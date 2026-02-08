@@ -10,3 +10,6 @@
 - **Styling**: Tailwind CSS v4
 - **CMS**: Sanity
 - **Languages**: TypeScript, JavaScript, HTML, CSS
+
+## Deployment & Workflow
+- **Commit Protocol**: Every commit/push to the remote repository defaults to skipping the Vercel build (by adding `[skip ci]` to the commit message). I must explicitly ask for confirmation: *"Should this push trigger a build?"* before every push. Unless explicitly instructed otherwise, the default is always to skip the build.
