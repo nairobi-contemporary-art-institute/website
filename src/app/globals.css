@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-newsreader);
+
+  --color-charcoal: #1A1A1A;
+  --color-ivory: #FdfBF7;
+  --color-umber: #4A3B32;
+  --color-ochre: #CCA43B;
+  --color-indigo: #3F51B5;
+  --color-green: #2E7D32;
+  --color-gold: #D4AF37;
+
+  --color-background: var(--color-ivory);
+  --color-foreground: var(--color-charcoal);
+}
+
+:root {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/* Institutional Tone - Smooth Scroll & Selection */
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: var(--color-ochre);
+  color: var(--color-ivory);
+}
