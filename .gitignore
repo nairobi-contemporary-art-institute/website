@@ -43,5 +43,6 @@ next-env.d.ts
 # User-specific & Planning
 .gemini/
 .agent/
-docs/
+docs/*
+!docs/planning/
 sanity/node_modules/
