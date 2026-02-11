@@ -8,7 +8,7 @@ export const exhibition = defineType({
         defineField({
             name: 'title',
             title: 'Title',
-            type: 'string',
+            type: 'internationalizedArrayString',
             validation: (Rule) => Rule.required(),
         }),
         defineField({
@@ -40,8 +40,7 @@ export const exhibition = defineType({
         defineField({
             name: 'description',
             title: 'Description',
-            type: 'array',
-            of: [{ type: 'block' }],
+            type: 'internationalizedArrayBlockContent',
         }),
         defineField({
             name: 'mainImage',
@@ -57,11 +56,33 @@ export const exhibition = defineType({
             type: 'array',
             of: [{ type: 'image', options: { hotspot: true } }],
         }),
+        defineField({
+            name: 'curators',
+            title: 'Curators',
+            type: 'array',
+            of: [{ type: 'reference', to: [{ type: 'person' }] }],
+        }),
+        defineField({
+            name: 'tags',
+            title: 'Tags',
+            type: 'array',
+            of: [{ type: 'reference', to: [{ type: 'category' }] }],
+        }),
     ],
     preview: {
         select: {
             title: 'title',
             media: 'mainImage',
+        },
+        prepare(selection) {
+            const { title } = selection
+            const displayTitle = Array.isArray(title)
+                ? title.find((t: any) => t._key === 'en')?.value || title[0]?.value || 'Untitled'
+                : title
+            return {
+                ...selection,
+                title: displayTitle,
+            }
         },
     },
 })

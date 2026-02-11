@@ -2,5 +2,66 @@
     "HomePage": {
         "title": "Nairobi Contemporary Art Institute",
         "description": "A non-profit visual arts space dedicated to the growth and preservation of contemporary art in East Africa."
+    },
+    "Navigation": {
+        "about": "About",
+        "visit": "Visit",
+        "exhibitions": "Exhibitions",
+        "channel": "Channel",
+        "collection": "Collection",
+        "education": "Education",
+        "support": "Support Us"
+    },
+    "Pages": {
+        "about": {
+            "title": "About NCAI",
+            "description": "NCAI is a non-profit visual arts space based in Nairobi."
+        },
+        "visit": {
+            "title": "Visit Us",
+            "description": "Information on how to visit our gallery space."
+        },
+        "exhibitions": {
+            "title": "Exhibitions",
+            "description": "Current, upcoming, and past exhibitions at NCAI."
+        },
+        "artists": {
+            "title": "Artists",
+            "description": "Directory of artists exhibited at NCAI."
+        },
+        "channel": {
+            "title": "Channel",
+            "description": "News, interviews, and insights from NCAI."
+        },
+        "education": {
+            "title": "Education",
+            "description": "Workshops, talks, and programs at NCAI."
+        },
+        "contact": {
+            "title": "Contact",
+            "description": "Get in touch with the NCAI team."
+        },
+        "support": {
+            "title": "Support Us",
+            "description": "Help us preserve and grow contemporary art in East Africa."
+        }
+    },
+    "Search": {
+        "placeholder": "Search NCAI...",
+        "close": "Close",
+        "noResults": "No results found for",
+        "results": "Results",
+        "modalLabel": "Search site content"
+    },
+    "NotFound": {
+        "title": "Page Not Found",
+        "description": "The page you are looking for does not exist or has been moved.",
+        "goHome": "Back to Home"
+    },
+    "Error": {
+        "title": "Something went wrong",
+        "description": "An unexpected error occurred. We have been notified and are looking into it.",
+        "tryAgain": "Try Again",
+        "goHome": "Back to Home"
     }
 }

@@ -1,11 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-newsreader);
-
+  /* Color Palette - Institutional Minimalism */
   --color-charcoal: #1A1A1A;
-  --color-ivory: #FdfBF7;
+  --color-ivory: #FDFBF7;
   --color-umber: #4A3B32;
   --color-ochre: #CCA43B;
   --color-indigo: #3F51B5;
@@ -14,11 +12,56 @@
 
   --color-background: var(--color-ivory);
   --color-foreground: var(--color-charcoal);
+
+  /* Typography - The Institutional Omnibus Stack */
+  --font-geist: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-noto: var(--font-noto-arabic), var(--font-noto-hindi), var(--font-noto-ethiopic);
+
+  /* Unified Font System */
+  --font-sans: var(--font-geist), var(--font-noto), sans-serif;
+  --font-serif: var(--font-geist), var(--font-noto), serif;
+  /* Omnibus: Serif is Sans in this system */
+  --font-mono: var(--font-geist-mono), SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+
+  /* Font Size Tokens (Rem-based) */
+  --font-size-4xl: 3rem;
+  /* 48px */
+  --font-size-3xl: 2.25rem;
+  /* 36px */
+  --font-size-2xl: 1.5rem;
+  /* 24px */
+  --font-size-xl: 1.25rem;
+  /* 20px */
+  --font-size-xl-high: 1.125rem;
+  --font-size-l: 1rem;
+  /* 16px */
+  --font-size-m: 0.875rem;
+  /* 14px */
+  --font-size-s: 0.75rem;
+  /* 12px */
+
+  /* Line Height Tokens */
+  --line-height-4xl: 3.5rem;
+  --line-height-3xl: 3rem;
+  --line-height-2xl: 2.25rem;
+  --line-height-xl: 2rem;
+  --line-height-l: 1.5rem;
+  --line-height-m: 1.25rem;
+  --line-height-s: 1rem;
+
+  /* Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-demi-bold: 600;
+  --font-weight-bold: 700;
 }
 
-:root {
+body {
   background-color: var(--color-background);
   color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Institutional Tone - Smooth Scroll & Selection */

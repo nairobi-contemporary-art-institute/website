@@ -1,1 +1,56 @@
-{"HomePage": {"title": "NCAI (sw)", "description": "Placeholder"}}
+{
+    "HomePage": {
+        "title": "Taasisi ya Sanaa ya Kisasa ya Nairobi",
+        "description": "Nafasi ya sanaa ya kuona isiyo ya kifaida iliyojitolea kwa ukuaji na uhifadhi wa sanaa ya kisasa katika Afrika Mashariki."
+    },
+    "Navigation": {
+        "about": "Kuhusu",
+        "visit": "Tembelea",
+        "exhibitions": "Maonyesho",
+        "channel": "Chaneli",
+        "collection": "Mkusanyiko",
+        "education": "Elimu",
+        "support": "Tuunge Mkono"
+    },
+    "Pages": {
+        "about": {
+            "title": "Kuhusu NCAI",
+            "description": "NCAI ni nafasi ya sanaa ya kuona isiyo ya kifaida iliyoko Nairobi."
+        },
+        "visit": {
+            "title": "Tembelea Us",
+            "description": "Habari juu ya jinsi ya kutembelea nafasi yetu ya nyumba ya sanaa."
+        },
+        "exhibitions": {
+            "title": "Maonyesho",
+            "description": "Maonyesho ya sasa, yajayo, na yaliyopita katika NCAI."
+        },
+        "artists": {
+            "title": "Wasanii",
+            "description": "Saraka ya wasanii walioonyeshwa katika NCAI."
+        },
+        "channel": {
+            "title": "Chaneli",
+            "description": "Habari, mahojiano, na maarifa kutoka NCAI."
+        },
+        "education": {
+            "title": "Elimu",
+            "description": "Warsha, mazungumzo, na programu katika NCAI."
+        },
+        "contact": {
+            "title": "Wasiliana nasi",
+            "description": "Wasiliana na timu ya NCAI."
+        },
+        "support": {
+            "title": "Tuunge Mkono",
+            "description": "Tusaidie kuhifadhi na kukuza sanaa ya kisasa katika Afrika Mashariki."
+        }
+    },
+    "Search": {
+        "placeholder": "Tafuta NCAI...",
+        "close": "Funga",
+        "noResults": "Hakuna matokeo yaliyopatikana kwa",
+        "results": "Matokeo",
+        "modalLabel": "Tafuta maudhui ya tovuti"
+    }
+}

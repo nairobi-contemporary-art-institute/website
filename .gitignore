@@ -43,6 +43,10 @@ next-env.d.ts
 # User-specific & Planning
 .gemini/
 .agent/
-docs/*
-!docs/planning/
-sanity/node_modules/
+.gsd/
+.planning/
+get-shit-done-for-antigravity/
+.vscode/
+
+# Documentation
+docs/

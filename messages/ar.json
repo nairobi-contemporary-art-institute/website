@@ -1,1 +1,56 @@
-{"HomePage": {"title": "NCAI (ar)", "description": "Placeholder"}}
+{
+    "HomePage": {
+        "title": "معهد نيروبي للفن المعاصر",
+        "description": "مساحة فنية بصرية غير ربحية مخصصة لنمو وحماية الفن المعاصر في شرق أفريقيا."
+    },
+    "Navigation": {
+        "about": "حول",
+        "visit": "زيارة",
+        "exhibitions": "المعارض",
+        "channel": "المجلة",
+        "collection": "المجموعة",
+        "education": "التعليم",
+        "support": "ادعمنا"
+    },
+    "Pages": {
+        "about": {
+            "title": "حول المعهد",
+            "description": "معهد نيروبي للفن المعاصر (NCAI) هو مساحة فنية بصرية غير ربحية."
+        },
+        "visit": {
+            "title": "زيارة المعهد",
+            "description": "معلومات حول كيفية زيارة مساحة المعرض الخاصة بنا."
+        },
+        "exhibitions": {
+            "title": "المعارض",
+            "description": "المعارض الحالية والقادمة والسابقة في المعهد."
+        },
+        "artists": {
+            "title": "الفنانون",
+            "description": "دليل الفنانين المشاركين في المعهد."
+        },
+        "channel": {
+            "title": "المجلة",
+            "description": "أخبار ومقابلات ورؤى من المعهد."
+        },
+        "education": {
+            "title": "التعليم",
+            "description": "ورش عمل ومحادثات وبرامج في المعهد."
+        },
+        "contact": {
+            "title": "اتصل بنا",
+            "description": "تواصل مع فريق المعهد."
+        },
+        "support": {
+            "title": "ادعمنا",
+            "description": "ساعدنا في حماية وتنمية الفن المعاصر في شرق أفريقيا."
+        }
+    },
+    "Search": {
+        "placeholder": "بحث في NCAI...",
+        "close": "إغلاق",
+        "noResults": "لم يتم العثور على نتائج لـ",
+        "results": "النتائج",
+        "modalLabel": "البحث في محتوى الموقع"
+    }
+}

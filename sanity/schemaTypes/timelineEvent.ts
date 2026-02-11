@@ -1,3 +1,4 @@
+
 import { defineField, defineType } from 'sanity'
 
 export const timelineEvent = defineType({
@@ -14,21 +15,28 @@ export const timelineEvent = defineType({
         defineField({
             name: 'title',
             title: 'Title',
-            type: 'string',
+            type: 'internationalizedArrayString',
             validation: (Rule) => Rule.required(),
         }),
         defineField({
             name: 'description',
             title: 'Description',
-            type: 'text',
+            type: 'internationalizedArrayBlockContent',
         }),
         defineField({
             name: 'media',
-            title: 'Media (Image or Video)',
-            type: 'file',
+            title: 'Media (Image)',
+            type: 'image',
             options: {
-                accept: 'image/*,video/*'
-            }
+                hotspot: true
+            },
+            fields: [
+                {
+                    name: 'alt',
+                    type: 'string',
+                    title: 'Alternative Text',
+                }
+            ]
         }),
         defineField({
             name: 'variant',
@@ -36,27 +44,34 @@ export const timelineEvent = defineType({
             type: 'string',
             options: {
                 list: [
-                    { title: 'Immersive Only', value: 'immersive' },
-                    { title: 'Teaser & Immersive', value: 'teaser' },
-                    { title: 'Institutional Only', value: 'institutional' },
+                    { title: 'Immersive', value: 'immersive' },
+                    { title: 'Standard', value: 'standard' },
                 ],
             },
-            initialValue: 'immersive',
+            initialValue: 'standard',
         }),
     ],
     orderings: [
         {
-            title: 'Year Asc',
+            title: 'Year Ascending',
             name: 'yearAsc',
             by: [
                 { field: 'year', direction: 'asc' }
+            ]
+        },
+        {
+            title: 'Year Descending',
+            name: 'yearDesc',
+            by: [
+                { field: 'year', direction: 'desc' }
             ]
         }
     ],
     preview: {
         select: {
-            title: 'title',
+            title: 'title.0.value',
             subtitle: 'year',
+            media: 'media',
         },
     },
 })
