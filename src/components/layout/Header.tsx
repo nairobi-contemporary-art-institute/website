@@ -4,16 +4,17 @@ import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n'
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher'
 import { SearchModal } from '@/components/ui/SearchModal'
+import { Logo } from '@/components/ui/Logo'
 import { cn } from '@/lib/utils'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useParams } from 'next/navigation'
 
 /**
  * The global navigation Header component.
  * Features:
- * - Responsive navigation links with i18n support
- * - Mobile hamburger menu with slide-over
- * - Sticky positioning with backdrop-blur transition on scroll
+ * - Structural "Architecture" design style
+ * - Solid background with grid lines
+ * - Bold typography
  * - Integrated LanguageSwitcher and Search
  */
 export function Header() {
@@ -21,17 +22,8 @@ export function Header() {
     const params = useParams()
     const locale = (params?.locale as string) || 'en'
 
-    const [isScrolled, setIsScrolled] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [isSearchOpen, setIsSearchOpen] = useState(false)
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20)
-        }
-        window.addEventListener('scroll', handleScroll)
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
 
     const navLinks = [
         { href: '/about', label: t('about') },
@@ -44,44 +36,44 @@ export function Header() {
 
     return (
         <>
-            <header
-                className={cn(
-                    'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-                    isScrolled ? 'bg-ivory/80 backdrop-blur-md py-4 shadow-sm' : 'bg-transparent py-8'
-                )}
-            >
-                <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-                    {/* Logo */}
-                    <Link
-                        href="/"
-                        className="text-2xl font-bold tracking-tighter text-umber flex items-center gap-2 group"
-                    >
-                        <span className="group-hover:text-amber-800 transition-colors">NCAI</span>
-                    </Link>
+            <header className="sticky top-0 z-50 bg-ivory/80 backdrop-blur-md text-umber border-b border-umber/10 transition-colors duration-300">
+                <div className="h-20 grid grid-cols-[auto_1fr_auto] items-stretch">
+                    {/* Logo Section */}
+                    <div className="flex items-center px-6 md:px-8 border-r border-umber/10">
+                        <Link
+                            href="/"
+                            className="text-umber flex items-center gap-2 group"
+                            aria-label="NCAI Home"
+                        >
+                            <Logo className="h-10 w-auto group-hover:text-amber-800 transition-colors" />
+                            <span className="text-3xl font-bold tracking-tighter group-hover:text-amber-800 transition-colors pt-2">NCAI</span>
+                        </Link>
+                    </div>
 
-                    {/* Desktop Nav */}
-                    <nav className="hidden md:flex items-center gap-8">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                className="text-xs font-bold uppercase tracking-widest text-umber/80 hover:text-umber transition-colors relative group"
-                            >
-                                {link.label}
-                                <span className="absolute -bottom-1 left-0 w-0 h-px bg-umber transition-all group-hover:w-full" />
-                            </Link>
-                        ))}
-                    </nav>
+                    {/* Desktop Nav Section */}
+                    <div className="hidden md:flex items-center px-8">
+                        <nav className="flex items-center gap-8 w-full">
+                            {navLinks.map((link) => (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    className="text-sm font-bold uppercase tracking-[0.2em] text-umber/60 hover:text-umber transition-colors relative group"
+                                >
+                                    {link.label}
+                                </Link>
+                            ))}
+                        </nav>
+                    </div>
 
-                    {/* Utils */}
-                    <div className="flex items-center gap-6">
+                    {/* Utils Section */}
+                    <div className="flex items-center px-6 md:px-8 border-l border-umber/10 gap-6">
                         {/* Search Trigger */}
                         <button
                             onClick={() => setIsSearchOpen(true)}
-                            className="text-umber/90 hover:text-umber transition-colors"
+                            className="text-umber/90 hover:text-umber transition-colors p-2 -mr-2"
                             aria-label="Open search"
                         >
-                            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M19 19L14.65 14.65M17 9C17 13.4183 13.4183 17 9 17C4.58172 17 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </button>
@@ -92,7 +84,7 @@ export function Header() {
 
                         {/* Mobile Toggle */}
                         <button
-                            className="md:hidden text-umber focus:outline-none"
+                            className="md:hidden text-umber focus:outline-none p-2 -mr-2"
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
                         >
@@ -116,25 +108,27 @@ export function Header() {
 
                 {/* Mobile Menu Overlay */}
                 <div className={cn(
-                    "fixed inset-0 bg-ivory z-40 flex flex-col items-center justify-center gap-8 transition-all duration-500 ease-in-out md:hidden",
+                    "fixed inset-0 bg-ivory z-40 flex flex-col pt-32 px-6 gap-8 transition-all duration-500 ease-in-out md:hidden",
                     isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
                 )}>
-                    {navLinks.map((link, i) => (
-                        <Link
-                            key={link.href}
-                            href={link.href}
-                            className={cn(
-                                "text-2xl font-bold uppercase tracking-widest text-umber transition-all duration-500 delay-[]",
-                                isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-                            )}
-                            style={{ transitionDelay: `${i * 50}ms` }}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                            {link.label}
-                        </Link>
-                    ))}
+                    <nav className="flex flex-col gap-6">
+                        {navLinks.map((link, i) => (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className={cn(
+                                    "text-3xl font-bold uppercase tracking-tighter text-umber transition-all duration-500 border-b border-umber/10 pb-4",
+                                    isMobileMenuOpen ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"
+                                )}
+                                style={{ transitionDelay: `${i * 50}ms` }}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
+                    </nav>
                     <div className={cn(
-                        "mt-8 border-t border-umber/10 pt-10 w-48 flex justify-center transition-all duration-500 delay-300",
+                        "mt-auto mb-10 transition-all duration-500 delay-300",
                         isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
                     )}>
                         <LanguageSwitcher />

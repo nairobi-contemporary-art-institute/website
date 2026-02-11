@@ -19,7 +19,7 @@ const footerCategories = [
         ],
     },
     {
-        title: 'Support us',
+        title: 'Get Involved',
         links: [
             { label: 'Become a Member', url: '/membership' },
             { label: 'Donate', url: '/support' },
