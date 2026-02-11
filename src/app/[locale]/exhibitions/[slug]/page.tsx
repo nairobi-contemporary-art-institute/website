@@ -61,7 +61,7 @@ export default async function ExhibitionPage({ params }: Props) {
     return (
         <div className="container mx-auto px-6 py-20 min-h-screen">
             <header className="max-w-4xl mx-auto mb-16 text-center space-y-6">
-                <span className="inline-block px-3 py-1 rounded-full border border-umber/20 text-xs font-bold tracking-widest uppercase text-umber/60">
+                <span className="inline-block px-3 py-1 border border-umber/20 text-xs font-bold tracking-widest text-umber/60">
                     {t.Pages?.exhibitions?.label || 'Exhibition'}
                 </span>
 
@@ -82,7 +82,7 @@ export default async function ExhibitionPage({ params }: Props) {
 
             {exhibition.mainImage && (
                 <div className="mb-20">
-                    <div className="aspect-[16/9] md:aspect-[21/9] relative bg-charcoal/5 overflow-hidden rounded-sm w-full">
+                    <div className="aspect-[16/9] md:aspect-[21/9] relative bg-charcoal/5 overflow-hidden w-full">
                         <Image
                             src={urlFor(exhibition.mainImage).width(1920).height(1080).url()}
                             alt={title || 'Exhibition Main Image'}
@@ -106,7 +106,7 @@ export default async function ExhibitionPage({ params }: Props) {
                             <h2 className="text-2xl font-bold text-charcoal">Gallery</h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {exhibition.gallery.map((image: any, i: number) => (
-                                    <div key={i} className="aspect-[4/3] relative bg-charcoal/5 overflow-hidden rounded-sm">
+                                    <div key={i} className="aspect-[4/3] relative bg-charcoal/5 overflow-hidden">
                                         <Image
                                             src={urlFor(image).width(800).height(600).url()}
                                             alt={`Gallery image ${i + 1}`}
@@ -125,7 +125,7 @@ export default async function ExhibitionPage({ params }: Props) {
                         {/* Artists */}
                         {exhibition.artists && exhibition.artists.length > 0 && (
                             <div>
-                                <h3 className="text-xs font-bold tracking-widest uppercase text-umber/60 mb-6 border-b border-umber/10 pb-2">
+                                <h3 className="text-xs font-bold tracking-widest text-umber/60 mb-6 border-b border-umber/10 pb-2">
                                     Artists
                                 </h3>
                                 <ul className="space-y-4">
@@ -138,7 +138,7 @@ export default async function ExhibitionPage({ params }: Props) {
                                                     className="flex items-center space-x-3 w-full"
                                                 >
                                                     {artist.image && (
-                                                        <div className="relative w-10 h-10 rounded-full overflow-hidden bg-charcoal/5 text-xs">
+                                                        <div className="relative w-10 h-10 overflow-hidden bg-charcoal/5 text-xs">
                                                             <Image
                                                                 src={urlFor(artist.image).width(100).height(100).url()}
                                                                 alt={artistName || 'Artist'}
@@ -161,7 +161,7 @@ export default async function ExhibitionPage({ params }: Props) {
                         {/* Curators */}
                         {exhibition.curators && exhibition.curators.length > 0 && (
                             <div>
-                                <h3 className="text-xs font-bold tracking-widest uppercase text-umber/60 mb-6 border-b border-umber/10 pb-2">
+                                <h3 className="text-xs font-bold tracking-widest text-umber/60 mb-6 border-b border-umber/10 pb-2">
                                     Curated By
                                 </h3>
                                 <ul className="space-y-4">
@@ -170,7 +170,7 @@ export default async function ExhibitionPage({ params }: Props) {
                                         return (
                                             <li key={curator._id} className="flex items-center space-x-3">
                                                 {curator.image && (
-                                                    <div className="relative w-10 h-10 rounded-full overflow-hidden bg-charcoal/5 text-xs">
+                                                    <div className="relative w-10 h-10 overflow-hidden bg-charcoal/5 text-xs">
                                                         <Image
                                                             src={urlFor(curator.image).width(100).height(100).url()}
                                                             alt={curatorName || 'Curator'}
@@ -183,7 +183,7 @@ export default async function ExhibitionPage({ params }: Props) {
                                                     <span className="font-medium text-charcoal">
                                                         {curatorName}
                                                     </span>
-                                                    <span className="text-[10px] text-charcoal/60 uppercase tracking-wider">
+                                                    <span className="text-[10px] text-charcoal/60 tracking-wider">
                                                         {curator.roles?.[0] || 'Curator'}
                                                     </span>
                                                 </div>
@@ -197,14 +197,14 @@ export default async function ExhibitionPage({ params }: Props) {
                         {/* Tags */}
                         {exhibition.tags && exhibition.tags.length > 0 && (
                             <div>
-                                <h3 className="text-xs font-bold tracking-widest uppercase text-umber/60 mb-4 border-b border-umber/10 pb-2">
+                                <h3 className="text-xs font-bold tracking-widest text-umber/60 mb-4 border-b border-umber/10 pb-2">
                                     Related
                                 </h3>
                                 <div className="flex flex-wrap gap-2">
                                     {exhibition.tags.map((tag: any) => (
                                         <span
                                             key={tag._id}
-                                            className="text-[10px] uppercase tracking-wider font-bold bg-charcoal/5 px-2 py-1 rounded-sm text-charcoal/60 hover:bg-charcoal/10 transition-colors cursor-default"
+                                            className="text-[10px] tracking-wider font-bold bg-charcoal/5 px-2 py-1 text-charcoal/60 hover:bg-charcoal/10 transition-colors cursor-default"
                                         >
                                             {getLocalizedValue(tag.title, locale)}
                                         </span>
@@ -217,7 +217,7 @@ export default async function ExhibitionPage({ params }: Props) {
             </div>
 
             <footer className="max-w-4xl mx-auto mt-20 pt-10 border-t border-umber/10 flex justify-between">
-                <Link href={`/${locale}/exhibitions`} className="text-sm font-bold tracking-widest uppercase text-umber hover:text-indigo-600 transition-colors">
+                <Link href={`/${locale}/exhibitions`} className="text-sm font-bold tracking-widest text-umber hover:text-indigo-600 transition-colors">
                     ← Back to Exhibitions
                 </Link>
             </footer>

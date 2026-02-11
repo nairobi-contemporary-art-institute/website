@@ -50,6 +50,10 @@ export const metadata: Metadata = {
   }
 };
 
+import { AccessibilityProvider } from '@/contexts/AccessibilityContext';
+
+import { ConditionalWrapper } from '@/components/layout/ConditionalWrapper';
+
 export default async function RootLayout({
   children,
   params
@@ -84,11 +88,11 @@ export default async function RootLayout({
     <html lang={locale} dir={isRtl ? 'rtl' : 'ltr'} className={fontClasses} suppressHydrationWarning>
       <body className="antialiased min-h-screen flex flex-col" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
-          <Header />
-          <main className="flex-1 pt-12 md:pt-20">
-            {children}
-          </main>
-          <Footer />
+          <AccessibilityProvider>
+            <ConditionalWrapper>
+              {children}
+            </ConditionalWrapper>
+          </AccessibilityProvider>
         </NextIntlClientProvider>
       </body>
     </html>

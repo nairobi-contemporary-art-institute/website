@@ -34,11 +34,11 @@ export function Introduction() {
                     </p>
                     <ul className="text-[10px] font-bold uppercase tracking-widest text-umber/60 space-y-2 list-none">
                         <li className="flex items-center gap-2">
-                            <span className="w-1 h-1 bg-ochre rounded-full" />
+                            <span className="w-1.5 h-1.5 bg-ochre" />
                             v1.0.0 — Initial Release (Feb 2026)
                         </li>
                         <li className="flex items-center gap-2">
-                            <span className="w-1 h-1 bg-umber/20 rounded-full" />
+                            <span className="w-1.5 h-1.5 bg-umber/20" />
                             Next Audit: May 2026
                         </li>
                     </ul>

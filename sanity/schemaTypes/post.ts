@@ -64,6 +64,39 @@ export const post = defineType({
                 },
             ],
         }),
+        defineField({
+            name: 'mediaType',
+            title: 'Media Type',
+            type: 'string',
+            options: {
+                list: [
+                    { title: 'Article', value: 'article' },
+                    { title: 'Video', value: 'video' },
+                    { title: 'Audio', value: 'audio' },
+                ],
+                layout: 'radio',
+            },
+            initialValue: 'article',
+        }),
+        defineField({
+            name: 'videoUrl',
+            title: 'Video URL (YouTube/Vimeo)',
+            type: 'url',
+            hidden: ({ document }) => document?.mediaType !== 'video',
+        }),
+        defineField({
+            name: 'audioFile',
+            title: 'Audio File',
+            type: 'file',
+            options: { accept: 'audio/*' },
+            hidden: ({ document }) => document?.mediaType !== 'audio',
+        }),
+        defineField({
+            name: 'duration',
+            title: 'Duration (e.g. 12:30)',
+            type: 'string',
+            hidden: ({ document }) => document?.mediaType === 'article',
+        }),
     ],
     preview: {
         select: {

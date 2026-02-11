@@ -30,13 +30,13 @@ export function DesignTokens() {
                 <div className="grid grid-cols-2 lg:grid-cols-3 gap-8">
                     {COLORS.map((color) => (
                         <div key={color.name} className="flex gap-4 items-center">
-                            <div className={`w-20 h-20 rounded-sm shrink-0 shadow-sm ${color.class}`} />
+                            <div className={`w-20 h-20 shrink-0 shadow-sm ${color.class}`} />
                             <div>
                                 <h4 className="text-[10px] font-bold text-umber/40 uppercase tracking-widest mb-1">{color.type}</h4>
                                 <h5 className="text-sm font-bold text-charcoal uppercase tracking-tighter">{color.name}</h5>
                                 <div className="mt-2 flex gap-2">
-                                    <code className="text-[10px] bg-charcoal/5 px-1.5 py-0.5 rounded-xs text-charcoal/60 lowercase">{color.token}</code>
-                                    <code className="text-[10px] bg-charcoal/5 px-1.5 py-0.5 rounded-xs text-charcoal/60">{color.hex}</code>
+                                    <code className="text-[10px] bg-charcoal/5 px-1.5 py-0.5 text-charcoal/60 lowercase">{color.token}</code>
+                                    <code className="text-[10px] bg-charcoal/5 px-1.5 py-0.5 text-charcoal/60">{color.hex}</code>
                                 </div>
                             </div>
                         </div>
@@ -70,9 +70,9 @@ export function DesignTokens() {
                         <div>
                             <span className="text-[9px] text-umber/40 font-mono mb-4 block">Metadata — 12px / Monospace</span>
                             <code className="text-[12px] font-mono text-charcoal leading-snug block">
-                                EXHIBITION_ID: 2026_01_RETRO<br />
-                                CURATOR: SARAH_MBEKI<br />
-                                STATUS: ACTIVE_ARCHIVE
+                                exhibition_id: 2026_01_retro<br />
+                                curator: Sarah Mbeki<br />
+                                status: active_archive
                             </code>
                         </div>
                     </div>

@@ -9,6 +9,8 @@ import { getLocalizedValue } from '@/sanity/lib/utils'
 import { ResponsiveDivider } from '@/components/ui/ResponsiveDivider'
 import { PortableText } from '@/components/ui/PortableText'
 
+import { TimelinePath } from '@/components/history/TimelinePath'
+
 export const metadata: Metadata = {
     title: 'History & Timeline',
     description: 'The history and evolution of the Nairobi Contemporary Art Institute.',
@@ -32,8 +34,8 @@ export default async function HistoryPage({ params }: { params: Promise<{ locale
             </header>
 
             <div className="max-w-5xl mx-auto relative">
-                {/* Vertical Center Line */}
-                <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-umber/20 -translate-x-1/2 md:translate-x-0" />
+                {/* Historical Curvilinear Path */}
+                <TimelinePath className="left-4 md:left-1/2 -translate-x-1/2 md:translate-x-0 text-umber" />
 
                 <div className="space-y-24">
                     {timelineEvents.map((event: any, index: number) => {

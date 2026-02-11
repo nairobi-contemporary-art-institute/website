@@ -6,6 +6,10 @@ import { dataset, projectId } from './sanity/env'
 import { schema } from './sanity/schemaTypes'
 import { internationalizedArray } from 'sanity-plugin-internationalized-array'
 import { languages } from './src/i18n'
+import { media } from 'sanity-plugin-media'
+import { colorInput } from '@sanity/color-input'
+import { table } from '@sanity/table'
+import { googleMapsInput } from '@sanity/google-maps-input'
 
 // Singleton document types
 const singletonTypes = new Set(['siteSettings'])
@@ -44,6 +48,12 @@ export default defineConfig({
             languages: languages.map(l => ({ id: l.id, title: l.title })),
             defaultLanguages: ['en'],
             fieldTypes: ['string', 'text', 'slug', 'blockContent']
+        }),
+        media(),
+        colorInput(),
+        table(),
+        googleMapsInput({
+            apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''
         })
     ],
     document: {

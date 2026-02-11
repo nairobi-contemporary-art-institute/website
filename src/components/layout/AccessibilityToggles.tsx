@@ -1,59 +1,32 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useAccessibility } from '@/contexts/AccessibilityContext'
 
 export function AccessibilityToggles() {
-    const [isDarkMode, setIsDarkMode] = useState(false)
-    const [isReducedMotion, setIsReducedMotion] = useState(false)
-
-    // Initialize from system preferences
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-            setIsDarkMode(prefersDark)
-            setIsReducedMotion(prefersReducedMotion)
-        }
-    }, [])
-
-    // Handle dark mode toggle
-    useEffect(() => {
-        if (isDarkMode) {
-            document.documentElement.classList.add('dark')
-        } else {
-            document.documentElement.classList.remove('dark')
-        }
-    }, [isDarkMode])
-
-    // Handle reduced motion toggle
-    useEffect(() => {
-        if (isReducedMotion) {
-            document.documentElement.style.setProperty('--motion-duration', '0s')
-        } else {
-            document.documentElement.style.removeProperty('--motion-duration')
-        }
-    }, [isReducedMotion])
+    const { isDarkMode, isReducedMotion, toggleDarkMode, toggleReducedMotion } = useAccessibility()
 
     return (
         <div className="flex items-center gap-6 text-sm">
-            <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                    type="checkbox"
-                    checked={isDarkMode}
-                    onChange={(e) => setIsDarkMode(e.target.checked)}
-                    className="w-4 h-4 accent-ochre"
-                />
+            <button
+                onClick={toggleDarkMode}
+                className="flex items-center gap-2 cursor-pointer group hover:text-ochre transition-colors"
+                aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+                <div className={`w-4 h-4 rounded-full border-2 border-current flex items-center justify-center p-0.5`}>
+                    {isDarkMode && <div className="w-full h-full bg-current rounded-full" />}
+                </div>
                 <span>Dark</span>
-            </label>
-            <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                    type="checkbox"
-                    checked={isReducedMotion}
-                    onChange={(e) => setIsReducedMotion(e.target.checked)}
-                    className="w-4 h-4 accent-ochre"
-                />
+            </button>
+            <button
+                onClick={toggleReducedMotion}
+                className="flex items-center gap-2 cursor-pointer group hover:text-ochre transition-colors"
+                aria-label={isReducedMotion ? 'Enable motion' : 'Reduce motion'}
+            >
+                <div className={`w-4 h-4 rounded-full border-2 border-current flex items-center justify-center p-0.5`}>
+                    {isReducedMotion && <div className="w-full h-full bg-current rounded-full" />}
+                </div>
                 <span>Reduced motion</span>
-            </label>
+            </button>
         </div>
     )
 }

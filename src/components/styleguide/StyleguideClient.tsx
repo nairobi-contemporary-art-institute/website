@@ -2,14 +2,15 @@
 
 import React, { useState } from 'react'
 import { StyleguideNav, styleguideSections } from './StyleguideNav'
-import { Introduction } from './sections/Introduction'
-import { BrandFoundations } from './sections/BrandFoundations'
-import { DesignTokens } from './sections/DesignTokens'
-import { LayoutStructure } from './sections/LayoutStructure'
-import { ComponentLibrary } from './sections/ComponentLibrary'
-import { StubSection } from './sections/StubSection'
-import { EditorialContent } from './sections/EditorialContent'
-import { Accessibility } from './sections/Accessibility'
+import { Introduction } from '@/components/styleguide/sections/Introduction'
+import { BrandFoundations } from '@/components/styleguide/sections/BrandFoundations'
+import { DesignTokens } from '@/components/styleguide/sections/DesignTokens'
+import { LayoutStructure } from '@/components/styleguide/sections/LayoutStructure'
+import { ComponentLibrary } from '@/components/styleguide/sections/ComponentLibrary'
+import { StubSection } from '@/components/styleguide/sections/StubSection'
+import { EditorialContent } from '@/components/styleguide/sections/EditorialContent'
+import { Accessibility } from '@/components/styleguide/sections/Accessibility'
+import { InteractionMotion } from '@/components/styleguide/sections/InteractionMotion'
 import { ResponsiveDivider } from '@/components/ui/ResponsiveDivider'
 
 export function StyleguideClient() {
@@ -23,6 +24,7 @@ export function StyleguideClient() {
             case '4-layout': return <LayoutStructure />
             case '5-components': return <ComponentLibrary />
             case '7-editorial': return <EditorialContent />
+            case '9-motion': return <InteractionMotion />
             case '10-a11y': return <Accessibility />
             default:
                 const section = styleguideSections.find(s => s.id === activeSection)

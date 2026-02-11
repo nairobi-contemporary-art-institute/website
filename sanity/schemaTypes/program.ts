@@ -71,13 +71,24 @@ export const program = defineType({
         defineField({
             name: 'description',
             title: 'Description',
-            type: 'array',
-            of: [{ type: 'block' }],
+            type: 'internationalizedArrayBlockContent',
+        }),
+        defineField({
+            name: 'excerpt',
+            title: 'Excerpt',
+            type: 'internationalizedArrayString',
+            description: 'Short summary for lists (max 200 chars)',
         }),
         defineField({
             name: 'registrationUrl',
             title: 'Registration URL',
             type: 'url',
+        }),
+        defineField({
+            name: 'resources',
+            title: 'Resources (PDFs)',
+            type: 'array',
+            of: [{ type: 'file', options: { accept: 'application/pdf' } }],
         }),
         defineField({
             name: 'educators',

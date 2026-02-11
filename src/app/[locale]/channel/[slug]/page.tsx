@@ -7,6 +7,10 @@ import Image from 'next/image'
 import { Link } from '@/i18n'
 import { PortableTextComponent } from '@/components/ui/PortableText'
 import { ResponsiveDivider } from '@/components/ui/ResponsiveDivider'
+import { MediaPlayer } from '@/components/channel/MediaPlayer'
+
+// Ensure dynamic rendering
+export const revalidate = 60
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }) {
     const { locale, slug } = await params
@@ -30,9 +34,15 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
     const title = getLocalizedValue(post.title, locale)
     const imageProps = post.mainImage ? urlFor(post.mainImage).width(1200).height(700).url() : null
 
+    // Media props
+    const mediaType = post.mediaType || 'article'
+    const videoUrl = post.videoUrl
+    const audioUrl = post.audioUrl
+
     return (
         <article className="container mx-auto px-6 py-20">
             <header className="max-w-3xl mx-auto mb-16 space-y-6 text-center">
+                {/* Tags */}
                 {post.tags && post.tags.length > 0 && (
                     <div className="flex gap-3 justify-center flex-wrap">
                         {post.tags.map((tag: any, i: number) => (
@@ -85,17 +95,29 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
                 </div>
             </header>
 
-            {imageProps && (
-                <div className="relative aspect-[16/9] w-full max-w-4xl mx-auto mb-12 overflow-hidden rounded-sm">
-                    <Image
-                        src={imageProps}
-                        alt={title || post.mainImage?.alt || 'Channel post image'}
-                        fill
-                        className="object-cover"
-                        priority
+            {/* Media Player or Main Image */}
+            <div className="w-full max-w-4xl mx-auto mb-12">
+                {mediaType === 'video' || mediaType === 'audio' ? (
+                    <MediaPlayer
+                        type={mediaType}
+                        url={videoUrl}
+                        audioUrl={audioUrl}
+                        thumbnail={imageProps || undefined}
                     />
-                </div>
-            )}
+                ) : imageProps ? (
+                    <div className="relative aspect-[16/9] w-full overflow-hidden rounded-sm shadow-xl">
+                        <Image
+                            src={imageProps}
+                            alt={title || post.mainImage?.alt || 'Channel post image'}
+                            fill
+                            className="object-cover"
+                            priority
+                            placeholder="blur"
+                            blurDataURL={post.mainImage?.asset?.metadata?.lqip}
+                        />
+                    </div>
+                ) : null}
+            </div>
 
             <div className="prose prose-lg max-w-3xl mx-auto text-charcoal">
                 {post.body && <PortableTextComponent value={post.body} locale={locale} />}

@@ -46,7 +46,7 @@ export function WorksGridOverlay({ isOpen, onClose, works, locale, artistName }:
                         const title = getLocalizedValue(work.title, locale)
                         return (
                             <div key={work._id} className="group space-y-4">
-                                <div className="aspect-square relative bg-charcoal/5 overflow-hidden rounded-sm">
+                                <div className="aspect-square relative bg-charcoal/5 overflow-hidden">
                                     <Image
                                         src={urlFor(work.image).width(600).height(600).url()}
                                         alt={title || 'Artwork'}

@@ -44,6 +44,20 @@
         "support": {
             "title": "Tuunge Mkono",
             "description": "Tusaidie kuhifadhi na kukuza sanaa ya kisasa katika Afrika Mashariki."
+        },
+        "events": {
+            "title": "Matukio",
+            "description": "Warsha, mazungumzo, na ufunguzi katika NCAI.",
+            "upcoming": "Yajayo",
+            "past": "Yaliyopita",
+            "backToCalendar": "Rudi kwa Kalenda",
+            "when": "Lini",
+            "where": "Wapi",
+            "rsvp": "Jisajili",
+            "facilitators": "Wawezeshaji",
+            "relatedExhibitions": "Kuhusiana na",
+            "archived": "Hifadhi",
+            "noUpcoming": "Hakuna matukio yajayo kwa sasa."
         }
     },
     "Search": {
@@ -51,6 +65,11 @@
         "close": "Funga",
         "noResults": "Hakuna matokeo yaliyopatikana kwa",
         "results": "Matokeo",
-        "modalLabel": "Tafuta maudhui ya tovuti"
+        "modalLabel": "Tafuta maudhui ya tovuti",
+        "filterAll": "Zote",
+        "filterExhibition": "Maonyesho",
+        "filterArtist": "Wasanii",
+        "filterPost": "Chaneli",
+        "filterProgram": "Elimu"
     }
 }

@@ -12,7 +12,7 @@ export const styleguideSections = [
     { id: '6-museum', label: '06 Museum Modules', status: 'stub' },
     { id: '7-editorial', label: '07 Editorial & Content', status: 'ready' },
     { id: '8-media', label: '08 Media Guidelines', status: 'stub' },
-    { id: '9-motion', label: '09 Interaction & Motion', status: 'stub' },
+    { id: '9-motion', label: '09 Interaction & Motion', status: 'ready' },
     { id: '10-a11y', label: '10 Accessibility', status: 'ready' },
     { id: '11-responsive', label: '11 Responsive Strategy', status: 'ready' },
     { id: '12-technical', label: '12 Technical Implementation', status: 'ready' },
@@ -44,7 +44,7 @@ export function StyleguideNav({ activeSection, onSectionChange }: StyleguideNavP
                     <div className="flex items-center justify-between gap-2">
                         <span>{section.label}</span>
                         {section.status === 'stub' && (
-                            <span className="text-[8px] px-1 border border-umber/20 rounded-xs opacity-50">STUB</span>
+                            <span className="text-[8px] px-1 border border-umber/20 opacity-50">STUB</span>
                         )}
                     </div>
                 </button>

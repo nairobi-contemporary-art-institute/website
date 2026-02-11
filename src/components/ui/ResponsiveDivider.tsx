@@ -2,14 +2,9 @@
 
 import { useRef } from 'react'
 import { cn } from '@/lib/utils'
-import gsap from 'gsap'
+import { gsap } from '@/lib/gsap'
 import { useGSAP } from '@gsap/react'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-// Register ScrollTrigger
-if (typeof window !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger)
-}
+import { useReducedMotion } from '@/contexts/AccessibilityContext'
 
 interface ResponsiveDividerProps {
     variant?: 'straight' | 'curved'
@@ -31,7 +26,11 @@ export function ResponsiveDivider({
         bold: 3,
     }[weight]
 
+    const isReducedMotion = useReducedMotion()
+
     useGSAP(() => {
+        if (isReducedMotion) return
+
         if (variant === 'curved' && pathRef.current) {
             const length = pathRef.current.getTotalLength()
 

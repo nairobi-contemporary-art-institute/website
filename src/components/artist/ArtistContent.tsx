@@ -47,7 +47,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                                 return (
                                     <span
                                         key={tag._id}
-                                        className="inline-flex items-center px-2 py-1 bg-charcoal/5 text-charcoal/60 text-xs uppercase tracking-wider font-medium rounded-sm"
+                                        className="inline-flex items-center px-2 py-1 bg-charcoal/5 text-charcoal/60 text-xs tracking-wider font-medium"
                                     >
                                         {tagTitle}
                                     </span>
@@ -119,7 +119,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         {artist.museumExhibitions.map((exh: any, i: number) => (
                             <div key={i} className="group space-y-4">
-                                <div className="aspect-[4/3] relative bg-charcoal/5 overflow-hidden rounded-sm">
+                                <div className="aspect-[4/3] relative bg-charcoal/5 overflow-hidden">
                                     {exh.image && (
                                         <Image
                                             src={urlFor(exh.image).width(800).height(600).url()}
@@ -152,7 +152,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                                     href={`/${locale}/exhibitions/${exhibition.slug || ''}`}
                                     className="group space-y-4"
                                 >
-                                    <div className="aspect-[4/3] relative bg-charcoal/5 overflow-hidden rounded-sm">
+                                    <div className="aspect-[4/3] relative bg-charcoal/5 overflow-hidden">
                                         {exhibition.mainImage ? (
                                             <Image
                                                 src={urlFor(exhibition.mainImage).width(800).height(600).url()}
@@ -167,7 +167,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                                     <div className="space-y-1">
                                         <h3 className="font-bold text-charcoal leading-snug group-hover:underline italic transition-all decoration-charcoal/20">{exTitle}</h3>
                                         {exhibition.startDate && (
-                                            <p className="text-[10px] uppercase tracking-widest text-charcoal/60 mt-2 font-medium">
+                                            <p className="text-[10px] tracking-widest text-charcoal/60 mt-2 font-medium">
                                                 {new Date(exhibition.startDate).getFullYear()}
                                             </p>
                                         )}

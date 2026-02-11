@@ -49,7 +49,7 @@ export function ComponentLibrary() {
             {/* Dividers */}
             <section className="space-y-10">
                 <h3 className="text-xs font-bold text-charcoal uppercase tracking-widest border-b border-umber/10 pb-4">Responsive Dividers</h3>
-                <div className="space-y-12 bg-ivory p-8 border border-umber/5 rounded-sm">
+                <div className="space-y-12 bg-ivory p-8 border border-umber/5">
                     <div className="space-y-4">
                         <span className="text-[10px] text-umber/40 uppercase font-mono">variant="curved" weight="thin"</span>
                         <ResponsiveDivider variant="curved" weight="thin" className="text-umber/20" />
@@ -71,7 +71,7 @@ export function ComponentLibrary() {
                 </div>
                 <div className="space-y-10">
                     <h3 className="text-xs font-bold text-charcoal uppercase tracking-widest border-b border-umber/10 pb-4">Language Interaction</h3>
-                    <div className="bg-ivory p-8 border border-umber/5 rounded-sm inline-block">
+                    <div className="bg-ivory p-8 border border-umber/5 inline-block">
                         <LanguageSwitcher />
                     </div>
                     <p className="text-sm text-umber/60 leading-relaxed">

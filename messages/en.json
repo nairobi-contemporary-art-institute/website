@@ -44,6 +44,20 @@
         "support": {
             "title": "Support Us",
             "description": "Help us preserve and grow contemporary art in East Africa."
+        },
+        "events": {
+            "title": "Events",
+            "description": "Workshops, talks, and openings at NCAI.",
+            "upcoming": "Upcoming",
+            "past": "Past Events",
+            "backToCalendar": "Back to Calendar",
+            "when": "When",
+            "where": "Where",
+            "rsvp": "RSVP / Register",
+            "facilitators": "Facilitators",
+            "relatedExhibitions": "In Context of",
+            "archived": "Archived",
+            "noUpcoming": "No upcoming events found for this category."
         }
     },
     "Search": {
@@ -51,7 +65,12 @@
         "close": "Close",
         "noResults": "No results found for",
         "results": "Results",
-        "modalLabel": "Search site content"
+        "modalLabel": "Search site content",
+        "filterAll": "All",
+        "filterExhibition": "Exhibitions",
+        "filterArtist": "Artists",
+        "filterPost": "Channel",
+        "filterProgram": "Education"
     },
     "NotFound": {
         "title": "Page Not Found",

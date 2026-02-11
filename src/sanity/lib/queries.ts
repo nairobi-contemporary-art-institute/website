@@ -10,7 +10,12 @@ export const EXHIBITIONS_QUERY = groq`
     "slug": slug.current,
     startDate,
     endDate,
-    mainImage,
+    mainImage {
+      asset-> {
+        _id,
+        metadata { lqip }
+      }
+    },
     "artistNames": artists[]->name
   }
 `
@@ -115,7 +120,14 @@ export const POSTS_QUERY = groq`
         "slug": slug.current
     },
     excerpt,
-    mainImage
+    mediaType,
+    duration,
+    mainImage {
+      asset-> {
+        _id,
+        metadata { lqip }
+      }
+    }
   }
 `
 
@@ -125,6 +137,13 @@ export const POSTS_QUERY = groq`
 export const POST_BY_SLUG_QUERY = groq`
   *[_type == "post" && slug.current == $slug][0] {
     ...,
+    mainImage {
+      asset-> {
+        _id,
+        metadata { lqip }
+      }
+    },
+    "audioUrl": audioFile.asset->url,
     author-> {
         name,
         image,
@@ -152,7 +171,13 @@ export const PROGRAMS_QUERY = groq`
     audience,
     startDate,
     endDate,
-    mainImage,
+    mainImage {
+      asset-> {
+        _id,
+        metadata { lqip }
+      }
+    },
+    excerpt,
     tags[]-> {
         title,
         type
@@ -166,12 +191,23 @@ export const PROGRAMS_QUERY = groq`
 export const PROGRAM_BY_SLUG_QUERY = groq`
   *[_type == "program" && slug.current == $slug][0] {
     ...,
+    mainImage {
+      asset-> {
+        _id,
+        metadata { lqip }
+      }
+    },
     educators[]-> {
         _id,
         name,
         "slug": slug.current,
         image,
         roles
+    },
+    resources[] {
+      "url": asset->url,
+      "size": asset->size,
+      "name": asset->originalFilename
     },
     tags[]-> {
         _id,
@@ -203,7 +239,12 @@ export const COLLECTION_QUERY = groq`
     creationDate,
     medium,
     dimensions,
-    mainImage,
+    mainImage {
+      asset-> {
+        _id,
+        metadata { lqip }
+      }
+    },
     "artistName": artist->name,
     tags[]-> {
         title,
@@ -240,7 +281,12 @@ export const TIMELINE_QUERY = groq`
     year,
     title,
     description,
-    media,
+    media {
+      asset-> {
+        _id,
+        metadata { lqip }
+      }
+    },
     variant
   }
 `
@@ -257,7 +303,13 @@ export const EVENTS_QUERY = groq`
     startDate,
     endDate,
     location,
-    mainImage,
+    registrationLink,
+    mainImage {
+      asset-> {
+        _id,
+        metadata { lqip }
+      }
+    },
     tags[]-> {
         title,
         type
@@ -271,6 +323,12 @@ export const EVENTS_QUERY = groq`
 export const EVENT_BY_SLUG_QUERY = groq`
   *[_type == "event" && slug.current == $slug][0] {
     ...,
+    mainImage {
+      asset-> {
+        _id,
+        metadata { lqip }
+      }
+    },
     relatedExhibitions[]->{
         _id,
         title,

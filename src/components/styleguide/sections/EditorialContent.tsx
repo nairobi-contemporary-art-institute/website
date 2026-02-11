@@ -32,8 +32,8 @@ export function EditorialContent() {
                 </div>
                 <div className="space-y-8">
                     <h3 className="text-xs font-bold text-charcoal uppercase tracking-widest border-b border-umber/10 pb-2 inline-block">Metadata Standards</h3>
-                    <div className="bg-charcoal p-6 text-ivory/80 font-mono text-xs rounded-sm space-y-2">
-                        <p>Artist Name: UPPERCASE</p>
+                    <div className="bg-charcoal p-6 text-ivory/80 font-mono text-xs space-y-2">
+                        <p>Artist Name: Sentence Case</p>
                         <p>Artwork Title: *Italicized*</p>
                         <p>Medium: Sentence Case</p>
                         <p>Dating: YYYY-YYYY or YYYY</p>

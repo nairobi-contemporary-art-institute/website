@@ -13,14 +13,14 @@ export function StubSection({ id, title, description, phase = "3-5" }: StubSecti
     return (
         <div id={id} className="min-h-[40vh] py-12 flex flex-col justify-center">
             <div className="flex items-center gap-4 mb-6">
-                <span className="text-xs font-bold text-ochre uppercase tracking-[0.2em] px-2 py-1 bg-ochre/10 rounded-sm">
+                <span className="text-xs font-bold text-ochre uppercase tracking-[0.2em] px-2 py-1 bg-ochre/10">
                     Coming Soon — Phase {phase}
                 </span>
             </div>
             <h2 className="text-3xl md:text-5xl font-bold text-charcoal uppercase tracking-tighter mb-6">
                 {title}
             </h2>
-            <div className="max-w-2xl bg-ivory border border-umber/10 p-8 rounded-sm">
+            <div className="max-w-2xl bg-ivory border border-umber/10 p-8">
                 <p className="text-umber/60 italic leading-relaxed">
                     {description || "This section is part of our long-term documentation strategy. It will be populated with live components, guidelines, and templates as the project progresses through future implementation phases."}
                 </p>

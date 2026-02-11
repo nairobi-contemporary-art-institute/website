@@ -6,7 +6,7 @@ import Image from "next/image"
 import { notFound } from "next/navigation"
 import { PortableText } from "@/components/ui/PortableText"
 import Link from "next/link"
-import { formatDate } from "@/lib/utils"
+import { cn } from "@/lib/utils"
 
 // Ensure dynamic rendering
 export const revalidate = 60
@@ -24,81 +24,111 @@ export default async function EventPage({ params }: Props) {
     }
 
     const title = getLocalizedValue(event.title, locale)
-    const description = getLocalizedValue(event.description, locale)
+    const description = getLocalizedValue(event.description, locale) || []
+
+    const startDate = new Date(event.startDate)
+    const endDate = event.endDate ? new Date(event.endDate) : null
+
+    const formattedDate = startDate.toLocaleDateString(locale, {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    })
+
+    const formattedTime = startDate.toLocaleTimeString(locale, {
+        hour: '2-digit',
+        minute: '2-digit'
+    })
+
+    const isPast = new Date() > (endDate || startDate)
 
     return (
-        <div className="container mx-auto px-6 py-20 min-h-screen">
-            <div className="max-w-5xl mx-auto">
-                <header className="mb-12">
-                    <div className="mb-6 flex flex-wrap items-center gap-4 text-sm uppercase tracking-widest text-umber">
-                        <span>{event.eventType}</span>
-                        <span>•</span>
-                        <span>{formatDate(event.startDate)}</span>
+        <div className="container mx-auto px-6 py-20 min-h-screen bg-stone-50/30">
+            <Link
+                href={`/${locale}/events`}
+                className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-umber hover:text-charcoal mb-12 transition-colors"
+            >
+                ← Back to Calendar
+            </Link>
+
+            <div className="max-w-6xl mx-auto">
+                <header className="mb-16 border-b border-charcoal/10 pb-12">
+                    <div className="flex flex-wrap items-center gap-4 text-xs font-mono uppercase tracking-widest text-umber mb-6">
+                        <span className="px-2 py-1 bg-umber/10 rounded-sm">{event.eventType}</span>
+                        {isPast && <span className="px-2 py-1 bg-stone-200 text-stone-500 rounded-sm">Archived</span>}
                     </div>
-                    <h1 className="text-5xl md:text-7xl font-light tracking-tighter text-charcoal mb-8">
+
+                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tighter text-charcoal mb-8 leading-[0.9]">
                         {title}
                     </h1>
-                    {event.location && (
-                        <p className="text-xl text-gray-600">{event.location}</p>
-                    )}
+
+                    <div className="flex flex-col md:flex-row gap-8 md:gap-16 text-lg text-charcoal/80">
+                        <div className="flex items-start gap-4">
+                            <span className="font-mono text-xs uppercase tracking-widest text-umber mt-1.5 w-16">When</span>
+                            <div>
+                                <p className="font-medium">{formattedDate}</p>
+                                <p className="text-charcoal/60">{formattedTime} {endDate && `- ${endDate.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })}`}</p>
+                            </div>
+                        </div>
+                        {event.location && (
+                            <div className="flex items-start gap-4">
+                                <span className="font-mono text-xs uppercase tracking-widest text-umber mt-1.5 w-16">Where</span>
+                                <p className="font-medium max-w-xs">{event.location}</p>
+                            </div>
+                        )}
+                    </div>
                 </header>
 
-                <div className="grid md:grid-cols-[2fr_1fr] gap-16">
-                    <div className="space-y-12">
+                <div className="grid lg:grid-cols-[1.5fr_1fr] gap-16 lg:gap-24">
+                    {/* Main Content */}
+                    <article className="space-y-12">
                         {event.mainImage && (
-                            <div className="relative aspect-video bg-off-white overflow-hidden rounded-sm">
+                            <div className="relative aspect-[4/3] w-full bg-stone-200 overflow-hidden">
                                 <Image
-                                    src={urlFor(event.mainImage).width(1200).height(800).url()}
+                                    src={urlFor(event.mainImage).width(1200).height(900).url()}
                                     alt={event.mainImage.alt || title || 'Event Image'}
                                     fill
                                     className="object-cover"
+                                    placeholder="blur"
+                                    blurDataURL={event.mainImage.asset?.metadata?.lqip}
                                     priority
                                 />
                             </div>
                         )}
 
-                        <section className="prose prose-lg max-w-none prose-headings:font-light prose-headings:tracking-tight prose-a:text-indigo-600 hover:prose-a:text-indigo-500">
-                            <PortableText value={description} locale={locale} />
-                        </section>
-                    </div>
+                        <PortableText value={description} />
+                    </article>
 
-                    <aside className="space-y-12">
-                        <div className="bg-off-white p-8 rounded-sm space-y-6">
-                            <h3 className="text-lg font-bold uppercase tracking-widest">Details</h3>
-                            <div className="space-y-4 text-sm">
-                                <div>
-                                    <span className="block text-gray-500 uppercase text-xs mb-1">Date & Time</span>
-                                    <p>{formatDate(event.startDate)}</p>
-                                    {event.endDate && <p>to {formatDate(event.endDate)}</p>}
-                                </div>
-                                {event.location && (
-                                    <div>
-                                        <span className="block text-gray-500 uppercase text-xs mb-1">Location</span>
-                                        <p>{event.location}</p>
-                                    </div>
-                                )}
-                            </div>
-
-                            {event.registrationLink && (
+                    {/* Sidebar */}
+                    <aside className="space-y-12 lg:pt-0">
+                        {/* RSVP Actions */}
+                        {!isPast && event.registrationLink && (
+                            <div className="bg-white p-8 border border-charcoal/5 shadow-sm space-y-4 sticky top-32">
+                                <h3 className="font-mono text-xs uppercase tracking-widest text-charcoal/60">Registration</h3>
+                                <p className="text-sm text-charcoal/80 mb-4">
+                                    Space is limited for this event. Please register in advance.
+                                </p>
                                 <a
                                     href={event.registrationLink}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="block w-full py-3 px-6 bg-charcoal text-white text-center font-bold tracking-wide hover:bg-indigo-600 transition-colors"
+                                    className="block w-full py-4 bg-charcoal text-off-white text-center font-medium tracking-wide hover:bg-umber transition-colors"
                                 >
-                                    RSVP / Register
+                                    RSVP Now
                                 </a>
-                            )}
-                        </div>
+                            </div>
+                        )}
 
+                        {/* Facilitators */}
                         {event.educators && event.educators.length > 0 && (
-                            <div className="space-y-6 pt-6 border-t border-gray-100">
-                                <h3 className="text-sm font-bold uppercase tracking-widest text-gray-500">Facilitators</h3>
-                                <div className="space-y-4">
+                            <div className="space-y-6">
+                                <h3 className="font-mono text-xs uppercase tracking-widest text-umber border-b border-umber/20 pb-2">Facilitators</h3>
+                                <div className="space-y-6">
                                     {event.educators.map((person: any) => (
-                                        <div key={person._id} className="flex items-center gap-3">
+                                        <div key={person._id} className="flex items-center gap-4 group">
                                             {person.image && (
-                                                <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gray-100 flex-shrink-0">
+                                                <div className="relative w-12 h-12 rounded-full overflow-hidden bg-stone-100 flex-shrink-0 grayscale group-hover:grayscale-0 transition-all">
                                                     <Image
                                                         src={urlFor(person.image).width(100).height(100).url()}
                                                         alt={getLocalizedValue(person.name, locale) || 'Facilitator'}
@@ -108,9 +138,9 @@ export default async function EventPage({ params }: Props) {
                                                 </div>
                                             )}
                                             <div>
-                                                <p className="font-bold text-sm text-charcoal">{getLocalizedValue(person.name, locale)}</p>
+                                                <p className="font-bold text-charcoal">{getLocalizedValue(person.name, locale)}</p>
                                                 {person.roles && (
-                                                    <p className="text-xs text-gray-500">{person.roles.join(', ')}</p>
+                                                    <p className="text-xs text-charcoal/60">{person.roles.join(', ')}</p>
                                                 )}
                                             </div>
                                         </div>
@@ -119,22 +149,10 @@ export default async function EventPage({ params }: Props) {
                             </div>
                         )}
 
-                        {event.tags && event.tags.length > 0 && (
-                            <div className="space-y-4 pt-6 border-t border-gray-100">
-                                <h3 className="text-sm font-bold uppercase tracking-widest text-gray-500">Related Topics</h3>
-                                <div className="flex flex-wrap gap-2">
-                                    {event.tags.map((tag: any) => (
-                                        <span key={tag._id} className="px-2 py-1 bg-amber-50 text-amber-900/70 text-[10px] font-bold rounded-sm uppercase tracking-wider">
-                                            {getLocalizedValue(tag.title, locale)}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
+                        {/* Related Exhibitions */}
                         {event.relatedExhibitions && event.relatedExhibitions.length > 0 && (
                             <div className="space-y-6">
-                                <h3 className="text-sm font-bold uppercase tracking-widest text-gray-500">Related Exhibitions</h3>
+                                <h3 className="font-mono text-xs uppercase tracking-widest text-umber border-b border-umber/20 pb-2">In Context of</h3>
                                 <div className="space-y-6">
                                     {event.relatedExhibitions.map((exhibition: any) => {
                                         const exTitle = getLocalizedValue(exhibition.title, locale)
@@ -145,16 +163,16 @@ export default async function EventPage({ params }: Props) {
                                                 className="block group"
                                             >
                                                 {exhibition.mainImage && (
-                                                    <div className="relative aspect-[3/2] mb-3 overflow-hidden bg-gray-100">
+                                                    <div className="relative aspect-video mb-3 overflow-hidden bg-stone-100">
                                                         <Image
-                                                            src={urlFor(exhibition.mainImage).width(400).height(300).url()}
+                                                            src={urlFor(exhibition.mainImage).width(600).height(400).url()}
                                                             alt={exTitle || 'Exhibition'}
                                                             fill
-                                                            className="object-cover transition-transform group-hover:scale-105"
+                                                            className="object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0"
                                                         />
                                                     </div>
                                                 )}
-                                                <h4 className="font-bold group-hover:text-indigo-600 transition-colors">
+                                                <h4 className="font-bold group-hover:text-umber transition-colors">
                                                     {exTitle}
                                                 </h4>
                                             </Link>

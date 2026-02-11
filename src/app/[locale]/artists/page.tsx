@@ -43,7 +43,7 @@ export default async function ArtistsPage({ params }: { params: Promise<{ locale
                             href={`/${locale}/artists/${artist.slug}`}
                             className="group block space-y-4"
                         >
-                            <div className="aspect-square relative bg-charcoal/5 overflow-hidden rounded-full grayscale group-hover:grayscale-0 transition-all duration-500">
+                            <div className="aspect-square relative bg-charcoal/5 overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500">
                                 {artist.image ? (
                                     <Image
                                         src={urlFor(artist.image).width(400).height(400).url()}

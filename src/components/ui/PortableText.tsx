@@ -6,7 +6,7 @@ const components = {
     types: {
         image: ({ value }: any) => {
             return (
-                <div className="my-8 relative aspect-video overflow-hidden rounded-sm bg-charcoal/5">
+                <div className="my-8 relative aspect-video overflow-hidden bg-charcoal/5">
                     <Image
                         src={urlFor(value).width(1200).url()}
                         alt={value.alt || ''}

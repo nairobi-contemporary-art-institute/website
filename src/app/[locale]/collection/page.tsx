@@ -14,6 +14,8 @@ export const metadata: Metadata = {
     description: 'Explore the NCAI Collection.',
 }
 
+export const revalidate = 3600 // Revalidate every hour
+
 export default async function CollectionPage({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params
     const collectionItems = await client.fetch(COLLECTION_QUERY)
@@ -49,6 +51,8 @@ export default async function CollectionPage({ params }: { params: Promise<{ loc
                                         alt={title || 'Collection Item'}
                                         fill
                                         className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                        placeholder="blur"
+                                        blurDataURL={item.mainImage?.asset?.metadata?.lqip}
                                     />
                                 ) : (
                                     <div className="w-full h-full flex items-center justify-center text-umber/20">No Image</div>

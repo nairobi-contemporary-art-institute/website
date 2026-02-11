@@ -41,7 +41,7 @@ export function WorkCarousel({ works, locale, onOpenGrid }: WorkCarouselProps) {
             {/* Main Image View */}
             <div className="relative group">
                 <div
-                    className="aspect-square relative bg-charcoal/5 overflow-hidden rounded-sm cursor-zoom-in"
+                    className="aspect-square relative bg-charcoal/5 overflow-hidden cursor-zoom-in"
                     onClick={() => setIsLightboxOpen(true)}
                 >
                     <Image
@@ -58,13 +58,13 @@ export function WorkCarousel({ works, locale, onOpenGrid }: WorkCarouselProps) {
                     <>
                         <button
                             onClick={(e) => { e.stopPropagation(); prev(); }}
-                            className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 hover:bg-white rounded-full shadow-sm opacity-0 group-hover:opacity-100 transition-opacity"
+                            className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 hover:bg-white shadow-sm opacity-0 group-hover:opacity-100 transition-opacity"
                         >
                             <ChevronLeft className="w-6 h-6 text-charcoal" />
                         </button>
                         <button
                             onClick={(e) => { e.stopPropagation(); next(); }}
-                            className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 hover:bg-white rounded-full shadow-sm opacity-0 group-hover:opacity-100 transition-opacity"
+                            className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 hover:bg-white shadow-sm opacity-0 group-hover:opacity-100 transition-opacity"
                         >
                             <ChevronRight className="w-6 h-6 text-charcoal" />
                         </button>
@@ -77,7 +77,7 @@ export function WorkCarousel({ works, locale, onOpenGrid }: WorkCarouselProps) {
                 <div className="space-y-1">
                     <button
                         onClick={onOpenGrid}
-                        className="p-1 hover:bg-charcoal/5 rounded-sm transition-colors mb-2"
+                        className="p-1 hover:bg-charcoal/5 transition-colors mb-2"
                         title="View all works"
                     >
                         <Grid className="w-5 h-5 text-charcoal/60" />
@@ -87,12 +87,12 @@ export function WorkCarousel({ works, locale, onOpenGrid }: WorkCarouselProps) {
                         <p className="text-charcoal/80">{currentWork.year}</p>
                         <p className="text-charcoal/60 text-xs">{medium}</p>
                         <p className="text-charcoal/60 text-xs">{currentWork.dimensions}</p>
-                        {currentWork.edition && <p className="text-charcoal/40 text-[10px] uppercase tracking-tighter mt-1">{currentWork.edition}</p>}
+                        {currentWork.edition && <p className="text-charcoal/40 text-[10px] tracking-tighter mt-1">{currentWork.edition}</p>}
 
                         {currentWork.tags && currentWork.tags.length > 0 && (
                             <div className="flex flex-wrap gap-1 mt-2 pt-1">
                                 {currentWork.tags.map((tag: any) => (
-                                    <span key={tag._id} className="text-[10px] text-charcoal/40 bg-charcoal/5 px-1.5 rounded-sm">
+                                    <span key={tag._id} className="text-[10px] text-charcoal/40 bg-charcoal/5 px-1.5 capitalize">
                                         {getLocalizedValue(tag.title, locale)}
                                     </span>
                                 ))}
