@@ -58,6 +58,11 @@
             "relatedExhibitions": "In Context of",
             "archived": "Archived",
             "noUpcoming": "No upcoming events found for this category."
+        },
+        "accessibility": {
+            "title": "Accessibility",
+            "description": "Information about physical and digital access at NCAI.",
+            "intro": "Art is for everyone. We strictly adhere to WCAG 2.2 AAA standards to ensure the NCAI digital experience is usable by people with diverse abilities. Physically, our space is designed to be welcoming and accessible to all."
         }
     },
     "Search": {

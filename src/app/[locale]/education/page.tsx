@@ -1,10 +1,7 @@
-import { client } from '@/sanity/lib/client'
+import { client, sanityFetch } from '@/sanity/lib/client'
 import { PROGRAMS_QUERY } from '@/sanity/lib/queries'
 import { EducationFilter } from '@/components/education/EducationFilter'
 import { getTranslations } from 'next-intl/server'
-
-// Ensure dynamic rendering
-export const revalidate = 60
 
 type Props = {
     params: Promise<{ locale: string }>
@@ -22,7 +19,7 @@ export async function generateMetadata({ params }: Props) {
 export default async function EducationPage({ params }: Props) {
     const { locale } = await params
     const t = await getTranslations({ locale, namespace: 'Pages.education' })
-    const programs = await client.fetch(PROGRAMS_QUERY)
+    const programs = await sanityFetch<any[]>({ query: PROGRAMS_QUERY, tags: ['program'] })
 
     return (
         <div className="container mx-auto px-6 py-20 min-h-screen">

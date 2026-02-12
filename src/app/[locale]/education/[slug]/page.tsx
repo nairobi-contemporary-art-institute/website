@@ -1,15 +1,15 @@
-import { client } from "@/sanity/lib/client"
+import { client, sanityFetch } from "@/sanity/lib/client"
 import { PROGRAM_BY_SLUG_QUERY } from "@/sanity/lib/queries"
 import { getLocalizedValue } from "@/sanity/lib/utils"
 import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
 import { notFound } from "next/navigation"
-import { PortableText } from "@/components/ui/PortableText"
+import { PortableTextComponent } from "@/components/ui/PortableText"
 import Link from "next/link"
 import { ResourceList } from "@/components/education/ResourceList"
 
 // Ensure dynamic rendering
-export const revalidate = 60
+// export const revalidate = 60
 
 type Props = {
     params: Promise<{ locale: string; slug: string }>
@@ -34,7 +34,11 @@ const AUDIENCE_LABELS: Record<string, string> = {
 
 export default async function ProgramPage({ params }: Props) {
     const { locale, slug } = await params
-    const program = await client.fetch(PROGRAM_BY_SLUG_QUERY, { slug })
+    const program = await sanityFetch<any>({
+        query: PROGRAM_BY_SLUG_QUERY,
+        params: { slug },
+        tags: [`program:${slug}`]
+    })
 
     if (!program) {
         notFound()
@@ -107,7 +111,7 @@ export default async function ProgramPage({ params }: Props) {
                             </div>
                         )}
 
-                        <PortableText value={description} />
+                        <PortableTextComponent value={description} />
                     </article>
 
                     {/* Sidebar */}

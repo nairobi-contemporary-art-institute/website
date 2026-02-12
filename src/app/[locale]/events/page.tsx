@@ -1,9 +1,6 @@
-import { client } from "@/sanity/lib/client"
+import { client, sanityFetch } from "@/sanity/lib/client"
 import { EVENTS_QUERY } from "@/sanity/lib/queries"
 import { EventFilter } from "@/components/events/EventFilter"
-
-// Ensure dynamic rendering
-export const revalidate = 60
 
 type Props = {
     params: Promise<{ locale: string }>
@@ -11,7 +8,10 @@ type Props = {
 
 export default async function EventsPage({ params }: Props) {
     const { locale } = await params
-    const events = await client.fetch(EVENTS_QUERY)
+    const events = await sanityFetch<any[]>({
+        query: EVENTS_QUERY,
+        tags: ['event']
+    })
 
     // Separate upcoming and past logic is handled in the client filter for interactive switching,
     // but initially we pass all events.

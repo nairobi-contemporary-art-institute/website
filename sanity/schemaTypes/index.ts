@@ -13,6 +13,8 @@ import { event } from './event'
 import { person } from './person'
 import { category } from './category'
 
+import { page } from './page'
+
 export const schema: { types: SchemaTypeDefinition[] } = {
-    types: [artist, work, exhibition, collectionItem, timelineEvent, event, person, category, siteSettings, post, program, blockContent],
+    types: [artist, work, exhibition, collectionItem, timelineEvent, event, person, category, siteSettings, post, program, blockContent, page],
 }

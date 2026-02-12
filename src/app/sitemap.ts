@@ -18,6 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/education',
         '/collection',
         '/support',
+        '/visit/accessibility',
     ]
 
     // 2. Dynamic Routes from Sanity

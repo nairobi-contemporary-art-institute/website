@@ -26,6 +26,12 @@ export const EXHIBITIONS_QUERY = groq`
 export const EXHIBITION_BY_SLUG_QUERY = groq`
   *[_type == "exhibition" && slug.current == $slug][0] {
     ...,
+    mainImage {
+      asset-> {
+        _id,
+        metadata { lqip }
+      }
+    },
     artists[]-> {
         _id,
         name,
@@ -70,6 +76,12 @@ export const ARTISTS_QUERY = groq`
 export const ARTIST_BY_SLUG_QUERY = groq`
   *[_type == "artist" && slug.current == $slug][0] {
     ...,
+    image {
+      asset-> {
+        _id,
+        metadata { lqip }
+      }
+    },
     tags[]-> {
         _id,
         title,
@@ -83,7 +95,12 @@ export const ARTIST_BY_SLUG_QUERY = groq`
         medium,
         dimensions,
         edition,
-        image,
+        image {
+            asset-> {
+                _id,
+                metadata { lqip }
+            }
+        },
         tags[]-> {
             title,
             type
@@ -259,6 +276,12 @@ export const COLLECTION_QUERY = groq`
 export const COLLECTION_ITEM_BY_SLUG_QUERY = groq`
   *[_type == "collectionItem" && slug.current == $slug][0] {
     ...,
+    mainImage {
+      asset-> {
+        _id,
+        metadata { lqip }
+      }
+    },
     artist->{
         _id,
         name,
@@ -348,5 +371,14 @@ export const EVENT_BY_SLUG_QUERY = groq`
         type,
         "slug": slug.current
     }
+  }
+`
+
+/**
+ * Fetch a single page by slug.
+ */
+export const PAGE_BY_SLUG_QUERY = groq`
+  *[_type == "page" && slug.current == $slug][0] {
+    ...
   }
 `

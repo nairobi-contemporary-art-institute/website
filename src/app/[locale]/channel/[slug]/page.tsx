@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { client } from '@/sanity/lib/client'
+import { client, sanityFetch } from '@/sanity/lib/client'
 import { POST_BY_SLUG_QUERY } from '@/sanity/lib/queries'
 import { getLocalizedValue } from '@/sanity/lib/utils'
 import { urlFor } from '@/sanity/lib/image'
@@ -9,12 +9,13 @@ import { PortableTextComponent } from '@/components/ui/PortableText'
 import { ResponsiveDivider } from '@/components/ui/ResponsiveDivider'
 import { MediaPlayer } from '@/components/channel/MediaPlayer'
 
-// Ensure dynamic rendering
-export const revalidate = 60
-
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }) {
     const { locale, slug } = await params
-    const post = await client.fetch(POST_BY_SLUG_QUERY, { slug })
+    const post = await sanityFetch<any>({
+        query: POST_BY_SLUG_QUERY,
+        params: { slug },
+        tags: [`post:${slug}`]
+    })
 
     if (!post) return { title: 'Not Found' }
 
@@ -27,7 +28,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function ChannelPostPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
     const { locale, slug } = await params
-    const post = await client.fetch(POST_BY_SLUG_QUERY, { slug })
+    const post = await sanityFetch<any>({
+        query: POST_BY_SLUG_QUERY,
+        params: { slug },
+        tags: [`post:${slug}`]
+    })
 
     if (!post) notFound()
 

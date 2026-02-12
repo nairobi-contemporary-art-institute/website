@@ -1,6 +1,7 @@
 'use client'
 
-import Link from 'next/link'
+import { Link } from '@/i18n'
+
 import { ResponsiveDivider } from '@/components/ui/ResponsiveDivider'
 import { SocialIcons } from './SocialIcons'
 import { AccessibilityToggles } from './AccessibilityToggles'
@@ -41,6 +42,7 @@ const footerCategories = [
 
 const legalLinks = [
     { label: 'Privacy policy', url: '/privacy' },
+    { label: 'Accessibility', url: '/visit/accessibility' },
     { label: 'Terms & conditions', url: '/terms' },
     { label: 'About ncai.art', url: '/about' },
 ]

@@ -1,15 +1,12 @@
-import { client } from "@/sanity/lib/client"
+import { client, sanityFetch } from "@/sanity/lib/client"
 import { EVENT_BY_SLUG_QUERY } from "@/sanity/lib/queries"
 import { getLocalizedValue } from "@/sanity/lib/utils"
 import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
 import { notFound } from "next/navigation"
-import { PortableText } from "@/components/ui/PortableText"
+import { PortableTextComponent } from "@/components/ui/PortableText"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
-
-// Ensure dynamic rendering
-export const revalidate = 60
 
 type Props = {
     params: Promise<{ locale: string; slug: string }>
@@ -17,7 +14,11 @@ type Props = {
 
 export default async function EventPage({ params }: Props) {
     const { locale, slug } = await params
-    const event = await client.fetch(EVENT_BY_SLUG_QUERY, { slug })
+    const event = await sanityFetch<any>({
+        query: EVENT_BY_SLUG_QUERY,
+        params: { slug },
+        tags: [`event:${slug}`]
+    })
 
     if (!event) {
         notFound()
@@ -97,7 +98,7 @@ export default async function EventPage({ params }: Props) {
                             </div>
                         )}
 
-                        <PortableText value={description} />
+                        <PortableTextComponent value={description} />
                     </article>
 
                     {/* Sidebar */}

@@ -16,3 +16,20 @@ export const client = createClient({
         studioUrl: '/studio',
     },
 })
+
+export async function sanityFetch<QueryResponse>({
+    query,
+    params = {},
+    tags,
+}: {
+    query: string
+    params?: Record<string, any>
+    tags?: string[]
+}) {
+    return client.fetch<QueryResponse>(query, params, {
+        next: {
+            revalidate: false, // for on-demand revalidation
+            tags,
+        },
+    })
+}

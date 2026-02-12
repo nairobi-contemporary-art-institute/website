@@ -1,5 +1,5 @@
 import { getTranslations, getMessages } from 'next-intl/server'
-import { client } from '@/sanity/lib/client'
+import { client, sanityFetch } from '@/sanity/lib/client'
 import { POSTS_QUERY } from '@/sanity/lib/queries'
 import { ChannelFilter } from '@/components/channel/ChannelFilter'
 
@@ -15,7 +15,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function ChannelPage({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params
     const t = await getTranslations({ locale, namespace: 'Pages.channel' })
-    const posts = await client.fetch(POSTS_QUERY)
+    const posts = await sanityFetch<any[]>({
+        query: POSTS_QUERY,
+        tags: ['post']
+    })
 
     return (
         <div className="container mx-auto px-6 py-20 min-h-screen">
