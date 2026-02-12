@@ -1,12 +1,15 @@
 'use client'
 
+import { useState, useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n'
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher'
 import { SearchModal } from '@/components/ui/SearchModal'
 import { Logo } from '@/components/ui/Logo'
 import { cn } from '@/lib/utils'
-import { useState, useEffect } from 'react'
-import { usePathname } from 'next/navigation'
+import { gsap, ScrollTrigger } from '@/lib/gsap'
+import { useGSAP } from '@gsap/react'
 
 interface HeaderClientProps {
     locale: string;
@@ -15,10 +18,64 @@ interface HeaderClientProps {
 }
 
 export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderClientProps) {
+    const t = useTranslations('HomePage')
     const pathname = usePathname()
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [isSearchOpen, setIsSearchOpen] = useState(false)
     const [isAtTop, setIsAtTop] = useState(true)
+
+    const headerRef = useRef<HTMLDivElement>(null)
+    const logoContainerRef = useRef<HTMLDivElement>(null)
+    const initialLogoRef = useRef<HTMLDivElement>(null)
+    const fullLogoRef = useRef<HTMLDivElement>(null)
+    const runwayRef = useRef<HTMLDivElement>(null)
+
+    useGSAP(() => {
+        // Disable expansion on mobile ( < 768px )
+        if (window.innerWidth < 768) return
+
+        const initialWidth = initialLogoRef.current?.offsetWidth || 120
+        const targetWidth = runwayRef.current?.offsetWidth || 400
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: document.body,
+                start: "top top",
+                end: "200px top",
+                scrub: 0.5,
+            }
+        })
+
+        // Animate the container width to push the navigation
+        tl.fromTo(logoContainerRef.current,
+            { width: initialWidth },
+            { width: targetWidth, duration: 1, ease: "none" },
+            0
+        )
+
+        tl.to(initialLogoRef.current, {
+            opacity: 0,
+            x: -20,
+            scale: 0.8,
+            duration: 1,
+            ease: "power2.inOut"
+        }, 0)
+            .fromTo(fullLogoRef.current,
+                {
+                    clipPath: "inset(0% 100% 0% 0%)",
+                    opacity: 0,
+                    x: 20
+                },
+                {
+                    clipPath: "inset(0% 0% 0% 0%)",
+                    opacity: 1,
+                    x: 0,
+                    duration: 1.5,
+                    ease: "power2.inOut"
+                },
+                0
+            )
+    }, { scope: headerRef, dependencies: [locale] })
 
     useEffect(() => {
         const handleScroll = () => {
@@ -45,7 +102,7 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
 
     return (
         <>
-            <div className="sticky top-0 z-50 flex flex-col w-full">
+            <div ref={headerRef} className="sticky top-0 z-50 flex flex-col w-full">
                 <div
                     className={cn(
                         "overflow-hidden transition-all duration-500 ease-in-out",
@@ -57,14 +114,31 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
                 <header className="bg-ivory/80 backdrop-blur-md text-umber border-b border-umber/10 transition-colors duration-300">
                     <div className="h-20 grid grid-cols-[auto_1fr_auto] items-stretch">
                         {/* Logo Section */}
-                        <div className="flex items-center px-6 md:px-8 border-r border-umber/10">
+                        <div ref={logoContainerRef} className="flex items-center px-6 md:px-8 border-r border-umber/10 overflow-hidden">
                             <Link
                                 href="/"
-                                className="text-umber flex items-center gap-2 group"
+                                className="text-umber flex items-center group relative h-full w-full"
                                 aria-label="NCAI Home"
                             >
-                                <Logo className="h-10 w-auto group-hover:text-amber-800 transition-colors" />
-                                <span className="text-3xl font-bold tracking-tighter group-hover:text-amber-800 transition-colors pt-2">NCAI</span>
+                                {/* Dynamic Runway - Provides the measurement for the multi-language title (absolute so it doesn't affect initial width) */}
+                                <div ref={runwayRef} className="absolute hidden md:block opacity-0 pointer-events-none whitespace-nowrap text-lg lg:text-xl font-bold uppercase tracking-tight px-2">
+                                    {t('title')}
+                                </div>
+
+                                {/* Initial State: Logomark + NCAI */}
+                                <div ref={initialLogoRef} className="flex items-center gap-2 md:absolute md:left-0 whitespace-nowrap">
+                                    <Logo className="h-10 w-auto group-hover:text-amber-800 transition-colors" />
+                                    <span className="text-3xl font-bold tracking-tighter group-hover:text-amber-800 transition-colors pt-2">NCAI</span>
+                                </div>
+
+                                {/* Target State: Full Title (revealed on scroll) */}
+                                <div
+                                    ref={fullLogoRef}
+                                    className="hidden md:block absolute left-0 whitespace-nowrap text-lg lg:text-xl font-bold uppercase tracking-tight text-umber opacity-0"
+                                    aria-hidden="true"
+                                >
+                                    {t('title')}
+                                </div>
                             </Link>
                         </div>
 
