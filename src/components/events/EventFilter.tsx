@@ -44,7 +44,7 @@ export function EventFilter({ events, locale }: EventFilterProps) {
                         key={cat}
                         onClick={() => setFilter(cat)}
                         className={cn(
-                            "px-4 py-1.5 rounded-full text-sm uppercase tracking-widest transition-all",
+                            "px-4 py-1.5 text-sm uppercase tracking-widest transition-all",
                             filter === cat
                                 ? "bg-charcoal text-off-white shadow-sm"
                                 : "bg-transparent text-charcoal/60 hover:text-charcoal border border-charcoal/20 hover:border-charcoal/40"
@@ -69,7 +69,7 @@ export function EventFilter({ events, locale }: EventFilterProps) {
                         ))}
                     </div>
                 ) : (
-                    <div className="py-32 text-center border border-dashed border-charcoal/20 rounded-lg bg-stone-50/50">
+                    <div className="py-32 text-center border border-dashed border-charcoal/20 bg-stone-50/50">
                         <p className="text-charcoal/40 font-mono uppercase tracking-widest text-sm">No upcoming events found</p>
                     </div>
                 )}

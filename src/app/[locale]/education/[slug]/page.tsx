@@ -31,6 +31,38 @@ const AUDIENCE_LABELS: Record<string, string> = {
     children: 'Children & Families',
     professionals: 'Professional Development',
 }
+import { Metadata } from "next"
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { locale, slug } = await params
+    const program = await sanityFetch<any>({
+        query: PROGRAM_BY_SLUG_QUERY,
+        params: { slug },
+        tags: [`program:${slug}`]
+    })
+
+    if (!program) {
+        return {}
+    }
+
+    const title = getLocalizedValue(program.title, locale)
+    const descriptionBlocks = getLocalizedValue(program.description, locale)
+    const description = Array.isArray(descriptionBlocks) && descriptionBlocks[0]?.children
+        ? (descriptionBlocks[0].children[0]?.text || 'Education program at NCAI')
+        : 'Education program at NCAI'
+
+    const ogImage = program.mainImage ? urlFor(program.mainImage).width(1200).height(630).url() : undefined
+
+    return {
+        title: title,
+        description: description,
+        openGraph: {
+            title: title,
+            description: description,
+            images: ogImage ? [{ url: ogImage }] : [],
+        },
+    }
+}
 
 export default async function ProgramPage({ params }: Props) {
     const { locale, slug } = await params
@@ -71,8 +103,8 @@ export default async function ProgramPage({ params }: Props) {
             <div className="max-w-6xl mx-auto">
                 <header className="mb-16 border-b border-charcoal/10 pb-12">
                     <div className="flex flex-wrap items-center gap-4 text-xs font-mono uppercase tracking-widest text-umber mb-6">
-                        <span className="px-2 py-1 bg-umber/10 rounded-sm">{typeLabel}</span>
-                        <span className="px-2 py-1 bg-stone-200 text-stone-600 rounded-sm">{audienceLabel}</span>
+                        <span className="px-2 py-1 bg-umber/10">{typeLabel}</span>
+                        <span className="px-2 py-1 bg-stone-200 text-stone-600">{audienceLabel}</span>
                     </div>
 
                     <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tighter text-charcoal mb-8 leading-[0.95]">
@@ -98,7 +130,7 @@ export default async function ProgramPage({ params }: Props) {
                     {/* Main Content */}
                     <article className="space-y-12">
                         {program.mainImage && (
-                            <div className="relative aspect-[16/9] w-full bg-stone-200 overflow-hidden rounded-sm">
+                            <div className="relative aspect-[16/9] w-full bg-stone-200 overflow-hidden">
                                 <Image
                                     src={urlFor(program.mainImage).width(1200).height(675).url()}
                                     alt={program.mainImage.alt || title || 'Program Image'}
@@ -118,7 +150,7 @@ export default async function ProgramPage({ params }: Props) {
                     <aside className="space-y-12 lg:pt-0">
                         {/* Registration */}
                         {isUpcoming && program.registrationUrl && (
-                            <div className="bg-white p-6 border border-charcoal/5 shadow-sm space-y-4 rounded-sm">
+                            <div className="bg-white p-6 border border-charcoal/5 shadow-sm space-y-4">
                                 <h3 className="font-mono text-xs uppercase tracking-widest text-charcoal/60">Participation</h3>
                                 <p className="text-sm text-charcoal/80 mb-4">
                                     Register to participate in this program.
@@ -127,7 +159,7 @@ export default async function ProgramPage({ params }: Props) {
                                     href={program.registrationUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="block w-full py-3 bg-charcoal text-off-white text-center font-medium tracking-wide hover:bg-umber transition-colors rounded-sm"
+                                    className="block w-full py-3 bg-charcoal text-off-white text-center font-medium tracking-wide hover:bg-umber transition-colors"
                                 >
                                     Register Now
                                 </a>
@@ -147,7 +179,7 @@ export default async function ProgramPage({ params }: Props) {
                                     {program.educators.map((person: any) => (
                                         <div key={person._id} className="flex items-center gap-4 group">
                                             {person.image && (
-                                                <div className="relative w-12 h-12 rounded-full overflow-hidden bg-stone-100 flex-shrink-0 grayscale group-hover:grayscale-0 transition-all">
+                                                <div className="relative w-12 h-12 overflow-hidden bg-stone-100 flex-shrink-0 grayscale group-hover:grayscale-0 transition-all">
                                                     <Image
                                                         src={urlFor(person.image).width(100).height(100).url()}
                                                         alt={getLocalizedValue(person.name, locale) || 'Facilitator'}
@@ -174,7 +206,7 @@ export default async function ProgramPage({ params }: Props) {
                                 <h3 className="font-mono text-xs uppercase tracking-widest text-umber border-b border-umber/20 pb-2">Related Topics</h3>
                                 <div className="flex flex-wrap gap-2">
                                     {program.tags.map((tag: any) => (
-                                        <span key={tag._id} className="px-2 py-1 bg-stone-100 text-charcoal/70 text-[10px] uppercase tracking-wider rounded-sm">
+                                        <span key={tag._id} className="px-2 py-1 bg-stone-100 text-charcoal/70 text-[10px] uppercase tracking-wider">
                                             {getLocalizedValue(tag.title, locale)}
                                         </span>
                                     ))}

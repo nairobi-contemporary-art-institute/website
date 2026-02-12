@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getMessages } from 'next-intl/server'
-import { client } from '@/sanity/lib/client'
+import { client, sanityFetch } from '@/sanity/lib/client'
 import { EXHIBITION_BY_SLUG_QUERY } from '@/sanity/lib/queries'
 import { urlFor } from '@/sanity/lib/image'
 import { getLocalizedValue } from '@/sanity/lib/utils'
@@ -27,7 +27,11 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { locale, slug } = await params
-    const exhibition = await client.fetch(EXHIBITION_BY_SLUG_QUERY, { slug })
+    const exhibition = await sanityFetch<any>({
+        query: EXHIBITION_BY_SLUG_QUERY,
+        params: { slug },
+        tags: [`exhibition:${slug}`]
+    })
 
     if (!exhibition) {
         return {
@@ -36,11 +40,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
 
     const title = getLocalizedValue(exhibition.title, locale)
+    const descriptionBlocks = getLocalizedValue(exhibition.description, locale)
+    const description = Array.isArray(descriptionBlocks) && descriptionBlocks[0]?.children
+        ? (descriptionBlocks[0].children[0]?.text || `Exhibition: ${title}`)
+        : `Exhibition: ${title}`
 
     return {
         title,
+        description,
         openGraph: {
             title,
+            description,
             images: exhibition.mainImage ? [urlFor(exhibition.mainImage).width(1200).height(630).url()] : [],
         },
     }
@@ -48,7 +58,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ExhibitionPage({ params }: Props) {
     const { locale, slug } = await params
-    const exhibition = await client.fetch(EXHIBITION_BY_SLUG_QUERY, { slug })
+    const exhibition = await sanityFetch<any>({
+        query: EXHIBITION_BY_SLUG_QUERY,
+        params: { slug },
+        tags: [`exhibition:${slug}`]
+    })
 
     if (!exhibition) {
         notFound()

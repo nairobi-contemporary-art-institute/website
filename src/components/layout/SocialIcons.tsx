@@ -42,14 +42,30 @@ const socialLinks = [
 ]
 
 interface SocialIconsProps {
-    links?: typeof socialLinks
+    urls?: {
+        instagram?: string
+        facebook?: string
+        youtube?: string
+        twitter?: string
+    }
     className?: string
 }
 
-export function SocialIcons({ links = socialLinks, className }: SocialIconsProps) {
+export function SocialIcons({ urls, className }: SocialIconsProps) {
+    const items = socialLinks.map(link => {
+        let href = link.href;
+        if (urls) {
+            if (link.name === 'Instagram' && urls.instagram) href = urls.instagram;
+            if (link.name === 'Facebook' && urls.facebook) href = urls.facebook;
+            if (link.name === 'YouTube' && urls.youtube) href = urls.youtube;
+            if (link.name === 'X' && urls.twitter) href = urls.twitter;
+        }
+        return { ...link, href };
+    });
+
     return (
         <div className={`flex items-center gap-4 ${className || ''}`}>
-            {links.map((link) => (
+            {items.map((link) => (
                 <Link
                     key={link.name}
                     href={link.href}

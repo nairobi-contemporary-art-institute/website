@@ -1,16 +1,21 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { Header } from './Header'
-import { Footer } from './Footer'
-
 import { PageTransition } from '@/components/ui/PageTransition'
 
 /**
  * Conditionally renders Header and Footer based on the current route.
  * For example, immersive routes like /timeline may want to hide global nav.
  */
-export function ConditionalWrapper({ children }: { children: React.ReactNode }) {
+export function ConditionalWrapper({
+    children,
+    header,
+    footer
+}: {
+    children: React.ReactNode;
+    header: React.ReactNode;
+    footer: React.ReactNode;
+}) {
     const pathname = usePathname()
 
     // Check if the current route is the immersive timeline
@@ -29,13 +34,13 @@ export function ConditionalWrapper({ children }: { children: React.ReactNode }) 
 
     return (
         <>
-            <Header />
+            {header}
             <main className="flex-1 pt-12 md:pt-20">
                 <PageTransition>
                     {children}
                 </PageTransition>
             </main>
-            <Footer />
+            {footer}
         </>
     )
 }

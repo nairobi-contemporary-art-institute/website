@@ -38,7 +38,7 @@ export function EducationFilter({ programs, locale }: EducationFilterProps) {
                         key={f.value}
                         onClick={() => setFilter(f.value)}
                         className={cn(
-                            "px-4 py-2 text-sm font-mono uppercase tracking-widest transition-all rounded-sm",
+                            "px-4 py-2 text-sm font-mono uppercase tracking-widest transition-all",
                             filter === f.value
                                 ? "bg-umber/10 text-umber font-bold border-b-2 border-umber"
                                 : "text-charcoal/60 hover:text-charcoal hover:bg-stone-50"
@@ -63,7 +63,7 @@ export function EducationFilter({ programs, locale }: EducationFilterProps) {
                         ))}
                     </div>
                 ) : (
-                    <div className="py-32 text-center border border-dashed border-charcoal/20 rounded-lg bg-stone-50/50">
+                    <div className="py-32 text-center border border-dashed border-charcoal/20 bg-stone-50/50">
                         <p className="text-charcoal/40 font-mono uppercase tracking-widest text-sm">No current programs found</p>
                     </div>
                 )}

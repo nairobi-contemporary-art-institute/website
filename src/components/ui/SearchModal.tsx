@@ -19,7 +19,7 @@ interface SearchResult {
     date?: string
 }
 
-const CATEGORIES = ['all', 'exhibition', 'artist', 'post', 'program'] as const
+const CATEGORIES = ['all', 'exhibition', 'artist', 'post', 'program', 'event'] as const
 type Category = typeof CATEGORIES[number]
 
 export function SearchModal({ isOpen, onClose, locale }: { isOpen: boolean; onClose: () => void; locale: string }) {
@@ -120,6 +120,7 @@ export function SearchModal({ isOpen, onClose, locale }: { isOpen: boolean; onCl
             case 'program': return `/education/${slug}`
             case 'artist': return `/artists/${slug}`
             case 'exhibition': return `/exhibitions/${slug}`
+            case 'event': return `/events/${slug}`
             default: return `/${slug}`
         }
     }
@@ -150,7 +151,7 @@ export function SearchModal({ isOpen, onClose, locale }: { isOpen: boolean; onCl
                         />
                         {isLoading && (
                             <div className="absolute right-0 top-1/2 -translate-y-1/2">
-                                <div className="w-8 h-8 border-2 border-umber/20 border-t-umber rounded-full animate-spin" />
+                                <div className="w-8 h-8 border-2 border-umber/20 border-t-umber animate-spin" />
                             </div>
                         )}
                     </div>
@@ -159,7 +160,7 @@ export function SearchModal({ isOpen, onClose, locale }: { isOpen: boolean; onCl
                         className="ml-8 text-umber/90 hover:text-umber flex flex-col items-center gap-1 group shrink-0"
                     >
                         <span className="text-[10px] uppercase tracking-widest font-bold">{t('close')}</span>
-                        <div className="w-10 h-10 rounded-full border border-umber/20 flex items-center justify-center group-hover:border-umber transition-colors">
+                        <div className="w-10 h-10 border border-umber/20 flex items-center justify-center group-hover:border-umber transition-colors">
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                                 <path d="M1 1L13 13M1 13L13 1" stroke="currentColor" strokeWidth="2" />
                             </svg>
@@ -206,7 +207,7 @@ export function SearchModal({ isOpen, onClose, locale }: { isOpen: boolean; onCl
                                 key={result._id}
                                 href={getRoute(result._type, result.slug)}
                                 onClick={onClose}
-                                className="search-result-item group flex items-center gap-6 p-4 rounded-sm hover:bg-umber/5 transition-colors border-b border-umber/5 last:border-0"
+                                className="search-result-item group flex items-center gap-6 p-4 hover:bg-umber/5 transition-colors border-b border-umber/5 last:border-0"
                             >
                                 <div className="w-20 h-20 relative bg-charcoal/5 overflow-hidden shrink-0">
                                     {result.image ? (

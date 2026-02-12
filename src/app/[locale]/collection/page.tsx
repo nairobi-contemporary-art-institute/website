@@ -44,7 +44,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ loc
                             href={`/${locale}/collection/${item.slug}`}
                             className="group block space-y-4"
                         >
-                            <div className="aspect-[3/4] relative bg-charcoal/5 overflow-hidden rounded-sm">
+                            <div className="aspect-[3/4] relative bg-charcoal/5 overflow-hidden">
                                 {item.mainImage ? (
                                     <Image
                                         src={urlFor(item.mainImage).width(600).height(800).url()}
@@ -72,7 +72,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ loc
                                 {item.tags && item.tags.length > 0 && (
                                     <div className="flex gap-2 flex-wrap pt-2">
                                         {item.tags.slice(0, 3).map((tag: any) => (
-                                            <span key={tag._id} className="text-[10px] uppercase tracking-widest text-amber-800/60 font-bold bg-amber-50 px-2 py-0.5 rounded-full">
+                                            <span key={tag._id} className="text-[10px] uppercase tracking-widest text-amber-800/60 font-bold bg-amber-50 px-2 py-0.5">
                                                 {getLocalizedValue(tag.title, locale)}
                                             </span>
                                         ))}

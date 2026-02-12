@@ -35,7 +35,7 @@ export function WorksGridOverlay({ isOpen, onClose, works, locale, artistName }:
                     </div>
                     <button
                         onClick={onClose}
-                        className="p-2 hover:bg-charcoal/5 rounded-full transition-colors"
+                        className="p-2 hover:bg-charcoal/5 transition-colors"
                     >
                         <X className="w-8 h-8 text-charcoal" />
                     </button>

@@ -90,7 +90,7 @@ export default async function AccessibilityPage({ params }: Props) {
                             </section>
                         </div>
 
-                        <section className="bg-stone-100 p-8 rounded-sm">
+                        <section className="bg-stone-100 p-8">
                             <h2 className="text-xs font-bold text-umber uppercase tracking-widest mb-4">Contact Us</h2>
                             <p className="mb-4">
                                 For checking specific accessibility needs or to request accommodations, please contact us ensuring at least 48 hours notice for specific arrangements.

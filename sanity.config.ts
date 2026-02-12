@@ -12,7 +12,7 @@ import { table } from '@sanity/table'
 import { googleMapsInput } from '@sanity/google-maps-input'
 
 // Singleton document types
-const singletonTypes = new Set(['siteSettings'])
+const singletonTypes = new Set(['siteSettings', 'aboutPage', 'getInvolvedPage'])
 
 // Singleton document actions (disable create/delete)
 const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
@@ -36,6 +36,24 @@ export default defineConfig({
                                 S.document()
                                     .schemaType('siteSettings')
                                     .documentId('siteSettings')
+                            ),
+                        // Singleton: About Page
+                        S.listItem()
+                            .title('About Page')
+                            .id('aboutPage')
+                            .child(
+                                S.document()
+                                    .schemaType('aboutPage')
+                                    .documentId('aboutPage')
+                            ),
+                        // Singleton: Get Involved Page
+                        S.listItem()
+                            .title('Get Involved Page')
+                            .id('getInvolvedPage')
+                            .child(
+                                S.document()
+                                    .schemaType('getInvolvedPage')
+                                    .documentId('getInvolvedPage')
                             ),
                         S.divider(),
                         // Other document types (filter out singletons)

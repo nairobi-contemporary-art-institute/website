@@ -53,7 +53,7 @@ export function ChannelCard({ post, locale }: ChannelCardProps) {
                 {/* Media Indicator Overlay */}
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
                     {(type === 'video' || type === 'audio') && (
-                        <div className="w-12 h-12 rounded-full bg-white/90 backdrop-blur text-charcoal flex items-center justify-center shadow-lg transform scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300">
+                        <div className="w-12 h-12 bg-white/90 backdrop-blur text-charcoal flex items-center justify-center shadow-lg transform scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300">
                             <Icon className="w-6 h-6 fill-current" />
                         </div>
                     )}
@@ -61,7 +61,7 @@ export function ChannelCard({ post, locale }: ChannelCardProps) {
 
                 {/* Duration Badge */}
                 {post.duration && (
-                    <div className="absolute bottom-3 right-3 px-2 py-1 bg-black/70 backdrop-blur text-white text-[10px] font-mono tracking-wider rounded-sm">
+                    <div className="absolute bottom-3 right-3 px-2 py-1 bg-black/70 backdrop-blur text-white text-[10px] font-mono tracking-wider">
                         {post.duration}
                     </div>
                 )}
@@ -94,7 +94,7 @@ export function ChannelCard({ post, locale }: ChannelCardProps) {
                 {post.tags && post.tags.length > 0 && (
                     <div className="flex gap-2 flex-wrap pt-2">
                         {post.tags.slice(0, 3).map((tag: any) => (
-                            <span key={tag._id || Math.random()} className="text-[10px] uppercase tracking-widest text-amber-800/60 font-bold bg-amber-50 px-2 py-0.5 rounded-full">
+                            <span key={tag._id || Math.random()} className="text-[10px] uppercase tracking-widest text-amber-800/60 font-bold bg-amber-50 px-2 py-0.5">
                                 {getLocalizedValue(tag.title, locale)}
                             </span>
                         ))}

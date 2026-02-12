@@ -8,8 +8,41 @@ import { PortableTextComponent } from "@/components/ui/PortableText"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 
+import { Metadata } from "next"
+
 type Props = {
     params: Promise<{ locale: string; slug: string }>
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { locale, slug } = await params
+    const event = await sanityFetch<any>({
+        query: EVENT_BY_SLUG_QUERY,
+        params: { slug },
+        tags: [`event:${slug}`]
+    })
+
+    if (!event) {
+        return {}
+    }
+
+    const title = getLocalizedValue(event.title, locale)
+    const descriptionBlocks = getLocalizedValue(event.description, locale)
+    const description = Array.isArray(descriptionBlocks) && descriptionBlocks[0]?.children
+        ? (descriptionBlocks[0].children[0]?.text || 'Event at NCAI')
+        : 'Event at NCAI'
+
+    const ogImage = event.mainImage ? urlFor(event.mainImage).width(1200).height(630).url() : undefined
+
+    return {
+        title: title,
+        description: description,
+        openGraph: {
+            title: title,
+            description: description,
+            images: ogImage ? [{ url: ogImage }] : [],
+        },
+    }
 }
 
 export default async function EventPage({ params }: Props) {
@@ -56,8 +89,8 @@ export default async function EventPage({ params }: Props) {
             <div className="max-w-6xl mx-auto">
                 <header className="mb-16 border-b border-charcoal/10 pb-12">
                     <div className="flex flex-wrap items-center gap-4 text-xs font-mono uppercase tracking-widest text-umber mb-6">
-                        <span className="px-2 py-1 bg-umber/10 rounded-sm">{event.eventType}</span>
-                        {isPast && <span className="px-2 py-1 bg-stone-200 text-stone-500 rounded-sm">Archived</span>}
+                        <span className="px-2 py-1 bg-umber/10">{event.eventType}</span>
+                        {isPast && <span className="px-2 py-1 bg-stone-200 text-stone-500">Archived</span>}
                     </div>
 
                     <h1 className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tighter text-charcoal mb-8 leading-[0.9]">
@@ -129,7 +162,7 @@ export default async function EventPage({ params }: Props) {
                                     {event.educators.map((person: any) => (
                                         <div key={person._id} className="flex items-center gap-4 group">
                                             {person.image && (
-                                                <div className="relative w-12 h-12 rounded-full overflow-hidden bg-stone-100 flex-shrink-0 grayscale group-hover:grayscale-0 transition-all">
+                                                <div className="relative w-12 h-12 overflow-hidden bg-stone-100 flex-shrink-0 grayscale group-hover:grayscale-0 transition-all">
                                                     <Image
                                                         src={urlFor(person.image).width(100).height(100).url()}
                                                         alt={getLocalizedValue(person.name, locale) || 'Facilitator'}

@@ -27,7 +27,7 @@ export default function SupportPage() {
                     NCAI relies on the generosity of individuals and organizations to continue our mission
                     of celebrating and preserving the artistic heritage of East Africa.
                 </p>
-                <div className="mt-12 bg-charcoal text-ivory p-8 md:p-12 rounded-sm text-center">
+                <div className="mt-12 bg-charcoal text-ivory p-8 md:p-12 text-center">
                     <h3 className="text-2xl font-bold mb-4">Become a Supporter</h3>
                     <p className="mb-8 opacity-80">Join us in shaping the future of contemporary art in Nairobi.</p>
                     <button className="bg-ivory text-charcoal px-8 py-3 font-bold uppercase tracking-widest text-xs hover:bg-ochre hover:text-ivory transition-all cursor-pointer">

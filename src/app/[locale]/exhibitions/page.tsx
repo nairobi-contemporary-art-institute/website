@@ -1,24 +1,8 @@
-
-import { useTranslations } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { client } from '@/sanity/lib/client'
 import { EXHIBITIONS_QUERY } from '@/sanity/lib/queries'
-import { getLocalizedValue } from '@/sanity/lib/utils'
-import { urlFor } from '@/sanity/lib/image'
 import { ResponsiveDivider } from '@/components/ui/ResponsiveDivider'
-import Image from 'next/image'
-import Link from 'next/link'
-
-
-// Placeholder for date formatting if not exists
-const formatDateLocal = (dateString: string, locale: string) => {
-    if (!dateString) return ''
-    return new Date(dateString).toLocaleDateString(locale, {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    })
-}
+import { ExhibitionCard } from '@/components/exhibitions/ExhibitionCard'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params
@@ -30,66 +14,79 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function ExhibitionsPage({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params
-    const t = await getMessages({ locale }) as any // generic typing fallback
+    const t = await getMessages({ locale }) as any
     const exhibitions = await client.fetch(EXHIBITIONS_QUERY)
+
+    const now = new Date()
+
+    const categorized = exhibitions.reduce((acc: any, exh: any) => {
+        const start = new Date(exh.startDate)
+        const end = exh.endDate ? new Date(exh.endDate) : null
+
+        if (start > now) {
+            acc.upcoming.push(exh)
+        } else if (end && end < now) {
+            acc.past.push(exh)
+        } else {
+            acc.current.push(exh)
+        }
+        return acc
+    }, { current: [], upcoming: [], past: [] })
 
     return (
         <div className="container mx-auto px-6 py-20 min-h-screen">
             <header className="max-w-3xl mb-16">
-                <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-charcoal mb-4">
-                    {t.Pages?.exhibitions?.title || 'Exhibitions'}
+                <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-charcoal mb-8 uppercase leading-[0.9]">
+                    {t.Navigation?.exhibitions || 'Exhibitions'}
                 </h1>
                 <ResponsiveDivider variant="curved" weight="medium" className="text-umber/20" />
             </header>
 
-            <div className="grid gap-16 md:grid-cols-2 lg:grid-cols-3">
-                {exhibitions.map((exhibition: any) => {
-                    const title = getLocalizedValue(exhibition.title, locale)
-                    const artistNames = exhibition.artistNames || []
+            <div className="space-y-32">
+                {/* Current Exhibitions */}
+                {categorized.current.length > 0 && (
+                    <section>
+                        <div className="flex items-center gap-4 mb-12">
+                            <h2 className="text-xs font-bold tracking-[0.3em] uppercase text-umber/60">Current</h2>
+                            <div className="h-px flex-1 bg-charcoal/10" />
+                        </div>
+                        <div className="grid gap-12">
+                            {categorized.current.map((exh: any) => (
+                                <ExhibitionCard key={exh._id} exhibition={exh} locale={locale} variant="featured" />
+                            ))}
+                        </div>
+                    </section>
+                )}
 
-                    return (
-                        <Link
-                            key={exhibition._id}
-                            href={`/${locale}/exhibitions/${exhibition.slug}`}
-                            className="group block space-y-4"
-                        >
-                            <div className="aspect-[4/5] relative bg-charcoal/5 overflow-hidden rounded-sm">
-                                {exhibition.mainImage ? (
-                                    <Image
-                                        src={urlFor(exhibition.mainImage).width(800).height(1000).url()}
-                                        alt={title || 'Exhibition Image'}
-                                        fill
-                                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                                    />
-                                ) : (
-                                    <div className="w-full h-full flex items-center justify-center text-umber/20">
-                                        No Image
-                                    </div>
-                                )}
-                            </div>
+                {/* Upcoming Exhibitions */}
+                {categorized.upcoming.length > 0 && (
+                    <section>
+                        <div className="flex items-center gap-4 mb-12">
+                            <h2 className="text-xs font-bold tracking-[0.3em] uppercase text-umber/60">Upcoming</h2>
+                            <div className="h-px flex-1 bg-charcoal/10" />
+                        </div>
+                        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+                            {categorized.upcoming.map((exh: any) => (
+                                <ExhibitionCard key={exh._id} exhibition={exh} locale={locale} />
+                            ))}
+                        </div>
+                    </section>
+                )}
 
-                            <div className="space-y-1">
-                                <h2 className="text-xl font-bold text-charcoal group-hover:text-indigo-600 transition-colors">
-                                    {title || 'Untitled'}
-                                </h2>
-                                {artistNames.length > 0 && (
-                                    <p className="text-sm text-umber/60 font-medium">
-                                        {artistNames.join(', ')}
-                                    </p>
-                                )}
-                                <p className="text-sm text-umber space-x-2">
-                                    <span>{formatDateLocal(exhibition.startDate, locale)}</span>
-                                    {exhibition.endDate && (
-                                        <>
-                                            <span>—</span>
-                                            <span>{formatDateLocal(exhibition.endDate, locale)}</span>
-                                        </>
-                                    )}
-                                </p>
-                            </div>
-                        </Link>
-                    )
-                })}
+                {/* Past Exhibitions */}
+                {categorized.past.length > 0 && (
+                    <section>
+                        <div className="flex items-center gap-4 mb-12">
+                            <h2 className="text-xs font-bold tracking-[0.3em] uppercase text-umber/60">Past</h2>
+                            <div className="h-px flex-1 bg-charcoal/10" />
+                        </div>
+                        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+                            {categorized.past.map((exh: any) => (
+                                <ExhibitionCard key={exh._id} exhibition={exh} locale={locale} />
+                            ))}
+                        </div>
+                    </section>
+                )}
             </div>
 
             {exhibitions.length === 0 && (

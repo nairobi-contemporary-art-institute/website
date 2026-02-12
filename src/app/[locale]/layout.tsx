@@ -89,7 +89,10 @@ export default async function RootLayout({
       <body className="antialiased min-h-screen flex flex-col" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <AccessibilityProvider>
-            <ConditionalWrapper>
+            <ConditionalWrapper
+              header={<Header locale={locale} />}
+              footer={<Footer locale={locale} />}
+            >
               {children}
             </ConditionalWrapper>
           </AccessibilityProvider>

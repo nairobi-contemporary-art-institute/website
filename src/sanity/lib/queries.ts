@@ -382,3 +382,88 @@ export const PAGE_BY_SLUG_QUERY = groq`
     ...
   }
 `
+/**
+ * Fetch global site settings (navigation, footer, social, hours).
+ */
+export const SITE_SETTINGS_QUERY = groq`
+  *[_type == "siteSettings"][0] {
+    ...,
+    headerMenu[] {
+      label,
+      url
+    },
+    footerCategories[] {
+      title,
+      links[] {
+        label,
+        url
+      }
+    },
+    socialLinks,
+    hours,
+    specialStatus,
+    contactInfo
+  }
+`
+/**
+ * Fetch the about page content.
+ */
+export const ABOUT_PAGE_QUERY = groq`
+  *[_type == "aboutPage"][0] {
+    ...,
+    hero {
+      ...,
+      image {
+        asset-> {
+          _id,
+          metadata { lqip }
+        }
+      }
+    },
+    sections[] {
+      ...,
+      image {
+        asset-> {
+          _id,
+          metadata { lqip }
+        }
+      }
+    },
+    libraryArchive {
+      ...,
+      image {
+        asset-> {
+          _id,
+          metadata { lqip }
+        }
+      }
+    }
+  }
+`
+
+/**
+ * Fetch the get involved page content.
+ */
+export const GET_INVOLVED_PAGE_QUERY = groq`
+  *[_type == "getInvolvedPage"][0] {
+    ...,
+    hero {
+      ...,
+      image {
+        asset-> {
+          _id,
+          metadata { lqip }
+        }
+      }
+    },
+    sections[] {
+      ...,
+      image {
+        asset-> {
+          _id,
+          metadata { lqip }
+        }
+      }
+    }
+  }
+`

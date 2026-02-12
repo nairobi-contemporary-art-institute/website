@@ -37,7 +37,7 @@ export default function VisitPage() {
                         <p>Monday: Closed</p>
                     </div>
                 </section>
-                <div className="bg-charcoal/5 aspect-video rounded-sm flex items-center justify-center text-umber/40 italic">
+                <div className="bg-charcoal/5 aspect-video flex items-center justify-center text-umber/40 italic">
                     Map integration placeholder
                 </div>
             </div>

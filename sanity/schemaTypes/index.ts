@@ -14,7 +14,9 @@ import { person } from './person'
 import { category } from './category'
 
 import { page } from './page'
+import { aboutPage } from './aboutPage'
+import { getInvolvedPage } from './getInvolvedPage'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-    types: [artist, work, exhibition, collectionItem, timelineEvent, event, person, category, siteSettings, post, program, blockContent, page],
+    types: [artist, work, exhibition, collectionItem, timelineEvent, event, person, category, siteSettings, post, program, blockContent, page, aboutPage, getInvolvedPage],
 }

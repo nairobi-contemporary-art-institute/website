@@ -33,7 +33,7 @@ export function EventCard({ event, locale, variant = 'default' }: EventCardProps
                         {event.eventType}
                     </span>
                     <span className={cn(
-                        "text-xs px-2 py-0.5 rounded-full",
+                        "text-xs px-2 py-0.5",
                         new Date(event.startDate) < new Date() ? "bg-stone-200 text-stone-600" : "bg-emerald-100 text-emerald-800"
                     )}>
                         {new Date(event.startDate) < new Date() ? 'Past' : 'Upcoming'}
@@ -77,7 +77,7 @@ export function EventCard({ event, locale, variant = 'default' }: EventCardProps
             <div className="space-y-2">
                 <div className="flex items-center gap-3 text-sm font-mono text-umber">
                     <span>{date}</span>
-                    <span className="w-1 h-1 rounded-full bg-umber/40" />
+                    <span className="w-1.5 h-1.5 bg-umber/40" />
                     <span>{time}</span>
                 </div>
 

@@ -30,7 +30,7 @@ export function Introduction() {
                 <div>
                     <h3 className="text-xs font-bold text-charcoal uppercase tracking-widest mb-6 border-b border-umber/10 pb-2 inline-block">Governance</h3>
                     <p className="text-sm text-umber/70 leading-relaxed mb-4">
-                        This system is maintained by the Digital Strategy team. Changes to core design tokens (brand colors, primary typography) require a review of the institutional brand guidelines.
+                        This system is maintained by <a href="mailto:studio@digitalorchard.design" className="text-ochre hover:text-umber transition-colors underline decoration-ochre/40 underline-offset-4 decoration-2">Digital Orchard Design</a>. Changes to core design tokens (brand colors, primary typography) require a review of the institutional brand guidelines.
                     </p>
                     <ul className="text-[10px] font-bold uppercase tracking-widest text-umber/60 space-y-2 list-none">
                         <li className="flex items-center gap-2">

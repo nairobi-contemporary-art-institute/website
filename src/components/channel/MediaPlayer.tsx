@@ -31,7 +31,7 @@ export function MediaPlayer({ type, url, audioUrl, thumbnail }: MediaPlayerProps
     // Audio Player
     if (type === 'audio' && audioUrl) {
         return (
-            <div className="w-full bg-stone-100 p-6 rounded-sm border border-charcoal/5 mb-12">
+            <div className="w-full bg-stone-100 p-6 border border-charcoal/5 mb-12">
                 <audio controls className="w-full h-12 accent-umber focus:outline-none">
                     <source src={audioUrl} />
                     Your browser does not support the audio element.
@@ -43,7 +43,7 @@ export function MediaPlayer({ type, url, audioUrl, thumbnail }: MediaPlayerProps
     // Video Player
     if (type === 'video' && url && mounted) {
         return (
-            <div className="relative aspect-video w-full max-w-5xl mx-auto bg-black overflow-hidden rounded-sm group mb-12 shadow-2xl">
+            <div className="relative aspect-video w-full max-w-5xl mx-auto bg-black overflow-hidden group mb-12 shadow-2xl">
                 <ReactPlayer
                     url={url}
                     playing={isPlaying}
@@ -52,7 +52,7 @@ export function MediaPlayer({ type, url, audioUrl, thumbnail }: MediaPlayerProps
                     height="100%"
                     light={thumbnail || true} // Use thumbnail as preview
                     playIcon={
-                        <div className="w-24 h-24 rounded-full bg-white/90 backdrop-blur flex items-center justify-center pl-1 shadow-2xl transform hover:scale-110 transition-transform duration-300 group-hover:bg-white">
+                        <div className="w-24 h-24 bg-white/90 backdrop-blur flex items-center justify-center pl-1 shadow-2xl transform hover:scale-110 transition-transform duration-300 group-hover:bg-white">
                             <Play className="w-10 h-10 fill-charcoal text-charcoal" />
                         </div>
                     }

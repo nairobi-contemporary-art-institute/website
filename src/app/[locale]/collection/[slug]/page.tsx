@@ -63,7 +63,7 @@ export default async function CollectionItemPage({ params }: Props) {
             <div className="grid lg:grid-cols-[1fr_400px] gap-16 items-start">
                 {/* Main Image */}
                 <div className="space-y-8">
-                    <div className="relative bg-charcoal/5 rounded-sm overflow-hidden w-full">
+                    <div className="relative bg-charcoal/5 overflow-hidden w-full">
                         {/* 
                            For collection items, we probably want to respect the aspect ratio 
                            rather than forcing a specific one, or use `style={{ objectFit: 'contain' }}`
@@ -133,7 +133,7 @@ export default async function CollectionItemPage({ params }: Props) {
                                 <span className="text-umber/60 uppercase text-xs tracking-wider block mb-3 font-bold">Related Topics</span>
                                 <div className="flex flex-wrap gap-2">
                                     {item.tags.map((tag: any) => (
-                                        <span key={tag._id} className="text-[10px] uppercase tracking-widest text-amber-800/60 font-bold bg-amber-50 px-3 py-1 rounded-full">
+                                        <span key={tag._id} className="text-[10px] uppercase tracking-widest text-amber-800/60 font-bold bg-amber-50 px-3 py-1">
                                             {getLocalizedValue(tag.title, locale)}
                                         </span>
                                     ))}

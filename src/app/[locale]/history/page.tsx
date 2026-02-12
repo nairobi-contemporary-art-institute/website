@@ -47,7 +47,7 @@ export default async function HistoryPage({ params }: { params: Promise<{ locale
                             <div key={event._id} className={`relative flex flex-col md:flex-row items-center gap-8 md:gap-16 ${isEven ? 'md:flex-row-reverse' : ''}`}>
 
                                 {/* Timeline Dot */}
-                                <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-charcoal rounded-full border-4 border-white shadow-sm -translate-x-1/2 md:translate-x-[0.5px] z-10 top-0 md:top-8" />
+                                <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-charcoal border-4 border-white shadow-sm -translate-x-1/2 md:translate-x-[0.5px] z-10 top-0 md:top-8" />
 
                                 {/* Content Side */}
                                 <div className="w-full md:w-1/2 pl-12 md:pl-0">
@@ -67,7 +67,7 @@ export default async function HistoryPage({ params }: { params: Promise<{ locale
                                 {/* Media Side */}
                                 <div className="w-full md:w-1/2 pl-12 md:pl-0">
                                     {event.media && (
-                                        <div className={`relative aspect-[3/2] bg-charcoal/5 rounded-sm overflow-hidden shadow-lg ${isEven ? 'md:origin-left' : 'md:origin-right'} hover:scale-[1.02] transition-transform duration-500`}>
+                                        <div className={`relative aspect-[3/2] bg-charcoal/5 overflow-hidden shadow-lg ${isEven ? 'md:origin-left' : 'md:origin-right'} hover:scale-[1.02] transition-transform duration-500`}>
                                             <Image
                                                 src={urlFor(event.media).width(600).height(400).url()}
                                                 alt={title || `Event in ${event.year}`}

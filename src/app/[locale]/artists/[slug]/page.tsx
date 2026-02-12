@@ -2,7 +2,7 @@
 import { type Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { client } from '@/sanity/lib/client'
+import { client, sanityFetch } from '@/sanity/lib/client'
 import { ARTIST_BY_SLUG_QUERY } from '@/sanity/lib/queries'
 import { urlFor } from '@/sanity/lib/image'
 import { getLocalizedValue } from '@/sanity/lib/utils'
@@ -14,7 +14,11 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { locale, slug } = await params
-    const artist = await client.fetch(ARTIST_BY_SLUG_QUERY, { slug })
+    const artist = await sanityFetch<any>({
+        query: ARTIST_BY_SLUG_QUERY,
+        params: { slug },
+        tags: [`artist:${slug}`]
+    })
 
     if (!artist) {
         return {
@@ -23,11 +27,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
 
     const name = getLocalizedValue(artist.name, locale)
+    const bioBlocks = getLocalizedValue(artist.bio, locale)
+    const description = Array.isArray(bioBlocks) && bioBlocks[0]?.children
+        ? (bioBlocks[0].children[0]?.text || `Artist profile for ${name}`)
+        : `Artist profile for ${name}`
 
     return {
         title: name,
+        description,
         openGraph: {
             title: name,
+            description,
             images: artist.image ? [urlFor(artist.image).width(1200).height(630).url()] : [],
         },
     }
@@ -35,7 +45,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ArtistPage({ params }: Props) {
     const { locale, slug } = await params
-    const artist = await client.fetch(ARTIST_BY_SLUG_QUERY, { slug })
+    const artist = await sanityFetch<any>({
+        query: ARTIST_BY_SLUG_QUERY,
+        params: { slug },
+        tags: [`artist:${slug}`]
+    })
 
     if (!artist) {
         notFound()

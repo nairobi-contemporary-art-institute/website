@@ -2,26 +2,32 @@ import { client } from '@/sanity/lib/client'
 import { NextResponse } from 'next/server'
 
 export async function GET(request: Request) {
-    const { searchParams } = new URL(request.url)
-    const term = searchParams.get('q')
+  const { searchParams } = new URL(request.url)
+  const term = searchParams.get('q')
 
-    if (!term) {
-        return NextResponse.json({ results: [] })
-    }
+  if (!term) {
+    return NextResponse.json({ results: [] })
+  }
 
-    // Search across posts, exhibitors, artists, and programs
-    // We use match and score for basic relevance
-    const query = `
-    *[_type in ["post", "exhibition", "artist", "program"] && 
+  // Search across posts, exhibitors, artists, programs, and events
+  // We use match and score for basic relevance
+  // Note: title/name are often internationalized arrays, so we search their values
+  const query = `
+    *[_type in ["post", "exhibition", "artist", "program", "event"] && 
       (
         title match $term + "*" || 
+        title[].value match $term + "*" ||
         name match $term + "*" || 
+        name[].value match $term + "*" ||
         excerpt match $term + "*" ||
-        description match $term + "*"
+        pt::text(description) match $term + "*" ||
+        pt::text(body) match $term + "*"
       )
     ] | score(
       title match $term,
-      name match $term
+      title[].value match $term,
+      name match $term,
+      name[].value match $term
     ) {
       _id,
       _type,
@@ -32,11 +38,11 @@ export async function GET(request: Request) {
     } | order(_score desc, date desc)[0...10]
   `
 
-    try {
-        const results = await client.fetch(query, { term })
-        return NextResponse.json({ results })
-    } catch (error) {
-        console.error('Search error:', error)
-        return NextResponse.json({ error: 'Failed to search' }, { status: 500 })
-    }
+  try {
+    const results = await client.fetch(query, { term })
+    return NextResponse.json({ results })
+  } catch (error) {
+    console.error('Search error:', error)
+    return NextResponse.json({ error: 'Failed to search' }, { status: 500 })
+  }
 }

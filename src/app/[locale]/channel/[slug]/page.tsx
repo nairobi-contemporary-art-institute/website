@@ -20,9 +20,18 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     if (!post) return { title: 'Not Found' }
 
     const title = getLocalizedValue(post.title, locale)
+    const description = post.excerpt || title
+    const ogImage = post.mainImage ? urlFor(post.mainImage).width(1200).height(630).url() : undefined
+
     return {
         title,
-        description: post.excerpt || title,
+        description,
+        openGraph: {
+            title,
+            description,
+            images: ogImage ? [{ url: ogImage }] : [],
+            type: 'article',
+        },
     }
 }
 
@@ -51,7 +60,7 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
                 {post.tags && post.tags.length > 0 && (
                     <div className="flex gap-3 justify-center flex-wrap">
                         {post.tags.map((tag: any, i: number) => (
-                            <span key={i} className="text-[10px] uppercase tracking-[0.2em] text-amber-800 font-bold bg-amber-50 px-3 py-1 rounded-full">
+                            <span key={i} className="text-[10px] uppercase tracking-[0.2em] text-amber-800 font-bold bg-amber-50 px-3 py-1">
                                 {getLocalizedValue(tag.title, locale)}
                             </span>
                         ))}
@@ -72,7 +81,7 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
                     {post.author && (
                         <div className="flex items-center gap-2 pl-6 border-l border-umber/20">
                             {post.author.image && (
-                                <div className="relative w-8 h-8 rounded-full overflow-hidden bg-charcoal/5">
+                                <div className="relative w-8 h-8 overflow-hidden bg-charcoal/5">
                                     <Image
                                         src={urlFor(post.author.image).width(64).height(64).url()}
                                         alt={getLocalizedValue(post.author.name, locale) || 'Author'}
@@ -110,7 +119,7 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
                         thumbnail={imageProps || undefined}
                     />
                 ) : imageProps ? (
-                    <div className="relative aspect-[16/9] w-full overflow-hidden rounded-sm shadow-xl">
+                    <div className="relative aspect-[16/9] w-full overflow-hidden shadow-xl">
                         <Image
                             src={imageProps}
                             alt={title || post.mainImage?.alt || 'Channel post image'}
