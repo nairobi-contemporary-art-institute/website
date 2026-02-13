@@ -19,7 +19,9 @@
         },
         "visit": {
             "title": "Visit Us",
-            "description": "Information on how to visit our gallery space."
+            "description": "Information on how to visit our gallery space.",
+            "location": "Location",
+            "hours": "Opening Hours"
         },
         "exhibitions": {
             "title": "Exhibitions",

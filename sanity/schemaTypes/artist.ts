@@ -31,6 +31,13 @@ export const artist = defineType({
             title: 'Profile Image',
             type: 'image',
             options: { hotspot: true },
+            fields: [
+                defineField({
+                    name: 'caption',
+                    title: 'Caption',
+                    type: 'internationalizedArrayString',
+                }),
+            ],
         }),
         defineField({
             name: 'works',
@@ -78,7 +85,19 @@ export const artist = defineType({
                     { name: 'title', type: 'string', title: 'Exhibition Title' },
                     { name: 'venue', type: 'string', title: 'Venue/Museum' },
                     { name: 'location', type: 'string', title: 'Location' },
-                    { name: 'image', type: 'image', title: 'Feature Image', options: { hotspot: true } },
+                    {
+                        name: 'image',
+                        type: 'image',
+                        title: 'Feature Image',
+                        options: { hotspot: true },
+                        fields: [
+                            defineField({
+                                name: 'caption',
+                                title: 'Caption',
+                                type: 'internationalizedArrayString',
+                            }),
+                        ],
+                    },
                     { name: 'link', type: 'url', title: 'External Link' }
                 ]
             }]

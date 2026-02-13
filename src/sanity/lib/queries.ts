@@ -10,11 +10,13 @@ export const EXHIBITIONS_QUERY = groq`
     "slug": slug.current,
     startDate,
     endDate,
+    listImage {
+      caption,
+      asset-> { _id, metadata { lqip } }
+    },
     mainImage {
-      asset-> {
-        _id,
-        metadata { lqip }
-      }
+      caption,
+      asset-> { _id, metadata { lqip } }
     },
     "artistNames": artists[]->name
   }
@@ -26,7 +28,20 @@ export const EXHIBITIONS_QUERY = groq`
 export const EXHIBITION_BY_SLUG_QUERY = groq`
   *[_type == "exhibition" && slug.current == $slug][0] {
     ...,
+    homepageImage {
+      caption,
+      asset-> { _id, metadata { lqip } }
+    },
+    listImage {
+      caption,
+      asset-> { _id, metadata { lqip } }
+    },
     mainImage {
+      caption,
+      asset-> { _id, metadata { lqip } }
+    },
+    gallery[] {
+      caption,
       asset-> {
         _id,
         metadata { lqip }
@@ -50,6 +65,18 @@ export const EXHIBITION_BY_SLUG_QUERY = groq`
         title,
         type,
         "slug": slug.current
+    },
+    partners[]-> {
+        _id,
+        name,
+        logo {
+          asset-> {
+            _id,
+            url,
+            metadata { lqip }
+          }
+        },
+        website
     }
   }
 `
@@ -77,6 +104,7 @@ export const ARTIST_BY_SLUG_QUERY = groq`
   *[_type == "artist" && slug.current == $slug][0] {
     ...,
     image {
+      caption,
       asset-> {
         _id,
         metadata { lqip }
@@ -96,6 +124,7 @@ export const ARTIST_BY_SLUG_QUERY = groq`
         dimensions,
         edition,
         image {
+            caption,
             asset-> {
                 _id,
                 metadata { lqip }
@@ -106,13 +135,30 @@ export const ARTIST_BY_SLUG_QUERY = groq`
             type
         }
     },
+    museumExhibitions[] {
+        ...,
+        image {
+            caption,
+            asset-> {
+                _id,
+                metadata { lqip }
+            }
+        }
+    },
     "exhibitions": *[_type == "exhibition" && references(^._id)] | order(startDate desc) {
         _id,
         title,
         "slug": slug.current,
         startDate,
         endDate,
-        mainImage
+        listImage {
+            caption,
+            asset-> { _id, metadata { lqip } }
+        },
+        mainImage {
+            caption,
+            asset-> { _id, metadata { lqip } }
+        }
     }
   }
 `
@@ -140,6 +186,7 @@ export const POSTS_QUERY = groq`
     mediaType,
     duration,
     mainImage {
+      caption,
       asset-> {
         _id,
         metadata { lqip }
@@ -155,11 +202,14 @@ export const POST_BY_SLUG_QUERY = groq`
   *[_type == "post" && slug.current == $slug][0] {
     ...,
     mainImage {
+      caption,
       asset-> {
         _id,
         metadata { lqip }
       }
     },
+    videoCaption,
+    audioCaption,
     "audioUrl": audioFile.asset->url,
     author-> {
         name,
@@ -189,6 +239,7 @@ export const PROGRAMS_QUERY = groq`
     startDate,
     endDate,
     mainImage {
+      caption,
       asset-> {
         _id,
         metadata { lqip }
@@ -209,6 +260,7 @@ export const PROGRAM_BY_SLUG_QUERY = groq`
   *[_type == "program" && slug.current == $slug][0] {
     ...,
     mainImage {
+      caption,
       asset-> {
         _id,
         metadata { lqip }
@@ -231,6 +283,29 @@ export const PROGRAM_BY_SLUG_QUERY = groq`
         title,
         type,
         "slug": slug.current
+    },
+    partners[]-> {
+        _id,
+        name,
+        logo {
+          asset-> {
+            _id,
+            url,
+            metadata { lqip }
+          }
+        },
+        website
+    },
+    relatedExhibitions[]-> {
+        _id,
+        title,
+        "slug": slug.current,
+        mainImage {
+            asset-> {
+                _id,
+                metadata { lqip }
+            }
+        }
     }
   }
 `
@@ -257,6 +332,7 @@ export const COLLECTION_QUERY = groq`
     medium,
     dimensions,
     mainImage {
+      caption,
       asset-> {
         _id,
         metadata { lqip }
@@ -277,6 +353,7 @@ export const COLLECTION_ITEM_BY_SLUG_QUERY = groq`
   *[_type == "collectionItem" && slug.current == $slug][0] {
     ...,
     mainImage {
+      caption,
       asset-> {
         _id,
         metadata { lqip }
@@ -305,6 +382,7 @@ export const TIMELINE_QUERY = groq`
     title,
     description,
     media {
+      caption,
       asset-> {
         _id,
         metadata { lqip }
@@ -328,6 +406,7 @@ export const EVENTS_QUERY = groq`
     location,
     registrationLink,
     mainImage {
+      caption,
       asset-> {
         _id,
         metadata { lqip }
@@ -347,6 +426,7 @@ export const EVENT_BY_SLUG_QUERY = groq`
   *[_type == "event" && slug.current == $slug][0] {
     ...,
     mainImage {
+      caption,
       asset-> {
         _id,
         metadata { lqip }
@@ -370,6 +450,18 @@ export const EVENT_BY_SLUG_QUERY = groq`
         title,
         type,
         "slug": slug.current
+    },
+    partners[]-> {
+        _id,
+        name,
+        logo {
+          asset-> {
+            _id,
+            url,
+            metadata { lqip }
+          }
+        },
+        website
     }
   }
 `
@@ -414,6 +506,7 @@ export const ABOUT_PAGE_QUERY = groq`
     hero {
       ...,
       image {
+        caption,
         asset-> {
           _id,
           metadata { lqip }
@@ -423,6 +516,7 @@ export const ABOUT_PAGE_QUERY = groq`
     sections[] {
       ...,
       image {
+        caption,
         asset-> {
           _id,
           metadata { lqip }
@@ -432,6 +526,7 @@ export const ABOUT_PAGE_QUERY = groq`
     libraryArchive {
       ...,
       image {
+        caption,
         asset-> {
           _id,
           metadata { lqip }
@@ -450,6 +545,7 @@ export const GET_INVOLVED_PAGE_QUERY = groq`
     hero {
       ...,
       image {
+        caption,
         asset-> {
           _id,
           metadata { lqip }
@@ -459,8 +555,370 @@ export const GET_INVOLVED_PAGE_QUERY = groq`
     sections[] {
       ...,
       image {
+        caption,
         asset-> {
           _id,
+          metadata { lqip }
+        }
+      }
+    }
+  }
+`
+
+/**
+ * Fetch the home page content.
+ */
+export const HOME_PAGE_QUERY = groq`
+  *[_type == "homePage"][0] {
+    ...,
+    hero {
+      ...,
+      image {
+        caption,
+        asset-> {
+          _id,
+          metadata { lqip }
+        }
+      }
+    },
+    featuredExhibition-> {
+      _id,
+      title,
+      "slug": slug.current,
+      startDate,
+      endDate,
+      homepageImage {
+        caption,
+        asset-> {
+          _id,
+          metadata { 
+            lqip,
+            dimensions { width, height, aspectRatio }
+          }
+        }
+      },
+      mainImage {
+        caption,
+        asset-> {
+          _id,
+          metadata { 
+            lqip,
+            dimensions { width, height, aspectRatio }
+          }
+        }
+      }
+    },
+    featuredPost-> {
+      _id,
+      title,
+      "slug": slug.current,
+      mainImage {
+        caption,
+        asset-> {
+          _id,
+          metadata { lqip }
+        }
+      },
+      excerpt
+    },
+    featuredCards[] {
+      title,
+      subtitle,
+      image {
+        asset-> {
+          _id,
+          url,
+          metadata { 
+            lqip,
+            dimensions {
+              width,
+              height,
+              aspectRatio
+            }
+          }
+        }
+      },
+      link {
+        reference-> {
+          _type,
+          _id,
+          "slug": slug.current,
+          title,
+          name
+        },
+        externalUrl
+      }
+    }
+  }
+`
+
+/**
+ * Fetch the visit page content.
+ */
+export const VISIT_PAGE_QUERY = groq`
+  *[_type == "visitPage"][0] {
+    ...,
+    label,
+    announcement,
+    heroImage {
+      caption,
+      asset-> {
+        _id,
+        metadata { lqip }
+      }
+    },
+    directions[] {
+      ...,
+      description
+    },
+    visitorCards[] {
+      ...,
+    },
+    sections[] {
+      ...,
+      image {
+        caption,
+        asset-> {
+          _id,
+          metadata { lqip }
+        }
+      }
+    }
+  }
+`
+
+/**
+ * Fetch the publications page content.
+ */
+export const PUBLICATIONS_PAGE_QUERY = groq`
+  *[_type == "publicationsPage"][0] {
+    ...,
+    header {
+      label,
+      headline,
+      description
+    },
+    featuredPublications[]-> {
+      _id,
+      title,
+      author,
+      description,
+      details,
+      "color": color.hex,
+      textColor,
+      textured,
+      showTitle,
+      showBranding,
+      variant,
+      coverImage {
+        asset-> {
+          _id,
+          url,
+          metadata { lqip }
+        }
+      },
+      price,
+      buyLink
+    },
+    ctaSection {
+      label,
+      headline,
+      description,
+      ctaLabel,
+      ctaUrl
+    }
+  }
+`
+/**
+ * Fetch the education page content.
+ */
+export const EDUCATION_PAGE_QUERY = groq`
+  *[_type == "educationPage"][0] {
+    ...,
+    header {
+      headline,
+      description
+    },
+    pillars[] {
+      title,
+      description,
+      image {
+        asset-> {
+          _id,
+          url,
+          metadata { lqip }
+        }
+      },
+      audienceTag
+    },
+    featuredPrograms[]-> {
+      _id,
+      title,
+      "slug": slug.current,
+      programType,
+      audience,
+      startDate,
+      mainImage {
+        asset-> {
+          _id,
+          metadata { lqip }
+        }
+      },
+      excerpt
+    }
+  }
+`
+
+/**
+ * Fetch the events page content.
+ */
+export const EVENTS_PAGE_QUERY = groq`
+  *[_type == "eventsPage"][0] {
+    ...,
+    header {
+      headline,
+      description
+    },
+    featuredEvents[]-> {
+      _id,
+      title,
+      "slug": slug.current,
+      eventType,
+      startDate,
+      mainImage {
+        asset-> {
+          _id,
+          metadata { lqip }
+        }
+      },
+      location,
+      excerpt
+    }
+  }
+`
+
+/**
+ * Fetch the accessibility page content.
+ */
+export const ACCESSIBILITY_PAGE_QUERY = groq`
+  *[_type == "accessibilityPage"][0] {
+    ...,
+    header {
+      headline,
+      description
+    },
+    sections[] {
+      title,
+      content,
+      image {
+        asset-> {
+          _id,
+          url,
+          metadata { lqip }
+        }
+      }
+    },
+    venueGuide {
+      title,
+      description,
+      "guideUrl": guideFile.asset->url,
+      mapImage {
+        asset-> {
+          _id,
+          url,
+          metadata { lqip }
+        }
+      }
+    },
+    policies[] {
+      policyName,
+      description
+    }
+  }
+`
+
+/**
+ * Fetch the collection page content.
+ */
+export const COLLECTION_PAGE_QUERY = groq`
+  *[_type == "collectionPage"][0] {
+    ...,
+    header {
+      headline,
+      description
+    },
+    featuredItems[]-> {
+        _id,
+        title,
+        "slug": slug.current,
+        creationDate,
+        "artistName": artist->name,
+        mainImage {
+            asset-> {
+                _id,
+                metadata { lqip }
+            }
+        },
+        tags[]-> {
+            _id,
+            title
+        }
+    }
+  }
+`
+
+/**
+ * Fetch the exhibitions page content.
+ */
+export const EXHIBITIONS_PAGE_QUERY = groq`
+  *[_type == "exhibitionsPage"][0] {
+    ...,
+    header {
+      headline,
+      description
+    }
+  }
+`
+
+/**
+ * Fetch the artists page content.
+ */
+export const ARTISTS_PAGE_QUERY = groq`
+  *[_type == "artistsPage"][0] {
+    ...,
+    header {
+      headline,
+      description
+    }
+  }
+`
+
+/**
+ * Fetch the support page content.
+ */
+export const SUPPORT_PAGE_QUERY = groq`
+  *[_type == "supportPage"][0] {
+    ...,
+    header {
+      ...,
+      image {
+        asset-> {
+          _id,
+          url,
+          metadata { lqip }
+        }
+      }
+    },
+    tiers[] {
+      ...,
+      description
+    },
+    sections[] {
+      ...,
+      image {
+        asset-> {
+          _id,
+          url,
           metadata { lqip }
         }
       }

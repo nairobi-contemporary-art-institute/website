@@ -109,7 +109,7 @@ export const siteSettings = defineType({
         defineField({
             name: 'siteDescription',
             title: 'Site Description',
-            type: 'internationalizedArrayText',
+            type: 'internationalizedArrayString',
             group: 'general',
         }),
         defineField({

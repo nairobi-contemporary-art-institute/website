@@ -23,13 +23,20 @@ export const aboutPage = defineType({
                 defineField({
                     name: 'intro',
                     title: 'Intro Text',
-                    type: 'internationalizedArrayText',
+                    type: 'internationalizedArrayString',
                 }),
                 defineField({
                     name: 'image',
                     title: 'Hero Image',
                     type: 'image',
                     options: { hotspot: true },
+                    fields: [
+                        defineField({
+                            name: 'caption',
+                            title: 'Caption',
+                            type: 'internationalizedArrayString',
+                        }),
+                    ],
                 }),
             ],
         }),
@@ -56,7 +63,19 @@ export const aboutPage = defineType({
                             },
                             initialValue: 'standard'
                         }),
-                        defineField({ name: 'image', title: 'Section Image', type: 'image', options: { hotspot: true } }),
+                        defineField({
+                            name: 'image',
+                            title: 'Section Image',
+                            type: 'image',
+                            options: { hotspot: true },
+                            fields: [
+                                defineField({
+                                    name: 'caption',
+                                    title: 'Caption',
+                                    type: 'internationalizedArrayString',
+                                }),
+                            ],
+                        }),
                     ],
                 }
             ]
@@ -68,7 +87,19 @@ export const aboutPage = defineType({
             fields: [
                 defineField({ name: 'title', title: 'Title', type: 'internationalizedArrayString' }),
                 defineField({ name: 'content', title: 'Content', type: 'internationalizedArrayBlockContent' }),
-                defineField({ name: 'image', title: 'Image', type: 'image', options: { hotspot: true } }),
+                defineField({
+                    name: 'image',
+                    title: 'Image',
+                    type: 'image',
+                    options: { hotspot: true },
+                    fields: [
+                        defineField({
+                            name: 'caption',
+                            title: 'Caption',
+                            type: 'internationalizedArrayString',
+                        }),
+                    ],
+                }),
             ]
         })
     ],

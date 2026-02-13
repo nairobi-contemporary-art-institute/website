@@ -32,7 +32,7 @@ export function EducationFilter({ programs, locale }: EducationFilterProps) {
     return (
         <div className="space-y-12">
             {/* Filter Tabs */}
-            <div className="flex flex-wrap gap-2 border-b border-charcoal/10 pb-4 sticky top-20 bg-background/95 backdrop-blur z-10">
+            <div className="flex flex-wrap gap-2 border-b border-rich-blue/20 pb-4 sticky top-20 bg-background/95 backdrop-blur z-10">
                 {AUDIENCE_FILTERS.map(f => (
                     <button
                         key={f.value}
@@ -71,10 +71,10 @@ export function EducationFilter({ programs, locale }: EducationFilterProps) {
 
             {/* Archive */}
             {past.length > 0 && (
-                <section className="pt-20 border-t border-charcoal/10">
+                <section className="pt-20 border-t border-rich-blue/20">
                     <div className="flex items-center gap-4 mb-8">
                         <h2 className="text-2xl font-light text-charcoal/60">Archive</h2>
-                        <div className="h-px flex-1 bg-charcoal/10" />
+                        <div className="h-px flex-1 bg-rich-blue/20" />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 opacity-80 hover:opacity-100 transition-opacity">
                         {past.map(prog => (

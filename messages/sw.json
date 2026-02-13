@@ -19,7 +19,9 @@
         },
         "visit": {
             "title": "Tembelea Us",
-            "description": "Habari juu ya jinsi ya kutembelea nafasi yetu ya nyumba ya sanaa."
+            "description": "Habari juu ya jinsi ya kutembelea nafasi yetu ya nyumba ya sanaa.",
+            "location": "Mahali",
+            "hours": "Saa za Kufungua"
         },
         "exhibitions": {
             "title": "Maonyesho",

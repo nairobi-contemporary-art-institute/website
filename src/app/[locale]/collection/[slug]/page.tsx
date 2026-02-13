@@ -10,6 +10,7 @@ import { urlFor } from '@/sanity/lib/image'
 import { getLocalizedValue } from '@/sanity/lib/utils'
 import { ResponsiveDivider } from '@/components/ui/ResponsiveDivider'
 import { PortableText } from '@/components/ui/PortableText'
+import { ArtCaption } from '@/components/ui/ArtCaption'
 
 type Props = {
     params: Promise<{ locale: string; slug: string }>
@@ -55,19 +56,15 @@ export default async function CollectionItemPage({ params }: Props) {
     return (
         <div className="container mx-auto px-6 py-24 min-h-screen">
             <header className="mb-12">
-                <Link href={`/${locale}/collection`} className="text-xs font-bold tracking-widest uppercase text-umber/60 hover:text-indigo-600 transition-colors mb-6 inline-block">
+                <Link href={`/${locale}/collection`} className="text-xs font-bold tracking-widest uppercase text-umber/60 hover:text-rich-blue transition-colors mb-6 inline-block">
                     ← {t.Pages?.collection?.back || 'Back to Collection'}
                 </Link>
             </header>
 
             <div className="grid lg:grid-cols-[1fr_400px] gap-16 items-start">
                 {/* Main Image */}
-                <div className="space-y-8">
+                <div className="space-y-6">
                     <div className="relative bg-charcoal/5 overflow-hidden w-full">
-                        {/* 
-                           For collection items, we probably want to respect the aspect ratio 
-                           rather than forcing a specific one, or use `style={{ objectFit: 'contain' }}`
-                        */}
                         <Image
                             src={urlFor(item.mainImage).width(1200).url()}
                             alt={title || 'Collection Item'}
@@ -77,18 +74,23 @@ export default async function CollectionItemPage({ params }: Props) {
                             priority
                         />
                     </div>
+                    {item.mainImage?.caption && (
+                        <div className="text-sm text-umber/60 leading-relaxed border-l-2 border-umber/10 pl-4 mt-4">
+                            <ArtCaption content={getLocalizedValue(item.mainImage.caption, locale)} />
+                        </div>
+                    )}
                 </div>
 
                 {/* Details Sidebar */}
                 <div className="space-y-10 lg:sticky lg:top-24">
                     <div className="space-y-4">
-                        <h1 className="text-3xl md:text-4xl font-bold text-charcoal italic">
+                        <h1 className="text-3xl md:text-5xl font-light text-charcoal italic leading-tight">
                             {title}
                         </h1>
                         {item.artist && (
                             <Link
                                 href={`/${locale}/artists/${item.artist.slug}`}
-                                className="text-xl md:text-2xl font-medium text-umber hover:text-indigo-600 transition-colors block"
+                                className="text-xl md:text-2xl font-bold text-charcoal hover:text-umber transition-colors block"
                             >
                                 {artistName}
                             </Link>

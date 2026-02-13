@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { client, sanityFetch } from '@/sanity/lib/client'
 import { ARTIST_BY_SLUG_QUERY } from '@/sanity/lib/queries'
 import { urlFor } from '@/sanity/lib/image'
-import { getLocalizedValue } from '@/sanity/lib/utils'
+import { getLocalizedValue, portableTextToPlainText } from '@/sanity/lib/utils'
 import { ArtistContent } from '@/components/artist/ArtistContent'
 
 type Props = {
@@ -27,10 +27,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
 
     const name = getLocalizedValue(artist.name, locale)
-    const bioBlocks = getLocalizedValue(artist.bio, locale)
-    const description = Array.isArray(bioBlocks) && bioBlocks[0]?.children
-        ? (bioBlocks[0].children[0]?.text || `Artist profile for ${name}`)
-        : `Artist profile for ${name}`
+    const bioBlocks = getLocalizedValue<any>(artist.bio, locale)
+    const description = typeof bioBlocks === 'string'
+        ? bioBlocks
+        : (bioBlocks ? portableTextToPlainText(bioBlocks) : `Artist profile for ${name}`)
 
     return {
         title: name,

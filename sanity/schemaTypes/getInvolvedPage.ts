@@ -23,13 +23,20 @@ export const getInvolvedPage = defineType({
                 defineField({
                     name: 'intro',
                     title: 'Intro Text',
-                    type: 'internationalizedArrayText',
+                    type: 'internationalizedArrayString',
                 }),
                 defineField({
                     name: 'image',
                     title: 'Hero Image',
                     type: 'image',
                     options: { hotspot: true },
+                    fields: [
+                        defineField({
+                            name: 'caption',
+                            title: 'Caption',
+                            type: 'internationalizedArrayString',
+                        }),
+                    ],
                 }),
             ],
         }),
@@ -53,7 +60,19 @@ export const getInvolvedPage = defineType({
                                 { name: 'url', title: 'URL', type: 'string' },
                             ]
                         }),
-                        defineField({ name: 'image', title: 'Section Image', type: 'image', options: { hotspot: true } }),
+                        defineField({
+                            name: 'image',
+                            title: 'Section Image',
+                            type: 'image',
+                            options: { hotspot: true },
+                            fields: [
+                                defineField({
+                                    name: 'caption',
+                                    title: 'Caption',
+                                    type: 'internationalizedArrayString',
+                                }),
+                            ],
+                        }),
                     ],
                     preview: {
                         select: {

@@ -3,14 +3,21 @@
 @theme {
   /* Color Palette - Institutional Minimalism */
   --color-charcoal: #1A1A1A;
+  --color-sun-bleached-paper: #FDFBF7;
+  --sun-bleached-paper: #FDFBF7;
   --color-ivory: #FDFBF7;
+  --ivory: #FDFBF7;
+  --color-deep-umber: #4A3B32;
+  --deep-umber: #4A3B32;
   --color-umber: #4A3B32;
+  --umber: #4A3B32;
   --color-ochre: #CCA43B;
-  --color-indigo: #3F51B5;
+  --color-rich-blue: #3F51B5;
+  --rich-blue: #3F51B5;
   --color-green: #2E7D32;
   --color-gold: #D4AF37;
 
-  --color-background: var(--color-ivory);
+  --color-background: #FFFFFF;
   --color-foreground: var(--color-charcoal);
 
   /* Typography - The Institutional Omnibus Stack */
@@ -72,4 +79,147 @@ html {
 ::selection {
   background-color: var(--color-ochre);
   color: var(--color-ivory);
+}
+
+@layer utilities {
+
+  /* Geist-Inspired Typography Utilities */
+  .text-heading-72 {
+    font-size: 72px;
+    line-height: 72px;
+    letter-spacing: -0.06em;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .text-heading-64 {
+    font-size: 64px;
+    line-height: 64px;
+    letter-spacing: -0.06em;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .text-heading-56 {
+    font-size: 56px;
+    line-height: 56px;
+    letter-spacing: -0.06em;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .text-heading-48 {
+    font-size: 48px;
+    line-height: 56px;
+    letter-spacing: -0.06em;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .text-heading-40 {
+    font-size: 40px;
+    line-height: 48px;
+    letter-spacing: -0.06em;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .text-heading-32 {
+    font-size: 32px;
+    line-height: 40px;
+    letter-spacing: -0.04em;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .text-heading-24 {
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -0.04em;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .text-copy-24 {
+    font-size: 24px;
+    line-height: 36px;
+  }
+
+  .text-copy-20 {
+    font-size: 20px;
+    line-height: 32px;
+  }
+
+  .text-copy-16 {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .text-copy-14 {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  /* Notification Bar Rotation */
+  .animate-notice-bar {
+    animation: notice-bar-rotation 16s ease-in-out infinite;
+  }
+
+  /* 3D Utilities */
+  .perspective-900 {
+    perspective: 900px;
+  }
+
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+
+  .translate-z-1 {
+    transform: translateZ(1px);
+  }
+
+  .translate-z--1 {
+    transform: translateZ(-1px);
+  }
+
+  .translate-z--20 {
+    transform: translateZ(-20px);
+  }
+
+  .rotate-y-90 {
+    transform: rotateY(90deg);
+  }
+
+  .-rotate-y-20 {
+    transform: rotateY(-20deg);
+  }
+}
+
+@keyframes notice-bar-rotation {
+
+  0%,
+  100% {
+    background-color: var(--color-rich-blue);
+  }
+
+  50% {
+    background-color: #171e43;
+  }
+}
+
+/* Lightbox Customization */
+.lg-sub-html .lg-caption {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.lg-sub-html .lg-caption .italic {
+  font-style: italic;
+}
+
+.lg-sub-html .lg-caption .font-bold {
+  font-weight: 700;
 }

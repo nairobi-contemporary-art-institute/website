@@ -18,6 +18,7 @@
     "@sanity/vision": "^5.9.0",
     "@types/styled-components": "^5.1.36",
     "clsx": "^2.1.1",
+    "framer-motion": "^12.34.0",
     "geist": "^1.7.0",
     "gsap": "^3.14.2",
     "jsdom": "^28.0.0",

@@ -56,13 +56,20 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                     </div>
                 </div>
                 {data.hero?.image && (
-                    <div className="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none hidden lg:block">
+                    <div className="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none hidden lg:block group">
                         <Image
                             src={urlFor(data.hero.image).width(800).url()}
                             alt=""
                             fill
                             className="object-cover"
                         />
+                        {data.hero.image.caption && (
+                            <div className="absolute bottom-4 left-4 pointer-events-auto">
+                                <p className="text-[10px] text-charcoal/40 italic bg-ivory/20 px-2 py-1">
+                                    {getLocalizedValue(data.hero.image.caption, locale)}
+                                </p>
+                            </div>
+                        )}
                     </div>
                 )}
             </header>
@@ -86,17 +93,24 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                                         </h2>
                                     )}
                                     {sectionContent && (
-                                        <PortableText value={sectionContent} />
+                                        <PortableText value={sectionContent} locale={locale} />
                                     )}
                                 </div>
                                 {isSplit && section.image && (
-                                    <div className="relative aspect-[4/3] bg-charcoal/5 overflow-hidden">
-                                        <Image
-                                            src={urlFor(section.image).width(1200).url()}
-                                            alt={sectionTitle || ''}
-                                            fill
-                                            className="object-cover"
-                                        />
+                                    <div className="space-y-4">
+                                        <div className="relative aspect-[4/3] bg-charcoal/5 overflow-hidden">
+                                            <Image
+                                                src={urlFor(section.image).width(1200).url()}
+                                                alt={sectionTitle || ''}
+                                                fill
+                                                className="object-cover"
+                                            />
+                                        </div>
+                                        {section.image.caption && (
+                                            <p className="text-sm text-umber/60 italic border-l-2 border-umber/10 pl-4">
+                                                {getLocalizedValue(section.image.caption, locale)}
+                                            </p>
+                                        )}
                                     </div>
                                 )}
                             </section>
@@ -112,17 +126,24 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                                         {getLocalizedValue(data.libraryArchive.title, locale)}
                                     </h2>
                                     <div className="prose prose-invert prose-lg max-w-none opacity-90">
-                                        <PortableText value={getLocalizedValue(data.libraryArchive.content, locale)} />
+                                        <PortableText value={getLocalizedValue(data.libraryArchive.content, locale)} locale={locale} />
                                     </div>
                                 </div>
                                 {data.libraryArchive.image && (
-                                    <div className="relative aspect-square lg:aspect-[4/5] bg-ivory/10 overflow-hidden order-1 lg:order-2">
-                                        <Image
-                                            src={urlFor(data.libraryArchive.image).width(1200).url()}
-                                            alt="Library & Archive"
-                                            fill
-                                            className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                                        />
+                                    <div className="space-y-4 order-1 lg:order-2">
+                                        <div className="relative aspect-square lg:aspect-[4/5] bg-ivory/10 overflow-hidden">
+                                            <Image
+                                                src={urlFor(data.libraryArchive.image).width(1200).url()}
+                                                alt="Library & Archive"
+                                                fill
+                                                className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                                            />
+                                        </div>
+                                        {data.libraryArchive.image.caption && (
+                                            <p className="text-sm text-ivory/40 italic border-l-2 border-ivory/10 pl-4">
+                                                {getLocalizedValue(data.libraryArchive.image.caption, locale)}
+                                            </p>
+                                        )}
                                     </div>
                                 )}
                             </div>

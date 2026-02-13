@@ -132,7 +132,7 @@ export function SearchModal({ isOpen, onClose, locale }: { isOpen: boolean; onCl
     return (
         <div
             ref={containerRef}
-            className="fixed inset-0 z-[100] flex flex-col bg-ivory"
+            className="fixed inset-0 z-[100] flex flex-col bg-white"
             role="dialog"
             aria-modal="true"
             aria-label={t('modalLabel')}

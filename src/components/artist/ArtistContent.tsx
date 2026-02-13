@@ -7,6 +7,7 @@ import { WorkCarousel } from './WorkCarousel'
 import { WorksGridOverlay } from './WorksGridOverlay'
 import Image from 'next/image'
 import { urlFor } from '@/sanity/lib/image'
+import { ArtCaption } from '@/components/ui/ArtCaption'
 
 interface ArtistContentProps {
     artist: any
@@ -68,7 +69,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
             </div>
 
             {/* Middle Section: Projects & News */}
-            <div className="grid md:grid-cols-2 gap-12 lg:gap-24 pt-24 border-t border-charcoal/10">
+            <div className="grid md:grid-cols-2 gap-12 lg:gap-24 pt-24 border-t border-rich-blue/20">
                 {/* Projects */}
                 {artist.forthcomingProjects && artist.forthcomingProjects.length > 0 && (
                     <section className="space-y-8">
@@ -117,24 +118,36 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                 <section className="space-y-12">
                     <h2 className="text-3xl font-bold text-charcoal tracking-tight">Museum Exhibitions</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {artist.museumExhibitions.map((exh: any, i: number) => (
-                            <div key={i} className="group space-y-4">
-                                <div className="aspect-[4/3] relative bg-charcoal/5 overflow-hidden">
-                                    {exh.image && (
-                                        <Image
-                                            src={urlFor(exh.image).width(800).height(600).url()}
-                                            alt={exh.title}
-                                            fill
-                                            className="object-cover group-hover:scale-102 transition-transform duration-700"
-                                        />
-                                    )}
+                        {artist.museumExhibitions.map((exh: any, i: number) => {
+                            const caption = getLocalizedValue(exh.image?.caption, locale)
+                            return (
+                                <div key={i} className="group space-y-4">
+                                    <div className="space-y-3">
+                                        <div className="aspect-[4/3] relative bg-charcoal/5 overflow-hidden">
+                                            {exh.image?.asset && (
+                                                <Image
+                                                    src={urlFor(exh.image).width(800).height(600).url()}
+                                                    alt={exh.title}
+                                                    fill
+                                                    className="object-cover group-hover:scale-102 transition-transform duration-700"
+                                                    placeholder="blur"
+                                                    blurDataURL={exh.image.asset?.metadata?.lqip}
+                                                />
+                                            )}
+                                        </div>
+                                        {caption && (
+                                            <div className="text-[10px] text-charcoal/50 leading-relaxed border-l border-rich-blue/20 pl-3">
+                                                <ArtCaption content={caption} />
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="space-y-1">
+                                        <h3 className="font-bold text-charcoal leading-snug">{exh.title}</h3>
+                                        <p className="text-xs text-charcoal/60">{exh.venue}, {exh.location}</p>
+                                    </div>
                                 </div>
-                                <div className="space-y-1">
-                                    <h3 className="font-bold text-charcoal leading-snug">{exh.title}</h3>
-                                    <p className="text-xs text-charcoal/60">{exh.venue}, {exh.location}</p>
-                                </div>
-                            </div>
-                        ))}
+                            )
+                        })}
                     </div>
                 </section>
             )}
@@ -153,7 +166,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                                     className="group space-y-4"
                                 >
                                     <div className="aspect-[4/3] relative bg-charcoal/5 overflow-hidden">
-                                        {exhibition.mainImage ? (
+                                        {exhibition.mainImage?.asset ? (
                                             <Image
                                                 src={urlFor(exhibition.mainImage).width(800).height(600).url()}
                                                 alt={exTitle || 'Exhibition'}

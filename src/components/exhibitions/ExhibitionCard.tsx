@@ -26,13 +26,14 @@ export function ExhibitionCard({ exhibition, locale, variant = 'default' }: Exhi
     if (variant === 'featured') {
         return (
             <Link href={`/${locale}/exhibitions/${exhibition.slug}`} className="group block">
-                <div className="aspect-[16/9] md:aspect-[21/9] relative overflow-hidden bg-charcoal/5 mb-8">
-                    {exhibition.mainImage && (
+                <div className="relative bg-charcoal/5 mb-8">
+                    {(exhibition.listImage?.asset || exhibition.mainImage?.asset) && (
                         <Image
-                            src={urlFor(exhibition.mainImage).width(1920).height(1080).url()}
+                            src={urlFor(exhibition.listImage || exhibition.mainImage).width(1920).url()}
                             alt={title || 'Exhibition image'}
-                            fill
-                            className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                            width={1920}
+                            height={1080}
+                            className="w-full h-auto block"
                         />
                     )}
                 </div>
@@ -70,18 +71,22 @@ export function ExhibitionCard({ exhibition, locale, variant = 'default' }: Exhi
             )}
         >
             <div className={cn(
-                "relative bg-charcoal/5 overflow-hidden",
-                variant === 'compact' ? "w-32 aspect-square flex-shrink-0" : "aspect-[4/5]"
+                "relative bg-charcoal/5",
+                variant === 'compact' ? "w-32 aspect-square flex-shrink-0" : "w-full"
             )}>
-                {exhibition.mainImage ? (
+                {exhibition.listImage?.asset || exhibition.mainImage?.asset ? (
                     <Image
-                        src={urlFor(exhibition.mainImage).width(800).height(variant === 'compact' ? 800 : 1000).url()}
+                        src={urlFor(exhibition.listImage || exhibition.mainImage).width(800).url()}
                         alt={title || 'Exhibition Image'}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        width={800}
+                        height={1000}
+                        className={cn(
+                            "w-full h-auto block",
+                            variant === 'compact' ? "h-full object-contain" : ""
+                        )}
                     />
                 ) : (
-                    <div className="w-full h-full flex items-center justify-center text-umber/20">
+                    <div className="w-full aspect-[4/5] flex items-center justify-center text-umber/20">
                         No Image
                     </div>
                 )}

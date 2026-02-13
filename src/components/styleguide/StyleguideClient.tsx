@@ -33,12 +33,12 @@ export function StyleguideClient() {
     }
 
     return (
-        <div className="flex flex-col md:flex-row min-h-screen bg-ivory">
+        <div className="flex flex-col md:flex-row min-h-screen bg-sun-bleached-paper">
             {/* Sidebar */}
-            <aside className="w-full md:w-80 border-r border-umber/10 bg-ivory md:h-screen md:sticky md:top-0 overflow-y-auto z-10">
-                <div className="p-8 border-b border-umber/10">
+            <aside className="w-full md:w-80 border-r border-deep-umber/10 bg-sun-bleached-paper md:h-screen md:sticky md:top-0 overflow-y-auto z-10">
+                <div className="p-8 border-b border-deep-umber/10">
                     <h1 className="text-2xl font-bold text-charcoal uppercase tracking-tighter">NCAI Hub</h1>
-                    <p className="text-[10px] text-umber/60 uppercase tracking-widest mt-1">Design System v1.0</p>
+                    <p className="text-[10px] text-deep-umber/60 uppercase tracking-widest mt-1">Design System v1.0</p>
                 </div>
                 <StyleguideNav activeSection={activeSection} onSectionChange={setActiveSection} />
             </aside>
@@ -49,12 +49,12 @@ export function StyleguideClient() {
                     {renderSection()}
                 </div>
 
-                <footer className="mt-24 pt-12 border-t border-umber/10">
+                <footer className="mt-24 pt-12 border-t border-deep-umber/10">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-                        <p className="text-[10px] text-umber/40 uppercase tracking-[0.3em]">
+                        <p className="text-[10px] text-deep-umber/40 uppercase tracking-[0.3em]">
                             Nairobi Contemporary Art Institute — 2026
                         </p>
-                        <nav className="flex gap-8 text-[10px] font-bold uppercase tracking-widest text-umber/40">
+                        <nav className="flex gap-8 text-[10px] font-bold uppercase tracking-widest text-deep-umber/40">
                             <a href="#" className="hover:text-ochre">GitHub</a>
                             <a href="#" className="hover:text-ochre">Sanity</a>
                             <a href="#" className="hover:text-ochre">Docs</a>

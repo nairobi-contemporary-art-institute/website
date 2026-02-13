@@ -53,6 +53,7 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
             links: [
                 { label: 'Journal (Channel)', url: '/channel' },
                 { label: 'Public Programs', url: '/education' },
+                { label: 'Publications', url: '/publications' },
                 { label: 'Exhibitions', url: '/exhibitions' },
                 { label: 'Artists', url: '/artists' },
                 { label: 'Collection', url: '/collection' },
@@ -80,16 +81,16 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
     ]
 
     return (
-        <footer className="bg-ivory text-charcoal">
+        <footer className="bg-white text-charcoal">
             {/* Top Divider */}
-            <ResponsiveDivider variant="straight" weight="thin" className="text-umber/30" />
+            <ResponsiveDivider variant="curved" weight="medium" className="text-gold" />
 
             {/* Main Footer Content */}
             <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
                     {/* Contact Info (Visit Us) - Now on the left */}
                     <div className="lg:col-span-3">
-                        <h4 className="text-lg font-bold uppercase tracking-tight mb-4">
+                        <h4 className="text-lg font-bold uppercase tracking-tight mb-4 text-deep-umber">
                             Visit Us
                         </h4>
                         <div className="space-y-4 text-sm text-charcoal/90">
@@ -141,7 +142,7 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
                     <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-3 gap-8">
                         {displayCategories.map((category) => (
                             <div key={category.title}>
-                                <h4 className="text-sm font-bold uppercase tracking-widest mb-4 text-umber/50">
+                                <h4 className="text-sm font-bold uppercase tracking-widest mb-4 text-deep-umber">
                                     {category.title}
                                 </h4>
                                 <ul className="space-y-2">

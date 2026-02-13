@@ -143,7 +143,7 @@ export function ImmersiveTimeline({ events: initialEvents, locale }: ImmersiveTi
 
                             {/* Image Content */}
                             <div className="relative aspect-[3/4] md:aspect-square bg-white/5 border border-ivory/10 shadow-2xl overflow-hidden group">
-                                {event.media ? (
+                                {event.media?.asset ? (
                                     <Image
                                         src={urlFor(event.media).width(1200).height(1200).url()}
                                         alt={event.year}

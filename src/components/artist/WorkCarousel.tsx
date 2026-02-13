@@ -83,7 +83,7 @@ export function WorkCarousel({ works, locale, onOpenGrid }: WorkCarouselProps) {
                         <Grid className="w-5 h-5 text-charcoal/60" />
                     </button>
                     <div className="text-sm space-y-0.5">
-                        <p className="font-bold text-charcoal italic">{title}</p>
+                        <p className="text-charcoal italic">{title}</p>
                         <p className="text-charcoal/80">{currentWork.year}</p>
                         <p className="text-charcoal/60 text-xs">{medium}</p>
                         <p className="text-charcoal/60 text-xs">{currentWork.dimensions}</p>
@@ -103,7 +103,7 @@ export function WorkCarousel({ works, locale, onOpenGrid }: WorkCarouselProps) {
 
                 <div className="pt-8">
                     <button
-                        className="px-6 py-2 border border-charcoal text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-charcoal hover:text-white transition-all duration-300"
+                        className="px-6 py-2 border border-charcoal text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-ivory hover:text-charcoal transition-all duration-300"
                     >
                         Enquire
                     </button>

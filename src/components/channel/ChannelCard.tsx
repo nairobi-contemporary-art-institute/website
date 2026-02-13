@@ -5,6 +5,7 @@ import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
 import Link from "next/link"
 import { PlayCircle, Headphones, BookOpen } from "lucide-react"
+import { PortableText } from "@/components/ui/PortableText"
 
 interface ChannelCardProps {
     post: any
@@ -35,12 +36,12 @@ export function ChannelCard({ post, locale }: ChannelCardProps) {
             className="group block h-full flex flex-col"
         >
             <div className="relative aspect-[16/10] bg-charcoal/5 overflow-hidden mb-5 group">
-                {post.mainImage ? (
+                {post.mainImage?.asset ? (
                     <Image
                         src={urlFor(post.mainImage).width(800).height(500).url()}
                         alt={post.mainImage.alt || title || 'Post Image'}
                         fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="object-cover"
                         placeholder="blur"
                         blurDataURL={post.mainImage.asset?.metadata?.lqip}
                     />
@@ -86,9 +87,13 @@ export function ChannelCard({ post, locale }: ChannelCardProps) {
                 </h3>
 
                 {post.excerpt && (
-                    <p className="text-sm text-charcoal/60 line-clamp-2 mt-auto leading-relaxed">
-                        {post.excerpt}
-                    </p>
+                    <div className="text-sm text-charcoal/60 line-clamp-2 mt-auto leading-relaxed prose-sm">
+                        {typeof getLocalizedValue(post.excerpt, locale) === 'string' ? (
+                            <p>{getLocalizedValue(post.excerpt, locale) as unknown as string}</p>
+                        ) : (
+                            <PortableText value={getLocalizedValue(post.excerpt, locale)} locale={locale} />
+                        )}
+                    </div>
                 )}
 
                 {post.tags && post.tags.length > 0 && (

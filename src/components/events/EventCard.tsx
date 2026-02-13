@@ -55,12 +55,12 @@ export function EventCard({ event, locale, variant = 'default' }: EventCardProps
             className="group block space-y-4"
         >
             <div className="relative aspect-[3/2] bg-stone-100 overflow-hidden">
-                {event.mainImage ? (
+                {event.mainImage?.asset ? (
                     <Image
                         src={urlFor(event.mainImage).width(800).height(600).url()}
                         alt={event.mainImage.alt || title || 'Event'}
                         fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="object-cover"
                         placeholder="blur"
                         blurDataURL={event.mainImage.asset?.metadata?.lqip}
                     />

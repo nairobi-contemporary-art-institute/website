@@ -51,7 +51,7 @@ export function WorksGridOverlay({ isOpen, onClose, works, locale, artistName }:
                                         src={urlFor(work.image).width(600).height(600).url()}
                                         alt={title || 'Artwork'}
                                         fill
-                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                        className="object-cover"
                                     />
                                 </div>
                                 <div className="space-y-1">

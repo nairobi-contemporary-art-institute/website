@@ -59,7 +59,7 @@ export async function OpeningStatus({ locale }: OpeningStatusProps) {
     if (specialStatus?.isActive && specialStatus?.message) {
         const message = getLocalizedValue(specialStatus.message, locale);
         return (
-            <div className="bg-umber text-ivory w-full text-center py-2 px-4 text-[10px] font-bold uppercase tracking-[0.2em]">
+            <div className="bg-rich-blue animate-notice-bar text-ivory w-full text-center py-2 px-4 text-[10px] font-bold uppercase tracking-[0.2em]">
                 {message || "Temporarily Closed"}
             </div>
         );
@@ -81,25 +81,50 @@ export async function OpeningStatus({ locale }: OpeningStatusProps) {
         return `${h12}${m > 0 ? `:${m.toString().padStart(2, '0')}` : ''} ${suffix}`;
     };
 
+    const daysOfWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    const todayIndex = now.getDay();
+
+    const getNextOpening = () => {
+        // Start check from today
+        for (let i = 0; i < 7; i++) {
+            const index = (todayIndex + i) % 7;
+            const dayName = daysOfWeek[index];
+            const dayHours = hours?.[dayName];
+
+            if (dayHours?.open && dayHours?.close) {
+                // If it's today, check if we haven't reached the opening time yet
+                if (i === 0 && timeString < dayHours.open) {
+                    return { day: 'today', time: dayHours.open };
+                }
+                // If it's a future day, that's our next opening
+                if (i > 0) {
+                    return { day: dayName, time: dayHours.open };
+                }
+            }
+        }
+        return null;
+    };
+
     const todayHours = hours?.[currentDayName];
     let statusMessage = "Closed Today";
     let isOpen = false;
 
-    if (todayHours?.open && todayHours?.close) {
-        if (timeString >= todayHours.open && timeString < todayHours.close) {
-            statusMessage = `Open until ${formatTimeDisplay(todayHours.close)}`;
-            isOpen = true;
-        } else if (timeString < todayHours.open) {
-            statusMessage = `Opening at ${formatTimeDisplay(todayHours.open)}`;
-            isOpen = false;
+    if (todayHours?.open && todayHours?.close && timeString >= todayHours.open && timeString < todayHours.close) {
+        statusMessage = `Open until ${formatTimeDisplay(todayHours.close)}`;
+        isOpen = true;
+    } else {
+        const next = getNextOpening();
+        if (next) {
+            const dayLabel = next.day === 'today' ? '' : `${next.day.charAt(0).toUpperCase() + next.day.slice(1)} `;
+            statusMessage = `Closed Now — Opens ${dayLabel}${formatTimeDisplay(next.time)}`;
         } else {
             statusMessage = "Closed Now";
-            isOpen = false;
         }
+        isOpen = false;
     }
 
     return (
-        <div className="w-full bg-charcoal border-b border-ivory/10 py-1.5 flex justify-center items-center gap-4 text-[10px] uppercase tracking-[0.2em] font-bold text-ivory/90">
+        <div className="w-full bg-rich-blue animate-notice-bar border-b border-ivory/10 py-1.5 flex justify-center items-center gap-4 text-[10px] uppercase tracking-[0.2em] font-bold text-ivory/90">
             <div className="flex items-center gap-2">
                 <div className={`w-1.5 h-1.5 ${isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-red-500/50'}`} />
                 <span>{statusMessage} — Rosslyn Riviera Mall, Limuru Rd, Nairobi</span>

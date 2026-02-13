@@ -20,8 +20,12 @@ export async function GET(request: Request) {
         name match $term + "*" || 
         name[].value match $term + "*" ||
         excerpt match $term + "*" ||
-        pt::text(description) match $term + "*" ||
-        pt::text(body) match $term + "*"
+        excerpt[].value match $term + "*" ||
+        pt::text(excerpt[].value) match $term + "*" ||
+        description match $term + "*" ||
+        description[].value match $term + "*" ||
+        pt::text(description[].value) match $term + "*" ||
+        pt::text(body[].value) match $term + "*"
       )
     ] | score(
       title match $term,

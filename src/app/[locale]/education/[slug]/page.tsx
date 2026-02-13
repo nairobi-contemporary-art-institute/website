@@ -5,8 +5,10 @@ import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
 import { notFound } from "next/navigation"
 import { PortableTextComponent } from "@/components/ui/PortableText"
+import { portableTextToPlainText } from "@/sanity/lib/utils"
 import Link from "next/link"
 import { ResourceList } from "@/components/education/ResourceList"
+import { LogoGrid } from "@/components/ui/LogoGrid"
 
 // Ensure dynamic rendering
 // export const revalidate = 60
@@ -46,10 +48,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
 
     const title = getLocalizedValue(program.title, locale)
-    const descriptionBlocks = getLocalizedValue(program.description, locale)
-    const description = Array.isArray(descriptionBlocks) && descriptionBlocks[0]?.children
-        ? (descriptionBlocks[0].children[0]?.text || 'Education program at NCAI')
-        : 'Education program at NCAI'
+    const descriptionBlocks = getLocalizedValue<any>(program.description, locale)
+    const description = typeof descriptionBlocks === 'string'
+        ? descriptionBlocks
+        : (descriptionBlocks ? portableTextToPlainText(descriptionBlocks) : 'Education program at NCAI')
 
     const ogImage = program.mainImage ? urlFor(program.mainImage).width(1200).height(630).url() : undefined
 
@@ -216,6 +218,44 @@ export default async function ProgramPage({ params }: Props) {
                     </aside>
                 </div>
             </div>
+
+            {program.relatedExhibitions && program.relatedExhibitions.length > 0 && (
+                <section className="mt-24 pt-24 border-t border-charcoal/10">
+                    <h2 className="text-3xl font-light tracking-tight mb-12">Related Exhibition</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {program.relatedExhibitions.map((exh: any) => (
+                            <Link
+                                key={exh._id}
+                                href={`/${locale}/exhibitions/${exh.slug}`}
+                                className="group flex gap-6 items-center bg-white border border-charcoal/5 p-4 hover:border-umber/20 transition-all"
+                            >
+                                <div className="relative w-32 aspect-[4/3] bg-stone-100 flex-shrink-0 overflow-hidden">
+                                    {exh.mainImage && (
+                                        <Image
+                                            src={urlFor(exh.mainImage).width(300).height(225).url()}
+                                            alt={getLocalizedValue(exh.title, locale) || 'Exhibition Image'}
+                                            fill
+                                            className="object-cover group-hover:scale-110 transition-transform duration-700"
+                                        />
+                                    )}
+                                </div>
+                                <div className="space-y-1">
+                                    <span className="text-[10px] uppercase tracking-widest text-umber font-bold">Exhibition</span>
+                                    <h3 className="text-xl font-bold text-charcoal group-hover:text-umber transition-colors">
+                                        {getLocalizedValue(exh.title, locale)}
+                                    </h3>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                </section>
+            )}
+
+            <LogoGrid
+                partners={program.partners}
+                locale={locale}
+                title="Program Partners"
+            />
         </div>
     )
 }

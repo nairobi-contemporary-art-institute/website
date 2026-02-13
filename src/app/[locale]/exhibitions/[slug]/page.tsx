@@ -5,11 +5,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getMessages } from 'next-intl/server'
 import { client, sanityFetch } from '@/sanity/lib/client'
-import { EXHIBITION_BY_SLUG_QUERY } from '@/sanity/lib/queries'
+import { EXHIBITION_BY_SLUG_QUERY, SITE_SETTINGS_QUERY } from '@/sanity/lib/queries'
 import { urlFor } from '@/sanity/lib/image'
-import { getLocalizedValue } from '@/sanity/lib/utils'
+import { getLocalizedValue, portableTextToPlainText } from '@/sanity/lib/utils'
 import { ResponsiveDivider } from '@/components/ui/ResponsiveDivider'
 import { PortableText } from '@/components/ui/PortableText'
+import { LogoGrid } from '@/components/ui/LogoGrid'
+import { ArtCaption } from '@/components/ui/ArtCaption'
+import { Gallery } from '@/components/ui/Gallery'
 
 // Placeholder date formatter
 const formatDateLocal = (dateString: string, locale: string) => {
@@ -40,10 +43,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
 
     const title = getLocalizedValue(exhibition.title, locale)
-    const descriptionBlocks = getLocalizedValue(exhibition.description, locale)
-    const description = Array.isArray(descriptionBlocks) && descriptionBlocks[0]?.children
-        ? (descriptionBlocks[0].children[0]?.text || `Exhibition: ${title}`)
-        : `Exhibition: ${title}`
+    const descriptionBlocks = getLocalizedValue<any>(exhibition.description, locale)
+    const description = typeof descriptionBlocks === 'string'
+        ? descriptionBlocks
+        : (descriptionBlocks ? portableTextToPlainText(descriptionBlocks) : `Exhibition: ${title}`)
 
     return {
         title,
@@ -70,171 +73,147 @@ export default async function ExhibitionPage({ params }: Props) {
 
     const title = getLocalizedValue(exhibition.title, locale)
     const description = getLocalizedValue(exhibition.description, locale)
-    const t = await getMessages({ locale }) as any // generic typing fallback
+    const t = await getMessages({ locale }) as any
+
+    const settings = await sanityFetch<any>({
+        query: SITE_SETTINGS_QUERY,
+        tags: ['siteSettings']
+    });
+
+    const artists = exhibition.artists || []
 
     return (
         <div className="container mx-auto px-6 py-20 min-h-screen">
-            <header className="max-w-4xl mx-auto mb-16 text-center space-y-6">
-                <span className="inline-block px-3 py-1 border border-umber/20 text-xs font-bold tracking-widest text-umber/60">
-                    {t.Pages?.exhibitions?.label || 'Exhibition'}
-                </span>
+            <div className="flex flex-col">
+                <header className="max-w-3xl mb-12 space-y-6">
+                    <span className="inline-block px-3 py-1 border border-umber/20 text-xs font-bold tracking-widest text-umber/60">
+                        {t.Pages?.exhibitions?.label || 'Exhibition'}
+                    </span>
 
-                <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-charcoal">
-                    {title || 'Untitled'}
-                </h1>
+                    <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-charcoal">
+                        {title || 'Untitled'}
+                    </h1>
 
-                <div className="flex items-center justify-center space-x-4 text-lg text-umber font-medium">
-                    <span>{formatDateLocal(exhibition.startDate, locale)}</span>
-                    {exhibition.endDate && (
-                        <>
-                            <span className="text-umber/40">—</span>
-                            <span>{formatDateLocal(exhibition.endDate, locale)}</span>
-                        </>
-                    )}
-                </div>
-            </header>
+                    <div className="flex items-center space-x-4 text-lg text-umber font-medium">
+                        <span>{formatDateLocal(exhibition.startDate, locale)}</span>
+                        {exhibition.endDate && (
+                            <>
+                                <span className="text-umber/40">—</span>
+                                <span>{formatDateLocal(exhibition.endDate, locale)}</span>
+                            </>
+                        )}
+                    </div>
+                </header>
 
-            {exhibition.mainImage && (
-                <div className="mb-20">
-                    <div className="aspect-[16/9] md:aspect-[21/9] relative bg-charcoal/5 overflow-hidden w-full">
-                        <Image
-                            src={urlFor(exhibition.mainImage).width(1920).height(1080).url()}
-                            alt={title || 'Exhibition Main Image'}
-                            fill
-                            className="object-cover"
-                        />
+                {exhibition.mainImage && (
+                    <div className="mb-20 space-y-4 w-full">
+                        <div className="relative bg-charcoal/5 w-full">
+                            <Image
+                                src={urlFor(exhibition.mainImage).width(2400).url()}
+                                alt={title || 'Exhibition Main Image'}
+                                width={2400}
+                                height={1200}
+                                className="w-full h-auto block"
+                                priority
+                                placeholder="blur"
+                                blurDataURL={exhibition.mainImage.asset?.metadata?.lqip}
+                            />
+                        </div>
+                        {exhibition.mainImage.caption && (
+                            <div className="max-w-3xl text-sm text-umber/60 leading-relaxed">
+                                <ArtCaption content={getLocalizedValue(exhibition.mainImage.caption, locale)} />
+                            </div>
+                        )}
+                    </div>
+                )}
+
+                <div className="max-w-3xl space-y-16">
+                    {/* Enquire Button */}
+                    <div>
+                        <Link
+                            href={`/${locale}/contact?subject=Enquiry: ${title}`}
+                            className="inline-block px-6 py-2 border border-charcoal text-xs uppercase tracking-widest font-bold hover:bg-charcoal hover:text-off-white transition-all"
+                        >
+                            Enquire
+                        </Link>
+                    </div>
+
+                    {/* Description */}
+                    <div className="prose prose-lg max-w-none text-charcoal/80 leading-relaxed font-serif">
+                        <PortableText value={description} locale={locale} />
                     </div>
                 </div>
-            )}
 
-            <div className="max-w-4xl mx-auto grid md:grid-cols-[1fr_250px] gap-16">
-                <div className="space-y-12">
-                    <section>
-                        <h2 className="sr-only">About</h2>
-                        <PortableText value={description} locale={locale} />
+                {/* Gallery Section */}
+                {exhibition.gallery && exhibition.gallery.length > 0 && (
+                    <Gallery images={exhibition.gallery} locale={locale} />
+                )}
+
+                <div className="max-w-3xl space-y-16">
+                    {/* More Information */}
+                    <section className="space-y-6 pt-16 border-t border-rich-blue/20">
+                        <h2 className="text-2xl font-semibold tracking-tight text-charcoal">More information</h2>
+                        <div className="flex flex-col space-y-4">
+                            <button className="text-left text-sm font-medium underline underline-offset-4 decoration-umber/30 hover:decoration-umber transition-all w-fit">
+                                Download the full press release
+                            </button>
+                            {artists.map((artist: any) => (
+                                <Link
+                                    key={artist._id}
+                                    href={`/${locale}/artists/${artist.slug}`}
+                                    className="text-sm font-medium underline underline-offset-4 decoration-umber/30 hover:decoration-umber transition-all w-fit"
+                                >
+                                    About {getLocalizedValue(artist.name, locale)}
+                                </Link>
+                            ))}
+                            <Link
+                                href={`/${locale}/contact`}
+                                className="text-sm font-medium underline underline-offset-4 decoration-umber/30 hover:decoration-umber transition-all w-fit"
+                            >
+                                Contact Us
+                            </Link>
+                        </div>
                     </section>
 
-                    {exhibition.gallery && exhibition.gallery.length > 0 && (
-                        <section className="space-y-8">
-                            <ResponsiveDivider variant="straight" weight="thin" className="text-umber/20" />
-                            <h2 className="text-2xl font-bold text-charcoal">Gallery</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                {exhibition.gallery.map((image: any, i: number) => (
-                                    <div key={i} className="aspect-[4/3] relative bg-charcoal/5 overflow-hidden">
-                                        <Image
-                                            src={urlFor(image).width(800).height(600).url()}
-                                            alt={`Gallery image ${i + 1}`}
-                                            fill
-                                            className="object-cover hover:scale-105 transition-transform duration-700"
-                                        />
-                                    </div>
-                                ))}
-                            </div>
-                        </section>
-                    )}
-                </div>
-
-                <aside className="space-y-12">
-                    <div className="sticky top-24 space-y-12">
-                        {/* Artists */}
-                        {exhibition.artists && exhibition.artists.length > 0 && (
-                            <div>
-                                <h3 className="text-xs font-bold tracking-widest text-umber/60 mb-6 border-b border-umber/10 pb-2">
-                                    Artists
-                                </h3>
-                                <ul className="space-y-4">
-                                    {exhibition.artists.map((artist: any) => {
-                                        const artistName = getLocalizedValue(artist.name, locale)
-                                        return (
-                                            <li key={artist._id} className="group flex items-center space-x-3">
-                                                <Link
-                                                    href={`/${locale}/artists/${artist.slug}`}
-                                                    className="flex items-center space-x-3 w-full"
-                                                >
-                                                    {artist.image && (
-                                                        <div className="relative w-10 h-10 overflow-hidden bg-charcoal/5 text-xs">
-                                                            <Image
-                                                                src={urlFor(artist.image).width(100).height(100).url()}
-                                                                alt={artistName || 'Artist'}
-                                                                fill
-                                                                className="object-cover grayscale group-hover:grayscale-0 transition-all"
-                                                            />
-                                                        </div>
-                                                    )}
-                                                    <span className="font-medium text-charcoal group-hover:text-indigo-600 transition-colors">
-                                                        {artistName}
-                                                    </span>
-                                                </Link>
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                            </div>
-                        )}
-
-                        {/* Curators */}
-                        {exhibition.curators && exhibition.curators.length > 0 && (
-                            <div>
-                                <h3 className="text-xs font-bold tracking-widest text-umber/60 mb-6 border-b border-umber/10 pb-2">
-                                    Curated By
-                                </h3>
-                                <ul className="space-y-4">
-                                    {exhibition.curators.map((curator: any) => {
-                                        const curatorName = getLocalizedValue(curator.name, locale)
-                                        return (
-                                            <li key={curator._id} className="flex items-center space-x-3">
-                                                {curator.image && (
-                                                    <div className="relative w-10 h-10 overflow-hidden bg-charcoal/5 text-xs">
-                                                        <Image
-                                                            src={urlFor(curator.image).width(100).height(100).url()}
-                                                            alt={curatorName || 'Curator'}
-                                                            fill
-                                                            className="object-cover grayscale"
-                                                        />
-                                                    </div>
-                                                )}
-                                                <div className="flex flex-col">
-                                                    <span className="font-medium text-charcoal">
-                                                        {curatorName}
-                                                    </span>
-                                                    <span className="text-[10px] text-charcoal/60 tracking-wider">
-                                                        {curator.roles?.[0] || 'Curator'}
-                                                    </span>
-                                                </div>
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                            </div>
-                        )}
-
-                        {/* Tags */}
-                        {exhibition.tags && exhibition.tags.length > 0 && (
-                            <div>
-                                <h3 className="text-xs font-bold tracking-widest text-umber/60 mb-4 border-b border-umber/10 pb-2">
-                                    Related
-                                </h3>
-                                <div className="flex flex-wrap gap-2">
-                                    {exhibition.tags.map((tag: any) => (
-                                        <span
-                                            key={tag._id}
-                                            className="text-[10px] tracking-wider font-bold bg-charcoal/5 px-2 py-1 text-charcoal/60 hover:bg-charcoal/10 transition-colors cursor-default"
-                                        >
-                                            {getLocalizedValue(tag.title, locale)}
-                                        </span>
-                                    ))}
+                    {/* Location */}
+                    <section className="space-y-6 pt-8">
+                        <h2 className="text-2xl font-semibold tracking-tight text-charcoal">Location</h2>
+                        <div className="space-y-4 text-sm text-charcoal/70 leading-relaxed">
+                            {settings?.contactInfo?.address && (
+                                <div className="whitespace-pre-line">
+                                    {settings.contactInfo.address}
                                 </div>
-                            </div>
-                        )}
-                    </div>
-                </aside>
-            </div>
+                            )}
+                            {settings?.hours && (
+                                <div className="space-y-1">
+                                    <p className="font-semibold text-charcoal">Opening Times:</p>
+                                    <p>Tuesday – Saturday: 10:00am – 6:00pm</p>
+                                </div>
+                            )}
+                            <Link
+                                href={settings?.contactInfo?.googleMapsUrl || '#'}
+                                target="_blank"
+                                className="inline-block text-sm font-medium underline underline-offset-4 decoration-umber/30 hover:decoration-umber transition-all"
+                            >
+                                View map
+                            </Link>
+                        </div>
+                    </section>
 
-            <footer className="max-w-4xl mx-auto mt-20 pt-10 border-t border-umber/10 flex justify-between">
-                <Link href={`/${locale}/exhibitions`} className="text-sm font-bold tracking-widest text-umber hover:text-indigo-600 transition-colors">
-                    ← Back to Exhibitions
-                </Link>
-            </footer>
+                    {/* Partners */}
+                    <LogoGrid
+                        partners={exhibition.partners}
+                        locale={locale}
+                        title={t.Common?.partners || 'Our Partners'}
+                    />
+
+                    <footer className="pt-10 border-t border-rich-blue/20">
+                        <Link href={`/${locale}/exhibitions`} className="text-sm font-bold tracking-widest text-umber hover:text-charcoal transition-colors">
+                            ← Back to Exhibitions
+                        </Link>
+                    </footer>
+                </div>
+            </div>
         </div>
     )
 }

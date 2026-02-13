@@ -44,6 +44,13 @@ export const work = defineType({
             options: {
                 hotspot: true,
             },
+            fields: [
+                defineField({
+                    name: 'caption',
+                    title: 'Caption',
+                    type: 'internationalizedArrayString',
+                }),
+            ],
             validation: (Rule) => Rule.required(),
         }),
         defineField({

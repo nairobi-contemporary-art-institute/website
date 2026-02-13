@@ -28,6 +28,13 @@ export const post = defineType({
             options: {
                 hotspot: true,
             },
+            fields: [
+                defineField({
+                    name: 'caption',
+                    title: 'Caption',
+                    type: 'internationalizedArrayString',
+                }),
+            ],
         }),
         defineField({
             name: 'publishedAt',
@@ -49,20 +56,12 @@ export const post = defineType({
         defineField({
             name: 'excerpt',
             title: 'Excerpt',
-            type: 'text',
-            rows: 3,
+            type: 'internationalizedArrayBlockContent',
         }),
         defineField({
             name: 'body',
             title: 'Body',
-            type: 'array',
-            of: [
-                { type: 'block' },
-                {
-                    type: 'image',
-                    options: { hotspot: true },
-                },
-            ],
+            type: 'blockContent',
         }),
         defineField({
             name: 'mediaType',
@@ -85,10 +84,22 @@ export const post = defineType({
             hidden: ({ document }) => document?.mediaType !== 'video',
         }),
         defineField({
+            name: 'videoCaption',
+            title: 'Video Caption',
+            type: 'internationalizedArrayString',
+            hidden: ({ document }) => document?.mediaType !== 'video',
+        }),
+        defineField({
             name: 'audioFile',
             title: 'Audio File',
             type: 'file',
             options: { accept: 'audio/*' },
+            hidden: ({ document }) => document?.mediaType !== 'audio',
+        }),
+        defineField({
+            name: 'audioCaption',
+            title: 'Audio Caption',
+            type: 'internationalizedArrayString',
             hidden: ({ document }) => document?.mediaType !== 'audio',
         }),
         defineField({

@@ -5,8 +5,10 @@ import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
 import { notFound } from "next/navigation"
 import { PortableTextComponent } from "@/components/ui/PortableText"
+import { portableTextToPlainText } from "@/sanity/lib/utils"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
+import { LogoGrid } from "@/components/ui/LogoGrid"
 
 import { Metadata } from "next"
 
@@ -27,10 +29,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
 
     const title = getLocalizedValue(event.title, locale)
-    const descriptionBlocks = getLocalizedValue(event.description, locale)
-    const description = Array.isArray(descriptionBlocks) && descriptionBlocks[0]?.children
-        ? (descriptionBlocks[0].children[0]?.text || 'Event at NCAI')
-        : 'Event at NCAI'
+    const descriptionBlocks = getLocalizedValue<any>(event.description, locale)
+    const description = typeof descriptionBlocks === 'string'
+        ? descriptionBlocks
+        : (descriptionBlocks ? portableTextToPlainText(descriptionBlocks) : 'Event at NCAI')
 
     const ogImage = event.mainImage ? urlFor(event.mainImage).width(1200).height(630).url() : undefined
 
@@ -218,6 +220,12 @@ export default async function EventPage({ params }: Props) {
                     </aside>
                 </div>
             </div>
+
+            <LogoGrid
+                partners={event.partners}
+                locale={locale}
+                title="Event Partners"
+            />
         </div>
     )
 }

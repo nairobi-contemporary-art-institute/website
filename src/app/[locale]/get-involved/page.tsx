@@ -57,20 +57,27 @@ export default async function GetInvolvedPage({ params }: { params: Promise<{ lo
                     </div>
                 </div>
                 {data.hero?.image && (
-                    <div className="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none hidden lg:block">
+                    <div className="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none hidden lg:block group">
                         <Image
                             src={urlFor(data.hero.image).width(1200).url()}
                             alt=""
                             fill
                             className="object-cover"
                         />
+                        {data.hero.image.caption && (
+                            <div className="absolute bottom-4 right-4 pointer-events-auto">
+                                <p className="text-[10px] text-charcoal/40 italic bg-ivory/20 px-2 py-1">
+                                    {getLocalizedValue(data.hero.image.caption, locale)}
+                                </p>
+                            </div>
+                        )}
                     </div>
                 )}
             </header>
 
             <div className="container mx-auto px-6 py-20">
                 {/* Main Content Sections */}
-                <div className="grid gap-px bg-charcoal/10 border border-charcoal/10">
+                <div className="grid gap-px bg-rich-blue/20 border border-rich-blue/20">
                     {data.sections?.map((section: any, idx: number) => {
                         const sectionTitle = getLocalizedValue(section.title, locale)
                         const sectionContent = getLocalizedValue(section.content, locale)
@@ -89,7 +96,7 @@ export default async function GetInvolvedPage({ params }: { params: Promise<{ lo
                                             )}
                                             {sectionContent && (
                                                 <div className="prose prose-lg max-w-none text-charcoal/80">
-                                                    <PortableText value={sectionContent} />
+                                                    <PortableText value={sectionContent} locale={locale} />
                                                 </div>
                                             )}
                                             {ctaUrl && ctaText && (
@@ -107,12 +114,21 @@ export default async function GetInvolvedPage({ params }: { params: Promise<{ lo
                                     </div>
                                     <div className="relative aspect-square lg:aspect-auto bg-charcoal/5 overflow-hidden">
                                         {section.image ? (
-                                            <Image
-                                                src={urlFor(section.image).width(1200).url()}
-                                                alt={sectionTitle || ''}
-                                                fill
-                                                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105"
-                                            />
+                                            <>
+                                                <Image
+                                                    src={urlFor(section.image).width(1200).url()}
+                                                    alt={sectionTitle || ''}
+                                                    fill
+                                                    className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105"
+                                                />
+                                                {section.image.caption && (
+                                                    <div className="absolute bottom-4 left-4 right-4">
+                                                        <p className="text-[10px] text-ivory font-bold uppercase tracking-widest bg-charcoal/60 backdrop-blur-sm px-3 py-1 inline-block">
+                                                            {getLocalizedValue(section.image.caption, locale)}
+                                                        </p>
+                                                    </div>
+                                                )}
+                                            </>
                                         ) : (
                                             <div className="w-full h-full flex items-center justify-center text-charcoal/10">
                                                 <span className="text-9xl font-black">{idx + 1}</span>

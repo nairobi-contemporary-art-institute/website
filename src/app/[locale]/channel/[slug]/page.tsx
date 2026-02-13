@@ -1,13 +1,14 @@
 import { notFound } from 'next/navigation'
 import { client, sanityFetch } from '@/sanity/lib/client'
 import { POST_BY_SLUG_QUERY } from '@/sanity/lib/queries'
-import { getLocalizedValue } from '@/sanity/lib/utils'
+import { getLocalizedValue, portableTextToPlainText } from '@/sanity/lib/utils'
 import { urlFor } from '@/sanity/lib/image'
 import Image from 'next/image'
 import { Link } from '@/i18n'
 import { PortableTextComponent } from '@/components/ui/PortableText'
 import { ResponsiveDivider } from '@/components/ui/ResponsiveDivider'
 import { MediaPlayer } from '@/components/channel/MediaPlayer'
+import { ArtCaption } from '@/components/ui/ArtCaption'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }) {
     const { locale, slug } = await params
@@ -20,7 +21,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     if (!post) return { title: 'Not Found' }
 
     const title = getLocalizedValue(post.title, locale)
-    const description = post.excerpt || title
+    const excerptBlocks = getLocalizedValue<any[]>(post.excerpt, locale)
+    const description = excerptBlocks ? portableTextToPlainText(excerptBlocks) : title
     const ogImage = post.mainImage ? urlFor(post.mainImage).width(1200).height(630).url() : undefined
 
     return {
@@ -110,25 +112,39 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
             </header>
 
             {/* Media Player or Main Image */}
-            <div className="w-full max-w-4xl mx-auto mb-12">
+            <div className="w-full max-w-4xl mx-auto mb-16 space-y-6">
                 {mediaType === 'video' || mediaType === 'audio' ? (
-                    <MediaPlayer
-                        type={mediaType}
-                        url={videoUrl}
-                        audioUrl={audioUrl}
-                        thumbnail={imageProps || undefined}
-                    />
-                ) : imageProps ? (
-                    <div className="relative aspect-[16/9] w-full overflow-hidden shadow-xl">
-                        <Image
-                            src={imageProps}
-                            alt={title || post.mainImage?.alt || 'Channel post image'}
-                            fill
-                            className="object-cover"
-                            priority
-                            placeholder="blur"
-                            blurDataURL={post.mainImage?.asset?.metadata?.lqip}
+                    <div className="space-y-4">
+                        <MediaPlayer
+                            type={mediaType}
+                            url={videoUrl}
+                            audioUrl={audioUrl}
+                            thumbnail={imageProps || undefined}
                         />
+                        {(mediaType === 'video' ? post.videoCaption : post.audioCaption) && (
+                            <div className="text-sm text-umber/60 leading-relaxed border-l-2 border-umber/10 pl-4 mt-2">
+                                <ArtCaption content={getLocalizedValue(mediaType === 'video' ? post.videoCaption : post.audioCaption, locale)} />
+                            </div>
+                        )}
+                    </div>
+                ) : imageProps ? (
+                    <div className="space-y-4">
+                        <div className="relative aspect-[16/9] w-full overflow-hidden shadow-xl">
+                            <Image
+                                src={imageProps}
+                                alt={title || post.mainImage?.alt || 'Channel post image'}
+                                fill
+                                className="object-cover"
+                                priority
+                                placeholder="blur"
+                                blurDataURL={post.mainImage?.asset?.metadata?.lqip}
+                            />
+                        </div>
+                        {post.mainImage?.caption && (
+                            <div className="text-sm text-umber/60 leading-relaxed border-l-2 border-umber/10 pl-4 mt-2">
+                                <ArtCaption content={getLocalizedValue(post.mainImage.caption, locale)} />
+                            </div>
+                        )}
                     </div>
                 ) : null}
             </div>

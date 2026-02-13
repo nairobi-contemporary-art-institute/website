@@ -1,21 +1,50 @@
-import { getMessages } from 'next-intl/server'
-import { client } from '@/sanity/lib/client'
-import { EXHIBITIONS_QUERY } from '@/sanity/lib/queries'
+import { type Metadata } from 'next'
+import { getTranslations, getMessages } from 'next-intl/server'
+import { client, sanityFetch } from '@/sanity/lib/client'
+import { EXHIBITIONS_QUERY, EXHIBITIONS_PAGE_QUERY } from '@/sanity/lib/queries'
 import { ResponsiveDivider } from '@/components/ui/ResponsiveDivider'
 import { ExhibitionCard } from '@/components/exhibitions/ExhibitionCard'
+import { getLocalizedValue, portableTextToPlainText } from '@/sanity/lib/utils'
+import { PortableTextComponent } from '@/components/ui/PortableText'
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+type Props = {
+    params: Promise<{ locale: string }>
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { locale } = await params
-    const messages: any = await getMessages({ locale })
+    const t = await getTranslations({ locale, namespace: 'Pages.exhibitions' })
+
+    const pageData = await sanityFetch<any>({
+        query: EXHIBITIONS_PAGE_QUERY,
+        tags: ['exhibitionsPage']
+    })
+
+    const title = getLocalizedValue(pageData?.title, locale) || t('title')
+    const descriptionBlocks = getLocalizedValue<any>(pageData?.header?.description, locale)
+    const description = typeof descriptionBlocks === 'string'
+        ? descriptionBlocks
+        : (descriptionBlocks ? portableTextToPlainText(descriptionBlocks) : t('description'))
+
     return {
-        title: messages.Pages.exhibitions?.title || 'Exhibitions',
+        title,
+        description,
+        openGraph: {
+            title,
+            description,
+        }
     }
 }
 
-export default async function ExhibitionsPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function ExhibitionsPage({ params }: Props) {
     const { locale } = await params
-    const t = await getMessages({ locale }) as any
-    const exhibitions = await client.fetch(EXHIBITIONS_QUERY)
+    const t = await getTranslations({ locale, namespace: 'Navigation' })
+    const messages = await getMessages({ locale }) as any
+
+    const [exhibitions, pageData] = await Promise.all([
+        client.fetch(EXHIBITIONS_QUERY),
+        sanityFetch<any>({ query: EXHIBITIONS_PAGE_QUERY, tags: ['exhibitionsPage'] })
+    ])
 
     const now = new Date()
 
@@ -33,12 +62,20 @@ export default async function ExhibitionsPage({ params }: { params: Promise<{ lo
         return acc
     }, { current: [], upcoming: [], past: [] })
 
+    const header = pageData?.header
+    const headline = getLocalizedValue(header?.headline, locale) || t('exhibitions')
+
     return (
         <div className="container mx-auto px-6 py-20 min-h-screen">
-            <header className="max-w-3xl mb-16">
-                <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-charcoal mb-8 uppercase leading-[0.9]">
-                    {t.Navigation?.exhibitions || 'Exhibitions'}
+            <header className="max-w-4xl mb-24 space-y-8">
+                <h1 className="text-6xl md:text-9xl font-black tracking-tighter text-charcoal uppercase leading-[0.85]">
+                    {headline}
                 </h1>
+                {header?.description && (
+                    <div className="text-xl md:text-2xl text-umber/80 font-light max-w-2xl leading-relaxed">
+                        <PortableTextComponent value={getLocalizedValue(header.description, locale)} />
+                    </div>
+                )}
                 <ResponsiveDivider variant="curved" weight="medium" className="text-umber/20" />
             </header>
 
@@ -90,7 +127,7 @@ export default async function ExhibitionsPage({ params }: { params: Promise<{ lo
             </div>
 
             {exhibitions.length === 0 && (
-                <div className="py-20 text-center text-umber/40 italic">
+                <div className="py-40 text-center text-umber/30 font-mono uppercase tracking-[0.3em] text-xs">
                     No exhibitions found.
                 </div>
             )}

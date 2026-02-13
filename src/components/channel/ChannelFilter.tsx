@@ -29,7 +29,7 @@ export function ChannelFilter({ posts, locale }: ChannelFilterProps) {
     return (
         <div className="space-y-12">
             {/* Filter Tabs */}
-            <div className="flex flex-wrap gap-2 border-b border-charcoal/10 pb-4 sticky top-20 bg-background/95 backdrop-blur z-10">
+            <div className="flex flex-wrap gap-2 border-b border-rich-blue/20 pb-4 sticky top-20 bg-background/95 backdrop-blur z-10">
                 {MEDIA_FILTERS.map(f => (
                     <button
                         key={f.value}

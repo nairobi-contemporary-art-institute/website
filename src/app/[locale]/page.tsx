@@ -1,12 +1,14 @@
 import { getTranslations } from 'next-intl/server'
-import { client } from '@/sanity/lib/client'
-import { EXHIBITIONS_QUERY, POSTS_QUERY, TIMELINE_QUERY } from '@/sanity/lib/queries'
+import { client, sanityFetch } from '@/sanity/lib/client'
+import { EXHIBITIONS_QUERY, POSTS_QUERY, TIMELINE_QUERY, HOME_PAGE_QUERY } from '@/sanity/lib/queries'
 import { getLocalizedValue } from '@/sanity/lib/utils'
 import { urlFor } from '@/sanity/lib/image'
 import { Link } from '@/i18n'
 import Image from 'next/image'
 import { ResponsiveDivider } from '@/components/ui/ResponsiveDivider'
 import { TimelineTeaser } from '@/components/home/TimelineTeaser'
+import { HomeHero } from '@/components/home/HomeHero'
+import { PortableText } from '@/components/ui/PortableText'
 
 // Define interfaces for fetched data
 interface Exhibition {
@@ -30,47 +32,70 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'HomePage' })
 
-  // Fetch latest exhibition, news, and timeline teaser
-  const [exhibitions, posts, timelineEvents] = await Promise.all([
-    client.fetch(EXHIBITIONS_QUERY),
-    client.fetch(POSTS_QUERY),
-    client.fetch(TIMELINE_QUERY)
+  // Fetch latest exhibition, news, and timeline teaser using sanityFetch for better cache control
+  const [exhibitions, posts, timelineEvents, homeData] = await Promise.all([
+    sanityFetch<Exhibition[]>({ query: EXHIBITIONS_QUERY, tags: ['exhibition'] }),
+    sanityFetch<Post[]>({ query: POSTS_QUERY, tags: ['post'] }),
+    sanityFetch<any[]>({ query: TIMELINE_QUERY, tags: ['timeline'] }),
+    sanityFetch<any>({ query: HOME_PAGE_QUERY, tags: ['homePage'] })
   ])
 
   const now = new Date()
-  const latestExhibition = exhibitions?.find((exh: any) => {
-    const start = new Date(exh.startDate)
-    const end = exh.endDate ? new Date(exh.endDate) : null
-    return start <= now && (!end || end >= now)
-  }) as Exhibition | undefined
 
-  const latestPost = posts?.[0] as Post | undefined
+  // 1. Priority: Admin override
+  // 2. Priority: Current active exhibition
+  // 3. Priority: Next upcoming exhibition
+  // 4. Fallback: Most recent exhibition
+
+  let latestExhibition = homeData?.featuredExhibition
+
+  if (!latestExhibition && exhibitions && exhibitions.length > 0) {
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    const todayTime = today.getTime()
+
+    // 1. Find a currently running exhibition
+    latestExhibition = exhibitions.find((exh: any) => {
+      const start = new Date(exh.startDate)
+      start.setHours(0, 0, 0, 0)
+      const startTime = start.getTime()
+
+      const end = exh.endDate ? new Date(exh.endDate) : null
+      if (end) end.setHours(23, 59, 59, 999)
+      const endTime = end ? end.getTime() : Infinity
+
+      return startTime <= todayTime && todayTime <= endTime
+    })
+
+    // 2. If no current, find the nearest upcoming one
+    if (!latestExhibition) {
+      const upcoming = exhibitions
+        .filter((exh: any) => {
+          const start = new Date(exh.startDate)
+          start.setHours(0, 0, 0, 0)
+          return start.getTime() > todayTime
+        })
+        .sort((a: any, b: any) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime())
+
+      latestExhibition = upcoming[0]
+    }
+
+    // 3. Last fallback: the most recent exhibition (already first in list due to query order)
+    if (!latestExhibition) {
+      latestExhibition = exhibitions[0]
+    }
+  }
+
+  const latestPost = homeData?.featuredPost || posts?.[0] as Post | undefined
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="relative h-[85vh] flex flex-col items-center justify-center p-8 bg-ivory overflow-hidden">
-        <div className="z-10 text-center max-w-4xl mx-auto flex flex-col items-center gap-8">
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-umber animate-in fade-in slide-in-from-bottom-4 duration-1000">
-            {t('title')}
-          </h1>
-          <p className="text-xl md:text-2xl tracking-wide leading-relaxed text-umber/80 max-w-2xl animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-200">
-            {t('description')}
-          </p>
-          <div className="animate-in fade-in zoom-in duration-1000 delay-500 mt-8">
-            <Link href="/visit" className="bg-umber text-ivory px-8 py-4 text-sm font-bold uppercase tracking-widest hover:bg-umber/90 transition-all">
-              Plan Your Visit
-            </Link>
-          </div>
-        </div>
-
-        {/* Subtle Background Pattern/Element */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.03]">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[url('/grid.svg')] bg-repeat" />
-        </div>
-      </section>
-
-      <ResponsiveDivider variant="curved" weight="medium" className="text-umber/10" />
+      {/* New Redesigned Hero Section */}
+      <HomeHero
+        exhibition={latestExhibition}
+        featuredCards={homeData?.featuredCards}
+        locale={locale}
+      />
 
       {/* Featured Section */}
       <div className="container mx-auto px-6 py-24">
@@ -83,13 +108,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
             {latestExhibition ? (
               <Link href={`/exhibitions/${latestExhibition.slug}`} className="group block">
-                <div className="aspect-[4/3] relative overflow-hidden bg-charcoal/5 mb-6">
-                  {latestExhibition.mainImage && (
+                <div className="relative bg-charcoal/5 mb-6">
+                  {(latestExhibition.homepageImage || latestExhibition.mainImage) && (
                     <Image
-                      src={urlFor(latestExhibition.mainImage).width(1200).height(900).url()}
+                      src={urlFor(latestExhibition.homepageImage || latestExhibition.mainImage).width(1200).url()}
                       alt={getLocalizedValue(latestExhibition.title, locale) || 'Exhibition image'}
-                      fill
-                      className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                      width={1200}
+                      height={900}
+                      className="w-full h-auto block"
                     />
                   )}
                 </div>
@@ -126,7 +152,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                         src={urlFor(latestPost.mainImage).width(800).height(450).url()}
                         alt={getLocalizedValue(latestPost.title, locale) || 'Post image'}
                         fill
-                        className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                        className="object-cover"
                       />
                     )}
                   </div>
@@ -134,9 +160,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     <h3 className="text-2xl font-bold text-charcoal group-hover:text-amber-900 transition-colors">
                       {getLocalizedValue(latestPost.title, locale) || 'Untitled Post'}
                     </h3>
-                    <p className="text-sm text-umber/80 line-clamp-2 leading-relaxed">
-                      {latestPost.excerpt}
-                    </p>
+                    <div className="text-sm text-umber/80 line-clamp-2 leading-relaxed prose-sm">
+                      {typeof getLocalizedValue(latestPost.excerpt, locale) === 'string' ? (
+                        <p>{getLocalizedValue(latestPost.excerpt, locale) as unknown as string}</p>
+                      ) : (
+                        <PortableText value={getLocalizedValue(latestPost.excerpt, locale)} locale={locale} />
+                      )}
+                    </div>
                   </div>
                 </Link>
               ) : (
@@ -168,7 +198,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <ResponsiveDivider variant="straight" weight="thin" className="text-umber/10" />
 
       {/* Timeline Teaser Section */}
-      <TimelineTeaser events={timelineEvents} locale={locale} />
+      {(homeData?.timelineTeaser?.show !== false) && (
+        <TimelineTeaser
+          events={timelineEvents}
+          locale={locale}
+          headline={getLocalizedValue(homeData?.timelineTeaser?.headline, locale)}
+        />
+      )}
     </div>
   )
 }

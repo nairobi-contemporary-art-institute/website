@@ -20,9 +20,10 @@ interface TimelineEvent {
 interface TimelineTeaserProps {
     events: TimelineEvent[]
     locale: string
+    headline?: string
 }
 
-export function TimelineTeaser({ events, locale }: TimelineTeaserProps) {
+export function TimelineTeaser({ events, locale, headline }: TimelineTeaserProps) {
     const containerRef = useRef<HTMLDivElement>(null)
 
     useGSAP(() => {
@@ -50,7 +51,9 @@ export function TimelineTeaser({ events, locale }: TimelineTeaserProps) {
                     <div className="max-w-2xl">
                         <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-amber-500 mb-6 block">Our Legacy</span>
                         <h2 className="text-4xl md:text-6xl font-bold tracking-tighter leading-none">
-                            TRACING THE EVOLUTION <br /> OF PRACTICE
+                            {headline || (
+                                <>TRACING THE EVOLUTION <br /> OF PRACTICE</>
+                            )}
                         </h2>
                     </div>
                     <Link

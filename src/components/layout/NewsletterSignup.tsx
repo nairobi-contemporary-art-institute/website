@@ -45,7 +45,7 @@ export function NewsletterSignup() {
 
     return (
         <div className="max-w-md">
-            <h3 className="text-xl md:text-2xl font-bold uppercase tracking-tight mb-4">
+            <h3 className="text-xl md:text-2xl font-bold uppercase tracking-tight mb-4 text-deep-umber">
                 Sign up for<br />our newsletter
             </h3>
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">

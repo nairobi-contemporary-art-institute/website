@@ -1,5 +1,4 @@
-
-import { defineType, defineArrayMember } from 'sanity'
+import { defineType, defineArrayMember, defineField } from 'sanity'
 
 /**
  * This is the schema definition for the rich text fields used for
@@ -52,6 +51,12 @@ export const blockContent = defineType({
                                 name: 'href',
                                 type: 'url',
                             },
+                            {
+                                title: 'Open in new tab',
+                                name: 'blank',
+                                type: 'boolean',
+                                initialValue: false,
+                            },
                         ],
                     },
                 ],
@@ -61,8 +66,22 @@ export const blockContent = defineType({
         // primitive types such as 'string' and 'number' in the same array
         // as a block type.
         defineArrayMember({
+            name: 'image',
+            title: 'Image',
             type: 'image',
             options: { hotspot: true },
+            fields: [
+                defineField({
+                    name: 'caption',
+                    title: 'Caption',
+                    type: 'internationalizedArrayString',
+                }),
+                defineField({
+                    name: 'alt',
+                    title: 'Alt Text',
+                    type: 'string',
+                }),
+            ]
         }),
     ],
 })

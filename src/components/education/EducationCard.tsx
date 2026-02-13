@@ -5,6 +5,7 @@ import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
+import { PortableText } from "@/components/ui/PortableText"
 
 interface EducationCardProps {
     program: any
@@ -42,12 +43,12 @@ export function EducationCard({ program, locale }: EducationCardProps) {
             className="group block h-full flex flex-col"
         >
             <div className="relative aspect-[3/2] bg-stone-100 overflow-hidden mb-6">
-                {program.mainImage ? (
+                {program.mainImage?.asset ? (
                     <Image
                         src={urlFor(program.mainImage).width(800).height(600).url()}
                         alt={program.mainImage.alt || title || 'Program Image'}
                         fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105 contrast-[0.95] group-hover:contrast-100"
+                        className="object-cover contrast-[0.95] group-hover:contrast-100"
                         placeholder="blur"
                         blurDataURL={program.mainImage.asset?.metadata?.lqip}
                     />
@@ -80,9 +81,13 @@ export function EducationCard({ program, locale }: EducationCardProps) {
                 </h3>
 
                 {program.excerpt && (
-                    <p className="text-sm text-charcoal/60 line-clamp-3 mt-auto">
-                        {getLocalizedValue(program.excerpt, locale)}
-                    </p>
+                    <div className="text-sm text-charcoal/60 line-clamp-3 mt-auto leading-relaxed prose-sm">
+                        {typeof getLocalizedValue(program.excerpt, locale) === 'string' ? (
+                            <p>{getLocalizedValue(program.excerpt, locale) as unknown as string}</p>
+                        ) : (
+                            <PortableText value={getLocalizedValue(program.excerpt, locale)} locale={locale} />
+                        )}
+                    </div>
                 )}
             </div>
         </Link>

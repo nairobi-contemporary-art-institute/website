@@ -29,13 +29,24 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
     const initialLogoRef = useRef<HTMLDivElement>(null)
     const fullLogoRef = useRef<HTMLDivElement>(null)
     const runwayRef = useRef<HTMLDivElement>(null)
+    const headerInnerRef = useRef<HTMLDivElement>(null)
+    const bannerRef = useRef<HTMLDivElement>(null)
+    const isFirstMount = useRef(true)
+    const lastAtTop = useRef(isAtTop)
 
     useGSAP(() => {
         // Disable expansion on mobile ( < 768px )
         if (window.innerWidth < 768) return
 
-        const initialWidth = initialLogoRef.current?.offsetWidth || 120
-        const targetWidth = runwayRef.current?.offsetWidth || 400
+        const initialContentWidth = initialLogoRef.current?.offsetWidth || 120
+        const targetContentWidth = runwayRef.current?.offsetWidth || 400
+
+        // Account for absolute positioning and container padding to prevent clipping
+        const style = window.getComputedStyle(logoContainerRef.current!)
+        const horizontalPadding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight)
+
+        const initialWidth = initialContentWidth + horizontalPadding
+        const targetWidth = targetContentWidth + horizontalPadding
 
         const tl = gsap.timeline({
             scrollTrigger: {
@@ -52,6 +63,15 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
             { width: targetWidth, duration: 1, ease: "none" },
             0
         )
+
+        // Sync header height contraction via padding
+        tl.to(headerInnerRef.current, {
+            paddingTop: "0.75rem", // py-3
+            paddingBottom: "0.75rem", // py-3
+            duration: 1,
+            ease: "none"
+        }, 0)
+
 
         tl.to(initialLogoRef.current, {
             opacity: 0,
@@ -75,7 +95,43 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
                 },
                 0
             )
+
     }, { scope: headerRef, dependencies: [locale] })
+
+    useEffect(() => {
+        const banner = bannerRef.current
+        if (!banner) return
+
+        if (isFirstMount.current) {
+            gsap.set(banner, { maxHeight: 100, opacity: 1 })
+            isFirstMount.current = false
+            lastAtTop.current = isAtTop
+            return
+        }
+
+        if (isAtTop !== lastAtTop.current) {
+            gsap.killTweensOf(banner)
+            if (isAtTop) {
+                // Return to top: 2.5s delay then 2.5s slow reveal
+                gsap.to(banner, {
+                    maxHeight: 100,
+                    opacity: 1,
+                    duration: 2.5,
+                    delay: 2.5,
+                    ease: "power2.inOut"
+                })
+            } else {
+                // Leave top: Quick hide
+                gsap.to(banner, {
+                    maxHeight: 0,
+                    opacity: 0,
+                    duration: 0.5,
+                    ease: "power2.inOut"
+                })
+            }
+            lastAtTop.current = isAtTop
+        }
+    }, [isAtTop])
 
     useEffect(() => {
         const handleScroll = () => {
@@ -104,24 +160,22 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
         <>
             <div ref={headerRef} className="sticky top-0 z-50 flex flex-col w-full">
                 <div
-                    className={cn(
-                        "overflow-hidden transition-all duration-500 ease-in-out",
-                        isAtTop ? "max-h-20 opacity-100" : "max-h-0 opacity-0"
-                    )}
+                    ref={bannerRef}
+                    className="overflow-hidden"
                 >
                     {openingStatus}
                 </div>
-                <header className="bg-ivory/80 backdrop-blur-md text-umber border-b border-umber/10 transition-colors duration-300">
-                    <div className="h-20 grid grid-cols-[auto_1fr_auto] items-stretch">
+                <header className="bg-white/80 backdrop-blur-md text-umber border-b border-rich-blue/20 transition-colors duration-300">
+                    <div ref={headerInnerRef} className="grid grid-cols-[auto_1fr_auto] items-stretch py-6 md:py-8 transition-all duration-300">
                         {/* Logo Section */}
-                        <div ref={logoContainerRef} className="flex items-center px-6 md:px-8 border-r border-umber/10 overflow-hidden">
+                        <div ref={logoContainerRef} className="flex items-center px-6 md:px-8 border-r border-rich-blue/20 overflow-hidden">
                             <Link
                                 href="/"
                                 className="text-umber flex items-center group relative h-full w-full"
                                 aria-label="NCAI Home"
                             >
                                 {/* Dynamic Runway - Provides the measurement for the multi-language title (absolute so it doesn't affect initial width) */}
-                                <div ref={runwayRef} className="absolute hidden md:block opacity-0 pointer-events-none whitespace-nowrap text-lg lg:text-xl font-bold uppercase tracking-tight px-2">
+                                <div ref={runwayRef} className="absolute hidden md:block opacity-0 pointer-events-none whitespace-nowrap text-lg lg:text-xl font-bold tracking-tight px-2">
                                     {t('title')}
                                 </div>
 
@@ -134,7 +188,7 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
                                 {/* Target State: Full Title (revealed on scroll) */}
                                 <div
                                     ref={fullLogoRef}
-                                    className="hidden md:block absolute left-0 whitespace-nowrap text-lg lg:text-xl font-bold uppercase tracking-tight text-umber opacity-0"
+                                    className="hidden md:block absolute left-0 whitespace-nowrap text-lg lg:text-xl font-bold tracking-tight text-umber opacity-0"
                                     aria-hidden="true"
                                 >
                                     {t('title')}
@@ -149,7 +203,7 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
                                     <Link
                                         key={link.href}
                                         href={link.href}
-                                        className="text-sm font-bold uppercase tracking-[0.2em] text-umber/60 hover:text-umber transition-colors relative group"
+                                        className="text-sm font-bold uppercase tracking-[0.2em] text-deep-umber hover:text-rich-blue transition-colors relative group"
                                     >
                                         {link.label}
                                     </Link>
@@ -158,7 +212,7 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
                         </div>
 
                         {/* Utils Section */}
-                        <div className="flex items-center px-6 md:px-8 border-l border-umber/10 gap-6">
+                        <div className="flex items-center px-6 md:px-8 border-l border-rich-blue/20 gap-6">
                             {/* Search Trigger */}
                             <button
                                 onClick={() => setIsSearchOpen(true)}
@@ -200,7 +254,7 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
 
                     {/* Mobile Menu Overlay */}
                     <div className={cn(
-                        "fixed inset-0 bg-ivory z-40 flex flex-col pt-32 px-6 gap-8 transition-all duration-500 ease-in-out md:hidden",
+                        "fixed inset-0 bg-white z-40 flex flex-col pt-32 px-6 gap-8 transition-all duration-500 ease-in-out md:hidden",
                         isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
                     )}>
                         <nav className="flex flex-col gap-6">
@@ -209,7 +263,7 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
                                     key={link.href}
                                     href={link.href}
                                     className={cn(
-                                        "text-3xl font-bold uppercase tracking-tighter text-umber transition-all duration-500 border-b border-umber/10 pb-4",
+                                        "text-3xl font-bold uppercase tracking-tighter text-deep-umber transition-all duration-500 border-b border-rich-blue/20 pb-4",
                                         isMobileMenuOpen ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"
                                     )}
                                     style={{ transitionDelay: `${i * 50}ms` }}

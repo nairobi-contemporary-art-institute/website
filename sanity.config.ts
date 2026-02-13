@@ -12,7 +12,7 @@ import { table } from '@sanity/table'
 import { googleMapsInput } from '@sanity/google-maps-input'
 
 // Singleton document types
-const singletonTypes = new Set(['siteSettings', 'aboutPage', 'getInvolvedPage'])
+const singletonTypes = new Set(['siteSettings', 'aboutPage', 'getInvolvedPage', 'homePage', 'visitPage', 'publicationsPage'])
 
 // Singleton document actions (disable create/delete)
 const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
@@ -54,6 +54,33 @@ export default defineConfig({
                                 S.document()
                                     .schemaType('getInvolvedPage')
                                     .documentId('getInvolvedPage')
+                            ),
+                        // Singleton: Home Page
+                        S.listItem()
+                            .title('Home Page')
+                            .id('homePage')
+                            .child(
+                                S.document()
+                                    .schemaType('homePage')
+                                    .documentId('homePage')
+                            ),
+                        // Singleton: Visit Page
+                        S.listItem()
+                            .title('Visit Page')
+                            .id('visitPage')
+                            .child(
+                                S.document()
+                                    .schemaType('visitPage')
+                                    .documentId('visitPage')
+                            ),
+                        // Singleton: Publications Page
+                        S.listItem()
+                            .title('Publications Page')
+                            .id('publicationsPage')
+                            .child(
+                                S.document()
+                                    .schemaType('publicationsPage')
+                                    .documentId('publicationsPage')
                             ),
                         S.divider(),
                         // Other document types (filter out singletons)
