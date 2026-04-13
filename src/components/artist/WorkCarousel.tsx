@@ -49,7 +49,12 @@ export function WorkCarousel({ works, locale, onOpenGrid }: WorkCarouselProps) {
                         alt={title || 'Artwork'}
                         fill
                         className="object-contain p-4 transition-transform duration-700 group-hover:scale-102"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
                         priority
+                        {...(currentWork.image?.asset?.metadata?.lqip && {
+                            placeholder: 'blur',
+                            blurDataURL: currentWork.image.asset.metadata.lqip
+                        })}
                     />
                 </div>
 
@@ -103,7 +108,7 @@ export function WorkCarousel({ works, locale, onOpenGrid }: WorkCarouselProps) {
 
                 <div className="pt-8">
                     <button
-                        className="px-6 py-2 border border-charcoal text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-ivory hover:text-charcoal transition-all duration-300"
+                        className="px-6 py-2 border border-charcoal text-[10px] capitalize tracking-[0.2em] font-bold hover:bg-ivory hover:text-charcoal transition-all duration-300"
                     >
                         Enquire
                     </button>
@@ -122,13 +127,14 @@ export function WorkCarousel({ works, locale, onOpenGrid }: WorkCarouselProps) {
                             alt={title || 'Artwork'}
                             fill
                             className="object-contain"
+                            sizes="100vw"
                         />
                     </div>
                     <button
                         className="absolute top-8 right-8 text-charcoal hover:scale-110 transition-transform"
                         onClick={() => setIsLightboxOpen(false)}
                     >
-                        <span className="text-xs uppercase tracking-widest font-bold">Close</span>
+                        <span className="text-xs capitalize tracking-widest font-bold">Close</span>
                     </button>
                 </div>
             )}

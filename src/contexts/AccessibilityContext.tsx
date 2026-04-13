@@ -49,10 +49,24 @@ export function AccessibilityProvider({ children }: { children: React.ReactNode 
         if (!isInitialized) return
 
         if (isReducedMotion) {
-            document.documentElement.style.setProperty('--motion-duration', '0s')
+            document.documentElement.style.setProperty('--motion-duration', '0.001s')
+            document.documentElement.classList.add('reduce-motion')
+
+            // GSAP Global Reduced Motion
+            import('@/lib/gsap').then(({ gsap }) => {
+                gsap.globalTimeline.timeScale(0) // Pause or drastically slow down
+            })
+
             localStorage.setItem('ncai-reduced-motion', 'true')
         } else {
             document.documentElement.style.removeProperty('--motion-duration')
+            document.documentElement.classList.remove('reduce-motion')
+
+            // GSAP Restore
+            import('@/lib/gsap').then(({ gsap }) => {
+                gsap.globalTimeline.timeScale(1)
+            })
+
             localStorage.setItem('ncai-reduced-motion', 'false')
         }
     }, [isReducedMotion, isInitialized])

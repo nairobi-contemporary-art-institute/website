@@ -122,7 +122,7 @@ export function Book({
                             {showTitle ? (
                                 <h3
                                     className={cn(
-                                        "text-[15px] font-bold leading-[1.2] uppercase tracking-tight",
+                                        "text-[15px] font-bold leading-[1.2] capitalize tracking-tight",
                                         isDarkText ? "text-charcoal" : "text-white"
                                     )}
                                     style={{
@@ -145,7 +145,7 @@ export function Book({
                                         </svg>
                                     )}
                                     <p className={cn(
-                                        "text-[7px] uppercase tracking-[0.3em] font-bold opacity-40",
+                                        "text-[7px] capitalize tracking-[0.3em] font-bold opacity-40",
                                         (variant === 'simple' || isDarkText) ? "text-black" : "text-white"
                                     )}>
                                         NCAI Press

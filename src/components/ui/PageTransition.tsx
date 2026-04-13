@@ -32,7 +32,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     }, { scope: containerRef, dependencies: [pathname, isReducedMotion] })
 
     return (
-        <div ref={containerRef} className="flex-1 flex flex-col">
+        <div ref={containerRef} className="flex flex-col min-h-screen flex-1">
             {children}
         </div>
     )

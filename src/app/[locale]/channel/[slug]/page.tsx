@@ -56,13 +56,13 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
     const audioUrl = post.audioUrl
 
     return (
-        <article className="container mx-auto px-6 py-20">
+        <article className="container mx-auto px-section-clamp py-20">
             <header className="max-w-3xl mx-auto mb-16 space-y-6 text-center">
                 {/* Tags */}
                 {post.tags && post.tags.length > 0 && (
                     <div className="flex gap-3 justify-center flex-wrap">
                         {post.tags.map((tag: any, i: number) => (
-                            <span key={i} className="text-[10px] uppercase tracking-[0.2em] text-amber-800 font-bold bg-amber-50 px-3 py-1">
+                            <span key={i} className="text-[10px] capitalize tracking-[0.2em] text-amber-800 font-bold bg-amber-50 px-3 py-1">
                                 {getLocalizedValue(tag.title, locale)}
                             </span>
                         ))}
@@ -80,28 +80,33 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
                         </span>
                     )}
 
-                    {post.author && (
-                        <div className="flex items-center gap-2 pl-6 border-l border-umber/20">
-                            {post.author.image && (
-                                <div className="relative w-8 h-8 overflow-hidden bg-charcoal/5">
-                                    <Image
-                                        src={urlFor(post.author.image).width(64).height(64).url()}
-                                        alt={getLocalizedValue(post.author.name, locale) || 'Author'}
-                                        fill
-                                        className="object-cover"
-                                    />
+                    {post.authors && post.authors.length > 0 && (
+                        <div className="flex flex-wrap items-center justify-center gap-y-4 gap-x-8 pl-6 border-l border-umber/20">
+                            {post.authors.map((author: any, idx: number) => (
+                                <div key={idx} className="flex items-center gap-2">
+                                    {author.image && (
+                                        <div className="relative w-8 h-8 overflow-hidden bg-charcoal/5 rounded-full">
+                                            <Image
+                                                src={urlFor(author.image).width(64).height(64).url()}
+                                                alt={getLocalizedValue(author.name, locale) || 'Author'}
+                                                fill
+                                                className="object-cover"
+                                                sizes="32px"
+                                            />
+                                        </div>
+                                    )}
+                                    <div className="text-left leading-tight">
+                                        <span className="block font-bold text-charcoal text-[10px] capitalize tracking-wider">
+                                            {getLocalizedValue(author.name, locale)}
+                                        </span>
+                                        {author.roles && (
+                                            <span className="block text-[9px] text-umber/60 capitalize tracking-tight">
+                                                {author.roles[0]}
+                                            </span>
+                                        )}
+                                    </div>
                                 </div>
-                            )}
-                            <div className="text-left leading-tight">
-                                <span className="block font-bold text-charcoal text-xs uppercase tracking-wider">
-                                    {getLocalizedValue(post.author.name, locale)}
-                                </span>
-                                {post.author.roles && (
-                                    <span className="block text-[10px] text-umber/60">
-                                        {post.author.roles[0]}
-                                    </span>
-                                )}
-                            </div>
+                            ))}
                         </div>
                     )}
                 </div>
@@ -113,7 +118,7 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
 
             {/* Media Player or Main Image */}
             <div className="w-full max-w-4xl mx-auto mb-16 space-y-6">
-                {mediaType === 'video' || mediaType === 'audio' ? (
+                {(mediaType === 'video' && videoUrl) || (mediaType === 'audio' && audioUrl) ? (
                     <div className="space-y-4">
                         <MediaPlayer
                             type={mediaType}
@@ -135,6 +140,7 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
                                 alt={title || post.mainImage?.alt || 'Channel post image'}
                                 fill
                                 className="object-cover"
+                                sizes="(max-width: 1024px) 100vw, 896px"
                                 priority
                                 placeholder="blur"
                                 blurDataURL={post.mainImage?.asset?.metadata?.lqip}
@@ -155,7 +161,7 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
 
             <footer className="max-w-3xl mx-auto mt-16">
                 <ResponsiveDivider variant="straight" weight="thin" className="text-umber/20 mb-8" />
-                <Link href="/channel" className="inline-block text-sm font-bold uppercase tracking-widest text-umber/50 hover:text-amber-800 transition-colors">
+                <Link href="/channel" className="inline-block text-sm font-bold capitalize tracking-widest text-umber/50 hover:text-amber-800 transition-colors">
                     ← Back to Channel
                 </Link>
             </footer>

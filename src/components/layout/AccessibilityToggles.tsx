@@ -6,11 +6,12 @@ export function AccessibilityToggles() {
     const { isDarkMode, isReducedMotion, toggleDarkMode, toggleReducedMotion } = useAccessibility()
 
     return (
-        <div className="flex items-center gap-6 text-sm">
+        <div className="flex items-center gap-6 text-sm" role="group" aria-label="Accessibility settings">
             <button
                 onClick={toggleDarkMode}
                 className="flex items-center gap-2 cursor-pointer group hover:text-ochre transition-colors"
-                aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                aria-pressed={isDarkMode}
+                aria-label={isDarkMode ? 'Disable dark mode' : 'Enable dark mode'}
             >
                 <div className={`w-4 h-4 border-2 border-current flex items-center justify-center p-0.5`}>
                     {isDarkMode && <div className="w-full h-full bg-current" />}
@@ -20,7 +21,8 @@ export function AccessibilityToggles() {
             <button
                 onClick={toggleReducedMotion}
                 className="flex items-center gap-2 cursor-pointer group hover:text-ochre transition-colors"
-                aria-label={isReducedMotion ? 'Enable motion' : 'Reduce motion'}
+                aria-pressed={isReducedMotion}
+                aria-label={isReducedMotion ? 'Disable reduced motion' : 'Enable reduced motion'}
             >
                 <div className={`w-4 h-4 border-2 border-current flex items-center justify-center p-0.5`}>
                     {isReducedMotion && <div className="w-full h-full bg-current" />}

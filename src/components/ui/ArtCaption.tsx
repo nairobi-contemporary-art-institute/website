@@ -13,7 +13,7 @@ interface ArtCaptionProps {
  * It ensures the default style is "normal" (not italicized by default).
  */
 export function ArtCaption({ content, className = '' }: ArtCaptionProps) {
-    if (!content) return null;
+    if (!content || typeof content !== 'string') return null;
 
     // Split the content by Markdown bold (**) or italic (*)
     // Regex matches: **bold text** or *italic text*

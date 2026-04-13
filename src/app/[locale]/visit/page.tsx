@@ -1,15 +1,18 @@
 import { getTranslations, getMessages } from 'next-intl/server'
-import { client } from '@/sanity/lib/client'
+import { sanityFetch } from '@/sanity/lib/client'
 import { VISIT_PAGE_QUERY, SITE_SETTINGS_QUERY } from '@/sanity/lib/queries'
-import { getLocalizedValue } from '@/sanity/lib/utils'
+import { getLocalizedValue, getLocalizedValueAsString } from '@/sanity/lib/utils'
 import { urlFor } from '@/sanity/lib/image'
 import Image from 'next/image'
+import { HeroIMMA } from '@/components/ui/HeroIMMA'
 import { ResponsiveDivider } from '@/components/ui/ResponsiveDivider'
 import { PortableText } from '@/components/ui/PortableText'
 import { ArtCaption } from '@/components/ui/ArtCaption'
 import { MapFrame } from '@/components/ui/MapFrame'
-import { LucideClock, LucideMapPin, LucidePhone, LucideMail, LucideInfo } from 'lucide-react'
+import { LucideClock, LucideMapPin, LucidePhone, LucideMail, LucideInfo, LucideBus, LucideCar, LucideTrainFront } from 'lucide-react'
 import Link from 'next/link'
+import { cn } from '@/lib/utils'
+import { ArtTooltip } from '@/components/ui/ArtTooltip'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params
@@ -24,65 +27,33 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
     const t = await getTranslations({ locale, namespace: 'Pages.visit' })
 
     const [visitData, siteSettings] = await Promise.all([
-        client.fetch(VISIT_PAGE_QUERY),
-        client.fetch(SITE_SETTINGS_QUERY)
+        sanityFetch<any>({ query: VISIT_PAGE_QUERY, tags: ['visitPage'] }),
+        sanityFetch<any>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] })
     ])
 
     const { hours, contactInfo } = siteSettings || {}
     const announcement = visitData?.announcement
+    const finalHeroImage = visitData?.heroImage
+    const finalHeroCaption = visitData?.heroImage?.caption ? getLocalizedValueAsString(visitData.heroImage.caption, locale) : undefined
 
     return (
-        <div className="flex flex-col min-h-screen">
+        <>
             {/* Hero Header Section */}
-            <section className="relative h-[60vh] md:h-[70vh] w-full overflow-hidden flex items-end">
-                {visitData?.heroImage && (
-                    <div className="absolute inset-0 z-0">
-                        <Image
-                            src={urlFor(visitData.heroImage).width(1920).height(1080).url()}
-                            alt="Visit NCAI"
-                            fill
-                            className="object-cover scale-105"
-                            priority
-                        />
-                        <div className="absolute inset-0 bg-charcoal/30 backdrop-blur-[2px]" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent" />
-                    </div>
-                )}
-
-                <div className="container mx-auto px-6 pb-12 relative z-10">
-                    <div className="max-w-4xl space-y-4">
-                        {visitData?.label && (
-                            <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-white/90 bg-white/10 backdrop-blur-md px-4 py-1.5 inline-block border-l-2 border-white/40">
-                                {getLocalizedValue(visitData.label, locale)}
-                            </span>
-                        )}
-                        <h1 className="text-5xl md:text-8xl font-bold tracking-tighter text-white">
-                            {getLocalizedValue(visitData?.title, locale) || t('title')}
-                        </h1>
-                        {visitData?.introText && (
-                            <p className="text-xl md:text-2xl text-white/80 leading-relaxed font-light max-w-2xl">
-                                {getLocalizedValue(visitData.introText, locale)}
-                            </p>
-                        )}
-                    </div>
-                </div>
-
-                {visitData?.heroImage?.caption && (
-                    <div className="absolute bottom-6 right-6 hidden md:block">
-                        <div className="text-[10px] uppercase tracking-widest text-white/50 bg-black/20 backdrop-blur-sm px-3 py-1">
-                            <ArtCaption content={getLocalizedValue(visitData.heroImage.caption, locale)} />
-                        </div>
-                    </div>
-                )}
-            </section>
+            <HeroIMMA 
+                title={getLocalizedValueAsString(visitData?.title, locale) || t('title')}
+                headline={getLocalizedValueAsString(visitData?.label, locale)}
+                intro={getLocalizedValueAsString(visitData?.introText, locale)}
+                caption={finalHeroCaption}
+                image={finalHeroImage}
+            />
 
             {/* Announcement Banner */}
             {announcement?.show && (
-                <div className="bg-amber-50 border-y border-amber-200 py-4 px-6">
+                <div className="bg-amber-50 border-y border-amber-200 py-4 px-section-clamp">
                     <div className="container mx-auto flex items-start gap-4 text-amber-900">
                         <LucideInfo className="w-5 h-5 mt-0.5 flex-shrink-0" />
                         <div>
-                            <h3 className="font-bold text-sm uppercase tracking-wider mb-1">
+                            <h3 className="font-bold text-sm capitalize tracking-wider mb-1">
                                 {getLocalizedValue(announcement.title, locale)}
                             </h3>
                             <p className="text-base opacity-90">
@@ -93,150 +64,309 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                 </div>
             )}
 
-            {/* Quick Navigation / Anchor Links */}
-            <div className="sticky top-[var(--header-height,64px)] z-40 bg-white/80 backdrop-blur-xl border-b border-black/5 py-4 overflow-x-auto scrollbar-hide">
-                <div className="container mx-auto px-6">
-                    <nav className="flex items-center gap-8 text-[11px] font-bold uppercase tracking-widest text-charcoal/60">
-                        <a href="#find-us" className="hover:text-charcoal transition-colors whitespace-nowrap">Find Us</a>
-                        <a href="#directions" className="hover:text-charcoal transition-colors whitespace-nowrap">Directions</a>
-                        <a href="#info" className="hover:text-charcoal transition-colors whitespace-nowrap">Information</a>
-                        {visitData?.sections?.map((s: any, i: number) => (
-                            <a
-                                key={i}
-                                href={`#section-${i}`}
-                                className="hover:text-charcoal transition-colors whitespace-nowrap"
-                            >
-                                {getLocalizedValue(s.title, locale)}
-                            </a>
-                        ))}
-                    </nav>
-                </div>
-            </div>
-
-            <main className="container mx-auto px-6 py-20 space-y-32">
-
-                {/* Find Us Section */}
-                <section id="find-us" className="grid lg:grid-cols-12 gap-16 items-start">
-                    <div className="lg:col-span-8 space-y-6">
-                        <MapFrame className="aspect-[16/9] shadow-inner border border-black/5" />
+            {/* Sticky Sidebar & Main Content Wrapper */}
+            <div className="container mx-auto px-section-clamp py-20 pt-8 lg:pt-20">
+                <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+                    
+                    {/* Mobile Navigation (Horizontal Scroll) */}
+                    <div className="lg:hidden col-span-12 -mx-section-clamp px-section-clamp overflow-x-auto scrollbar-hide pb-4 mb-4 border-b border-black/5">
+                        <nav className="flex flex-nowrap items-center gap-6 text-[11px] font-bold capitalize tracking-widest text-charcoal/60">
+                            <a href="#overview" className="hover:text-charcoal transition-colors whitespace-nowrap">{t('overviewLink') || 'Overview'}</a>
+                            <a href="#opening-hours" className="hover:text-charcoal transition-colors whitespace-nowrap">{t('hours') || 'Opening Hours'}</a>
+                            <a href="#directions-map" className="hover:text-charcoal transition-colors whitespace-nowrap">{t('directionsMapLink') || 'Directions & Map'}</a>
+                            {visitData?.visitorCards && visitData.visitorCards.length > 0 && (
+                                <a href="#info" className="hover:text-charcoal transition-colors whitespace-nowrap">{t('infoLink')}</a>
+                            )}
+                            {visitData?.sections?.map((s: any, i: number) => {
+                                const title = getLocalizedValue(s.title, locale);
+                                const slug = title?.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+                                return (
+                                    <a
+                                        key={i}
+                                        href={`#${slug || `section-${i}`}`}
+                                        className="hover:text-charcoal transition-colors whitespace-nowrap"
+                                    >
+                                        {title}
+                                    </a>
+                                );
+                            })}
+                        </nav>
                     </div>
-                    <div className="lg:col-span-4 space-y-12">
-                        <div className="space-y-6">
-                            <div className="flex items-center gap-3 text-amber-800">
-                                <LucideMapPin className="w-5 h-5" />
-                                <h2 className="text-xs font-bold uppercase tracking-[0.2em]">{t('location') || 'Location'}</h2>
-                            </div>
-                            <div className="text-xl text-umber/90 leading-relaxed font-serif italic border-l-2 border-umber/10 pl-6">
-                                <p className="font-bold text-charcoal not-italic font-sans mb-2">{contactInfo?.name || 'NCAI'}</p>
-                                <p className="whitespace-pre-line">{contactInfo?.address}</p>
-                            </div>
-                        </div>
 
-                        <div className="space-y-6">
-                            <div className="flex items-center gap-3 text-amber-800">
-                                <LucideClock className="w-5 h-5" />
-                                <h2 className="text-xs font-bold uppercase tracking-[0.2em]">{t('hours') || 'Opening Hours'}</h2>
+                    {/* Desktop Navigation (Sticky Left Sidebar) */}
+                    <div className="hidden lg:block lg:col-span-3 lg:sticky lg:top-[calc(var(--header-height,64px)+2rem)] space-y-8 pr-8">
+                        <nav className="flex flex-col gap-4 text-xs font-bold capitalize tracking-widest text-charcoal/60">
+                            <a href="#overview" className="hover:text-charcoal transition-colors py-2 border-b border-black/5">{t('overviewLink') || 'Overview'}</a>
+                            <a href="#opening-hours" className="hover:text-charcoal transition-colors py-2 border-b border-black/5">{t('hours') || 'Opening Hours'}</a>
+                            <a href="#directions-map" className="hover:text-charcoal transition-colors py-2 border-b border-black/5">{t('directionsMapLink') || 'Directions & Map'}</a>
+                            {visitData?.visitorCards && visitData.visitorCards.length > 0 && (
+                                <a href="#info" className="hover:text-charcoal transition-colors py-2 border-b border-black/5">{t('infoLink')}</a>
+                            )}
+                            {visitData?.sections?.map((s: any, i: number) => {
+                                const title = getLocalizedValue(s.title, locale);
+                                const slug = title?.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+                                return (
+                                    <a
+                                        key={i}
+                                        href={`#${slug || `section-${i}`}`}
+                                        className="hover:text-charcoal transition-colors py-2 border-b border-black/5"
+                                    >
+                                        {title}
+                                    </a>
+                                );
+                            })}
+                        </nav>
+                    </div>
+
+                    {/* Main Content Column */}
+                    <div className="col-span-12 lg:col-span-9 space-y-24 lg:space-y-32 overflow-visible">
+
+                {/* Overview Anchor */}
+                <div id="overview" className="scroll-mt-[120px]" />
+
+                {/* Opening Hours Section */}
+                <section id="opening-hours" className="grid lg:grid-cols-[1fr_2px_2.5fr] gap-12 lg:gap-24 items-start scroll-mt-[120px]">
+                    <div className="pt-2">
+                        <div className="space-y-8">
+                            <h2 className="text-4xl md:text-5xl lg:text-7xl font-normal text-charcoal tracking-tighter capitalize leading-[0.9] lg:max-w-[320px]">
+                                {visitData?.title ? getLocalizedValue(visitData.title, locale) : (locale === 'en' ? 'Admission & Hours' : 'Saa za Kufungua')}
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div className="hidden lg:block h-full py-4">
+                        <div className="w-[1px] h-full bg-black/10 mx-auto" />
+                    </div>
+
+                    <div className="space-y-16">
+                        {visitData?.introText && (
+                            <div className="prose prose-xl prose-umber max-w-none font-light prose-p:leading-relaxed">
+                                <PortableText 
+                                    value={getLocalizedValue(visitData.introText, locale)} 
+                                />
                             </div>
+                        )}
+
+                        <div className="space-y-10">
+                            <div className="flex items-center gap-4">
+                                <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-charcoal/40">
+                                    {t('normalOpeningHours')}
+                                </h3>
+                                <div className="h-px flex-1 bg-black/5" />
+                            </div>
+
                             {siteSettings?.specialStatus?.isActive ? (
-                                <div className="p-6 bg-charcoal text-white rounded-sm">
-                                    <p className="text-lg font-light leading-relaxed">
-                                        {getLocalizedValue(siteSettings.specialStatus.message, locale)}
-                                    </p>
+                                <div className="p-10 bg-charcoal text-white rounded-sm border border-black/10 shadow-2xl relative overflow-hidden group">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl group-hover:bg-amber-500/20 transition-all duration-700" />
+                                    <div className="flex items-start gap-6 relative z-10">
+                                        <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center shrink-0">
+                                            <LucideClock className="w-6 h-6 text-amber-500" />
+                                        </div>
+                                        <div className="space-y-3">
+                                             <p className="text-2xl font-normal leading-tight tracking-tight">
+                                                {getLocalizedValue(siteSettings.specialStatus.message, locale)}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             ) : (
-                                <div className="grid grid-cols-1 gap-4 text-sm text-umber/80 border-t border-black/5 pt-4">
-                                    {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map((day) => {
-                                        const dayHours = hours?.[day as keyof typeof hours]
-                                        return (
-                                            <div key={day} className="flex justify-between items-center py-2 border-b border-black/5 last:border-0 hover:bg-black/[0.02] px-2 -mx-2 transition-colors">
-                                                <span className="capitalize font-bold text-charcoal">{day}</span>
-                                                <span className="font-light">
-                                                    {dayHours?.open && dayHours?.close
-                                                        ? `${dayHours.open} – ${dayHours.close}`
-                                                        : <span className="text-umber/40 italic">Closed</span>}
-                                                </span>
+                                <div className="grid sm:grid-cols-2 gap-6">
+                                    {/* Primary Hours Card */}
+                                    <div className="p-10 bg-[#FDFBF7] border border-black/5 rounded-sm space-y-8 shadow-sm">
+                                        <div className="flex justify-between items-end border-b border-black/5 pb-4">
+                                            <h4 className="text-xs font-bold uppercase tracking-widest text-charcoal/40">Galleries</h4>
+                                            <span className="text-[10px] uppercase tracking-widest text-amber-600 font-bold">Today</span>
+                                        </div>
+                                        <div className="space-y-4">
+                                            {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map((day) => {
+                                                const dayHours = hours?.[day as keyof typeof hours];
+                                                const isClosed = !dayHours?.open || !dayHours.close;
+                                                const isToday = new Date().toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase() === day;
+                                                
+                                                return (
+                                                    <div key={day} className={cn(
+                                                        "flex justify-between items-center text-sm transition-transform duration-300",
+                                                        isToday && "scale-[1.02] origin-left"
+                                                    )}>
+                                                        <span className={cn(
+                                                            "font-bold capitalize transition-colors",
+                                                            isToday ? "text-charcoal" : "text-charcoal/40"
+                                                        )}>{day}</span>
+                                                        <span className={cn(
+                                                            "font-light tracking-tight",
+                                                            isClosed ? "text-umber/20 italic" : "text-umber/90",
+                                                            isToday && "font-normal"
+                                                        )}>
+                                                            {isClosed ? (t('closed') || 'Closed') : `${dayHours.open} – ${dayHours.close}`}
+                                                        </span>
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                    </div>
+
+                                    {/* Other/Admission Hours Card */}
+                                    <div className="p-10 bg-[#1A1A1A] text-white rounded-sm space-y-8 flex flex-col justify-between shadow-xl relative overflow-hidden group">
+                                        <div className="absolute bottom-0 right-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 translate-x-1/2 blur-3xl group-hover:bg-white/10 transition-all duration-1000" />
+                                        <div className="space-y-6 relative z-10">
+                                            <h4 className="text-xs font-bold uppercase tracking-widest text-white/30 border-b border-white/10 pb-4">NCAI Library</h4>
+                                            <div className="space-y-4">
+                                                <p className="text-lg font-light leading-relaxed text-white/70">
+                                                    Accessible to student and researchers by scheduled appointment.
+                                                </p>
+                                                <Link href="/about/library" className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-amber-500 hover:text-white transition-colors gap-3 group/link">
+                                                    Request Access
+                                                    <div className="w-8 h-px bg-amber-500/30 group-hover/link:w-12 group-hover/link:bg-white transition-all duration-500" />
+                                                </Link>
                                             </div>
-                                        )
-                                    })}
+                                        </div>
+                                        <div className="pt-8 border-t border-white/10 relative z-10">
+                                            <p className="text-[10px] uppercase tracking-[0.3em] text-amber-500 font-bold mb-2">Admission</p>
+                                            <p className="text-3xl font-normal tracking-tighter leading-none">Free entrance for everyone</p>
+                                        </div>
+                                    </div>
                                 </div>
                             )}
-                        </div>
-
-                        <div className="pt-8 grid grid-cols-2 gap-4">
-                            <a href={`tel:${contactInfo?.phone}`} className="flex flex-col items-center justify-center p-4 border border-black/5 rounded-sm hover:bg-black/5 transition-colors text-charcoal grayscale">
-                                <LucidePhone className="w-5 h-5 mb-2" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest">Call Us</span>
-                            </a>
-                            <a href={`mailto:${contactInfo?.email}`} className="flex flex-col items-center justify-center p-4 border border-black/5 rounded-sm hover:bg-black/5 transition-colors text-charcoal grayscale">
-                                <LucideMail className="w-5 h-5 mb-2" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest">Email Us</span>
-                            </a>
+                            
+                            {visitData?.openingHoursNote && (
+                                <div className="flex items-center gap-3 pt-4">
+                                    <div className="w-4 h-[1px] bg-black/10" />
+                                    <p className="text-[10px] text-umber/50 italic tracking-wide uppercase">
+                                        {getLocalizedValue(visitData.openingHoursNote, locale)}
+                                    </p>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </section>
 
-                <ResponsiveDivider variant="wavy" weight="thin" className="text-charcoal/10" />
+                <ResponsiveDivider variant="straight" weight="thin" className="text-umber/10" />
 
-                {/* Directions Section */}
-                {visitData?.directions && visitData.directions.length > 0 && (
-                    <section id="directions" className="grid lg:grid-cols-12 gap-16">
-                        <header className="lg:col-span-4">
-                            <h2 className="text-5xl font-bold tracking-tighter text-charcoal mb-4">How to get here</h2>
-                            <p className="text-lg text-umber/60 leading-relaxed font-light">
-                                Nairobi Contemporary Art Institute is conveniently located in the Kuona Artists Collective.
-                            </p>
-                        </header>
-                        <div className="lg:col-span-8 grid sm:grid-cols-2 gap-8">
-                            {visitData.directions.map((d: any, i: number) => (
-                                <div key={i} className="space-y-4 p-8 bg-charcoal/[0.02] border border-black/5 rounded-sm transition-transform hover:-translate-y-1">
-                                    <h3 className="text-xl font-bold text-charcoal flex items-center gap-3">
-                                        <div className="w-2 h-2 bg-amber-800 rounded-full" />
-                                        {getLocalizedValue(d.method, locale)}
-                                    </h3>
-                                    <div className="prose prose-sm prose-umber max-w-none prose-p:leading-relaxed">
-                                        <PortableText value={getLocalizedValue(d.description, locale)} locale={locale} />
-                                    </div>
-                                </div>
-                            ))}
+                <section id="directions-map" className="grid lg:grid-cols-[1fr_2px_2.5fr] gap-12 lg:gap-24 items-start scroll-mt-[120px]">
+                    <div className="pt-2">
+                        <div className="space-y-8">
+                            <h2 className="text-4xl md:text-5xl lg:text-7xl font-normal text-charcoal tracking-tighter capitalize leading-[0.9] lg:max-w-[320px]">
+                                {locale === 'en' ? 'Directions & Map' : 'Ramani & Maelekezo'}
+                            </h2>
                         </div>
-                    </section>
-                )}
+                    </div>
+
+                    <div className="hidden lg:block h-full py-4">
+                        <div className="w-[1px] h-full bg-black/10 mx-auto" />
+                    </div>
+
+                    <div className="space-y-20">
+                         {/* Map View */}
+                         <div className="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-sm overflow-hidden bg-stone-100 border border-black/5 group cursor-pointer shadow-2xl">
+                            <MapFrame 
+                                address={getLocalizedValue(siteSettings?.address, locale) || "Nairobi Contemporary Art Institute"}
+                                className="grayscale hover:grayscale-0 transition-all duration-1000 w-full h-full scale-[1.01] group-hover:scale-100"
+                            />
+                            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-700 pointer-events-none" />
+                            <div className="absolute inset-x-0 bottom-0 p-10 bg-gradient-to-t from-black/80 via-black/40 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-out flex justify-center pointer-events-none">
+                                <a 
+                                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contactInfo?.address || 'NCAI Nairobi')}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-white text-[10px] font-bold uppercase tracking-[0.4em] bg-white/10 backdrop-blur-xl px-10 py-5 rounded-full border border-white/20 hover:bg-white hover:text-black hover:border-white transition-all duration-500 pointer-events-auto"
+                                >
+                                    Launch Navigation
+                                </a>
+                            </div>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-16">
+                            {visitData?.directions && visitData.directions.length > 0 ? (
+                                visitData.directions.map((d: any, i: number) => {
+                                    const methodValue = getLocalizedValue(d.method, locale) || '';
+                                    const method = methodValue.toLowerCase();
+                                    let Icon = LucideMapPin;
+                                    if (method.includes('bus') || method.includes('basi') || method.includes('matatu')) Icon = LucideBus;
+                                    if (method.includes('car') || method.includes('gari') || method.includes('parking')) Icon = LucideCar;
+                                    if (method.includes('train') || method.includes('reli')) Icon = LucideTrainFront;
+
+                                    return (
+                                        <div key={i} className="space-y-8 group">
+                                            <div className="flex items-center gap-6">
+                                                <div className="w-16 h-16 rounded-full border border-black/5 bg-white flex items-center justify-center transition-all duration-700 group-hover:bg-charcoal group-hover:text-white shadow-sm group-hover:shadow-xl group-hover:-translate-y-1">
+                                                    <Icon className="w-7 h-7" strokeWidth={1} />
+                                                </div>
+                                                <div className="space-y-1">
+                                                    <h3 className="text-xs font-bold uppercase tracking-[0.3em] text-charcoal/40 group-hover:text-charcoal transition-colors">
+                                                        {methodValue}
+                                                    </h3>
+                                                    <div className="h-px w-8 bg-black/10 group-hover:w-16 transition-all duration-700" />
+                                                </div>
+                                            </div>
+                                            <div className="prose prose-lg prose-umber max-w-none text-charcoal/80 font-light leading-relaxed pl-1">
+                                                <PortableText 
+                                                    value={getLocalizedValue(d.description, locale)} 
+                                                    locale={locale}
+                                                />
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            ) : (
+                                <div className="col-span-full">
+                                    <p className="text-umber/50 italic">{t('noDirections') || 'Directions coming soon.'}</p>
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="pt-20 border-t border-black/5 grid md:grid-cols-[1.5fr_1fr] gap-12 items-end">
+                            <div className="space-y-8">
+                                <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-charcoal/30">Registry</h3>
+                                <div className="space-y-4">
+                                    <p className="text-3xl font-normal tracking-tight text-charcoal leading-none">{contactInfo?.name || 'NCAI'}</p>
+                                    <p className="text-xl text-umber/80 leading-snug font-serif italic max-w-sm">
+                                        {contactInfo?.address}
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="flex gap-4">
+                                <a href={`tel:${contactInfo?.phone}`} className="flex-1 h-20 border border-black/5 flex flex-col items-center justify-center hover:bg-charcoal hover:text-white transition-all duration-700 group">
+                                    <LucidePhone className="w-5 h-5 mb-2 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
+                                    <span className="text-[9px] font-bold uppercase tracking-widest opacity-40 group-hover:opacity-100">Call Us</span>
+                                </a>
+                                <a href={`mailto:${contactInfo?.email}`} className="flex-1 h-20 border border-black/5 flex flex-col items-center justify-center hover:bg-charcoal hover:text-white transition-all duration-700 group">
+                                    <LucideMail className="w-5 h-5 mb-2 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
+                                    <span className="text-[9px] font-bold uppercase tracking-widest opacity-40 group-hover:opacity-100">Email</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <ResponsiveDivider variant="straight" weight="thin" className="text-umber/10" />
 
                 {/* Information Grid Section */}
                 {visitData?.visitorCards && visitData.visitorCards.length > 0 && (
-                    <section id="info" className="space-y-12">
-                        <header className="max-w-3xl">
-                            <h2 className="text-5xl font-bold tracking-tighter text-charcoal mb-4">Visitor Information</h2>
-                            <p className="text-xl text-umber/60 leading-relaxed font-light">
-                                Plan your visit with ease. Find details on admission, accessibility, and our guided tours.
-                            </p>
-                        </header>
-
-                        <div className="grid md:grid-cols-3 gap-8">
+                    <section id="info" className="scroll-mt-[120px]">
+                        <div className="grid lg:grid-cols-3 gap-8">
                             {visitData.visitorCards.map((card: any, i: number) => (
-                                <div key={i} className="group relative aspect-square p-8 bg-charcoal text-white flex flex-col justify-end overflow-hidden">
-                                    {/* Decorative gradient overlay */}
-                                    <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/10 to-transparent opacity-50" />
-
-                                    <div className="relative z-10 space-y-4">
-                                        <h3 className="text-3xl font-bold tracking-tight">{getLocalizedValue(card.title, locale)}</h3>
-                                        <p className="text-sm text-white/70 leading-relaxed line-clamp-3">
-                                            {getLocalizedValue(card.description, locale)}
-                                        </p>
-                                        {card.ctaUrl && (
-                                            <Link
-                                                href={card.ctaUrl}
-                                                className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-white hover:gap-4 transition-all pt-4"
-                                            >
-                                                {getLocalizedValue(card.ctaLabel, locale) || 'Learn More'}
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="stroke-current">
-                                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" strokeWidth="1.5" />
-                                                </svg>
-                                            </Link>
-                                        )}
+                                <div key={i} className="group p-10 bg-white border border-black/5 rounded-sm hover:border-black/10 hover:shadow-2xl transition-all duration-700 flex flex-col justify-between min-h-[400px]">
+                                    <div className="space-y-6">
+                                        <div className="w-12 h-[1px] bg-charcoal/20 group-hover:w-24 transition-all duration-700" />
+                                        <h3 className="text-3xl font-normal tracking-tight text-charcoal leading-tight">
+                                            {getLocalizedValue(card.title, locale)}
+                                        </h3>
+                                        <div className="prose prose-sm prose-umber font-light leading-relaxed opacity-70 group-hover:opacity-100 transition-opacity duration-700">
+                                            <PortableText value={getLocalizedValue(card.description, locale)} />
+                                        </div>
                                     </div>
-
-                                    <div className="absolute -top-12 -right-12 w-48 h-48 bg-white/5 rounded-full blur-3xl group-hover:bg-white/10 transition-colors" />
+                                    
+                                    {(card.button?.link || card.ctaUrl) && (
+                                        <div className="pt-10">
+                                            <Link 
+                                                href={card.button?.link || card.ctaUrl}
+                                                className="inline-flex items-center text-[10px] font-bold uppercase tracking-[0.2em] text-charcoal group-hover:text-amber-800 transition-colors"
+                                            >
+                                                {getLocalizedValue(card.button?.text || card.ctaLabel, locale) || t('learnMore')}
+                                                <div className="ml-3 w-8 h-[1px] bg-charcoal/20 group-hover:bg-amber-800 transition-all duration-700 group-hover:w-12" />
+                                            </Link>
+                                        </div>
+                                    )}
                                 </div>
                             ))}
                         </div>
@@ -245,77 +375,106 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
 
                 {/* Flexible Sections */}
                 <div className="space-y-32">
-                    {visitData?.sections?.map((section: any, idx: number) => (
-                        <section
-                            key={idx}
-                            id={`section-${idx}`}
-                            className="grid lg:grid-cols-12 gap-16 items-start animate-in fade-in slide-in-from-bottom-8 duration-1000"
-                            style={{ transitionDelay: `${idx * 200}ms` }}
-                        >
-                            <div className="lg:col-span-4 space-y-6">
-                                <h2 className="text-5xl font-bold tracking-tighter text-charcoal">
-                                    {getLocalizedValue(section.title, locale)}
-                                </h2>
-                                <ResponsiveDivider variant="straight" weight="thin" className="text-umber/20" />
-                            </div>
+                    {visitData?.sections?.map((section: any, idx: number) => {
+                        const title = getLocalizedValue(section.title, locale);
+                        const slug = title?.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+                        return (
+                            <section
+                                key={idx}
+                                id={slug || `section-${idx}`}
+                                className="grid lg:grid-cols-[1fr_2px_2.5fr] gap-12 lg:gap-24 items-start scroll-mt-[120px]"
+                            >
+                                <div className="pt-2">
+                                     <h2 className="text-4xl md:text-5xl lg:text-7xl font-normal text-charcoal tracking-tighter capitalize leading-[0.9] lg:max-w-[320px]">
+                                        {getLocalizedValue(section.title, locale)}
+                                    </h2>
+                                </div>
+                                
+                                <div className="hidden lg:block h-full py-4">
+                                    <div className="w-[1px] h-full bg-black/10 mx-auto" />
+                                </div>
 
-                            <div className="lg:col-span-8 space-y-12">
-                                {section.image && (
-                                    <div className="space-y-4">
-                                        <div className="relative aspect-video overflow-hidden bg-charcoal/5 group">
-                                            <Image
-                                                src={urlFor(section.image).width(1200).height(675).url()}
-                                                alt={getLocalizedValue(section.title, locale) || 'Visit section image'}
-                                                fill
-                                                className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                                            />
+                                <div className="space-y-12">
+                                    {section.image && (
+                                        <div className="relative aspect-[16/9] w-full rounded-sm overflow-visible bg-stone-100 border border-black/5 group">
+                                            {section.image.link ? (
+                                                <Link href={section.image.link} className="block w-full h-full relative overflow-hidden group">
+                                                        <Image
+                                                            src={urlFor(section.image).width(1200).height(675).url()}
+                                                            alt={getLocalizedValue(section.title, locale) || ""}
+                                                            fill
+                                                            className="object-cover transition-all duration-1000 group-hover:scale-105"
+                                                            sizes="(max-width: 1024px) 100vw, 60vw"
+                                                        />
+                                                </Link>
+                                            ) : (
+                                                <Image
+                                                    src={urlFor(section.image).width(1200).height(675).url()}
+                                                    alt={getLocalizedValue(section.title, locale) || ""}
+                                                    fill
+                                                    className="object-cover rounded-sm grayscale-[0.5] hover:grayscale-0 transition-all duration-1000"
+                                                    sizes="(max-width: 1024px) 100vw, 60vw"
+                                                />
+                                            )}
                                             {section.image.caption && (
-                                                <div className="absolute bottom-4 left-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                    <div className="text-[10px] uppercase tracking-widest text-white bg-black/40 backdrop-blur-md px-3 py-1">
-                                                        <ArtCaption content={getLocalizedValue(section.image.caption, locale)} />
-                                                    </div>
+                                                <div className="absolute bottom-6 right-6 z-50">
+                                                    <ArtTooltip 
+                                                        content={<ArtCaption content={getLocalizedValue(section.image.caption, locale)} className="text-charcoal" />}
+                                                        align="right"
+                                                    />
                                                 </div>
                                             )}
                                         </div>
+                                    )}
+
+                                    <div className="prose prose-xl prose-umber max-w-none font-light prose-p:leading-relaxed">
+                                        <PortableText
+                                            value={getLocalizedValue(section.content, locale)}
+                                            locale={locale}
+                                        />
                                     </div>
-                                )}
-
-                                <div className="prose prose-xl prose-umber max-w-none font-light prose-p:leading-relaxed">
-                                    <PortableText
-                                        value={getLocalizedValue(section.content, locale)}
-                                        locale={locale}
-                                    />
                                 </div>
-                            </div>
-                        </section>
-                    ))}
+                            </section>
+                        );
+                    })}
                 </div>
+            </div>
+        </div>
+    </div>
 
-                {/* Keep In Touch / Footer CTA */}
-                <section className="bg-charcoal text-white py-32 -mx-6 px-6">
-                    <div className="container mx-auto grid lg:grid-cols-2 gap-16 items-center">
-                        <div className="space-y-8">
-                            <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/50 border-l-2 border-white/20 pl-4">Stay Connected</span>
-                            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">Join the community</h2>
-                        </div>
-                        <div className="space-y-8">
-                            <p className="text-xl text-white/70 font-light leading-relaxed">
-                                Receive regular updates on our exhibitions, public programs, and publications.
-                            </p>
-                            <form className="flex flex-col sm:flex-row gap-4">
-                                <input
-                                    type="email"
-                                    placeholder="your@email.com"
-                                    className="flex-1 bg-white/5 border border-white/10 px-6 py-4 text-white focus:outline-none focus:border-white/40 transition-colors"
-                                />
-                                <button className="bg-white text-charcoal px-8 py-4 font-bold uppercase tracking-widest hover:bg-white/90 transition-colors">
-                                    Subscribe
-                                </button>
-                            </form>
+            {/* Newsletter CTA / Keep in touch area */}
+            <section className="bg-[#1C1C1C] text-white py-32 px-section-clamp mt-32 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-[60%] h-full pointer-events-none opacity-10">
+                    <div className="w-full h-full border-l border-white/5 skew-x-[-20deg] translate-x-1/2" />
+                </div>
+                
+                <div className="container mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
+                    <div className="space-y-8">
+                         <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/40">{t('stayConnected')}</h2>
+                         <p className="text-5xl md:text-8xl font-normal tracking-tighter leading-[0.9]">
+                            {locale === 'en' ? 'Keep in touch.' : 'Endelea kuwasiliana.'}
+                         </p>
+                    </div>
+                    
+                    <div className="space-y-12">
+                        <p className="text-xl md:text-2xl font-light text-white/50 max-w-2xl leading-relaxed">
+                            {t('subscribeText') || 'Sign up to our newsletter for the latest exhibition announcements, events, and NCAI news.'}
+                        </p>
+
+                        <div className="pt-8">
+                            <Link 
+                                href="/newsletter"
+                                className="inline-flex items-center gap-6 group"
+                            >
+                                <span className="text-2xl font-normal tracking-tight border-b border-white/20 pb-2 group-hover:border-white transition-colors">Sign up now</span>
+                                <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:border-white transition-all duration-500">
+                                    <div className="w-2 h-2 bg-white group-hover:bg-black rounded-full" />
+                                </div>
+                            </Link>
                         </div>
                     </div>
-                </section>
-            </main>
-        </div>
+                </div>
+            </section>
+        </>
     )
 }

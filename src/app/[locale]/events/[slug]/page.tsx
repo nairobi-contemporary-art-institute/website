@@ -9,6 +9,7 @@ import { portableTextToPlainText } from "@/sanity/lib/utils"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { LogoGrid } from "@/components/ui/LogoGrid"
+import { EventRSVPForm } from "@/components/events/EventRSVPForm"
 
 import { Metadata } from "next"
 
@@ -80,17 +81,17 @@ export default async function EventPage({ params }: Props) {
     const isPast = new Date() > (endDate || startDate)
 
     return (
-        <div className="container mx-auto px-6 py-20 min-h-screen bg-stone-50/30">
+        <div className="container mx-auto px-section-clamp py-20 min-h-screen bg-stone-50/30">
             <Link
                 href={`/${locale}/events`}
-                className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-umber hover:text-charcoal mb-12 transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-mono capitalize tracking-widest text-umber hover:text-charcoal mb-12 transition-colors"
             >
                 ← Back to Calendar
             </Link>
 
             <div className="max-w-6xl mx-auto">
                 <header className="mb-16 border-b border-charcoal/10 pb-12">
-                    <div className="flex flex-wrap items-center gap-4 text-xs font-mono uppercase tracking-widest text-umber mb-6">
+                    <div className="flex flex-wrap items-center gap-4 text-xs font-mono capitalize tracking-widest text-umber mb-6">
                         <span className="px-2 py-1 bg-umber/10">{event.eventType}</span>
                         {isPast && <span className="px-2 py-1 bg-stone-200 text-stone-500">Archived</span>}
                     </div>
@@ -101,7 +102,7 @@ export default async function EventPage({ params }: Props) {
 
                     <div className="flex flex-col md:flex-row gap-8 md:gap-16 text-lg text-charcoal/80">
                         <div className="flex items-start gap-4">
-                            <span className="font-mono text-xs uppercase tracking-widest text-umber mt-1.5 w-16">When</span>
+                            <span className="font-mono text-xs capitalize tracking-widest text-umber mt-1.5 w-16">When</span>
                             <div>
                                 <p className="font-medium">{formattedDate}</p>
                                 <p className="text-charcoal/60">{formattedTime} {endDate && `- ${endDate.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })}`}</p>
@@ -109,7 +110,7 @@ export default async function EventPage({ params }: Props) {
                         </div>
                         {event.location && (
                             <div className="flex items-start gap-4">
-                                <span className="font-mono text-xs uppercase tracking-widest text-umber mt-1.5 w-16">Where</span>
+                                <span className="font-mono text-xs capitalize tracking-widest text-umber mt-1.5 w-16">Where</span>
                                 <p className="font-medium max-w-xs">{event.location}</p>
                             </div>
                         )}
@@ -139,27 +140,36 @@ export default async function EventPage({ params }: Props) {
                     {/* Sidebar */}
                     <aside className="space-y-12 lg:pt-0">
                         {/* RSVP Actions */}
-                        {!isPast && event.registrationLink && (
-                            <div className="bg-white p-8 border border-charcoal/5 shadow-sm space-y-4 sticky top-32">
-                                <h3 className="font-mono text-xs uppercase tracking-widest text-charcoal/60">Registration</h3>
-                                <p className="text-sm text-charcoal/80 mb-4">
-                                    Space is limited for this event. Please register in advance.
-                                </p>
-                                <a
-                                    href={event.registrationLink}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="block w-full py-4 bg-charcoal text-off-white text-center font-medium tracking-wide hover:bg-umber transition-colors"
-                                >
-                                    RSVP Now
-                                </a>
+                        {!isPast && (
+                            <div className="sticky top-32">
+                                <EventRSVPForm
+                                    eventTitle={title || 'Event'}
+                                    eventSlug={slug}
+                                    locale={locale}
+                                />
+
+                                {event.registrationLink && (
+                                    <div className="mt-6 text-center">
+                                        <p className="text-[10px] font-mono capitalize tracking-widest text-charcoal/30 mb-2">
+                                            Alternative Link
+                                        </p>
+                                        <a
+                                            href={event.registrationLink}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-xs font-mono capitalize tracking-widest text-umber hover:text-charcoal transition-colors border-b border-umber/20"
+                                        >
+                                            Register via External Site
+                                        </a>
+                                    </div>
+                                )}
                             </div>
                         )}
 
                         {/* Facilitators */}
                         {event.educators && event.educators.length > 0 && (
                             <div className="space-y-6">
-                                <h3 className="font-mono text-xs uppercase tracking-widest text-umber border-b border-umber/20 pb-2">Facilitators</h3>
+                                <h3 className="font-mono text-xs capitalize tracking-widest text-umber border-b border-umber/20 pb-2">Facilitators</h3>
                                 <div className="space-y-6">
                                     {event.educators.map((person: any) => (
                                         <div key={person._id} className="flex items-center gap-4 group">
@@ -188,7 +198,7 @@ export default async function EventPage({ params }: Props) {
                         {/* Related Exhibitions */}
                         {event.relatedExhibitions && event.relatedExhibitions.length > 0 && (
                             <div className="space-y-6">
-                                <h3 className="font-mono text-xs uppercase tracking-widest text-umber border-b border-umber/20 pb-2">In Context of</h3>
+                                <h3 className="font-mono text-xs capitalize tracking-widest text-umber border-b border-umber/20 pb-2">In Context of</h3>
                                 <div className="space-y-6">
                                     {event.relatedExhibitions.map((exhibition: any) => {
                                         const exTitle = getLocalizedValue(exhibition.title, locale)

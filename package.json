@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@base-ui/react": "^1.2.0",
     "@gsap/react": "^2.1.2",
     "@portabletext/react": "^6.0.2",
     "@sanity/color-input": "^6.0.4",

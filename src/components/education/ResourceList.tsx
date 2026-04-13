@@ -19,7 +19,7 @@ export function ResourceList({ resources }: ResourceListProps) {
 
     return (
         <div className="space-y-4">
-            <h3 className="font-mono text-xs uppercase tracking-widest text-umber border-b border-umber/20 pb-2">Resources</h3>
+            <h3 className="font-mono text-xs capitalize tracking-widest text-umber border-b border-umber/20 pb-2">Resources</h3>
             <ul className="space-y-3">
                 {resources.map((res, i) => (
                     <li key={res.url + i}>

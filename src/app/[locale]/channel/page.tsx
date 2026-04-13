@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { getTranslations, getMessages } from 'next-intl/server'
 import { client, sanityFetch } from '@/sanity/lib/client'
 import { POSTS_QUERY } from '@/sanity/lib/queries'
@@ -21,7 +22,7 @@ export default async function ChannelPage({ params }: { params: Promise<{ locale
     })
 
     return (
-        <div className="container mx-auto px-6 py-20 min-h-screen">
+        <div className="container mx-auto px-section-clamp py-20 min-h-screen">
             <header className="mb-20">
                 <h1 className="text-6xl md:text-8xl font-light tracking-tighter text-charcoal mb-4">
                     {t('title')}
@@ -32,7 +33,9 @@ export default async function ChannelPage({ params }: { params: Promise<{ locale
                 <div className="h-px w-24 bg-charcoal mt-8" />
             </header>
 
-            <ChannelFilter posts={posts} locale={locale} />
+            <Suspense fallback={<div className="animate-pulse bg-stone-100 h-96 w-full" />}>
+                <ChannelFilter posts={posts} locale={locale} />
+            </Suspense>
         </div>
     )
 }

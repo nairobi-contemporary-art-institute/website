@@ -74,6 +74,7 @@ export function HomeHero({ exhibition, featuredCards, locale }: HomeHeroProps) {
                             height={displayImage.asset?.metadata?.dimensions?.height || 1200}
                             className="w-full h-auto block"
                             priority
+                            sizes="(max-width: 1024px) 100vw, 60vw"
                             placeholder="blur"
                             blurDataURL={displayImage.asset?.metadata?.lqip}
                         />
@@ -86,7 +87,7 @@ export function HomeHero({ exhibition, featuredCards, locale }: HomeHeroProps) {
                     </p>
                     <Link href={`/${locale}/exhibitions/${exhibitionSlug}`} className="group inline-block">
                         <h1
-                            className="text-4xl md:text-6xl lg:text-7xl font-black leading-[0.9] tracking-tighter mb-3 group-hover:text-umber transition-colors duration-500 uppercase"
+                            className="text-4xl md:text-6xl lg:text-7xl font-black leading-[0.9] tracking-tighter mb-3 group-hover:text-umber transition-colors duration-500 capitalize"
                         >
                             {exhibitionTitle}
                         </h1>
@@ -95,7 +96,7 @@ export function HomeHero({ exhibition, featuredCards, locale }: HomeHeroProps) {
                     <div className="flex flex-col gap-1.5">
                         {exhibition?.startDate && (
                             <div className="flex flex-col">
-                                <span className="text-[10px] font-bold tracking-[0.4em] uppercase text-charcoal/60 mb-0.5">Opens</span>
+                                <span className="text-[10px] font-bold tracking-[0.4em] capitalize text-charcoal/60 mb-0.5">Opens</span>
                                 <span className="text-2xl md:text-3xl lg:text-[32px] font-black tracking-tighter leading-none text-charcoal">
                                     {new Date(exhibition.startDate).toLocaleDateString(locale, { month: 'long', day: 'numeric', year: 'numeric' })}
                                     <span className="ml-4 text-charcoal/30 text-xl md:text-2xl lg:text-[24px]">
@@ -107,7 +108,7 @@ export function HomeHero({ exhibition, featuredCards, locale }: HomeHeroProps) {
 
                         {exhibition?.endDate && (
                             <div className="flex flex-col gap-0.5">
-                                <span className="text-[10px] font-bold tracking-[0.4em] uppercase text-charcoal/60">Through</span>
+                                <span className="text-[10px] font-bold tracking-[0.4em] capitalize text-charcoal/60">Through</span>
                                 <span
                                     className="text-[20px] font-black tracking-tighter leading-none capitalize text-charcoal"
                                 >
@@ -144,17 +145,18 @@ export function HomeHero({ exhibition, featuredCards, locale }: HomeHeroProps) {
                                             width={imageDimensions?.width || 800}
                                             height={imageDimensions?.height || 600}
                                             className="w-full h-auto object-cover"
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 40vw, 33vw"
                                         />
                                     )}
                                 </div>
                                 <div className="space-y-2">
                                     <h3
-                                        style={{ textTransform: 'uppercase' }}
+                                        style={{ textTransform: 'capitalize' }}
                                         className="text-3xl lg:text-5xl font-black leading-[0.85] tracking-tighter text-charcoal group-hover:text-umber transition-colors duration-500"
                                     >
                                         {cardTitle}
                                     </h3>
-                                    <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-charcoal/40 group-hover:text-charcoal transition-colors">
+                                    <p className="text-[10px] font-bold tracking-[0.2em] capitalize text-charcoal/40 group-hover:text-charcoal transition-colors">
                                         {cardSubtitle}
                                     </p>
                                 </div>

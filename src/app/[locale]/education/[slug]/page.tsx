@@ -28,10 +28,10 @@ const TYPE_LABELS: Record<string, string> = {
 
 const AUDIENCE_LABELS: Record<string, string> = {
     all: 'All Ages',
-    adults: 'Adults',
-    youth: 'Youth',
+    ujuzi: 'UJUZI (Professionals)',
+    youth: 'Schools & Youth',
     children: 'Children & Families',
-    professionals: 'Professional Development',
+    adults: 'Adults & Public',
 }
 import { Metadata } from "next"
 
@@ -94,17 +94,17 @@ export default async function ProgramPage({ params }: Props) {
     const isUpcoming = !startDate || (startDate && startDate >= new Date()) || (endDate && endDate >= new Date())
 
     return (
-        <div className="container mx-auto px-6 py-20 min-h-screen bg-stone-50/30">
+        <div className="container mx-auto px-section-clamp py-20 min-h-screen bg-stone-50/30">
             <Link
                 href={`/${locale}/education`}
-                className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-umber hover:text-charcoal mb-12 transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-mono capitalize tracking-widest text-umber hover:text-charcoal mb-12 transition-colors"
             >
                 ← Back to Education
             </Link>
 
             <div className="max-w-6xl mx-auto">
                 <header className="mb-16 border-b border-charcoal/10 pb-12">
-                    <div className="flex flex-wrap items-center gap-4 text-xs font-mono uppercase tracking-widest text-umber mb-6">
+                    <div className="flex flex-wrap items-center gap-4 text-xs font-mono capitalize tracking-widest text-umber mb-6">
                         <span className="px-2 py-1 bg-umber/10">{typeLabel}</span>
                         <span className="px-2 py-1 bg-stone-200 text-stone-600">{audienceLabel}</span>
                     </div>
@@ -116,7 +116,7 @@ export default async function ProgramPage({ params }: Props) {
                     {startDate && (
                         <div className="flex flex-col md:flex-row gap-8 md:gap-16 text-lg text-charcoal/80">
                             <div className="flex items-start gap-4">
-                                <span className="font-mono text-xs uppercase tracking-widest text-umber mt-1.5 w-16">Dates</span>
+                                <span className="font-mono text-xs capitalize tracking-widest text-umber mt-1.5 w-16">Dates</span>
                                 <div>
                                     <p className="font-medium">
                                         {startDate.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' })}
@@ -133,15 +133,16 @@ export default async function ProgramPage({ params }: Props) {
                     <article className="space-y-12">
                         {program.mainImage && (
                             <div className="relative aspect-[16/9] w-full bg-stone-200 overflow-hidden">
-                                <Image
-                                    src={urlFor(program.mainImage).width(1200).height(675).url()}
-                                    alt={program.mainImage.alt || title || 'Program Image'}
-                                    fill
-                                    className="object-cover"
-                                    placeholder="blur"
-                                    blurDataURL={program.mainImage.asset?.metadata?.lqip}
-                                    priority
-                                />
+                                    <Image
+                                        src={urlFor(program.mainImage).width(1200).height(675).url()}
+                                        alt={program.mainImage.alt || title || 'Program Image'}
+                                        fill
+                                        className="object-cover"
+                                        placeholder="blur"
+                                        blurDataURL={program.mainImage.asset?.metadata?.lqip}
+                                        priority
+                                        sizes="(max-width: 1024px) 100vw, 60vw"
+                                    />
                             </div>
                         )}
 
@@ -153,7 +154,7 @@ export default async function ProgramPage({ params }: Props) {
                         {/* Registration */}
                         {isUpcoming && program.registrationUrl && (
                             <div className="bg-white p-6 border border-charcoal/5 shadow-sm space-y-4">
-                                <h3 className="font-mono text-xs uppercase tracking-widest text-charcoal/60">Participation</h3>
+                                <h3 className="font-mono text-xs capitalize tracking-widest text-charcoal/60">Participation</h3>
                                 <p className="text-sm text-charcoal/80 mb-4">
                                     Register to participate in this program.
                                 </p>
@@ -176,7 +177,7 @@ export default async function ProgramPage({ params }: Props) {
                         {/* Educators */}
                         {program.educators && program.educators.length > 0 && (
                             <div className="space-y-6">
-                                <h3 className="font-mono text-xs uppercase tracking-widest text-umber border-b border-umber/20 pb-2">Facilitators</h3>
+                                <h3 className="font-mono text-xs capitalize tracking-widest text-umber border-b border-umber/20 pb-2">Facilitators</h3>
                                 <div className="space-y-6">
                                     {program.educators.map((person: any) => (
                                         <div key={person._id} className="flex items-center gap-4 group">
@@ -187,6 +188,7 @@ export default async function ProgramPage({ params }: Props) {
                                                         alt={getLocalizedValue(person.name, locale) || 'Facilitator'}
                                                         fill
                                                         className="object-cover"
+                                                        sizes="48px"
                                                     />
                                                 </div>
                                             )}
@@ -205,10 +207,10 @@ export default async function ProgramPage({ params }: Props) {
                         {/* Tags */}
                         {program.tags && program.tags.length > 0 && (
                             <div className="space-y-4">
-                                <h3 className="font-mono text-xs uppercase tracking-widest text-umber border-b border-umber/20 pb-2">Related Topics</h3>
+                                <h3 className="font-mono text-xs capitalize tracking-widest text-umber border-b border-umber/20 pb-2">Related Topics</h3>
                                 <div className="flex flex-wrap gap-2">
                                     {program.tags.map((tag: any) => (
-                                        <span key={tag._id} className="px-2 py-1 bg-stone-100 text-charcoal/70 text-[10px] uppercase tracking-wider">
+                                        <span key={tag._id} className="px-2 py-1 bg-stone-100 text-charcoal/70 text-[10px] capitalize tracking-wider">
                                             {getLocalizedValue(tag.title, locale)}
                                         </span>
                                     ))}
@@ -220,7 +222,7 @@ export default async function ProgramPage({ params }: Props) {
             </div>
 
             {program.relatedExhibitions && program.relatedExhibitions.length > 0 && (
-                <section className="mt-24 pt-24 border-t border-charcoal/10">
+                <section className="px-section-clamp mt-24 pt-24 border-t border-charcoal/10">
                     <h2 className="text-3xl font-light tracking-tight mb-12">Related Exhibition</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {program.relatedExhibitions.map((exh: any) => (
@@ -236,11 +238,12 @@ export default async function ProgramPage({ params }: Props) {
                                             alt={getLocalizedValue(exh.title, locale) || 'Exhibition Image'}
                                             fill
                                             className="object-cover group-hover:scale-110 transition-transform duration-700"
+                                            sizes="128px"
                                         />
                                     )}
                                 </div>
                                 <div className="space-y-1">
-                                    <span className="text-[10px] uppercase tracking-widest text-umber font-bold">Exhibition</span>
+                                    <span className="text-[10px] capitalize tracking-widest text-umber font-bold">Exhibition</span>
                                     <h3 className="text-xl font-bold text-charcoal group-hover:text-umber transition-colors">
                                         {getLocalizedValue(exh.title, locale)}
                                     </h3>

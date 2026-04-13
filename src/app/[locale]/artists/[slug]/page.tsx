@@ -1,49 +1,46 @@
-
-import { type Metadata } from 'next'
-import { notFound } from 'next/navigation'
-import Link from 'next/link'
-import { client, sanityFetch } from '@/sanity/lib/client'
+import { sanityFetch } from '@/sanity/lib/client'
 import { ARTIST_BY_SLUG_QUERY } from '@/sanity/lib/queries'
-import { urlFor } from '@/sanity/lib/image'
-import { getLocalizedValue, portableTextToPlainText } from '@/sanity/lib/utils'
+import { GridSystem } from '@/components/ui/Grid/Grid'
 import { ArtistContent } from '@/components/artist/ArtistContent'
+import { Metadata } from 'next'
+import { getLocalizedValue } from '@/sanity/lib/utils'
+import { notFound } from 'next/navigation'
+import { SITEMAP_QUERY } from '@/sanity/lib/queries'
+import { locales } from '@/i18n'
 
-type Props = {
-    params: Promise<{ locale: string; slug: string }>
+export async function generateStaticParams() {
+    const documents = await sanityFetch<any[]>({
+        query: SITEMAP_QUERY,
+        tags: ['artist']
+    })
+    const artists = documents.filter(doc => doc._type === 'artist' && doc.slug)
+
+    return locales.flatMap((locale) =>
+        artists.map((artist) => ({
+            locale,
+            slug: artist.slug,
+        }))
+    )
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
     const { locale, slug } = await params
     const artist = await sanityFetch<any>({
         query: ARTIST_BY_SLUG_QUERY,
         params: { slug },
         tags: [`artist:${slug}`]
     })
-
-    if (!artist) {
-        return {
-            title: 'Artist Not Found',
-        }
-    }
+    if (!artist) return {}
 
     const name = getLocalizedValue(artist.name, locale)
-    const bioBlocks = getLocalizedValue<any>(artist.bio, locale)
-    const description = typeof bioBlocks === 'string'
-        ? bioBlocks
-        : (bioBlocks ? portableTextToPlainText(bioBlocks) : `Artist profile for ${name}`)
 
     return {
         title: name,
-        description,
-        openGraph: {
-            title: name,
-            description,
-            images: artist.image ? [urlFor(artist.image).width(1200).height(630).url()] : [],
-        },
+        description: `Artist profile for ${name} at NCAI.`,
     }
 }
 
-export default async function ArtistPage({ params }: Props) {
+export default async function ArtistProfilePage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
     const { locale, slug } = await params
     const artist = await sanityFetch<any>({
         query: ARTIST_BY_SLUG_QUERY,
@@ -56,14 +53,10 @@ export default async function ArtistPage({ params }: Props) {
     }
 
     return (
-        <div className="container mx-auto px-6 py-24 min-h-screen">
-            <ArtistContent artist={artist} locale={locale} />
-
-            <footer className="max-w-7xl mx-auto mt-48 pt-10 border-t border-charcoal/10">
-                <Link href={`/${locale}/artists`} className="text-[10px] font-bold tracking-[0.3em] uppercase text-charcoal/40 hover:text-charcoal transition-colors">
-                    ← Back to Artists Index
-                </Link>
-            </footer>
-        </div>
+        <GridSystem unstable_useContainer>
+            <main className="pt-32 pb-24">
+                <ArtistContent artist={artist} locale={locale} />
+            </main>
+        </GridSystem>
     )
 }

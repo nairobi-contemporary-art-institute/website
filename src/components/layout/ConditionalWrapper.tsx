@@ -19,8 +19,8 @@ export function ConditionalWrapper({
     const pathname = usePathname()
 
     // Check if the current route is the immersive timeline
-    // Note: pathname includes the locale prefix (e.g., /en/timeline)
-    const isImmersive = pathname?.includes('/timeline')
+    // Precise check for /timeline or /[locale]/timeline to avoid accidental matches
+    const isImmersive = pathname?.match(/\/(?:[a-z]{2}\/)?timeline$/)
 
     if (isImmersive) {
         return (
@@ -35,7 +35,7 @@ export function ConditionalWrapper({
     return (
         <>
             {header}
-            <main className="flex-1 pt-12 md:pt-20">
+            <main className="flex-1">
                 <PageTransition>
                     {children}
                 </PageTransition>

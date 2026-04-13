@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { client } from '@/sanity/lib/client';
+import { sanityFetch } from '@/sanity/lib/client';
 import { authenticateOdoo } from '@/lib/odoo';
 
 /**
@@ -19,9 +19,12 @@ export async function GET() {
         }
     };
 
-    // 1. Check Sanity
+    // 1. Check Sanity (Using a short 60s cache to avoid burning quota on pings)
     try {
-        await client.fetch('*[_type == "siteSettings"][0]{title}');
+        await sanityFetch<any>({
+            query: '*[_type == "siteSettings"][0]{title}',
+            revalidate: 60
+        });
         status.services.sanity = { status: 'ok' };
     } catch (error: any) {
         status.services.sanity = { status: 'error', message: error.message };

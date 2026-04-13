@@ -14,10 +14,10 @@ interface EducationCardProps {
 
 const AUDIENCE_LABELS: Record<string, string> = {
     all: 'All Ages',
-    adults: 'Adults',
-    youth: 'Youth',
+    ujuzi: 'UJUZI (Professionals)',
+    youth: 'Schools & Youth',
     children: 'Children & Families',
-    professionals: 'Professional Development',
+    adults: 'Adults & Public',
 }
 
 const TYPE_LABELS: Record<string, string> = {
@@ -49,6 +49,7 @@ export function EducationCard({ program, locale }: EducationCardProps) {
                         alt={program.mainImage.alt || title || 'Program Image'}
                         fill
                         className="object-cover contrast-[0.95] group-hover:contrast-100"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         placeholder="blur"
                         blurDataURL={program.mainImage.asset?.metadata?.lqip}
                     />
@@ -60,14 +61,14 @@ export function EducationCard({ program, locale }: EducationCardProps) {
 
                 {/* Badges */}
                 <div className="absolute top-0 left-0 flex flex-col items-start gap-1 p-3">
-                    <span className="bg-white/90 backdrop-blur px-2 py-1 text-[10px] uppercase tracking-widest font-medium border border-charcoal/5 shadow-sm">
+                    <span className="bg-white/90 backdrop-blur px-2 py-1 text-[10px] capitalize tracking-widest font-medium border border-charcoal/5 shadow-sm">
                         {audience}
                     </span>
                 </div>
             </div>
 
             <div className="flex flex-col flex-1 space-y-3">
-                <div className="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-umber border-b border-umber/10 pb-2">
+                <div className="flex items-center justify-between text-xs font-mono capitalize tracking-widest text-umber border-b border-umber/10 pb-2">
                     <span>{type}</span>
                     {startDate && (
                         <span>

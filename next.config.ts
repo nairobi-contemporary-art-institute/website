@@ -11,7 +11,25 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'cdn.sanity.io',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
     ],
+  },
+  async redirects() {
+    return [
+      {
+        source: '/support',
+        destination: '/get-involved',
+        permanent: true,
+      },
+      {
+        source: '/membership',
+        destination: '/get-involved',
+        permanent: true,
+      },
+    ];
   },
 };
 

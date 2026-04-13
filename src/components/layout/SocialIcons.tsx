@@ -71,7 +71,7 @@ export function SocialIcons({ urls, className }: SocialIconsProps) {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-charcoal hover:text-ochre transition-colors duration-200"
+                    className="text-sun-bleached-paper/80 hover:text-white transition-colors duration-200"
                     aria-label={`Visit our ${link.name} page`}
                 >
                     {link.icon}

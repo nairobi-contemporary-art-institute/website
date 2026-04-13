@@ -2,10 +2,10 @@
 import { type Metadata } from 'next'
 import Image from 'next/image'
 import { getMessages } from 'next-intl/server'
-import { client } from '@/sanity/lib/client'
+import { sanityFetch } from '@/sanity/lib/client'
 import { TIMELINE_QUERY } from '@/sanity/lib/queries'
 import { urlFor } from '@/sanity/lib/image'
-import { getLocalizedValue } from '@/sanity/lib/utils'
+import { getLocalizedValue, getLocalizedValueAsString } from '@/sanity/lib/utils'
 import { ResponsiveDivider } from '@/components/ui/ResponsiveDivider'
 import { PortableText } from '@/components/ui/PortableText'
 
@@ -18,11 +18,14 @@ export const metadata: Metadata = {
 
 export default async function HistoryPage({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params
-    const timelineEvents = await client.fetch(TIMELINE_QUERY)
+    const timelineEvents = await sanityFetch<any[]>({
+        query: TIMELINE_QUERY,
+        tags: ['timeline']
+    })
     const t = await getMessages({ locale }) as any
 
     return (
-        <div className="container mx-auto px-6 py-24 min-h-screen">
+        <div className="container mx-auto px-section-clamp py-24 min-h-screen">
             <header className="max-w-4xl mx-auto mb-20 text-center">
                 <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-charcoal mb-6">
                     {t.Pages?.history?.title || 'Our History'}
@@ -39,7 +42,7 @@ export default async function HistoryPage({ params }: { params: Promise<{ locale
 
                 <div className="space-y-24">
                     {timelineEvents.map((event: any, index: number) => {
-                        const title = getLocalizedValue(event.title, locale)
+                        const title = getLocalizedValueAsString(event.title, locale)
                         const description = getLocalizedValue(event.description, locale)
                         const isEven = index % 2 === 0
 

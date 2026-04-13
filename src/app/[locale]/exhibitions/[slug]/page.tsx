@@ -83,7 +83,7 @@ export default async function ExhibitionPage({ params }: Props) {
     const artists = exhibition.artists || []
 
     return (
-        <div className="container mx-auto px-6 py-20 min-h-screen">
+        <div className="container mx-auto px-section-clamp py-20 min-h-screen">
             <div className="flex flex-col">
                 <header className="max-w-3xl mb-12 space-y-6">
                     <span className="inline-block px-3 py-1 border border-umber/20 text-xs font-bold tracking-widest text-umber/60">
@@ -115,6 +115,7 @@ export default async function ExhibitionPage({ params }: Props) {
                                 height={1200}
                                 className="w-full h-auto block"
                                 priority
+                                loading="eager"
                                 placeholder="blur"
                                 blurDataURL={exhibition.mainImage.asset?.metadata?.lqip}
                             />
@@ -132,7 +133,7 @@ export default async function ExhibitionPage({ params }: Props) {
                     <div>
                         <Link
                             href={`/${locale}/contact?subject=Enquiry: ${title}`}
-                            className="inline-block px-6 py-2 border border-charcoal text-xs uppercase tracking-widest font-bold hover:bg-charcoal hover:text-off-white transition-all"
+                            className="inline-block px-section-clamp py-2 border border-charcoal text-xs capitalize tracking-widest font-bold hover:bg-charcoal hover:text-off-white transition-all"
                         >
                             Enquire
                         </Link>
@@ -151,7 +152,7 @@ export default async function ExhibitionPage({ params }: Props) {
 
                 <div className="max-w-3xl space-y-16">
                     {/* More Information */}
-                    <section className="space-y-6 pt-16 border-t border-rich-blue/20">
+                    <section className="px-section-clamp space-y-6 pt-16 border-t border-rich-blue/20">
                         <h2 className="text-2xl font-semibold tracking-tight text-charcoal">More information</h2>
                         <div className="flex flex-col space-y-4">
                             <button className="text-left text-sm font-medium underline underline-offset-4 decoration-umber/30 hover:decoration-umber transition-all w-fit">
@@ -176,7 +177,7 @@ export default async function ExhibitionPage({ params }: Props) {
                     </section>
 
                     {/* Location */}
-                    <section className="space-y-6 pt-8">
+                    <section className="px-section-clamp space-y-6 pt-8">
                         <h2 className="text-2xl font-semibold tracking-tight text-charcoal">Location</h2>
                         <div className="space-y-4 text-sm text-charcoal/70 leading-relaxed">
                             {settings?.contactInfo?.address && (

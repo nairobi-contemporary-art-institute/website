@@ -51,7 +51,7 @@ export function EventFilter({ events, locale }: EventFilterProps) {
                             key={cat}
                             onClick={() => setFilter(cat)}
                             className={cn(
-                                "px-5 py-2 text-[10px] font-bold uppercase tracking-[0.2em] transition-all border",
+                                "px-5 py-2 text-[10px] font-bold capitalize tracking-[0.2em] transition-all border",
                                 filter === cat
                                     ? "bg-charcoal text-off-white border-charcoal shadow-sm"
                                     : "bg-transparent text-charcoal/50 hover:text-charcoal border-charcoal/10 hover:border-charcoal/30"
@@ -108,7 +108,7 @@ export function EventFilter({ events, locale }: EventFilterProps) {
                             </div>
                         ) : (
                             <div className="py-32 text-center border border-dashed border-charcoal/10 bg-stone-50/50">
-                                <p className="text-charcoal/30 font-mono uppercase tracking-[0.3em] text-[10px]">No upcoming events found</p>
+                                <p className="text-charcoal/30 font-mono capitalize tracking-[0.3em] text-[10px]">No upcoming events found</p>
                             </div>
                         )}
                     </section>

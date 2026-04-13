@@ -25,6 +25,11 @@ export async function addSubscriber(data: ListmonkSubscriber): Promise<ListmonkR
     try {
         const auth = Buffer.from(`${username}:${password}`).toString('base64');
 
+        // Parse list IDs from environment variable (e.g., "1,2") or default to [1]
+        const envListIds = process.env.LISTMONK_LIST_ID
+            ? process.env.LISTMONK_LIST_ID.split(',').map(id => parseInt(id.trim())).filter(id => !isNaN(id))
+            : [1];
+
         const response = await fetch(`${url}/api/subscribers`, {
             method: 'POST',
             headers: {
@@ -34,7 +39,7 @@ export async function addSubscriber(data: ListmonkSubscriber): Promise<ListmonkR
             body: JSON.stringify({
                 ...data,
                 status: data.status || 'enabled',
-                lists: data.lists || [1]
+                lists: data.lists || envListIds
             })
         });
 

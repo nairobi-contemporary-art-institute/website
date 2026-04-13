@@ -1,5 +1,5 @@
 import { locales } from '@/i18n'
-import { client } from '@/sanity/lib/client'
+import { sanityFetch } from '@/sanity/lib/client'
 import { SITEMAP_QUERY } from '@/sanity/lib/queries'
 import { MetadataRoute } from 'next'
 
@@ -17,13 +17,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/channel',
         '/education',
         '/collection',
-        '/support',
+        '/get-involved',
         '/publications',
         '/visit/accessibility',
     ]
 
     // 2. Dynamic Routes from Sanity
-    const dynamicData = await client.fetch(SITEMAP_QUERY)
+    const dynamicData = await sanityFetch<any[]>({
+        query: SITEMAP_QUERY,
+        tags: ['sitemap']
+    })
 
     interface SanitySitemapItem {
         _type: 'exhibition' | 'artist' | 'post' | 'program'

@@ -18,6 +18,7 @@
   --color-gold: #D4AF37;
 
   --color-background: #FFFFFF;
+  --color-background-dark: #1C1C1C;
   --color-foreground: var(--color-charcoal);
 
   /* Typography - The Institutional Omnibus Stack */
@@ -56,11 +57,29 @@
   --line-height-m: 1.25rem;
   --line-height-s: 1rem;
 
+  /* Layout Spacing */
+  --spacing-section-clamp: clamp(1rem, 0.75rem + 1vw, 1.5rem);
+
   /* Font Weights */
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-demi-bold: 600;
-  --font-weight-bold: 700;
+  /* Grid System - Geist Inspired */
+  --grid-columns: 12;
+  --grid-guide-color: color-mix(in srgb, var(--color-rich-blue) 8%, transparent);
+  --grid-guide-width: 1px;
+}
+
+@layer components {
+  .container {
+    /* To ensure your margin reads exactly 24px on both left and right, 
+       we set the width to 100% minus 48px (24px + 24px).
+       This ensures the visual space on the outside of the box is exactly 24px. */
+    max-width: calc(100% - 48px) !important;
+    width: 100% !important;
+    margin-left: 24px !important;
+    margin-right: 24px !important;
+  }
 }
 
 body {
@@ -69,6 +88,29 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Clickable elements should always show the pointer cursor */
+a,
+button,
+label,
+summary,
+[role="button"],
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="checkbox"],
+input[type="radio"],
+select {
+  cursor: pointer;
+}
+
+/* Ensure disabled elements show default or not-allowed cursor */
+button:disabled,
+[role="button"][aria-disabled="true"],
+input:disabled,
+label[aria-disabled="true"] {
+  cursor: not-allowed;
 }
 
 /* Institutional Tone - Smooth Scroll & Selection */
@@ -89,7 +131,7 @@ html {
     line-height: 72px;
     letter-spacing: -0.06em;
     font-weight: 700;
-    text-transform: uppercase;
+    text-transform: capitalize !important;
   }
 
   .text-heading-64 {
@@ -97,7 +139,7 @@ html {
     line-height: 64px;
     letter-spacing: -0.06em;
     font-weight: 700;
-    text-transform: uppercase;
+    text-transform: capitalize !important;
   }
 
   .text-heading-56 {
@@ -105,7 +147,7 @@ html {
     line-height: 56px;
     letter-spacing: -0.06em;
     font-weight: 700;
-    text-transform: uppercase;
+    text-transform: capitalize !important;
   }
 
   .text-heading-48 {
@@ -113,7 +155,7 @@ html {
     line-height: 56px;
     letter-spacing: -0.06em;
     font-weight: 700;
-    text-transform: uppercase;
+    text-transform: capitalize !important;
   }
 
   .text-heading-40 {
@@ -121,7 +163,7 @@ html {
     line-height: 48px;
     letter-spacing: -0.06em;
     font-weight: 700;
-    text-transform: uppercase;
+    text-transform: capitalize !important;
   }
 
   .text-heading-32 {
@@ -129,7 +171,7 @@ html {
     line-height: 40px;
     letter-spacing: -0.04em;
     font-weight: 700;
-    text-transform: uppercase;
+    text-transform: capitalize !important;
   }
 
   .text-heading-24 {
@@ -137,7 +179,7 @@ html {
     line-height: 32px;
     letter-spacing: -0.04em;
     font-weight: 700;
-    text-transform: uppercase;
+    text-transform: capitalize !important;
   }
 
   .text-copy-24 {
@@ -190,8 +232,15 @@ html {
     transform: rotateY(90deg);
   }
 
-  .-rotate-y-20 {
-    transform: rotateY(-20deg);
+  /* Grid System Utilities */
+  .grid-guide-lines {
+    background-size: calc(100% / var(--grid-columns)) 100%;
+    background-image: linear-gradient(to right, var(--grid-guide-color) var(--grid-guide-width), transparent var(--grid-guide-width));
+  }
+
+  .grid-guide-lines-rows {
+    background-size: 100% calc(100% / var(--grid-rows, 1));
+    background-image: linear-gradient(to bottom, var(--grid-guide-color) var(--grid-guide-width), transparent var(--grid-guide-width));
   }
 }
 

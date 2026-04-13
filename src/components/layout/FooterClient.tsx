@@ -10,7 +10,7 @@ import { usePathname } from 'next/navigation'
 
 const legalLinks = [
     { label: 'Privacy policy', url: '/privacy' },
-    { label: 'Accessibility', url: '/visit/accessibility' },
+    { label: 'Accessibility', url: '/accessibility' },
     { label: 'Terms & conditions', url: '/terms' },
     { label: 'Cookie Preferences', url: '/preferences' },
 ]
@@ -62,8 +62,8 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
         {
             title: 'Get Involved',
             links: [
-                { label: 'Become a Member', url: '/membership' },
-                { label: 'Donate', url: '/support' },
+                { label: 'Membership', url: '/get-involved' },
+                { label: 'Support NCAI', url: '/get-involved' },
                 { label: 'Jobs & Internships', url: '/careers' },
                 { label: 'Volunteer', url: '/volunteer' },
             ],
@@ -81,19 +81,19 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
     ]
 
     return (
-        <footer className="bg-white text-charcoal">
+        <footer className="bg-background-dark text-sun-bleached-paper">
             {/* Top Divider */}
-            <ResponsiveDivider variant="curved" weight="medium" className="text-gold" />
+            <ResponsiveDivider variant="curved" weight="medium" className="text-white" />
 
             {/* Main Footer Content */}
-            <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
+            <div className="container py-12 md:py-16">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
                     {/* Contact Info (Visit Us) - Now on the left */}
                     <div className="lg:col-span-3">
-                        <h4 className="text-lg font-bold uppercase tracking-tight mb-4 text-deep-umber">
+                        <h4 className="text-lg font-bold uppercase tracking-tight mb-4 text-white">
                             Visit Us
                         </h4>
-                        <div className="space-y-4 text-sm text-charcoal/90">
+                        <div className="space-y-4 text-sm text-sun-bleached-paper/80">
                             {contactInfo ? (
                                 <div className="leading-snug">
                                     <strong className="block font-semibold mb-1">{contactInfo.name}</strong>
@@ -102,7 +102,7 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
                                             href={contactInfo.googleMapsUrl}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="block hover:text-ochre transition-colors"
+                                            className="block hover:text-white transition-colors"
                                             aria-label="View on Google Maps"
                                         >
                                             {contactInfo.address?.split('\n').map((line, i) => (
@@ -125,12 +125,12 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
                             )}
                             <div className="space-y-1">
                                 {contactInfo?.email && (
-                                    <a href={`mailto:${contactInfo.email}`} className="block hover:text-ochre transition-colors">
+                                    <a href={`mailto:${contactInfo.email}`} className="block hover:text-white transition-colors text-sun-bleached-paper/80">
                                         {contactInfo.email}
                                     </a>
                                 )}
                                 {contactInfo?.phone && (
-                                    <a href={`tel:${contactInfo.phone.replace(/\s+/g, '')}`} className="block hover:text-ochre transition-colors">
+                                <a href={`tel:${contactInfo.phone.replace(/\s+/g, '')}`} className="block hover:text-white transition-colors text-sun-bleached-paper/80">
                                         {contactInfo.phone}
                                     </a>
                                 )}
@@ -142,7 +142,7 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
                     <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-3 gap-8">
                         {displayCategories.map((category) => (
                             <div key={category.title}>
-                                <h4 className="text-sm font-bold uppercase tracking-widest mb-4 text-deep-umber">
+                                <h4 className="text-sm font-bold uppercase tracking-widest mb-4 text-white">
                                     {category.title}
                                 </h4>
                                 <ul className="space-y-2">
@@ -150,7 +150,7 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
                                         <li key={link.label}>
                                             <Link
                                                 href={link.url}
-                                                className="text-sm text-charcoal/90 hover:text-ochre transition-colors duration-200 underline-offset-2 hover:underline"
+                                                className="text-sm text-sun-bleached-paper/80 hover:text-white transition-colors duration-200 underline-offset-2 hover:underline"
                                             >
                                                 {link.label}
                                             </Link>
@@ -172,9 +172,9 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
             </div>
 
             {/* Bottom Bar */}
-            <ResponsiveDivider variant="straight" weight="thin" className="text-umber/30" />
+            <ResponsiveDivider variant="straight" weight="thin" className="text-sun-bleached-paper/10" />
 
-            <div className="max-w-7xl mx-auto px-6 py-6">
+            <div className="container py-6">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                     {/* Legal Links & Accessibility */}
                     <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
@@ -182,7 +182,7 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
                             <Link
                                 key={link.label}
                                 href={link.url}
-                                className="text-charcoal/90 hover:text-ochre transition-colors duration-200 underline-offset-2 hover:underline"
+                                className="text-sun-bleached-paper/80 hover:text-white transition-colors duration-200 underline-offset-2 hover:underline"
                             >
                                 {link.label}
                             </Link>
@@ -191,7 +191,7 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
                     </div>
 
                     {/* Copyright */}
-                    <p className="text-sm text-charcoal/90">
+                    <p className="text-sm text-sun-bleached-paper/60">
                         {copyrightText || `© ${currentYear} Nairobi Contemporary Art Institute`}
                     </p>
                 </div>

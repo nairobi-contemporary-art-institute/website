@@ -84,19 +84,24 @@ export const EXHIBITION_BY_SLUG_QUERY = groq`
 /**
  * Fetch all artists for the directory.
  */
-export const ARTISTS_QUERY = groq`
+export const ARTISTS_INDEX_QUERY = groq`
   *[_type == "artist"] | order(name[0].value asc) {
     _id,
     name,
     "slug": slug.current,
-    image,
+    image {
+      caption,
+      asset-> {
+        _id,
+        metadata { lqip }
+      }
+    },
     tags[]-> {
         title,
         type
     }
   }
 `
-
 /**
  * Fetch a single artist by slug.
  */
@@ -159,6 +164,15 @@ export const ARTIST_BY_SLUG_QUERY = groq`
             caption,
             asset-> { _id, metadata { lqip } }
         }
+    },
+    "relatedArtists": *[_type == "artist" && _id != ^._id && count(tags[@._ref in ^.tags[]._ref]) > 0][0...8] {
+        _id,
+        name,
+        "slug": slug.current,
+        image {
+            asset-> { _id, metadata { lqip } }
+        },
+        tags[]-> { title }
     }
   }
 `
@@ -172,12 +186,13 @@ export const POSTS_QUERY = groq`
     title,
     "slug": slug.current,
     publishedAt,
-    author-> {
+    authors[]-> {
         name,
         image,
         "slug": slug.current
     },
     tags[]-> {
+        _id,
         title,
         type,
         "slug": slug.current
@@ -211,7 +226,7 @@ export const POST_BY_SLUG_QUERY = groq`
     videoCaption,
     audioCaption,
     "audioUrl": audioFile.asset->url,
-    author-> {
+    authors[]-> {
         name,
         image,
         roles,
@@ -309,6 +324,7 @@ export const PROGRAM_BY_SLUG_QUERY = groq`
     }
   }
 `
+
 /**
  * Fetch all searchable documents for sitemap.
  */
@@ -378,7 +394,7 @@ export const COLLECTION_ITEM_BY_SLUG_QUERY = groq`
 export const TIMELINE_QUERY = groq`
   *[_type == "timelineEvent"] | order(year asc) {
     _id,
-    year,
+    "year": string(year),
     title,
     description,
     media {
@@ -478,11 +494,26 @@ export const PAGE_BY_SLUG_QUERY = groq`
  * Fetch global site settings (navigation, footer, social, hours).
  */
 export const SITE_SETTINGS_QUERY = groq`
-  *[_type == "siteSettings"][0] {
+  *[_id == "siteSettings"][0] {
     ...,
+    "headerStyle": coalesce(headerStyle, "ncai"),
+    "headerFeaturedImages": headerFeaturedImages[]{
+      asset->,
+      hotspot,
+      crop,
+      caption,
+      link
+    },
     headerMenu[] {
       label,
-      url
+      url,
+      columns[] {
+        title,
+        links[] {
+          label,
+          url
+        }
+      }
     },
     footerCategories[] {
       title,
@@ -494,14 +525,19 @@ export const SITE_SETTINGS_QUERY = groq`
     socialLinks,
     hours,
     specialStatus,
-    contactInfo
+    contactInfo,
+    entranceAnimationPool[] { 
+      alt,
+      caption,
+      asset-> { _id, url } 
+    }
   }
 `
 /**
  * Fetch the about page content.
  */
 export const ABOUT_PAGE_QUERY = groq`
-  *[_type == "aboutPage"][0] {
+  *[_id == "aboutPage"][0] {
     ...,
     hero {
       ...,
@@ -514,16 +550,6 @@ export const ABOUT_PAGE_QUERY = groq`
       }
     },
     sections[] {
-      ...,
-      image {
-        caption,
-        asset-> {
-          _id,
-          metadata { lqip }
-        }
-      }
-    },
-    libraryArchive {
       ...,
       image {
         caption,
@@ -552,6 +578,10 @@ export const GET_INVOLVED_PAGE_QUERY = groq`
         }
       }
     },
+    membershipTiers[] {
+      ...,
+      description
+    },
     sections[] {
       ...,
       image {
@@ -561,7 +591,8 @@ export const GET_INVOLVED_PAGE_QUERY = groq`
           metadata { lqip }
         }
       }
-    }
+    },
+    contactSection
   }
 `
 
@@ -569,15 +600,46 @@ export const GET_INVOLVED_PAGE_QUERY = groq`
  * Fetch the home page content.
  */
 export const HOME_PAGE_QUERY = groq`
-  *[_type == "homePage"][0] {
+  *[_id == "homePage"][0] {
     ...,
     hero {
-      ...,
-      image {
-        caption,
-        asset-> {
-          _id,
-          metadata { lqip }
+      enabled,
+      mode,
+      autoAdvanceSeconds,
+      slides[] {
+        image {
+          caption,
+          hotspot,
+          asset-> {
+            _id,
+            metadata {
+              lqip,
+              dimensions { width, height, aspectRatio }
+            }
+          }
+        },
+        imageSize {
+          widthPercent
+        },
+        gradientColor,
+        gradientOpacity,
+        preHeading,
+        title,
+        subtitle,
+        date {
+          startDate,
+          endDate
+        },
+        location,
+        link {
+          reference-> {
+            _type,
+            _id,
+            "slug": slug.current,
+            title,
+            name
+          },
+          externalUrl
         }
       }
     },
@@ -648,6 +710,24 @@ export const HOME_PAGE_QUERY = groq`
         },
         externalUrl
       }
+    },
+    collectionTeaser {
+      enabled,
+      headline,
+      description,
+      featuredItems[]-> {
+        _id,
+        title,
+        "slug": slug.current,
+        creationDate,
+        mainImage {
+          asset-> {
+            _id,
+            metadata { lqip }
+          }
+        },
+        "artistName": artist->name
+      }
     }
   }
 `
@@ -656,7 +736,7 @@ export const HOME_PAGE_QUERY = groq`
  * Fetch the visit page content.
  */
 export const VISIT_PAGE_QUERY = groq`
-  *[_type == "visitPage"][0] {
+  *[_id == "visitPage"][0] {
     ...,
     label,
     announcement,
@@ -793,6 +873,15 @@ export const EVENTS_PAGE_QUERY = groq`
       },
       location,
       excerpt
+    },
+    noticeBar {
+      enabled,
+      autoMondayClosing,
+      customStatus {
+        label,
+        linkText,
+        linkUrl
+      }
     }
   }
 `
@@ -852,6 +941,7 @@ export const COLLECTION_PAGE_QUERY = groq`
         title,
         "slug": slug.current,
         creationDate,
+        medium,
         "artistName": artist->name,
         mainImage {
             asset-> {
@@ -894,34 +984,20 @@ export const ARTISTS_PAGE_QUERY = groq`
 `
 
 /**
- * Fetch the support page content.
+ * Fetch the team/personnel content.
  */
-export const SUPPORT_PAGE_QUERY = groq`
-  *[_type == "supportPage"][0] {
-    ...,
-    header {
-      ...,
-      image {
-        asset-> {
-          _id,
-          url,
-          metadata { lqip }
-        }
+export const TEAM_QUERY = groq`
+  *[_type == "person"] | order(name[0].value asc) {
+    _id,
+    name,
+    "slug": slug.current,
+    roles,
+    image {
+      asset-> {
+        _id,
+        metadata { lqip }
       }
     },
-    tiers[] {
-      ...,
-      description
-    },
-    sections[] {
-      ...,
-      image {
-        asset-> {
-          _id,
-          url,
-          metadata { lqip }
-        }
-      }
-    }
+    bio
   }
 `

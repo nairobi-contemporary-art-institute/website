@@ -5,7 +5,7 @@ import { gsap } from '@/lib/gsap'
 import { useGSAP } from '@gsap/react'
 import { Link } from '@/i18n'
 import { urlFor } from '@/sanity/lib/image'
-import { getLocalizedValue } from '@/sanity/lib/utils'
+import { getLocalizedValue, portableTextToPlainText, getLocalizedValueAsString } from "@/sanity/lib/utils";
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 
@@ -25,76 +25,138 @@ interface TimelineTeaserProps {
 
 export function TimelineTeaser({ events, locale, headline }: TimelineTeaserProps) {
     const containerRef = useRef<HTMLDivElement>(null)
+    const teaserRef = useRef<HTMLDivElement>(null)
 
     useGSAP(() => {
         const items = gsap.utils.toArray('.teaser-item')
+        if (items.length === 0) return
 
+        // Reveal animation
         gsap.fromTo(items,
-            { opacity: 0, y: 30 },
+            { opacity: 0, y: 60, scale: 0.95 },
             {
                 opacity: 1,
                 y: 0,
-                duration: 0.8,
-                stagger: 0.2,
+                scale: 1,
+                duration: 1.2,
+                ease: "expo.out",
+                stagger: 0.15,
                 scrollTrigger: {
                     trigger: containerRef.current,
-                    start: "top 80%",
+                    start: "top 75%",
                 }
             }
         )
-    }, { scope: containerRef })
+
+        // Mouse follow motion for years
+        const handleMouseMove = (e: MouseEvent) => {
+            const { clientX, clientY } = e
+            const xPos = (clientX / window.innerWidth - 0.5) * 40
+            const yPos = (clientY / window.innerHeight - 0.5) * 40
+
+            gsap.to('.teaser-year-bg', {
+                x: xPos,
+                y: yPos,
+                duration: 2,
+                ease: "power2.out",
+                stagger: 0.05
+            })
+        }
+
+        window.addEventListener('mousemove', handleMouseMove)
+        return () => window.removeEventListener('mousemove', handleMouseMove)
+    }, { scope: containerRef, dependencies: [events] })
 
     return (
-        <section ref={containerRef} className="bg-charcoal text-ivory py-32 overflow-hidden">
-            <div className="container mx-auto px-6">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-                    <div className="max-w-2xl">
-                        <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-amber-500 mb-6 block">Our Legacy</span>
-                        <h2 className="text-4xl md:text-6xl font-bold tracking-tighter leading-none">
+        <section ref={containerRef} className="bg-charcoal text-ivory py-32 md:py-48 overflow-hidden relative">
+            {/* Subtle background grain or texture could go here */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/asfalt-dark.png')]" />
+
+            <div className="container mx-auto px-6 relative z-10">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-12">
+                    <div className="max-w-3xl">
+                        <div className="flex items-center gap-4 mb-8">
+                            <div className="w-12 h-px bg-amber-500/50" />
+                            <span className="text-[10px] capitalize tracking-[0.5em] font-bold text-amber-500">The Institutional Journey</span>
+                        </div>
+                        <h2 className="text-5xl md:text-8xl font-bold tracking-tighter leading-[0.9] capitalize italic sm:not-italic">
                             {headline || (
-                                <>TRACING THE EVOLUTION <br /> OF PRACTICE</>
+                                <>A Legacy of <br /><span className="text-amber-500">Transcendence</span></>
                             )}
                         </h2>
                     </div>
                     <Link
                         href="/timeline"
-                        className="group flex items-center gap-4 text-xs font-bold uppercase tracking-[0.2em] border-b border-ivory/20 pb-2 hover:border-amber-500 transition-all"
+                        className="group flex items-center gap-6 text-[10px] font-bold capitalize tracking-[0.3em] py-4 px-8 border border-ivory/20 hover:border-amber-500 hover:bg-amber-500 hover:text-charcoal transition-all duration-500 rounded-full"
                     >
-                        Explore Full Timeline
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        Enter Archive
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
                     </Link>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-ivory/10">
-                    {events.slice(0, 3).map((event, idx) => (
-                        <div key={event._id} className="teaser-item group relative aspect-[4/5] bg-charcoal overflow-hidden p-8 flex flex-col justify-end">
-                            {/* Background Image (Grayscale by default) */}
-                            {event.media && (
-                                <div className="absolute inset-0 opacity-40 group-hover:opacity-60 transition-opacity duration-700">
-                                    <Image
-                                        src={urlFor(event.media).width(800).height(1000).url()}
-                                        alt={getLocalizedValue(event.title, locale) || String(event.year)}
-                                        fill
-                                        className="object-cover grayscale"
-                                    />
-                                </div>
-                            )}
-
-                            {/* Overlay Gradient */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/20 to-transparent opacity-80" />
-
-                            <div className="relative z-10 space-y-4">
-                                <span className="text-5xl font-bold tracking-tighter text-amber-500/50 group-hover:text-amber-500 transition-colors">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 min-h-[600px] items-start">
+                    {events.slice(0, 4).map((event, idx) => {
+                        const description = getLocalizedValue(event.description, locale);
+                        return (
+                            <div
+                                key={event._id}
+                                className={`teaser-item group relative aspect-[3/4] overflow-hidden flex flex-col justify-end p-8 transition-transform duration-700
+                                    ${idx % 2 === 1 ? 'lg:mt-24' : 'lg:mt-0'}
+                                `}
+                            >
+                                {/* Huge Background Year */}
+                                <div className="teaser-year-bg absolute -top-10 -left-10 text-[10rem] font-black text-ivory/[0.03] select-none z-0">
                                     {event.year}
-                                </span>
-                                <h3 className="text-xl md:text-2xl font-bold tracking-tight">
-                                    {getLocalizedValue(event.title, locale)}
-                                </h3>
-                                <div className="w-0 group-hover:w-full h-px bg-amber-500 transition-all duration-700" />
+                                </div>
+
+                                {/* Background Image with sophisticated blend */}
+                                {event.media && (
+                                    <div className="absolute inset-0 z-0">
+                                        <div className="absolute inset-0 bg-charcoal mix-blend-multiply opacity-40 group-hover:opacity-20 transition-opacity duration-700" />
+                                        <Image
+                                            src={urlFor(event.media).width(800).height(1000).url()}
+                                            alt={getLocalizedValue(event.title, locale) || String(event.year)}
+                                            fill
+                                            className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100"
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                                        />
+                                    </div>
+                                )}
+
+                                {/* Border overlay */}
+                                <div className="absolute inset-0 border border-ivory/5 group-hover:border-amber-500/30 transition-colors duration-700 z-10" />
+
+                                {/* Overlay Gradient */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent opacity-90 group-hover:opacity-70 transition-opacity z-10" />
+
+                                <div className="relative z-20 space-y-6">
+                                    <span className="text-xs font-bold tracking-[0.3em] text-amber-500 block transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                        {event.year}
+                                    </span>
+                                    <h3 className="text-2xl font-bold tracking-tight leading-tight transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                                        {getLocalizedValueAsString(event.title, locale)}
+                                    </h3>
+
+                                    <p className="text-sm text-ivory/60 line-clamp-2 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100 transform translate-y-4 group-hover:translate-y-0">
+                                        {description ? (typeof description === 'string' ? description : portableTextToPlainText(description)) : ''}
+                                    </p>
+
+                                    <div className="pt-4 overflow-hidden">
+                                        <div className="h-px bg-amber-500 w-0 group-hover:w-full transition-all duration-1000" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
+            </div>
+
+            {/* Ambient Curvilinear Element (Decorative) */}
+            <div className="absolute top-0 right-0 w-1/2 h-full pointer-events-none opacity-10">
+                <svg viewBox="0 0 500 1000" className="w-full h-full text-amber-500" fill="none" stroke="currentColor">
+                    <path d="M500,0 C400,300 100,700 0,1000" strokeWidth="0.5" />
+                    <path d="M500,100 C410,350 110,750 0,1100" strokeWidth="0.2" strokeDasharray="10 20" />
+                </svg>
             </div>
         </section>
     )

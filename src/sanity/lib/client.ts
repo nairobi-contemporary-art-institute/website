@@ -21,14 +21,16 @@ export async function sanityFetch<QueryResponse>({
     query,
     params = {},
     tags,
+    revalidate = 3600, // Default to 1 hour
 }: {
     query: string
     params?: Record<string, any>
     tags?: string[]
+    revalidate?: number | false
 }) {
     return client.fetch<QueryResponse>(query, params, {
         next: {
-            revalidate: false,
+            revalidate,
             tags,
         },
     })

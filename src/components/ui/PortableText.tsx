@@ -17,6 +17,7 @@ export const components = (locale?: string) => ({
                             alt={value.alt || ''}
                             fill
                             className="object-cover"
+                            sizes="(max-width: 1024px) 100vw, 1200px"
                         />
                     </div>
                     {caption && (
@@ -32,7 +33,7 @@ export const components = (locale?: string) => ({
         h1: ({ children }: any) => <h1 className="text-4xl font-bold mt-12 mb-6 tracking-tighter">{children}</h1>,
         h2: ({ children }: any) => <h2 className="text-3xl font-bold mt-10 mb-5 tracking-tight">{children}</h2>,
         h3: ({ children }: any) => <h3 className="text-2xl font-bold mt-8 mb-4">{children}</h3>,
-        h4: ({ children }: any) => <h4 className="text-xl font-bold mt-6 mb-3 tracking-tight uppercase tracking-wider">{children}</h4>,
+        h4: ({ children }: any) => <h4 className="text-xl font-bold mt-6 mb-3 tracking-tight capitalize tracking-wider">{children}</h4>,
         blockquote: ({ children }: any) => (
             <blockquote className="border-l-4 border-umber/20 pl-6 py-2 my-8 italic text-xl text-umber/80">
                 {children}

@@ -1,7 +1,17 @@
 {
     "HomePage": {
         "title": "Taasisi ya Sanaa ya Kisasa ya Nairobi",
-        "description": "Nafasi ya sanaa ya kuona isiyo ya kifaida iliyojitolea kwa ukuaji na uhifadhi wa sanaa ya kisasa katika Afrika Mashariki."
+        "description": "Nafasi ya sanaa ya kuona isiyo ya kifaida iliyojitolea kwa ukuaji na uhifadhi wa sanaa ya kisasa katika Afrika Mashariki.",
+        "fromJournal": "Kutoka kwa Jarida",
+        "currentExh": "Maonyesho ya Sasa",
+        "getInvolved": "Jihusishe",
+        "supportNcai": "Saidia NCAI",
+        "joinCommunity": "Jiunge na jumuiya",
+        "stayConnected": "Endelea Kuungana",
+        "subscribeText": "Pokea sasisho za mara kwa mara kuhusu maonyesho yetu, programu za umma, na machapisho.",
+        "viewExh": "Tazama Onyesho",
+        "exploreCollection": "Explore Collection",
+        "viewFullCollection": "View Full Collection"
     },
     "Navigation": {
         "about": "Kuhusu",
@@ -21,23 +31,87 @@
             "title": "Tembelea Us",
             "description": "Habari juu ya jinsi ya kutembelea nafasi yetu ya nyumba ya sanaa.",
             "location": "Mahali",
-            "hours": "Saa za Kufungua"
+            "hours": "Saa za Kufungua",
+            "normalOpeningHours": "Saa za Kufungua Kawaida",
+            "NORMALOPENINGHOURS": "Saa za Kufungua Kawaida",
+            "locationLink": "Tupate",
+            "overviewLink": "Maelezo ya Jumla",
+            "directionsMapLink": "Maelekezo na Ramani",
+            "directionsLink": "Maelekezo",
+            "infoLink": "Habari",
+            "howToGetHere": "Jinsi ya kufika hapa",
+            "visitorInfo": "Habari kwa Wageni",
+            "callUs": "Tupigie",
+            "emailUs": "Tuandikie",
+            "closed": "Imefungwa",
+            "stayConnected": "Endelea Kuungana",
+            "joinCommunity": "Jiunge na jumuiya",
+            "subscribeText": "Pokea sasisho za mara kwa mara kuhusu maonyesho yetu, programu za umma, na machapisho.",
+            "subscribe": "Jisajili"
         },
         "exhibitions": {
             "title": "Maonyesho",
-            "description": "Maonyesho ya sasa, yajayo, na yaliyopita katika NCAI."
+            "description": "Maonyesho ya sasa, yajayo, na yaliyopita katika NCAI.",
+            "untitled": "Bila Kichwa",
+            "untitledExhibition": "Maonyesho Bila Kichwa",
+            "noImage": "Hakuna Picha",
+            "current": "Sasa",
+            "upcoming": "Yajayo",
+            "past": "Yaliyopita",
+            "found": "Maonyesho yaliyopatikana.",
+            "notFound": "Hakuna maonyesho yaliyopatikana."
         },
         "artists": {
             "title": "Wasanii",
-            "description": "Saraka ya wasanii walioonyeshwa katika NCAI."
+            "description": "Saraka ya wasanii walioonyeshwa katika NCAI.",
+            "noArtists": "Hakuna wasanii waliopatikana kwa chaguo hili.",
+            "relatedTitle": "Wasanii wenye mwelekeo sawa",
+            "projectsTitle": "Miradi ya hivi karibuni, ya sasa na ijayo",
+            "newsTitle": "Habari na Nyenzo",
+            "noNews": "Hakuna habari zinazopatikana kwa sasa.",
+            "museumExhibitionsTitle": "Maonyesho ya Makumbusho",
+            "ncaiExhibitionsTitle": "Maonyesho katika NCAI",
+            "worksArchive": "Kumbukumbu ya Kazi",
+            "noImage": "Hakuna Picha",
+            "exhibition": "Maonyesho",
+            "artistLabel": "Msanii",
+            "artworkLabel": "Kazi ya Sanaa"
+        },
+        "collection": {
+            "title": "Mkusanyiko",
+            "description": "Mkusanyiko wetu ni kumbukumbu inayokua ya uzalishaji wa kisanii wa kisasa na wa kileo, ukiwa na kitovu wake Afrika Mashariki.",
+            "noItems": "Vitu vya mshusanyiko vitaongezwa hivi karibuni.",
+            "year": "Mwaka",
+            "medium": "Njia",
+            "dimensions": "Vipimo",
+            "edition": "Toleo",
+            "acquisitionDate": "Tarehe ya Upataji",
+            "creditLine": "Mstari wa Mikopo",
+            "notAvailable": "Hazipatikani",
+            "by": "na",
+            "untitled": "Bila Kichwa",
+            "unknownArtist": "Msanii Asiyejulikana",
+            "noImage": "Hakuna Picha",
+            "detailsDescription": "Maelezo ya kazi ya sanaa {title} katika Mkusanyiko wa NCAI."
         },
         "channel": {
             "title": "Chaneli",
-            "description": "Habari, mahojiano, na maarifa kutoka NCAI."
+            "description": "Habari, mahojiano, na maarifa kutoka NCAI.",
+            "noContent": "Hakuna maudhui yaliyopatikana",
+            "filterAll": "Zote",
+            "filterWatch": "Tazama (Video)",
+            "filterListen": "Sikiliza (Audio)",
+            "filterRead": "Soma (Makala)"
         },
         "education": {
             "title": "Elimu",
-            "description": "Warsha, mazungumzo, na programu katika NCAI."
+            "description": "Warsha, mazungumzo, na programu katika NCAI.",
+            "allPrograms": "Programu Zote",
+            "noPrograms": "Hakuna programu zilizopatikana",
+            "filterAll": "Zote",
+            "filterSchools": "Shule",
+            "filterFamilies": "Familia",
+            "filterPublic": "Umma"
         },
         "contact": {
             "title": "Wasiliana nasi",
@@ -60,6 +134,11 @@
             "relatedExhibitions": "Kuhusiana na",
             "archived": "Hifadhi",
             "noUpcoming": "Hakuna matukio yajayo kwa sasa."
+        },
+        "accessibility": {
+            "title": "Ufikiaji",
+            "description": "Habari juu ya ufikiaji wa kimwili na kidijitali katika NCAI.",
+            "intro": "Sanaa ni ya kila mtu. Tunatii kikamilifu viwango vya WCAG 2.2 AAA ili kuhakikisha huduma ya kidijitali ya NCAI enaweza kutumiwa na watu wenye uwezo tofauti. Kimwili, nafasi yetu imeundwa kuwa ya kukaribisha na kufikiwa na wote."
         }
     },
     "Search": {

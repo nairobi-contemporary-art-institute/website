@@ -18,8 +18,8 @@ export default function Error({
     }, [error])
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-[60vh] px-6 text-center">
-            <h2 className="text-2xl font-bold text-charcoal mb-4 uppercase tracking-widest italic">
+        <div className="flex flex-col items-center justify-center min-h-[60vh] px-section-clamp text-center">
+            <h2 className="text-2xl font-bold text-charcoal mb-4 capitalize tracking-widest italic">
                 {t('title')}
             </h2>
             <p className="text-umber/90 max-w-md mx-auto mb-10">
@@ -28,13 +28,13 @@ export default function Error({
             <div className="flex gap-4">
                 <button
                     onClick={() => reset()}
-                    className="px-8 py-3 border border-charcoal text-charcoal text-xs font-bold uppercase tracking-widest hover:bg-charcoal hover:text-ivory transition-all"
+                    className="px-8 py-3 border border-charcoal text-charcoal text-xs font-bold capitalize tracking-widest hover:bg-charcoal hover:text-ivory transition-all"
                 >
                     {t('tryAgain')}
                 </button>
                 <Link
                     href="/"
-                    className="px-8 py-3 bg-charcoal text-ivory text-xs font-bold uppercase tracking-widest hover:bg-amber-900 transition-colors"
+                    className="px-8 py-3 bg-charcoal text-ivory text-xs font-bold capitalize tracking-widest hover:bg-amber-900 transition-colors"
                 >
                     {t('goHome')}
                 </Link>

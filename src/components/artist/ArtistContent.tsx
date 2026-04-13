@@ -8,6 +8,8 @@ import { WorksGridOverlay } from './WorksGridOverlay'
 import Image from 'next/image'
 import { urlFor } from '@/sanity/lib/image'
 import { ArtCaption } from '@/components/ui/ArtCaption'
+import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 interface ArtistContentProps {
     artist: any
@@ -15,6 +17,7 @@ interface ArtistContentProps {
 }
 
 export function ArtistContent({ artist, locale }: ArtistContentProps) {
+    const t = useTranslations('Pages.artists')
     const [isGridOpen, setIsGridOpen] = useState(false)
 
     const name = getLocalizedValue(artist.name, locale)
@@ -73,7 +76,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                 {/* Projects */}
                 {artist.forthcomingProjects && artist.forthcomingProjects.length > 0 && (
                     <section className="space-y-8">
-                        <h2 className="text-2xl font-bold text-charcoal tracking-tight">Recent, current and forthcoming projects</h2>
+                        <h2 className="text-2xl font-bold text-charcoal tracking-tight">{t('projectsTitle')}</h2>
                         <ul className="space-y-6">
                             {artist.forthcomingProjects.map((project: any, i: number) => (
                                 <li key={i} className="group flex flex-col gap-1">
@@ -96,7 +99,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
 
                 {/* News / Links */}
                 <section className="space-y-8">
-                    <h2 className="text-2xl font-bold text-charcoal tracking-tight">News & Resources</h2>
+                    <h2 className="text-2xl font-bold text-charcoal tracking-tight">{t('newsTitle')}</h2>
                     <ul className="space-y-4">
                         {artist.news?.map((item: any, i: number) => (
                             <li key={i}>
@@ -107,7 +110,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                         ))}
                         {/* Static placeholders from benchmark for now just to match if desired, but better to keep dynamic */}
                         {!artist.news && (
-                            <li className="text-xs text-charcoal/40 italic">No news available at this time.</li>
+                            <li className="text-xs text-charcoal/40 italic">{t('noNews')}</li>
                         )}
                     </ul>
                 </section>
@@ -116,7 +119,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
             {/* Bottom Section: Museum Exhibitions */}
             {artist.museumExhibitions && artist.museumExhibitions.length > 0 && (
                 <section className="space-y-12">
-                    <h2 className="text-3xl font-bold text-charcoal tracking-tight">Museum Exhibitions</h2>
+                    <h2 className="text-3xl font-bold text-charcoal tracking-tight">{t('museumExhibitionsTitle')}</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         {artist.museumExhibitions.map((exh: any, i: number) => {
                             const caption = getLocalizedValue(exh.image?.caption, locale)
@@ -130,6 +133,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                                                     alt={exh.title}
                                                     fill
                                                     className="object-cover group-hover:scale-102 transition-transform duration-700"
+                                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                                     placeholder="blur"
                                                     blurDataURL={exh.image.asset?.metadata?.lqip}
                                                 />
@@ -155,7 +159,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
             {/* NCAI Exhibitions Section */}
             {artist.exhibitions && artist.exhibitions.length > 0 && (
                 <section className="space-y-12">
-                    <h2 className="text-3xl font-bold text-charcoal tracking-tight">Exhibitions at NCAI</h2>
+                    <h2 className="text-3xl font-bold text-charcoal tracking-tight">{t('ncaiExhibitionsTitle')}</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         {artist.exhibitions.map((exhibition: any) => {
                             const exTitle = getLocalizedValue(exhibition.title, locale)
@@ -169,12 +173,17 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                                         {exhibition.mainImage?.asset ? (
                                             <Image
                                                 src={urlFor(exhibition.mainImage).width(800).height(600).url()}
-                                                alt={exTitle || 'Exhibition'}
+                                                alt={exTitle || t('exhibition')}
                                                 fill
                                                 className="object-cover group-hover:scale-102 transition-transform duration-700"
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                {...(exhibition.mainImage.asset.metadata?.lqip && {
+                                                    placeholder: 'blur',
+                                                    blurDataURL: exhibition.mainImage.asset.metadata.lqip
+                                                })}
                                             />
                                         ) : (
-                                            <div className="w-full h-full flex items-center justify-center text-umber/20">No Image</div>
+                                            <div className="w-full h-full flex items-center justify-center text-umber/20">{t('noImage')}</div>
                                         )}
                                     </div>
                                     <div className="space-y-1">
@@ -192,13 +201,55 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                 </section>
             )}
 
+            {/* Related Artists Section */}
+            {artist.relatedArtists && artist.relatedArtists.length > 0 && (
+                <section className="space-y-12">
+                    <h2 className="text-3xl font-bold text-charcoal tracking-tight">{t('relatedTitle')}</h2>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8">
+                        {artist.relatedArtists.map((related: any) => {
+                            const relName = getLocalizedValue(related.name, locale)
+                            return (
+                                <Link
+                                    key={related._id}
+                                    href={`/${locale}/artists/${related.slug || ''}`}
+                                    className="group space-y-3"
+                                >
+                                    <div className="aspect-[3/4] relative bg-charcoal/5 overflow-hidden">
+                                        {related.image?.asset ? (
+                                            <Image
+                                                src={urlFor(related.image).width(400).height(600).url()}
+                                                alt={relName || t('artistLabel')}
+                                                fill
+                                                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 16vw"
+                                                {...(related.image.asset.metadata?.lqip && {
+                                                    placeholder: 'blur',
+                                                    blurDataURL: related.image.asset.metadata.lqip
+                                                })}
+                                            />
+                                        ) : (
+                                            <div className="w-full h-full flex items-center justify-center text-charcoal/20 text-2xl font-bold">
+                                                {relName?.[0]}
+                                            </div>
+                                        )}
+                                    </div>
+                                    <h3 className="text-xs font-bold text-charcoal leading-tight group-hover:underline decoration-charcoal/20 transition-all capitalize tracking-tight">
+                                        {relName}
+                                    </h3>
+                                </Link>
+                            )
+                        })}
+                    </div>
+                </section>
+            )}
+
             {/* Overlays */}
             <WorksGridOverlay
                 isOpen={isGridOpen}
                 onClose={() => setIsGridOpen(false)}
                 works={artist.works}
                 locale={locale}
-                artistName={name || 'Artist'}
+                artistName={name || t('artistLabel')}
             />
         </div>
     )

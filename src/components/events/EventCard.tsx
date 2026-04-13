@@ -29,7 +29,7 @@ export function EventCard({ event, locale, variant = 'default' }: EventCardProps
                 className="group flex flex-col gap-2 p-4 border border-transparent hover:border-umber/20 transition-colors"
             >
                 <div className="flex justify-between items-start">
-                    <span className="text-xs font-mono uppercase tracking-widest text-umber">
+                    <span className="text-xs font-mono capitalize tracking-widest text-umber">
                         {event.eventType}
                     </span>
                     <span className={cn(
@@ -61,6 +61,7 @@ export function EventCard({ event, locale, variant = 'default' }: EventCardProps
                         alt={event.mainImage.alt || title || 'Event'}
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         placeholder="blur"
                         blurDataURL={event.mainImage.asset?.metadata?.lqip}
                     />
@@ -69,7 +70,7 @@ export function EventCard({ event, locale, variant = 'default' }: EventCardProps
                         NO IMAGE
                     </div>
                 )}
-                <div className="absolute top-0 left-0 bg-white/90 backdrop-blur px-3 py-1 text-xs uppercase tracking-widest font-medium border-b border-r border-charcoal/10">
+                <div className="absolute top-0 left-0 bg-white/90 backdrop-blur px-3 py-1 text-xs capitalize tracking-widest font-medium border-b border-r border-charcoal/10">
                     {event.eventType}
                 </div>
             </div>
@@ -94,7 +95,7 @@ export function EventCard({ event, locale, variant = 'default' }: EventCardProps
                         {event.tags.slice(0, 3).map((tag: any) => (
                             <span
                                 key={tag._id}
-                                className="text-[10px] uppercase tracking-widest text-charcoal/60 border border-charcoal/10 px-2 py-0.5"
+                                className="text-[10px] capitalize tracking-widest text-charcoal/60 border border-charcoal/10 px-2 py-0.5"
                             >
                                 {getLocalizedValue(tag.title, locale)}
                             </span>

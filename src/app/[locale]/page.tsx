@@ -8,7 +8,12 @@ import Image from 'next/image'
 import { ResponsiveDivider } from '@/components/ui/ResponsiveDivider'
 import { TimelineTeaser } from '@/components/home/TimelineTeaser'
 import { HomeHero } from '@/components/home/HomeHero'
+import { HomeHeroNew } from '@/components/home/HomeHeroNew'
 import { PortableText } from '@/components/ui/PortableText'
+import { MuseumGrid } from '@/components/ui/MuseumGrid'
+import { MuseumCardData } from '@/lib/types/museum-card'
+import { CollectionTeaser } from '@/components/home/CollectionTeaser'
+import { COLLECTION_QUERY } from '@/sanity/lib/queries'
 
 // Define interfaces for fetched data
 interface Exhibition {
@@ -37,8 +42,19 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     sanityFetch<Exhibition[]>({ query: EXHIBITIONS_QUERY, tags: ['exhibition'] }),
     sanityFetch<Post[]>({ query: POSTS_QUERY, tags: ['post'] }),
     sanityFetch<any[]>({ query: TIMELINE_QUERY, tags: ['timeline'] }),
-    sanityFetch<any>({ query: HOME_PAGE_QUERY, tags: ['homePage'] })
+    sanityFetch<any>({ query: HOME_PAGE_QUERY, tags: ['homePage'] }),
+    sanityFetch<any[]>({ query: COLLECTION_QUERY, tags: ['collectionItem'] })
   ])
+
+  // Process collection items for the teaser
+  let teaserItems = homeData?.collectionTeaser?.featuredItems || []
+  if (teaserItems.length === 0 && homeData?.collectionTeaser?.enabled !== false) {
+    // Fallback to latest collection items if none selected manually
+     teaserItems = (await sanityFetch<any[]>({ 
+      query: COLLECTION_QUERY, 
+      tags: ['collectionItem'] 
+    })).slice(0, 12)
+  }
 
   const now = new Date()
 
@@ -48,6 +64,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   // 4. Fallback: Most recent exhibition
 
   let latestExhibition = homeData?.featuredExhibition
+  const exhT = await getTranslations({ locale, namespace: 'Pages.exhibitions' })
 
   if (!latestExhibition && exhibitions && exhibitions.length > 0) {
     const today = new Date()
@@ -88,23 +105,53 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   const latestPost = homeData?.featuredPost || posts?.[0] as Post | undefined
 
+  // Map exhibitions and posts into the unified MuseumCardData interface
+  const gridItems: MuseumCardData[] = [
+    ...(exhibitions || []).map((exh: any): MuseumCardData => ({
+      id: exh._id || exh.slug,
+      href: `/exhibitions/${exh.slug}`,
+      label: exhT('title'),
+      title: getLocalizedValue(exh.title, locale) || 'Untitled',
+      date: exh.startDate ? new Date(exh.startDate).getFullYear().toString() : '',
+      image: exh.listImage || exh.homepageImage || exh.mainImage,
+      tags: ['Exhibitions'],
+      backgroundColor: '#2a3b4c'
+    })),
+    ...(posts || []).map((post: any): MuseumCardData => ({
+      id: post._id || (post.slug?.current),
+      href: `/channel/${typeof post.slug === 'string' ? post.slug : post.slug?.current}`,
+      label: 'JOURNAL',
+      title: getLocalizedValue(post.title, locale) || 'Untitled Post',
+      image: post.mainImage,
+      tags: ['News', 'Journal'],
+      backgroundColor: '#a05a2c'
+    }))
+  ];
+
   return (
     <div className="flex flex-col min-h-screen">
-      {/* New Redesigned Hero Section */}
-      <HomeHero
-        exhibition={latestExhibition}
-        featuredCards={homeData?.featuredCards}
-        locale={locale}
-      />
+      {/* Hero Section — new configurable hero or legacy fallback */}
+      {homeData?.hero?.enabled && homeData?.hero?.slides?.length > 0 ? (
+        <HomeHeroNew heroData={homeData.hero} locale={locale} />
+      ) : (
+        <HomeHero
+          exhibition={latestExhibition}
+          featuredCards={homeData?.featuredCards}
+          locale={locale}
+        />
+      )}
+
+      {/* Masonry Museum Grid */}
+      <MuseumGrid items={gridItems} filterPrefix={t('exploreCollection')} />
 
       {/* Featured Section */}
-      <div className="container mx-auto px-6 py-24">
+      <div className="container mx-auto px-section-clamp py-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           {/* Latest Exhibition */}
           <div className="lg:col-span-7 flex flex-col gap-8">
-            <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-amber-800 block border-b border-amber-800/20 pb-4">
-              Current Exhibition
-            </span>
+            <h2 className="text-[10px] capitalize tracking-[0.2em] font-bold text-amber-800 block border-b border-amber-800/20 pb-4">
+              {latestExhibition && new Date(latestExhibition.startDate) > new Date() ? exhT('upcoming') : exhT('current')}
+            </h2>
 
             {latestExhibition ? (
               <Link href={`/exhibitions/${latestExhibition.slug}`} className="group block">
@@ -116,15 +163,16 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                       width={1200}
                       height={900}
                       className="w-full h-auto block"
+                      sizes="(max-width: 1024px) 100vw, 60vw"
                     />
                   )}
                 </div>
                 <div className="flex flex-col gap-4">
-                  <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-charcoal group-hover:text-amber-900 transition-colors">
+                  <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-charcoal group-hover:text-amber-900 transition-colors">
                     {getLocalizedValue(latestExhibition.title, locale) || 'Untitled Exhibition'}
-                  </h2>
-                  <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-amber-800 group-hover:translate-x-2 transition-transform">
-                    View Exhibition
+                  </h3>
+                  <div className="flex items-center gap-4 text-xs font-bold capitalize tracking-widest text-amber-800 group-hover:translate-x-2 transition-transform">
+                    {t('viewExh') || 'View Exhibition'}
                     <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
                       <path d="M15 1L19 5L15 9M0 5H19" stroke="currentColor" strokeWidth="1.5" />
                     </svg>
@@ -133,7 +181,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </Link>
             ) : (
               <div className="aspect-[4/3] flex items-center justify-center bg-gray-100 text-gray-400 italic">
-                No current exhibitions found.
+                {exhT('notFound')}
               </div>
             )}
           </div>
@@ -141,11 +189,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           {/* Latest News / Channel */}
           <div className="lg:col-span-5 flex flex-col gap-16">
             <div className="flex flex-col gap-8">
-              <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-amber-800 block border-b border-amber-800/20 pb-4">
-                From the Journal
-              </span>
+              <h2 className="text-[10px] capitalize tracking-[0.2em] font-bold text-amber-800 block border-b border-amber-800/20 pb-4">
+                {t('fromJournal')}
+              </h2>
               {latestPost ? (
-                <Link href={`/channel/${latestPost.slug.current}`} className="group flex flex-col gap-6">
+                <Link href={`/channel/${typeof latestPost.slug === 'string' ? latestPost.slug : latestPost.slug?.current}`} className="group flex flex-col gap-6">
                   <div className="aspect-[16/9] relative overflow-hidden bg-charcoal/5">
                     {latestPost.mainImage && (
                       <Image
@@ -153,6 +201,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                         alt={getLocalizedValue(latestPost.title, locale) || 'Post image'}
                         fill
                         className="object-cover"
+                        sizes="(max-width: 1024px) 100vw, 40vw"
                       />
                     )}
                   </div>
@@ -176,14 +225,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               )}
             </div>
 
-            <Link href="/support" className="mt-auto group relative overflow-hidden bg-charcoal text-ivory p-10 flex flex-col justify-between min-h-[300px]">
+            <Link href="/get-involved" className="mt-auto group relative overflow-hidden bg-charcoal text-ivory p-10 flex flex-col justify-between min-h-[300px]">
               <div className="relative z-10 flex flex-col gap-4">
-                <span className="text-[10px] uppercase tracking-widest font-bold text-emerald-400">Get Involved</span>
-                <h3 className="text-3xl font-bold tracking-tight max-w-[80%]">Join us in preserving contemporary art in East Africa.</h3>
+                <span className="text-[10px] capitalize tracking-widest font-bold text-emerald-400">{t('getInvolved')}</span>
+                <h3 className="text-3xl font-bold tracking-tight max-w-[80%]">{t('joinCommunity')}</h3>
               </div>
 
-              <div className="relative z-10 flex items-center gap-3 text-xs font-bold uppercase tracking-widest mt-8 group-hover:underline decoration-emerald-400 underline-offset-4 transition-all">
-                Support NCAI
+              <div className="relative z-10 flex items-center gap-3 text-xs font-bold capitalize tracking-widest mt-8 group-hover:underline decoration-emerald-400 underline-offset-4 transition-all">
+                {t('supportNcai')}
                 <div className="w-1.5 h-1.5 bg-emerald-400" />
               </div>
 
@@ -196,6 +245,19 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </div>
 
       <ResponsiveDivider variant="straight" weight="thin" className="text-umber/10" />
+
+      {/* Collection Teaser Section */}
+      {homeData?.collectionTeaser?.enabled !== false && (
+        <CollectionTeaser 
+          data={{
+            ...homeData.collectionTeaser,
+            featuredItems: teaserItems,
+            exploreCollectionLabel: t('exploreCollection'),
+            viewFullCollectionLabel: t('viewFullCollection')
+          }}
+          locale={locale}
+        />
+      )}
 
       {/* Timeline Teaser Section */}
       {(homeData?.timelineTeaser?.show !== false) && (

@@ -42,6 +42,7 @@ export function ChannelCard({ post, locale }: ChannelCardProps) {
                         alt={post.mainImage.alt || title || 'Post Image'}
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         placeholder="blur"
                         blurDataURL={post.mainImage.asset?.metadata?.lqip}
                     />
@@ -69,7 +70,7 @@ export function ChannelCard({ post, locale }: ChannelCardProps) {
             </div>
 
             <div className="flex flex-col flex-1 space-y-3">
-                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-umber">
+                <div className="flex items-center gap-2 text-xs font-mono capitalize tracking-widest text-umber">
                     <Icon className="w-3 h-3" />
                     <span>{typeLabel}</span>
                     {post.publishedAt && (
@@ -99,7 +100,7 @@ export function ChannelCard({ post, locale }: ChannelCardProps) {
                 {post.tags && post.tags.length > 0 && (
                     <div className="flex gap-2 flex-wrap pt-2">
                         {post.tags.slice(0, 3).map((tag: any) => (
-                            <span key={tag._id || Math.random()} className="text-[10px] uppercase tracking-widest text-amber-800/60 font-bold bg-amber-50 px-2 py-0.5">
+                            <span key={tag._id || Math.random()} className="text-[10px] capitalize tracking-widest text-amber-800/60 font-bold bg-amber-50 px-2 py-0.5">
                                 {getLocalizedValue(tag.title, locale)}
                             </span>
                         ))}

@@ -11,7 +11,7 @@ export async function generateMetadata() {
 export default async function StyleguidePage() {
     // We can fetch initial server-side data here if needed for the styleguide
     return (
-        <div className="bg-ivory selection:bg-ochre/20">
+        <div className="bg-white selection:bg-ochre/20">
             <StyleguideClient />
         </div>
     )

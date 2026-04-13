@@ -9,6 +9,9 @@ import { notFound } from 'next/navigation';
 import { routing, Locale } from '@/i18n';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { GridInspector } from '@/components/ui/Grid/GridInspector';
+import { EntranceAnimation } from '@/components/ui/EntranceAnimation/EntranceAnimation';
+
 
 const notoArabic = Noto_Sans_Arabic({
   variable: "--font-noto-arabic",
@@ -51,8 +54,11 @@ export const metadata: Metadata = {
 };
 
 import { AccessibilityProvider } from '@/contexts/AccessibilityContext';
-
+import { AnalyticsProvider } from '@/components/layout/AnalyticsProvider';
 import { ConditionalWrapper } from '@/components/layout/ConditionalWrapper';
+
+import { sanityFetch } from '@/sanity/lib/client';
+import { SITE_SETTINGS_QUERY } from '@/sanity/lib/queries';
 
 export default async function RootLayout({
   children,
@@ -84,18 +90,40 @@ export default async function RootLayout({
     notoEthiopic.variable
   ].join(' ');
 
+  // Fetch entrance animation backgrounds
+  const settings = await sanityFetch<{
+    entranceAnimationPool?: { 
+      alt: string; 
+      caption?: string; 
+      asset?: { url: string } 
+    }[];
+  }>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'], revalidate: 0 });
+
+  const fullPool = settings?.entranceAnimationPool
+    ?.filter(img => img?.asset?.url) || [];
+
+  // Take first 3 stably to avoid hydration mismatch from Math.random()
+  const entranceAnimImages = fullPool.slice(0, 3).map(img => ({
+    url: img.asset!.url,
+    alt: img.alt || "NCAI Entrance Animation Backdrop",
+  }));
+
   return (
-    <html lang={locale} dir={isRtl ? 'rtl' : 'ltr'} className={fontClasses} suppressHydrationWarning>
+    <html lang={locale} dir={isRtl ? 'rtl' : 'ltr'} className={fontClasses} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className="antialiased min-h-screen flex flex-col" suppressHydrationWarning>
-        <NextIntlClientProvider messages={messages}>
-          <AccessibilityProvider>
-            <ConditionalWrapper
-              header={<Header locale={locale} />}
-              footer={<Footer locale={locale} />}
-            >
-              {children}
-            </ConditionalWrapper>
-          </AccessibilityProvider>
+        <NextIntlClientProvider messages={messages} locale={locale}>
+          <AnalyticsProvider>
+            <AccessibilityProvider>
+              <GridInspector />
+              <EntranceAnimation backgroundImages={entranceAnimImages} />
+              <ConditionalWrapper
+                header={<Header locale={locale} />}
+                footer={<Footer locale={locale} />}
+              >
+                {children}
+              </ConditionalWrapper>
+            </AccessibilityProvider>
+          </AnalyticsProvider>
         </NextIntlClientProvider>
       </body>
     </html>

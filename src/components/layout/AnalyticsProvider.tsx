@@ -1,0 +1,45 @@
+'use client'
+
+import { useEffect } from 'react'
+import { usePathname } from '@/i18n'
+import Script from 'next/script'
+import { GA_TRACKING_ID, pageview } from '@/lib/analytics'
+
+export function AnalyticsProvider({ children }: { children: React.ReactNode }) {
+    const pathname = usePathname()
+
+    useEffect(() => {
+        if (pathname) {
+            pageview(pathname)
+        }
+    }, [pathname])
+
+    if (!GA_TRACKING_ID) {
+        return <>{children}</>
+    }
+
+    return (
+        <>
+            {/* Global Site Tag (gtag.js) - Google Analytics */}
+            <Script
+                strategy="afterInteractive"
+                src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+            />
+            <Script
+                id="gtag-init"
+                strategy="afterInteractive"
+                dangerouslySetInnerHTML={{
+                    __html: `
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', '${GA_TRACKING_ID}', {
+                            page_path: window.location.pathname,
+                        });
+                    `,
+                }}
+            />
+            {children}
+        </>
+    )
+}

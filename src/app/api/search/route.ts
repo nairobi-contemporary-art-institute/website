@@ -1,4 +1,4 @@
-import { client } from '@/sanity/lib/client'
+import { sanityFetch } from '@/sanity/lib/client'
 import { NextResponse } from 'next/server'
 
 export async function GET(request: Request) {
@@ -13,7 +13,7 @@ export async function GET(request: Request) {
   // We use match and score for basic relevance
   // Note: title/name are often internationalized arrays, so we search their values
   const query = `
-    *[_type in ["post", "exhibition", "artist", "program", "event"] && 
+    *[_type in ["post", "exhibition", "artist", "program", "event", "collectionItem"] && 
       (
         title match $term + "*" || 
         title[].value match $term + "*" ||
@@ -43,7 +43,11 @@ export async function GET(request: Request) {
   `
 
   try {
-    const results = await client.fetch(query, { term })
+    const results = await sanityFetch<any[]>({
+      query,
+      params: { term },
+      revalidate: 30 // Short 30s cache for search to protect quota while staying fresh
+    })
     return NextResponse.json({ results })
   } catch (error) {
     console.error('Search error:', error)

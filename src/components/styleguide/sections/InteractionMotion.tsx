@@ -40,7 +40,7 @@ export function InteractionMotion() {
     return (
         <section ref={container} className="space-y-12">
             <div>
-                <h2 className="text-4xl font-bold text-charcoal tracking-tighter uppercase mb-4">09 Interaction & Motion</h2>
+                <h2 className="text-4xl font-bold text-charcoal tracking-tighter capitalize mb-4">09 Interaction & Motion</h2>
                 <p className="text-lg text-umber/80 max-w-2xl">
                     NCAI's digital experience relies on fluid, physics-based motion to guide users through its historical narratives.
                     We use <strong>GSAP</strong> as our primary animation engine.
@@ -49,7 +49,7 @@ export function InteractionMotion() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div className="p-8 border border-umber/10 bg-white space-y-4">
-                    <h3 className="text-xs font-bold uppercase tracking-widest text-umber/60">GSAP Core Check</h3>
+                    <h3 className="text-xs font-bold capitalize tracking-widest text-umber/60">GSAP Core Check</h3>
                     <div
                         ref={boxRef}
                         className="w-20 h-20 bg-ochre flex items-center justify-center text-ivory font-bold text-xs"
@@ -62,9 +62,9 @@ export function InteractionMotion() {
                 </div>
 
                 <div className="p-8 border border-umber/10 bg-white space-y-4 scroll-section overflow-hidden">
-                    <h3 className="text-xs font-bold uppercase tracking-widest text-umber/60">ScrollTrigger Check</h3>
+                    <h3 className="text-xs font-bold capitalize tracking-widest text-umber/60">ScrollTrigger Check</h3>
                     <div className="h-40 relative border-l border-dashed border-umber/20 pl-4">
-                        <div className="scroll-box w-16 h-16 bg-charcoal flex items-center justify-center text-ivory font-bold text-[10px] uppercase">
+                        <div className="scroll-box w-16 h-16 bg-charcoal flex items-center justify-center text-ivory font-bold text-[10px] capitalize">
                             Scroll Me
                         </div>
                     </div>
@@ -75,18 +75,18 @@ export function InteractionMotion() {
             </div>
 
             <div className="p-12 border border-umber/10 bg-charcoal text-ivory space-y-6">
-                <h3 className="text-2xl font-bold tracking-tighter uppercase">Motion Principles</h3>
+                <h3 className="text-2xl font-bold tracking-tighter capitalize">Motion Principles</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div className="space-y-2">
-                        <h4 className="text-ochre font-bold uppercase text-xs tracking-widest">01 Curvilinear</h4>
+                        <h4 className="text-ochre font-bold capitalize text-xs tracking-widest">01 Curvilinear</h4>
                         <p className="text-xs text-ivory/60 leading-relaxed">Motion follows natural, non-linear paths, reflecting the organic growth of art history.</p>
                     </div>
                     <div className="space-y-2">
-                        <h4 className="text-ochre font-bold uppercase text-xs tracking-widest">02 Purposeful</h4>
+                        <h4 className="text-ochre font-bold capitalize text-xs tracking-widest">02 Purposeful</h4>
                         <p className="text-xs text-ivory/60 leading-relaxed">No motion for its own sake. Every transition must serve hierarchical clarity or narrative flow.</p>
                     </div>
                     <div className="space-y-2">
-                        <h4 className="text-ochre font-bold uppercase text-xs tracking-widest">03 Accessible</h4>
+                        <h4 className="text-ochre font-bold capitalize text-xs tracking-widest">03 Accessible</h4>
                         <p className="text-xs text-ivory/60 leading-relaxed">Respect <code>prefers-reduced-motion</code>. Provide static alternatives for all essential navigation.</p>
                     </div>
                 </div>

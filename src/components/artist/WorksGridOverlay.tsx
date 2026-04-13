@@ -4,6 +4,7 @@ import { X } from 'lucide-react'
 import Image from 'next/image'
 import { urlFor } from '@/sanity/lib/image'
 import { getLocalizedValue } from '@/sanity/lib/utils'
+import { useTranslations } from 'next-intl'
 
 interface Work {
     _id: string
@@ -23,15 +24,17 @@ interface WorksGridOverlayProps {
 }
 
 export function WorksGridOverlay({ isOpen, onClose, works, locale, artistName }: WorksGridOverlayProps) {
+    const t = useTranslations('Pages.artists')
+
     if (!isOpen) return null
 
     return (
         <div className="fixed inset-0 z-[60] bg-white overflow-y-auto">
-            <div className="container mx-auto px-6 py-12">
+            <div className="container py-12">
                 <header className="flex justify-between items-center mb-16 sticky top-0 bg-white/90 backdrop-blur-sm py-4 z-10">
                     <div>
                         <h2 className="text-2xl font-bold text-charcoal">{artistName}</h2>
-                        <p className="text-sm text-charcoal/60 uppercase tracking-widest">Works Archive</p>
+                        <p className="text-sm text-charcoal/60 capitalize tracking-widest">{t('worksArchive')}</p>
                     </div>
                     <button
                         onClick={onClose}
@@ -49,9 +52,14 @@ export function WorksGridOverlay({ isOpen, onClose, works, locale, artistName }:
                                 <div className="aspect-square relative bg-charcoal/5 overflow-hidden">
                                     <Image
                                         src={urlFor(work.image).width(600).height(600).url()}
-                                        alt={title || 'Artwork'}
+                                        alt={title || t('artworkLabel')}
                                         fill
                                         className="object-cover"
+                                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                                        {...(work.image?.asset?.metadata?.lqip && {
+                                            placeholder: 'blur',
+                                            blurDataURL: work.image.asset.metadata.lqip
+                                        })}
                                     />
                                 </div>
                                 <div className="space-y-1">

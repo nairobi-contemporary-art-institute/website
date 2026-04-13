@@ -36,7 +36,7 @@ export function TimelinePath({ className }: TimelinePathProps) {
                 scrub: 0.5,
             },
         })
-    }, { scope: containerRef })
+    }, { scope: containerRef, dependencies: [isReducedMotion] })
 
     return (
         <div ref={containerRef} className={className} style={{ position: 'absolute', top: 0, bottom: 0, width: '40px' }}>

@@ -56,7 +56,7 @@ export function LogoGrid({ partners, locale, title }: LogoGridProps) {
 
                             {/* Text Layer (Starts below/outside and slides in) */}
                             <div className="absolute inset-x-0 bottom-8 flex flex-col items-center px-4 translate-y-full group-hover:translate-y-0 transition-all duration-500 ease-out opacity-0 group-hover:opacity-100">
-                                <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-charcoal text-center leading-tight max-w-[80%]">
+                                <p className="text-[10px] font-bold tracking-[0.2em] capitalize text-charcoal text-center leading-tight max-w-[80%]">
                                     {name}
                                 </p>
                             </div>

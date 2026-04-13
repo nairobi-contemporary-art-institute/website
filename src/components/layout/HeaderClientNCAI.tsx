@@ -1,0 +1,388 @@
+'use client'
+
+import { useState, useEffect, useRef } from 'react'
+import { usePathname } from '@/i18n'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n'
+import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher'
+import { SearchModal } from '@/components/ui/SearchModal'
+import { Logo } from '@/components/ui/Logo'
+import { cn } from '@/lib/utils'
+import { gsap } from '@/lib/gsap'
+import { useGSAP } from '@gsap/react'
+import { MegaMenu } from './MegaMenu'
+
+interface HeaderClientProps {
+    locale: string;
+    openingStatus: React.ReactNode;
+    navLinks: Array<{
+        label: string;
+        href: string;
+        columns?: Array<{
+            title?: string;
+            links: Array<{ label: string; href: string }>;
+        }>;
+    }>;
+    featuredImages?: any[];
+}
+
+export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], featuredImages = [] }: HeaderClientProps) {
+    const t = useTranslations('HomePage')
+    const pathname = usePathname()
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+    const [isSearchOpen, setIsSearchOpen] = useState(false)
+    const [isScrolled, setIsScrolled] = useState(false)
+    const [activeMenuIndex, setActiveMenuIndex] = useState<number | null>(null)
+    const [isHoveringHeader, setIsHoveringHeader] = useState(false)
+    const [mounted, setMounted] = useState(false)
+    
+    useEffect(() => {
+        setMounted(true)
+    }, [])
+
+    // Refs for GSAP
+    const headerRef = useRef<HTMLDivElement>(null)
+    const initialLogoRef = useRef<HTMLDivElement>(null)
+    const fullLogoRef = useRef<HTMLDivElement>(null)
+    const bannerRef = useRef<HTMLDivElement>(null)
+
+    // Animation for logo matching the legacy one exactly
+    useGSAP(() => {
+        if (window.innerWidth < 768) return
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: typeof document !== 'undefined' ? document.body : null,
+                start: "top top",
+                end: "200px top",
+                scrub: 0.5,
+            }
+        })
+
+        tl.to(initialLogoRef.current, {
+            opacity: 0,
+            x: -20,
+            scale: 0.8,
+            duration: 1,
+            ease: "power2.inOut"
+        }, 0)
+        .fromTo(fullLogoRef.current,
+            {
+                clipPath: "inset(0% 100% 0% 0%)",
+                opacity: 0,
+                x: 20
+            },
+            {
+                clipPath: "inset(0% 0% 0% 0%)",
+                opacity: 1,
+                x: 0,
+                duration: 1.5,
+                ease: "power2.inOut"
+            },
+            0
+        )
+    }, { scope: headerRef, dependencies: [locale] })
+
+    // Scroll listener for sticky header styling - more tolerant threshold (40px)
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 40)
+        }
+        window.addEventListener('scroll', handleScroll, { passive: true })
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
+
+    const isImmersive = pathname?.includes('/timeline')
+
+    const displayLinks = navLinks.length > 0 ? navLinks : [
+        {
+            href: '/whats-on',
+            label: "What's On",
+            columns: [
+                {
+                    title: 'All', links: [
+                        { label: 'Current', href: '/whats-on#current' },
+                        { label: 'Upcoming', href: '/whats-on#upcoming' },
+                        { label: 'Archive', href: '/whats-on#archive' }
+                    ]
+                },
+                {
+                    title: 'Exhibitions', links: [
+                        { label: 'Current', href: '/exhibitions#current' },
+                        { label: 'Upcoming', href: '/exhibitions#upcoming' },
+                        { label: 'Archive', href: '/exhibitions#archive' }
+                    ]
+                },
+                {
+                    title: 'Events', links: [
+                        { label: 'Current', href: '/events#current' },
+                        { label: 'Upcoming', href: '/events#upcoming' },
+                        { label: 'Archive', href: '/events#archive' }
+                    ]
+                }
+            ]
+        },
+        {
+            href: '/collection',
+            label: 'Archive',
+            columns: [
+                {
+                    title: 'Repository', links: [
+                        { label: 'The Collection', href: '/collection' },
+                        { label: 'Artist Registry', href: '/artists' },
+                        { label: 'Publications', href: '/publications' }
+                    ]
+                }
+            ]
+        },
+        {
+            href: '/events',
+            label: 'Programs',
+            columns: [
+                {
+                    title: 'Activity', links: [
+                        { label: 'Events Calendar', href: '/events' },
+                        { label: 'Educational Outreach', href: '/education' }
+                    ]
+                }
+            ]
+        },
+        { href: '/channel', label: 'Channel' },
+        {
+            href: '/visit',
+            label: 'Visit',
+            columns: [
+                {
+                    title: 'NCAI', links: [
+                        { label: 'Plan Your Visit', href: '/visit' },
+                        { label: 'About Us', href: '/about' },
+                        { label: 'Support NCAI', href: '/get-involved' },
+                        { label: 'Contact', href: '/contact' }
+                    ]
+                }
+            ]
+        },
+    ]
+
+    const handleMouseEnter = (index: number) => {
+        setActiveMenuIndex(index)
+    }
+
+    const closeMegaMenu = () => {
+        setActiveMenuIndex(null)
+    }
+
+    if (isImmersive) return null
+
+    // Important: The header turns dark when:
+    // 1. A desktop mega menu is active
+    // 2. The user is hovering over the header bar
+    const isDark = activeMenuIndex !== null || isHoveringHeader
+    const isSolid = isScrolled || isMobileMenuOpen || activeMenuIndex !== null
+
+    return (
+        <>
+            {/* The header is fixed, meaning it overlays the hero section like IMMA */}
+            <div
+                ref={headerRef}
+                className="fixed top-0 left-0 right-0 z-[100] flex flex-col w-full transition-all duration-300 [--header-padding-right:1.5rem] md:[--header-padding-right:3rem]"
+                onMouseLeave={closeMegaMenu}
+            >
+                <div
+                    ref={bannerRef}
+                    className="overflow-hidden"
+                    suppressHydrationWarning
+                >
+                    <div className={cn(
+                        "transition-all duration-500",
+                        // Force expanded state on server and initial client pass
+                        (!mounted || !isScrolled) ? "max-h-24 opacity-100" : "max-h-0 opacity-0 pointer-events-none"
+                    )}>
+                        {openingStatus}
+                    </div>
+                </div>
+
+                <header
+                    className={cn(
+                        "transition-all duration-300",
+                        isDark 
+                            ? "bg-background-dark text-white border-b border-white/10 shadow-sm" 
+                            : isSolid 
+                                ? "bg-white text-charcoal border-b border-charcoal/10 shadow-sm"
+                                : "bg-transparent text-ivory" 
+                    )}
+                    onMouseEnter={() => setIsHoveringHeader(true)}
+                    onMouseLeave={() => setIsHoveringHeader(false)}
+                >
+                    <div className="flex justify-between items-stretch px-6 md:px-12 transition-all duration-300">
+                        {/* Logo Section */}
+                        <div className="flex items-center py-6">
+                            <Link
+                                href="/"
+                                className={cn(
+                                    "flex items-center group relative h-full w-full transition-colors duration-300",
+                                    isDark ? "text-white" : isSolid ? "text-charcoal" : "text-ivory"
+                                )}
+                                aria-label="NCAI Home"
+                                onMouseEnter={closeMegaMenu}
+                            >
+                                {/* Initial State: Logomark + NCAI */}
+                                <div ref={initialLogoRef} className="flex items-center gap-2 md:absolute md:left-0 whitespace-nowrap">
+                                    <Logo className="h-10 md:h-12 w-auto transition-colors" />
+                                </div>
+
+                                {/* Target State: Full Title (revealed on scroll) */}
+                                <div
+                                    ref={fullLogoRef}
+                                    className="hidden md:flex items-center absolute left-0 whitespace-nowrap opacity-0"
+                                    aria-hidden="true"
+                                >
+                                    <Logo className="h-8 md:h-10 w-auto mr-4" />
+                                    <span className="text-xl md:text-3xl font-bold tracking-tight">
+                                        {t('title')}
+                                    </span>
+                                </div>
+                            </Link>
+                        </div>
+
+                        {/* Navigation Section */}
+                        <div className="flex flex-col justify-center gap-2 md:py-4">
+                            {/* Top Tier Links (Small) */}
+                            <div className="hidden md:flex justify-end items-center gap-6">
+                                <Link href="#" className="opacity-80 hover:opacity-100 text-xs font-semibold tracking-widest uppercase transition-opacity">Shop</Link>
+                                <Link href="#" className="opacity-80 hover:opacity-100 text-xs font-semibold tracking-widest uppercase transition-opacity">Support</Link>
+                                <Link href="#" className="opacity-80 hover:opacity-100 text-xs font-semibold tracking-widest uppercase transition-opacity">Members</Link>
+                                <Link href="#" className="opacity-80 hover:opacity-100 text-xs font-semibold tracking-widest uppercase transition-opacity">Venue Hire</Link>
+                                <LanguageSwitcher />
+                            </div>
+
+                            {/* Bottom Tier Links (Large) */}
+                            <div className="hidden md:flex justify-end items-center gap-8">
+                                <nav className="flex items-center gap-8">
+                                    {displayLinks.map((link, idx) => (
+                                        <Link
+                                            key={link.href}
+                                            href={link.href}
+                                            className="text-lg md:text-xl font-bold uppercase tracking-tight relative py-2 group hover:opacity-70 transition-opacity"
+                                            onMouseEnter={() => handleMouseEnter(idx)}
+                                        >
+                                            {link.label}
+                                            <span className={cn(
+                                                "absolute bottom-0 left-0 h-0.5 transition-all ease-in-out duration-300",
+                                                isDark ? "bg-white" : isSolid ? "bg-charcoal" : "bg-ivory",
+                                                activeMenuIndex === idx ? "w-full opacity-100" : "w-0 opacity-0 group-hover:w-full group-hover:opacity-100"
+                                            )} />
+                                        </Link>
+                                    ))}
+                                    {/* Search Toggle */}
+                                    <button
+                                        onClick={() => setIsSearchOpen(true)}
+                                        className="hover:opacity-70 transition-opacity ml-2"
+                                        aria-label="Open search"
+                                        onMouseEnter={closeMegaMenu}
+                                    >
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M21 21L15.8033 15.8033M19 10.5C19 15.1944 15.1944 19 10.5 19C5.80558 19 2 15.1944 2 10.5C2 5.80558 5.80558 2 10.5 2C15.1944 2 19 5.80558 19 10.5Z" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                    </button>
+                                </nav>
+                            </div>
+
+                            {/* Mobile Toggle */}
+                            <div className="flex md:hidden items-center h-full gap-4">
+                                <button
+                                    className="focus:outline-none p-2"
+                                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                                    aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+                                >
+                                    <div className="w-8 h-6 flex flex-col justify-between relative">
+                                        <span className={cn(
+                                            "w-full h-0.5 bg-current transition-all duration-300 origin-left",
+                                            isMobileMenuOpen && "rotate-45"
+                                        )} />
+                                        <span className={cn(
+                                            "w-full h-0.5 bg-current transition-all duration-300",
+                                            isMobileMenuOpen && "opacity-0"
+                                        )} />
+                                        <span className={cn(
+                                            "w-full h-0.5 bg-current transition-all duration-300 origin-left",
+                                            isMobileMenuOpen && "-rotate-45"
+                                        )} />
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Desktop MegaMenu Overlay */}
+                    <div className="hidden md:block">
+                        {displayLinks.map((link, idx) => (
+                            <MegaMenu
+                                key={idx}
+                                isOpen={activeMenuIndex === idx && !!link.columns}
+                                columns={link.columns || []}
+                                onClose={closeMegaMenu}
+                                featuredImages={featuredImages}
+                            />
+                        ))}
+                    </div>
+
+                    {/* Mobile Menu Overlay */}
+                    <div className={cn(
+                        "fixed inset-0 bg-background-dark text-white z-40 flex flex-col pt-32 px-6 pb-12 transition-all duration-500 ease-in-out md:hidden overflow-y-auto",
+                        isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+                    )}>
+                        <nav className="flex flex-col gap-10">
+                            {displayLinks.map((link, i) => (
+                                <div key={link.href} className="flex flex-col gap-4">
+                                    <Link
+                                        href={link.href}
+                                        className={cn(
+                                            "text-4xl font-bold uppercase tracking-tighter text-white transition-all duration-500",
+                                            isMobileMenuOpen ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"
+                                        )}
+                                        style={{ transitionDelay: `${i * 50}ms` }}
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                    >
+                                        {link.label}
+                                    </Link>
+
+                                    {/* Mobile Sub-links */}
+                                    {link.columns && (
+                                        <div className={cn(
+                                            "flex flex-col gap-3 ml-1 pl-4 border-l border-white/10 transition-all duration-700",
+                                            isMobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                                        )} style={{ transitionDelay: `${(i * 50) + 200}ms` }}>
+                                            {(link.columns || []).flatMap(col => col.links || []).map((sublink, j) => (
+                                                <Link
+                                                    key={(sublink?.href || '') + j}
+                                                    href={sublink?.href || '#'}
+                                                    className="text-lg font-semibold text-white/60 hover:text-white"
+                                                    onClick={() => setIsMobileMenuOpen(false)}
+                                                >
+                                                    {sublink?.label}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </nav>
+                        <div className={cn(
+                            "mt-12 transition-all duration-500 delay-300 text-white",
+                            isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+                        )}>
+                            <LanguageSwitcher />
+                        </div>
+                    </div>
+                </header>
+            </div>
+
+            <SearchModal
+                isOpen={isSearchOpen}
+                onClose={() => setIsSearchOpen(false)}
+                locale={locale}
+            />
+        </>
+    )
+}

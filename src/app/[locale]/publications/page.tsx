@@ -22,7 +22,7 @@ export default async function PublicationsPage({ params }: PublicationsPageProps
     if (!data) {
         // Fallback to empty state if no data is found
         return (
-            <div className="bg-sun-bleached-paper min-h-screen py-24 px-6 md:px-20 text-center">
+            <div className="bg-sun-bleached-paper min-h-screen py-24 px-section-clamp md:px-20 text-center">
                 <h1 className="text-heading-72 text-charcoal mb-8">NCAI Press</h1>
                 <p className="text-copy-20 text-deep-umber/80 italic">Publications coming soon.</p>
             </div>
@@ -36,9 +36,9 @@ export default async function PublicationsPage({ params }: PublicationsPageProps
     const pageLabel = getLocalizedValue(header?.label, locale) || 'Archives & Publications';
 
     return (
-        <div className="bg-sun-bleached-paper min-h-screen py-24 px-6 md:px-20">
+        <div className="bg-sun-bleached-paper min-h-screen py-24 px-section-clamp md:px-20">
             <header className="max-w-4xl mb-24">
-                <h2 className="text-xs font-bold text-deep-umber/40 uppercase tracking-[0.4em] mb-4">
+                <h2 className="text-xs font-bold text-deep-umber/40 capitalize tracking-[0.4em] mb-4">
                     {pageLabel}
                 </h2>
                 <h1 className="text-heading-72 text-charcoal mb-8">
@@ -57,8 +57,8 @@ export default async function PublicationsPage({ params }: PublicationsPageProps
 
             <ResponsiveDivider className="mb-24" />
 
-            <section className="mb-32">
-                <h3 className="text-xs font-bold text-charcoal uppercase tracking-widest mb-16 border-b border-deep-umber/10 pb-4">
+            <section className="px-section-clamp mb-32">
+                <h3 className="text-xs font-bold text-charcoal capitalize tracking-widest mb-16 border-b border-deep-umber/10 pb-4">
                     {locale === 'en' ? 'Recent Imprints' : 'Recent Publications'}
                 </h3>
 
@@ -76,10 +76,10 @@ export default async function PublicationsPage({ params }: PublicationsPageProps
                                 coverImage={pub.coverImage?.asset?.url || (pub.coverImage && urlFor(pub.coverImage).width(400).url())}
                             />
                             <div className="space-y-2">
-                                <h4 className="text-lg font-bold text-charcoal uppercase tracking-tighter">
+                                <h4 className="text-lg font-bold text-charcoal capitalize tracking-tighter">
                                     {getLocalizedValue(pub.title, locale)}
                                 </h4>
-                                <div className="text-[10px] text-deep-umber/60 uppercase tracking-widest italic prose-details">
+                                <div className="text-[10px] text-deep-umber/60 capitalize tracking-widest italic prose-details">
                                     {typeof getLocalizedValue(pub.details, locale) === 'string' ? (
                                         <p>{getLocalizedValue(pub.details, locale) as unknown as string}</p>
                                     ) : (
@@ -102,9 +102,9 @@ export default async function PublicationsPage({ params }: PublicationsPageProps
             </section>
 
             {ctaSection && (
-                <section className="bg-charcoal text-sun-bleached-paper p-12 md:p-24">
+                <section className="px-section-clamp bg-charcoal text-sun-bleached-paper p-12 md:p-24">
                     <div className="max-w-3xl">
-                        <h3 className="text-xs font-bold text-sun-bleached-paper/40 uppercase tracking-[0.4em] mb-4">
+                        <h3 className="text-xs font-bold text-sun-bleached-paper/40 capitalize tracking-[0.4em] mb-4">
                             {getLocalizedValue(ctaSection.label, locale)}
                         </h3>
                         <h2 className="text-4xl md:text-6xl font-light tracking-tighter mb-8 italic">
@@ -120,7 +120,7 @@ export default async function PublicationsPage({ params }: PublicationsPageProps
                         {ctaSection.ctaUrl && (
                             <a
                                 href={ctaSection.ctaUrl}
-                                className="inline-block border border-sun-bleached-paper/20 px-8 py-4 text-sm uppercase tracking-widest hover:bg-sun-bleached-paper hover:text-charcoal transition-all"
+                                className="inline-block border border-sun-bleached-paper/20 px-8 py-4 text-sm capitalize tracking-widest hover:bg-sun-bleached-paper hover:text-charcoal transition-all"
                             >
                                 {getLocalizedValue(ctaSection.ctaLabel, locale) || 'Learn More'}
                             </a>

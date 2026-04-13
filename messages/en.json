@@ -1,7 +1,17 @@
 {
     "HomePage": {
         "title": "Nairobi Contemporary Art Institute",
-        "description": "A non-profit visual arts space dedicated to the growth and preservation of contemporary art in East Africa."
+        "description": "A non-profit visual arts space dedicated to the growth and preservation of contemporary art in East Africa.",
+        "fromJournal": "From the Journal",
+        "currentExh": "Current Exhibition",
+        "getInvolved": "Get Involved",
+        "supportNcai": "Support NCAI",
+        "joinCommunity": "Join the community",
+        "stayConnected": "Stay Connected",
+        "subscribeText": "Receive regular updates on our exhibitions, public programs, and publications.",
+        "viewExh": "View Exhibition",
+        "exploreCollection": "Explore Collection",
+        "viewFullCollection": "View Full Collection"
     },
     "Navigation": {
         "about": "About",
@@ -18,26 +28,90 @@
             "description": "NCAI is a non-profit visual arts space based in Nairobi."
         },
         "visit": {
-            "title": "Visit Us",
+            "title": "Visitor Info",
             "description": "Information on how to visit our gallery space.",
             "location": "Location",
-            "hours": "Opening Hours"
+            "hours": "Opening Hours",
+            "normalOpeningHours": "Normal Opening Hours",
+            "NORMALOPENINGHOURS": "Normal Opening Hours",
+            "locationLink": "Find Us",
+            "overviewLink": "Overview",
+            "directionsMapLink": "Directions & Map",
+            "directionsLink": "Directions",
+            "infoLink": "Information",
+            "howToGetHere": "How to get here",
+            "visitorInfo": "Visitor Information",
+            "callUs": "Call Us",
+            "emailUs": "Email Us",
+            "closed": "Closed",
+            "stayConnected": "Stay Connected",
+            "joinCommunity": "Join the community",
+            "subscribeText": "Receive regular updates on our exhibitions, public programs, and publications.",
+            "subscribe": "Subscribe"
         },
         "exhibitions": {
             "title": "Exhibitions",
-            "description": "Current, upcoming, and past exhibitions at NCAI."
+            "description": "Current, upcoming, and past exhibitions at NCAI.",
+            "untitled": "Untitled",
+            "untitledExhibition": "Untitled Exhibition",
+            "noImage": "No Image",
+            "current": "Current",
+            "upcoming": "Upcoming",
+            "past": "Past",
+            "found": "Exhibitions found.",
+            "notFound": "No exhibitions found."
         },
         "artists": {
             "title": "Artists",
-            "description": "Directory of artists exhibited at NCAI."
+            "description": "Directory of artists exhibited at NCAI.",
+            "noArtists": "No artists found for this selection.",
+            "relatedTitle": "Artists with similar focus",
+            "projectsTitle": "Recent, current and forthcoming projects",
+            "newsTitle": "News & Resources",
+            "noNews": "No news available at this time.",
+            "museumExhibitionsTitle": "Museum Exhibitions",
+            "ncaiExhibitionsTitle": "Exhibitions at NCAI",
+            "worksArchive": "Works Archive",
+            "noImage": "No Image",
+            "exhibition": "Exhibition",
+            "artistLabel": "Artist",
+            "artworkLabel": "Artwork"
+        },
+        "collection": {
+            "title": "Collection",
+            "description": "Our collection is a growing archive of modern and contemporary artistic production, centered on East Africa.",
+            "noItems": "Collection items will be added soon.",
+            "year": "Year",
+            "medium": "Medium",
+            "dimensions": "Dimensions",
+            "edition": "Edition",
+            "acquisitionDate": "Acquisition Date",
+            "creditLine": "Credit Line",
+            "notAvailable": "N/A",
+            "by": "by",
+            "untitled": "Untitled",
+            "unknownArtist": "Unknown Artist",
+            "noImage": "No Image",
+            "detailsDescription": "Details of the artwork {title} in the NCAI Collection."
         },
         "channel": {
             "title": "Channel",
-            "description": "News, interviews, and insights from NCAI."
+            "description": "News, interviews, and insights from NCAI.",
+            "noContent": "No content found",
+            "filterAll": "All",
+            "filterWatch": "Watch (Video)",
+            "filterListen": "Listen (Audio)",
+            "filterRead": "Read (Articles)"
         },
         "education": {
             "title": "Education",
-            "description": "Workshops, talks, and programs at NCAI."
+            "description": "Workshops, talks, and programs at NCAI.",
+            "allPrograms": "All Programs",
+            "noPrograms": "No programs found",
+            "filterAll": "All",
+            "filterSchools": "Schools",
+            "filterFamilies": "Families",
+            "filterPublic": "Public"
         },
         "contact": {
             "title": "Contact",

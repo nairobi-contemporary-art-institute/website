@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { usePathname } from 'next/navigation'
+import { usePathname } from '@/i18n'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n'
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher'
@@ -14,8 +14,17 @@ import { useGSAP } from '@gsap/react'
 interface HeaderClientProps {
     locale: string;
     openingStatus: React.ReactNode;
-    navLinks: Array<{ label: string; href: string }>;
+    navLinks: Array<{
+        label: string;
+        href: string;
+        columns?: Array<{
+            title?: string;
+            links: Array<{ label: string; href: string }>;
+        }>;
+    }>;
 }
+
+import { MegaMenu } from './MegaMenu'
 
 export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderClientProps) {
     const t = useTranslations('HomePage')
@@ -23,7 +32,10 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [isSearchOpen, setIsSearchOpen] = useState(false)
     const [isAtTop, setIsAtTop] = useState(true)
+    const [activeMenuIndex, setActiveMenuIndex] = useState<number | null>(null)
+    const [isHoveringHeader, setIsHoveringHeader] = useState(false)
 
+    // ... (refs stay the same)
     const headerRef = useRef<HTMLDivElement>(null)
     const logoContainerRef = useRef<HTMLDivElement>(null)
     const initialLogoRef = useRef<HTMLDivElement>(null)
@@ -34,6 +46,7 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
     const isFirstMount = useRef(true)
     const lastAtTop = useRef(isAtTop)
 
+    // ... (useGSAP and useEffect for scroll stay same)
     useGSAP(() => {
         // Disable expansion on mobile ( < 768px )
         if (window.innerWidth < 768) return
@@ -146,26 +159,90 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
 
     // Fallback if navLinks is empty
     const displayLinks = navLinks.length > 0 ? navLinks : [
-        { href: '/about', label: 'About' },
-        { href: '/visit', label: 'Visit' },
-        { href: '/exhibitions', label: 'Exhibitions' },
-        { href: '/education', label: 'Education' },
+        {
+            href: '/exhibitions',
+            label: 'Exhibitions',
+            columns: [
+                {
+                    title: 'Explore', links: [
+                        { label: 'Current', href: '/exhibitions' },
+                        { label: 'Past Archive', href: '/exhibitions' },
+                        { label: 'Upcoming', href: '/exhibitions' },
+                        { label: 'Timeline', href: '/timeline' }
+                    ]
+                }
+            ]
+        },
+        {
+            href: '/collection',
+            label: 'Archive',
+            columns: [
+                {
+                    title: 'Repository', links: [
+                        { label: 'The Collection', href: '/collection' },
+                        { label: 'Artist Registry', href: '/artists' },
+                        { label: 'Publications', href: '/publications' }
+                    ]
+                }
+            ]
+        },
+        {
+            href: '/events',
+            label: 'Programs',
+            columns: [
+                {
+                    title: 'Activity', links: [
+                        { label: 'Events Calendar', href: '/events' },
+                        { label: 'Educational Outreach', href: '/education' }
+                    ]
+                }
+            ]
+        },
         { href: '/channel', label: 'Channel' },
-        { href: '/support', label: 'Support' },
+        {
+            href: '/visit',
+            label: 'Visit',
+            columns: [
+                {
+                    title: 'NCAI', links: [
+                        { label: 'Plan Your Visit', href: '/visit' },
+                        { label: 'About Us', href: '/about' },
+                        { label: 'Support NCAI', href: '/get-involved' },
+                        { label: 'Contact', href: '/contact' }
+                    ]
+                }
+            ]
+        },
     ]
+
+    const handleMouseEnter = (index: number) => {
+        setActiveMenuIndex(index)
+    }
+
+    const closeMegaMenu = () => {
+        setActiveMenuIndex(null)
+    }
 
     if (isImmersive) return null
 
     return (
         <>
-            <div ref={headerRef} className="sticky top-0 z-50 flex flex-col w-full">
+            <div
+                ref={headerRef}
+                className="sticky top-0 z-50 flex flex-col w-full [--header-padding-right:1.5rem] md:[--header-padding-right:2rem]"
+                onMouseLeave={closeMegaMenu}
+            >
                 <div
                     ref={bannerRef}
                     className="overflow-hidden"
                 >
                     {openingStatus}
                 </div>
-                <header className="bg-white/80 backdrop-blur-md text-umber border-b border-rich-blue/20 transition-colors duration-300">
+                <header
+                    className="bg-white/80 backdrop-blur-md text-umber border-b border-rich-blue/20 transition-colors duration-300"
+                    onMouseEnter={() => setIsHoveringHeader(true)}
+                    onMouseLeave={() => setIsHoveringHeader(false)}
+                >
                     <div ref={headerInnerRef} className="grid grid-cols-[auto_1fr_auto] items-stretch py-6 md:py-8 transition-all duration-300">
                         {/* Logo Section */}
                         <div ref={logoContainerRef} className="flex items-center px-6 md:px-8 border-r border-rich-blue/20 overflow-hidden">
@@ -173,6 +250,7 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
                                 href="/"
                                 className="text-umber flex items-center group relative h-full w-full"
                                 aria-label="NCAI Home"
+                                onMouseEnter={closeMegaMenu}
                             >
                                 {/* Dynamic Runway - Provides the measurement for the multi-language title (absolute so it doesn't affect initial width) */}
                                 <div ref={runwayRef} className="absolute hidden md:block opacity-0 pointer-events-none whitespace-nowrap text-lg lg:text-xl font-bold tracking-tight px-2">
@@ -199,13 +277,19 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
                         {/* Desktop Nav Section */}
                         <div className="hidden md:flex items-center px-8">
                             <nav className="flex items-center gap-8 w-full">
-                                {displayLinks.map((link) => (
+                                {displayLinks.map((link, idx) => (
                                     <Link
                                         key={link.href}
                                         href={link.href}
-                                        className="text-sm font-bold uppercase tracking-[0.2em] text-deep-umber hover:text-rich-blue transition-colors relative group"
+                                        className="text-sm font-bold transition-all duration-200 uppercase tracking-[0.2em] text-deep-umber hover:text-ochre relative py-4 group"
+                                        onMouseEnter={() => handleMouseEnter(idx)}
                                     >
                                         {link.label}
+                                        {/* Underline for active/hovered */}
+                                        <span className={cn(
+                                            "absolute bottom-2 left-0 h-0.5 bg-ochre transition-all ease-in-out duration-300",
+                                            activeMenuIndex === idx ? "w-full opacity-100" : "w-0 opacity-0 group-hover:w-full group-hover:opacity-100"
+                                        )} />
                                     </Link>
                                 ))}
                             </nav>
@@ -218,6 +302,7 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
                                 onClick={() => setIsSearchOpen(true)}
                                 className="text-umber/90 hover:text-umber transition-colors p-2 -mr-2"
                                 aria-label="Open search"
+                                onMouseEnter={closeMegaMenu}
                             >
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M19 19L14.65 14.65M17 9C17 13.4183 13.4183 17 9 17C4.58172 17 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -252,29 +337,61 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
                         </div>
                     </div>
 
+                    {/* Desktop MegaMenu Overlay */}
+                    <div className="hidden md:block">
+                        {displayLinks.map((link, idx) => (
+                            <MegaMenu
+                                key={idx}
+                                isOpen={activeMenuIndex === idx && !!link.columns}
+                                columns={link.columns || []}
+                                onClose={closeMegaMenu}
+                            />
+                        ))}
+                    </div>
+
                     {/* Mobile Menu Overlay */}
                     <div className={cn(
-                        "fixed inset-0 bg-white z-40 flex flex-col pt-32 px-6 gap-8 transition-all duration-500 ease-in-out md:hidden",
+                        "fixed inset-0 bg-white z-40 flex flex-col pt-32 px-6 pb-12 transition-all duration-500 ease-in-out md:hidden overflow-y-auto",
                         isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
                     )}>
-                        <nav className="flex flex-col gap-6">
+                        <nav className="flex flex-col gap-10">
                             {displayLinks.map((link, i) => (
-                                <Link
-                                    key={link.href}
-                                    href={link.href}
-                                    className={cn(
-                                        "text-3xl font-bold uppercase tracking-tighter text-deep-umber transition-all duration-500 border-b border-rich-blue/20 pb-4",
-                                        isMobileMenuOpen ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"
+                                <div key={link.href} className="flex flex-col gap-4">
+                                    <Link
+                                        href={link.href}
+                                        className={cn(
+                                            "text-4xl font-bold uppercase tracking-tighter text-deep-umber transition-all duration-500",
+                                            isMobileMenuOpen ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"
+                                        )}
+                                        style={{ transitionDelay: `${i * 50}ms` }}
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                    >
+                                        {link.label}
+                                    </Link>
+
+                                    {/* Mobile Sub-links */}
+                                    {link.columns && (
+                                        <div className={cn(
+                                            "flex flex-col gap-3 ml-1 pl-4 border-l-2 border-rich-blue/10 transition-all duration-700",
+                                            isMobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                                        )} style={{ transitionDelay: `${(i * 50) + 200}ms` }}>
+                                            {(link.columns || []).flatMap(col => col.links || []).map((sublink, j) => (
+                                                <Link
+                                                    key={(sublink?.href || '') + j}
+                                                    href={sublink?.href || '#'}
+                                                    className="text-lg font-bold text-rich-blue/60 hover:text-ochre"
+                                                    onClick={() => setIsMobileMenuOpen(false)}
+                                                >
+                                                    {sublink?.label}
+                                                </Link>
+                                            ))}
+                                        </div>
                                     )}
-                                    style={{ transitionDelay: `${i * 50}ms` }}
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                >
-                                    {link.label}
-                                </Link>
+                                </div>
                             ))}
                         </nav>
                         <div className={cn(
-                            "mt-auto mb-10 transition-all duration-500 delay-300",
+                            "mt-12 transition-all duration-500 delay-300",
                             isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
                         )}>
                             <LanguageSwitcher />

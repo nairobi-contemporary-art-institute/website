@@ -6,8 +6,8 @@ export function Introduction() {
     return (
         <div className="space-y-12">
             <header>
-                <h2 className="text-xs font-bold text-umber/40 uppercase tracking-[0.4em] mb-4">Section 01</h2>
-                <h1 className="text-5xl md:text-8xl font-bold text-charcoal uppercase tracking-tighter leading-none mb-8">
+                <h2 className="text-xs font-bold text-umber/40 capitalize tracking-[0.4em] mb-4">Section 01</h2>
+                <h1 className="text-5xl md:text-8xl font-bold text-charcoal capitalize tracking-tighter leading-none mb-8">
                     Introduction<br />& Governance
                 </h1>
                 <p className="text-xl text-umber/80 italic max-w-2xl leading-relaxed">
@@ -19,7 +19,7 @@ export function Introduction() {
 
             <section className="grid md:grid-cols-2 gap-16">
                 <div>
-                    <h3 className="text-xs font-bold text-charcoal uppercase tracking-widest mb-6 border-b border-umber/10 pb-2 inline-block">Purpose</h3>
+                    <h3 className="text-xs font-bold text-charcoal capitalize tracking-widest mb-6 border-b border-umber/10 pb-2 inline-block">Purpose</h3>
                     <p className="text-base text-umber/90 leading-relaxed mb-6">
                         The purpose of the NCAI Design System is to ensure visual and functional consistency across all digital touchpoints, from the primary website to specialized exhibition microsites.
                     </p>
@@ -28,11 +28,11 @@ export function Introduction() {
                     </p>
                 </div>
                 <div>
-                    <h3 className="text-xs font-bold text-charcoal uppercase tracking-widest mb-6 border-b border-umber/10 pb-2 inline-block">Governance</h3>
+                    <h3 className="text-xs font-bold text-charcoal capitalize tracking-widest mb-6 border-b border-umber/10 pb-2 inline-block">Governance</h3>
                     <p className="text-sm text-umber/70 leading-relaxed mb-4">
                         This system is maintained by <a href="mailto:studio@digitalorchard.design" className="text-ochre hover:text-umber transition-colors underline decoration-ochre/40 underline-offset-4 decoration-2">Digital Orchard Design</a>. Changes to core design tokens (brand colors, primary typography) require a review of the institutional brand guidelines.
                     </p>
-                    <ul className="text-[10px] font-bold uppercase tracking-widest text-umber/60 space-y-2 list-none">
+                    <ul className="text-[10px] font-bold capitalize tracking-widest text-umber/60 space-y-2 list-none">
                         <li className="flex items-center gap-2">
                             <span className="w-1.5 h-1.5 bg-ochre" />
                             v1.0.0 — Initial Release (Feb 2026)

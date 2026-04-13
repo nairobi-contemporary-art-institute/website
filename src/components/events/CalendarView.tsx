@@ -75,7 +75,7 @@ export function CalendarView({ events, locale }: CalendarViewProps) {
                     </button>
                     <button
                         onClick={() => setViewDate(new Date())}
-                        className="px-4 py-2 text-xs uppercase tracking-widest border hover:bg-stone-50 transition-colors"
+                        className="px-4 py-2 text-xs capitalize tracking-widest border hover:bg-stone-50 transition-colors"
                     >
                         Today
                     </button>
@@ -85,7 +85,7 @@ export function CalendarView({ events, locale }: CalendarViewProps) {
             {/* Weekdays */}
             <div className="grid grid-cols-7 border-b bg-stone-50">
                 {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
-                    <div key={d} className="py-3 text-center text-[10px] uppercase tracking-[0.2em] font-bold text-charcoal/40">
+                    <div key={d} className="py-3 text-center text-[10px] capitalize tracking-[0.2em] font-bold text-charcoal/40">
                         {d}
                     </div>
                 ))}
@@ -121,10 +121,10 @@ export function CalendarView({ events, locale }: CalendarViewProps) {
                                                 href={`/${locale}/events/${event.slug}`}
                                                 className="block p-2 text-[10px] leading-tight bg-umber/5 border-l-2 border-umber text-charcoal hover:bg-umber/10 transition-all font-medium"
                                             >
-                                                <div className="font-mono text-[8px] uppercase tracking-wider text-umber mb-1">
+                                                <div className="font-mono text-[8px] capitalize tracking-wider text-umber mb-1">
                                                     {new Date(event.startDate).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', hour12: false })}
                                                 </div>
-                                                <div className="line-clamp-2 uppercase tracking-wide">
+                                                <div className="line-clamp-2 capitalize tracking-wide">
                                                     {eventTitle}
                                                 </div>
                                             </Link>
