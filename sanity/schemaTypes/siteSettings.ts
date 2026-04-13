@@ -6,6 +6,7 @@ export const siteSettings = defineType({
     type: 'document',
     groups: [
         { name: 'general', title: 'General', default: true },
+        { name: 'entranceAnimation', title: 'Entrance Animation' },
         { name: 'navigation', title: 'Navigation' },
         { name: 'socialMedia', title: 'Social Media' },
         { name: 'footer', title: 'Footer Links' },
@@ -13,6 +14,78 @@ export const siteSettings = defineType({
         { name: 'hours', title: 'Opening Hours' },
     ],
     fields: [
+        defineField({
+            name: 'headerStyle',
+            title: 'Header Style',
+            type: 'string',
+            group: 'general',
+            description: 'Choose the header design for sub-pages. "Standard" uses the original header, "NCAI-Style" uses the redesigned header.',
+            options: {
+                list: [
+                    { title: 'Standard', value: 'standard' },
+                    { title: 'NCAI-Style', value: 'ncai' },
+                ],
+                layout: 'radio',
+            },
+            initialValue: 'ncai',
+        }),
+        defineField({
+            name: 'entranceAnimationPool',
+            title: 'Entrance Animation Image Pool',
+            type: 'array',
+            group: 'entranceAnimation',
+            description: 'Upload as many images as you like. Three will be selected at random for each visit.',
+            of: [{ 
+                type: 'image',
+                options: { hotspot: true },
+                fields: [
+                    {
+                        name: 'alt',
+                        type: 'string',
+                        title: 'Alt Text',
+                        description: 'Important for SEO and accessibility. Describe what is in the image.',
+                        validation: (Rule) => Rule.required(),
+                    },
+                    {
+                        name: 'caption',
+                        type: 'string',
+                        title: 'Caption',
+                        description: 'Internal reference or image credit.',
+                    }
+                ],
+                preview: {
+                    select: {
+                        title: 'alt',
+                        media: 'asset'
+                    }
+                }
+            }],
+        }),
+        defineField({
+            name: 'headerFeaturedImages',
+            title: 'Header Featured Images Pool',
+            type: 'array',
+            group: 'navigation',
+            description: 'Upload as many images as you like. Three will be selected at random each time the mega-menu is displayed.',
+            of: [{ 
+                type: 'image',
+                options: { hotspot: true },
+                fields: [
+                    {
+                        name: 'caption',
+                        type: 'internationalizedArrayString',
+                        title: 'Caption / Information',
+                        description: 'This will be displayed in a tooltip when the user interacts with the info icon.',
+                    },
+                    {
+                        name: 'link',
+                        type: 'string',
+                        title: 'Link',
+                        description: 'Optional: The page this image should link to (e.g., /visit or /exhibitions/my-show).',
+                    }
+                ]
+            }],
+        }),
         defineField({
             name: 'contactInfo',
             title: 'Contact Information',
@@ -31,11 +104,12 @@ export const siteSettings = defineType({
             title: 'Header Navigation',
             type: 'array',
             group: 'navigation',
+            description: 'Define the 5 primary navigation links and their megamenu content.',
             of: [
                 {
                     type: 'object',
-                    name: 'navLink',
-                    title: 'Navigation Link',
+                    name: 'navItem',
+                    title: 'Navigation Item',
                     fields: [
                         defineField({
                             name: 'label',
@@ -46,8 +120,63 @@ export const siteSettings = defineType({
                             name: 'url',
                             title: 'URL',
                             type: 'string',
-                            description: 'e.g. /about',
+                            description: 'Primary link (e.g. /exhibitions)',
                         }),
+                        defineField({
+                            name: 'columns',
+                            title: 'Megamenu Columns',
+                            description: 'Optional columns for a megamenu layout.',
+                            type: 'array',
+                            of: [
+                                {
+                                    type: 'object',
+                                    name: 'column',
+                                    title: 'Column',
+                                    fields: [
+                                        defineField({
+                                            name: 'title',
+                                            title: 'Column Heading',
+                                            type: 'internationalizedArrayString',
+                                        }),
+                                        defineField({
+                                            name: 'links',
+                                            title: 'Links',
+                                            type: 'array',
+                                            of: [
+                                                {
+                                                    type: 'object',
+                                                    name: 'link',
+                                                    title: 'Link',
+                                                    fields: [
+                                                        defineField({
+                                                            name: 'label',
+                                                            title: 'Label',
+                                                            type: 'internationalizedArrayString',
+                                                        }),
+                                                        defineField({
+                                                            name: 'url',
+                                                            title: 'URL',
+                                                            type: 'string',
+                                                        }),
+                                                    ]
+                                                }
+                                            ]
+                                        })
+                                    ],
+                                    preview: {
+                                        select: {
+                                            title: 'title',
+                                        },
+                                        prepare({ title }) {
+                                            const titleValue = Array.isArray(title)
+                                                ? title.find((t: any) => t._key === 'en')?.value || title[0]?.value
+                                                : title
+                                            return { title: titleValue || 'Untitled Column' }
+                                        }
+                                    }
+                                }
+                            ]
+                        })
                     ],
                     preview: {
                         select: {

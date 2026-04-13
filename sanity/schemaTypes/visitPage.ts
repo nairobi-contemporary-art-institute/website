@@ -45,6 +45,23 @@ export const visitPage = defineType({
             ]
         }),
         defineField({
+            name: 'openingHoursSection',
+            title: 'Opening Hours Section Content',
+            type: 'object',
+            fields: [
+                defineField({
+                    name: 'description',
+                    title: 'Description',
+                    type: 'internationalizedArrayBlockContent',
+                }),
+                defineField({
+                    name: 'footerNote',
+                    title: 'Footer Note',
+                    type: 'internationalizedArrayString',
+                }),
+            ],
+        }),
+        defineField({
             name: 'directions',
             title: 'Directions',
             description: 'Structured transportation information.',

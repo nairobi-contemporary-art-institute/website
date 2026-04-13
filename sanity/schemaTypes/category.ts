@@ -29,6 +29,7 @@ export const category = defineType({
             type: 'string',
             options: {
                 list: [
+                    { title: 'Series', value: 'series' },
                     { title: 'Style', value: 'style' },
                     { title: 'Medium', value: 'medium' },
                     { title: 'Theme', value: 'theme' },

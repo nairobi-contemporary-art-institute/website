@@ -61,11 +61,11 @@ export const educationPage = defineType({
                             type: 'string',
                             options: {
                                 list: [
+                                    { title: 'UJUZI (Professionals)', value: 'ujuzi' },
+                                    { title: 'Schools & Youth', value: 'youth' },
+                                    { title: 'Children & Families', value: 'children' },
+                                    { title: 'Adults & Public', value: 'adults' },
                                     { title: 'All Ages', value: 'all' },
-                                    { title: 'Adults', value: 'adults' },
-                                    { title: 'Youth', value: 'youth' },
-                                    { title: 'Children', value: 'children' },
-                                    { title: 'Professionals', value: 'professionals' },
                                 ],
                             },
                         }),

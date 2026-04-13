@@ -27,8 +27,7 @@ import { accessibilityPage } from './accessibilityPage'
 import { collectionPage } from './collectionPage'
 import { exhibitionsPage } from './exhibitionsPage'
 import { artistsPage } from './artistsPage'
-import { supportPage } from './supportPage'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-    types: [artist, work, exhibition, collectionItem, timelineEvent, event, person, category, partner, siteSettings, post, program, blockContent, page, aboutPage, getInvolvedPage, homePage, visitPage, publication, publicationsPage, educationPage, eventsPage, accessibilityPage, collectionPage, exhibitionsPage, artistsPage, supportPage],
+    types: [artist, work, exhibition, collectionItem, timelineEvent, event, person, category, partner, siteSettings, post, program, blockContent, page, aboutPage, getInvolvedPage, homePage, visitPage, publication, publicationsPage, educationPage, eventsPage, accessibilityPage, collectionPage, exhibitionsPage, artistsPage],
 }

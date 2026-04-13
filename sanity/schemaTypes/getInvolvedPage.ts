@@ -41,8 +41,33 @@ export const getInvolvedPage = defineType({
             ],
         }),
         defineField({
+            name: 'membershipTiers',
+            title: 'Membership Tiers',
+            type: 'array',
+            of: [
+                {
+                    type: 'object',
+                    fields: [
+                        { name: 'name', title: 'Tier Name', type: 'internationalizedArrayString' },
+                        { name: 'price', title: 'Price/Frequency', type: 'internationalizedArrayString', description: 'e.g. 5,000 KES / Year' },
+                        { name: 'description', title: 'Tier Description', type: 'internationalizedArrayBlockContent' },
+                        {
+                            name: 'benefits',
+                            title: 'Key Benefits',
+                            type: 'array',
+                            of: [{ type: 'internationalizedArrayString' }]
+                        },
+                        { name: 'ctaLabel', title: 'CTA Label', type: 'internationalizedArrayString' },
+                        { name: 'ctaUrl', title: 'CTA URL', type: 'string' },
+                        { name: 'isFeatured', title: 'Highlight as Featured?', type: 'boolean' }
+                    ]
+                }
+            ]
+        }),
+        defineField({
             name: 'sections',
-            title: 'Get Involved Sections',
+            title: 'Additional Sections',
+            description: 'Corporate Partners, Legacy Giving, etc.',
             type: 'array',
             of: [
                 {
@@ -59,6 +84,18 @@ export const getInvolvedPage = defineType({
                                 { name: 'text', title: 'Button Text', type: 'internationalizedArrayString' },
                                 { name: 'url', title: 'URL', type: 'string' },
                             ]
+                        }),
+                        defineField({
+                            name: 'layout',
+                            title: 'Layout',
+                            type: 'string',
+                            options: {
+                                list: [
+                                    { title: 'Standard', value: 'standard' },
+                                    { title: 'Split (Text/Image)', value: 'split' },
+                                ],
+                            },
+                            initialValue: 'split'
                         }),
                         defineField({
                             name: 'image',
@@ -86,6 +123,15 @@ export const getInvolvedPage = defineType({
                         }
                     }
                 }
+            ]
+        }),
+        defineField({
+            name: 'contactSection',
+            title: 'Contact / Inquiry Footer',
+            type: 'object',
+            fields: [
+                { name: 'headline', title: 'Headline', type: 'internationalizedArrayString' },
+                { name: 'email', title: 'Contact Email', type: 'string' },
             ]
         })
     ],

@@ -46,6 +46,8 @@ export const person = defineType({
                     { title: 'Author', value: 'author' },
                     { title: 'Researcher', value: 'researcher' },
                     { title: 'Speaker', value: 'speaker' },
+                    { title: 'Filmmaker', value: 'filmmaker' },
+                    { title: 'Videographer', value: 'videographer' },
                 ],
             },
         }),

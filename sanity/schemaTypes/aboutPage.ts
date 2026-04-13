@@ -59,6 +59,8 @@ export const aboutPage = defineType({
                                 list: [
                                     { title: 'Standard', value: 'standard' },
                                     { title: 'Split (Text/Image)', value: 'split' },
+                                    { title: 'Dark Highlight (Library/Archive Style)', value: 'dark-highlight' },
+                                    { title: 'History Timeline', value: 'history-timeline' },
                                 ],
                             },
                             initialValue: 'standard'
@@ -77,31 +79,24 @@ export const aboutPage = defineType({
                             ],
                         }),
                     ],
+                    preview: {
+                        select: {
+                            title: 'title',
+                            layout: 'layout'
+                        },
+                        prepare({ title, layout }) {
+                            const titleValue = Array.isArray(title)
+                                ? title.find((t: any) => t._key === 'en')?.value || title[0]?.value
+                                : 'Section'
+                            return {
+                                title: titleValue,
+                                subtitle: layout ? `Layout: ${layout}` : ''
+                            }
+                        }
+                    }
                 }
             ]
         }),
-        defineField({
-            name: 'libraryArchive',
-            title: 'Library & Archive Section',
-            type: 'object',
-            fields: [
-                defineField({ name: 'title', title: 'Title', type: 'internationalizedArrayString' }),
-                defineField({ name: 'content', title: 'Content', type: 'internationalizedArrayBlockContent' }),
-                defineField({
-                    name: 'image',
-                    title: 'Image',
-                    type: 'image',
-                    options: { hotspot: true },
-                    fields: [
-                        defineField({
-                            name: 'caption',
-                            title: 'Caption',
-                            type: 'internationalizedArrayString',
-                        }),
-                    ],
-                }),
-            ]
-        })
     ],
     preview: {
         select: {

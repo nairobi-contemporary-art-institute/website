@@ -42,10 +42,10 @@ export const post = defineType({
             type: 'datetime',
         }),
         defineField({
-            name: 'author',
-            title: 'Author',
-            type: 'reference',
-            to: [{ type: 'person' }],
+            name: 'authors',
+            title: 'Authors',
+            type: 'array',
+            of: [{ type: 'reference', to: [{ type: 'person' }] }],
         }),
         defineField({
             name: 'tags',
@@ -112,18 +112,18 @@ export const post = defineType({
     preview: {
         select: {
             title: 'title',
-            author: 'author',
+            authors: 'authors',
             media: 'mainImage',
         },
         prepare(selection) {
-            const { title, author } = selection
+            const { title, authors } = selection
             const displayTitle = Array.isArray(title)
                 ? title.find((t: any) => t._key === 'en')?.value || title[0]?.value || 'Untitled'
                 : title
             return {
                 ...selection,
                 title: displayTitle,
-                subtitle: author && `by ${author}`,
+                subtitle: authors && authors.length > 0 ? `by multiple authors` : '',
             }
         },
     },
