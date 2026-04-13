@@ -45,6 +45,9 @@ next-env.d.ts
 .agent/
 .gsd/
 .planning/
+.opencode/
+scratch/
+test-fetch.ts
 get-shit-done-for-antigravity/
 .vscode/
 
