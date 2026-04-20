@@ -7,5 +7,10 @@ export const config = {
     // Match all pathnames except for
     // - API routes
     // - Static files (_next/static, images, favicon.ico, etc.)
-    matcher: ['/((?!api|_next|studio|.*\\..*).*)']
+    // - Sanity Studio
+    matcher: [
+        '/',
+        '/(en|sw|ar|hi|de|pt|fr|es|am|so)/:path*',
+        '/((?!api|_next|_vercel|studio|.*\\..*).*)'
+    ]
 };
