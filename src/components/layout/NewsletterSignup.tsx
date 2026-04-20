@@ -45,9 +45,12 @@ export function NewsletterSignup() {
 
     return (
         <div className="max-w-md">
-            <h3 className="text-xl md:text-2xl font-bold uppercase tracking-tight mb-4 text-white">
+            <h3 className="text-xl md:text-2xl font-bold mb-2 text-white">
                 Keep in touch
             </h3>
+            <p className="text-sm text-sun-bleached-paper/60 mb-6 font-light leading-relaxed">
+                Receive regular updates on our exhibitions, public programs, and publications.
+            </p>
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                 <div className="border border-sun-bleached-paper/30 focus-within:border-white transition-colors">
                     <label htmlFor="newsletter-email" className="sr-only">
@@ -67,7 +70,7 @@ export function NewsletterSignup() {
                 <button
                     type="submit"
                     disabled={status === 'loading'}
-                    className="w-full px-6 py-4 bg-white text-black font-bold uppercase tracking-widest hover:bg-white/90 transition-all duration-200 disabled:opacity-50 text-sm"
+                    className="w-full px-6 py-4 bg-white text-black font-bold hover:bg-white/90 transition-all duration-200 disabled:opacity-50 text-sm"
                 >
                     {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
                 </button>
@@ -78,7 +81,7 @@ export function NewsletterSignup() {
                     id="newsletter-consent"
                     checked={consent}
                     onChange={(e) => setConsent(e.target.checked)}
-                    className="mt-1 h-3 w-3 rounded border-sun-bleached-paper/30 bg-transparent text-white focus:ring-white"
+                    className="mt-1 h-3 w-3 rounded-none border-sun-bleached-paper/30 bg-transparent text-white focus:ring-white"
                     required
                 />
                 <label htmlFor="newsletter-consent" className="text-[10px] text-sun-bleached-paper/60 leading-tight">

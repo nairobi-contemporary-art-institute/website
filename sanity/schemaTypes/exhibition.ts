@@ -255,6 +255,21 @@ export const exhibition = defineType({
             of: [{ type: 'reference', to: [{ type: 'artist' }] }],
         }),
         defineField({
+            name: 'artistListLayout',
+            title: 'Artist List Layout',
+            description: 'Choose how the participating artists are displayed on the exhibition page.',
+            type: 'string',
+            group: 'visual',
+            options: {
+                list: [
+                    { title: 'Visual Grid (Portraits & Bio)', value: 'grid' },
+                    { title: 'Inline Sentence (Comma Separated Links)', value: 'sentence' },
+                ],
+                layout: 'radio',
+            },
+            initialValue: 'grid',
+        }),
+        defineField({
             name: 'curators',
             title: 'Curators',
             type: 'array',

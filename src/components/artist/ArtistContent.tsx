@@ -64,7 +64,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                     )}
 
                     {/* Artist Profile Image */}
-                    {artist.image && (
+                    {artist.image?.asset && (
                         <div className="pt-12 max-w-md">
                             <div className="aspect-[3/4] relative bg-charcoal/5 overflow-hidden">
                                 <Image

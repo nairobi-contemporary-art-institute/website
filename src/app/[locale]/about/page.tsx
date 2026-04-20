@@ -60,7 +60,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
     ]
 
     return (
-        <main className="bg-ivory min-h-screen">
+        <main className="bg-ivory min-h-screen page-header-padding">
             {/* Hero Section - Full spanning width */}
             {headerStyle === 'ncai' ? (
                 <HeroIMMA
@@ -71,7 +71,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                     caption={aboutPageData?.hero?.image?.caption ? getLocalizedValue(aboutPageData.hero.image.caption, locale) : undefined}
                 />
             ) : (
-                <header className="relative pt-32 pb-20 overflow-hidden border-b border-charcoal/5">
+                <header className="relative py-20 overflow-hidden border-b border-charcoal/5">
                     <GridSystem unstable_useContainer>
                         <Grid columns={{ sm: 1, md: 12 }} gap={24}>
                             <GridCell column={{ sm: 1, md: 8 }} className="items-start justify-start p-0">

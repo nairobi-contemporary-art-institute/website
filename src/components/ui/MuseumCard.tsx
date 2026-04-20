@@ -9,13 +9,14 @@ interface MuseumCardProps {
     data: MuseumCardData;
     className?: string;
     aspectRatio?: string;
+    priority?: boolean;
 }
 
-export function MuseumCard({ data, className, aspectRatio = "aspect-square" }: MuseumCardProps) {
+export function MuseumCard({ data, className, aspectRatio = "aspect-square", priority = false }: MuseumCardProps) {
     const { href, label, title, subtitle, date, image, backgroundColor } = data;
     
     // Default fallback color if no image and no bg color is specified
-    const bgColor = backgroundColor || '#1a1a1a';
+    const bgColor = backgroundColor || 'var(--color-background-dark)';
 
     return (
         <Link 
@@ -36,6 +37,7 @@ export function MuseumCard({ data, className, aspectRatio = "aspect-square" }: M
                         fill
                         className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        priority={priority}
                     />
                     {/* Gradient Overlay for text readable contrast */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 opacity-70" />

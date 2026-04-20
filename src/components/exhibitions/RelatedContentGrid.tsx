@@ -22,10 +22,10 @@ export function RelatedContentGrid({ items, locale, title = "Related Content", c
     return (
         <section className={cn("py-32", className)}>
             <div className="flex flex-col gap-4 mb-16">
-                <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.3em] text-umber/40">
+                <div className="flex items-center gap-4 text-[10px] font-black tracking-[0.3em] text-umber/40">
                     Explore More
                 </div>
-                <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-charcoal leading-[0.8]">
+                <h2 className="text-xl md:text-2xl font-black tracking-tight text-charcoal">
                     {title}
                 </h2>
             </div>

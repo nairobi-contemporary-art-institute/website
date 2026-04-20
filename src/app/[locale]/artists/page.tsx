@@ -49,7 +49,7 @@ export default async function ArtistsPage({ params }: Props) {
     return (
         <div className="bg-[#0A0A0A] min-h-screen">
             <GridSystem unstable_useContainer>
-                <main className="pt-32 pb-24">
+                <main className="page-header-padding pb-24">
                     <header className="mb-24">
                         <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-white leading-none uppercase">
                             {title}

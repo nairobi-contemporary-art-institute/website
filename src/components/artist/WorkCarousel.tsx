@@ -123,23 +123,29 @@ export function WorkCarousel({ works, locale, artistName, onOpenGrid }: WorkCaro
                                 <MediaPlayer 
                                     type="video" 
                                     url={currentWork.videoUrl} 
-                                    thumbnail={urlFor(currentWork.image).width(1200).url()}
+                                    thumbnail={currentWork.image?.asset ? urlFor(currentWork.image).width(1200).url() : ''}
                                 />
                             </div>
                         ) : (
                             <div className="relative w-full h-full p-4 md:p-8">
-                                <Image
-                                    src={urlFor(currentWork.image).width(1200).url()}
-                                    alt={title || 'Artwork'}
-                                    fill
-                                    className="object-contain pointer-events-none"
-                                    sizes="(max-width: 1024px) 100vw, 50vw"
-                                    priority
-                                    {...(currentWork.image?.asset?.metadata?.lqip && {
-                                        placeholder: 'blur',
-                                        blurDataURL: currentWork.image.asset.metadata.lqip
-                                    })}
-                                />
+                                {currentWork.image?.asset ? (
+                                    <Image
+                                        src={urlFor(currentWork.image).width(1200).url()}
+                                        alt={title || 'Artwork'}
+                                        fill
+                                        className="object-contain pointer-events-none"
+                                        sizes="(max-width: 1024px) 100vw, 50vw"
+                                        priority
+                                        {...(currentWork.image?.asset?.metadata?.lqip && {
+                                            placeholder: 'blur',
+                                            blurDataURL: currentWork.image.asset.metadata.lqip
+                                        })}
+                                    />
+                                ) : (
+                                    <div className="w-full h-full bg-stone-100 flex items-center justify-center text-stone-300">
+                                        No image available
+                                    </div>
+                                )}
                             </div>
                         )}
                     </motion.div>

@@ -12,6 +12,7 @@ import { useLocale } from 'next-intl'
 
 interface MegaMenuProps {
     isOpen: boolean;
+    activeCategory?: string;
     columns: Array<{
         title?: string;
         links: Array<{
@@ -23,7 +24,7 @@ interface MegaMenuProps {
     featuredImages?: any[];
 }
 
-export function MegaMenu({ isOpen, columns, onClose, featuredImages }: MegaMenuProps) {
+export function MegaMenu({ isOpen, activeCategory, columns, onClose, featuredImages }: MegaMenuProps) {
     const locale = useLocale();
     const [selectedImages, setSelectedImages] = useState<any[]>([]);
     const images = featuredImages ?? [];
@@ -67,13 +68,13 @@ export function MegaMenu({ isOpen, columns, onClose, featuredImages }: MegaMenuP
                                 {columns.map((column, idx) => (
                                     <div key={idx} className="flex flex-col gap-6">
                                         {column.title && (
-                                            <h3 className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/40 border-b border-white/10 pb-2">
+                                            <h3 className="text-[10px] uppercase tracking-[0.3em] font-normal text-white/40 border-b border-white/10 pb-2">
                                                 {column.title}
                                             </h3>
                                         )}
                                         <ul className="flex flex-col gap-4">
                                             {(column.links || []).map((link) => (
-                                                <li key={link.href}>
+                                                <li key={`${link.label}-${link.href}`}>
                                                     <Link
                                                         href={link.href}
                                                         className="text-lg font-bold text-white hover:text-ochre transition-colors group flex items-center gap-2"
@@ -91,10 +92,10 @@ export function MegaMenu({ isOpen, columns, onClose, featuredImages }: MegaMenuP
                                 ))}
                             </div>
 
-                            {/* Right: Featured Images Section (Show for 'Visit' or similar top-level items) */}
+                            {/* Right: Featured Images Section */}
                             <div className="w-full md:w-[45%] flex flex-col gap-6 mt-12 md:mt-0">
-                                <h3 className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/40 border-b border-white/10 pb-2">
-                                    Visit NCAI
+                                <h3 className="text-[10px] uppercase tracking-[0.3em] font-normal text-white/40 border-b border-white/10 pb-2">
+                                    {activeCategory ? `Featured in ${activeCategory}` : 'Featured'}
                                 </h3>
                                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                                     {[0, 1, 2].map((i) => {
@@ -164,13 +165,30 @@ export function MegaMenu({ isOpen, columns, onClose, featuredImages }: MegaMenuP
                             </div>
                         </div>
 
-                        {/* Bottom strip for decorative element or quick info */}
-                        <div className="bg-white/[0.02] border-t border-white/5 py-4 px-6 md:px-12">
-                            <div className="container mx-auto flex justify-between items-center text-[10px] uppercase tracking-widest text-white/30 font-bold">
-                                <span>Nairobi Contemporary Art Institute</span>
-                                <Link href="/about" className="hover:text-ivory transition-colors">
-                                    <span>East African Contemporary Art</span>
-                                </Link>
+                        {/* High-Converting Quick Action Bar */}
+                        <div className="bg-white/[0.03] border-t border-white/10 py-5 px-6 md:px-12">
+                            <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+                                <div className="flex items-center gap-8 text-[10px] uppercase tracking-[0.2em] text-white/40 font-bold">
+                                    <span className="text-white/60">Nairobi Contemporary Art Institute</span>
+                                    <Link href="/visit" className="hover:text-ochre transition-colors">Plan your visit</Link>
+                                    <Link href="/about" className="hover:text-ochre transition-colors">The Institute</Link>
+                                </div>
+                                <div className="flex items-center gap-6">
+                                    <Link 
+                                        href="/get-involved#membership" 
+                                        className="text-[10px] uppercase tracking-[0.2em] font-bold text-white bg-ochre/20 border border-ochre/30 px-4 py-2 hover:bg-ochre hover:text-black transition-all"
+                                        onClick={onClose}
+                                    >
+                                        Become a Member
+                                    </Link>
+                                    <Link 
+                                        href="/visit" 
+                                        className="text-[10px] uppercase tracking-[0.2em] font-bold text-black bg-white px-4 py-2 hover:bg-ivory transition-all"
+                                        onClick={onClose}
+                                    >
+                                        Book Tickets
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </Popover.Popup>

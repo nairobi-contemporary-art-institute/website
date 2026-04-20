@@ -1,12 +1,11 @@
 import { getTranslations } from 'next-intl/server'
 import { client, sanityFetch } from '@/sanity/lib/client'
-import { EXHIBITIONS_QUERY, POSTS_QUERY, TIMELINE_QUERY, HOME_PAGE_QUERY, FEATURED_COLLECTION_QUERY } from '@/sanity/lib/queries'
+import { EXHIBITIONS_QUERY, POSTS_QUERY, HOME_PAGE_QUERY, FEATURED_COLLECTION_QUERY } from '@/sanity/lib/queries'
 import { getLocalizedValue } from '@/sanity/lib/utils'
 import { urlFor } from '@/sanity/lib/image'
 import { Link } from '@/i18n'
 import Image from 'next/image'
 import { ResponsiveDivider } from '@/components/ui/ResponsiveDivider'
-import { TimelineTeaser } from '@/components/home/TimelineTeaser'
 import { HomeHero } from '@/components/home/HomeHero'
 import { HomeHeroNew } from '@/components/home/HomeHeroNew'
 import { PortableText } from '@/components/ui/PortableText'
@@ -38,11 +37,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'HomePage' })
 
-  // Fetch latest exhibition, news, and timeline teaser using sanityFetch for better cache control
-  const [exhibitions, posts, timelineEvents, homeData] = await Promise.all([
+  // Fetch latest exhibition, news, and home data using sanityFetch for better cache control
+  const [exhibitions, posts, homeData] = await Promise.all([
     sanityFetch<Exhibition[]>({ query: EXHIBITIONS_QUERY, tags: ['exhibition'] }),
     sanityFetch<Post[]>({ query: POSTS_QUERY, tags: ['post'] }),
-    sanityFetch<any[]>({ query: TIMELINE_QUERY, tags: ['timeline'] }),
     sanityFetch<any>({ query: HOME_PAGE_QUERY, tags: ['homePage'] }),
     sanityFetch<any[]>({ query: COLLECTION_QUERY, tags: ['collectionItem'] })
   ])
@@ -172,15 +170,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             viewFullCollectionLabel: t('viewFullCollection')
           }}
           locale={locale}
-        />
-      )}
-
-      {/* Timeline Teaser Section */}
-      {(homeData?.timelineTeaser?.show !== false) && (
-        <TimelineTeaser
-          events={timelineEvents}
-          locale={locale}
-          headline={getLocalizedValue(homeData?.timelineTeaser?.headline, locale)}
         />
       )}
     </div>

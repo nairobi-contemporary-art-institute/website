@@ -49,149 +49,149 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
     // Fallback categories if Sanity data is missing
     const displayCategories = categories.length > 0 ? categories : [
         {
-            title: 'Learn & Engage',
+            title: 'What\'s On',
             links: [
-                { label: 'Journal (Channel)', url: '/channel' },
-                { label: 'Public Programs', url: '/education' },
-                { label: 'Publications', url: '/publications' },
                 { label: 'Exhibitions', url: '/exhibitions' },
-                { label: 'Artists', url: '/artists' },
-                { label: 'Collection', url: '/collection' },
+                { label: 'Public Programs', url: '/education' },
+                { label: 'Events', url: '/events' },
+                { label: 'Visit Us', url: '/visit' },
             ],
         },
         {
-            title: 'Get Involved',
+            title: 'Collection',
+            links: [
+                { label: 'The Channel', url: '/channel' },
+                { label: 'Artists', url: '/artists' },
+                { label: 'Collection', url: '/collection' },
+                { label: 'Publications', url: '/publications' },
+            ],
+        },
+        {
+            title: 'Learn',
+            links: [
+                { label: 'Academy', url: '/education' },
+                { label: 'Resources', url: '/education#resources' },
+                { label: 'Fellowships', url: '/about' },
+            ],
+        },
+        {
+            title: 'Support',
             links: [
                 { label: 'Membership', url: '/get-involved' },
                 { label: 'Support NCAI', url: '/get-involved' },
-                { label: 'Jobs & Internships', url: '/careers' },
-                { label: 'Volunteer', url: '/volunteer' },
-            ],
-        },
-        {
-            title: 'NCAI',
-            links: [
+                { label: 'Careers', url: '/about/careers' },
                 { label: 'About us', url: '/about' },
-                { label: 'Visit', url: '/visit' },
-                { label: 'Contact', url: '/contact' },
-                { label: 'Press', url: '/press' },
-                { label: 'Styleguide', url: '/styleguide' },
             ],
         },
     ]
 
     return (
         <footer className="bg-background-dark text-sun-bleached-paper">
-            {/* Top Divider */}
+            {/* Newsletter Row - Full Width Section above the swoosh line */}
+            <div className="container pt-20 pb-4">
+                <div className="max-w-2xl">
+                    <NewsletterSignup />
+                </div>
+            </div>
+
+            {/* Swoosh Line / Top Divider */}
             <ResponsiveDivider variant="curved" weight="medium" className="text-white" />
 
             {/* Main Footer Content */}
-            <div className="container py-12 md:py-16">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
-                    {/* Contact Info (Visit Us) - Now on the left */}
-                    <div className="lg:col-span-3">
-                        <h4 className="text-lg font-bold uppercase tracking-tight mb-4 text-white">
-                            Visit Us
-                        </h4>
-                        <div className="space-y-4 text-sm text-sun-bleached-paper/80">
-                            {contactInfo ? (
-                                <div className="leading-snug">
-                                    <strong className="block font-semibold mb-1">{contactInfo.name}</strong>
-                                    {contactInfo.googleMapsUrl ? (
-                                        <a
-                                            href={contactInfo.googleMapsUrl}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="block hover:text-white transition-colors"
-                                            aria-label="View on Google Maps"
-                                        >
-                                            {contactInfo.address?.split('\n').map((line, i) => (
+            <div className="container py-24">
+                {/* Main Links Row */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+                    {/* Contact Info Column (Visit Us) */}
+                    <div className="lg:col-span-3 space-y-8">
+                        <div className="text-sm text-sun-bleached-paper/80 space-y-6">
+                            <div className="leading-relaxed">
+                                <strong className="block font-bold text-white mb-6">Visit Us</strong>
+                                {contactInfo?.address ? (
+                                    contactInfo.googleMapsUrl ? (
+                                        <a href={contactInfo.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors block">
+                                            {contactInfo.address.split('\n').map((line, i) => (
                                                 <span key={i} className="block">{line}</span>
                                             ))}
                                         </a>
                                     ) : (
-                                        <p>
-                                            {contactInfo.address?.split('\n').map((line, i) => (
+                                        <div className="block">
+                                            {contactInfo.address.split('\n').map((line, i) => (
                                                 <span key={i} className="block">{line}</span>
                                             ))}
-                                        </p>
-                                    )}
-                                </div>
-                            ) : (
-                                <div className="leading-snug">
-                                    <strong className="block font-semibold mb-1">Nairobi Contemporary Art Institute</strong>
+                                        </div>
+                                    )
+                                ) : (
                                     <p>Rosslyn Riviera Mall,<br />Limuru Road, Nairobi</p>
-                                </div>
-                            )}
+                                )}
+                            </div>
+                            
                             <div className="space-y-1">
                                 {contactInfo?.email && (
-                                    <a href={`mailto:${contactInfo.email}`} className="block hover:text-white transition-colors text-sun-bleached-paper/80">
+                                    <a href={`mailto:${contactInfo.email}`} className="block hover:text-white transition-colors">
                                         {contactInfo.email}
                                     </a>
                                 )}
                                 {contactInfo?.phone && (
-                                <a href={`tel:${contactInfo.phone.replace(/\s+/g, '')}`} className="block hover:text-white transition-colors text-sun-bleached-paper/80">
+                                    <a href={`tel:${contactInfo.phone.replace(/\s+/g, '')}`} className="block hover:text-white transition-colors">
                                         {contactInfo.phone}
                                     </a>
                                 )}
                             </div>
+
+                            <div className="pt-4">
+                                <SocialIcons urls={socialUrls} />
+                            </div>
                         </div>
                     </div>
 
-                    {/* Link Categories - Centered */}
-                    <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-3 gap-8">
-                        {displayCategories.map((category) => (
-                            <div key={category.title}>
-                                <h4 className="text-sm font-bold uppercase tracking-widest mb-4 text-white">
+                    {/* Link Categories - Now taking more space (9 columns) */}
+                    <div className="lg:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+                        {displayCategories.map((category, index) => (
+                            <div key={`${category.title}-${index}`} className="flex flex-col h-full">
+                                <h4 className="text-sm font-bold mb-6 text-white min-h-[1.5rem]">
                                     {category.title}
                                 </h4>
-                                <ul className="space-y-2">
-                                    {category.links.map((link) => (
-                                        <li key={link.label}>
-                                            <Link
-                                                href={link.url}
-                                                className="text-sm text-sun-bleached-paper/80 hover:text-white transition-colors duration-200 underline-offset-2 hover:underline"
-                                            >
-                                                {link.label}
-                                            </Link>
-                                        </li>
-                                    ))}
+                                <ul className="space-y-3 flex-grow">
+                                    {category.links.map((link, linkIndex) => (
+                                         <li key={`${link.label}-${link.url}-${linkIndex}`}>
+                                             <Link
+                                                 href={link.url}
+                                                 className="text-sm text-sun-bleached-paper/80 hover:text-white transition-colors duration-200 underline-offset-4 hover:underline decoration-white/20"
+                                             >
+                                                 {link.label}
+                                             </Link>
+                                         </li>
+                                     ))}
                                 </ul>
                             </div>
                         ))}
                     </div>
-
-                    {/* Newsletter Section - Now on the right */}
-                    <div className="lg:col-span-3">
-                        <NewsletterSignup />
-                        <div className="mt-8">
-                            <SocialIcons urls={socialUrls} />
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            {/* Bottom Bar */}
-            <ResponsiveDivider variant="straight" weight="thin" className="text-sun-bleached-paper/10" />
+            {/* Bottom Swoosh/Divider */}
+            <ResponsiveDivider variant="straight" weight="thin" className="text-white/10" />
 
-            <div className="container py-6">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div className="container py-8">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                     {/* Legal Links & Accessibility */}
-                    <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
-                        {legalLinks.map((link) => (
+                    <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-[11px] font-normal">
+                        {legalLinks.map((link, idx) => (
                             <Link
-                                key={link.label}
+                                key={`${link.label}-${link.url}-${idx}`}
                                 href={link.url}
-                                className="text-sun-bleached-paper/80 hover:text-white transition-colors duration-200 underline-offset-2 hover:underline"
+                                className="text-sun-bleached-paper/40 hover:text-white transition-colors duration-200"
                             >
                                 {link.label}
                             </Link>
                         ))}
-                        <AccessibilityToggles />
+                        <div className="md:ml-4">
+                            <AccessibilityToggles />
+                        </div>
                     </div>
 
                     {/* Copyright */}
-                    <p className="text-sm text-sun-bleached-paper/60">
+                    <p className="text-[11px] font-normal text-sun-bleached-paper/30">
                         {copyrightText || `© ${currentYear} Nairobi Contemporary Art Institute`}
                     </p>
                 </div>

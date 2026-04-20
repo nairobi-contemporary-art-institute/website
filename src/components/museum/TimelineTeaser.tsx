@@ -76,18 +76,18 @@ export function TimelineTeaser({ events, locale, headline }: TimelineTeaserProps
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-12">
                     <div className="max-w-3xl">
                         <div className="flex items-center gap-4 mb-8">
-                            <div className="w-12 h-px bg-amber-500/50" />
-                            <span className="text-[10px] capitalize tracking-[0.5em] font-bold text-amber-500">The Institutional Journey</span>
+                            <div className="w-12 h-px bg-ochre/50" />
+                            <span className="text-[10px] capitalize tracking-[0.5em] font-bold text-ochre">The Institutional Journey</span>
                         </div>
                         <h2 className="text-5xl md:text-8xl font-bold tracking-tighter leading-[0.9] capitalize italic sm:not-italic">
                             {headline || (
-                                <>A Legacy of <br /><span className="text-amber-500">Transcendence</span></>
+                                <>A Legacy of <br /><span className="text-ochre">Transcendence</span></>
                             )}
                         </h2>
                     </div>
                     <Link
                         href="/timeline"
-                        className="group flex items-center gap-6 text-[10px] font-bold capitalize tracking-[0.3em] py-4 px-8 border border-ivory/20 hover:border-amber-500 hover:bg-amber-500 hover:text-charcoal transition-all duration-500 rounded-full"
+                        className="group flex items-center gap-6 text-[10px] font-bold capitalize tracking-[0.3em] py-4 px-8 border border-ivory/20 hover:border-ochre hover:bg-ochre hover:text-charcoal transition-all duration-500 rounded-full"
                     >
                         Enter Archive
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
@@ -114,7 +114,27 @@ export function TimelineTeaser({ events, locale, headline }: TimelineTeaserProps
                                     <div className="absolute inset-0 z-0">
                                         <div className="absolute inset-0 bg-charcoal mix-blend-multiply opacity-40 group-hover:opacity-20 transition-opacity duration-700" />
                                         <Image
-                                            src={urlFor(event.media).width(800).height(1000).url()}
+                                            src={(() => {
+                                                try {
+                                                    // Handle mock data or malformed refs gracefully
+                                                    if (typeof event.media === 'string' && event.media.startsWith('http')) return event.media;
+                                                    
+                                                    const ref = event.media?.asset?._ref || '';
+                                                    if (ref.includes('image-t') || ref.includes('00000000000000000000000')) {
+                                                        const placeholders = [
+                                                            '1549490349-8643362247b5', // Abstract
+                                                            '1523891708897-40030044813f', // Architecture
+                                                            '1501862700950-18382cd41497', // Texture
+                                                            '1550684848-fac1c5b4e853'  // Modern
+                                                        ];
+                                                        const index = parseInt(ref.replace(/\D/g, '') || '0') % placeholders.length;
+                                                        return `https://images.unsplash.com/photo-${placeholders[index]}?w=800&q=80`;
+                                                    }
+                                                    return urlFor(event.media).width(800).height(1000).url();
+                                                } catch (e) {
+                                                    return `https://images.unsplash.com/photo-1549490349-8643362247b5?w=800&q=80`;
+                                                }
+                                            })()}
                                             alt={getLocalizedValue(event.title, locale) || String(event.year)}
                                             fill
                                             className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100"
@@ -124,13 +144,13 @@ export function TimelineTeaser({ events, locale, headline }: TimelineTeaserProps
                                 )}
 
                                 {/* Border overlay */}
-                                <div className="absolute inset-0 border border-ivory/5 group-hover:border-amber-500/30 transition-colors duration-700 z-10" />
+                                <div className="absolute inset-0 border border-ivory/5 group-hover:border-ochre/30 transition-colors duration-700 z-10" />
 
                                 {/* Overlay Gradient */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent opacity-90 group-hover:opacity-70 transition-opacity z-10" />
 
                                 <div className="relative z-20 space-y-6">
-                                    <span className="text-xs font-bold tracking-[0.3em] text-amber-500 block transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                    <span className="text-xs font-bold tracking-[0.3em] text-ochre block transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                                         {event.year}
                                     </span>
                                     <h3 className="text-2xl font-bold tracking-tight leading-tight transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
@@ -142,7 +162,7 @@ export function TimelineTeaser({ events, locale, headline }: TimelineTeaserProps
                                     </p>
 
                                     <div className="pt-4 overflow-hidden">
-                                        <div className="h-px bg-amber-500 w-0 group-hover:w-full transition-all duration-1000" />
+                                        <div className="h-px bg-ochre w-0 group-hover:w-full transition-all duration-1000" />
                                     </div>
                                 </div>
                             </div>
@@ -153,7 +173,7 @@ export function TimelineTeaser({ events, locale, headline }: TimelineTeaserProps
 
             {/* Ambient Curvilinear Element (Decorative) */}
             <div className="absolute top-0 right-0 w-1/2 h-full pointer-events-none opacity-10">
-                <svg viewBox="0 0 500 1000" className="w-full h-full text-amber-500" fill="none" stroke="currentColor">
+                <svg viewBox="0 0 500 1000" className="w-full h-full text-ochre" fill="none" stroke="currentColor">
                     <path d="M500,0 C400,300 100,700 0,1000" strokeWidth="0.5" />
                     <path d="M500,100 C410,350 110,750 0,1100" strokeWidth="0.2" strokeDasharray="10 20" />
                 </svg>
