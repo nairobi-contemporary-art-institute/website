@@ -3,19 +3,20 @@
  * Falls back to 'en' if the requested locale is not found.
  */
 export function getLocalizedValue<T = string>(
-    array?: { _key: string; value?: T; text?: T }[],
+    array: any,
     locale: string = 'en'
 ): T | undefined {
+    if (typeof array === 'string') return array as unknown as T
     if (!array || !Array.isArray(array)) return undefined
 
     // Try finding the exact locale
-    const localized = array.find((item) => item._key === locale)
+    const localized = array.find((item: any) => item._key === locale)
     const result = localized ? (localized.value ?? localized.text) : undefined
 
     if (result !== undefined) return result as T
 
     // Fallback to English
-    const fallback = array.find((item) => item._key === 'en')
+    const fallback = array.find((item: any) => item._key === 'en')
     const fallbackResult = fallback ? (fallback.value ?? fallback.text) : undefined
 
     if (fallbackResult !== undefined) return fallbackResult as T
@@ -45,9 +46,12 @@ export function portableTextToPlainText(blocks: any[]): string {
  * Safely get a localized value as a string, even if it is stored as Portable Text.
  */
 export function getLocalizedValueAsString(
-    array?: { _key: string; value?: any; text?: any }[],
+    array: any,
     locale: string = 'en'
 ): string {
+    if (typeof array === 'string') return array
+    if (!array) return ''
+
     const val = getLocalizedValue<any>(array, locale);
     if (!val) return '';
     if (typeof val === 'string') return val;

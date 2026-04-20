@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { Link } from "@/i18n"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { WhatsOnFilter } from "./WhatsOnFilter"
 import { WhatsOnCalendar } from "./WhatsOnCalendar"
@@ -97,7 +98,7 @@ export function WhatsOnClient({ items, locale, noticeBarSettings, categories = [
             }
 
             // Month Range Match (DEPRECATED: We want the list to show everything by default even when calendar is open)
-            let passesMonth = true;
+            const passesMonth = true;
             // Removed aggressive filtering to keep Current/Upcoming/Archive visible when browsing the calendar grid
 
             // Date Match (Specific day)
@@ -217,7 +218,7 @@ export function WhatsOnClient({ items, locale, noticeBarSettings, categories = [
                                     {customLabel ? (
                                         customLinkUrl && <a href={customLinkUrl} className="underline underline-offset-4">{customLinkText || 'Learn more'}</a>
                                     ) : (
-                                        <>See <a href="/visit" className="underline underline-offset-4">opening hours</a> for more information.</>
+                                        <>See <Link href="/visit" className="underline underline-offset-4">opening hours</Link> for more information.</>
                                     )}
                                 </span>
                             </>

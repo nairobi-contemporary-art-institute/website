@@ -89,7 +89,7 @@ export function GridRoot({
     rows = 1,
     gap = 0,
     height,
-    hideGuides = 'none',
+    hideGuides = 'both',
     className,
 }: GridProps) {
     const { guideWidth } = useContext(GridSystemContext);

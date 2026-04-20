@@ -10,7 +10,7 @@
         "stayConnected": "Endelea Kuungana",
         "subscribeText": "Pokea sasisho za mara kwa mara kuhusu maonyesho yetu, programu za umma, na machapisho.",
         "viewExh": "Tazama Onyesho",
-        "exploreCollection": "Explore Collection",
+        "exploreCollection": "Explore NCAI",
         "viewFullCollection": "View Full Collection"
     },
     "Navigation": {
@@ -20,12 +20,48 @@
         "channel": "Chaneli",
         "collection": "Mkusanyiko",
         "education": "Elimu",
-        "support": "Tuunge Mkono"
+        "support": "Tuunge Mkono",
+        "aboutOverview": "Overview",
+        "aboutMission": "Dhamira",
+        "aboutHistory": "Historia",
+        "aboutTeam": "Timu",
+        "aboutCareers": "Nafasi za Kazi"
     },
     "Pages": {
         "about": {
             "title": "Kuhusu NCAI",
-            "description": "NCAI ni nafasi ya sanaa ya kuona isiyo ya kifaida iliyoko Nairobi."
+            "description": "NCAI ni nafasi ya sanaa ya kuona isiyo ya kifaida iliyoko Nairobi.",
+            "teamFilters": {
+                "all": "Zote",
+                "curator": "Uhifadhi",
+                "education": "Elimu na Programu za Umma",
+                "administration": "Utawala",
+                "management": "Usimamizi waပြခန်း",
+                "frontdesk": "Mapokezi",
+                "production": "Uzalishaji",
+                "press": "Vyombo vya Habari"
+            },
+            "teamCategories": {
+                "staff": "Timu Yetu",
+                "contributors": "Wachangiaji na Washirika"
+            },
+            "historyTeaser": {
+                "title": "Safari Yetu",
+                "cta": "Gundua Historia Yetu"
+            },
+            "missionTeaser": {
+                "title": "Dhamira Yetu",
+                "cta": "Soma Dhamira Yetu"
+            },
+            "teamTeaser": {
+                "title": "Timu",
+                "cta": "Kutana na Timu"
+            },
+            "careersTeaser": {
+                "title": "Jiunge Nasi",
+                "cta": "Tazama Nafasi",
+                "empty": "Kwa sasa hakuna nafasi zilizo wazi. Tafadhali angalia tena baadaye au ufuate chaneli zetu za kijamii kwa sasisho."
+            }
         },
         "visit": {
             "title": "Tembelea Us",
@@ -92,7 +128,20 @@
             "untitled": "Bila Kichwa",
             "unknownArtist": "Msanii Asiyejulikana",
             "noImage": "Hakuna Picha",
-            "detailsDescription": "Maelezo ya kazi ya sanaa {title} katika Mkusanyiko wa NCAI."
+            "detailsDescription": "Maelezo ya kazi ya sanaa {title} katika Mkusanyiko wa NCAI.",
+            "onDisplayAt": "Inaonyeshwa katika {location}",
+            "currentlyOnDisplay": "Inaonyeshwa sasa",
+            "outOnLoan": "Imekopeshwa",
+            "artistsAZ": "Wasanii A-Z",
+            "searchPlaceholder": "Tafuta mkusanyiko",
+            "noFilteredResults": "Hakuna vitu vilivyopatikana vinavyolingana na machujio yako.",
+            "clearFilters": "Futa machujio yote",
+            "allLabel": "{label} Zote",
+            "noImageAvailable": "Hakuna Picha Inayopatikana",
+            "sortRandom": "Nasibu",
+            "sortAZ": "Alfabeti",
+            "shuffleWorks": "Changanya",
+            "resetFilters": "Futa Machujio"
         },
         "channel": {
             "title": "Chaneli",
@@ -150,7 +199,16 @@
         "filterAll": "Zote",
         "filterExhibition": "Maonyesho",
         "filterArtist": "Wasanii",
+        "filterWork": "Kazi",
         "filterPost": "Chaneli",
-        "filterProgram": "Elimu"
+        "filterProgram": "Elimu",
+        "filterEvent": "Matukio",
+        "collectionItem": "Kazi ya Sanaa",
+        "work": "Kazi ya Sanaa",
+        "artist": "Msanii",
+        "exhibition": "Maonyesho",
+        "post": "Chapisho",
+        "program": "Programu",
+        "event": "Tukio"
     }
 }

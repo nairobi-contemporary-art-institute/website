@@ -7,6 +7,8 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import { urlFor } from "@/sanity/lib/image"
 
+import { AboutSubNav } from "@/components/about/AboutSubNav"
+
 type Props = {
     params: Promise<{ locale: string }>
 }
@@ -14,7 +16,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { locale } = await params
     return {
-        title: `${locale === 'en' ? 'Mission & Vision' : 'Malengo na Maono'} | NCAI`,
+        title: `${locale === 'en' ? 'Mission' : 'Malengo'} | NCAI`,
         description: 'Our commitment to the growth and preservation of contemporary art in East Africa.',
     }
 }
@@ -29,54 +31,58 @@ export default async function MissionPage({ params }: Props) {
     }) || []
 
     return (
-        <GridSystem unstable_useContainer className="pt-32 pb-40 min-h-screen bg-ivory">
-            <header className="mb-32 max-w-4xl">
-                <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-charcoal capitalize leading-[0.9] mb-8">
-                    {locale === 'en' ? 'Mission & Vision' : 'Malengo na Maono'}
-                </h1>
-            </header>
+        <GridSystem>
+            <main className="min-h-screen bg-ivory">
+                <header className="pt-32 pb-12 px-section-clamp">
+                    <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-charcoal capitalize leading-[0.9] mb-8">
+                        {locale === 'en' ? 'Mission & Vision' : 'Malengo na Maono'}
+                    </h1>
+                </header>
 
-            <div className="space-y-40">
-                {missionSections.map((section: any, idx: number) => {
-                    const title = getLocalizedValue(section.title, locale)
-                    const content = getLocalizedValue(section.content, locale)
-                    const isEven = idx % 2 === 0
+                <AboutSubNav locale={locale} />
 
-                    return (
-                        <section key={idx} className="px-section-clamp relative">
-                            <Grid columns={{ sm: 1, md: 12 }} gap={48} className="items-center">
-                                <GridCell column={{ sm: 1, md: 6 }} className={`${isEven ? 'order-1' : 'order-1 md:order-2'} items-start justify-start p-0`}>
-                                    <div className="space-y-8">
-                                        {title && (
-                                            <h2 className="text-4xl md:text-6xl font-bold capitalize tracking-tighter text-charcoal leading-none">
-                                                {title}
-                                            </h2>
-                                        )}
-                                        {content && (
-                                            <div className="prose prose-xl max-w-none text-charcoal/80">
-                                                <PortableText value={content} locale={locale} />
-                                            </div>
-                                        )}
-                                    </div>
-                                </GridCell>
+                <div className="py-32 space-y-40">
+                    {missionSections.map((section: any, idx: number) => {
+                        const title = getLocalizedValue(section.title, locale)
+                        const content = getLocalizedValue(section.content, locale)
+                        const isEven = idx % 2 === 0
 
-                                {section.image && (
-                                    <GridCell column={{ sm: 1, md: 6 }} className={`${isEven ? 'order-2' : 'order-2 md:order-1'} p-0`}>
-                                        <div className="relative aspect-square w-full bg-charcoal/5 overflow-hidden group shadow-2xl">
-                                            <Image
-                                                src={urlFor(section.image).width(1200).url()}
-                                                alt={title || ''}
-                                                fill
-                                                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
-                                            />
+                        return (
+                            <section key={idx} className="px-section-clamp relative">
+                                <Grid columns={{ sm: 1, md: 12 }} gap={48} className="items-center">
+                                    <GridCell column={{ sm: 1, md: 6 }} className={`${isEven ? 'order-1' : 'order-1 md:order-2'} items-start justify-start p-0`}>
+                                        <div className="space-y-8">
+                                            {title && (
+                                                <h2 className="text-4xl md:text-6xl font-bold capitalize tracking-tighter text-charcoal leading-none">
+                                                    {title}
+                                                </h2>
+                                            )}
+                                            {content && (
+                                                <div className="prose prose-xl max-w-none text-charcoal/80">
+                                                    <PortableText value={content} locale={locale} />
+                                                </div>
+                                            )}
                                         </div>
                                     </GridCell>
-                                )}
-                            </Grid>
-                        </section>
-                    )
-                })}
-            </div>
+
+                                    {section.image && (
+                                        <GridCell column={{ sm: 1, md: 6 }} className={`${isEven ? 'order-2' : 'order-2 md:order-1'} p-0`}>
+                                            <div className="relative aspect-square w-full bg-charcoal/5 overflow-hidden group shadow-2xl">
+                                                <Image
+                                                    src={urlFor(section.image).width(1200).url()}
+                                                    alt={title || ''}
+                                                    fill
+                                                    className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
+                                                />
+                                            </div>
+                                        </GridCell>
+                                    )}
+                                </Grid>
+                            </section>
+                        )
+                    })}
+                </div>
+            </main>
         </GridSystem>
     )
 }

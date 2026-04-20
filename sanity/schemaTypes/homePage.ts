@@ -57,6 +57,7 @@ export const homePage = defineType({
                                 defineField({
                                     name: 'image',
                                     title: 'Image',
+                                    description: 'Recommended size: 2500px × 1500px. High-impact image for the homepage hero. Ensure the source is high quality.',
                                     type: 'image',
                                     options: { hotspot: true },
                                     fields: [
@@ -99,6 +100,20 @@ export const homePage = defineType({
                                     description: 'Opacity of the background color (100 = fully opaque).'
                                 }),
                                 defineField({
+                                    name: 'intelligentContrast',
+                                    title: 'Intelligent Contrast',
+                                    type: 'boolean',
+                                    description: 'Automatically set the text color to the complimentary color of the background. Note: Overridden by "Force Black Text".',
+                                    initialValue: false
+                                }),
+                                defineField({
+                                    name: 'forceBlackText',
+                                    title: 'Force Black Text',
+                                    type: 'boolean',
+                                    description: 'Manually force all text content to be black. This takes precedence over "Intelligent Contrast".',
+                                    initialValue: false
+                                }),
+                                defineField({
                                     name: 'preHeading',
                                     title: 'Pre-Heading (Event Type)',
                                     type: 'internationalizedArrayString',
@@ -112,9 +127,15 @@ export const homePage = defineType({
                                 }),
                                 defineField({
                                     name: 'subtitle',
-                                    title: 'Subtitle / Description',
+                                    title: 'Subtitle',
                                     type: 'internationalizedArrayString',
-                                    description: 'Optional secondary text below the title.'
+                                    description: 'Optional short description below the title.'
+                                }),
+                                defineField({
+                                    name: 'description',
+                                    title: 'Text Block (Rich Text)',
+                                    type: 'internationalizedArrayBlockContent',
+                                    description: 'A more detailed text area for the slide content.'
                                 }),
                                 defineField({
                                     name: 'date',
@@ -138,6 +159,59 @@ export const homePage = defineType({
                                     title: 'Location',
                                     type: 'internationalizedArrayString',
                                     description: 'e.g. "Gallery 1, Main Building"'
+                                }),
+                                defineField({
+                                    name: 'layout',
+                                    title: 'Layout Style',
+                                    type: 'string',
+                                    options: {
+                                        list: [
+                                            { title: 'Auto (Based on image hotspot)', value: 'auto' },
+                                            { title: 'Split (Text Left / Image Right)', value: 'split-left' },
+                                            { title: 'Split (Text Right / Image Left)', value: 'split-right' },
+                                            { title: 'Centered Overlay', value: 'centered' }
+                                        ],
+                                        layout: 'radio'
+                                    },
+                                    initialValue: 'auto'
+                                }),
+                                defineField({
+                                    name: 'contentPosition',
+                                    title: 'Content Alignment',
+                                    type: 'string',
+                                    options: {
+                                        list: [
+                                            { title: 'Left', value: 'left' },
+                                            { title: 'Center', value: 'center' },
+                                            { title: 'Right', value: 'right' }
+                                        ],
+                                        layout: 'radio'
+                                    },
+                                    initialValue: 'left',
+                                    description: 'Horizontal position of the text block.'
+                                }),
+                                defineField({
+                                    name: 'contentWidth',
+                                    title: 'Content Width (%)',
+                                    type: 'number',
+                                    initialValue: 50,
+                                    validation: (Rule) => Rule.min(20).max(100),
+                                    description: 'Width of the text section area.'
+                                }),
+                                defineField({
+                                    name: 'imageAlignment',
+                                    title: 'Image Alignment',
+                                    type: 'string',
+                                    options: {
+                                        list: [
+                                            { title: 'Left', value: 'left' },
+                                            { title: 'Center', value: 'center' },
+                                            { title: 'Right', value: 'right' }
+                                        ],
+                                        layout: 'radio'
+                                    },
+                                    initialValue: 'center',
+                                    hidden: ({ parent }) => parent?.layout === 'auto'
                                 }),
                                 defineField({
                                     name: 'link',
@@ -187,6 +261,130 @@ export const homePage = defineType({
             ]
         }),
         defineField({
+            name: 'announcement',
+            title: 'Announcement Banner',
+            type: 'object',
+            description: 'A prominent announcement section displayed directly below the hero.',
+            fields: [
+                defineField({
+                    name: 'enabled',
+                    title: 'Enable Announcement',
+                    type: 'boolean',
+                    initialValue: false,
+                    description: 'Toggle the announcement banner on or off.'
+                }),
+                defineField({
+                    name: 'preHeading',
+                    title: 'Pre-Heading',
+                    type: 'internationalizedArrayString',
+                    description: 'Small label above the headline, e.g. "ANNOUNCEMENT".'
+                }),
+                defineField({
+                    name: 'heading',
+                    title: 'Heading',
+                    type: 'internationalizedArrayString',
+                    description: 'Main announcement headline.'
+                }),
+                defineField({
+                    name: 'briefText',
+                    title: 'Brief Text',
+                    type: 'internationalizedArrayBlockContent',
+                    description: 'A short summary paragraph shown inline.'
+                }),
+                defineField({
+                    name: 'ctaLabel',
+                    title: 'CTA Button Label',
+                    type: 'internationalizedArrayString',
+                    description: 'Text for the call-to-action link, e.g. "Learn More".'
+                }),
+                defineField({
+                    name: 'ctaUrl',
+                    title: 'CTA URL',
+                    type: 'url',
+                    description: 'External link the CTA button points to.',
+                    validation: (Rule) => Rule.uri({ allowRelative: true, scheme: ['http', 'https'] })
+                }),
+                defineField({
+                    name: 'logo',
+                    title: 'Partner Logo',
+                    type: 'image',
+                    description: 'Optional partner or event logo (e.g. La Biennale di Venezia).',
+                    options: { hotspot: false }
+                }),
+                defineField({
+                    name: 'backgroundImage',
+                    title: 'Background Image',
+                    type: 'image',
+                    description: 'Recommended size: 2000px × 800px. Optimized for the announcement banner backdrop.',
+                    options: { hotspot: true }
+                }),
+                defineField({
+                    name: 'exploreMore',
+                    title: 'Explore More Section',
+                    type: 'object',
+                    fields: [
+                        defineField({
+                            name: 'title',
+                            title: 'Section Title',
+                            type: 'internationalizedArrayString',
+                            initialValue: [{ _key: 'en', value: 'Explore More' }]
+                        }),
+                        defineField({
+                            name: 'cards',
+                            title: 'CTA Cards',
+                            type: 'array',
+                            validation: (Rule) => Rule.max(3),
+                            of: [{
+                                type: 'object',
+                                name: 'ctaCard',
+                                fields: [
+                                    { name: 'title', title: 'Title', type: 'internationalizedArrayString' },
+                                    { name: 'description', title: 'Description', type: 'internationalizedArrayString' },
+                                    { name: 'buttonText', title: 'Button Text', type: 'internationalizedArrayString' },
+                                    { name: 'url', title: 'URL', type: 'string' },
+                                    { 
+                                        name: 'style', 
+                                        title: 'Style', 
+                                        type: 'string', 
+                                        options: { list: ['primary', 'secondary'], layout: 'radio' },
+                                        initialValue: 'primary'
+                                    },
+                                    {
+                                        name: 'state',
+                                        title: 'State',
+                                        type: 'string',
+                                        options: { list: ['active', 'comingSoon'], layout: 'radio' },
+                                        initialValue: 'active'
+                                    }
+                                ]
+                            }]
+                        }),
+                        defineField({
+                            name: 'secondaryCta',
+                            title: 'Secondary CTA (Mailing List)',
+                            type: 'object',
+                            fields: [
+                                { name: 'text', title: 'Text', type: 'internationalizedArrayString' },
+                                { name: 'url', title: 'URL', type: 'string' }
+                            ]
+                        })
+                    ]
+                }),
+                defineField({
+                    name: 'pressRelease',
+                    title: 'Full Press Release',
+                    type: 'internationalizedArrayBlockContent',
+                    description: 'Full press release text, shown inside the expandable accordion.'
+                }),
+                defineField({
+                    name: 'accordionLabel',
+                    title: 'Accordion Label',
+                    type: 'internationalizedArrayString',
+                    description: 'Label for the accordion toggle, e.g. "Read Full Press Release".'
+                })
+            ]
+        }),
+        defineField({
             name: 'featuredExhibition',
             title: 'Featured Exhibition Override',
             type: 'reference',
@@ -212,7 +410,13 @@ export const homePage = defineType({
                     fields: [
                         { name: 'title', title: 'Card Title', type: 'internationalizedArrayString' },
                         { name: 'subtitle', title: 'Card Subtitle', type: 'internationalizedArrayString' },
-                        { name: 'image', title: 'Card Image', type: 'image', options: { hotspot: true } },
+                        { 
+                            name: 'image', 
+                            title: 'Card Image', 
+                            description: 'Recommended size: 1200px × 1200px (1:1). High-quality square crop for the right-column scrolling cards.',
+                            type: 'image', 
+                            options: { hotspot: true } 
+                        },
                         {
                             name: 'link',
                             title: 'Link',
@@ -245,7 +449,7 @@ export const homePage = defineType({
             fields: [
                 defineField({ name: 'enabled', title: 'Enable Collection Teaser', type: 'boolean', initialValue: true }),
                 defineField({ name: 'headline', title: 'Headline', type: 'internationalizedArrayString' }),
-                defineField({ name: 'description', title: 'Description', type: 'internationalizedArrayString' }),
+                defineField({ name: 'descriptionRich', title: 'Description', type: 'internationalizedArrayBlockContent' }),
                 defineField({ 
                     name: 'featuredItems', 
                     title: 'Featured Artworks', 

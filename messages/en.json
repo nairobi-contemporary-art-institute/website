@@ -10,8 +10,9 @@
         "stayConnected": "Stay Connected",
         "subscribeText": "Receive regular updates on our exhibitions, public programs, and publications.",
         "viewExh": "View Exhibition",
-        "exploreCollection": "Explore Collection",
-        "viewFullCollection": "View Full Collection"
+        "exploreCollection": "Explore NCAI",
+        "viewFullCollection": "View Full Collection",
+        "loadMore": "Load More"
     },
     "Navigation": {
         "about": "About",
@@ -20,12 +21,48 @@
         "channel": "Channel",
         "collection": "Collection",
         "education": "Education",
-        "support": "Get Involved"
+        "support": "Get Involved",
+        "aboutOverview": "Overview",
+        "aboutMission": "Mission",
+        "aboutHistory": "History",
+        "aboutTeam": "Team",
+        "aboutCareers": "Careers"
     },
     "Pages": {
         "about": {
             "title": "About NCAI",
-            "description": "NCAI is a non-profit visual arts space based in Nairobi."
+            "description": "NCAI is a non-profit visual arts space based in Nairobi.",
+            "teamFilters": {
+                "all": "All",
+                "curator": "Curatorial",
+                "education": "Education & Public Programs",
+                "administration": "Administration",
+                "management": "Gallery Management",
+                "frontdesk": "Front Desk",
+                "production": "Production",
+                "press": "Press"
+            },
+            "teamCategories": {
+                "staff": "Our Team",
+                "contributors": "Contributors & Collaborators"
+            },
+            "historyTeaser": {
+                "title": "Our Journey",
+                "cta": "Explore our History"
+            },
+            "missionTeaser": {
+                "title": "Our Mission",
+                "cta": "Read our Mission"
+            },
+            "teamTeaser": {
+                "title": "The Team",
+                "cta": "Meet the Team"
+            },
+            "careersTeaser": {
+                "title": "Join Us",
+                "cta": "View Opportunities",
+                "empty": "There are currently no open positions. Please check back later or follow our social channels for updates."
+            }
         },
         "visit": {
             "title": "Visitor Info",
@@ -92,7 +129,20 @@
             "untitled": "Untitled",
             "unknownArtist": "Unknown Artist",
             "noImage": "No Image",
-            "detailsDescription": "Details of the artwork {title} in the NCAI Collection."
+            "detailsDescription": "Details of the artwork {title} in the NCAI Collection.",
+            "onDisplayAt": "On Display at {location}",
+            "currentlyOnDisplay": "Currently on Display",
+            "outOnLoan": "Out on Loan",
+            "artistsAZ": "Artists A-Z",
+            "searchPlaceholder": "Search collection",
+            "noFilteredResults": "No items found matching your filters.",
+            "clearFilters": "Clear all filters",
+            "allLabel": "All {label}s",
+            "noImageAvailable": "No Image Available",
+            "sortRandom": "Randomise",
+            "sortAZ": "Alphabetise",
+            "shuffleWorks": "Shuffle Works",
+            "resetFilters": "Reset Filters"
         },
         "channel": {
             "title": "Channel",
@@ -111,7 +161,27 @@
             "filterAll": "All",
             "filterSchools": "Schools",
             "filterFamilies": "Families",
-            "filterPublic": "Public"
+            "filterPublic": "Public",
+            "resources": {
+                "title": "Resources",
+                "subtitle": "Learning Materials",
+                "description": "Downloadable worksheets, activity packs, and guides developed by NCAI and our partners.",
+                "viewResource": "View Resource",
+                "download": "Download PDF",
+                "types": {
+                    "worksheet": "Worksheet",
+                    "activityPack": "Activity Pack",
+                    "teacherGuide": "Teacher's Guide",
+                    "essay": "Essay",
+                    "reference": "Reference"
+                },
+                "audiences": {
+                    "children": "Children & Families",
+                    "youth": "Schools & Youth",
+                    "adults": "Adults & Public",
+                    "ujuzi": "UJUZI Professionals"
+                }
+            }
         },
         "contact": {
             "title": "Contact",
@@ -150,9 +220,17 @@
         "filterAll": "All",
         "filterExhibition": "Exhibitions",
         "filterArtist": "Artists",
+        "filterWork": "Works",
         "filterPost": "Channel",
         "filterProgram": "Education",
-        "filterEvent": "Events"
+        "filterEvent": "Events",
+        "collectionItem": "Artwork",
+        "work": "Artwork",
+        "artist": "Artist",
+        "exhibition": "Exhibition",
+        "post": "Post",
+        "program": "Program",
+        "event": "Event"
     },
     "NotFound": {
         "title": "Page Not Found",

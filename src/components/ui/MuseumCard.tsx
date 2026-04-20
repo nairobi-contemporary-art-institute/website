@@ -29,7 +29,7 @@ export function MuseumCard({ data, className, aspectRatio = "aspect-square" }: M
         >
             {/* Background Image */}
             {image?.asset && (
-                <div className="absolute inset-0 z-0 transition-opacity duration-500 group-hover:opacity-0">
+                <div className="absolute inset-0 z-0">
                     <Image
                         src={urlFor(image).url()}
                         alt={title}
@@ -38,34 +38,34 @@ export function MuseumCard({ data, className, aspectRatio = "aspect-square" }: M
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                     {/* Gradient Overlay for text readable contrast */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/60 opacity-80" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 opacity-70" />
                 </div>
             )}
 
-            {/* Content Container */}
+            {/* Content Container - Overlay style */}
             <div className="relative z-10 flex flex-col justify-between h-full p-6 md:p-8">
-                {/* Top Section: Label + Main Titles */}
-                <div className="space-y-4">
-                    <span className="inline-block text-[10px] md:text-xs font-bold uppercase tracking-widest text-white/90">
+                {/* Top Section: Label & Date */}
+                <div className="flex justify-between items-start gap-4">
+                    <span className="inline-block text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-white/90">
                         {label}
                     </span>
                     
+                    {date && (
+                        <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-white/100">
+                            {date}
+                        </span>
+                    )}
+                </div>
+
+                {/* Bottom Section: Title & Subtitle */}
+                <div className="mt-auto">
                     <h3 className="uppercase tracking-tighter">
-                        <span className="block text-2xl leading-[1.5rem] font-bold">{title}</span>
+                        <span className="block text-2xl lg:text-3xl xl:text-4xl leading-none font-black">{title}</span>
                         {subtitle && (
-                            <span className="block text-xl leading-[1.25rem] font-normal mt-2 opacity-90">{subtitle}</span>
+                            <span className="block text-lg lg:text-xl leading-tight font-normal mt-2 opacity-90">{subtitle}</span>
                         )}
                     </h3>
                 </div>
-
-                {/* Bottom Section: Date/Meta */}
-                {date && (
-                    <div className="mt-auto">
-                        <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-white/90">
-                            {date}
-                        </span>
-                    </div>
-                )}
             </div>
         </Link>
     )

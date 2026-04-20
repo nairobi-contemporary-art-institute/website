@@ -28,11 +28,39 @@ export const person = defineType({
             title: 'Image',
             type: 'image',
             options: { hotspot: true },
+            fields: [
+                defineField({
+                    name: 'imageCredit',
+                    title: 'Image Credit',
+                    type: 'reference',
+                    to: [{ type: 'person' }],
+                }),
+            ],
         }),
         defineField({
             name: 'bio',
             title: 'Bio',
             type: 'internationalizedArrayBlockContent',
+        }),
+        defineField({
+            name: 'category',
+            title: 'Category',
+            type: 'string',
+            options: {
+                list: [
+                    { title: 'Staff (Full-time)', value: 'staff' },
+                    { title: 'Contributor / Guest (Project-based)', value: 'contributor' },
+                ],
+                layout: 'radio',
+            },
+            initialValue: 'staff',
+        }),
+        defineField({
+            name: 'hasProfile',
+            title: 'Has Public Profile',
+            description: 'If disabled, this person will not appear on the Team page and their name will not be linkable in credits.',
+            type: 'boolean',
+            initialValue: true,
         }),
         defineField({
             name: 'roles',
@@ -42,12 +70,14 @@ export const person = defineType({
             options: {
                 list: [
                     { title: 'Curator', value: 'curator' },
+                    { title: 'Assistant Curator', value: 'assistant-curator' },
                     { title: 'Educator', value: 'educator' },
                     { title: 'Author', value: 'author' },
                     { title: 'Researcher', value: 'researcher' },
                     { title: 'Speaker', value: 'speaker' },
                     { title: 'Filmmaker', value: 'filmmaker' },
                     { title: 'Videographer', value: 'videographer' },
+                    { title: 'Photographer', value: 'photographer' },
                 ],
             },
         }),

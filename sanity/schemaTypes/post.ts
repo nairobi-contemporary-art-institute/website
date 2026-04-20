@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity'
+import { SlugLinkField } from './components/SlugLinkField'
 
 export const post = defineType({
     name: 'post',
@@ -18,6 +19,9 @@ export const post = defineType({
             options: {
                 source: 'title',
                 maxLength: 96,
+            },
+            components: {
+                field: SlugLinkField,
             },
             validation: (Rule) => Rule.required(),
         }),
@@ -107,6 +111,13 @@ export const post = defineType({
             title: 'Duration (e.g. 12:30)',
             type: 'string',
             hidden: ({ document }) => document?.mediaType === 'article',
+        }),
+        defineField({
+            name: 'relatedArtist',
+            title: 'Related Artist',
+            description: 'Link this post to a specific artist for enriched content.',
+            type: 'reference',
+            to: [{ type: 'artist' }],
         }),
     ],
     preview: {

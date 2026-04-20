@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { getLocalizedValue, portableTextToPlainText } from "@/sanity/lib/utils";
 import { Cloud, CloudDrizzle, CloudFog, CloudLightning, CloudRain, CloudSun, Moon, Snowflake, Sun } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 // Types for the props passed from the Server Component wrapper
 interface OpeningStatusData {
@@ -42,7 +43,7 @@ export function OpeningStatusClient({ locale, hours, specialStatus, weather }: O
         const message = getLocalizedValue(specialStatus.message, locale);
         return (
             <div 
-                className="bg-rich-blue animate-notice-bar text-ivory w-full text-center py-2 px-4 text-[10px] font-bold uppercase tracking-[0.2em]"
+                className="w-full text-center py-2 px-4 text-[10px] font-bold uppercase tracking-[0.2em] transition-colors duration-300 bg-black text-ivory group-[.notice-theme-dark]/header:bg-white group-[.notice-theme-dark]/header:text-charcoal"
                 suppressHydrationWarning
             >
                 {message ? (typeof message === 'string' ? message : portableTextToPlainText(message)) : "Temporarily Closed"}
@@ -106,7 +107,7 @@ export function OpeningStatusClient({ locale, hours, specialStatus, weather }: O
 
     return (
         <div 
-            className="w-full bg-rich-blue animate-notice-bar py-1.5 flex justify-center items-center gap-4 text-[10px] uppercase tracking-[0.2em] font-bold text-ivory/90"
+            className="w-full py-1.5 flex justify-center items-center gap-4 text-[10px] uppercase tracking-[0.2em] font-bold transition-colors duration-300 bg-black text-ivory/90 group-[.notice-theme-dark]/header:bg-white group-[.notice-theme-dark]/header:text-charcoal"
             suppressHydrationWarning
         >
             <div className="flex items-center gap-2" suppressHydrationWarning>
@@ -117,7 +118,7 @@ export function OpeningStatusClient({ locale, hours, specialStatus, weather }: O
             </div>
 
             {weather?.current && (
-                <div className="flex items-center gap-2 pl-4 border-l border-ivory/20" suppressHydrationWarning>
+                <div className="flex items-center gap-2 pl-4 border-l border-current/20" suppressHydrationWarning>
                     {getWeatherIcon(weather.current.weather_code, weather.current.is_day === 0)}
                     <span>{Math.round(weather.current.temperature_2m)}°C</span>
                 </div>

@@ -1,13 +1,16 @@
 import { sanityFetch } from "@/sanity/lib/client"
-import { ABOUT_PAGE_QUERY, TIMELINE_QUERY, SITE_SETTINGS_QUERY } from "@/sanity/lib/queries"
+import { ABOUT_PAGE_QUERY, SITE_SETTINGS_QUERY } from "@/sanity/lib/queries"
 import { getLocalizedValue } from "@/sanity/lib/utils"
 import { PortableText } from "@/components/ui/PortableText"
 import { ResponsiveDivider } from '@/components/ui/ResponsiveDivider'
 import Image from "next/image"
 import { urlFor } from "@/sanity/lib/image"
 import { GridRoot as Grid, GridSystem, Cell as GridCell } from "@/components/ui/Grid/Grid"
-import { HistoryTimeline } from "@/components/about/HistoryTimeline"
 import { HeroIMMA } from "@/components/ui/HeroIMMA"
+import { AboutSubNav } from "@/components/about/AboutSubNav"
+import { getTranslations } from "next-intl/server"
+import { Link } from "@/i18n"
+import { cn } from "@/lib/utils"
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params
@@ -16,10 +19,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         tags: ["aboutPage"],
     })
 
-    if (!data) return { title: 'About' }
+    if (!data) return { title: 'About NCAI' }
 
     return {
-        title: getLocalizedValue(data.title, locale),
+        title: getLocalizedValue(data.title, locale) || 'About NCAI',
         description: getLocalizedValue(data.hero?.headline, locale)
     }
 }
@@ -27,14 +30,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params
 
-    const [data, timelineEvents, settings] = await Promise.all([
+    const [aboutPageData, settings] = await Promise.all([
         sanityFetch<any>({
             query: ABOUT_PAGE_QUERY,
             tags: ["aboutPage"],
-        }),
-        sanityFetch<any[]>({
-            query: TIMELINE_QUERY,
-            tags: ["timelineEvent"],
         }),
         sanityFetch<any>({
             query: SITE_SETTINGS_QUERY,
@@ -42,195 +41,161 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         })
     ])
 
-    if (!data) return null
+    const t = await getTranslations({ locale, namespace: 'Pages.about' })
+    const tNav = await getTranslations({ locale, namespace: 'Navigation' })
 
-    const title = getLocalizedValue(data.title, locale)
-    const heroHeadline = getLocalizedValue(data.hero?.headline, locale)
-    const heroIntro = getLocalizedValue(data.hero?.intro, locale)
+    const title = getLocalizedValue(aboutPageData?.title, locale) || t('title')
+    const heroHeadline = getLocalizedValue(aboutPageData?.hero?.headline, locale) || t('description')
+    const heroIntro = getLocalizedValue(aboutPageData?.hero?.intro, locale)
     
     // Check global style preference
     const headerStyle = settings?.headerStyle || 'ncai'
 
+    const navItems = [
+        { label: tNav('aboutOverview'), href: '/about' },
+        { label: tNav('aboutMission'), href: '/about/mission' },
+        { label: tNav('aboutHistory'), href: '/about/history' },
+        { label: tNav('aboutTeam'), href: '/about/team' },
+        { label: tNav('aboutCareers'), href: '/about/careers' },
+    ]
+
     return (
-        <GridSystem unstable_useContainer className="bg-ivory min-h-screen">
-            {/* Hero Section */}
+        <main className="bg-ivory min-h-screen">
+            {/* Hero Section - Full spanning width */}
             {headerStyle === 'ncai' ? (
                 <HeroIMMA
                     title={title}
-                    image={data.hero?.image}
+                    image={aboutPageData?.hero?.image}
                     headline={heroHeadline}
                     intro={heroIntro}
-                    caption={data.hero?.image?.caption ? getLocalizedValue(data.hero.image.caption, locale) : undefined}
+                    caption={aboutPageData?.hero?.image?.caption ? getLocalizedValue(aboutPageData.hero.image.caption, locale) : undefined}
                 />
             ) : (
                 <header className="relative pt-32 pb-20 overflow-hidden border-b border-charcoal/5">
-                    <Grid columns={{ sm: 1, md: 12 }} gap={24}>
-                        <GridCell column={{ sm: 1, md: 8 }} className="items-start justify-start p-0">
-                            <div className="max-w-4xl space-y-8">
-                                <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-charcoal capitalize leading-[0.9]">
-                                    {title}
-                                </h1>
-                                {heroHeadline && (
-                                    <p className="text-2xl md:text-4xl text-umber font-medium leading-tight tracking-tight">
-                                        {heroHeadline}
-                                    </p>
-                                )}
-                                {heroIntro && (
-                                    <p className="text-lg md:text-xl text-charcoal/80 max-w-2xl leading-relaxed">
-                                        {heroIntro}
-                                    </p>
-                                )}
-                            </div>
-                        </GridCell>
-
-                        {data.hero?.image && (
-                            <GridCell column={{ sm: 1, md: 4 }} className="hidden md:flex p-0 relative min-h-[400px]">
-                                <Image
-                                    src={urlFor(data.hero.image).width(800).url()}
-                                    alt=""
-                                    fill
-                                    className="object-cover opacity-20 grayscale brightness-50"
-                                />
-                                {data.hero.image.caption && (
-                                    <div className="absolute bottom-4 right-4">
-                                        <p className="text-[10px] text-charcoal/40 italic bg-ivory/20 px-2 py-1">
-                                            {getLocalizedValue(data.hero.image.caption, locale)}
+                    <GridSystem unstable_useContainer>
+                        <Grid columns={{ sm: 1, md: 12 }} gap={24}>
+                            <GridCell column={{ sm: 1, md: 8 }} className="items-start justify-start p-0">
+                                <div className="max-w-4xl space-y-8">
+                                    <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-charcoal capitalize leading-[0.9]">
+                                        {title}
+                                    </h1>
+                                    {heroHeadline && (
+                                        <p className="text-2xl md:text-4xl text-umber font-medium leading-tight tracking-tight">
+                                            {heroHeadline}
                                         </p>
-                                    </div>
-                                )}
+                                    )}
+                                    {heroIntro && (
+                                        <p className="text-lg md:text-xl text-charcoal/80 max-w-2xl leading-relaxed">
+                                            {heroIntro}
+                                        </p>
+                                    )}
+                                </div>
                             </GridCell>
-                        )}
-                    </Grid>
+
+                            {aboutPageData?.hero?.image && (
+                                <GridCell column={{ sm: 1, md: 4 }} className="hidden md:flex p-0 relative min-h-[400px]">
+                                    <Image
+                                        src={urlFor(aboutPageData.hero.image).width(800).url()}
+                                        alt=""
+                                        fill
+                                        className="object-cover opacity-20 grayscale brightness-50"
+                                    />
+                                </GridCell>
+                            )}
+                        </Grid>
+                    </GridSystem>
                 </header>
             )}
 
-            <div className="py-20 space-y-40">
-                {/* Modular Sections */}
-                {data.sections?.map((section: any, idx: number) => {
-                    const sectionTitle = getLocalizedValue(section.title, locale)
-                    const sectionContent = getLocalizedValue(section.content, locale)
-                    const layout = section.layout || 'standard'
-                    const isSplit = layout === 'split'
-                    const isDark = layout === 'dark-highlight'
-                    const isTimeline = layout === 'history-timeline' || sectionTitle === 'Our History'
+            {/* Horizontal Sub-Navigation (Sticky) */}
+            <AboutSubNav locale={locale} />
 
-                    if (isTimeline) {
-                        return (
-                            <section key={idx} className="px-section-clamp space-y-16">
-                                <Grid columns={{ sm: 1, md: 12 }}>
-                                    <GridCell column={{ sm: 1, md: 8 }}>
-                                        <div className="space-y-6">
-                                            {sectionTitle && (
-                                                <h2 className="text-4xl md:text-6xl font-black capitalize tracking-tighter leading-none text-charcoal">
-                                                    {sectionTitle}
-                                                </h2>
-                                            )}
-                                            {sectionContent && (
-                                                <div className="prose prose-lg max-w-2xl text-charcoal/70">
-                                                    <PortableText value={sectionContent} locale={locale} />
-                                                </div>
-                                            )}
-                                        </div>
-                                    </GridCell>
-                                </Grid>
+            {/* Main Content (Contained) */}
+            <GridSystem unstable_useContainer className="py-24 px-section-clamp">
+                <Grid columns={{ sm: 1, md: 12 }} gap={64}>
+                    {/* Sidebar Column (3 columns) */}
+                    <GridCell column={{ sm: 1, md: 3 }} className="p-0 hidden md:block">
+                        <nav className="sticky top-[200px] space-y-2">
+                            {navItems.map((item, idx) => {
+                                const isActive = item.href === '/about'
+                                return (
+                                    <Link 
+                                        key={idx} 
+                                        href={item.href}
+                                        className={cn(
+                                            "block py-3 border-b border-charcoal/5 text-sm uppercase tracking-widest transition-all",
+                                            isActive ? "text-umber font-bold" : "text-charcoal/40 hover:text-charcoal"
+                                        )}
+                                    >
+                                        {item.label}
+                                    </Link>
+                                )
+                            })}
+                        </nav>
+                    </GridCell>
 
-                                <HistoryTimeline events={timelineEvents} locale={locale} />
+                    {/* Main Content Column (9 columns) */}
+                    <GridCell column={{ sm: 1, md: 9 }} className="p-0 items-start justify-start">
+                        <div className="max-w-4xl space-y-24">
+                            {/* Main About Title & Intro */}
+                            <section className="space-y-12">
+                                <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-charcoal leading-none">
+                                    {title}
+                                </h2>
+                                
+                                <div className="prose prose-xl prose-charcoal max-w-none space-y-8">
+                                    <p className="text-2xl text-charcoal/70 leading-relaxed font-light">
+                                        {aboutPageData?.hero?.intro ? getLocalizedValue(aboutPageData.hero.intro, locale) : heroHeadline}
+                                    </p>
+                                </div>
                             </section>
-                        )
-                    }
 
-                    if (isDark) {
-                        return (
-                            <section key={idx} className="px-section-clamp bg-charcoal text-ivory -mx-section-clamp px-section-clamp py-32 rounded-sm shadow-2xl overflow-hidden relative group">
-                                {/* Abstract background element */}
-                                <div className="absolute top-0 right-0 w-1/2 h-full bg-ochre/5 -skew-x-12 translate-x-1/2 pointer-events-none" />
-
-                                <Grid columns={{ sm: 1, md: 12 }} gap={48} className="items-center relative z-10">
-                                    <GridCell column={{ sm: 1, md: 6 }} className="order-2 md:order-1 items-start justify-start p-0">
-                                        <div className="space-y-8">
-                                            {sectionTitle && (
-                                                <h2 className="text-4xl md:text-6xl font-bold capitalize tracking-tighter leading-none">
-                                                    {sectionTitle}
-                                                </h2>
-                                            )}
-                                            {sectionContent && (
-                                                <div className="prose prose-invert prose-lg max-w-none opacity-80">
-                                                    <PortableText value={sectionContent} locale={locale} />
-                                                </div>
-                                            )}
-                                        </div>
-                                    </GridCell>
-
-                                    {section.image && (
-                                        <GridCell column={{ sm: 1, md: 6 }} className="order-1 md:order-2 p-0">
-                                            <div className="relative aspect-square md:aspect-[4/5] w-full bg-ivory/5 overflow-hidden shadow-2xl">
-                                                <Image
-                                                    src={urlFor(section.image).width(1200).url()}
-                                                    alt={sectionTitle || ''}
-                                                    fill
-                                                    className="object-cover grayscale hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-105"
-                                                />
-                                                {section.image.caption && (
-                                                    <div className="absolute bottom-4 left-4 right-4 z-20">
-                                                        <p className="text-[10px] text-charcoal font-bold capitalize tracking-widest bg-ivory/80 backdrop-blur-sm px-3 py-1 inline-block">
-                                                            {getLocalizedValue(section.image.caption, locale)}
-                                                        </p>
+                            {/* Render Sanity Sections if they exist */}
+                            {aboutPageData?.sections && aboutPageData.sections.length > 0 && (
+                                <div className="space-y-32">
+                                    {aboutPageData.sections.map((section: any, idx: number) => {
+                                        const sectionTitle = getLocalizedValue(section.title, locale)
+                                        const sectionContent = getLocalizedValue(section.content, locale)
+                                        
+                                        return (
+                                            <section key={idx} className="space-y-10 group">
+                                                {sectionTitle && (
+                                                    <h3 className="text-4xl font-bold tracking-tighter text-charcoal group-hover:text-umber transition-colors duration-500">
+                                                        {sectionTitle}
+                                                    </h3>
+                                                )}
+                                                
+                                                {section.image && (
+                                                    <div className="relative aspect-[16/9] w-full bg-charcoal/5 overflow-hidden">
+                                                        <Image
+                                                            src={urlFor(section.image).width(1200).url()}
+                                                            alt={sectionTitle || ''}
+                                                            fill
+                                                            className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+                                                        />
                                                     </div>
                                                 )}
-                                            </div>
-                                        </GridCell>
-                                    )}
-                                </Grid>
-                            </section>
-                        )
-                    }
 
-                    return (
-                        <section key={idx}>
-                            <Grid columns={{ sm: 1, md: 12 }} gap={48} className="items-center">
-                                <GridCell column={{ sm: 1, md: isSplit ? 6 : 8 }} className="items-start justify-start p-0">
-                                    <div className="space-y-8">
-                                        {sectionTitle && (
-                                            <h2 className="text-4xl md:text-5xl font-bold capitalize tracking-tighter text-charcoal leading-none">
-                                                {sectionTitle}
-                                            </h2>
-                                        )}
-                                        {sectionContent && (
-                                            <div className="prose prose-lg max-w-none text-charcoal/80">
-                                                <PortableText value={sectionContent} locale={locale} />
-                                            </div>
-                                        )}
-                                    </div>
-                                </GridCell>
-
-                                {isSplit && section.image && (
-                                    <GridCell column={{ sm: 1, md: 6 }} className="p-0">
-                                        <div className="relative aspect-[4/3] w-full bg-charcoal/5 overflow-hidden group">
-                                            <Image
-                                                src={urlFor(section.image).width(1200).url()}
-                                                alt={sectionTitle || ''}
-                                                fill
-                                                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
-                                            />
-                                            {section.image.caption && (
-                                                <div className="absolute bottom-4 left-4 right-4 z-20">
-                                                    <p className="text-[10px] text-ivory font-bold capitalize tracking-widest bg-charcoal/60 backdrop-blur-sm px-3 py-1 inline-block">
-                                                        {getLocalizedValue(section.image.caption, locale)}
-                                                    </p>
-                                                </div>
-                                            )}
-                                        </div>
-                                    </GridCell>
-                                )}
-                            </Grid>
-                        </section>
-                    )
-                })}
+                                                {sectionContent && (
+                                                    <div className="prose prose-lg md:prose-xl max-w-none text-charcoal/80">
+                                                        <PortableText value={sectionContent} locale={locale} />
+                                                    </div>
+                                                )}
+                                                
+                                                <ResponsiveDivider weight="thin" className="opacity-10 pt-16" />
+                                            </section>
+                                        )
+                                    })}
+                                </div>
+                            )}
+                        </div>
+                    </GridCell>
+                </Grid>
 
                 <div className="mt-20">
                     <ResponsiveDivider variant="curved" weight="medium" className="text-umber/20" />
                 </div>
-            </div>
-        </GridSystem>
+            </GridSystem>
+        </main>
     )
 }

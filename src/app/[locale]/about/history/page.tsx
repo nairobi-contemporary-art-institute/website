@@ -2,9 +2,10 @@ import { sanityFetch } from "@/sanity/lib/client"
 import { ABOUT_PAGE_QUERY, TIMELINE_QUERY } from "@/sanity/lib/queries"
 import { getLocalizedValue } from "@/sanity/lib/utils"
 import { GridSystem } from "@/components/ui/Grid/Grid"
+import { AboutSubNav } from "@/components/about/AboutSubNav"
 import { HistoryTimeline } from "@/components/about/HistoryTimeline"
-import { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
+import { Metadata } from "next"
+import { getTranslations } from "next-intl/server"
 
 type Props = {
     params: Promise<{ locale: string }>
@@ -15,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const t = await getTranslations({ locale, namespace: 'Pages.about' })
 
     return {
-        title: `${locale === 'en' ? 'Our History' : 'Historia Yetu'} | NCAI`,
+        title: `${locale === 'en' ? 'History' : 'Historia'} | NCAI`,
         description: 'Discover the journey and milestones of the Nairobi Contemporary Art Institute.',
     }
 }
@@ -36,20 +37,19 @@ export default async function HistoryPage({ params }: Props) {
     const description = getLocalizedValue(historySection?.content, locale)
 
     return (
-        <GridSystem unstable_useContainer>
-            <main className="pt-32 pb-24 min-h-screen bg-ivory">
-                <header className="mb-20 max-w-4xl">
+        <GridSystem>
+            <main className="min-h-screen bg-ivory">
+                <header className="pt-32 pb-12 px-section-clamp">
                     <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-charcoal capitalize leading-[0.9] mb-8">
                         {title}
                     </h1>
-                    {description && (
-                        <div className="text-xl md:text-2xl text-umber/80 font-light max-w-2xl leading-relaxed">
-                            {/* Simple text or portable text if needed, but HistoryTimeline has its own headers usually */}
-                        </div>
-                    )}
                 </header>
 
-                <HistoryTimeline events={timelineEvents} locale={locale} />
+                <AboutSubNav locale={locale} />
+
+                <div className="py-20">
+                    <HistoryTimeline events={timelineEvents} locale={locale} />
+                </div>
             </main>
         </GridSystem>
     )

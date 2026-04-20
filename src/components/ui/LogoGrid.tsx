@@ -28,18 +28,18 @@ export function LogoGrid({ partners, locale, title }: LogoGridProps) {
     if (!partners || partners.length === 0) return null
 
     return (
-        <section className="py-24 border-t border-rich-blue/20 w-full">
+        <section className="py-24 w-full">
             {title && (
                 <h2 className="text-2xl font-semibold tracking-tight text-charcoal mb-12">
                     {title}
                 </h2>
             )}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 border-l border-t border-rich-blue/20 max-w-5xl">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-w-5xl">
                 {partners.map((partner) => {
                     const name = getLocalizedValue(partner.name, locale)
                     const content = (
-                        <div className="relative group border-r border-b border-rich-blue/20 bg-white p-10 flex flex-col items-center justify-center min-h-[220px] overflow-hidden">
+                        <div className="relative group bg-white p-10 flex flex-col items-center justify-center min-h-[220px] overflow-hidden">
                             {/* Logo Layer */}
                             <div className="relative w-full aspect-[3/2] flex items-center justify-center transition-all duration-500 group-hover:-translate-y-4">
                                 <div className="relative w-full h-full max-w-[160px]">

@@ -1,51 +1,6 @@
 import React, { useState } from 'react'
 import { Check, Copy } from 'lucide-react'
-
-// ── 48 Quaternary Colors (6 families × 8 fine-grained shades) ──
-const QUATERNARY_COLORS = [
-    // Red / Orange family
-    '#B71C1C', '#D32F2F', '#E53935', '#FF5252',
-    '#FF6E40', '#FF7043', '#FF8A65', '#FFAB91',
-    // Orange / Yellow family
-    '#FF6D00', '#FF9100', '#FFA000', '#FFB300',
-    '#FFC107', '#FFD54F', '#FFEB3B', '#FDD835',
-    // Lime / Green family
-    '#C0CA33', '#9CCC65', '#8BC34A', '#7CB342',
-    '#66BB6A', '#4CAF50', '#43A047', '#2E7D32',
-    // Teal / Cyan family
-    '#00897B', '#009688', '#00ACC1', '#00BCD4',
-    '#0097A7', '#0288D1', '#039BE5', '#03A9F4',
-    // Blue / Indigo family
-    '#1E88E5', '#1976D2', '#1565C0', '#3949AB',
-    '#3F51B5', '#5C6BC0', '#5E35B1', '#7E57C2',
-    // Purple / Magenta family
-    '#8E24AA', '#AB47BC', '#7B1FA2', '#9C27B0',
-    '#D81B60', '#E91E63', '#C2185B', '#AD1457',
-]
-
-// ── 24 Tertiary Colors (6 families × 4 shades) ──
-const TERTIARY_COLORS = [
-    // Red Family
-    '#E53935', '#FF7043', '#FB8C00', '#FF9800',
-    // Yellow Family
-    '#FDD835', '#C0CA33', '#7CB342', '#43A047',
-    // Green Family
-    '#2E7D32', '#388E3C', '#00897B', '#00ACC1',
-    // Cyan/Blue Family
-    '#00BCD4', '#039BE5', '#1E88E5', '#3949AB',
-    // Violet/Purple Family
-    '#5E35B1', '#8E24AA', '#7B1FA2', '#AB47BC',
-    // Magenta/Rose Family
-    '#D81B60', '#E91E63', '#C2185B', '#AD1457',
-]
-
-// ── 12 Secondary Colors (Primary RGB triads cycling) ──
-const SECONDARY_COLORS = [
-    '#E43D30', '#F9B233', '#2B5797',
-    '#E43D30', '#F9B233', '#2B5797',
-    '#E43D30', '#F9B233', '#2B5797',
-    '#E43D30', '#F9B233', '#2B5797',
-]
+import { SECONDARY_COLORS, TERTIARY_COLORS, QUATERNARY_COLORS } from '@/lib/colors'
 
 // ── Primary ──
 const PRIMARY_COLORS = ['#000000', '#ffffff']

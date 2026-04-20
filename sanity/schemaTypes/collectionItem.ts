@@ -1,5 +1,5 @@
-
 import { defineField, defineType } from 'sanity'
+import { SlugLinkField } from './components/SlugLinkField'
 
 export const collectionItem = defineType({
     name: 'collectionItem',
@@ -19,6 +19,9 @@ export const collectionItem = defineType({
             options: {
                 source: 'title[0].value',
                 maxLength: 96,
+            },
+            components: {
+                field: SlugLinkField
             },
             validation: (Rule) => Rule.required(),
         }),
@@ -41,6 +44,8 @@ export const collectionItem = defineType({
                     name: 'alt',
                     type: 'string',
                     title: 'Alternative Text',
+                    description: 'Detailed visual description for accessibility. Mention medium texture, primary subjects, and colors (e.g., "Vibrant oil painting showing a crowded marketplace").',
+                    validation: (Rule) => Rule.required(),
                 }
             ]
         }),
@@ -101,6 +106,41 @@ export const collectionItem = defineType({
             name: 'creditLine',
             title: 'Credit Line',
             type: 'internationalizedArrayString',
+        }),
+        defineField({
+            name: 'showInCollection',
+            title: 'Show in Collection',
+            type: 'boolean',
+            initialValue: true,
+            description: 'If disabled, this item will not appear in the digital collection archive.'
+        }),
+        defineField({
+            name: 'featuredOnHome',
+            title: 'Show in Explore NCAI (Home)',
+            type: 'boolean',
+            initialValue: false,
+            description: 'If enabled, this item will appear in the "Explore NCAI" section on the homepage.'
+        }),
+        defineField({
+            name: 'onLoan',
+            title: 'Out on Loan',
+            type: 'boolean',
+            initialValue: false,
+            description: 'Indicates if this work is currently on loan to another institution.'
+        }),
+        defineField({
+            name: 'onDisplay',
+            title: 'Currently on Display',
+            type: 'boolean',
+            initialValue: false,
+            description: 'Indicates if this work is currently on display at NCAI.'
+        }),
+        defineField({
+            name: 'displayLocation',
+            title: 'Display Location',
+            type: 'internationalizedArrayString',
+            hidden: ({ document }) => !document?.onDisplay,
+            description: 'Where the work is currently displayed (shown in hover tooltip).'
         }),
     ],
     preview: {

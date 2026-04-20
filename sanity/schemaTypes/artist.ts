@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity'
+import { SlugLinkField } from './components/SlugLinkField'
 
 export const artist = defineType({
     name: 'artist',
@@ -19,6 +20,9 @@ export const artist = defineType({
                 source: 'name',
                 maxLength: 96,
             },
+            components: {
+                field: SlugLinkField
+            },
             validation: (Rule) => Rule.required(),
         }),
         defineField({
@@ -29,22 +33,54 @@ export const artist = defineType({
         defineField({
             name: 'image',
             title: 'Profile Image',
+            description: 'Artist portrait. Recommended size: 1500px × 1875px (4:5 Portrait). Minimum width 1200px. High-fidelity portraiture is essential for the clinical-luxury aesthetic.',
             type: 'image',
             options: { hotspot: true },
             fields: [
+                defineField({
+                    name: 'alt',
+                    type: 'string',
+                    title: 'Alternative Text',
+                    description: 'Briefly describe the portrait for screen readers. Mention setting, expression, and focus (e.g., "Sane Wadu smiling in his Naivasha studio").',
+                    validation: (Rule) => Rule.required(),
+                }),
                 defineField({
                     name: 'caption',
                     title: 'Caption',
                     type: 'internationalizedArrayString',
                 }),
+                defineField({
+                    name: 'imageCredit',
+                    title: 'Image Credit',
+                    type: 'reference',
+                    to: [{ type: 'person' }],
+                }),
             ],
+        }),
+        defineField({
+            name: 'longBio',
+            title: 'Long Bio and CV',
+            description: 'Extended biography and comprehensive CV listing.',
+            type: 'internationalizedArrayBlockContent',
         }),
         defineField({
             name: 'works',
             title: 'Works Gallery',
             description: 'Artwork to display in the main carousel and grid',
             type: 'array',
-            of: [{ type: 'reference', to: [{ type: 'work' }] }],
+            of: [{ 
+                type: 'reference', 
+                to: [{ type: 'work' }],
+                options: {
+                    filter: ({ document }) => {
+                        const artistId = document?._id?.replace('drafts.', '');
+                        return {
+                            filter: 'artist._ref == $artistId',
+                            params: { artistId }
+                        }
+                    }
+                }
+            }],
         }),
         defineField({
             name: 'forthcomingProjects',
@@ -89,6 +125,7 @@ export const artist = defineType({
                         name: 'image',
                         type: 'image',
                         title: 'Feature Image',
+                        description: 'Recommended size: 1200px × 1200px (1:1). High-quality square crop for museum exhibition previews.',
                         options: { hotspot: true },
                         fields: [
                             defineField({
@@ -101,6 +138,13 @@ export const artist = defineType({
                     { name: 'link', type: 'url', title: 'External Link' }
                 ]
             }]
+        }),
+        defineField({
+            name: 'featuredExhibitions',
+            title: 'Featured Exhibitions',
+            description: 'Link existing exhibitions that this artist features in.',
+            type: 'array',
+            of: [{ type: 'reference', to: [{ type: 'exhibition' }] }],
         }),
         defineField({
             name: 'tags',

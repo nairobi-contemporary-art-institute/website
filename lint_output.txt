@@ -1,0 +1,535 @@
+
+> temp_app@0.1.0 lint
+> eslint
+
+
+/Users/ciarannash/Documents/NCAI/.agent/skills/spline-3d-integration/examples/interactive-scene.tsx
+   32:41  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   33:37  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   34:26  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   35:53  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   36:56  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   38:36  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   39:40  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   73:29  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   77:47  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   87:45  warning  'e' is defined but never used                                                                                                                                                                                                                                                            @typescript-eslint/no-unused-vars
+   87:48  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  145:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/Users/ciarannash/Documents/NCAI/.agent/skills/spline-3d-integration/examples/react-spline-wrapper.tsx
+  30:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/about/careers/page.tsx
+  21:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  40:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/about/history/page.tsx
+  15:11  warning  't' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  26:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  27:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  30:58  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/about/mission/page.tsx
+  24:41  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  26:61  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  40:48  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/about/page.tsx
+   14:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   31:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   35:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   39:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  109:47  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/about/team/page.tsx
+   3:10  warning  'getLocalizedValue' is defined but never used   @typescript-eslint/no-unused-vars
+  23:20  warning  'aboutData' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  24:21  warning  Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+  25:21  warning  Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+  28:11  warning  't' is assigned a value but never used          @typescript-eslint/no-unused-vars
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/accessibility/page.tsx
+   16:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   29:49  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   44:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   75:58  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  156:61  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/artists/[slug]/page.tsx
+  12:41  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  28:38  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  45:38  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/artists/page.tsx
+  16:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  26:49  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  42:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  43:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/channel/[slug]/page.tsx
+   2:10  warning  'client' is defined but never used        @typescript-eslint/no-unused-vars
+  15:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  24:45  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  42:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  64:46  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  85:56  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/channel/page.tsx
+   3:10  warning  'client' is defined but never used        @typescript-eslint/no-unused-vars
+  19:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/collection/[slug]/page.tsx
+   17:41  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   33:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   53:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  151:54  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/collection/page.tsx
+   18:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   29:49  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   45:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   46:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   53:58  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   56:35  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  128:55  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  136:46  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/contact/page.tsx
+  7:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/education/[slug]/page.tsx
+    1:10  warning  'client' is defined but never used        @typescript-eslint/no-unused-vars
+   40:39  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   51:49  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   71:39  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  182:69  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  212:61  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  228:63  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/education/page.tsx
+   1:10  warning  'client' is defined but never used        @typescript-eslint/no-unused-vars
+  15:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  28:49  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  44:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  45:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  75:56  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/events/[slug]/page.tsx
+    1:10  warning  'client' is defined but never used        @typescript-eslint/no-unused-vars
+   10:10  warning  'cn' is defined but never used            @typescript-eslint/no-unused-vars
+   22:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   33:49  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   53:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  174:67  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  203:80  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/events/page.tsx
+   1:10  warning  'client' is defined but never used        @typescript-eslint/no-unused-vars
+  15:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  25:49  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  40:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  41:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  47:64  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  48:54  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/exhibitions/[slug]/page.tsx
+    7:10  warning  'client' is defined but never used             @typescript-eslint/no-unused-vars
+   11:10  warning  'ResponsiveDivider' is defined but never used  @typescript-eslint/no-unused-vars
+   33:42  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+   46:49  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+   64:42  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+   76:48  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+   78:40  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+  161:51  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/exhibitions/page.tsx
+   3:10  warning  'client' is defined but never used             @typescript-eslint/no-unused-vars
+  18:40  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+  24:49  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+  42:11  warning  'te' is assigned a value but never used        @typescript-eslint/no-unused-vars
+  43:11  warning  'messages' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  43:55  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+  46:21  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+  47:21  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+  50:67  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/get-involved/page.tsx
+   15:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   31:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   35:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  115:66  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  142:86  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  170:55  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/history/page.tsx
+  21:46  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  25:48  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  44:49  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/page.tsx
+    2:10  warning  'client' is defined but never used        @typescript-eslint/no-unused-vars
+   22:10  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   23:14  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   24:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   31:10  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   32:14  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   44:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   45:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   46:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   53:39  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   59:9   warning  'now' is assigned a value but never used  @typescript-eslint/no-unused-vars
+   75:47  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   90:23  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   95:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   95:27  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  110:38  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  120:33  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/publications/page.tsx
+    7:10  warning  'notFound' is defined but never used                  @typescript-eslint/no-unused-vars
+   17:36  warning  Unexpected any. Specify a different type              @typescript-eslint/no-explicit-any
+   35:11  warning  'pageDescription' is assigned a value but never used  @typescript-eslint/no-unused-vars
+   66:54  warning  Unexpected any. Specify a different type              @typescript-eslint/no-explicit-any
+  137:36  warning  Unexpected any. Specify a different type              @typescript-eslint/no-explicit-any
+  145:49  warning  Unexpected any. Specify a different type              @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/styleguide/page.tsx
+  1:10  warning  'getTranslations' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/timeline/page.tsx
+  15:38  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/visit/page.tsx
+   19:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   30:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   31:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   80:59  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  105:59  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  280:62  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  347:64  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  378:57  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/[locale]/whats-on/page.tsx
+  11:11  warning  't' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  14:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  15:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  16:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  17:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  22:42  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  34:39  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  36:58  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  50:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  51:56  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/api/events/register/route.ts
+  51:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/api/health/route.ts
+  13:34  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  24:27  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  29:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  42:25  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  55:25  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  60:60  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/api/revalidate/route.ts
+  36:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/api/search/route.ts
+  46:39  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/app/sitemap.ts
+  26:43  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/about/HistoryTimeline.tsx
+   3:17  warning  'useRef' is defined but never used        @typescript-eslint/no-unused-vars
+   9:22  warning  'Grid' is defined but never used          @typescript-eslint/no-unused-vars
+   9:36  warning  'GridCell' is defined but never used      @typescript-eslint/no-unused-vars
+  14:12  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  15:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  16:12  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/about/TeamGrid.tsx
+   9:11  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  12:13  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  13:11  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/artist/ArtistContent.tsx
+   15:13  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   49:52  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   81:71  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  104:50  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  124:61  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  164:62  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  209:62  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/artist/ArtistIndex.tsx
+  11:14  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/artist/WorkCarousel.tsx
+   13:12  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   15:14  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   18:12  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   19:12  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   22:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  123:61  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/artist/WorksGridOverlay.tsx
+  11:12  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  13:14  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  15:12  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/channel/ChannelCard.tsx
+   11:11  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  102:58  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/channel/ChannelFilter.tsx
+   10:12  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   60:79  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  102:55  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  113:72  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/channel/MediaPlayer.tsx
+    5:37  warning  'Volume2' is defined but never used                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+    5:46  warning  'VolumeX' is defined but never used                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+   10:78  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                           @typescript-eslint/no-explicit-any
+  119:30  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                           @typescript-eslint/no-explicit-any
+  128:54  warning  The ref value 'playerRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'playerRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+  132:26  warning  'e' is defined but never used                                                                                                                                                                                                                                      @typescript-eslint/no-unused-vars
+
+/Users/ciarannash/Documents/NCAI/src/components/education/EducationCard.tsx
+   7:10  warning  'cn' is defined but never used                   @typescript-eslint/no-unused-vars
+  11:14  warning  Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+  38:11  warning  'isUpcoming' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/ciarannash/Documents/NCAI/src/components/education/EducationFilter.tsx
+  9:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/education/ResourceList.tsx
+  1:8   warning  'Link' is defined but never used  @typescript-eslint/no-unused-vars
+  2:10  warning  'cn' is defined but never used    @typescript-eslint/no-unused-vars
+
+/Users/ciarannash/Documents/NCAI/src/components/events/CalendarView.tsx
+   10:13  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  116:63  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/events/EventCard.tsx
+   8:12  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  95:59  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/events/EventFilter.tsx
+  10:13  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/events/EventRSVPForm.tsx
+  14:11  warning  't' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  48:18  warning  'error' is defined but never used       @typescript-eslint/no-unused-vars
+
+/Users/ciarannash/Documents/NCAI/src/components/exhibitions/ExhibitionCard.tsx
+   6:10  warning  'getLocalizedValue' is defined but never used  @typescript-eslint/no-unused-vars
+  11:17  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/home/CollectionTeaser.tsx
+  14:10  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  17:14  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  24:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  25:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/home/HomeHero.tsx
+  11:12  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  12:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  13:12  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  18:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  19:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  26:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/home/HomeHeroNew.tsx
+  22:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  27:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  28:13  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  29:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  31:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  36:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  37:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/home/TimelineTeaser.tsx
+  15:12  warning  Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+  16:18  warning  Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+  17:12  warning  Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+  28:11  warning  'teaserRef' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/ciarannash/Documents/NCAI/src/components/layout/Header.tsx
+  27:28  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/layout/HeaderClient.tsx
+  11:16  warning  'ScrollTrigger' is defined but never used              @typescript-eslint/no-unused-vars
+  36:12  warning  'isHoveringHeader' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/ciarannash/Documents/NCAI/src/components/layout/HeaderClientNCAI.tsx
+  26:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/layout/HeaderSwitcher.tsx
+  10:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  12:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/layout/MegaMenu.tsx
+   23:22   warning  Unexpected any. Specify a different type                                                                                                                                                                                                @typescript-eslint/no-explicit-any
+   28:58   warning  Unexpected any. Specify a different type                                                                                                                                                                                                @typescript-eslint/no-explicit-any
+   29:11   warning  The 'images' logical expression could make the dependencies of useEffect Hook (at line 37) change on every render. Move it inside the useEffect callback. Alternatively, wrap the initialization of 'images' in its own useMemo() Hook  react-hooks/exhaustive-deps
+  151:110  warning  Unexpected any. Specify a different type                                                                                                                                                                                                @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/layout/NewsletterSignup.tsx
+  40:23  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/layout/OpeningStatus.tsx
+  20:14  warning  'error' is defined but never used         @typescript-eslint/no-unused-vars
+  25:94  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  28:66  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/layout/OpeningStatusClient.tsx
+  10:12  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  11:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  12:14  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/layout/legacy/HeaderClientLegacy.tsx
+  11:16  warning  'ScrollTrigger' is defined but never used  @typescript-eslint/no-unused-vars
+  25:22  warning  Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/layout/legacy/HeaderLegacy.tsx
+  10:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  13:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  15:24  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/styleguide/StyleguideClient.tsx
+  20:10  warning  'ResponsiveDivider' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/ciarannash/Documents/NCAI/src/components/styleguide/StyleguideNav.tsx
+  3:17  warning  'useState' is defined but never used   @typescript-eslint/no-unused-vars
+  3:27  warning  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/ciarannash/Documents/NCAI/src/components/styleguide/sections/Accessibility.tsx
+  3:10  warning  'ResponsiveDivider' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/ciarannash/Documents/NCAI/src/components/styleguide/sections/BrandFoundations.tsx
+  3:10  warning  'ResponsiveDivider' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/ciarannash/Documents/NCAI/src/components/styleguide/sections/DesignTokens.tsx
+  3:10  warning  'ResponsiveDivider' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/ciarannash/Documents/NCAI/src/components/styleguide/sections/EditorialContent.tsx
+  3:10  warning  'ResponsiveDivider' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/ciarannash/Documents/NCAI/src/components/styleguide/sections/LayoutStructure.tsx
+  3:10  warning  'ResponsiveDivider' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/ciarannash/Documents/NCAI/src/components/timeline/ImmersiveTimeline.tsx
+   19:12  warning  Unexpected any. Specify a different type                                                                         @typescript-eslint/no-explicit-any
+   20:18  warning  Unexpected any. Specify a different type                                                                         @typescript-eslint/no-explicit-any
+   21:12  warning  Unexpected any. Specify a different type                                                                         @typescript-eslint/no-explicit-any
+   30:7   warning  'ERA_COLORS' is assigned a value but never used                                                                  @typescript-eslint/no-unused-vars
+   40:11  warning  'scrollContentRef' is assigned a value but never used                                                            @typescript-eslint/no-unused-vars
+   96:34  warning  Unexpected any. Specify a different type                                                                         @typescript-eslint/no-explicit-any
+   96:39  warning  'i' is defined but never used                                                                                    @typescript-eslint/no-unused-vars
+  207:31  warning  'isLightVariant' is assigned a value but never used                                                              @typescript-eslint/no-unused-vars
+  346:21  warning  Elements with the ARIA role "scrollbar" must have the following attributes defined: aria-controls,aria-valuenow  jsx-a11y/role-has-required-aria-props
+
+/Users/ciarannash/Documents/NCAI/src/components/ui/ArtTooltip.tsx
+  15:39  warning  'children' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/ciarannash/Documents/NCAI/src/components/ui/Book.tsx
+  96:33  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/Users/ciarannash/Documents/NCAI/src/components/ui/EntranceAnimation/EntranceAnimation.tsx
+  216:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  223:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  230:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/Users/ciarannash/Documents/NCAI/src/components/ui/Gallery.tsx
+  22:12  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  23:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/ui/Grid/Grid.tsx
+  111:14  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/ui/Grid/GridInspector.tsx
+  4:10  warning  'cn' is defined but never used    @typescript-eslint/no-unused-vars
+  5:10  warning  'Grid' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/ciarannash/Documents/NCAI/src/components/ui/HeroIMMA.tsx
+  11:13  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/ui/LogoGrid.tsx
+  9:11  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/ui/PortableText.tsx
+   9:28  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  33:28  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  34:28  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  35:28  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  36:28  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  37:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  42:32  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  45:32  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  46:32  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  49:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  66:58  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/ui/SearchModal.tsx
+   17:12  warning  Unexpected any. Specify a different type                                                                                              @typescript-eslint/no-explicit-any
+   19:13  warning  Unexpected any. Specify a different type                                                                                              @typescript-eslint/no-explicit-any
+   89:8   warning  React Hook useEffect has missing dependencies: 'animateResults' and 'trackEvent'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  100:39  warning  Unexpected any. Specify a different type                                                                                              @typescript-eslint/no-explicit-any
+  104:35  warning  Unexpected any. Specify a different type                                                                                              @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/components/whatson/WhatsOnClient.tsx
+   21:20  warning  Unexpected any. Specify a different type                                                                                                                     @typescript-eslint/no-explicit-any
+   22:23  warning  Unexpected any. Specify a different type                                                                                                                     @typescript-eslint/no-explicit-any
+  100:17  error    'passesMonth' is never reassigned. Use 'const' instead                                                                                                       prefer-const
+  118:8   warning  React Hook useMemo has unnecessary dependencies: 'baseDate' and 'isCalendarOpen'. Either exclude them or remove the dependency array                         react-hooks/exhaustive-deps
+  220:47  error    Do not use an `<a>` element to navigate to `/visit/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+  220:47  error    Do not use an `<a>` element to navigate to `/visit/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+  220:47  error    Do not use an `<a>` element to navigate to `/visit/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+  220:47  error    Do not use an `<a>` element to navigate to `/visit/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+  220:47  error    Do not use an `<a>` element to navigate to `/visit/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+  220:47  error    Do not use an `<a>` element to navigate to `/visit/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+  220:47  error    Do not use an `<a>` element to navigate to `/visit/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+
+/Users/ciarannash/Documents/NCAI/src/components/whatson/WhatsOnFilter.tsx
+  3:10  warning  'useState' is defined but never used     @typescript-eslint/no-unused-vars
+  5:13  warning  'ChevronDown' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/ciarannash/Documents/NCAI/src/lib/analytics.ts
+  12:53  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  13:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  26:53  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  27:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/lib/listmonk.ts
+   4:30  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  62:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/lib/odoo.ts
+   13:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   29:67  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   65:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  124:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/lib/types/museum-card.ts
+  8:13  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/sanity/lib/client.ts
+  27:29  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/sanity/lib/image.ts
+  12:32  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/ciarannash/Documents/NCAI/src/sanity/lib/utils.ts
+  31:49  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  39:47  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  48:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  48:49  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  51:35  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+✖ 343 problems (8 errors, 335 warnings)
+  1 error and 0 warnings potentially fixable with the `--fix` option.
+

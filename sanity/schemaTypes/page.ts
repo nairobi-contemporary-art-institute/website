@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity'
+import { SlugLinkField } from './components/SlugLinkField'
 
 export const page = defineType({
     name: 'page',
@@ -18,6 +19,9 @@ export const page = defineType({
                 source: 'title',
                 maxLength: 96,
             },
+            components: {
+                field: SlugLinkField
+            }
         }),
         defineField({
             name: 'body',

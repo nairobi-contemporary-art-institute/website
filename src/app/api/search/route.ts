@@ -13,7 +13,7 @@ export async function GET(request: Request) {
   // We use match and score for basic relevance
   // Note: title/name are often internationalized arrays, so we search their values
   const query = `
-    *[_type in ["post", "exhibition", "artist", "program", "event", "collectionItem"] && 
+    *[_type in ["post", "exhibition", "artist", "program", "event", "collectionItem", "work"] && 
       (
         title match $term + "*" || 
         title[].value match $term + "*" ||
@@ -25,7 +25,8 @@ export async function GET(request: Request) {
         description match $term + "*" ||
         description[].value match $term + "*" ||
         pt::text(description[].value) match $term + "*" ||
-        pt::text(body[].value) match $term + "*"
+        pt::text(body[].value) match $term + "*" ||
+        artist->name[].value match $term + "*"
       )
     ] | score(
       title match $term,
@@ -36,21 +37,26 @@ export async function GET(request: Request) {
       _id,
       _type,
       "title": coalesce(title, name),
-      "slug": slug.current,
+      "slug": coalesce(slug.current, artist->slug.current),
       "image": coalesce(mainImage, image),
-      "date": coalesce(publishedAt, startDate),
-    } | order(_score desc, date desc)[0...10]
+      "date": coalesce(publishedAt, startDate, year, creationDate),
+      "artistName": artist->name
+    } | order(_score desc, date desc)[0...15]
   `
 
   try {
     const results = await sanityFetch<any[]>({
       query,
       params: { term },
-      revalidate: 30 // Short 30s cache for search to protect quota while staying fresh
+      revalidate: 30
     })
     return NextResponse.json({ results })
-  } catch (error) {
+  } catch (error: any) {
     console.error('Search error:', error)
-    return NextResponse.json({ error: 'Failed to search' }, { status: 500 })
+    return NextResponse.json({ 
+      error: 'Failed to search', 
+      details: error.message,
+      stack: error.stack 
+    }, { status: 500 })
   }
 }

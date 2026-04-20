@@ -32,8 +32,10 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [isSearchOpen, setIsSearchOpen] = useState(false)
     const [isAtTop, setIsAtTop] = useState(true)
+    const [isVisible, setIsVisible] = useState(true)
     const [activeMenuIndex, setActiveMenuIndex] = useState<number | null>(null)
     const [isHoveringHeader, setIsHoveringHeader] = useState(false)
+    const lastScrollY = useRef(0)
 
     // ... (refs stay the same)
     const headerRef = useRef<HTMLDivElement>(null)
@@ -148,10 +150,36 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
 
     useEffect(() => {
         const handleScroll = () => {
-            setIsAtTop(window.scrollY < 20)
+            const currentScrollY = window.scrollY
+            const vh75 = window.innerHeight * 0.75
+            
+            setIsAtTop(currentScrollY < 20)
+
+            // Smart hide/show logic
+            if (currentScrollY > vh75 && currentScrollY > lastScrollY.current) {
+                // Scrolling down past 240vh
+                setIsVisible(false)
+            } else if (currentScrollY < lastScrollY.current) {
+                // Any upward scroll reveals header
+                setIsVisible(true)
+            }
+            
+            lastScrollY.current = currentScrollY
         }
         window.addEventListener('scroll', handleScroll, { passive: true })
         return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
+
+    // Mouse proximity listener - reveal header when hovering near the top
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            const vh16 = window.innerHeight * 0.16
+            if (e.clientY <= vh16) {
+                setIsVisible(true)
+            }
+        }
+        window.addEventListener('mousemove', handleMouseMove)
+        return () => window.removeEventListener('mousemove', handleMouseMove)
     }, [])
 
     // Check if the current route is the immersive timeline
@@ -229,7 +257,10 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
         <>
             <div
                 ref={headerRef}
-                className="sticky top-0 z-50 flex flex-col w-full [--header-padding-right:1.5rem] md:[--header-padding-right:2rem]"
+                className={cn(
+                    "fixed top-0 left-0 right-0 z-50 flex flex-col w-full transition-all duration-500 ease-in-out",
+                    !isVisible ? "-translate-y-full" : "translate-y-0"
+                )}
                 onMouseLeave={closeMegaMenu}
             >
                 <div

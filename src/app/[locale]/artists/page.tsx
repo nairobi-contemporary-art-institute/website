@@ -47,21 +47,23 @@ export default async function ArtistsPage({ params }: Props) {
     const description = getLocalizedValue(pageData?.header?.description, locale)
 
     return (
-        <GridSystem unstable_useContainer>
-            <main className="pt-32 pb-24">
-                <header className="mb-16">
-                    <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-charcoal leading-none capitalize">
-                        {title}
-                    </h1>
-                    {description && (
-                        <div className="mt-8 text-xl md:text-2xl text-charcoal/70 max-w-3xl leading-relaxed">
-                            <PortableText value={description} locale={locale} />
-                        </div>
-                    )}
-                </header>
+        <div className="bg-[#0A0A0A] min-h-screen">
+            <GridSystem unstable_useContainer>
+                <main className="pt-32 pb-24">
+                    <header className="mb-24">
+                        <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-white leading-none uppercase">
+                            {title}
+                        </h1>
+                        {description && (
+                            <div className="mt-12 text-xl md:text-2xl text-white/40 max-w-3xl leading-relaxed font-light">
+                                <PortableText value={description} locale={locale} />
+                            </div>
+                        )}
+                    </header>
 
-                <ArtistIndex artists={artists} locale={locale} />
-            </main>
-        </GridSystem>
+                    <ArtistIndex artists={artists} locale={locale} />
+                </main>
+            </GridSystem>
+        </div>
     )
 }

@@ -100,6 +100,66 @@ export const siteSettings = defineType({
             ]
         }),
         defineField({
+            name: 'utilityNav',
+            title: 'Utility Navigation',
+            type: 'array',
+            group: 'navigation',
+            description: 'Links for the small top-tier menu (e.g. Shop, Support, Members).',
+            of: [
+                {
+                    type: 'object',
+                    name: 'link',
+                    title: 'Link',
+                    fields: [
+                        defineField({
+                            name: 'label',
+                            title: 'Label',
+                            type: 'internationalizedArrayString',
+                        }),
+                        defineField({
+                            name: 'internalLink',
+                            title: 'Internal Page (Search)',
+                            type: 'reference',
+                            to: [
+                                { type: 'page' },
+                                { type: 'exhibition' },
+                                { type: 'post' },
+                                { type: 'artist' },
+                                { type: 'event' },
+                                { type: 'program' },
+                                { type: 'publication' },
+                                { type: 'aboutPage' },
+                                { type: 'visitPage' },
+                                { type: 'getInvolvedPage' },
+                                { type: 'homePage' },
+                                { type: 'publicationsPage' },
+                                { type: 'educationPage' },
+                            ],
+                            description: 'Optional: Search for an internal page. If selected, this will override the manual URL below.'
+                        }),
+                        defineField({
+                            name: 'url',
+                            title: 'External URL / Manual Path',
+                            type: 'string',
+                            description: 'Use this for external links or manual paths (e.g. https://instagram.com or /my-path)'
+                        }),
+                    ],
+                    preview: {
+                        select: {
+                            title: 'label',
+                            subtitle: 'url',
+                        },
+                        prepare({ title, subtitle }) {
+                            const labelValue = Array.isArray(title)
+                                ? title.find((t: { _key: string, value?: string }) => t._key === 'en')?.value || title[0]?.value
+                                : title
+                            return { title: labelValue || 'Untitled Link', subtitle }
+                        }
+                    }
+                }
+            ]
+        }),
+        defineField({
             name: 'headerMenu',
             title: 'Header Navigation',
             type: 'array',
@@ -117,10 +177,31 @@ export const siteSettings = defineType({
                             type: 'internationalizedArrayString',
                         }),
                         defineField({
+                            name: 'internalLink',
+                            title: 'Internal Page (Search)',
+                            type: 'reference',
+                            to: [
+                                { type: 'page' },
+                                { type: 'exhibition' },
+                                { type: 'post' },
+                                { type: 'artist' },
+                                { type: 'event' },
+                                { type: 'program' },
+                                { type: 'publication' },
+                                { type: 'aboutPage' },
+                                { type: 'visitPage' },
+                                { type: 'getInvolvedPage' },
+                                { type: 'homePage' },
+                                { type: 'publicationsPage' },
+                                { type: 'educationPage' },
+                            ],
+                            description: 'Optional: Search for an internal page. If selected, this will override the manual URL below.'
+                        }),
+                        defineField({
                             name: 'url',
-                            title: 'URL',
+                            title: 'External URL / Manual Path',
                             type: 'string',
-                            description: 'Primary link (e.g. /exhibitions)',
+                            description: 'Primary link (e.g. /exhibitions) - used if no internal page is selected.'
                         }),
                         defineField({
                             name: 'columns',
@@ -154,8 +235,29 @@ export const siteSettings = defineType({
                                                             type: 'internationalizedArrayString',
                                                         }),
                                                         defineField({
+                                                            name: 'internalLink',
+                                                            title: 'Internal Page (Search)',
+                                                            type: 'reference',
+                                                            to: [
+                                                                { type: 'page' },
+                                                                { type: 'exhibition' },
+                                                                { type: 'post' },
+                                                                { type: 'artist' },
+                                                                { type: 'event' },
+                                                                { type: 'program' },
+                                                                { type: 'publication' },
+                                                                { type: 'aboutPage' },
+                                                                { type: 'visitPage' },
+                                                                { type: 'getInvolvedPage' },
+                                                                { type: 'homePage' },
+                                                                { type: 'publicationsPage' },
+                                                                { type: 'educationPage' },
+                                                            ],
+                                                            description: 'Optional: Search for an internal page.'
+                                                        }),
+                                                        defineField({
                                                             name: 'url',
-                                                            title: 'URL',
+                                                            title: 'External URL / Manual Path',
                                                             type: 'string',
                                                         }),
                                                     ]
@@ -234,12 +336,28 @@ export const siteSettings = defineType({
             title: 'Site Title',
             type: 'internationalizedArrayString',
             group: 'general',
+            description: 'The main title of the website. Best practice: 50–60 characters. Format: Brand Name | Tagline',
+            validation: Rule => Rule.custom((value: any) => {
+                if (!value) return true;
+                const errors = value
+                    .filter((item: any) => item.value && item.value.length > 60)
+                    .map((item: any) => `${item._key.toUpperCase()}: Title is too long (${item.value.length}/60 chars)`);
+                return errors.length > 0 ? errors[0] : true;
+            }).warning()
         }),
         defineField({
             name: 'siteDescription',
             title: 'Site Description',
-            type: 'internationalizedArrayString',
+            type: 'internationalizedArrayText',
             group: 'general',
+            description: 'The SEO summary shown in search results. Best practice: 120–155 characters.',
+            validation: Rule => Rule.custom((value: any) => {
+                if (!value) return true;
+                const errors = value
+                    .filter((item: any) => item.value && item.value.length > 160)
+                    .map((item: any) => `${item._key.toUpperCase()}: Description is quite long (${item.value.length}/160 chars)`);
+                return errors.length > 0 ? errors[0] : true;
+            }).warning()
         }),
         defineField({
             name: 'socialLinks',
@@ -301,10 +419,31 @@ export const siteSettings = defineType({
                                             type: 'internationalizedArrayString',
                                         }),
                                         defineField({
+                                            name: 'internalLink',
+                                            title: 'Internal Page (Search)',
+                                            type: 'reference',
+                                            to: [
+                                                { type: 'page' },
+                                                { type: 'exhibition' },
+                                                { type: 'post' },
+                                                { type: 'artist' },
+                                                { type: 'event' },
+                                                { type: 'program' },
+                                                { type: 'publication' },
+                                                { type: 'aboutPage' },
+                                                { type: 'visitPage' },
+                                                { type: 'getInvolvedPage' },
+                                                { type: 'homePage' },
+                                                { type: 'publicationsPage' },
+                                                { type: 'educationPage' },
+                                            ],
+                                            description: 'Optional: Search for an internal page.'
+                                        }),
+                                        defineField({
                                             name: 'url',
-                                            title: 'Link URL',
+                                            title: 'External URL / Manual Path',
                                             type: 'string',
-                                            description: 'Relative path (e.g., /about) or external URL',
+                                            description: 'Relative path (e.g., /about) or external URL - used if no internal page is selected.',
                                         }),
                                     ],
                                     preview: {

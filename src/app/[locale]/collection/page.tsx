@@ -1,5 +1,5 @@
 import { sanityFetch } from '@/sanity/lib/client'
-import { COLLECTION_QUERY, COLLECTION_PAGE_QUERY } from '@/sanity/lib/queries'
+import { COLLECTION_QUERY, COLLECTION_PAGE_QUERY, ARTISTS_INDEX_QUERY } from '@/sanity/lib/queries'
 import { GridSystem } from '@/components/ui/Grid/Grid'
 import { Metadata } from 'next'
 import { getLocalizedValue, portableTextToPlainText, getLocalizedValueAsString } from '@/sanity/lib/utils'
@@ -8,6 +8,7 @@ import { urlFor } from '@/sanity/lib/image'
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import { PortableText } from '@/components/ui/PortableText'
+import { CollectionClient } from '@/components/collection/CollectionClient'
 
 type Props = {
     params: Promise<{ locale: string }>
@@ -41,107 +42,39 @@ export default async function CollectionPage({ params }: Props) {
     const { locale } = await params
     const t = await getTranslations({ locale, namespace: 'Pages.collection' })
 
-    const [pageData, allWorks] = await Promise.all([
+    const [pageData, allWorks, allArtists] = await Promise.all([
         sanityFetch<any>({ query: COLLECTION_PAGE_QUERY, tags: ['collectionPage'] }),
-        sanityFetch<any[]>({ query: COLLECTION_QUERY, tags: ['collectionItem'] })
+        sanityFetch<any[]>({ query: COLLECTION_QUERY, tags: ['collectionItem'] }),
+        sanityFetch<any[]>({ query: ARTISTS_INDEX_QUERY, tags: ['artist'] })
     ])
 
     const title = getLocalizedValueAsString(pageData?.header?.headline, locale) || getLocalizedValueAsString(pageData?.title, locale) || t('title')
     const description = getLocalizedValue(pageData?.header?.description, locale)
 
-    const featuredItems = pageData?.featuredItems || []
-    const featuredIds = new Set(featuredItems.map((item: any) => item._id))
-    const regularWorks = allWorks.filter(work => !featuredIds.has(work._id))
-
-    const renderWorkCard = (work: any, isFeatured = false) => {
-        const workTitle = getLocalizedValue(work.title, locale) || t('untitled')
-        const artistName = getLocalizedValue(work.artistName, locale) || t('unknownArtist')
-
-        return (
-            <Link
-                key={work._id}
-                href={`/${locale}/collection/${work.slug || ''}`}
-                className={`group space-y-6 ${isFeatured ? 'md:col-span-2 lg:col-span-1' : ''}`}
-            >
-                <div className={`relative bg-charcoal/5 overflow-hidden ${isFeatured ? 'aspect-[4/3]' : 'aspect-square'}`}>
-                    {work.mainImage?.asset ? (
-                        <Image
-                            src={urlFor(work.mainImage).width(isFeatured ? 1200 : 800).height(isFeatured ? 900 : 800).url()}
-                            alt={workTitle}
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-700"
-                            sizes={isFeatured ? "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"}
-                            {...(work.mainImage?.asset?.metadata?.lqip && {
-                                placeholder: 'blur',
-                                blurDataURL: work.mainImage.asset.metadata.lqip
-                            })}
-                        />
-                    ) : (
-                        <div className="w-full h-full flex items-center justify-center text-charcoal/20">{t('noImage')}</div>
-                    )}
-                    {isFeatured && (
-                        <div className="absolute top-4 left-4">
-                            <span className="bg-ivory text-charcoal text-[10px] capitalize tracking-widest px-2 py-1 font-bold">
-                                Featured
-                            </span>
-                        </div>
-                    )}
-                </div>
-                <div className="space-y-2">
-                    <h3 className={`${isFeatured ? 'text-2xl md:text-3xl' : 'text-xl'} font-bold text-charcoal leading-tight italic group-hover:underline decoration-charcoal/20 transition-all`}>
-                        {workTitle}
-                    </h3>
-                    <div className="space-y-1">
-                        <p className={`${isFeatured ? 'text-lg' : 'text-sm'} font-medium text-charcoal`}>{artistName}</p>
-                        <p className={`${isFeatured ? 'text-sm' : 'text-xs'} text-charcoal/60`}>
-                            {getLocalizedValue(work.medium, locale)}
-                            {work.creationDate && `, ${work.creationDate}`}
-                        </p>
-                    </div>
-                </div>
-            </Link>
-        )
-    }
-
     return (
-        <GridSystem unstable_useContainer>
-            <main className="pt-32 pb-24">
-                <header className="mb-20">
-                    <h1 className="text-6xl md:text-8xl font-bold tracking-tighter text-charcoal leading-none capitalize">
-                        {title}
-                    </h1>
-                    {description ? (
-                        <div className="mt-8 text-xl md:text-2xl text-charcoal/70 max-w-3xl leading-relaxed">
-                            <PortableText value={description} locale={locale} />
+        <div className="bg-[#0A0A0A] min-h-screen text-white">
+            <GridSystem unstable_useContainer>
+                <main className="pt-64 pb-24">
+                    <header className="mb-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                        <div>
+                            <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-white leading-none uppercase">
+                                {title}
+                            </h1>
                         </div>
-                    ) : (
-                        <p className="mt-6 text-xl text-charcoal/60 max-w-2xl leading-relaxed">
-                            {t('description')}
-                        </p>
-                    )}
-                </header>
+                        {description && (
+                            <div className="text-xl md:text-2xl text-white/70 max-w-3xl leading-relaxed prose-invert pt-4">
+                                <PortableText value={description} locale={locale} />
+                            </div>
+                        )}
+                    </header>
 
-                {/* Featured Items Section */}
-                {featuredItems.length > 0 && (
-                    <section className="px-section-clamp mb-24">
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                            {featuredItems.map((item: any) => renderWorkCard(item, true))}
-                        </div>
-                        <div className="mt-16 h-px w-full bg-charcoal/10" />
-                    </section>
-                )}
-
-                {/* Main Collection Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                    {regularWorks.map((work: any) => renderWorkCard(work))}
-                </div>
-
-                {allWorks.length === 0 && (
-                    <div className="py-24 text-center border-t border-charcoal/10">
-                        <p className="text-charcoal/40 italic">{t('noItems')}</p>
-                    </div>
-                )}
-            </main>
-        </GridSystem>
+                    <CollectionClient 
+                        locale={locale} 
+                        items={allWorks} 
+                        artists={allArtists}
+                    />
+                </main>
+            </GridSystem>
+        </div>
     )
 }

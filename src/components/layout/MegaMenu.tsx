@@ -168,7 +168,9 @@ export function MegaMenu({ isOpen, columns, onClose, featuredImages }: MegaMenuP
                         <div className="bg-white/[0.02] border-t border-white/5 py-4 px-6 md:px-12">
                             <div className="container mx-auto flex justify-between items-center text-[10px] uppercase tracking-widest text-white/30 font-bold">
                                 <span>Nairobi Contemporary Art Institute</span>
-                                <span>Est. 2020</span>
+                                <Link href="/about" className="hover:text-ivory transition-colors">
+                                    <span>East African Contemporary Art</span>
+                                </Link>
                             </div>
                         </div>
                     </Popover.Popup>
