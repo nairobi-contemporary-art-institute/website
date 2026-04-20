@@ -35,6 +35,8 @@ export const EXHIBITION_BY_SLUG_QUERY = groq`
     bookingUrl,
     showInternalNavigation,
     enquiryModule,
+    "pressKitUrl": pressKit.asset->url,
+    "exhibitionGuideUrl": exhibitionGuide.asset->url,
     manualRelatedContent[]-> {
         _id,
         _type,

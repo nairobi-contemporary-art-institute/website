@@ -88,7 +88,7 @@ export function ExhibitHeroSplit({
             <GridSystem unstable_useContainer={false} className="relative z-10 w-full px-6 md:px-12">
                 <Grid columns={{ sm: 1, md: 12 }}>
                     <GridCell column={{ sm: 1, md: 6 }} className="hidden md:block relative bg-transparent">
-                        {heroImage && (
+                        {heroImage?.asset && (
                                 <Image 
                                     src={urlFor(heroImage).url()} 
                                     fill 

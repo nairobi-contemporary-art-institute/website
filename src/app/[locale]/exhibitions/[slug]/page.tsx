@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         openGraph: {
             title,
             description,
-            images: exhibition.mainImage ? [urlFor(exhibition.mainImage).width(1200).height(630).url()] : [],
+            images: exhibition.mainImage?.asset ? [urlFor(exhibition.mainImage).width(1200).height(630).url()] : [],
         },
     }
 }
@@ -202,7 +202,7 @@ export default async function ExhibitionPage({ params }: Props) {
 
                                             return (
                                                 <div key={artist._id} className="space-y-6">
-                                                    {artist.image && (
+                                                    {artist.image?.asset && (
                                                         <div className="space-y-3">
                                                             <div className="aspect-[4/5] relative overflow-hidden bg-stone-100">
                                                                 <Image
@@ -379,18 +379,34 @@ export default async function ExhibitionPage({ params }: Props) {
                                     </div>
                                 </AccordionSection>
 
-                                <AccordionSection title="Press & Resources">
-                                     <div className="flex flex-col gap-4">
-                                        <button className="text-left py-2 flex items-center gap-4 group">
-                                            <span className="w-10 h-10 rounded-full border border-charcoal/10 flex items-center justify-center group-hover:bg-charcoal group-hover:text-white transition-all">↓</span>
-                                            <span className="text-lg font-medium tracking-tight">Download Press Release</span>
-                                        </button>
-                                        <button className="text-left py-2 flex items-center gap-4 group">
-                                            <span className="w-10 h-10 rounded-full border border-charcoal/10 flex items-center justify-center group-hover:bg-charcoal group-hover:text-white transition-all">↓</span>
-                                            <span className="text-lg font-medium tracking-tight">Exhibition Guide</span>
-                                        </button>
-                                     </div>
-                                </AccordionSection>
+                                {(exhibition.pressKitUrl || exhibition.exhibitionGuideUrl) && (
+                                    <AccordionSection title="Press & Resources">
+                                        <div className="flex flex-col gap-4">
+                                            {exhibition.pressKitUrl && (
+                                                <a 
+                                                    href={exhibition.pressKitUrl} 
+                                                    target="_blank" 
+                                                    rel="noopener noreferrer"
+                                                    className="text-left py-2 flex items-center gap-4 group"
+                                                >
+                                                    <span className="w-10 h-10 rounded-full border border-charcoal/10 flex items-center justify-center group-hover:bg-charcoal group-hover:text-white transition-all">↓</span>
+                                                    <span className="text-lg font-medium tracking-tight">Download Press Release</span>
+                                                </a>
+                                            )}
+                                            {exhibition.exhibitionGuideUrl && (
+                                                <a 
+                                                    href={exhibition.exhibitionGuideUrl} 
+                                                    target="_blank" 
+                                                    rel="noopener noreferrer"
+                                                    className="text-left py-2 flex items-center gap-4 group"
+                                                >
+                                                    <span className="w-10 h-10 rounded-full border border-charcoal/10 flex items-center justify-center group-hover:bg-charcoal group-hover:text-white transition-all">↓</span>
+                                                    <span className="text-lg font-medium tracking-tight">Exhibition Guide</span>
+                                                </a>
+                                            )}
+                                        </div>
+                                    </AccordionSection>
+                                )}
                             </div>
                         </div>
                     </GridCell>

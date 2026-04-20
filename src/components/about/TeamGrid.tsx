@@ -95,7 +95,7 @@ export function TeamGrid({ people, locale }: TeamGridProps) {
                 <div className={`relative aspect-[4/5] overflow-hidden bg-charcoal/5 group-hover:shadow-2xl transition-all duration-700 shrink-0 ${
                     isExpanded ? 'w-full md:w-[380px]' : 'w-full'
                 }`}>
-                    {person.image ? (
+                    {person.image?.asset ? (
                         <Image
                             src={urlFor(person.image).width(800).height(1000).url()}
                             alt={name || 'Team Member'}

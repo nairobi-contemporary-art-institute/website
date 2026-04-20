@@ -100,6 +100,22 @@ export const exhibition = defineType({
             ],
         }),
         defineField({
+            name: 'pressKit',
+            title: 'Press Kit (PDF)',
+            description: 'Upload the official press kit PDF for this exhibition.',
+            type: 'file',
+            options: { accept: '.pdf' },
+            group: 'general',
+        }),
+        defineField({
+            name: 'exhibitionGuide',
+            title: 'Exhibition Guide (PDF)',
+            description: 'Upload the official visitor guide or hand-out PDF.',
+            type: 'file',
+            options: { accept: '.pdf' },
+            group: 'general',
+        }),
+        defineField({
             name: 'heroLayout',
             title: 'Hero Layout',
             type: 'string',
