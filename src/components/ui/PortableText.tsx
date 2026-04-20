@@ -5,8 +5,13 @@ import { getLocalizedValue } from '@/sanity/lib/utils'
 import { ArtCaption } from './ArtCaption'
 import { cn } from '@/lib/utils'
 
+import { TimelineTeaserBlock } from '../museum/TimelineTeaserBlock'
+
 export const components = (locale?: string) => ({
     types: {
+        timelineTeaser: ({ value }: any) => {
+            return <TimelineTeaserBlock value={value} locale={locale || 'en'} />
+        },
         image: ({ value }: any) => {
             if (!value?.asset) return null
             const caption = locale ? getLocalizedValue(value.caption, locale) : null

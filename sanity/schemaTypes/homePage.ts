@@ -459,15 +459,6 @@ export const homePage = defineType({
                 }),
             ]
         }),
-        defineField({
-            name: 'timelineTeaser',
-            title: 'Timeline Teaser Settings',
-            type: 'object',
-            fields: [
-                defineField({ name: 'show', title: 'Show Timeline Teaser', type: 'boolean', initialValue: true }),
-                defineField({ name: 'headline', title: 'Headline', type: 'internationalizedArrayString' }),
-            ]
-        })
     ],
     preview: {
         prepare() {
