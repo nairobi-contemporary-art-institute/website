@@ -28,14 +28,58 @@ export const EXHIBITIONS_QUERY = groq`
 export const EXHIBITION_BY_SLUG_QUERY = groq`
   *[_type == "exhibition" && slug.current == $slug][0] {
     ...,
-    homepageImage {
-      caption,
-      asset-> { _id, metadata { lqip } }
+    heroLayout,
+    backgroundThemeColor,
+    heroTextArt,
+    admission,
+    bookingUrl,
+    showInternalNavigation,
+    enquiryModule,
+    manualRelatedContent[]-> {
+        _id,
+        _type,
+        "title": coalesce(title, name),
+        "slug": slug.current,
+        mainImage {
+            asset-> { _id, metadata { lqip } }
+        },
+        image {
+            asset-> { _id, metadata { lqip } }
+        },
+        startDate,
+        endDate,
+        "artistNames": artists[]->name[@._key == $locale][0].value
+    },
+    extraSections[] {
+        _type,
+        _key,
+        title,
+        layoutType,
+        content,
+        author,
+        images[] {
+            caption,
+            asset-> {
+                _id,
+                metadata { lqip }
+            }
+        }
+    },
+    mediaModule {
+        mediaType,
+        title,
+        label,
+        url,
+        image {
+            asset-> { _id, metadata { lqip } }
+        },
+        backgroundColor
     },
     listImage {
       caption,
       asset-> { _id, metadata { lqip } }
     },
+    galleryLayout,
     mainImage {
       caption,
       asset-> { _id, metadata { lqip } }
@@ -51,13 +95,38 @@ export const EXHIBITION_BY_SLUG_QUERY = groq`
         _id,
         name,
         "slug": slug.current,
-        image
+        image {
+            ...,
+            asset-> { _id, metadata { lqip } },
+            imageCredit-> { name, "slug": slug.current, hasProfile }
+        },
+        bio,
+        "portraitPost": *[_type == "post" && references(^._id) && (title[@._key == $locale].value match "*Portrait*" || slug.current match "*portrait*")][0] {
+            _id,
+            _type,
+            title,
+            "slug": slug.current,
+            publishedAt,
+            mediaType,
+            duration,
+            excerpt,
+            mainImage {
+                asset-> { _id, metadata { lqip } }
+            },
+            tags[]-> { _id, title }
+        }
     },
     curators[]-> {
         _id,
+        _type,
         name,
         "slug": slug.current,
-        image,
+        hasProfile,
+        image {
+            ...,
+            asset-> { _id, metadata { lqip } },
+            imageCredit-> { name, "slug": slug.current, hasProfile }
+        },
         roles
     },
     tags[]-> {
@@ -77,6 +146,18 @@ export const EXHIBITION_BY_SLUG_QUERY = groq`
           }
         },
         website
+    },
+    "relatedPosts": *[_type == "post" && (references(^._id) || references(^.artists[]._ref) || count(tags[@._ref in ^.tags[]._ref]) > 0)] | order(publishedAt desc)[0...4] {
+        _id,
+        _type,
+        title,
+        "slug": slug.current,
+        publishedAt,
+        mediaType,
+        excerpt,
+        mainImage {
+            asset-> { _id, metadata { lqip } }
+        }
     }
   }
 `
@@ -105,9 +186,9 @@ export const ARTISTS_INDEX_QUERY = groq`
 /**
  * Fetch a single artist by slug.
  */
-export const ARTIST_BY_SLUG_QUERY = groq`
-  *[_type == "artist" && slug.current == $slug][0] {
+export const ARTIST_BY_SLUG_QUERY = groq`*[_type == "artist" && slug.current == $slug][0] {
     ...,
+    longBio,
     image {
       caption,
       asset-> {
@@ -121,13 +202,16 @@ export const ARTIST_BY_SLUG_QUERY = groq`
         type,
         "slug": slug.current
     },
-    works[]-> {
+    "works": *[_type == "work" && references(^._id) && showOnArtistProfile != false] | order(year desc) {
         _id,
         title,
         year,
         medium,
         dimensions,
         edition,
+        mediaType,
+        videoUrl,
+        videoCaption,
         image {
             caption,
             asset-> {
@@ -150,6 +234,21 @@ export const ARTIST_BY_SLUG_QUERY = groq`
             }
         }
     },
+    featuredExhibitions[]-> {
+        _id,
+        title,
+        "slug": slug.current,
+        startDate,
+        endDate,
+        listImage {
+            caption,
+            asset-> { _id, metadata { lqip } }
+        },
+        mainImage {
+            caption,
+            asset-> { _id, metadata { lqip } }
+        }
+    },
     "exhibitions": *[_type == "exhibition" && references(^._id)] | order(startDate desc) {
         _id,
         title,
@@ -162,6 +261,18 @@ export const ARTIST_BY_SLUG_QUERY = groq`
         },
         mainImage {
             caption,
+            asset-> { _id, metadata { lqip } }
+        }
+    },
+    "artistPosts": *[_type == "post" && references(^._id)] | order(publishedAt desc) {
+        _id,
+        _type,
+        title,
+        "slug": slug.current,
+        publishedAt,
+        mediaType,
+        excerpt,
+        mainImage {
             asset-> { _id, metadata { lqip } }
         }
     },
@@ -223,6 +334,7 @@ export const POST_BY_SLUG_QUERY = groq`
         metadata { lqip }
       }
     },
+    videoUrl,
     videoCaption,
     audioCaption,
     "audioUrl": audioFile.asset->url,
@@ -237,7 +349,52 @@ export const POST_BY_SLUG_QUERY = groq`
         title,
         type,
         "slug": slug.current
+    },
+    relatedArtist-> {
+        _id,
+        name,
+        "slug": slug.current,
+        bio,
+        image {
+            asset-> { _id, metadata { lqip } }
+        },
+        works[0...4]-> {
+            _id,
+            title,
+            year,
+            medium,
+            image {
+                asset-> { _id, metadata { lqip } }
+            }
+        },
+        featuredExhibitions[0...3]-> {
+            _id,
+            title,
+            "slug": slug.current,
+            listImage {
+                asset-> { _id, metadata { lqip } }
+            }
+        }
     }
+  }
+`
+
+/**
+ * Fetch other artist portraits excluding the current one.
+ */
+export const RELATED_ARTIST_PORTRAITS_QUERY = groq`
+  *[_type == "post" && slug.current match "artist-portrait-*" && slug.current != $slug] | order(publishedAt desc)[0...3] {
+    _id,
+    title,
+    "slug": slug.current,
+    publishedAt,
+    excerpt,
+    mediaType,
+    duration,
+    mainImage {
+      asset-> { _id, metadata { lqip } }
+    },
+    tags[]-> { _id, title }
   }
 `
 
@@ -340,25 +497,55 @@ export const SITEMAP_QUERY = groq`
  * Fetch all collection items.
  */
 export const COLLECTION_QUERY = groq`
-  *[_type == "collectionItem"] | order(creationDate desc) {
+  *[(_type == "collectionItem" || _type == "work") && showInCollection != false] | order(coalesce(creationDate, year) desc) {
     _id,
+    _type,
     title,
     "slug": slug.current,
-    creationDate,
+    "creationDate": coalesce(creationDate, year),
     medium,
     dimensions,
-    mainImage {
-      caption,
-      asset-> {
-        _id,
-        metadata { lqip }
-      }
+    "mainImage": coalesce(mainImage, image) {
+      asset-> { _id, metadata { lqip, dimensions { width, height, aspectRatio } } }
     },
     "artistName": artist->name,
+    artist-> {
+        name,
+        "slug": slug.current
+    },
     tags[]-> {
         title,
         type
-    }
+    },
+    onLoan,
+    onDisplay,
+    displayLocation
+  }
+`
+
+/**
+ * Fetch featured collection items for the homepage.
+ */
+export const FEATURED_COLLECTION_QUERY = groq`
+  *[(_type == "collectionItem" || _type == "work") && featuredOnHome == true] | order(coalesce(creationDate, year) desc) {
+    _id,
+    _type,
+    title,
+    "slug": slug.current,
+    "creationDate": coalesce(creationDate, year),
+    medium,
+    dimensions,
+    "mainImage": coalesce(mainImage, image) {
+      asset-> { _id, metadata { lqip, dimensions { width, height, aspectRatio } } }
+    },
+    "artistName": artist->name,
+    artist-> {
+        name,
+        "slug": slug.current
+    },
+    onLoan,
+    onDisplay,
+    displayLocation
   }
 `
 
@@ -504,14 +691,90 @@ export const SITE_SETTINGS_QUERY = groq`
       caption,
       link
     },
+    utilityNav[] {
+      label,
+      "url": coalesce(
+        internalLink->{
+          "url": select(
+            _type == "exhibition" => "/exhibitions/" + slug.current,
+            _type == "post" => "/channel/" + slug.current,
+            _type == "artist" => "/artists/" + slug.current,
+            _type == "event" => "/events/" + slug.current,
+            _type == "program" => "/programs/" + slug.current,
+            _type == "publication" => "/publications/" + slug.current,
+            _type == "page" => "/" + slug.current,
+            _type == "aboutPage" => "/about",
+            _type == "visitPage" => "/visit",
+            _type == "getInvolvedPage" => "/get-involved",
+            _type == "homePage" => "/",
+            _type == "publicationsPage" => "/publications",
+            _type == "educationPage" => "/education",
+            _type == "artistsPage" => "/artists",
+            _type == "exhibitionsPage" => "/exhibitions",
+            _type == "eventsPage" => "/events",
+            _type == "collectionPage" => "/collection",
+            "/" + slug.current
+          )
+        }.url,
+        url
+      )
+    },
     headerMenu[] {
       label,
-      url,
+      "url": coalesce(
+        internalLink->{
+          "url": select(
+            _type == "exhibition" => "/exhibitions/" + slug.current,
+            _type == "post" => "/channel/" + slug.current,
+            _type == "artist" => "/artists/" + slug.current,
+            _type == "event" => "/events/" + slug.current,
+            _type == "program" => "/programs/" + slug.current,
+            _type == "publication" => "/publications/" + slug.current,
+            _type == "page" => "/" + slug.current,
+            _type == "aboutPage" => "/about",
+            _type == "visitPage" => "/visit",
+            _type == "getInvolvedPage" => "/get-involved",
+            _type == "homePage" => "/",
+            _type == "publicationsPage" => "/publications",
+            _type == "educationPage" => "/education",
+            _type == "artistsPage" => "/artists",
+            _type == "exhibitionsPage" => "/exhibitions",
+            _type == "eventsPage" => "/events",
+            _type == "collectionPage" => "/collection",
+            "/" + slug.current
+          )
+        }.url,
+        url
+      ),
       columns[] {
         title,
         links[] {
           label,
-          url
+          "url": coalesce(
+            internalLink->{
+              "url": select(
+                _type == "exhibition" => "/exhibitions/" + slug.current,
+                _type == "post" => "/channel/" + slug.current,
+                _type == "artist" => "/artists/" + slug.current,
+                _type == "event" => "/events/" + slug.current,
+                _type == "program" => "/programs/" + slug.current,
+                _type == "publication" => "/publications/" + slug.current,
+                _type == "page" => "/" + slug.current,
+                _type == "aboutPage" => "/about",
+                _type == "visitPage" => "/visit",
+                _type == "getInvolvedPage" => "/get-involved",
+                _type == "homePage" => "/",
+                _type == "publicationsPage" => "/publications",
+                _type == "educationPage" => "/education",
+                _type == "artistsPage" => "/artists",
+                _type == "exhibitionsPage" => "/exhibitions",
+                _type == "eventsPage" => "/events",
+                _type == "collectionPage" => "/collection",
+                "/" + slug.current
+              )
+            }.url,
+            url
+          )
         }
       }
     },
@@ -519,7 +782,31 @@ export const SITE_SETTINGS_QUERY = groq`
       title,
       links[] {
         label,
-        url
+        "url": coalesce(
+          internalLink->{
+            "url": select(
+              _type == "exhibition" => "/exhibitions/" + slug.current,
+              _type == "post" => "/channel/" + slug.current,
+              _type == "artist" => "/artists/" + slug.current,
+              _type == "event" => "/events/" + slug.current,
+              _type == "program" => "/programs/" + slug.current,
+              _type == "publication" => "/publications/" + slug.current,
+              _type == "page" => "/" + slug.current,
+              _type == "aboutPage" => "/about",
+              _type == "visitPage" => "/visit",
+              _type == "getInvolvedPage" => "/get-involved",
+              _type == "homePage" => "/",
+              _type == "publicationsPage" => "/publications",
+              _type == "educationPage" => "/education",
+              _type == "artistsPage" => "/artists",
+              _type == "exhibitionsPage" => "/exhibitions",
+              _type == "eventsPage" => "/events",
+              _type == "collectionPage" => "/collection",
+              "/" + slug.current
+            )
+          }.url,
+          url
+        )
       }
     },
     socialLinks,
@@ -626,11 +913,18 @@ export const HOME_PAGE_QUERY = groq`
         preHeading,
         title,
         subtitle,
+        description,
         date {
           startDate,
           endDate
         },
         location,
+        layout,
+        contentPosition,
+        contentWidth,
+        imageAlignment,
+        intelligentContrast,
+        forceBlackText,
         link {
           reference-> {
             _type,
@@ -642,6 +936,38 @@ export const HOME_PAGE_QUERY = groq`
           externalUrl
         }
       }
+    },
+    announcement {
+      enabled,
+      preHeading,
+      heading,
+      briefText,
+      ctaLabel,
+      ctaUrl,
+      logo {
+        asset-> { _id, url, metadata { lqip, dimensions { width, height } } }
+      },
+      backgroundImage {
+        asset-> { _id, url, metadata { lqip, dimensions { width, height } } },
+        hotspot
+      },
+      exploreMore {
+        title,
+        cards[] {
+          title,
+          description,
+          buttonText,
+          url,
+          style,
+          state
+        },
+        secondaryCta {
+          text,
+          url
+        }
+      },
+      pressRelease,
+      accordionLabel
     },
     featuredExhibition-> {
       _id,
@@ -714,7 +1040,7 @@ export const HOME_PAGE_QUERY = groq`
     collectionTeaser {
       enabled,
       headline,
-      description,
+      descriptionRich,
       featuredItems[]-> {
         _id,
         title,
@@ -723,10 +1049,37 @@ export const HOME_PAGE_QUERY = groq`
         mainImage {
           asset-> {
             _id,
-            metadata { lqip }
+            metadata {
+              lqip,
+              dimensions { width, height, aspectRatio }
+            }
           }
         },
-        "artistName": artist->name
+        artist-> {
+          name
+        }
+      },
+      "featuredWorks": *[_type == "work" && featuredOnHome == true] {
+        _id,
+        title,
+        year,
+        medium,
+        onLoan,
+        onDisplay,
+        displayLocation,
+        image {
+          asset-> {
+            _id,
+            metadata {
+              lqip,
+              dimensions { width, height, aspectRatio }
+            }
+          }
+        },
+        artist-> {
+          name,
+          "slug": slug.current
+        }
       }
     }
   }
@@ -812,16 +1165,53 @@ export const PUBLICATIONS_PAGE_QUERY = groq`
 /**
  * Fetch the education page content.
  */
+export const RESOURCES_QUERY = groq`
+  *[_type == "resource"] | order(featured desc, _createdAt desc) {
+    _id,
+    title,
+    type,
+    audience,
+    ageRange,
+    "fileUrl": file.asset->url,
+    "fileSize": file.asset->size,
+    coverImage {
+      asset-> {
+        _id,
+        url,
+        metadata { lqip }
+      }
+    },
+    audience,
+    exhibition-> {
+      title
+    },
+    exhibitionFallback,
+    featured
+  }
+`
+
 export const EDUCATION_PAGE_QUERY = groq`
-  *[_type == "educationPage"][0] {
+  *[_id == "educationPage"][0] {
     ...,
     header {
       headline,
-      description
+      descriptionRich,
+      image {
+        asset-> {
+          _id,
+          url,
+          metadata { lqip }
+        }
+      }
+    },
+    sections[] {
+        title,
+        content
     },
     pillars[] {
       title,
       description,
+      linkUrl,
       image {
         asset-> {
           _id,
@@ -938,21 +1328,24 @@ export const COLLECTION_PAGE_QUERY = groq`
     },
     featuredItems[]-> {
         _id,
+        _type,
         title,
         "slug": slug.current,
-        creationDate,
+        "creationDate": coalesce(creationDate, year),
         medium,
         "artistName": artist->name,
-        mainImage {
-            asset-> {
-                _id,
-                metadata { lqip }
-            }
+        artist-> {
+            name,
+            "slug": slug.current
         },
+        "mainImage": coalesce(mainImage, image),
         tags[]-> {
             _id,
             title
-        }
+        },
+        onLoan,
+        onDisplay,
+        displayLocation
     }
   }
 `
@@ -987,16 +1380,15 @@ export const ARTISTS_PAGE_QUERY = groq`
  * Fetch the team/personnel content.
  */
 export const TEAM_QUERY = groq`
-  *[_type == "person"] | order(name[0].value asc) {
+  *[_type == "person" && hasProfile != false] | order(name[0].value asc) {
     _id,
     name,
     "slug": slug.current,
     roles,
+    category,
     image {
-      asset-> {
-        _id,
-        metadata { lqip }
-      }
+      asset-> { _id, metadata { lqip } },
+      imageCredit-> { name, "slug": slug.current }
     },
     bio
   }

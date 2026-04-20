@@ -1,11 +1,12 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { getLocalizedValue } from '@/sanity/lib/utils'
+import { getLocalizedValue, getLocalizedValueAsString } from '@/sanity/lib/utils'
 import Link from 'next/link'
 import Image from 'next/image'
 import { urlFor } from '@/sanity/lib/image'
 import { useTranslations } from 'next-intl'
+import { cn } from '@/lib/utils'
 
 interface ArtistIndexProps {
     artists: any[]
@@ -21,8 +22,8 @@ export function ArtistIndex({ artists, locale }: ArtistIndexProps) {
     const processedArtists = useMemo(() => {
         return artists.map(artist => ({
             ...artist,
-            displayName: getLocalizedValue(artist.name, locale) || 'Untitled',
-            firstLetter: (getLocalizedValue(artist.name, locale)?.[0] || '#').toUpperCase()
+            displayName: getLocalizedValueAsString(artist.name, locale) || 'Untitled',
+            firstLetter: (getLocalizedValueAsString(artist.name, locale)?.[0] || '#').toUpperCase()
         })).sort((a, b) => a.displayName.localeCompare(b.displayName))
     }, [artists, locale])
 
@@ -37,12 +38,15 @@ export function ArtistIndex({ artists, locale }: ArtistIndexProps) {
     }, [processedArtists])
 
     return (
-        <div className="space-y-12">
+        <div className="space-y-16">
             {/* A-Z Navigation */}
-            <nav className="flex flex-wrap gap-2 md:gap-4 border-b border-charcoal/10 pb-8">
+            <nav className="flex flex-wrap gap-4 border-b border-white/10 pb-12">
                 <button
                     onClick={() => setActiveLetter(null)}
-                    className={`text-sm font-medium transition-colors ${!activeLetter ? 'text-charcoal border-b-2 border-charcoal' : 'text-charcoal/40 hover:text-charcoal'}`}
+                    className={cn(
+                        "text-[10px] font-black uppercase tracking-[0.3em] transition-all",
+                        !activeLetter ? "text-white" : "text-white/20 hover:text-white"
+                    )}
                 >
                     {locale === 'en' ? 'ALL' : 'ZOTE'}
                 </button>
@@ -53,12 +57,11 @@ export function ArtistIndex({ artists, locale }: ArtistIndexProps) {
                             key={letter}
                             disabled={!hasArtists}
                             onClick={() => setActiveLetter(letter)}
-                            className={`text-sm font-medium transition-colors ${activeLetter === letter
-                                ? 'text-charcoal border-b-2 border-charcoal'
-                                : hasArtists
-                                    ? 'text-charcoal/40 hover:text-charcoal'
-                                    : 'text-charcoal/10 cursor-not-allowed'
-                                }`}
+                            className={cn(
+                                "text-[10px] font-black uppercase tracking-[0.3em] transition-all",
+                                activeLetter === letter ? "text-white" : 
+                                hasArtists ? "text-white/20 hover:text-white" : "text-white/5 cursor-not-allowed"
+                            )}
                         >
                             {letter}
                         </button>
@@ -66,34 +69,15 @@ export function ArtistIndex({ artists, locale }: ArtistIndexProps) {
                 })}
             </nav>
 
-            {/* Artists Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12">
+            {/* Artists Grid - Minimalist typography grid matching Collection page */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-2">
                 {filteredArtists.map(artist => (
                     <Link
                         key={artist._id}
                         href={`/${locale}/artists/${artist.slug}`}
-                        className="group space-y-4"
+                        className="group flex flex-col pt-4 pb-6 border-b border-white/5 hover:border-white/20 transition-all"
                     >
-                        <div className="aspect-[3/4] relative bg-charcoal/5 overflow-hidden">
-                            {artist.image?.asset ? (
-                                <Image
-                                    src={urlFor(artist.image).width(600).height(800).url()}
-                                    alt={artist.displayName}
-                                    fill
-                                    className="object-cover group-hover:scale-105 transition-transform duration-700"
-                                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                                    {...(artist.image.asset.metadata?.lqip && {
-                                        placeholder: 'blur',
-                                        blurDataURL: artist.image.asset.metadata.lqip
-                                    })}
-                                />
-                            ) : (
-                                <div className="w-full h-full flex items-center justify-center text-charcoal/20 text-4xl font-bold">
-                                    {artist.firstLetter}
-                                </div>
-                            )}
-                        </div>
-                        <h3 className="text-lg font-bold text-charcoal leading-tight transition-colors group-hover:text-charcoal/60">
+                        <h3 className="text-2xl md:text-3xl text-white/60 group-hover:text-white transition-colors duration-300">
                             {artist.displayName}
                         </h3>
                     </Link>
@@ -101,8 +85,8 @@ export function ArtistIndex({ artists, locale }: ArtistIndexProps) {
             </div>
 
             {filteredArtists.length === 0 && (
-                <div className="py-24 text-center">
-                    <p className="text-charcoal/40 italic">{t('noArtists')}</p>
+                <div className="py-24 text-center border-t border-white/5">
+                    <p className="text-white/20 italic text-xl font-light">{t('noArtists')}</p>
                 </div>
             )}
         </div>

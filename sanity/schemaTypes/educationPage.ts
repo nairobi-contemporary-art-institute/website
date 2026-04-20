@@ -23,9 +23,15 @@ export const educationPage = defineType({
                     type: 'internationalizedArrayString',
                 }),
                 defineField({
-                    name: 'description',
+                    name: 'descriptionRich',
                     title: 'Description',
                     type: 'internationalizedArrayBlockContent',
+                }),
+                defineField({
+                    name: 'image',
+                    title: 'Hero Background Image',
+                    type: 'image',
+                    options: { hotspot: true },
                 }),
             ],
         }),
@@ -69,6 +75,12 @@ export const educationPage = defineType({
                                 ],
                             },
                         }),
+                        defineField({
+                            name: 'linkUrl',
+                            title: 'External Link URL',
+                            description: 'Optional: If provided, this pillar card will link to this URL in a new tab.',
+                            type: 'string',
+                        }),
                     ],
                     preview: {
                         select: {
@@ -80,10 +92,30 @@ export const educationPage = defineType({
             ]
         }),
         defineField({
+            name: 'sections',
+            title: 'Content Sections',
+            description: 'Additional text-heavy sections like "Overview" or "Our Programme"',
+            type: 'array',
+            of: [
+                {
+                    type: 'object',
+                    fields: [
+                        defineField({ name: 'title', title: 'Section Title', type: 'internationalizedArrayString' }),
+                        defineField({ name: 'content', title: 'Content', type: 'internationalizedArrayBlockContent' }),
+                    ]
+                }
+            ]
+        }),
+        defineField({
             name: 'featuredPrograms',
             title: 'Featured Programs',
             type: 'array',
             of: [{ type: 'reference', to: [{ type: 'program' }] }],
         }),
     ],
+    preview: {
+        prepare() {
+            return { title: 'Education Page' }
+        },
+    },
 })

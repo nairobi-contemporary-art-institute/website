@@ -60,7 +60,7 @@ export function EventCard({ event, locale, variant = 'default' }: EventCardProps
                         src={urlFor(event.mainImage).width(800).height(600).url()}
                         alt={event.mainImage.alt || title || 'Event'}
                         fill
-                        className="object-cover"
+                        className="object-contain"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         placeholder="blur"
                         blurDataURL={event.mainImage.asset?.metadata?.lqip}

@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { LucideInfo } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { MarkdownText } from '@/components/ui/MarkdownText'
 
 interface ArtTooltipProps {
     content: React.ReactNode
@@ -33,19 +34,33 @@ export function ArtTooltip({ content, children, className, align = 'right' }: Ar
 
     return (
         <div className={cn("relative inline-block", className)} ref={tooltipRef}>
-            <button
-                onClick={(e) => {
-                    e.preventDefault()
-                    e.stopPropagation()
-                    setIsVisible(!isVisible)
-                }}
-                onMouseEnter={() => setIsVisible(true)}
-                onMouseLeave={() => setIsVisible(false)}
-                className="flex items-center justify-center w-8 h-8 rounded-full bg-black/40 backdrop-blur-md text-white border border-white/20 hover:bg-black/60 transition-all focus:outline-none"
-                aria-label="View more information"
-            >
-                <LucideInfo className="w-4 h-4" />
-            </button>
+            {children ? (
+                <div
+                    onMouseEnter={() => setIsVisible(true)}
+                    onMouseLeave={() => setIsVisible(false)}
+                    onClick={(e) => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        setIsVisible(!isVisible)
+                    }}
+                >
+                    {children}
+                </div>
+            ) : (
+                <button
+                    onClick={(e) => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        setIsVisible(!isVisible)
+                    }}
+                    onMouseEnter={() => setIsVisible(true)}
+                    onMouseLeave={() => setIsVisible(false)}
+                    className="flex items-center justify-center w-8 h-8 rounded-full bg-black/40 backdrop-blur-md text-white border border-white/20 hover:bg-black/60 transition-all focus:outline-none"
+                    aria-label="View more information"
+                >
+                    <LucideInfo className="w-4 h-4" />
+                </button>
+            )}
 
             <AnimatePresence>
                 {isVisible && (
@@ -55,12 +70,16 @@ export function ArtTooltip({ content, children, className, align = 'right' }: Ar
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.2, ease: "easeOut" }}
                         className={cn(
-                            "absolute bottom-full mb-3 z-50 w-64 p-4 bg-white text-charcoal shadow-2xl rounded-sm border border-black/5",
+                            "absolute bottom-full mb-3 z-50 w-64 p-4 bg-white text-charcoal shadow-2xl rounded-sm border border-black/5 whitespace-normal",
                             align === 'right' ? "right-0" : align === 'left' ? "left-0" : "left-1/2 -translate-x-1/2"
                         )}
                     >
                         <div className="text-[10px] leading-relaxed font-sans tracking-wide">
-                            {content}
+                            {typeof content === 'string' ? (
+                                <MarkdownText text={content} />
+                            ) : (
+                                content
+                            )}
                         </div>
                         {/* Little triangle arrow */}
                         <div className={cn(

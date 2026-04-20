@@ -23,17 +23,20 @@ interface HeaderClientProps {
             links: Array<{ label: string; href: string }>;
         }>;
     }>;
+    utilityLinks?: Array<{ label: string; href: string }>;
     featuredImages?: any[];
 }
 
-export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], featuredImages = [] }: HeaderClientProps) {
+export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utilityLinks = [], featuredImages = [] }: HeaderClientProps) {
     const t = useTranslations('HomePage')
     const pathname = usePathname()
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [isSearchOpen, setIsSearchOpen] = useState(false)
     const [isScrolled, setIsScrolled] = useState(false)
+    const [isVisible, setIsVisible] = useState(true)
     const [activeMenuIndex, setActiveMenuIndex] = useState<number | null>(null)
     const [isHoveringHeader, setIsHoveringHeader] = useState(false)
+    const lastScrollY = useRef(0)
     const [mounted, setMounted] = useState(false)
     
     useEffect(() => {
@@ -83,13 +86,48 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], feature
         )
     }, { scope: headerRef, dependencies: [locale] })
 
-    // Scroll listener for sticky header styling - more tolerant threshold (40px)
+    // Scroll listener for sticky header styling and smart hide/show
     useEffect(() => {
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 40)
+            const currentScrollY = window.scrollY
+            const vh75 = window.innerHeight * 0.75
+            
+            // Update scrolled state for styling
+            setIsScrolled(currentScrollY > 40)
+
+            // Smart hide/show logic
+            if (currentScrollY > vh75 && currentScrollY > lastScrollY.current) {
+                // Scrolling down past 240vh
+                setIsVisible(false)
+            } else if (currentScrollY < lastScrollY.current) {
+                // Any upward scroll reveals header
+                setIsVisible(true)
+            }
+            
+            lastScrollY.current = currentScrollY
         }
         window.addEventListener('scroll', handleScroll, { passive: true })
         return () => window.removeEventListener('scroll', handleScroll)
+    }, []);
+
+    // Update global CSS variable for header offset to sync sticky navs
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const root = document.documentElement;
+        const offset = isVisible ? (window.innerWidth < 768 ? 88 : 96) : 0;
+        root.style.setProperty('--header-offset', `${offset}px`);
+    }, [isVisible]);
+
+    // Mouse proximity listener - reveal header when hovering near the top
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            const vh16 = window.innerHeight * 0.16
+            if (e.clientY <= vh16) {
+                setIsVisible(true)
+            }
+        }
+        window.addEventListener('mousemove', handleMouseMove)
+        return () => window.removeEventListener('mousemove', handleMouseMove)
     }, [])
 
     const isImmersive = pathname?.includes('/timeline')
@@ -177,17 +215,31 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], feature
     // Important: The header turns dark when:
     // 1. A desktop mega menu is active
     // 2. The user is hovering over the header bar
-    const isDark = activeMenuIndex !== null || isHoveringHeader
-    const isSolid = isScrolled || isMobileMenuOpen || activeMenuIndex !== null
+    // 3. We are on an artist portrait page
+    const isArtistPortrait = pathname?.includes('/artist-portrait-')
+    const isArtist = pathname?.includes('/artists/')
+    const isExhibition = pathname?.includes('/exhibitions/')
+    const isChannel = pathname?.includes('/channel')
+    const isCollection = pathname?.includes('/collection')
+    
+    // Header turns dark (white text -> dark background)
+    const isDark = activeMenuIndex !== null || isHoveringHeader || isArtistPortrait || isArtist || isExhibition || isChannel || isCollection || isMobileMenuOpen
+    
+    // Header becomes solid (non-transparent)
+    const isSolid = isScrolled || isMobileMenuOpen || activeMenuIndex !== null || isArtistPortrait || isArtist || isExhibition || isChannel || isCollection
 
     return (
         <>
             {/* The header is fixed, meaning it overlays the hero section like IMMA */}
-            <div
-                ref={headerRef}
-                className="fixed top-0 left-0 right-0 z-[100] flex flex-col w-full transition-all duration-300 [--header-padding-right:1.5rem] md:[--header-padding-right:3rem]"
-                onMouseLeave={closeMegaMenu}
-            >
+                <div
+                    ref={headerRef}
+                    className={cn(
+                        "fixed top-0 left-0 right-0 z-[100] flex flex-col w-full transition-all duration-500 ease-in-out",
+                        !isVisible ? "-translate-y-full" : "translate-y-0",
+                        isDark ? "notice-theme-dark" : "notice-theme-light"
+                    )}
+                    onMouseLeave={closeMegaMenu}
+                >
                 <div
                     ref={bannerRef}
                     className="overflow-hidden"
@@ -206,15 +258,15 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], feature
                     className={cn(
                         "transition-all duration-300",
                         isDark 
-                            ? "bg-background-dark text-white border-b border-white/10 shadow-sm" 
+                            ? "bg-background-dark text-white shadow-sm" 
                             : isSolid 
-                                ? "bg-white text-charcoal border-b border-charcoal/10 shadow-sm"
+                                ? "bg-white text-charcoal shadow-sm"
                                 : "bg-transparent text-ivory" 
                     )}
                     onMouseEnter={() => setIsHoveringHeader(true)}
                     onMouseLeave={() => setIsHoveringHeader(false)}
                 >
-                    <div className="flex justify-between items-stretch px-6 md:px-12 transition-all duration-300">
+                    <div className="flex justify-between items-stretch px-6 md:px-12 transition-all duration-300 relative z-50">
                         {/* Logo Section */}
                         <div className="flex items-center py-6">
                             <Link
@@ -229,6 +281,7 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], feature
                                 {/* Initial State: Logomark + NCAI */}
                                 <div ref={initialLogoRef} className="flex items-center gap-2 md:absolute md:left-0 whitespace-nowrap">
                                     <Logo className="h-10 md:h-12 w-auto transition-colors" />
+                                    <span className="text-3xl font-bold tracking-tighter transition-colors pt-2">NCAI</span>
                                 </div>
 
                                 {/* Target State: Full Title (revealed on scroll) */}
@@ -245,19 +298,33 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], feature
                             </Link>
                         </div>
 
-                        {/* Navigation Section */}
-                        <div className="flex flex-col justify-center gap-2 md:py-4">
+                        {/* Navigation Section - Desktop Only */}
+                        <div className="hidden md:flex flex-col justify-center gap-2 py-4">
                             {/* Top Tier Links (Small) */}
-                            <div className="hidden md:flex justify-end items-center gap-6">
-                                <Link href="#" className="opacity-80 hover:opacity-100 text-xs font-semibold tracking-widest uppercase transition-opacity">Shop</Link>
-                                <Link href="#" className="opacity-80 hover:opacity-100 text-xs font-semibold tracking-widest uppercase transition-opacity">Support</Link>
-                                <Link href="#" className="opacity-80 hover:opacity-100 text-xs font-semibold tracking-widest uppercase transition-opacity">Members</Link>
-                                <Link href="#" className="opacity-80 hover:opacity-100 text-xs font-semibold tracking-widest uppercase transition-opacity">Venue Hire</Link>
+                            <div className="flex justify-end items-center gap-6">
+                                {utilityLinks.length > 0 ? (
+                                    utilityLinks.map((link) => (
+                                        <Link 
+                                            key={link.href} 
+                                            href={link.href} 
+                                            className="opacity-80 hover:opacity-100 text-xs font-semibold tracking-widest uppercase transition-opacity"
+                                        >
+                                            {link.label}
+                                        </Link>
+                                    ))
+                                ) : (
+                                    <>
+                                        <Link href="#" className="opacity-80 hover:opacity-100 text-xs font-semibold tracking-widest uppercase transition-opacity">Shop</Link>
+                                        <Link href="#" className="opacity-80 hover:opacity-100 text-xs font-semibold tracking-widest uppercase transition-opacity">Support</Link>
+                                        <Link href="#" className="opacity-80 hover:opacity-100 text-xs font-semibold tracking-widest uppercase transition-opacity">Members</Link>
+                                        <Link href="#" className="opacity-80 hover:opacity-100 text-xs font-semibold tracking-widest uppercase transition-opacity">Venue Hire</Link>
+                                    </>
+                                )}
                                 <LanguageSwitcher />
                             </div>
 
                             {/* Bottom Tier Links (Large) */}
-                            <div className="hidden md:flex justify-end items-center gap-8">
+                            <div className="flex justify-end items-center gap-8">
                                 <nav className="flex items-center gap-8">
                                     {displayLinks.map((link, idx) => (
                                         <Link
@@ -274,7 +341,7 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], feature
                                             )} />
                                         </Link>
                                     ))}
-                                    {/* Search Toggle */}
+                                    {/* Desktop Search Toggle */}
                                     <button
                                         onClick={() => setIsSearchOpen(true)}
                                         className="hover:opacity-70 transition-opacity ml-2"
@@ -287,30 +354,45 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], feature
                                     </button>
                                 </nav>
                             </div>
+                        </div>
 
-                            {/* Mobile Toggle */}
-                            <div className="flex md:hidden items-center h-full gap-4">
-                                <button
-                                    className="focus:outline-none p-2"
-                                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                                    aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-                                >
-                                    <div className="w-8 h-6 flex flex-col justify-between relative">
-                                        <span className={cn(
-                                            "w-full h-0.5 bg-current transition-all duration-300 origin-left",
-                                            isMobileMenuOpen && "rotate-45"
-                                        )} />
-                                        <span className={cn(
-                                            "w-full h-0.5 bg-current transition-all duration-300",
-                                            isMobileMenuOpen && "opacity-0"
-                                        )} />
-                                        <span className={cn(
-                                            "w-full h-0.5 bg-current transition-all duration-300 origin-left",
-                                            isMobileMenuOpen && "-rotate-45"
-                                        )} />
-                                    </div>
-                                </button>
-                            </div>
+                        {/* Mobile Utils Section */}
+                        <div className={cn(
+                            "flex md:hidden items-center px-6 border-l gap-2 transition-colors duration-300",
+                            isDark ? "border-white/10" : "border-black/10"
+                        )}>
+                            {/* Mobile Search Toggle */}
+                            <button
+                                onClick={() => setIsSearchOpen(true)}
+                                className="p-2 hover:opacity-70 transition-opacity"
+                                aria-label="Open search"
+                            >
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21 21L15.8033 15.8033M19 10.5C19 15.1944 15.1944 19 10.5 19C5.80558 19 2 15.1944 2 10.5C2 5.80558 5.80558 2 10.5 2C15.1944 2 19 5.80558 19 10.5Z" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                            </button>
+
+                            {/* Mobile Menu Toggle */}
+                            <button
+                                className="focus:outline-none p-2 relative z-50 h-10 w-10 flex items-center justify-center transition-all active:scale-95"
+                                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                                aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+                            >
+                                <div className="w-7 h-5 relative flex flex-col justify-between">
+                                    <span className={cn(
+                                        "w-full h-0.5 bg-current transition-all duration-300 ease-in-out origin-center block absolute",
+                                        isMobileMenuOpen ? "rotate-45 top-1/2 -translate-y-1/2" : "top-0"
+                                    )} />
+                                    <span className={cn(
+                                        "w-full h-0.5 bg-current transition-all duration-300 ease-in-out block absolute top-1/2 -translate-y-1/2",
+                                        isMobileMenuOpen ? "opacity-0 -translate-x-2" : "opacity-100"
+                                    )} />
+                                    <span className={cn(
+                                        "w-full h-0.5 bg-current transition-all duration-300 ease-in-out origin-center block absolute",
+                                        isMobileMenuOpen ? "-rotate-45 top-1/2 -translate-y-1/2" : "bottom-0"
+                                    )} />
+                                </div>
+                            </button>
                         </div>
                     </div>
 
@@ -329,7 +411,7 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], feature
 
                     {/* Mobile Menu Overlay */}
                     <div className={cn(
-                        "fixed inset-0 bg-background-dark text-white z-40 flex flex-col pt-32 px-6 pb-12 transition-all duration-500 ease-in-out md:hidden overflow-y-auto",
+                        "fixed inset-0 bg-background-dark text-white z-40 flex flex-col pt-44 px-6 pb-12 transition-all duration-500 ease-in-out md:hidden overflow-y-auto",
                         isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
                     )}>
                         <nav className="flex flex-col gap-10">

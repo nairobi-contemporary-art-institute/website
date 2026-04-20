@@ -46,7 +46,7 @@ export function NewsletterSignup() {
     return (
         <div className="max-w-md">
             <h3 className="text-xl md:text-2xl font-bold uppercase tracking-tight mb-4 text-white">
-                Sign up for<br />our newsletter
+                Keep in touch
             </h3>
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                 <div className="border border-sun-bleached-paper/30 focus-within:border-white transition-colors">
@@ -69,7 +69,7 @@ export function NewsletterSignup() {
                     disabled={status === 'loading'}
                     className="w-full px-6 py-4 bg-white text-black font-bold uppercase tracking-widest hover:bg-white/90 transition-all duration-200 disabled:opacity-50 text-sm"
                 >
-                    {status === 'loading' ? 'Signing up...' : 'Sign up'}
+                    {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
                 </button>
             </form>
             <div className="mt-4 flex items-start gap-2">

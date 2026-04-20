@@ -3,6 +3,7 @@ import { urlFor } from '@/sanity/lib/image'
 import Image from 'next/image'
 import { getLocalizedValue } from '@/sanity/lib/utils'
 import { ArtCaption } from './ArtCaption'
+import { cn } from '@/lib/utils'
 
 export const components = (locale?: string) => ({
     types: {
@@ -63,19 +64,36 @@ export const components = (locale?: string) => ({
     },
 })
 
-export function PortableText({ value, locale }: { value: any; locale?: string }) {
+export function PortableText({ 
+    value, 
+    locale, 
+    className, 
+    noProse = false,
+    size = 'base'
+}: { 
+    value: any; 
+    locale?: string; 
+    className?: string; 
+    noProse?: boolean;
+    size?: 'sm' | 'base' | 'lg' | 'xl'
+}) {
     if (!value) return null
+ 
+    const wrapperClass = cn(
+        !noProse && `prose prose-${size} prose-umber max-w-none`,
+        className
+    )
 
     if (typeof value === 'string') {
         return (
-            <div className="prose prose-lg prose-umber max-w-none">
+            <div className={wrapperClass}>
                 <p>{value}</p>
             </div>
         )
     }
 
     return (
-        <div className="prose prose-lg prose-umber max-w-none">
+        <div className={wrapperClass}>
             <PortableTextReact value={value} components={components(locale)} />
         </div>
     )

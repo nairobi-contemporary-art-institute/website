@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { urlFor } from '@/sanity/lib/image'
 import { getLocalizedValue, getLocalizedValueAsString } from '@/sanity/lib/utils'
-import { cn } from '@/lib/utils'
+import { cn, formatExhibitionDate } from '@/lib/utils'
 import { useTranslations } from 'next-intl'
 
 interface ExhibitionCardProps {
@@ -13,19 +13,13 @@ interface ExhibitionCardProps {
     variant?: 'default' | 'compact' | 'featured'
 }
 
-const formatDateLocal = (dateString: string, locale: string) => {
-    if (!dateString) return ''
-    return new Date(dateString).toLocaleDateString(locale, {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    })
-}
 
 export function ExhibitionCard({ exhibition, locale, variant = 'default' }: ExhibitionCardProps) {
     const t = useTranslations('Pages.exhibitions')
     const title = getLocalizedValueAsString(exhibition.title, locale)
-    const artistNames = exhibition.artistNames || []
+    const artistNames = (exhibition.artistNames || []).map((name: any) => 
+        typeof name === 'string' ? name : getLocalizedValue(name, locale)
+    )
 
     const displayImage = exhibition.listImage?.asset
         ? exhibition.listImage
@@ -54,19 +48,18 @@ export function ExhibitionCard({ exhibition, locale, variant = 'default' }: Exhi
                     </h2>
                     <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
                         {artistNames.length > 0 && (
-                            <p className="text-lg text-umber/80 font-medium">
+                            <p className="text-lg text-umber/80 font-normal">
                                 {artistNames.join(', ')}
                             </p>
                         )}
                         <p className="text-sm text-umber font-mono capitalize tracking-widest">
-                            {formatDateLocal(exhibition.startDate, locale)}
-                            {exhibition.endDate && (
-                                <>
-                                    <span className="mx-2">—</span>
-                                    {formatDateLocal(exhibition.endDate, locale)}
-                                </>
-                            )}
+                            {formatExhibitionDate(exhibition.startDate, exhibition.endDate, locale)}
                         </p>
+                        {exhibition.location && (
+                            <p className="text-xs capitalize tracking-widest text-umber/40 mt-2">
+                                {getLocalizedValue(exhibition.location, locale)}
+                            </p>
+                        )}
                     </div>
                 </div>
             </Link>
@@ -92,8 +85,7 @@ export function ExhibitionCard({ exhibition, locale, variant = 'default' }: Exhi
                         width={800}
                         height={1000}
                         className={cn(
-                            "w-full h-auto block",
-                            variant === 'compact' ? "h-full object-contain" : ""
+                            "w-full h-full object-contain block"
                         )}
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
@@ -112,19 +104,18 @@ export function ExhibitionCard({ exhibition, locale, variant = 'default' }: Exhi
                     {title || t('untitled')}
                 </h2>
                 {artistNames.length > 0 && (
-                    <p className="text-sm text-umber/60 font-medium">
+                    <p className="text-sm text-umber/60 font-normal">
                         {artistNames.join(', ')}
                     </p>
                 )}
                 <p className="text-xs text-umber font-mono tracking-tighter">
-                    <span>{formatDateLocal(exhibition.startDate, locale)}</span>
-                    {exhibition.endDate && (
-                        <>
-                            <span className="mx-1 opacity-50">—</span>
-                            <span>{formatDateLocal(exhibition.endDate, locale)}</span>
-                        </>
-                    )}
+                    {formatExhibitionDate(exhibition.startDate, exhibition.endDate, locale)}
                 </p>
+                {exhibition.location && (
+                    <p className="text-[10px] capitalize tracking-widest text-umber/40 mt-1">
+                        {getLocalizedValue(exhibition.location, locale)}
+                    </p>
+                )}
             </div>
         </Link>
     )

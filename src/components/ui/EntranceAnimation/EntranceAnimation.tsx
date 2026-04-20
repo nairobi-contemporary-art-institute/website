@@ -1,54 +1,13 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useMemo } from 'react'
 import { gsap } from '@/lib/gsap'
 import { usePathname } from '@/i18n'
+import { Logo } from '@/components/ui/Logo'
+import { useReducedMotion } from '@/contexts/AccessibilityContext'
+import { SECONDARY_COLORS, TERTIARY_COLORS } from '@/lib/colors'
 
-// ── 48 Quaternary Colors (6 families × 8 fine-grained shades) ──
-const QUATERNARY_COLORS = [
-    // Red / Orange family
-    '#B71C1C', '#D32F2F', '#E53935', '#FF5252',
-    '#FF6E40', '#FF7043', '#FF8A65', '#FFAB91',
-    // Orange / Yellow family
-    '#FF6D00', '#FF9100', '#FFA000', '#FFB300',
-    '#FFC107', '#FFD54F', '#FFEB3B', '#FDD835',
-    // Lime / Green family
-    '#C0CA33', '#9CCC65', '#8BC34A', '#7CB342',
-    '#66BB6A', '#4CAF50', '#43A047', '#2E7D32',
-    // Teal / Cyan family
-    '#00897B', '#009688', '#00ACC1', '#00BCD4',
-    '#0097A7', '#0288D1', '#039BE5', '#03A9F4',
-    // Blue / Indigo family
-    '#1E88E5', '#1976D2', '#1565C0', '#3949AB',
-    '#3F51B5', '#5C6BC0', '#5E35B1', '#7E57C2',
-    // Purple / Magenta family
-    '#8E24AA', '#AB47BC', '#7B1FA2', '#9C27B0',
-    '#D81B60', '#E91E63', '#C2185B', '#AD1457',
-]
-
-// ── 24 Tertiary Colors (6 families × 4 shades) ──
-const TERTIARY_COLORS = [
-    // Red Family
-    '#E53935', '#FF7043', '#FB8C00', '#FF9800',
-    // Yellow Family
-    '#FDD835', '#C0CA33', '#7CB342', '#43A047',
-    // Green Family
-    '#2E7D32', '#388E3C', '#00897B', '#00ACC1',
-    // Cyan/Blue Family
-    '#00BCD4', '#039BE5', '#1E88E5', '#3949AB',
-    // Violet/Purple Family
-    '#5E35B1', '#8E24AA', '#7B1FA2', '#AB47BC',
-    // Magenta/Rose Family
-    '#D81B60', '#E91E63', '#C2185B', '#AD1457',
-]
-
-// ── 12 Secondary Colors (Primary RGB triads cycling) ──
-const SECONDARY_COLORS = [
-    '#E43D30', '#F9B233', '#2B5797',
-    '#E43D30', '#F9B233', '#2B5797',
-    '#E43D30', '#F9B233', '#2B5797',
-    '#E43D30', '#F9B233', '#2B5797',
-]
+const STARK_COLORS = Array.from({ length: 24 }, (_, i) => i % 2 === 0 ? '#000000' : '#FFFFFF')
 
 interface EntranceAnimationProps {
     backgroundImages?: { url: string; alt: string }[]
@@ -56,8 +15,23 @@ interface EntranceAnimationProps {
 
 export function EntranceAnimation({ backgroundImages = [] }: EntranceAnimationProps) {
     const pathname = usePathname()
+    const isReducedMotion = useReducedMotion()
     const containerRef = useRef<HTMLDivElement>(null)
     const [isVisible, setIsVisible] = useState(pathname === '/')
+    const [selectedImages, setSelectedImages] = useState<{ url: string; alt: string }[]>([])
+
+    // Randomly select 3 unique images only on client side to avoid hydration mismatch
+    useEffect(() => {
+        if (!backgroundImages || backgroundImages.length === 0) return
+        
+        const shuffled = [...backgroundImages]
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+        }
+        
+        setSelectedImages(shuffled.slice(0, 3))
+    }, [backgroundImages])
 
     useEffect(() => {
         if (pathname === '/') {
@@ -68,227 +42,242 @@ export function EntranceAnimation({ backgroundImages = [] }: EntranceAnimationPr
     useEffect(() => {
         if (!isVisible || !containerRef.current) return
 
+        // -- SCROLL LOCK --
+        const originalOverflow = document.body.style.overflow
+        document.body.style.overflow = 'hidden'
+
         const container = containerRef.current
         const phase1Stripes = container.querySelectorAll('.phase-1-stripe')
         const phase2Stripes = container.querySelectorAll('.phase-2-stripe')
         const phase3Stripes = container.querySelectorAll('.phase-3-stripe')
         const phase4Stripes = container.querySelectorAll('.phase-4-stripe')
-        const ncaiText = container.querySelector('.ncai-logo-text')
+        const identityContainer = container.querySelector('.identity-reveal-container')
+        const logoMarkBars = container.querySelectorAll('.logo-mark-bar')
+        const wordmarkLetters = container.querySelectorAll('.wordmark-letter')
         const bg1 = container.querySelector('.bg-layer-1')
         const bg2 = container.querySelector('.bg-layer-2')
         const bg3 = container.querySelector('.bg-layer-3')
 
+        // If reduced motion is enabled, we skip the complex sequence
+        if (isReducedMotion) {
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    document.body.style.overflow = originalOverflow || 'unset'
+                    setIsVisible(false)
+                }
+            })
+            tl.to(container, { opacity: 0, duration: 1, delay: 1, ease: 'power2.inOut' })
+            return () => {
+                document.body.style.overflow = originalOverflow || 'unset'
+                tl.kill()
+            }
+        }
+
         const tl = gsap.timeline({
             onComplete: () => {
+                document.body.style.overflow = originalOverflow || 'unset'
                 setIsVisible(false)
             }
         })
 
-        // ═══════════════════════════════════════════════
-        // T=0: INITIAL STATE
-        // ═══════════════════════════════════════════════
-
-        // Phase 1: 6 solid black stripes — full screen coverage
+        // -- Initial State --
         tl.set(phase1Stripes, { y: 0, opacity: 1, visibility: 'visible' }, 0)
+        tl.set(phase2Stripes, { y: (i: number) => (i % 2 === 0 ? '100vh' : '-100vh'), autoAlpha: 0 }, 0)
+        tl.set(phase3Stripes, { y: (i: number) => (i % 2 === 0 ? '100vh' : '-100vh'), autoAlpha: 0 }, 0)
+        tl.set(phase4Stripes, { y: (i: number) => (i % 2 === 0 ? '100vh' : '-100vh'), autoAlpha: 0 }, 0)
+        tl.set(logoMarkBars, { opacity: 0 }, 0)
+        tl.set(wordmarkLetters, { opacity: 0, scale: 0.95 }, 0)
 
-        // Phases 2–4: off-screen and invisible
-        tl.set(phase2Stripes, {
-            y: (i: number) => (i % 2 === 0 ? '100vh' : '-100vh'),
-            autoAlpha: 0
-        }, 0)
-        tl.set(phase3Stripes, {
-            y: (i: number) => (i % 2 === 0 ? '100vh' : '-100vh'),
-            autoAlpha: 0
-        }, 0)
-        tl.set(phase4Stripes, {
-            y: (i: number) => (i % 2 === 0 ? '100vh' : '-100vh'),
-            autoAlpha: 0
-        }, 0)
-
-        const bgLayers = [bg1, bg2, bg3].filter(Boolean) as Element[]
-
-        // BG1: Instantly visible at T=0 (hidden behind solid black stripes)
+        // BG Layers initialization
         if (bg1) tl.set(bg1, { autoAlpha: 1 }, 0)
         if (bg2) tl.set(bg2, { autoAlpha: 0 }, 0)
         if (bg3) tl.set(bg3, { autoAlpha: 0 }, 0)
 
-        tl.set(ncaiText, { opacity: 0, scale: 0.85 }, 0)
-
-        // ═══════════════════════════════════════════════
-        // T=0.05–0.55s: NCAI LOGO FADES IN
-        // ═══════════════════════════════════════════════
-        tl.to(ncaiText, {
-            opacity: 1,
-            scale: 1,
-            duration: 0.5,
-            ease: 'power3.out'
-        }, 0.05)
-
-        // ═══════════════════════════════════════════════
-        // T=0.35–1.35s: PHASE 1 EXIT (6 B&W stripes slide out)
-        // Reveals BG1 behind them
-        // ═══════════════════════════════════════════════
+        // -- Phase 1 Exit --
         tl.to(phase1Stripes, {
             y: (i: number) => (i % 2 === 0 ? '-300vh' : '300vh'),
-            duration: 1.0,
-            ease: 'power2.inOut',
-            stagger: 0.05
+            duration: 1.0, ease: 'power2.inOut', stagger: 0.05
         }, 0.35)
 
-        // ═══════════════════════════════════════════════
-        // T=0.8–1.85s: PHASE 2 SWEEP (12 secondary colors)
-        // ═══════════════════════════════════════════════
+        // -- Phase 2 Sweep --
         tl.to(phase2Stripes, {
-            autoAlpha: 1,
-            y: (i: number) => (i % 2 === 0 ? '-300vh' : '300vh'),
-            duration: 1.05,
-            ease: 'power2.inOut',
-            stagger: 0.03
+            autoAlpha: 1, y: (i: number) => (i % 2 === 0 ? '-300vh' : '300vh'),
+            duration: 1.0, ease: 'power2.inOut', stagger: 0.03
         }, 0.8)
+        if (bg2) tl.set(bg2, { autoAlpha: 1 }, 1.15)
 
-        // BG2: INSTANT SWAP at T=1.15 (Phase 2 peak coverage)
-        // Stripes travel 400vh total, cross viewport center ~35% into eased duration
-        // T = 0.8 + (1.05 × 0.35) ≈ 1.17, rounded to 1.15
-        if (bg2) {
-            tl.set(bg2, { autoAlpha: 1 }, 1.15)
-        }
-
-        // ═══════════════════════════════════════════════
-        // T=1.35–2.4s: PHASE 3 SWEEP (24 tertiary colors)
-        // ═══════════════════════════════════════════════
+        // -- Phase 3 Sweep --
         tl.to(phase3Stripes, {
-            autoAlpha: 1,
-            y: (i: number) => (i % 2 === 0 ? '-300vh' : '300vh'),
-            duration: 1.05,
-            ease: 'power2.inOut',
-            stagger: 0.015
+            autoAlpha: 1, y: (i: number) => (i % 2 === 0 ? '-300vh' : '300vh'),
+            duration: 1.0, ease: 'power2.inOut', stagger: 0.015
         }, 1.35)
+        if (bg3) tl.set(bg3, { autoAlpha: 1 }, 1.7)
 
-        // BG3: INSTANT SWAP at T=1.7 (Phase 3 peak coverage)
-        if (bg3) {
-            tl.set(bg3, { autoAlpha: 1 }, 1.7)
-        }
+        // -- PHASE 4: THE CONTINUOUS SWEEP (Never static, Always solid) --
+        // Set visibility immediately so they are solid as they enter the frame
+        tl.set(phase4Stripes, { autoAlpha: 1, visibility: 'visible' }, 1.9)
 
-        // ═══════════════════════════════════════════════
-        // T=1.9–2.95s: PHASE 4 SWEEP (48 quaternary colors)
-        // This is the final curtain — homepage is revealed after
-        // ═══════════════════════════════════════════════
         tl.to(phase4Stripes, {
-            autoAlpha: 1,
             y: (i: number) => (i % 2 === 0 ? '-300vh' : '300vh'),
-            duration: 1.05,
-            ease: 'power2.inOut',
-            stagger: 0.007
+            duration: 2.2, // Slightly faster for snappier feel
+            ease: 'none', // Strict linear motion for non-static requirement
+            stagger: { each: 0.005, from: "center" }
         }, 1.9)
 
-        // ALL BGS REMOVED at T=2.25 (Phase 4 peak coverage)
-        // Phase 4 stripes fully obscure the screen at this moment,
-        // so removing BGs is invisible. When Phase 4 exits,
-        // the real homepage content is revealed underneath.
-        if (bgLayers.length > 0) {
-            tl.set(bgLayers, { autoAlpha: 0 }, 2.25)
+        // Backdrop Blur Layer reveal (blurs the homepage content behind the overlay)
+        const blurLayer = container.querySelector('.backdrop-blur-layer')
+        tl.to(blurLayer, {
+            opacity: 1,
+            backdropFilter: 'blur(80px)',
+            duration: 1.0, // Smoother transition
+            ease: 'power2.out'
+        }, 1.9)
+
+        // -- LOGO REVEAL --
+        // Place the logo mark bars only when the stripes have met and are starting to leave (approx 0.5s into sweep)
+        tl.set(identityContainer, { opacity: 1 }, 2.4)
+        tl.set(logoMarkBars, { opacity: 1 }, 2.4)
+
+        // Snap logo bars to final "close" proportions (ONLY AFTER all stripes have left the screen)
+        tl.to(logoMarkBars, {
+            x: (i: number) => {
+                if (i === 0) return `${(100 / 24) * 0.5}vw`
+                if (i === 2) return `-${(100 / 24) * 0.5}vw`
+                return "0vw"
+            },
+            duration: 0.8, // Slightly slower for more impact
+            ease: 'back.out(1.2)'
+        }, 4.2)
+
+        // Staggered reveal of NCAI letters
+        tl.to(wordmarkLetters, {
+            opacity: 1, 
+            scale: 1, 
+            duration: 0.3, 
+            stagger: 0.06,
+            ease: 'expo.out' 
+        }, 4.8)
+
+        // Reveal the homepage as the shutters create a solid mask at center
+        const baseLayer = container.querySelector('.bg-base-layer')
+        if (baseLayer) tl.to(baseLayer, { opacity: 0, duration: 0.1 }, 2.1)
+        if (bg1 || bg2 || bg3) {
+            tl.set([bg1, bg2, bg3].filter(Boolean), { autoAlpha: 0 }, 2.45)
         }
 
-        // ═══════════════════════════════════════════════
-        // T=2.3–3.3s: NCAI LOGO FADES OUT
-        // ═══════════════════════════════════════════════
-        tl.to(ncaiText, {
-            opacity: 0,
-            scale: 1.15,
-            duration: 1.0,
+        // Logo and wordmark exit / fade out + Remove background blur
+        tl.to([logoMarkBars, wordmarkLetters], {
+            opacity: 0, 
+            y: -20,
+            scale: 1.02,
+            duration: 0.6, 
             ease: 'power2.in'
-        }, 2.3)
+        }, 6.2)
+        
+        tl.to(blurLayer, {
+            opacity: 0,
+            backdropFilter: 'blur(0px)',
+            duration: 1.2,
+            ease: 'power2.inOut'
+        }, 6.2)
 
         return () => {
+            document.body.style.overflow = originalOverflow || 'unset'
             tl.kill()
         }
-    }, [isVisible])
+    }, [isVisible, isReducedMotion, selectedImages])
 
     if (!isVisible) return null
+
+    // -- Geometric Calculations --
+    const STRIPE_COUNT = 24
+    const STRIPE_W = (100 / STRIPE_COUNT)
+    // Shift left so the bars align with indices 6, 8, 10
+    const UNIT_LEFT_OFFSET = (STRIPE_W * 6) 
 
     return (
         <div
             ref={containerRef}
             className="fixed inset-0 z-[100] w-screen h-screen overflow-hidden pointer-events-none"
         >
-            {/* ── Background Image Layers ── */}
-            {backgroundImages[0] && (
-                <img
-                    src={backgroundImages[0].url}
-                    alt={backgroundImages[0].alt}
-                    className="bg-layer-1 absolute inset-0 w-full h-full object-cover z-[1] invisible opacity-0"
-                />
-            )}
-            {backgroundImages[1] && (
-                <img
-                    src={backgroundImages[1].url}
-                    alt={backgroundImages[1].alt}
-                    className="bg-layer-2 absolute inset-0 w-full h-full object-cover z-[2] invisible opacity-0"
-                />
-            )}
-            {backgroundImages[2] && (
-                <img
-                    src={backgroundImages[2].url}
-                    alt={backgroundImages[2].alt}
-                    className="bg-layer-3 absolute inset-0 w-full h-full object-cover z-[3] invisible opacity-0"
-                />
-            )}
+            {/* Base Background (faded out before reveal) */}
+            <div className="bg-base-layer absolute inset-0 bg-white z-0" />
 
-            {/* ── Phase 1: 6 Solid Black Stripes ── */}
+            {/* Backdrop Blur Layer (initially hidden) */}
+            <div className="backdrop-blur-layer absolute inset-0 z-[1] opacity-0 pointer-events-none" />
+
+            {/* Background Layers */}
+            {selectedImages[0] && <img src={selectedImages[0].url} className="bg-layer-1 absolute inset-0 w-full h-full object-cover z-[2] invisible opacity-0" alt="" />}
+            {selectedImages[1] && <img src={selectedImages[1].url} className="bg-layer-2 absolute inset-0 w-full h-full object-cover z-[3] invisible opacity-0" alt="" />}
+            {selectedImages[2] && <img src={selectedImages[2].url} className="bg-layer-3 absolute inset-0 w-full h-full object-cover z-[4] invisible opacity-0" alt="" />}
+
+            {/* Phases 1-4 Striped Panels */}
             <div className="absolute inset-0 flex w-full h-full z-10 pointer-events-none">
-                {[...Array(6)].map((_, i) => (
-                    <div
-                        key={`p1-${i}`}
-                        className="phase-1-stripe h-[300vh] flex-1"
-                        style={{ background: '#000000' }}
-                    />
-                ))}
+                {[...Array(6)].map((_, i) => <div key={`p1-${i}`} className="phase-1-stripe h-[200vh] flex-1 bg-black" />)}
             </div>
-
-            {/* ── Phase 2: 12 Secondary Color Stripes ── */}
             <div className="absolute inset-0 flex w-full h-full z-20 pointer-events-none">
-                {[...Array(12)].map((_, i) => (
-                    <div
-                        key={`p2-${i}`}
-                        className="phase-2-stripe h-[300vh] flex-1 invisible opacity-0"
-                        style={{ background: SECONDARY_COLORS[i] }}
-                    />
-                ))}
+                {[...Array(12)].map((_, i) => <div key={`p2-${i}`} className="phase-2-stripe h-[200vh] flex-1 invisible opacity-0" style={{ background: SECONDARY_COLORS[i] }} />)}
             </div>
-
-            {/* ── Phase 3: 24 Tertiary Color Stripes ── */}
             <div className="absolute inset-0 flex w-full h-full z-30 pointer-events-none">
-                {[...Array(24)].map((_, i) => (
-                    <div
-                        key={`p3-${i}`}
-                        className="phase-3-stripe h-[300vh] flex-1 invisible opacity-0"
-                        style={{ background: TERTIARY_COLORS[i] }}
-                    />
-                ))}
+                {[...Array(24)].map((_, i) => <div key={`p3-${i}`} className="phase-3-stripe h-[200vh] flex-1 invisible opacity-0" style={{ background: TERTIARY_COLORS[i] }} />)}
             </div>
-
-            {/* ── Phase 4: 48 Quaternary Color Stripes (final curtain) ── */}
             <div className="absolute inset-0 flex w-full h-full z-[35] pointer-events-none">
-                {[...Array(48)].map((_, i) => (
-                    <div
-                        key={`p4-${i}`}
-                        className="phase-4-stripe h-[300vh] flex-1 invisible opacity-0"
-                        style={{ background: QUATERNARY_COLORS[i] }}
+                {STARK_COLORS.map((color, i) => (
+                    <div 
+                        key={`p4-${i}`} 
+                        className="phase-4-stripe h-[200vh] flex-1 invisible opacity-0" 
+                        style={{ background: color }} 
                     />
                 ))}
             </div>
 
-            {/* ── NCAI Logo Text Overlay ── */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-40">
-                <h1
-                    className="ncai-logo-text text-white font-bold tracking-tighter leading-none select-none opacity-0"
-                    style={{
-                        fontSize: 'clamp(100px, 20vw, 400px)',
-                        textShadow: '0 4px 60px rgba(0,0,0,0.3)',
-                    }}
-                >
-                    NCAI
-                </h1>
+            {/* Geometric Identity Reveal Unit - Nested below Phase 4 stripes (z-35) */}
+            <div 
+                className="identity-reveal-container absolute inset-0 z-[34] flex items-center pointer-events-none opacity-0"
+                style={{ paddingLeft: `${UNIT_LEFT_OFFSET}vw` }}
+            >
+                <div className="flex items-center gap-12">
+                    {/* Logo Mark: 3 Vertical Bars aligned with Grid Stripes 6, 8, 10 (Each width = 1 stripe) */}
+                    <div 
+                        className="flex items-start h-[min(22vw,260px)]" 
+                        style={{ width: `${STRIPE_W * 5}vw` }}
+                    >
+                        {/* Box 1 (Left Stripe - Index 6) */}
+                        <div 
+                            className="logo-mark-bar bg-white h-[66%] mt-[34%] translate-x-0" 
+                            style={{ 
+                                width: `${STRIPE_W}vw`,
+                                marginRight: `${STRIPE_W}vw` 
+                            }} 
+                        />
+                        {/* Box 2 (Middle Stripe - Index 8) */}
+                        <div 
+                            className="logo-mark-bar bg-white h-[68%] mt-0 translate-x-0" 
+                            style={{ 
+                                width: `${STRIPE_W}vw`,
+                                marginRight: `${STRIPE_W}vw` 
+                            }} 
+                        />
+                        {/* Box 3 (Right Stripe - Index 10) */}
+                        <div 
+                            className="logo-mark-bar bg-white h-[66%] mt-[34%] translate-x-0" 
+                            style={{ width: `${STRIPE_W}vw` }} 
+                        />
+                    </div>
+
+                    {/* Wordmark: Staggered Fade */}
+                    <h1
+                        className="ncai-logo-text flex text-white font-bold tracking-tighter leading-none select-none"
+                        style={{
+                            fontSize: 'clamp(60px, 14vw, 280px)',
+                            textShadow: '0 4px 60px rgba(0,0,0,0.3)',
+                        }}
+                    >
+                        {"NCAI".split('').map((letter, i) => (
+                            <span key={i} className="wordmark-letter inline-block">{letter}</span>
+                        ))}
+                    </h1>
+                </div>
             </div>
         </div>
     )

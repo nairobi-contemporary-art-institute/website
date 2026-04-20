@@ -31,27 +31,49 @@ const notoEthiopic = Noto_Sans_Ethiopic({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: {
-    template: '%s | Nairobi Contemporary Art Institute (NCAI)',
-    default: 'Nairobi Contemporary Art Institute (NCAI)',
-  },
-  description: "A non-profit visual arts space based in Nairobi, dedicated to the growth and preservation of contemporary art in East Africa.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://ncai.art'),
-  openGraph: {
-    type: 'website',
-    siteName: 'NCAI',
-    locale: 'en_US',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    site: '@ncainairobi',
-  },
-  robots: {
-    index: true,
-    follow: true,
-  }
-};
+import { getLocalizedValueAsString } from '@/sanity/lib/utils';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  
+  const settings = await sanityFetch<any>({ 
+    query: SITE_SETTINGS_QUERY, 
+    tags: ['siteSettings'],
+    revalidate: 60 // Cache for 1 minute
+  });
+
+  const siteTitle = getLocalizedValueAsString(settings?.siteTitle, locale) || 'Nairobi Contemporary Art Institute (NCAI)';
+  const siteDescription = getLocalizedValueAsString(settings?.siteDescription, locale) || "A non-profit visual arts space based in Nairobi, dedicated to the growth and preservation of contemporary art in East Africa.";
+
+  return {
+    title: {
+      template: `%s | ${siteTitle}`,
+      default: siteTitle,
+    },
+    description: siteDescription,
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://ncai.art'),
+    openGraph: {
+      type: 'website',
+      siteName: siteTitle,
+      locale: locale === 'sw' ? 'sw_KE' : 'en_US',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@ncainairobi',
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+    icons: {
+      icon: [
+        { url: '/icon.png', type: 'image/png' },
+        { url: '/icon.svg', type: 'image/svg+xml' },
+      ],
+      apple: '/icon.png',
+    }
+  };
+}
 
 import { AccessibilityProvider } from '@/contexts/AccessibilityContext';
 import { AnalyticsProvider } from '@/components/layout/AnalyticsProvider';
@@ -102,8 +124,8 @@ export default async function RootLayout({
   const fullPool = settings?.entranceAnimationPool
     ?.filter(img => img?.asset?.url) || [];
 
-  // Take first 3 stably to avoid hydration mismatch from Math.random()
-  const entranceAnimImages = fullPool.slice(0, 3).map(img => ({
+  // Map the full pool to the required format
+  const entranceAnimImages = fullPool.map(img => ({
     url: img.asset!.url,
     alt: img.alt || "NCAI Entrance Animation Backdrop",
   }));
@@ -125,6 +147,7 @@ export default async function RootLayout({
             </AccessibilityProvider>
           </AnalyticsProvider>
         </NextIntlClientProvider>
+
       </body>
     </html>
   );

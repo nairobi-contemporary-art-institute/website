@@ -54,7 +54,7 @@ export default async function ArtistProfilePage({ params }: { params: Promise<{ 
 
     return (
         <GridSystem unstable_useContainer>
-            <main className="pt-32 pb-24">
+            <main className="pt-52 pb-24">
                 <ArtistContent artist={artist} locale={locale} />
             </main>
         </GridSystem>

@@ -15,6 +15,14 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'imma.ie',
+      },
+      {
+        protocol: 'https',
+        hostname: 'proxy.extractcss.dev',
+      },
     ],
   },
   async redirects() {

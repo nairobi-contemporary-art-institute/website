@@ -1,25 +1,37 @@
 import { defineField, defineType } from 'sanity'
 import { CalendarIcon } from '@sanity/icons'
+import { SlugLinkField } from './components/SlugLinkField'
 
 export const event = defineType({
     name: 'event',
     title: 'Event',
     type: 'document',
     icon: CalendarIcon,
+    groups: [
+        { name: 'general', title: 'General', default: true },
+        { name: 'images', title: 'Images' },
+        { name: 'content', title: 'Content' },
+        { name: 'related', title: 'Related Info' },
+    ],
     fields: [
         defineField({
             name: 'title',
             title: 'Title',
             type: 'internationalizedArrayString',
+            group: 'general',
             validation: (Rule) => Rule.required(),
         }),
         defineField({
             name: 'slug',
             title: 'Slug',
             type: 'slug',
+            group: 'general',
             options: {
                 source: 'title',
                 maxLength: 96,
+            },
+            components: {
+                field: SlugLinkField
             },
             validation: (Rule) => Rule.required(),
         }),
@@ -27,6 +39,7 @@ export const event = defineType({
             name: 'eventType',
             title: 'Event Type',
             type: 'string',
+            group: 'general',
             options: {
                 list: [
                     { title: 'Exhibition Opening', value: 'Exhibition Opening' },
@@ -83,6 +96,8 @@ export const event = defineType({
                     name: 'alt',
                     type: 'string',
                     title: 'Alternative Text',
+                    description: 'Describe the event hero image for screen readers and SEO. Mention the venue atmosphere or primary subject.',
+                    validation: (Rule) => Rule.required(),
                 }
             ]
         }),

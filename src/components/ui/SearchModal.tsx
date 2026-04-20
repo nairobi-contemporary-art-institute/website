@@ -18,9 +18,10 @@ interface SearchResult {
     slug: string
     image?: any
     date?: string
+    artistName?: any
 }
 
-const CATEGORIES = ['all', 'exhibition', 'artist', 'post', 'program', 'event'] as const
+const CATEGORIES = ['all', 'exhibition', 'artist', 'work', 'post', 'program', 'event'] as const
 type Category = typeof CATEGORIES[number]
 
 export function SearchModal({ isOpen, onClose, locale }: { isOpen: boolean; onClose: () => void; locale: string }) {
@@ -113,13 +114,18 @@ export function SearchModal({ isOpen, onClose, locale }: { isOpen: boolean; onCl
             case 'artist': return `/artists/${slug}`
             case 'exhibition': return `/exhibitions/${slug}`
             case 'event': return `/events/${slug}`
+            case 'collectionItem': return `/collection/${slug}`
+            case 'work': return `/artists/${slug}`
             default: return `/${slug}`
         }
     }
 
     const filteredResults = activeCategory === 'all'
         ? results
-        : results.filter(r => r._type === activeCategory)
+        : results.filter(r => {
+            if (activeCategory === 'work') return r._type === 'work' || r._type === 'collectionItem'
+            return r._type === activeCategory
+        })
 
     return (
         <Dialog.Root open={isOpen} onOpenChange={(open) => !open && onClose()}>
@@ -229,11 +235,16 @@ export function SearchModal({ isOpen, onClose, locale }: { isOpen: boolean; onCl
                                         </div>
                                         <div className="flex flex-col">
                                             <span className="text-[10px] capitalize tracking-widest text-ochre font-bold mb-1">
-                                                {result._type}
+                                                {t.has(result._type) ? t(result._type) : result._type}
                                             </span>
                                             <h3 className="text-2xl font-bold text-white leading-tight group-hover:text-ochre transition-colors">
                                                 {getLocalizedTitle(result.title)}
                                             </h3>
+                                            {result.artistName && (
+                                                <p className="text-sm text-white/60 mt-1">
+                                                    {getLocalizedTitle(result.artistName)}
+                                                </p>
+                                            )}
                                             {result.date && (
                                                 <span className="text-xs text-white/60 mt-1">
                                                     {new Date(result.date).toLocaleDateString(locale, { year: 'numeric', month: 'short' })}

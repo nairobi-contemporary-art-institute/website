@@ -9,6 +9,8 @@ import { urlFor } from '@/sanity/lib/image'
 import { cn } from '@/lib/utils'
 import { ArtTooltip } from '@/components/ui/ArtTooltip'
 import { ArtCaption } from '@/components/ui/ArtCaption'
+import { getComplimentaryColor } from '@/lib/colors'
+import { PortableText } from '@/components/ui/PortableText'
 
 interface HeroSlide {
     image?: {
@@ -29,6 +31,13 @@ interface HeroSlide {
     subtitle?: any
     date?: { startDate?: string; endDate?: string }
     location?: any
+    description?: any
+    layout?: 'auto' | 'split-left' | 'split-right' | 'centered'
+    contentPosition?: 'left' | 'center' | 'right'
+    contentWidth?: number
+    imageAlignment?: 'left' | 'center' | 'right'
+    intelligentContrast?: boolean
+    forceBlackText?: boolean
     link?: {
         reference?: {
             _type: string
@@ -81,40 +90,93 @@ function SlideContent({ slide, locale, textOnRight = true }: { slide: HeroSlide;
             : formatDate(slide.date.startDate)
         : null
 
+    // Intelligent Contrast & Force Black logic
+    const bgColor = slide.gradientColor?.hex || '#1A1A1A'
+    const complColor = slide.intelligentContrast ? getComplimentaryColor(bgColor) : null
+    
+    // Determine base color
+    let baseColor = '#FFFFFF' // Default
+    if (slide.forceBlackText) {
+        baseColor = '#000000'
+    } else if (slide.intelligentContrast && complColor) {
+        baseColor = complColor
+    }
+
+    const textStyle = { color: baseColor }
+    const mutedTextStyle = { color: baseColor, opacity: 0.6 }
+    const isCentered = slide.layout === 'centered' || slide.contentPosition === 'center'
+    const textAlignClass = isCentered ? 'text-center' : 'text-left'
+
     return (
-        <div className="flex flex-col justify-center px-6 md:px-12 lg:px-16 py-10 md:py-16 pointer-events-none h-full">
-            <div className={`pointer-events-auto max-w-2xl ${textOnRight ? '' : 'ml-0'}`}>
-                {preHeading && (
-                    <p className="text-[10px] md:text-xs uppercase tracking-[0.3em] font-bold text-white/60 mb-3 md:mb-4">
-                        {preHeading}
-                    </p>
-                )}
-                {title && (
-                    <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-white leading-[0.9] mb-4 md:mb-6 capitalize">
-                        {title.split('\n').map((line, i) => (
-                            <React.Fragment key={i}>
-                                {i > 0 && <br />}
-                                {line}
-                            </React.Fragment>
-                        ))}
-                    </h1>
-                )}
-                {subtitle && (
-                    <p className="text-base md:text-lg text-white/80 max-w-xl mb-4 leading-relaxed">
-                        {subtitle}
-                    </p>
-                )}
-                <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-                    {dateLabel && (
-                        <span className="text-sm md:text-base font-bold text-white/80">
-                            {dateLabel}
-                        </span>
+        <div className="flex flex-col justify-center py-10 md:py-16 pointer-events-none h-full w-full">
+            <div className={cn(
+                "pointer-events-auto w-full transition-all duration-700",
+                textAlignClass
+            )}>
+                {/* Heading Block: Moved right by 12.5% (half of 25%) */}
+                <div className={cn(
+                    "mb-4 md:mb-6 transition-all duration-700",
+                    !isCentered && (textOnRight ? "md:pl-[5vw]" : "md:pr-[5vw]")
+                )}>
+                    {preHeading && (
+                        <p 
+                            className="text-[10px] md:text-xs uppercase tracking-[0.3em] font-bold mb-3 md:mb-4 opacity-60"
+                            style={textStyle}
+                        >
+                            {preHeading}
+                        </p>
                     )}
-                    {location && (
-                        <span className="text-xs md:text-sm font-bold text-white/50 uppercase tracking-wider">
-                            {location}
-                        </span>
+                    {title && (
+                        <h1 
+                            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[0.9] mb-4 md:mb-6 capitalize transition-all duration-700"
+                            style={textStyle}
+                        >
+                            {title.split('\n').map((line, i) => (
+                                <React.Fragment key={i}>
+                                    {i > 0 && <br />}
+                                    {line}
+                                </React.Fragment>
+                            ))}
+                        </h1>
                     )}
+                </div>
+
+                {/* Content Block: Translated right 25% on desktop */}
+                <div className={cn(
+                    "flex flex-col gap-y-4 transition-all duration-700",
+                    !isCentered && (textOnRight ? "md:pl-[10vw]" : "md:pr-[10vw]")
+                )}>
+                    {subtitle && (
+                        <p 
+                            className="text-base md:text-lg max-w-xl font-medium tracking-tight leading-relaxed"
+                            style={mutedTextStyle}
+                        >
+                            {subtitle}
+                        </p>
+                    )}
+                    {slide.description && (
+                        <div className="text-sm md:text-base max-w-xl leading-relaxed opacity-80" style={{ color: baseColor }}>
+                            <PortableText value={getLocalizedValue(slide.description, locale)} locale={locale} noProse={true} />
+                        </div>
+                    )}
+                    <div className="flex flex-col gap-y-2 mt-2">
+                        {dateLabel && (
+                            <span 
+                                className="text-sm md:text-base font-bold"
+                                style={mutedTextStyle}
+                            >
+                                {dateLabel}
+                            </span>
+                        )}
+                        {location && (
+                            <span 
+                                className="text-xs md:text-sm font-bold uppercase tracking-wider"
+                                style={mutedTextStyle}
+                            >
+                                {location}
+                            </span>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
@@ -158,20 +220,31 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                     if (isCarousel && index !== currentSlide) return null
 
                     const href = getSlideLink(slide)
+                    const { 
+                        layout = 'auto', 
+                        contentPosition = 'left', 
+                        contentWidth = 50, 
+                        imageAlignment = 'center' 
+                    } = slide
+
                     const imageCaption = getLocalizedValue(slide.image?.caption, locale)
                     const bgColor = slide.gradientColor?.hex || '#1A1A1A'
 
-                    // Image positioning based on hotspot + width
+                    // Image positioning
                     const hotspot = slide.image?.hotspot || { x: 0.5, y: 0.5 }
                     const imgWidthPercent = slide.imageSize?.widthPercent ?? 50
                     
-                    // Calculate height to maintain original aspect ratio
                     const assetDims = slide.image?.asset?.metadata?.dimensions
                     const aspectRatio = assetDims?.aspectRatio || 16/9
                     const imgHeightPercent = imgWidthPercent / aspectRatio
 
-                    const imgLeft = (hotspot.x * 100) - (imgWidthPercent / 2)
-                    const imgTop = (hotspot.y * 100) - (imgHeightPercent / 2)
+                    let finalImgLeft = (hotspot.x * 100) - (imgWidthPercent / 2)
+                    if (layout !== 'auto') {
+                        if (imageAlignment === 'left') finalImgLeft = 5 // some margin
+                        else if (imageAlignment === 'right') finalImgLeft = 95 - imgWidthPercent
+                        else if (imageAlignment === 'center') finalImgLeft = 50 - (imgWidthPercent / 2)
+                    }
+                    const finalImgTop = (hotspot.y * 100) - (imgHeightPercent / 2)
 
                     const imageElement = slide.image?.asset && (
                         <div
@@ -179,8 +252,8 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                             style={{
                                 width: `${imgWidthPercent}%`,
                                 height: `${imgHeightPercent}%`,
-                                left: `${imgLeft}%`,
-                                top: `${imgTop}%`,
+                                left: `${finalImgLeft}%`,
+                                top: `${finalImgTop}%`,
                             }}
                         >
                             <Image
@@ -205,8 +278,14 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                         </div>
                     )
 
-                    // Flip text to opposite side of image hotspot
-                    const textOnRight = hotspot.x <= 0.5
+                    // Derived layout properties
+                    const textOnRight = layout === 'auto' ? hotspot.x <= 0.5 : layout === 'split-right'
+                    
+                    // Flex alignment for the content layer
+                    let justifyClass = 'justify-center'
+                    if (layout === 'split-left' || contentPosition === 'left') justifyClass = 'justify-start'
+                    if (layout === 'split-right' || contentPosition === 'right') justifyClass = 'justify-end'
+                    if (contentPosition === 'center') justifyClass = 'justify-center'
 
                     const content = (
                         <div className="relative w-full h-full">
@@ -216,9 +295,12 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                                 {captionTooltip}
                             </div>
 
-                            {/* Text content layer (z-20) - flips based on image position */}
-                            <div className={`absolute inset-0 z-20 flex ${textOnRight ? 'justify-end' : 'justify-start'}`}>
-                                <div className="w-full md:w-1/2 h-full flex items-center">
+                            {/* Text content layer (z-20) */}
+                            <div className={`absolute inset-0 z-20 flex px-6 md:px-12 lg:px-16 ${justifyClass}`}>
+                                <div 
+                                    className="h-full flex items-center"
+                                    style={{ width: `${contentWidth}%` }}
+                                >
                                     <SlideContent slide={slide} locale={locale} textOnRight={textOnRight} />
                                 </div>
                             </div>

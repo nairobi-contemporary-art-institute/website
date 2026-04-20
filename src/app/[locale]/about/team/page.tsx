@@ -2,9 +2,10 @@ import { sanityFetch } from "@/sanity/lib/client"
 import { TEAM_QUERY, ABOUT_PAGE_QUERY } from "@/sanity/lib/queries"
 import { getLocalizedValue } from "@/sanity/lib/utils"
 import { GridSystem } from "@/components/ui/Grid/Grid"
+import { AboutSubNav } from "@/components/about/AboutSubNav"
 import { TeamGrid } from "@/components/about/TeamGrid"
-import { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
+import { Metadata } from "next"
+import { getTranslations } from "next-intl/server"
 
 type Props = {
     params: Promise<{ locale: string }>
@@ -13,7 +14,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { locale } = await params
     return {
-        title: `${locale === 'en' ? 'Our Team' : 'Timu Yetu'} | NCAI`,
+        title: `${locale === 'en' ? 'Team' : 'Timu'} | NCAI`,
         description: 'Meet the curators, educators, and visionaries behind NCAI.',
     }
 }
@@ -28,9 +29,9 @@ export default async function TeamPage({ params }: Props) {
     const t = await getTranslations({ locale, namespace: 'Pages.about' })
 
     return (
-        <GridSystem unstable_useContainer>
-            <main className="pt-32 pb-24 min-h-screen bg-ivory">
-                <header className="mb-20 max-w-4xl">
+        <GridSystem>
+            <main className="min-h-screen bg-ivory">
+                <header className="pt-32 pb-12 px-section-clamp">
                     <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-charcoal capitalize leading-[0.9] mb-8">
                         {locale === 'en' ? 'Our Team' : 'Timu Yetu'}
                     </h1>
@@ -39,7 +40,11 @@ export default async function TeamPage({ params }: Props) {
                     </p>
                 </header>
 
-                <TeamGrid people={people} locale={locale} />
+                <AboutSubNav locale={locale} />
+
+                <div className="py-24 px-section-clamp">
+                    <TeamGrid people={people} locale={locale} />
+                </div>
             </main>
         </GridSystem>
     )

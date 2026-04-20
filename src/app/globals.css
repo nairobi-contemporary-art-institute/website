@@ -1,3 +1,4 @@
+@layer inherited;
 @import "tailwindcss";
 
 @theme {
@@ -242,6 +243,8 @@ html {
     background-size: 100% calc(100% / var(--grid-rows, 1));
     background-image: linear-gradient(to bottom, var(--grid-guide-color) var(--grid-guide-width), transparent var(--grid-guide-width));
   }
+
+  /* Artistic Filters */
 }
 
 @keyframes notice-bar-rotation {
@@ -271,4 +274,24 @@ html {
 
 .lg-sub-html .lg-caption .font-bold {
   font-weight: 700;
+}
+
+@layer inherited {
+  .premium-gallery-text {
+    line-height: 1.4;
+    word-spacing: -0.05em;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: var(--font-geist-sans), Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    word-spacing: -0.05em;
+    --cmplz-manage-consent-offset: -35px;
+  }
+}
+
+::selection {
+  color: #fff;
+  text-shadow: none;
+  background: #333;
 }

@@ -28,6 +28,7 @@ export const aboutPage = defineType({
                 defineField({
                     name: 'image',
                     title: 'Hero Image',
+                    description: 'Recommended size: 3000px × 1800px (16:9 or 3:2). Large scale image for the primary About page hero.',
                     type: 'image',
                     options: { hotspot: true },
                     fields: [
@@ -68,6 +69,7 @@ export const aboutPage = defineType({
                         defineField({
                             name: 'image',
                             title: 'Section Image',
+                            description: 'Recommended size: 1500px × 1200px. High-quality imagery for modular content sections.',
                             type: 'image',
                             options: { hotspot: true },
                             fields: [

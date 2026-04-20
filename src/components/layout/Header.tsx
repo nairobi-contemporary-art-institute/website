@@ -27,6 +27,7 @@ interface SiteSettings {
     headerFeaturedImages?: any[];
     headerStyle?: string;
     headerMenu?: HeaderMenuItem[];
+    utilityNav?: HeaderMenuLink[];
 }
 
 export async function Header({ locale }: { locale: string }) {
@@ -53,6 +54,11 @@ export async function Header({ locale }: { locale: string }) {
         };
     }) || [];
 
+    const utilityLinks = settings?.utilityNav?.map((item) => ({
+        label: getLocalizedValue(item.label, locale) || 'Untitled',
+        href: item.url
+    })) || [];
+
     const headerStyle = settings?.headerStyle || 'ncai';
 
     return (
@@ -60,6 +66,7 @@ export async function Header({ locale }: { locale: string }) {
             locale={locale}
             openingStatus={<OpeningStatus locale={locale} initialData={settings} />}
             navLinks={navLinks}
+            utilityLinks={utilityLinks}
             headerStyle={headerStyle}
             featuredImages={settings?.headerFeaturedImages}
         />
