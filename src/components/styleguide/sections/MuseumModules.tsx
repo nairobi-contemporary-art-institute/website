@@ -4,6 +4,7 @@ import React from 'react'
 import { MuseumGrid } from '@/components/ui/MuseumGrid'
 import { WhatsOnClient } from '@/components/whatson/WhatsOnClient'
 import { MuseumResultRow } from '@/components/ui/MuseumResultRow'
+import { TimelineTeaser } from '@/components/museum/TimelineTeaser'
 
 export function MuseumModules() {
     return (
@@ -126,6 +127,27 @@ export function MuseumModules() {
                     />
                 </div>
             </section>
+
+            <section className="space-y-8">
+                <h3 className="text-xs font-bold text-charcoal capitalize tracking-widest border-b border-umber/10 pb-2 inline-block">Section 06.5 / The Institutional Journey</h3>
+                <div className="bg-ivory border border-umber/10 overflow-hidden">
+                    <div className="p-8 border-b border-umber/10 space-y-4">
+                        <p className="text-sm text-umber/80 leading-relaxed font-medium">
+                            A legacy-driven storytelling architecture designed for high-impact museum narratives. 
+                        </p>
+                        <p className="text-xs text-umber/60 leading-relaxed max-w-2xl">
+                            Optimized for NCAI&apos;s transition from an archival collective to a contemporary institution, this component features GSAP-orchestrated scroll reveals, interactive mouse-following media triggers, and deep-parallax spatial effects to create a sense of transcendence and temporal depth.
+                        </p>
+                    </div>
+                    
+                    <div className="w-full">
+                        <TimelineTeaser 
+                            events={MOCK_TIMELINE_DATA} 
+                            locale="en" 
+                        />
+                    </div>
+                </div>
+            </section>
         </div>
     )
 }
@@ -177,5 +199,36 @@ const MOCK_MUSEUM_DATA: import('@/lib/types/museum-card').MuseumCardData[] = [
         date: "CLOSES 12 AUGUST 2026",
         backgroundColor: "#2a3b4c",
         tags: ["Families", "Adults", "Students"]
+    }
+];
+
+const MOCK_TIMELINE_DATA = [
+    {
+        _id: "t1",
+        year: 2021,
+        title: { _type: 'internationalizedArrayString', _key: 'en', value: 'Foundation Principles' },
+        description: { _type: 'internationalizedArrayString', _key: 'en', value: 'Establishing the core mission to support contemporary art in Nairobi through curated dialogue.' },
+        media: { asset: { _ref: 'image-000000000000000000000001-2000x3000-jpg' } } 
+    },
+    {
+        _id: "t2",
+        year: 2022,
+        title: { _type: 'internationalizedArrayString', _key: 'en', value: 'First Major Group Show' },
+        description: { _type: 'internationalizedArrayString', _key: 'en', value: 'Bringing together diverse voices from across the East African region.' },
+        media: { asset: { _ref: 'image-000000000000000000000002-2000x3000-jpg' } }
+    },
+    {
+        _id: "t3",
+        year: 2023,
+        title: { _type: 'internationalizedArrayString', _key: 'en', value: 'The Archive Initiative' },
+        description: { _type: 'internationalizedArrayString', _key: 'en', value: 'Digitizing decades of creative output to preserve the collective memory of the city.' },
+        media: { asset: { _ref: 'image-000000000000000000000003-2000x3000-jpg' } }
+    },
+    {
+        _id: "t4",
+        year: 2024,
+        title: { _type: 'internationalizedArrayString', _key: 'en', value: 'International Expansion' },
+        description: { _type: 'internationalizedArrayString', _key: 'en', value: 'Forging partnerships with global institutions to amplify Nairobi voices.' },
+        media: { asset: { _ref: 'image-000000000000000000000004-2000x3000-jpg' } }
     }
 ];

@@ -51,7 +51,7 @@ export default async function AccessibilityPage({ params }: Props) {
 
     return (
         <div className="min-h-screen bg-stone-50/20 pb-32">
-            <header className="container mx-auto px-section-clamp pt-24 pb-20 border-b border-charcoal/5">
+            <header className="container mx-auto px-section-clamp page-header-padding pb-20 border-b border-charcoal/5">
                 <div className="max-w-4xl">
                     <h1 className="text-6xl md:text-8xl font-light tracking-tighter text-charcoal mb-8">
                         {title}

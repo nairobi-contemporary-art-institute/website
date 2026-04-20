@@ -58,7 +58,7 @@ export default async function GetInvolvedPage({ params }: { params: Promise<{ lo
                         caption={data.hero?.image?.caption ? getLocalizedValue(data.hero.image.caption, locale) : undefined}
                     />
                 ) : (
-                    <header className="relative pt-32 pb-20 overflow-hidden border-b border-charcoal/5">
+                    <header className="relative page-header-padding pb-20 overflow-hidden border-b border-charcoal/5">
                         <Grid columns={{ sm: 1, md: 12 }} gap={24}>
                             <GridCell column={{ sm: 1, md: 8 }} className="items-start justify-start p-0">
                                 <div className="max-w-4xl space-y-8">

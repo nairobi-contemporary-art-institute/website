@@ -245,13 +245,13 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                                     <div className="flex flex-col items-center gap-3 group/btn">
                                         <button 
                                             onClick={reShuffle}
-                                            className="p-4 text-white/40 hover:text-white transition-all bg-white/5 rounded-full hover:bg-white/10"
+                                            className="w-12 h-12 flex items-center justify-center text-white/40 hover:text-white transition-all bg-white/5 rounded-full hover:bg-white/10"
                                         >
                                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="group-hover/btn:rotate-180 transition-transform duration-500">
                                                 <path d="M4 4V9H4.58152M19.9381 11C19.979 11.3276 20 11.6613 20 12C20 16.4183 16.4183 20 12 20C9.49944 20 7.26677 18.8527 5.7998 17.0558M20 20V15H19.4185M4.06189 13C4.02104 12.6724 4 12.3387 4 12C4 7.58172 7.58172 4 12 4C14.5006 4 16.7332 5.14727 18.2002 6.94416" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                                             </svg>
                                         </button>
-                                        <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/20 group-hover/btn:text-white/60 transition-colors">
+                                        <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/20 group-hover/btn:text-white/60 transition-colors text-center">
                                             {t('shuffleWorks') || 'Shuffle Works'}
                                         </span>
                                     </div>
@@ -259,13 +259,13 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                                         <button 
                                             onClick={() => setSortBy('az')}
                                             className={cn(
-                                                "p-4 transition-all rounded-full",
+                                                "w-12 h-12 flex items-center justify-center transition-all rounded-full",
                                                 sortBy === 'az' ? "bg-white text-black" : "bg-white/5 text-white/40 hover:text-white hover:bg-white/10"
                                             )}
                                         >
                                             <span className="text-[12px] font-black">A–Z</span>
                                         </button>
-                                        <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/20 group-hover/btn:text-white/60 transition-colors">
+                                        <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/20 group-hover/btn:text-white/60 transition-colors text-center">
                                             {t('sortAZ') || 'Alphabetise'}
                                         </span>
                                     </div>
@@ -275,13 +275,13 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                             <div className="flex flex-col items-center gap-3 group/btn">
                                 <button 
                                     onClick={resetFilters}
-                                    className="p-4 text-white/40 hover:text-white transition-all bg-white/5 rounded-full hover:bg-white/10"
+                                    className="w-12 h-12 flex items-center justify-center text-white/40 hover:text-white transition-all bg-white/5 rounded-full hover:bg-white/10"
                                 >
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="group-hover/btn:-rotate-180 transition-transform duration-500">
                                         <path d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C15.2235 2 18.0481 3.52352 19.8284 5.82843M19.8284 5.82843V1M19.8284 5.82843H15" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                                     </svg>
                                 </button>
-                                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/20 group-hover/btn:text-white/60 transition-colors">
+                                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/20 group-hover/btn:text-white/60 transition-colors text-center">
                                     {t('resetFilters') || 'Reset Filters'}
                                 </span>
                             </div>
@@ -381,6 +381,9 @@ function WorkCard({ item, locale, index }: { item: CollectionItem, locale: strin
     const hasStatus = item.onDisplay || item.onLoan
     const displayLocation = getLocalizedValue(item.displayLocation, locale)
     
+    // Safety check for slug
+    const workPath = item.slug ? `/collection/${item.slug}` : '#'
+
     // Explicitly use metadata for height/width if available to avoid cropping
     const imgMetadata = image?.asset?.metadata?.dimensions
     const aspectRatio = imgMetadata?.aspectRatio || 1
@@ -394,7 +397,7 @@ function WorkCard({ item, locale, index }: { item: CollectionItem, locale: strin
             transition={{ duration: 0.6, delay: (index % 12) * 0.05 }}
             className="break-inside-avoid mb-16 group"
         >
-            <Link href={`/${locale}/collection/${item.slug}`} className="space-y-6 block">
+            <Link href={workPath} className={cn("space-y-6 block", !item.slug && "pointer-events-none opacity-50")}>
                 <div className="relative bg-white/5 overflow-hidden">
                     {image?.asset ? (
                         <div style={{ aspectRatio: aspectRatio }}>
@@ -433,7 +436,9 @@ function WorkCard({ item, locale, index }: { item: CollectionItem, locale: strin
                                     </div>
                                 }
                             >
-                                <div className="w-3 h-3 rounded-full bg-white/40 ring-4 ring-black/40 shadow-lg" />
+                                <div className="w-6 h-6 flex items-center justify-center">
+                                    <div className="w-3 h-3 rounded-full bg-white/40 ring-4 ring-black/40 shadow-lg" />
+                                </div>
                             </ArtTooltip>
                         </div>
                     )}

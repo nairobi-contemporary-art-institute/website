@@ -50,6 +50,19 @@ scratch/
 test-fetch.ts
 get-shit-done-for-antigravity/
 .vscode/
+.zencoder/
+.zenflow/
+.opencode/
+
+# Logs and Temp
+lint_output.txt
+*.log
+.next/
+dist/
+build/
 
 # Documentation
 docs/
+ARCHITECTURE.md
+STACK.md
+ROADMAP.md

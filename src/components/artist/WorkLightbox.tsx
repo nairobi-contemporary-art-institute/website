@@ -135,17 +135,23 @@ export function WorkLightbox({ isOpen, onClose, works, initialIndex, locale, art
                                     <MediaPlayer 
                                         type="video" 
                                         url={currentWork.videoUrl} 
-                                        thumbnail={urlFor(currentWork.image).width(1600).url()}
+                                        thumbnail={currentWork.image?.asset ? urlFor(currentWork.image).width(1600).url() : ''}
                                     />
                                 ) : (
-                                    <Image
-                                        src={urlFor(currentWork.image).width(1600).url()}
-                                        alt={title || 'Artwork'}
-                                        fill
-                                        className="object-contain"
-                                        sizes="95vw"
-                                        priority
-                                    />
+                                    currentWork.image?.asset ? (
+                                        <Image
+                                            src={urlFor(currentWork.image).width(1600).url()}
+                                            alt={title || 'Artwork'}
+                                            fill
+                                            className="object-contain"
+                                            sizes="95vw"
+                                            priority
+                                        />
+                                    ) : (
+                                        <div className="w-full h-full bg-stone-100 flex items-center justify-center text-stone-300">
+                                            No image available
+                                        </div>
+                                    )
                                 )}
                             </div>
 

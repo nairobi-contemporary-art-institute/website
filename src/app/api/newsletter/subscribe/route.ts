@@ -7,6 +7,7 @@ import { z } from 'zod';
 const subscriberSchema = z.object({
     email: z.string().email(),
     name: z.string().optional(),
+    preferences: z.record(z.boolean()).optional(),
 });
 
 export async function POST(req: NextRequest) {

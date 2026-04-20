@@ -92,11 +92,11 @@ export function PDFViewerModal({ isOpen, onClose, fileUrl, title }: PDFViewerMod
                             
                             <div className="flex items-center space-x-2 md:space-x-4">
                                 {/* Segmented Width Control */}
-                                <div className="hidden md:flex items-center bg-white/5 rounded-full p-1 border border-white/10">
+                                <div className="hidden md:flex items-center bg-white/5 p-1 border border-white/10">
                                     <button 
                                         onClick={() => setViewMode('standard')}
                                         className={cn(
-                                            "px-3 py-1 rounded-full text-[9px] uppercase tracking-widest font-bold transition-all duration-300",
+                                            "px-3 py-1 text-[9px] uppercase tracking-widest font-bold transition-all duration-300",
                                             viewMode === 'standard' ? "bg-white text-charcoal" : "text-stone-400 hover:text-white"
                                         )}
                                     >
@@ -105,7 +105,7 @@ export function PDFViewerModal({ isOpen, onClose, fileUrl, title }: PDFViewerMod
                                     <button 
                                         onClick={() => setViewMode('wide')}
                                         className={cn(
-                                            "px-3 py-1 rounded-full text-[9px] uppercase tracking-widest font-bold transition-all duration-300",
+                                            "px-3 py-1 text-[9px] uppercase tracking-widest font-bold transition-all duration-300",
                                             viewMode === 'wide' ? "bg-white text-charcoal" : "text-stone-400 hover:text-white"
                                         )}
                                     >
@@ -114,7 +114,7 @@ export function PDFViewerModal({ isOpen, onClose, fileUrl, title }: PDFViewerMod
                                     <button 
                                         onClick={() => setViewMode('full')}
                                         className={cn(
-                                            "px-3 py-1 rounded-full text-[9px] uppercase tracking-widest font-bold transition-all duration-300",
+                                            "px-3 py-1 text-[9px] uppercase tracking-widest font-bold transition-all duration-300",
                                             viewMode === 'full' ? "bg-white text-charcoal" : "text-stone-400 hover:text-white"
                                         )}
                                     >

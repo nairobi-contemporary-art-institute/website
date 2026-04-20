@@ -62,7 +62,7 @@ export default async function EventsPage({ params }: Props) {
 
     return (
         <div className="bg-stone-50 min-h-screen">
-            <div className="container mx-auto px-section-clamp py-20 pb-12">
+            <div className="container mx-auto px-section-clamp page-header-padding pb-12">
                 <header className="max-w-4xl space-y-8">
                     <h1 className="text-6xl md:text-9xl font-black tracking-tighter text-charcoal capitalize leading-[0.85]">
                         {title}

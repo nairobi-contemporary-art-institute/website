@@ -12,6 +12,7 @@ import { PortableText } from '@/components/ui/PortableText'
 import { LogoGrid } from '@/components/ui/LogoGrid'
 import { ArtCaption } from '@/components/ui/ArtCaption'
 import { ExhibitHeroSplit } from '@/components/exhibitions/ExhibitHeroSplit'
+import { PressResources } from '@/components/exhibitions/PressResources'
 import { HorizontalGallery } from '@/components/exhibitions/HorizontalGallery'
 import { CinematicGallery } from '@/components/exhibitions/CinematicGallery'
 import { WrittenPiece } from '@/components/exhibitions/WrittenPiece'
@@ -192,59 +193,77 @@ export default async function ExhibitionPage({ params }: Props) {
                                     <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-charcoal/40 border-b border-charcoal/5 pb-4">
                                         {artists.length === 1 ? 'Participating Artist' : 'Participating Artists'}
                                     </h4>
-                                    <div className="flex flex-col gap-16">
-                                        {artists.map((artist: any) => {
-                                            const artistBio = getLocalizedValue(artist.bio, locale)
-                                            const portraitCaption = getLocalizedValue(artist.image?.caption, locale)
-                                            const portraitCredit = getLocalizedValue(artist.image?.imageCredit?.name, locale)
-                                            const portraitCreditSlug = artist.image?.imageCredit?.slug
-                                            const portraitCreditHasProfile = artist.image?.imageCredit?.hasProfile !== false
+                                    
+                                    {exhibition.artistListLayout === 'sentence' ? (
+                                        <div className="text-sm md:text-base font-medium text-charcoal leading-relaxed">
+                                            {artists.map((artist: any, index: number) => (
+                                                <span key={artist._id} className="inline-block whitespace-nowrap mr-1.5">
+                                                    <Link 
+                                                        href={`/${locale}/artists/${artist.slug}`}
+                                                        className="hover:text-ochre hover:underline decoration-ochre underline-offset-4 transition-all duration-300"
+                                                    >
+                                                        {getLocalizedValue(artist.name, locale)}
+                                                    </Link>
+                                                    {index < artists.length - 1 && <span>,</span>}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <div className="flex flex-col gap-16">
+                                            {artists.map((artist: any) => {
+                                                const artistBio = getLocalizedValue(artist.bio, locale)
+                                                const portraitCaption = getLocalizedValue(artist.image?.caption, locale)
+                                                const portraitCredit = getLocalizedValue(artist.image?.imageCredit?.name, locale)
+                                                const portraitCreditSlug = artist.image?.imageCredit?.slug
+                                                const portraitCreditHasProfile = artist.image?.imageCredit?.hasProfile !== false
 
-                                            return (
-                                                <div key={artist._id} className="space-y-6">
-                                                    {artist.image?.asset && (
-                                                        <div className="space-y-3">
-                                                            <div className="aspect-[4/5] relative overflow-hidden bg-stone-100">
-                                                                <Image
-                                                                    src={urlFor(artist.image).width(800).height(1000).url()}
-                                                                    alt={getLocalizedValue(artist.name, locale) ?? ''}
-                                                                    fill
-                                                                    className="object-cover transition-transform duration-700 hover:scale-105"
-                                                                />
-                                                            </div>
-                                                            {(portraitCaption || portraitCredit) && (
-                                                                <div className="space-y-1">
-                                                                    {portraitCaption && <p className="text-[10px] text-charcoal/60 leading-tight italic">{portraitCaption}</p>}
-                                                                    {portraitCredit && (
-                                                                        <p className="text-[8px] uppercase tracking-[0.2em] text-charcoal/40 font-bold">
-                                                                            Image credit: {(portraitCreditSlug && portraitCreditHasProfile) ? (
-                                                                                <Link 
-                                                                                    href={`/${locale}/about/team#${portraitCreditSlug}`}
-                                                                                    className="hover:text-ochre transition-colors underline decoration-charcoal/10 underline-offset-4"
-                                                                                >
-                                                                                    {portraitCredit}
-                                                                                </Link>
-                                                                            ) : (
-                                                                                portraitCredit
-                                                                            )}
-                                                                        </p>
-                                                                    )}
+                                                return (
+                                                    <div key={artist._id} className="space-y-6">
+                                                        {artist.image?.asset && (
+                                                            <div className="space-y-3">
+                                                                <div className="aspect-[4/5] relative overflow-hidden bg-stone-100">
+                                                                    <Image
+                                                                        src={urlFor(artist.image).width(800).height(1000).url()}
+                                                                        alt={getLocalizedValue(artist.name, locale) ?? ''}
+                                                                        fill
+                                                                        priority
+                                                                        sizes="(max-width: 768px) 100vw, 33vw"
+                                                                        className="object-cover transition-transform duration-700 hover:scale-105"
+                                                                    />
                                                                 </div>
-                                                            )}
-                                                        </div>
-                                                    )}
-                                                    <div className="space-y-4">
-                                                        <Link 
-                                                            href={`/${locale}/artists/${artist.slug}`}
-                                                            className="text-2xl font-medium tracking-tight hover:text-ochre transition-colors uppercase block"
-                                                        >
-                                                            {getLocalizedValue(artist.name, locale)}
-                                                        </Link>
-                                                        {artistBio && (
-                                                            <div className="text-sm text-stone-500 leading-relaxed font-serif max-w-sm">
-                                                                <PortableText value={artistBio} locale={locale} />
+                                                                {(portraitCaption || portraitCredit) && (
+                                                                    <div className="space-y-1">
+                                                                        {portraitCaption && <p className="text-[10px] text-charcoal/60 leading-tight italic">{portraitCaption}</p>}
+                                                                        {portraitCredit && (
+                                                                            <p className="text-[8px] uppercase tracking-[0.2em] text-charcoal/40 font-bold">
+                                                                                Image credit: {(portraitCreditSlug && portraitCreditHasProfile) ? (
+                                                                                    <Link 
+                                                                                        href={`/${locale}/about/team#${portraitCreditSlug}`}
+                                                                                        className="hover:text-ochre transition-colors underline decoration-charcoal/10 underline-offset-4"
+                                                                                    >
+                                                                                        {portraitCredit}
+                                                                                    </Link>
+                                                                                ) : (
+                                                                                    portraitCredit
+                                                                                )}
+                                                                            </p>
+                                                                        )}
+                                                                    </div>
+                                                                )}
                                                             </div>
                                                         )}
+                                                        <div className="space-y-4">
+                                                            <Link 
+                                                                href={`/${locale}/artists/${artist.slug}`}
+                                                                className="text-2xl font-medium tracking-tight hover:text-ochre transition-colors uppercase block"
+                                                            >
+                                                                {getLocalizedValue(artist.name, locale)}
+                                                            </Link>
+                                                            {artistBio && (
+                                                                <div className="text-sm text-stone-500 leading-relaxed font-serif max-w-sm">
+                                                                    <PortableText value={artistBio} locale={locale} />
+                                                                </div>
+                                                            )}
                                                             <div className="flex flex-col gap-2">
                                                                 <Link 
                                                                     href={`/${locale}/artists/${artist.slug}`}
@@ -270,10 +289,11 @@ export default async function ExhibitionPage({ params }: Props) {
                                                         )}
                                                     </div>
                                                 )
-                                        })}
-                                    </div>
+                                            })}
+                                        </div>
+                                    )}
                                 </div>
-                            )}
+                             )}
 
                              {/* Curators */}
                              {exhibition.curators?.length > 0 && (
@@ -379,34 +399,10 @@ export default async function ExhibitionPage({ params }: Props) {
                                     </div>
                                 </AccordionSection>
 
-                                {(exhibition.pressKitUrl || exhibition.exhibitionGuideUrl) && (
-                                    <AccordionSection title="Press & Resources">
-                                        <div className="flex flex-col gap-4">
-                                            {exhibition.pressKitUrl && (
-                                                <a 
-                                                    href={exhibition.pressKitUrl} 
-                                                    target="_blank" 
-                                                    rel="noopener noreferrer"
-                                                    className="text-left py-2 flex items-center gap-4 group"
-                                                >
-                                                    <span className="w-10 h-10 rounded-full border border-charcoal/10 flex items-center justify-center group-hover:bg-charcoal group-hover:text-white transition-all">↓</span>
-                                                    <span className="text-lg font-medium tracking-tight">Download Press Release</span>
-                                                </a>
-                                            )}
-                                            {exhibition.exhibitionGuideUrl && (
-                                                <a 
-                                                    href={exhibition.exhibitionGuideUrl} 
-                                                    target="_blank" 
-                                                    rel="noopener noreferrer"
-                                                    className="text-left py-2 flex items-center gap-4 group"
-                                                >
-                                                    <span className="w-10 h-10 rounded-full border border-charcoal/10 flex items-center justify-center group-hover:bg-charcoal group-hover:text-white transition-all">↓</span>
-                                                    <span className="text-lg font-medium tracking-tight">Exhibition Guide</span>
-                                                </a>
-                                            )}
-                                        </div>
-                                    </AccordionSection>
-                                )}
+                                <PressResources 
+                                    pressKitUrl={exhibition.pressKitUrl} 
+                                    exhibitionGuideUrl={exhibition.exhibitionGuideUrl} 
+                                />
                             </div>
                         </div>
                     </GridCell>

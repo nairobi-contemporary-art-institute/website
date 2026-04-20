@@ -11,6 +11,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { GridInspector } from '@/components/ui/Grid/GridInspector';
 import { EntranceAnimation } from '@/components/ui/EntranceAnimation/EntranceAnimation';
+import ExitIntentPopup from '@/components/layout/ExitIntentPopup';
 
 
 const notoArabic = Noto_Sans_Arabic({
@@ -80,7 +81,10 @@ import { AnalyticsProvider } from '@/components/layout/AnalyticsProvider';
 import { ConditionalWrapper } from '@/components/layout/ConditionalWrapper';
 
 import { sanityFetch } from '@/sanity/lib/client';
-import { SITE_SETTINGS_QUERY } from '@/sanity/lib/queries';
+import { 
+  SITE_SETTINGS_QUERY, 
+  COLLECTION_QUERY 
+} from '@/sanity/lib/queries';
 
 export default async function RootLayout({
   children,
@@ -112,14 +116,18 @@ export default async function RootLayout({
     notoEthiopic.variable
   ].join(' ');
 
-  // Fetch entrance animation backgrounds
-  const settings = await sanityFetch<{
-    entranceAnimationPool?: { 
-      alt: string; 
-      caption?: string; 
-      asset?: { url: string } 
-    }[];
-  }>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'], revalidate: 0 });
+  // Fetch entrance animation backgrounds and newsletter data
+  const [settings, works] = await Promise.all([
+    sanityFetch<{
+      entranceAnimationPool?: { 
+        alt: string; 
+        caption?: string; 
+        asset?: { url: string } 
+      }[];
+      newsletterPopup?: any;
+    }>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'], revalidate: 60 }),
+    sanityFetch<any[]>({ query: COLLECTION_QUERY, tags: ['work', 'collectionItem'], revalidate: 60 })
+  ]);
 
   const fullPool = settings?.entranceAnimationPool
     ?.filter(img => img?.asset?.url) || [];
@@ -137,6 +145,10 @@ export default async function RootLayout({
           <AnalyticsProvider>
             <AccessibilityProvider>
               <GridInspector />
+              <ExitIntentPopup 
+                settings={settings?.newsletterPopup} 
+                works={works}
+              />
               <EntranceAnimation backgroundImages={entranceAnimImages} />
               <ConditionalWrapper
                 header={<Header locale={locale} />}

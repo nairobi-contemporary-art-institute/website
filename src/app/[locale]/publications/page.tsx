@@ -36,7 +36,7 @@ export default async function PublicationsPage({ params }: PublicationsPageProps
     const pageLabel = getLocalizedValue(header?.label, locale) || 'Archives & Publications';
 
     return (
-        <div className="bg-sun-bleached-paper min-h-screen py-24 px-section-clamp md:px-20">
+        <div className="bg-sun-bleached-paper min-h-screen page-header-padding pb-24 px-section-clamp md:px-20">
             <header className="max-w-4xl mb-24">
                 <h2 className="text-xs font-bold text-deep-umber/40 capitalize tracking-[0.4em] mb-4">
                     {pageLabel}

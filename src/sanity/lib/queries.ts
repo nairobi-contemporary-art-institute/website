@@ -34,6 +34,7 @@ export const EXHIBITION_BY_SLUG_QUERY = groq`
     admission,
     bookingUrl,
     showInternalNavigation,
+    artistListLayout,
     enquiryModule,
     "pressKitUrl": pressKit.asset->url,
     "exhibitionGuideUrl": exhibitionGuide.asset->url,
@@ -685,6 +686,7 @@ export const PAGE_BY_SLUG_QUERY = groq`
 export const SITE_SETTINGS_QUERY = groq`
   *[_id == "siteSettings"][0] {
     ...,
+    newsletterPopup,
     "headerStyle": coalesce(headerStyle, "ncai"),
     "headerFeaturedImages": headerFeaturedImages[]{
       asset->,

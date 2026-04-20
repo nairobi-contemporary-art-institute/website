@@ -12,6 +12,7 @@ export const siteSettings = defineType({
         { name: 'footer', title: 'Footer Links' },
         { name: 'contact', title: 'Contact Info' },
         { name: 'hours', title: 'Opening Hours' },
+        { name: 'newsletterPopup', title: 'Exit Intent Popup' },
     ],
     fields: [
         defineField({
@@ -481,6 +482,40 @@ export const siteSettings = defineType({
             title: 'Copyright Text',
             type: 'internationalizedArrayString',
             group: 'footer',
+        }),
+        defineField({
+            name: 'newsletterPopup',
+            title: 'Exit Intent Popup Settings',
+            type: 'object',
+            group: 'newsletterPopup',
+            fields: [
+                defineField({
+                    name: 'isActive',
+                    title: 'Is Active',
+                    type: 'boolean',
+                    initialValue: true,
+                    description: 'Enable or disable the exit intent popup globally.'
+                }),
+                defineField({
+                    name: 'title',
+                    title: 'Popup Title',
+                    type: 'internationalizedArrayString',
+                    initialValue: [{ _key: 'en', value: 'Be the first to know' }],
+                }),
+                defineField({
+                    name: 'description',
+                    title: 'Popup Description',
+                    type: 'internationalizedArrayText',
+                    initialValue: [{ _key: 'en', value: 'To stay up to date about new exhibitions, available works, and artist news, sign up for our newsletter.' }],
+                }),
+                defineField({
+                    name: 'cooldownDays',
+                    title: 'Cooldown (Days)',
+                    type: 'number',
+                    initialValue: 1,
+                    description: 'Number of days to hide the popup after a user closes it.'
+                })
+            ]
         }),
     ],
     preview: {

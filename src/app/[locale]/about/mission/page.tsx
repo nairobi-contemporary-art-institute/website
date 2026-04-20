@@ -33,7 +33,7 @@ export default async function MissionPage({ params }: Props) {
     return (
         <GridSystem>
             <main className="min-h-screen bg-ivory">
-                <header className="pt-32 pb-12 px-section-clamp">
+                <header className="page-header-padding pb-12 px-section-clamp">
                     <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-charcoal capitalize leading-[0.9] mb-8">
                         {locale === 'en' ? 'Mission & Vision' : 'Malengo na Maono'}
                     </h1>

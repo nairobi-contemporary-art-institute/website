@@ -138,54 +138,20 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
             label: "What's On",
             columns: [
                 {
-                    title: 'All', links: [
-                        { label: 'Current', href: '/whats-on#current' },
-                        { label: 'Upcoming', href: '/whats-on#upcoming' },
-                        { label: 'Archive', href: '/whats-on#archive' }
-                    ]
-                },
-                {
-                    title: 'Exhibitions', links: [
-                        { label: 'Current', href: '/exhibitions#current' },
-                        { label: 'Upcoming', href: '/exhibitions#upcoming' },
-                        { label: 'Archive', href: '/exhibitions#archive' }
-                    ]
-                },
-                {
-                    title: 'Events', links: [
-                        { label: 'Current', href: '/events#current' },
-                        { label: 'Upcoming', href: '/events#upcoming' },
-                        { label: 'Archive', href: '/events#archive' }
-                    ]
-                }
-            ]
-        },
-        {
-            href: '/collection',
-            label: 'Archive',
-            columns: [
-                {
-                    title: 'Repository', links: [
-                        { label: 'The Collection', href: '/collection' },
-                        { label: 'Artist Registry', href: '/artists' },
-                        { label: 'Publications', href: '/publications' }
-                    ]
-                }
-            ]
-        },
-        {
-            href: '/events',
-            label: 'Programs',
-            columns: [
-                {
-                    title: 'Activity', links: [
+                    title: 'Current', links: [
+                        { label: 'Exhibitions', href: '/exhibitions' },
                         { label: 'Events Calendar', href: '/events' },
-                        { label: 'Educational Outreach', href: '/education' }
+                        { label: "What's On Today", href: '/whats-on' }
+                    ]
+                },
+                {
+                    title: 'Archive', links: [
+                        { label: 'Past Exhibitions', href: '/exhibitions#archive' },
+                        { label: 'Past Events', href: '/events#archive' }
                     ]
                 }
             ]
         },
-        { href: '/channel', label: 'Channel' },
         {
             href: '/visit',
             label: 'Visit',
@@ -193,9 +159,60 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                 {
                     title: 'NCAI', links: [
                         { label: 'Plan Your Visit', href: '/visit' },
-                        { label: 'About Us', href: '/about' },
-                        { label: 'Support NCAI', href: '/get-involved' },
-                        { label: 'Contact', href: '/contact' }
+                        { label: 'Location & Hours', href: '/visit#location' },
+                        { label: 'Accessibility', href: '/accessibility' }
+                    ]
+                },
+                {
+                    title: 'Groups', links: [
+                        { label: 'Tours & Groups', href: '/visit#tours' },
+                        { label: 'School Visits', href: '/about/mission' }
+                    ]
+                }
+            ]
+        },
+        {
+            href: '/collection',
+            label: 'Collection',
+            columns: [
+                {
+                    title: 'Research', links: [
+                        { label: 'Collection', href: '/collection' },
+                        { label: 'Artists', href: '/artists' },
+                        { label: 'Archives', href: '/collection' }
+                    ]
+                }
+            ]
+        },
+        {
+            href: '/education',
+            label: 'Learn',
+            columns: [
+                {
+                    title: 'Engagement', links: [
+                        { label: 'Public Programs', href: '/education' },
+                        { label: 'Artist Residencies', href: '/about/mission' },
+                        { label: 'Resources', href: '/whats-on' }
+                    ]
+                }
+            ]
+        },
+        { href: '/channel', label: 'Channel' },
+        {
+            href: '/get-involved',
+            label: 'Support',
+            columns: [
+                {
+                    title: 'Join Us', links: [
+                        { label: 'Membership', href: '/get-involved#membership' },
+                        { label: 'Support NCAI', href: '/get-involved#support' },
+                        { label: 'Careers', href: '/about/careers' }
+                    ]
+                },
+                {
+                    title: 'Opportunities', links: [
+                        { label: 'Volunteer', href: '/contact' },
+                        { label: 'Venue Hire', href: '/contact' }
                     ]
                 }
             ]
@@ -303,9 +320,9 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                             {/* Top Tier Links (Small) */}
                             <div className="flex justify-end items-center gap-6">
                                 {utilityLinks.length > 0 ? (
-                                    utilityLinks.map((link) => (
+                                    utilityLinks.map((link, idx) => (
                                         <Link 
-                                            key={link.href} 
+                                            key={`${link.label}-${link.href}-${idx}`} 
                                             href={link.href} 
                                             className="opacity-80 hover:opacity-100 text-xs font-semibold tracking-widest uppercase transition-opacity"
                                         >
@@ -314,10 +331,8 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                                     ))
                                 ) : (
                                     <>
-                                        <Link href="#" className="opacity-80 hover:opacity-100 text-xs font-semibold tracking-widest uppercase transition-opacity">Shop</Link>
-                                        <Link href="#" className="opacity-80 hover:opacity-100 text-xs font-semibold tracking-widest uppercase transition-opacity">Support</Link>
-                                        <Link href="#" className="opacity-80 hover:opacity-100 text-xs font-semibold tracking-widest uppercase transition-opacity">Members</Link>
-                                        <Link href="#" className="opacity-80 hover:opacity-100 text-xs font-semibold tracking-widest uppercase transition-opacity">Venue Hire</Link>
+                                        <Link href="#" className="opacity-80 hover:opacity-100 text-[10px] font-bold tracking-[0.2em] uppercase transition-opacity">Shop</Link>
+                                        <Link href="/get-involved#membership" className="opacity-80 hover:opacity-100 text-[10px] font-bold tracking-[0.2em] uppercase transition-opacity">Membership</Link>
                                     </>
                                 )}
                                 <LanguageSwitcher />
@@ -328,7 +343,7 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                                 <nav className="flex items-center gap-8">
                                     {displayLinks.map((link, idx) => (
                                         <Link
-                                            key={link.href}
+                                            key={`${link.label}-${link.href}-${idx}`}
                                             href={link.href}
                                             className="text-lg md:text-xl font-bold uppercase tracking-tight relative py-2 group hover:opacity-70 transition-opacity"
                                             onMouseEnter={() => handleMouseEnter(idx)}
@@ -402,6 +417,7 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                             <MegaMenu
                                 key={idx}
                                 isOpen={activeMenuIndex === idx && !!link.columns}
+                                activeCategory={link.label}
                                 columns={link.columns || []}
                                 onClose={closeMegaMenu}
                                 featuredImages={featuredImages}
@@ -416,7 +432,7 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                     )}>
                         <nav className="flex flex-col gap-10">
                             {displayLinks.map((link, i) => (
-                                <div key={link.href} className="flex flex-col gap-4">
+                                <div key={`${link.label}-${link.href}-${i}`} className="flex flex-col gap-4">
                                     <Link
                                         href={link.href}
                                         className={cn(
@@ -437,7 +453,7 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                                         )} style={{ transitionDelay: `${(i * 50) + 200}ms` }}>
                                             {(link.columns || []).flatMap(col => col.links || []).map((sublink, j) => (
                                                 <Link
-                                                    key={(sublink?.href || '') + j}
+                                                    key={`${sublink?.label}-${sublink?.href}-${j}`}
                                                     href={sublink?.href || '#'}
                                                     className="text-lg font-semibold text-white/60 hover:text-white"
                                                     onClick={() => setIsMobileMenuOpen(false)}

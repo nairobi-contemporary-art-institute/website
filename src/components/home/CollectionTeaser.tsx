@@ -79,7 +79,7 @@ export function CollectionTeaser({ data, locale }: CollectionTeaserProps) {
   };
 
   return (
-    <section className="bg-[#121212] py-24 md:py-48 border-t border-white/5 overflow-hidden">
+    <section className="bg-background-dark py-24 md:py-48 overflow-hidden">
       <div className="container mx-auto px-section-clamp">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 mb-20 md:mb-32">
           
@@ -167,13 +167,15 @@ export function CollectionTeaser({ data, locale }: CollectionTeaserProps) {
                             </div>
                           }
                         >
-                          <div className="w-2.5 h-2.5 rounded-full bg-white/40 group-hover:bg-white transition-colors cursor-help ring-4 ring-black/40 shadow-lg" />
+                          <div className="w-6 h-6 flex items-center justify-center">
+                            <div className="w-2.5 h-2.5 rounded-full bg-white/40 group-hover:bg-white transition-colors cursor-help ring-4 ring-black/40 shadow-lg" />
+                          </div>
                         </ArtTooltip>
                       </div>
                     )}
 
                     <Link href={`/${slug}`} className="block">
-                      <div className="relative bg-[#1A1A1A]/50 mb-6 overflow-hidden shadow-2xl transition-shadow duration-500 group-hover:shadow-white/[0.05]">
+                      <div className="relative bg-charcoal/50 mb-6 overflow-hidden shadow-2xl transition-shadow duration-500 group-hover:shadow-white/[0.05]">
                         {image?.asset ? (
                           <div style={{ aspectRatio: image.asset.metadata?.dimensions?.aspectRatio || 1 }}>
                             <Image
@@ -186,7 +188,7 @@ export function CollectionTeaser({ data, locale }: CollectionTeaserProps) {
                             />
                           </div>
                         ) : (
-                          <div className="aspect-[4/5] w-full h-full flex items-center justify-center text-white/10 text-[10px] uppercase tracking-widest bg-[#1A1A1A]">
+                          <div className="aspect-[4/5] w-full h-full flex items-center justify-center text-white/10 text-[10px] uppercase tracking-widest bg-charcoal">
                             {tCol('noImageAvailable')}
                           </div>
                         )}

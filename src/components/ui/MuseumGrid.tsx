@@ -62,7 +62,7 @@ export function MuseumGrid({
         <div className={cn("w-full flex flex-col", className)}>
             {/* Filter Bar */}
             {showFilters && (
-                <div className="bg-[#1a1a1a] text-white py-4 px-6 md:px-8 border-b border-white/10 z-40">
+                <div className="bg-background-dark text-white py-4 px-6 md:px-8 border-b border-white/10 z-40">
                     <div className="flex flex-col md:flex-row md:items-center gap-4 text-xs tracking-widest uppercase">
                         <span className="opacity-70 font-bold shrink-0">{filterPrefix}</span>
                         
@@ -108,10 +108,10 @@ export function MuseumGrid({
             {/* Isotope Masonry Grid */}
             <motion.div 
                 layout
-                className={cn("grid w-full", gridGap, gridColumns)}
+                className={cn("grid w-full bg-background-dark", gridGap, gridColumns)}
             >
                 <AnimatePresence mode="popLayout">
-                    {filteredItems.map((item) => (
+                    {filteredItems.map((item, index) => (
                         <motion.div
                             layout
                             initial={{ opacity: 0, scale: 0.9 }}
@@ -121,7 +121,7 @@ export function MuseumGrid({
                             key={item.id}
                             className="w-full"
                         >
-                            <MuseumCard data={item} aspectRatio={cardAspectRatio} />
+                            <MuseumCard data={item} aspectRatio={cardAspectRatio} priority={index < 2} />
                         </motion.div>
                     ))}
                 </AnimatePresence>

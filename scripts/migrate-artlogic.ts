@@ -167,7 +167,7 @@ async function run() {
   // TO ENSURE WE CAN TEST SAFELY, DEFAULT TEST_MODE = TRUE
   // TO DO FULL IMPORT, CHANGE testMode = false
   const testMode = false; 
-  let limit = testMode ? 5 : rows.length;
+  const limit = testMode ? 5 : rows.length;
 
   for (let i = 0; i < limit; i++) {
     const row = rows[i];
