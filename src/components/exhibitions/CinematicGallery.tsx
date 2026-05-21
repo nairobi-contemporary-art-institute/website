@@ -1,13 +1,14 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, ChevronLeft, ChevronRight, Info } from 'lucide-react'
+import { X, ChevronLeft, ChevronRight } from 'lucide-react'
+import { TooltipIcon } from '@/components/ui/TooltipIcon'
 import { urlFor } from '@/sanity/lib/image'
 import { getLocalizedValue } from '@/sanity/lib/utils'
 import { cn } from '@/lib/utils'
 import { MarkdownText } from '@/components/ui/MarkdownText'
-import { gsap, ScrollTrigger } from '@/lib/gsap'
+import { gsap } from '@/lib/gsap'
 import { useGSAP } from '@gsap/react'
 
 interface GalleryImage {
@@ -158,8 +159,8 @@ export function CinematicGallery({ images, locale, title, className }: Cinematic
                             {/* Stylish Hover Tooltip Trigger */}
                             <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30">
                                 <div className="relative">
-                                    <div className="bg-white rounded-full p-2 text-black hover:bg-white/90 transition-colors shadow-lg">
-                                        <Info size={16} fill="currentColor" />
+                                    <div className="w-6 h-6 rounded-circle bg-white flex items-center justify-center text-black hover:bg-white/90 transition-colors shadow-lg">
+                                        <TooltipIcon size={12} />
                                     </div>
                                     
                                     {/* Tooltip Content */}
@@ -198,12 +199,12 @@ export function CinematicGallery({ images, locale, title, className }: Cinematic
                                     setShowCaption(!showCaption);
                                 }}
                                 className={cn(
-                                    "p-3 rounded-full transition-all duration-300",
+                                    "p-3 rounded-circle transition-all duration-300",
                                     showCaption ? "bg-white text-black" : "bg-white/10 text-white hover:bg-white/20"
                                 )}
                                 title="Image Info"
                             >
-                                <Info size={24} fill={showCaption ? "currentColor" : "none"} />
+                                <TooltipIcon size={24} />
                             </button>
                             <button 
                                 onClick={() => setSelectedIndex(null)}

@@ -35,6 +35,11 @@
   border-radius: 0 !important;
 }
 
+/* Exception for circular elements (tooltips, etc) */
+.rounded-circle {
+  border-radius: 9999px !important;
+}
+
 @theme {
   --color-background: #FFFFFF;
   --color-background-dark: #1C1C1C;

@@ -9,7 +9,8 @@ import { ResponsiveDivider } from '@/components/ui/ResponsiveDivider'
 import { PortableText } from '@/components/ui/PortableText'
 import { ArtCaption } from '@/components/ui/ArtCaption'
 import { MapFrame } from '@/components/ui/MapFrame'
-import { LucideClock, LucideMapPin, LucidePhone, LucideMail, LucideInfo, LucideBus, LucideCar, LucideTrainFront } from 'lucide-react'
+import { LucideClock, LucideMapPin, LucidePhone, LucideMail, LucideBus, LucideCar, LucideTrainFront } from 'lucide-react'
+import { TooltipIcon } from '@/components/ui/TooltipIcon'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { ArtTooltip } from '@/components/ui/ArtTooltip'
@@ -51,7 +52,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
             {announcement?.show && (
                 <div className="bg-amber-50 border-y border-amber-200 py-4 px-section-clamp">
                     <div className="container mx-auto flex items-start gap-4 text-amber-900">
-                        <LucideInfo className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                        <TooltipIcon className="w-5 h-5 mt-0.5 flex-shrink-0 rounded-circle" size={20} />
                         <div>
                             <h3 className="font-bold text-sm capitalize tracking-wider mb-1">
                                 {getLocalizedValue(announcement.title, locale)}
