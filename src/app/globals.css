@@ -45,8 +45,8 @@
   --color-background-dark: #1C1C1C;
   --color-foreground: var(--color-charcoal);
 
-  /* Typography - The Institutional Omnibus Stack */
-  --font-geist: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  /* Typography - Helvetica Neue preview (macOS system font — replace with licensed webfont before production) */
+  --font-geist: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-noto: var(--font-noto-arabic), var(--font-noto-hindi), var(--font-noto-ethiopic);
 
   /* Unified Font System */
