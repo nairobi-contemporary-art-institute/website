@@ -8,7 +8,7 @@ import { urlFor } from '@/sanity/lib/image'
 import { getLocalizedValue } from '@/sanity/lib/utils'
 import { cn } from '@/lib/utils'
 import { MarkdownText } from '@/components/ui/MarkdownText'
-import { gsap } from '@/lib/gsap'
+import { gsap, ScrollTrigger } from '@/lib/gsap'
 import { useGSAP } from '@gsap/react'
 
 interface GalleryImage {
@@ -69,6 +69,43 @@ export function CinematicGallery({ images, locale, title, className }: Cinematic
             tween.kill()
         }
     }, { scope: containerRef, dependencies: [hasImages] })
+
+    // Recompute ScrollTrigger geometry once images have their real widths.
+    // The strip <img>s have unknown width until loaded, so scrollWidth is
+    // measured too small on mount → the pin releases before the last images
+    // scroll in. Refreshing after each load fixes the travel/pin duration
+    // (values are functions with invalidateOnRefresh already enabled).
+    useEffect(() => {
+        if (!hasImages || !stripRef.current) return
+
+        const imgs = Array.from(stripRef.current.querySelectorAll('img'))
+        let remaining = imgs.filter(img => !img.complete).length
+
+        // All images already cached — still refresh once to be safe.
+        if (remaining === 0) {
+            ScrollTrigger.refresh()
+            return
+        }
+
+        const onSettle = () => {
+            remaining -= 1
+            // Refresh incrementally and again when the last image settles.
+            ScrollTrigger.refresh()
+        }
+
+        const cleanups = imgs
+            .filter(img => !img.complete)
+            .map(img => {
+                img.addEventListener('load', onSettle)
+                img.addEventListener('error', onSettle)
+                return () => {
+                    img.removeEventListener('load', onSettle)
+                    img.removeEventListener('error', onSettle)
+                }
+            })
+
+        return () => cleanups.forEach(fn => fn())
+    }, [hasImages])
 
     // Sync scroll when navigating in lightbox
     useEffect(() => {

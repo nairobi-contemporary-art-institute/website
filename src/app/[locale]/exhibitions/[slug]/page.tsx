@@ -110,6 +110,7 @@ export default async function ExhibitionPage({ params }: Props) {
 
     // Build Nav Items
     const navItems = [
+        exhibition.installationViews?.length > 0 && { id: 'installation', label: 'Installation' },
         { id: 'overview', label: 'Overview' },
         artists.length > 0 && { id: 'artists', label: 'Artists' },
         { id: 'visitor-info', label: 'Visit' },
