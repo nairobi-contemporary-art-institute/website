@@ -1,8 +1,9 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, ChevronLeft, ChevronRight, Info } from 'lucide-react'
+import { X, ChevronLeft, ChevronRight } from 'lucide-react'
+import { TooltipIcon } from '@/components/ui/TooltipIcon'
 import { urlFor } from '@/sanity/lib/image'
 import { getLocalizedValue } from '@/sanity/lib/utils'
 import { cn } from '@/lib/utils'
@@ -69,6 +70,43 @@ export function CinematicGallery({ images, locale, title, className }: Cinematic
         }
     }, { scope: containerRef, dependencies: [hasImages] })
 
+    // Recompute ScrollTrigger geometry once images have their real widths.
+    // The strip <img>s have unknown width until loaded, so scrollWidth is
+    // measured too small on mount → the pin releases before the last images
+    // scroll in. Refreshing after each load fixes the travel/pin duration
+    // (values are functions with invalidateOnRefresh already enabled).
+    useEffect(() => {
+        if (!hasImages || !stripRef.current) return
+
+        const imgs = Array.from(stripRef.current.querySelectorAll('img'))
+        let remaining = imgs.filter(img => !img.complete).length
+
+        // All images already cached — still refresh once to be safe.
+        if (remaining === 0) {
+            ScrollTrigger.refresh()
+            return
+        }
+
+        const onSettle = () => {
+            remaining -= 1
+            // Refresh incrementally and again when the last image settles.
+            ScrollTrigger.refresh()
+        }
+
+        const cleanups = imgs
+            .filter(img => !img.complete)
+            .map(img => {
+                img.addEventListener('load', onSettle)
+                img.addEventListener('error', onSettle)
+                return () => {
+                    img.removeEventListener('load', onSettle)
+                    img.removeEventListener('error', onSettle)
+                }
+            })
+
+        return () => cleanups.forEach(fn => fn())
+    }, [hasImages])
+
     // Sync scroll when navigating in lightbox
     useEffect(() => {
         if (!hasImages) return
@@ -133,49 +171,37 @@ export function CinematicGallery({ images, locale, title, className }: Cinematic
                     const localizedCaption = getLocalizedValue(image.caption, locale)
 
                     return (
-                        <div
+                        <figure
                             key={i}
                             ref={el => { itemRefs.current[i] = el }}
-                            className="relative flex-none flex-shrink-0 cursor-pointer group"
-                            style={{ 
-                                height: 'max(60vh, 450px)', 
-                                maxHeight: '80vh',
-                                width: 'auto',
-                                minWidth: '100px' // Prevent total shrinkage before load
-                            }}
+                            className="group flex-none flex-shrink-0 cursor-pointer flex flex-col"
                             onClick={() => setSelectedIndex(i)}
                         >
-                            <motion.img
-                                layoutId={`image-${i}`}
-                                src={imageUrl}
-                                alt={localizedCaption || `Gallery image ${i + 1}`}
-                                className="h-full w-auto object-contain bg-black/5 transition-opacity duration-300"
-                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                            />
-                            
-                            {/* Stylish Hover Tooltip Trigger */}
-                            <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30">
-                                <div className="relative">
-                                    <div className="bg-white rounded-full p-2 text-black hover:bg-white/90 transition-colors shadow-lg">
-                                        <Info size={16} fill="currentColor" />
-                                    </div>
-                                    
-                                    {/* Tooltip Content */}
-                                    <div className="absolute bottom-full left-0 mb-4 w-64 p-4 bg-black border border-white/10 text-white pointer-events-none transform -translate-x-0 hidden group-hover:block z-50 whitespace-normal">
-                                        <div className="premium-gallery-text text-[14px] lowercase leading-relaxed">
-                                            {localizedCaption ? (
-                                                <MarkdownText text={localizedCaption} />
-                                            ) : (
-                                                "No caption available"
-                                            )}
-                                        </div>
-                                        <div className="absolute top-full left-4 border-l-8 border-r-8 border-t-8 border-transparent border-t-black" />
-                                    </div>
-                                </div>
+                            <div
+                                style={{
+                                    height: 'max(52vh, 400px)',
+                                    maxHeight: '68vh',
+                                    width: 'auto',
+                                    minWidth: '100px' // Prevent total shrinkage before load
+                                }}
+                            >
+                                <motion.img
+                                    layoutId={`image-${i}`}
+                                    src={imageUrl}
+                                    alt={localizedCaption || `Gallery image ${i + 1}`}
+                                    className="h-full w-auto object-contain bg-black/5 transition-opacity duration-300"
+                                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                />
                             </div>
-                        </div>
+
+                            {localizedCaption && (
+                                <figcaption className="mt-3 max-w-md whitespace-normal premium-gallery-text text-xs md:text-sm normal-case text-white/70 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <MarkdownText text={localizedCaption} />
+                                </figcaption>
+                            )}
+                        </figure>
                     )
                 })}
             </div>
@@ -198,12 +224,12 @@ export function CinematicGallery({ images, locale, title, className }: Cinematic
                                     setShowCaption(!showCaption);
                                 }}
                                 className={cn(
-                                    "p-3 rounded-full transition-all duration-300",
+                                    "p-3 rounded-circle transition-all duration-300",
                                     showCaption ? "bg-white text-black" : "bg-white/10 text-white hover:bg-white/20"
                                 )}
                                 title="Image Info"
                             >
-                                <Info size={24} fill={showCaption ? "currentColor" : "none"} />
+                                <TooltipIcon size={24} />
                             </button>
                             <button 
                                 onClick={() => setSelectedIndex(null)}
@@ -227,14 +253,14 @@ export function CinematicGallery({ images, locale, title, className }: Cinematic
                             <ChevronRight size={32} />
                         </button>
 
-                        {/* Main Image in Lightbox */}
-                        <div className="relative w-full h-full flex items-center justify-center">
+                        {/* Main Image + caption (caption sits BELOW the image, never over it) */}
+                        <div className="w-full h-full flex flex-col items-center justify-center gap-6">
                             <motion.img
                                 key={selectedIndex}
                                 layoutId={`image-${selectedIndex}`}
                                 src={urlFor(validImages[selectedIndex].asset).width(2000).url()}
                                 alt="Gallery View"
-                                className="max-w-full max-h-full object-contain shadow-2xl"
+                                className="min-h-0 flex-1 max-w-full object-contain shadow-2xl"
                                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
                                 drag="x"
                                 dragConstraints={{ left: 0, right: 0 }}
@@ -244,33 +270,30 @@ export function CinematicGallery({ images, locale, title, className }: Cinematic
                                 }}
                             />
 
-                            {/* Caption Overlay */}
+                            {/* Caption Panel — below the image, solid, non-overlapping */}
                             <AnimatePresence>
-                                {showCaption && (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: 10 }}
-                                        className="absolute bottom-0 left-0 right-0 p-8 pt-20 bg-gradient-to-t from-black via-black/80 to-transparent text-white"
-                                        onClick={(e) => e.stopPropagation()}
-                                    >
-                                        <div className="max-w-3xl mx-auto space-y-4">
-                                            <div className="premium-gallery-text text-xs tracking-[0.3em] text-white/40">
-                                                Information
+                                {showCaption && (() => {
+                                    const cap = getLocalizedValue(validImages[selectedIndex].caption, locale)
+                                    if (!cap) return null
+                                    return (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 12 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: 8 }}
+                                            className="shrink-0 w-full max-w-3xl mx-auto px-6 py-5 bg-black/60 border-t border-white/10 text-white"
+                                            onClick={(e) => e.stopPropagation()}
+                                        >
+                                            <div className="space-y-2">
+                                                <div className="premium-gallery-text text-[10px] tracking-[0.3em] text-white/40">
+                                                    Information
+                                                </div>
+                                                <p className="premium-gallery-text text-base md:text-lg leading-relaxed normal-case">
+                                                    <MarkdownText text={cap} />
+                                                </p>
                                             </div>
-                                            <p className="premium-gallery-text text-xl md:text-2xl leading-relaxed normal-case">
-                                                {(() => {
-                                                    const cap = getLocalizedValue(validImages[selectedIndex].caption, locale);
-                                                    return cap ? (
-                                                        <MarkdownText text={cap} />
-                                                    ) : (
-                                                        "No description available."
-                                                    );
-                                                })()}
-                                            </p>
-                                        </div>
-                                    </motion.div>
-                                )}
+                                        </motion.div>
+                                    )
+                                })()}
                             </AnimatePresence>
                         </div>
 

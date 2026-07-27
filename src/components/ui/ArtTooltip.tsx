@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { LucideInfo } from 'lucide-react'
+import { TooltipIcon } from '@/components/ui/TooltipIcon'
 import { cn } from '@/lib/utils'
 import { MarkdownText } from '@/components/ui/MarkdownText'
 
@@ -55,10 +55,10 @@ export function ArtTooltip({ content, children, className, align = 'right' }: Ar
                     }}
                     onMouseEnter={() => setIsVisible(true)}
                     onMouseLeave={() => setIsVisible(false)}
-                    className="flex items-center justify-center w-8 h-8 rounded-full bg-black/40 backdrop-blur-md text-white border border-white/20 hover:bg-black/60 transition-all focus:outline-none"
+                    className="flex items-center justify-center w-6 h-6 rounded-circle bg-black/40 backdrop-blur-md text-white border border-white/20 hover:bg-black/60 transition-all focus:outline-none"
                     aria-label="View more information"
                 >
-                    <LucideInfo className="w-4 h-4" />
+                    <TooltipIcon size={12} />
                 </button>
             )}
 

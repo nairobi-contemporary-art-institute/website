@@ -168,7 +168,7 @@ export function CollectionTeaser({ data, locale }: CollectionTeaserProps) {
                           }
                         >
                           <div className="w-6 h-6 flex items-center justify-center">
-                            <div className="w-2.5 h-2.5 rounded-full bg-white/40 group-hover:bg-white transition-colors cursor-help ring-4 ring-black/40 shadow-lg" />
+                            <div className="w-2.5 h-2.5 rounded-circle bg-white/40 group-hover:bg-white transition-colors cursor-help ring-4 ring-black/40 shadow-lg" />
                           </div>
                         </ArtTooltip>
                       </div>

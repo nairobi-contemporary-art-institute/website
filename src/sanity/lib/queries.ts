@@ -87,6 +87,10 @@ export const EXHIBITION_BY_SLUG_QUERY = groq`
       caption,
       asset-> { _id, metadata { lqip } }
     },
+    installationViews[] {
+      caption,
+      asset-> { _id, metadata { lqip } }
+    },
     gallery[] {
       caption,
       asset-> {

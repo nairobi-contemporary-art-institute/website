@@ -62,11 +62,11 @@ export function DesignTokens() {
                 </div>
             </section>
 
-            {/* Typography Scale — Derived from Geist */}
+            {/* Typography Scale — Helvetica Neue */}
             <section className="space-y-12">
                 <header className="border-b border-deep-umber/10 pb-4">
                     <h3 className="text-xs font-bold text-charcoal capitalize tracking-widest mb-2">Typography Scale</h3>
-                    <p className="text-xs text-deep-umber/60 italic">NCAI uses the Vercel Geist type system for architectural clarity and technical precision.</p>
+                    <p className="text-xs text-deep-umber/60 italic">NCAI uses Helvetica Neue for architectural clarity and institutional precision.</p>
                 </header>
 
                 <div className="grid lg:grid-cols-2 gap-16">
@@ -117,7 +117,7 @@ export function DesignTokens() {
                             <div className="grid grid-cols-2 gap-8">
                                 <div className="space-y-2">
                                     <span className="text-[9px] font-mono text-deep-umber/40 capitalize">Sans (Primary)</span>
-                                    <p className="text-xl font-bold text-charcoal">Geist Sans</p>
+                                    <p className="text-xl font-bold text-charcoal">Helvetica Neue</p>
                                 </div>
                                 <div className="space-y-2">
                                     <span className="text-[9px] font-mono text-deep-umber/40 capitalize">Mono (System)</span>

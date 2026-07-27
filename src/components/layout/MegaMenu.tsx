@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 import { Popover } from '@base-ui/react'
 import Image from 'next/image'
 import { urlFor } from '@/sanity/lib/image'
-import { Info } from 'lucide-react'
+import { TooltipIcon } from '@/components/ui/TooltipIcon'
 import { useLocale } from 'next-intl'
 
 interface MegaMenuProps {
@@ -136,10 +136,10 @@ export function MegaMenu({ isOpen, activeCategory, columns, onClose, featuredIma
                                                         <div className="group/info relative">
                                                             <button 
                                                                 aria-label="Image Information"
-                                                                className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/20 hover:bg-white/40 hover:scale-110 transition-all duration-300 shadow-lg"
+                                                                className="w-6 h-6 rounded-circle bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/20 hover:bg-white/40 hover:scale-110 transition-all duration-300 shadow-lg"
                                                                 onClick={(e) => e.stopPropagation()}
                                                             >
-                                                                <Info size={18} />
+                                                                <TooltipIcon size={12} />
                                                             </button>
                                                             
                                                             {/* Tooltip */}

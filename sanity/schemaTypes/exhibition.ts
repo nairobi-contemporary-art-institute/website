@@ -203,6 +203,34 @@ export const exhibition = defineType({
             ],
         }),
         defineField({
+            name: 'installationViews',
+            title: 'Installation Views',
+            description: 'Side-scrolling carousel that appears as the FIRST section on the exhibition page. Use photos of the exhibition installed in the gallery space (the room, the hang, visitors) — distinct from images of the individual works. Shown on a white background to set them apart from the works gallery.',
+            type: 'array',
+            group: 'visual',
+            of: [
+                {
+                    type: 'image',
+                    options: { hotspot: true },
+                    fields: [
+                        {
+                            name: 'alt',
+                            type: 'string',
+                            title: 'Alternative Text',
+                            description: 'Describe the installation view for accessibility. Avoid "image of". Mention the gallery atmosphere, the hang, or the space.',
+                            validation: (Rule) => Rule.required(),
+                        },
+                        {
+                            name: 'caption',
+                            type: 'internationalizedArrayString',
+                            title: 'Caption',
+                            description: 'Optional. Displayed below the image — never overlaid.',
+                        },
+                    ],
+                },
+            ],
+        }),
+        defineField({
             name: 'listImage',
             title: 'Listing Image (Archive)',
             description: 'Recommended size: 1500px × 1500px (1:1 Square) or 1500px × 1875px (4:5 Portrait). These images appear in the main exhibition archive grid.',

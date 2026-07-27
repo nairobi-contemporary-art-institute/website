@@ -12,6 +12,8 @@ import { PortableText } from '@/components/ui/PortableText'
 import { LogoGrid } from '@/components/ui/LogoGrid'
 import { ArtCaption } from '@/components/ui/ArtCaption'
 import { ExhibitHeroSplit } from '@/components/exhibitions/ExhibitHeroSplit'
+import { InstallationCarousel } from '@/components/exhibitions/InstallationCarousel'
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs'
 import { PressResources } from '@/components/exhibitions/PressResources'
 import { HorizontalGallery } from '@/components/exhibitions/HorizontalGallery'
 import { CinematicGallery } from '@/components/exhibitions/CinematicGallery'
@@ -109,6 +111,7 @@ export default async function ExhibitionPage({ params }: Props) {
 
     // Build Nav Items
     const navItems = [
+        exhibition.installationViews?.length > 0 && { id: 'installation', label: 'Installation' },
         { id: 'overview', label: 'Overview' },
         artists.length > 0 && { id: 'artists', label: 'Artists' },
         { id: 'visitor-info', label: 'Visit' },
@@ -127,6 +130,45 @@ export default async function ExhibitionPage({ params }: Props) {
 
     return (
         <main className="min-h-screen bg-[#F9F8F6]">
+            {/* INSTALLATION SECTION — breadcrumbs + title block + carousel, white bg, above the hero */}
+            {exhibition.installationViews?.length > 0 && (
+                <section id="installation" className="scroll-mt-32 bg-white pt-36 md:pt-44">
+                    <div className="px-6 md:px-12 space-y-8">
+                        <Breadcrumbs
+                            items={[
+                                { label: t.Nav?.home || 'Home', href: `/${locale}` },
+                                { label: t.Nav?.exhibitions || t.Pages?.exhibitions?.title || 'Exhibitions', href: `/${locale}/exhibitions` },
+                                { label: title || 'Untitled' },
+                            ]}
+                        />
+
+                        <header className="space-y-4 max-w-5xl">
+                            <span className="inline-block text-[10px] font-black uppercase tracking-[0.3em] text-charcoal/40">
+                                {t.Pages?.exhibitions?.label || 'Exhibition'}
+                            </span>
+                            {artistNames && (
+                                <h3 className="text-sm md:text-base font-medium tracking-wide text-charcoal/70">
+                                    {artistNames}
+                                </h3>
+                            )}
+                            <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.85] text-charcoal">
+                                {title || 'Untitled'}
+                            </h1>
+                            <p className="text-sm md:text-base font-bold tracking-tight text-charcoal/80">
+                                {formatExhibitionDate(exhibition.startDate, exhibition.endDate, locale)}
+                            </p>
+                        </header>
+                    </div>
+
+                    <div className="mt-10 md:mt-12">
+                        <InstallationCarousel
+                            images={exhibition.installationViews}
+                            locale={locale}
+                        />
+                    </div>
+                </section>
+            )}
+
             {/* HERO SECTION */}
             {exhibition.heroLayout === 'split' ? (
                 <ExhibitHeroSplit
