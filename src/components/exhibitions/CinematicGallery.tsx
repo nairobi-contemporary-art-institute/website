@@ -26,7 +26,7 @@ interface CinematicGalleryProps {
 export function CinematicGallery({ images, locale, title, className }: CinematicGalleryProps) {
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
     const [showCaption, setShowCaption] = useState(false)
-    const itemRefs = useRef<(HTMLDivElement | null)[]>([])
+    const itemRefs = useRef<(HTMLElement | null)[]>([])
 
     const containerRef = useRef<HTMLDivElement>(null)
     const stripRef = useRef<HTMLDivElement>(null)
