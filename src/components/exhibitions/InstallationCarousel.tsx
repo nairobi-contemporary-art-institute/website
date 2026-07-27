@@ -30,7 +30,7 @@ export function InstallationCarousel({ images, locale, title, className }: Insta
 
     return (
         <section
-            className={cn('w-full bg-white pt-28 md:pt-32 pb-12 md:pb-16', className)}
+            className={cn('w-full bg-white pb-12 md:pb-16', className)}
             aria-label={title || 'Installation views'}
         >
             {title && (
@@ -41,33 +41,26 @@ export function InstallationCarousel({ images, locale, title, className }: Insta
                 </div>
             )}
 
-            <div
-                className="flex gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth px-6 md:px-12 pb-4"
-                style={{ scrollbarWidth: 'thin' }}
-            >
+            <div className="carousel-scroll flex gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory scroll-pl-6 md:scroll-pl-12 px-6 md:px-12 pb-4">
                 {validImages.map((image, i) => {
                     const imageUrl = urlFor(image.asset).height(1200).url()
-                    const lqip = image.asset?.metadata?.lqip
                     const caption = getLocalizedValue(image.caption, locale)
 
                     return (
                         <figure
                             key={image.asset?._id || i}
-                            className="snap-start shrink-0 flex flex-col"
+                            className="snap-start shrink-0 flex flex-col w-[78vw] sm:w-[46vw] md:w-[24vw]"
                         >
-                            <div
-                                className="h-[50vh] md:h-[62vh] flex items-center justify-center bg-stone-100 overflow-hidden"
-                                style={lqip ? { backgroundImage: `url(${lqip})`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}
-                            >
+                            <div className="w-full aspect-[4/3] bg-white overflow-hidden">
                                 <img
                                     src={imageUrl}
                                     alt={caption || `Installation view ${i + 1}`}
                                     loading={i === 0 ? 'eager' : 'lazy'}
-                                    className="h-full w-auto max-w-none object-contain block"
+                                    className="w-full h-full object-cover block"
                                 />
                             </div>
                             {caption && (
-                                <figcaption className="mt-3 max-w-md text-xs text-charcoal/60 leading-relaxed">
+                                <figcaption className="mt-3 w-full text-xs text-charcoal/60 leading-relaxed">
                                     {caption}
                                 </figcaption>
                             )}

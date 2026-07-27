@@ -329,3 +329,27 @@ html {
   text-shadow: none;
   background: #333;
 }
+
+/* Horizontal carousel scrollbar: invisible until hover.
+   Styling ::-webkit-scrollbar forces a non-overlay bar on macOS, so a
+   transparent thumb reads as hidden and colours in on hover — no layout shift. */
+.carousel-scroll {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: transparent transparent;
+}
+.carousel-scroll:hover {
+  scrollbar-color: rgba(28, 28, 28, 0.25) transparent;
+}
+.carousel-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+.carousel-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.carousel-scroll::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 9999px;
+}
+.carousel-scroll:hover::-webkit-scrollbar-thumb {
+  background: rgba(28, 28, 28, 0.25);
+}
