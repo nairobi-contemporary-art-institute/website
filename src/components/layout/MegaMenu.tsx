@@ -53,7 +53,7 @@ export function MegaMenu({ isOpen, activeCategory, columns, onClose, featuredIma
             <Popover.Portal>
                 <Popover.Positioner className="fixed top-[var(--header-height,100px)] left-0 w-full z-[90]">
                     <Popover.Popup
-                        className="w-full bg-background-dark border-b border-white/10 shadow-2xl overflow-hidden outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in data-[state=closed]:fade-out data-[state=open]:slide-in-from-top-2 data-[state=closed]:slide-out-to-top-2 duration-300"
+                        className="w-full bg-white border-b border-charcoal/10 shadow-2xl overflow-hidden outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in data-[state=closed]:fade-out data-[state=open]:slide-in-from-top-2 data-[state=closed]:slide-out-to-top-2 duration-300"
                         onMouseLeave={onClose}
                     >
                         <div className="container mx-auto px-6 py-12 md:px-12 flex flex-col md:flex-row gap-16">
@@ -68,7 +68,7 @@ export function MegaMenu({ isOpen, activeCategory, columns, onClose, featuredIma
                                 {columns.map((column, idx) => (
                                     <div key={idx} className="flex flex-col gap-6">
                                         {column.title && (
-                                            <h3 className="text-[10px] uppercase tracking-[0.3em] font-normal text-white/40 border-b border-white/10 pb-2">
+                                            <h3 className="text-[10px] uppercase tracking-[0.3em] font-normal text-charcoal/40 border-b border-charcoal/10 pb-2">
                                                 {column.title}
                                             </h3>
                                         )}
@@ -77,7 +77,7 @@ export function MegaMenu({ isOpen, activeCategory, columns, onClose, featuredIma
                                                 <li key={`${link.label}-${link.href}`}>
                                                     <Link
                                                         href={link.href}
-                                                        className="text-lg font-bold text-white hover:text-ochre transition-colors group flex items-center gap-2"
+                                                        className="text-lg font-bold text-charcoal hover:text-ochre transition-colors group flex items-center gap-2"
                                                         onClick={onClose}
                                                     >
                                                         <span className="relative">
@@ -94,7 +94,7 @@ export function MegaMenu({ isOpen, activeCategory, columns, onClose, featuredIma
 
                             {/* Right: Featured Images Section */}
                             <div className="w-full md:w-[45%] flex flex-col gap-6 mt-12 md:mt-0">
-                                <h3 className="text-[10px] uppercase tracking-[0.3em] font-normal text-white/40 border-b border-white/10 pb-2">
+                                <h3 className="text-[10px] uppercase tracking-[0.3em] font-normal text-charcoal/40 border-b border-charcoal/10 pb-2">
                                     {activeCategory ? `Featured in ${activeCategory}` : 'Featured'}
                                 </h3>
                                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -107,7 +107,7 @@ export function MegaMenu({ isOpen, activeCategory, columns, onClose, featuredIma
                                         return (
                                             <div key={i} className="group cursor-pointer relative">
                                                 {imgAsset?.link ? (
-                                                    <Link href={imgAsset.link} className="block relative aspect-[4/5] overflow-hidden rounded-none bg-stone-900 shadow-sm transition-transform duration-500 group-hover:scale-[1.02]">
+                                                    <Link href={imgAsset.link} className="block relative aspect-[4/5] overflow-hidden rounded-none bg-stone-100 shadow-sm transition-transform duration-500 group-hover:scale-[1.02]">
                                                         <Image
                                                             src={displayUrl}
                                                             alt={`Featured ${i + 1}`}
@@ -118,7 +118,7 @@ export function MegaMenu({ isOpen, activeCategory, columns, onClose, featuredIma
                                                         <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/20" />
                                                     </Link>
                                                 ) : (
-                                                    <div className="relative aspect-[4/5] overflow-hidden rounded-none bg-stone-900 shadow-sm transition-transform duration-500 group-hover:scale-[1.02]">
+                                                    <div className="relative aspect-[4/5] overflow-hidden rounded-none bg-stone-100 shadow-sm transition-transform duration-500 group-hover:scale-[1.02]">
                                                         <Image
                                                             src={displayUrl}
                                                             alt={`Featured ${i + 1}`}
@@ -136,7 +136,7 @@ export function MegaMenu({ isOpen, activeCategory, columns, onClose, featuredIma
                                                         <div className="group/info relative">
                                                             <button 
                                                                 aria-label="Image Information"
-                                                                className="w-6 h-6 rounded-circle bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/20 hover:bg-white/40 hover:scale-110 transition-all duration-300 shadow-lg"
+                                                                className="w-6 h-6 rounded-circle bg-charcoal/10 backdrop-blur-md flex items-center justify-center text-charcoal border border-charcoal/20 hover:bg-charcoal/20 hover:scale-110 transition-all duration-300 shadow-lg"
                                                                 onClick={(e) => e.stopPropagation()}
                                                             >
                                                                 <TooltipIcon size={12} />
@@ -144,7 +144,7 @@ export function MegaMenu({ isOpen, activeCategory, columns, onClose, featuredIma
                                                             
                                                             {/* Tooltip */}
                                                             <div className="pointer-events-none absolute bottom-full right-0 mb-3 w-[250px] opacity-0 translate-y-2 group-hover/info:opacity-100 group-hover/info:translate-y-0 transition-all duration-300 z-40">
-                                                                <div className="bg-background-dark/95 backdrop-blur-xl border border-white/10 p-4 text-xs text-white/90 leading-relaxed shadow-2xl">
+                                                                <div className="bg-white/95 backdrop-blur-xl border border-charcoal/10 p-4 text-xs text-charcoal/90 leading-relaxed shadow-2xl">
                                                                     <div className="flex flex-col gap-2">
                                                                         <span className="text-[9px] uppercase tracking-widest text-ochre font-bold">Image Information</span>
                                                                         <p className="font-normal italic">
@@ -166,24 +166,24 @@ export function MegaMenu({ isOpen, activeCategory, columns, onClose, featuredIma
                         </div>
 
                         {/* High-Converting Quick Action Bar */}
-                        <div className="bg-white/[0.03] border-t border-white/10 py-5 px-6 md:px-12">
+                        <div className="bg-charcoal/[0.03] border-t border-charcoal/10 py-5 px-6 md:px-12">
                             <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-                                <div className="flex items-center gap-8 text-[10px] uppercase tracking-[0.2em] text-white/40 font-bold">
-                                    <span className="text-white/60">Nairobi Contemporary Art Institute</span>
+                                <div className="flex items-center gap-8 text-[10px] uppercase tracking-[0.2em] text-charcoal/40 font-bold">
+                                    <span className="text-charcoal/60">Nairobi Contemporary Art Institute</span>
                                     <Link href="/visit" className="hover:text-ochre transition-colors">Plan your visit</Link>
                                     <Link href="/about" className="hover:text-ochre transition-colors">The Institute</Link>
                                 </div>
                                 <div className="flex items-center gap-6">
                                     <Link 
                                         href="/get-involved#membership" 
-                                        className="text-[10px] uppercase tracking-[0.2em] font-bold text-white bg-ochre/20 border border-ochre/30 px-4 py-2 hover:bg-ochre hover:text-black transition-all"
+                                        className="text-[10px] uppercase tracking-[0.2em] font-bold text-charcoal bg-ochre/20 border border-ochre/30 px-4 py-2 hover:bg-ochre hover:text-black transition-all"
                                         onClick={onClose}
                                     >
                                         Become a Member
                                     </Link>
                                     <Link 
                                         href="/visit" 
-                                        className="text-[10px] uppercase tracking-[0.2em] font-bold text-black bg-white px-4 py-2 hover:bg-ivory transition-all"
+                                        className="text-[10px] uppercase tracking-[0.2em] font-bold text-white bg-charcoal px-4 py-2 hover:bg-charcoal/80 transition-all"
                                         onClick={onClose}
                                     >
                                         Book Tickets

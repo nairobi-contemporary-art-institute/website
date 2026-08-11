@@ -125,6 +125,7 @@ export default async function RootLayout({
         asset?: { url: string } 
       }[];
       newsletterPopup?: any;
+      entranceAnimationEnabled?: boolean;
     }>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'], revalidate: 60 }),
     sanityFetch<any[]>({ query: COLLECTION_QUERY, tags: ['work', 'collectionItem'], revalidate: 60 })
   ]);
@@ -138,6 +139,8 @@ export default async function RootLayout({
     alt: img.alt || "NCAI Entrance Animation Backdrop",
   }));
 
+  const entranceAnimationEnabled = settings?.entranceAnimationEnabled !== false;
+
   return (
     <html lang={locale} dir={isRtl ? 'rtl' : 'ltr'} className={fontClasses} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className="antialiased min-h-screen flex flex-col" suppressHydrationWarning>
@@ -149,7 +152,7 @@ export default async function RootLayout({
                 settings={settings?.newsletterPopup} 
                 works={works}
               />
-              <EntranceAnimation backgroundImages={entranceAnimImages} />
+              {entranceAnimationEnabled && <EntranceAnimation backgroundImages={entranceAnimImages} />}
               <ConditionalWrapper
                 header={<Header locale={locale} />}
                 footer={<Footer locale={locale} />}

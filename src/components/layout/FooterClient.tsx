@@ -152,7 +152,7 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
                                     {category.title}
                                 </h4>
                                 <ul className="space-y-3 flex-grow">
-                                    {category.links.map((link, linkIndex) => (
+                                    {category.links.filter(link => link?.url).map((link, linkIndex) => (
                                          <li key={`${link.label}-${link.url}-${linkIndex}`}>
                                              <Link
                                                  href={link.url}

@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils'
 import { gsap } from '@/lib/gsap'
 import { useGSAP } from '@gsap/react'
 import { MegaMenu } from './MegaMenu'
+import { FreeEntryBadge, type FreeEntryBadgeProps } from './FreeEntryBadge'
 
 interface HeaderClientProps {
     locale: string;
@@ -25,9 +26,10 @@ interface HeaderClientProps {
     }>;
     utilityLinks?: Array<{ label: string; href: string }>;
     featuredImages?: any[];
+    freeEntryBadge?: FreeEntryBadgeProps | null;
 }
 
-export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utilityLinks = [], featuredImages = [] }: HeaderClientProps) {
+export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utilityLinks = [], featuredImages = [], freeEntryBadge }: HeaderClientProps) {
     const t = useTranslations('HomePage')
     const pathname = usePathname()
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -240,7 +242,7 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
     const isCollection = pathname?.includes('/collection')
     
     // Header turns dark (white text -> dark background)
-    const isDark = activeMenuIndex !== null || isHoveringHeader || isArtistPortrait || isArtist || isExhibition || isChannel || isCollection || isMobileMenuOpen
+    const isDark = isArtistPortrait || isArtist || isExhibition || isChannel || isCollection || isMobileMenuOpen
     
     // Header becomes solid (non-transparent)
     const isSolid = isScrolled || isMobileMenuOpen || activeMenuIndex !== null || isArtistPortrait || isArtist || isExhibition || isChannel || isCollection
@@ -340,6 +342,7 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
 
                             {/* Bottom Tier Links (Large) */}
                             <div className="flex justify-end items-center gap-8">
+                                {freeEntryBadge && <FreeEntryBadge {...freeEntryBadge} />}
                                 <nav className="flex items-center gap-8">
                                     {displayLinks.map((link, idx) => (
                                         <Link

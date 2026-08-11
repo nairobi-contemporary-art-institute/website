@@ -977,6 +977,21 @@ export const HOME_PAGE_QUERY = groq`
       pressRelease,
       accordionLabel
     },
+    about {
+      enabled,
+      heading,
+      intro,
+      subheading,
+      subBody,
+      image {
+        alt,
+        hotspot,
+        asset-> {
+          _id,
+          metadata { lqip, dimensions { width, height, aspectRatio } }
+        }
+      }
+    },
     featuredExhibition-> {
       _id,
       title,

@@ -7,7 +7,17 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontWeight: {
+        light: '300',
+        normal: '400',
+        medium: '400',
+        semibold: '400',
+        bold: '700',
+        extrabold: '700',
+        black: '700',
+      },
+    },
   },
   plugins: [],
 }

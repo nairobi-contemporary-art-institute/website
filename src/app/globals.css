@@ -84,10 +84,10 @@
   /* Layout Spacing */
   --spacing-section-clamp: clamp(1rem, 0.75rem + 1vw, 1.5rem);
 
-  /* Font Weights */
+  /* Font Weights — Helvetica hierarchy (Light / Regular / Bold) */
+  --font-weight-light: 300;
   --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-demi-bold: 600;
+  --font-weight-bold: 700;
   /* Grid System - Geist Inspired */
   --grid-columns: 12;
   --grid-guide-color: color-mix(in srgb, var(--color-rich-blue) 8%, transparent);
@@ -110,6 +110,7 @@ body {
   background-color: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans);
+  font-weight: 300;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

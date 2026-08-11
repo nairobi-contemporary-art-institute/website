@@ -385,6 +385,29 @@ export const homePage = defineType({
             ]
         }),
         defineField({
+            name: 'about',
+            title: 'About Section',
+            type: 'object',
+            description: 'Introductory section displayed directly below the hero.',
+            fields: [
+                defineField({ name: 'enabled', title: 'Enable About Section', type: 'boolean', initialValue: true }),
+                defineField({ name: 'heading', title: 'Heading', type: 'internationalizedArrayString' }),
+                defineField({ name: 'intro', title: 'Introduction', type: 'internationalizedArrayBlockContent' }),
+                defineField({ name: 'subheading', title: 'Sub-section Heading', type: 'internationalizedArrayString' }),
+                defineField({ name: 'subBody', title: 'Sub-section Body', type: 'internationalizedArrayBlockContent' }),
+                defineField({
+                    name: 'image',
+                    title: 'Section Image',
+                    type: 'image',
+                    description: 'Optional. When present, displays in the right column.',
+                    options: { hotspot: true },
+                    fields: [
+                        defineField({ name: 'alt', title: 'Alt Text', type: 'string' })
+                    ]
+                }),
+            ]
+        }),
+        defineField({
             name: 'featuredExhibition',
             title: 'Featured Exhibition Override',
             type: 'reference',

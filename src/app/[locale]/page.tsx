@@ -13,6 +13,7 @@ import { MuseumGrid } from '@/components/ui/MuseumGrid'
 import { MuseumCardData } from '@/lib/types/museum-card'
 import { CollectionTeaser } from '@/components/home/CollectionTeaser'
 import { AnnouncementBanner } from '@/components/home/AnnouncementBanner'
+import { HomeAbout } from '@/components/home/HomeAbout'
 import { COLLECTION_QUERY } from '@/sanity/lib/queries'
 
 // Define interfaces for fetched data
@@ -147,6 +148,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           featuredCards={homeData?.featuredCards}
           locale={locale}
         />
+      )}
+
+      {/* About Section */}
+      {homeData?.about?.enabled && (
+        <HomeAbout data={homeData.about} locale={locale} />
       )}
 
       {/* Announcement Banner */}
