@@ -1,8 +1,19 @@
 import type { Metadata } from "next";
-import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
+import localFont from "next/font/local";
 import { Noto_Sans_Arabic, Noto_Sans_Devanagari, Noto_Sans_Ethiopic } from "next/font/google";
 import "../globals.css";
+
+const inter = localFont({
+  src: [
+    { path: "../fonts/InterVariable.woff2", style: "normal", weight: "100 900" },
+    { path: "../fonts/InterVariable-Italic.woff2", style: "italic", weight: "100 900" },
+  ],
+  variable: "--font-inter",
+  display: "swap",
+  adjustFontFallback: "Arial",
+  fallback: ["Helvetica Neue", "Arial", "sans-serif"],
+});
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -109,7 +120,7 @@ export default async function RootLayout({
 
   // Decide which font classes to apply
   const fontClasses = [
-    GeistSans.variable,
+    inter.variable,
     GeistMono.variable,
     notoArabic.variable,
     notoHindi.variable,

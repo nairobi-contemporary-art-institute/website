@@ -45,8 +45,8 @@
   --color-background-dark: #1C1C1C;
   --color-foreground: var(--color-charcoal);
 
-  /* Typography - Helvetica Neue preview (macOS system font — replace with licensed webfont before production) */
-  --font-geist: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* Typography - Inter (self-hosted, OFL). Helvetica-adjacent grotesque; free to serve live. */
+  --font-geist: var(--font-inter), "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-noto: var(--font-noto-arabic), var(--font-noto-hindi), var(--font-noto-ethiopic);
 
   /* Unified Font System */
@@ -84,7 +84,7 @@
   /* Layout Spacing */
   --spacing-section-clamp: clamp(1rem, 0.75rem + 1vw, 1.5rem);
 
-  /* Font Weights — Helvetica hierarchy (Light / Regular / Bold) */
+  /* Font Weights — Inter weight hierarchy (Light / Regular / Bold) */
   --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-bold: 700;
@@ -317,7 +317,7 @@ html {
     word-spacing: -0.05em;
     color: #fff;
     text-transform: uppercase;
-    font-family: var(--font-geist-sans), Helvetica, Arial, sans-serif;
+    font-family: var(--font-inter), Helvetica, Arial, sans-serif;
     font-weight: 600;
     letter-spacing: 0.08em;
     word-spacing: -0.05em;
