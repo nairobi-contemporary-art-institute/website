@@ -84,10 +84,19 @@
   /* Layout Spacing */
   --spacing-section-clamp: clamp(1rem, 0.75rem + 1vw, 1.5rem);
 
-  /* Font Weights — Inter weight hierarchy (Light / Regular / Bold) */
+  /* Font Weights — Inter hierarchy collapsed to 3 tiers (Light 300 / Regular 400 / Bold 700).
+     All Tailwind weight utilities remap into these so the client hierarchy stays consistent
+     app-wide. (Tailwind v4 ignores tailwind.config.js here — no @config link — so remap must
+     live in @theme.) */
+  --font-weight-thin: 300;
+  --font-weight-extralight: 300;
   --font-weight-light: 300;
   --font-weight-normal: 400;
+  --font-weight-medium: 400;
+  --font-weight-semibold: 400;
   --font-weight-bold: 700;
+  --font-weight-extrabold: 700;
+  --font-weight-black: 700;
   /* Grid System - Geist Inspired */
   --grid-columns: 12;
   --grid-guide-color: color-mix(in srgb, var(--color-rich-blue) 8%, transparent);
