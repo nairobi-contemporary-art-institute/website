@@ -1,6 +1,7 @@
 # TODO
 
 ## Immediate (Testing)
+- [ ] Push typography commits — `0739a1c` (Inter self-host) + `591916a` (weight hierarchy) on `fix/cinematic-gallery-ref-type`; manual QA at `/styleguide` first, then push
 - [ ] Verify video playback on channel page — added `videoUrl` to `POST_BY_SLUG_QUERY`, need to test with actual video posts
 - [ ] Verify hero renders correctly with Sanity data in Studio — confirm new schema fields (slides, imageSize, date range) save and display properly
 
