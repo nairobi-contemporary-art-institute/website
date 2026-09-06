@@ -67,7 +67,7 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
             ],
         },
         {
-            title: 'Learn',
+            title: 'Education',
             links: [
                 { label: 'Academy', url: '/education' },
                 { label: 'Resources', url: '/education#resources' },

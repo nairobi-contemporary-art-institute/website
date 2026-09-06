@@ -19,19 +19,19 @@ export function ChannelCard({ post, locale, variant = 'light' }: ChannelCardProp
     const title = getLocalizedValue(post.title, locale)
 
     // Determine type label and icon
-    const type = post.mediaType || 'article'
+    const type = post.mediaType || 'text'
 
     const Icon = {
-        video: PlayCircle,
+        film: PlayCircle,
         audio: Headphones,
-        article: BookOpen
-    }[type as 'video' | 'audio' | 'article'] || BookOpen
+        text: BookOpen
+    }[type as 'film' | 'audio' | 'text'] || BookOpen
 
     const typeLabel = {
-        video: 'Watch',
+        film: 'Watch',
         audio: 'Listen',
-        article: 'Read'
-    }[type as 'video' | 'audio' | 'article'] || 'Read'
+        text: 'Read'
+    }[type as 'film' | 'audio' | 'text'] || 'Read'
 
     return (
         <Link
@@ -57,7 +57,7 @@ export function ChannelCard({ post, locale, variant = 'light' }: ChannelCardProp
 
                 {/* Media Indicator Overlay */}
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                    {(type === 'video' || type === 'audio') && (
+                    {(type === 'film' || type === 'audio') && (
                         <div className="w-12 h-12 bg-white/90 backdrop-blur text-charcoal flex items-center justify-center shadow-lg transform scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300">
                             <Icon className="w-6 h-6 fill-current" />
                         </div>

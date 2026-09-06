@@ -36,7 +36,7 @@ interface CollectionClientProps {
 
 export function CollectionClient({ locale, items, artists }: CollectionClientProps) {
     const t = useTranslations('Pages.collection')
-    const [view, setView] = useState<'collection' | 'artists'>('collection')
+    const [view, setView] = useState<'byArtist' | 'collection' | 'artists'>('byArtist')
     const [searchQuery, setSearchQuery] = useState('')
     const [filterArtist, setFilterArtist] = useState('')
     const [filterMedium, setFilterMedium] = useState('')
@@ -118,6 +118,29 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
         })
     }, [artists, locale])
 
+    // Group the (already filtered) works by artist for the foregrounded "By Artist" view.
+    const worksByArtist = useMemo(() => {
+        const groups = new Map<string, { name: string; slug?: string; works: CollectionItem[] }>()
+        const noArtistKey = '__unattributed__'
+
+        filteredItems.forEach(item => {
+            const name = getLocalizedValue(item.artist?.name, locale) || item.artistName || ''
+            const key = name || noArtistKey
+            if (!groups.has(key)) {
+                groups.set(key, { name: name || t('unknownArtist'), slug: item.artist?.slug, works: [] })
+            }
+            groups.get(key)!.works.push(item)
+        })
+
+        return Array.from(groups.entries())
+            .sort(([a], [b]) => {
+                if (a === noArtistKey) return 1
+                if (b === noArtistKey) return -1
+                return a.localeCompare(b)
+            })
+            .map(([, group]) => group)
+    }, [filteredItems, locale, t])
+
     const reShuffle = () => {
         setSortBy('random')
         const pool = [...items]
@@ -143,10 +166,19 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 border-b border-white/5 pb-8">
                 <div className="flex gap-2">
                     <button
+                        onClick={() => setView('byArtist')}
+                        className={cn(
+                            "px-8 py-3 text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300",
+                            (!isMounted || view === 'byArtist') ? "bg-white text-black" : "bg-white/5 text-white/40 hover:text-white"
+                        )}
+                    >
+                        {t('byArtist') || 'By Artist'}
+                    </button>
+                    <button
                         onClick={() => setView('collection')}
                         className={cn(
                             "px-8 py-3 text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300",
-                            (!isMounted || view === 'collection') ? "bg-white text-black" : "bg-white/5 text-white/40 hover:text-white"
+                            (isMounted && view === 'collection') ? "bg-white text-black" : "bg-white/5 text-white/40 hover:text-white"
                         )}
                     >
                         {t('title') || 'Collection'}
@@ -162,7 +194,7 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                     </button>
                 </div>
 
-                {(isMounted && view === 'collection') && (
+                {(isMounted && view !== 'artists') && (
                     <div className="w-full md:max-w-xl relative group">
                         <input
                             type="text"
@@ -180,7 +212,7 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                 )}
             </div>
 
-            {(isMounted && view === 'collection') && (
+            {(isMounted && view !== 'artists') && (
                 <>
                     {/* Filters Row */}
                     <div className="space-y-8">
@@ -288,14 +320,45 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                         </div>
                     </div>
 
-                    {/* Results Grid - Using columns for true masonry */}
-                    <div className="columns-1 md:columns-2 lg:columns-4 gap-8 [column-fill:_balance]">
-                        <AnimatePresence mode="popLayout">
-                            {filteredItems.map((item, index) => (
-                                <WorkCard key={item._id} item={item} locale={locale} index={index} />
+                    {/* Results Grid — masonry (Collection) or grouped by artist (By Artist) */}
+                    {view === 'collection' ? (
+                        <div className="columns-1 md:columns-2 lg:columns-4 gap-8 [column-fill:_balance]">
+                            <AnimatePresence mode="popLayout">
+                                {filteredItems.map((item, index) => (
+                                    <WorkCard key={item._id} item={item} locale={locale} index={index} />
+                                ))}
+                            </AnimatePresence>
+                        </div>
+                    ) : (
+                        <div className="space-y-24">
+                            {worksByArtist.map((group) => (
+                                <section key={group.name} className="space-y-8">
+                                    <div className="flex items-baseline justify-between border-b border-white/10 pb-4 sticky top-0 bg-[#111111] z-20">
+                                        {group.slug ? (
+                                            <Link
+                                                href={`/${locale}/artists/${group.slug}`}
+                                                className="text-2xl md:text-4xl font-bold text-white hover:text-white/60 transition-colors uppercase tracking-tight"
+                                            >
+                                                {group.name}
+                                            </Link>
+                                        ) : (
+                                            <h2 className="text-2xl md:text-4xl font-bold text-white uppercase tracking-tight">
+                                                {group.name}
+                                            </h2>
+                                        )}
+                                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/30 shrink-0 pl-4">
+                                            {group.works.length} {group.works.length === 1 ? t('workLabel') : t('worksLabel')}
+                                        </span>
+                                    </div>
+                                    <div className="columns-1 md:columns-2 lg:columns-4 gap-8 [column-fill:_balance]">
+                                        {group.works.map((item, index) => (
+                                            <WorkCard key={item._id} item={item} locale={locale} index={index} />
+                                        ))}
+                                    </div>
+                                </section>
                             ))}
-                        </AnimatePresence>
-                    </div>
+                        </div>
+                    )}
 
                     {filteredItems.length === 0 && (
                         <div className="py-48 text-center border-t border-white/5">

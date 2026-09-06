@@ -134,6 +134,9 @@
             "currentlyOnDisplay": "Currently on Display",
             "outOnLoan": "Out on Loan",
             "artistsAZ": "Artists A-Z",
+            "byArtist": "By Artist",
+            "workLabel": "work",
+            "worksLabel": "works",
             "searchPlaceholder": "Search collection",
             "noFilteredResults": "No items found matching your filters.",
             "clearFilters": "Clear all filters",
@@ -149,9 +152,9 @@
             "description": "News, interviews, and insights from NCAI.",
             "noContent": "No content found",
             "filterAll": "All",
-            "filterWatch": "Watch (Video)",
-            "filterListen": "Listen (Audio)",
-            "filterRead": "Read (Articles)"
+            "filterFilm": "Film",
+            "filterAudio": "Audio",
+            "filterText": "Text"
         },
         "education": {
             "title": "Education",

@@ -228,7 +228,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                                     <div className="flex-1 space-y-3">
                                         <div className="flex items-center gap-3">
                                             <span className="text-[10px] uppercase tracking-widest text-ochre font-bold">
-                                                {post.mediaType === 'video' ? 'VIDEO' : 'STORY'}
+                                                {post.mediaType === 'film' ? 'VIDEO' : 'STORY'}
                                             </span>
                                             {post.publishedAt && (
                                                 <span className="text-[10px] text-charcoal/40 uppercase tracking-widest">

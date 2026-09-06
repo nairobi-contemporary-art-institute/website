@@ -66,7 +66,7 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
     const imageProps = post.mainImage ? urlFor(post.mainImage).width(1200).height(700).url() : null
 
     // Media props
-    const mediaType = post.mediaType || 'article'
+    const mediaType = post.mediaType || 'text'
     const videoUrl = post.videoUrl
     const audioUrl = post.audioUrl
     
@@ -134,17 +134,17 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
 
             {/* Media Player or Main Image */}
             <div className="w-full max-w-4xl mx-auto mb-16 space-y-6">
-                {(mediaType === 'video' && videoUrl) || (mediaType === 'audio' && audioUrl) ? (
+                {(mediaType === 'film' && videoUrl) || (mediaType === 'audio' && audioUrl) ? (
                     <div className="space-y-4">
                         <MediaPlayer
-                            type={mediaType}
+                            type={mediaType === 'film' ? 'video' : 'audio'}
                             url={videoUrl}
                             audioUrl={audioUrl}
                             thumbnail={imageProps || undefined}
                         />
-                        {(mediaType === 'video' ? post.videoCaption : post.audioCaption) && (
+                        {(mediaType === 'film' ? post.videoCaption : post.audioCaption) && (
                             <div className="text-sm text-umber/60 leading-relaxed border-l-2 border-umber/10 pl-4 mt-2">
-                                <ArtCaption content={getLocalizedValue(mediaType === 'video' ? post.videoCaption : post.audioCaption, locale)} />
+                                <ArtCaption content={getLocalizedValue(mediaType === 'film' ? post.videoCaption : post.audioCaption, locale)} />
                             </div>
                         )}
                     </div>

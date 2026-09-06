@@ -188,7 +188,7 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
         },
         {
             href: '/education',
-            label: 'Learn',
+            label: 'Education',
             columns: [
                 {
                     title: 'Engagement', links: [

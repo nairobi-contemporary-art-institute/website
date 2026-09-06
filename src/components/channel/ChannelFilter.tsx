@@ -43,9 +43,9 @@ export function ChannelFilter({ posts, locale }: ChannelFilterProps) {
 
     const MEDIA_FILTERS = [
         { label: t('filterAll'), value: 'all' },
-        { label: t('filterWatch'), value: 'video' },
-        { label: t('filterListen'), value: 'audio' },
-        { label: t('filterRead'), value: 'article' },
+        { label: t('filterFilm'), value: 'film' },
+        { label: t('filterAudio'), value: 'audio' },
+        { label: t('filterText'), value: 'text' },
     ]
 
     // Extract unique series from posts that have tags of type 'series'
@@ -56,7 +56,7 @@ export function ChannelFilter({ posts, locale }: ChannelFilterProps) {
     )).map(s => JSON.parse(s))
 
     const filtered = posts.filter(p => {
-        const typeMatch = filter === 'all' || p.mediaType === filter || (filter === 'article' && !p.mediaType)
+        const typeMatch = filter === 'all' || p.mediaType === filter || (filter === 'text' && !p.mediaType)
         const seriesMatch = seriesFilter === 'all' || (p.tags || []).some((t: any) => t.slug === seriesFilter)
         return typeMatch && seriesMatch
     })
