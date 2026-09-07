@@ -66,3 +66,6 @@ docs/
 ARCHITECTURE.md
 STACK.md
 ROADMAP.md
+
+# scraping scratch dir (contains secrets + large binaries)
+temp_scrape/
