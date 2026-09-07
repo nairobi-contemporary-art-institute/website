@@ -145,7 +145,9 @@
             "sortRandom": "Randomise",
             "sortAZ": "Alphabetise",
             "shuffleWorks": "Shuffle Works",
-            "resetFilters": "Reset Filters"
+            "resetFilters": "Reset Filters",
+            "viewWorks": "View Works",
+            "hideWorks": "Hide Works"
         },
         "channel": {
             "title": "Channel",

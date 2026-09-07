@@ -144,7 +144,9 @@
             "sortRandom": "Nasibu",
             "sortAZ": "Alfabeti",
             "shuffleWorks": "Changanya",
-            "resetFilters": "Futa Machujio"
+            "resetFilters": "Futa Machujio",
+            "viewWorks": "Tazama Kazi",
+            "hideWorks": "Ficha Kazi"
         },
         "channel": {
             "title": "Chaneli",
