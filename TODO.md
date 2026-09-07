@@ -20,6 +20,11 @@
 ## Data
 - [ ] Collection items missing `slug`s — work cards render but aren't clickable (`href="#"`) in both masonry and By-Artist views. Backfill slugs in Sanity (or via import script) so `/collection/[slug]` detail pages link. Pre-existing; surfaced during By-Artist work.
 
+## Collection page (Studio-Museum-style artist browsing — `a328f43`)
+- [ ] i18n coverage — new `viewWorks`/`hideWorks` keys added to `en`/`sw` only; other 8 locales have no `Pages.collection` at all, so `/collection` shows raw keys there. Ties into Localization item above.
+- [ ] Representative thumbnail is "artist's first work with an image" (client-derived). If curators want control, add a `collectionThumbnail` field to the artist schema + wire into `ARTISTS_INDEX_QUERY` / grouping.
+- [ ] Pagination — reference paginates artists (~29 pages); we render all artist cards at once. Fine at current scale; add pagination/lazy-load as the collection grows.
+
 ## Features
 - [ ] Mobile hero layout — text flip behavior needs mobile-specific adjustments
 - [ ] Auto-advance controls — make carousel timing configurable per-slide
