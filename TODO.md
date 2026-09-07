@@ -10,6 +10,13 @@
 - [ ] Image overflow handling — images clip at section edges when hotspot positions near boundaries
 - [ ] Dev server stability — investigate why server dies mid-session; consider health checks
 
+## Content migration (ncai254.com → Sanity)
+- [ ] Localization — all imports English-only (`internationalizedArray` key `en`); am/ar/de/es empty. Decide: machine-translate pass vs editor task.
+- [ ] Artist Talk posts — 8 imported (`create_posts.js`) with blank `videoUrl`; per-video Vimeo IDs not in scrape. Backfill Vimeo URLs so `/channel/[slug]` plays.
+- [ ] Publication cover images — 4 new pubs use generated 3D covers (color only), `coverImage` blank; page-order mapping ambiguous. Add real covers in Studio if wanted.
+- [ ] Artist Films page — 4 Vimeo links, no titles/metadata; not imported. Pull titles from Vimeo then create film posts.
+- [ ] Channel root (`/channel`) intro images — 2 Wix images not migrated.
+
 ## Data
 - [ ] Collection items missing `slug`s — work cards render but aren't clickable (`href="#"`) in both masonry and By-Artist views. Backfill slugs in Sanity (or via import script) so `/collection/[slug]` detail pages link. Pre-existing; surfaced during By-Artist work.
 
