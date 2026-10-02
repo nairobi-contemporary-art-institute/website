@@ -38,3 +38,17 @@ Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Tailwind CSS v4 
 **Images.** Build URLs with `urlFor()` from `src/sanity/lib/image.ts`. Remote image hosts are whitelisted in `next.config.ts` (`cdn.sanity.io`, `images.unsplash.com`, etc.) — add new hosts there or `next/image` will reject them.
 
 **Redirects.** `/support` and `/membership` permanently redirect to `/get-involved` (in `next.config.ts`).
+
+## Agent skills
+
+### Issue tracker
+
+Issues live in GitHub Issues via `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Using default five canonical labels (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context layout (`CONTEXT.md` + `docs/adr/` at root). See `docs/agents/domain.md`.
