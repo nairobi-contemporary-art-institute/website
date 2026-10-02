@@ -18,8 +18,9 @@ export function ChannelCard({ post, locale, variant = 'light' }: ChannelCardProp
     const isDark = variant === 'dark'
     const title = getLocalizedValue(post.title, locale)
 
-    // Determine type label and icon
-    const type = post.mediaType || 'text'
+    // Determine type label and icon (legacy 'video'/'article' map to canonical)
+    const rawType = post.mediaType || 'text'
+    const type = rawType === 'video' ? 'film' : rawType === 'article' ? 'text' : rawType
 
     const Icon = {
         film: PlayCircle,
@@ -50,7 +51,7 @@ export function ChannelCard({ post, locale, variant = 'light' }: ChannelCardProp
                         blurDataURL={post.mainImage.asset?.metadata?.lqip}
                     />
                 ) : (
-                    <div className={cn("absolute inset-0 flex items-center justify-center", isDark ? "text-sun-bleached-paper/20" : "text-umber/20")}>
+                    <div className={cn("absolute inset-0 flex items-center justify-center", isDark ? "text-sun-bleached-paper/20" : "text-umber/80")}>
                         <Icon className="w-12 h-12 opacity-50" />
                     </div>
                 )}
@@ -78,7 +79,7 @@ export function ChannelCard({ post, locale, variant = 'light' }: ChannelCardProp
                     <span className={isDark ? "text-sun-bleached-paper" : ""}>{typeLabel}</span>
                     {post.publishedAt && (
                         <>
-                            <span className={cn("mx-1", isDark ? "text-sun-bleached-paper/20" : "text-umber/30")}>/</span>
+                            <span className={cn("mx-1", isDark ? "text-sun-bleached-paper/20" : "text-umber/80")}>/</span>
                             <span>
                                 {new Date(post.publishedAt).toLocaleDateString(locale, { month: 'short', day: 'numeric', year: 'numeric' })}
                             </span>
@@ -86,12 +87,12 @@ export function ChannelCard({ post, locale, variant = 'light' }: ChannelCardProp
                     )}
                 </div>
 
-                <h3 className={cn("text-xl font-bold transition-colors leading-tight", isDark ? "text-white group-hover:text-ochre" : "text-charcoal group-hover:text-ochre")}>
+                <h2 className={cn("text-xl font-bold transition-colors leading-tight", isDark ? "text-white group-hover:text-ochre" : "text-charcoal group-hover:text-ochre")}>
                     {title}
-                </h3>
+                </h2>
 
                 {post.excerpt && (
-                    <div className={cn("text-sm line-clamp-2 mt-auto leading-relaxed prose-sm", isDark ? "text-sun-bleached-paper/60" : "text-charcoal/60")}>
+                    <div className={cn("text-sm line-clamp-2 mt-auto leading-relaxed prose-sm", isDark ? "text-sun-bleached-paper/60" : "text-charcoal/70")}>
                         {typeof getLocalizedValue(post.excerpt, locale) === 'string' ? (
                             <p>{getLocalizedValue(post.excerpt, locale) as unknown as string}</p>
                         ) : (

@@ -54,7 +54,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                 <div className="md:col-span-5 space-y-12">
                     {bio && (
                         <div className="space-y-4">
-                            <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-charcoal/40 border-b border-charcoal/5 pb-2">
+                            <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-charcoal/70 border-b border-charcoal/5 pb-2">
                                 Brief Bio
                             </h2>
                             <div className="text-base leading-[20px] font-normal text-charcoal/80">
@@ -80,7 +80,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                                 />
                             </div>
                             {artist.image.caption && (
-                                <div className="text-[10px] text-charcoal/50 mt-4 leading-relaxed border-l border-rich-blue/20 pl-3 italic">
+                                <div className="text-[10px] text-charcoal/70 mt-4 leading-relaxed border-l border-rich-blue/20 pl-3 italic">
                                     <ArtCaption content={getLocalizedValue(artist.image.caption, locale)} />
                                 </div>
                             )}
@@ -112,7 +112,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                                 return (
                                     <span
                                         key={tag._id}
-                                        className="inline-flex items-center px-2 py-1 bg-charcoal/5 text-charcoal/60 text-xs tracking-wider font-medium"
+                                        className="inline-flex items-center px-2 py-1 bg-charcoal/5 text-charcoal/70 text-xs tracking-wider font-medium"
                                     >
                                         {tagTitle}
                                     </span>
@@ -147,7 +147,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                                     <h3 className="text-sm font-bold text-charcoal">
                                         {pTitle}
                                     </h3>
-                                    <p className="text-xs text-charcoal/60">
+                                    <p className="text-xs text-charcoal/70">
                                         {pVenue}{project.date ? `, ${project.date}` : ''}
                                     </p>
                                 </li>
@@ -184,13 +184,13 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                                                 })}
                                             />
                                         ) : (
-                                            <div className="w-full h-full flex items-center justify-center text-umber/20">{t('noImage')}</div>
+                                            <div className="w-full h-full flex items-center justify-center text-umber/80">{t('noImage')}</div>
                                         )}
                                     </div>
                                     <div className="space-y-1">
                                         <h3 className="font-bold text-charcoal leading-snug group-hover:underline italic transition-all decoration-charcoal/20">{exTitle}</h3>
                                         {exhibition.startDate && (
-                                            <p className="text-[10px] tracking-widest text-charcoal/60 mt-2 font-medium">
+                                            <p className="text-[10px] tracking-widest text-charcoal/70 mt-2 font-medium">
                                                 {new Date(exhibition.startDate).getFullYear()}
                                             </p>
                                         )}
@@ -228,10 +228,10 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                                     <div className="flex-1 space-y-3">
                                         <div className="flex items-center gap-3">
                                             <span className="text-[10px] uppercase tracking-widest text-ochre font-bold">
-                                                {post.mediaType === 'film' ? 'VIDEO' : 'STORY'}
+                                                {(post.mediaType === 'film' || post.mediaType === 'video') ? 'VIDEO' : 'STORY'}
                                             </span>
                                             {post.publishedAt && (
-                                                <span className="text-[10px] text-charcoal/40 uppercase tracking-widest">
+                                                <span className="text-[10px] text-charcoal/70 uppercase tracking-widest">
                                                     {new Date(post.publishedAt).toLocaleDateString(locale, { month: 'short', year: 'numeric' })}
                                                 </span>
                                             )}
@@ -242,7 +242,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                                         {post.excerpt && (() => {
                                             const excerptText = getLocalizedValueAsString(post.excerpt, locale)
                                             return excerptText ? (
-                                                <p className="text-sm text-charcoal/60 line-clamp-2 italic font-serif">
+                                                <p className="text-sm text-charcoal/70 line-clamp-2 italic font-serif">
                                                     {excerptText}
                                                 </p>
                                             ) : null
@@ -283,14 +283,14 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                                             )}
                                         </div>
                                         {caption && (
-                                            <div className="text-[10px] text-charcoal/50 leading-relaxed border-l border-rich-blue/20 pl-3">
+                                            <div className="text-[10px] text-charcoal/70 leading-relaxed border-l border-rich-blue/20 pl-3">
                                                 <ArtCaption content={caption} />
                                             </div>
                                         )}
                                     </div>
                                     <div className="space-y-1">
                                         <h3 className="font-bold text-charcoal leading-snug">{exTitle}</h3>
-                                        <p className="text-xs text-charcoal/60">{exVenue}, {exLocation}</p>
+                                        <p className="text-xs text-charcoal/70">{exVenue}, {exLocation}</p>
                                     </div>
                                 </div>
                             )
@@ -356,7 +356,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                                 >
                                     <h3 className="font-bold text-charcoal leading-snug">{getLocalizedValueAsString(item.title, locale)}</h3>
                                     {item.date && (
-                                        <p className="text-[10px] tracking-widest text-charcoal/40 mt-3 font-bold uppercase">{new Date(item.date).toLocaleDateString(locale, { month: 'short', year: 'numeric' })}</p>
+                                        <p className="text-[10px] tracking-widest text-charcoal/70 mt-3 font-bold uppercase">{new Date(item.date).toLocaleDateString(locale, { month: 'short', year: 'numeric' })}</p>
                                     )}
                                 </a>
                             </li>
