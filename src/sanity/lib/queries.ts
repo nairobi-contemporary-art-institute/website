@@ -933,6 +933,7 @@ export const HOME_PAGE_QUERY = groq`
         imageAlignment,
         intelligentContrast,
         forceBlackText,
+        durationSeconds,
         link {
           reference-> {
             _type,

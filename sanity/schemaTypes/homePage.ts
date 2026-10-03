@@ -237,6 +237,13 @@ export const homePage = defineType({
                                             description: 'Used if no internal reference is set.'
                                         })
                                     ]
+                                }),
+                                defineField({
+                                    name: 'durationSeconds',
+                                    title: 'Slide Duration (seconds)',
+                                    type: 'number',
+                                    description: 'How long this slide displays in carousel mode. Blank uses the hero default above.',
+                                    validation: (Rule) => Rule.min(1)
                                 })
                             ],
                             preview: {
