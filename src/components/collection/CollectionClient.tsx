@@ -36,7 +36,7 @@ interface CollectionClientProps {
 
 export function CollectionClient({ locale, items, artists }: CollectionClientProps) {
     const t = useTranslations('Pages.collection')
-    const [view, setView] = useState<'collection' | 'artists'>('collection')
+    const [view, setView] = useState<'byArtist' | 'collection' | 'artists'>('byArtist')
     const [searchQuery, setSearchQuery] = useState('')
     const [filterArtist, setFilterArtist] = useState('')
     const [filterMedium, setFilterMedium] = useState('')
@@ -45,6 +45,7 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
     const [sortBy, setSortBy] = useState<'random' | 'az'>('random')
     const [isMounted, setIsMounted] = useState(false)
     const [shuffledPool, setShuffledPool] = useState<CollectionItem[]>([])
+    const [expandedArtist, setExpandedArtist] = useState<string | null>(null)
 
     React.useEffect(() => {
         setIsMounted(true)
@@ -118,6 +119,40 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
         })
     }, [artists, locale])
 
+    // Group the (already filtered) works by artist for the foregrounded "By Artist" view.
+    const worksByArtist = useMemo(() => {
+        const noArtistKey = '__unattributed__'
+        const groups = new Map<string, { key: string; name: string; slug?: string; works: CollectionItem[] }>()
+
+        filteredItems.forEach(item => {
+            const name = getLocalizedValue(item.artist?.name, locale) || item.artistName || ''
+            const key = name || noArtistKey
+            if (!groups.has(key)) {
+                groups.set(key, { key, name: name || t('unknownArtist'), slug: item.artist?.slug, works: [] })
+            }
+            groups.get(key)!.works.push(item)
+        })
+
+        return Array.from(groups.entries())
+            .sort(([a], [b]) => {
+                if (a === noArtistKey) return 1
+                if (b === noArtistKey) return -1
+                return a.localeCompare(b)
+            })
+            .map(([, group]) => ({
+                ...group,
+                // Representative thumbnail = the artist's first work that has an image.
+                thumbnail: group.works.find(w => w.mainImage)?.mainImage,
+            }))
+    }, [filteredItems, locale, t])
+
+    // Collapse any open artist when the filtered set changes underneath us.
+    React.useEffect(() => {
+        if (expandedArtist && !worksByArtist.some(g => g.key === expandedArtist)) {
+            setExpandedArtist(null)
+        }
+    }, [worksByArtist, expandedArtist])
+
     const reShuffle = () => {
         setSortBy('random')
         const pool = [...items]
@@ -140,13 +175,22 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
     return (
         <div className="space-y-12">
             {/* Upper Action Bar: Tabs (Left) and Search (Right) */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 border-b border-white/5 pb-8">
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 lg:gap-12 border-b border-white/5 pb-8">
                 <div className="flex gap-2">
+                    <button
+                        onClick={() => setView('byArtist')}
+                        className={cn(
+                            "px-8 py-3 text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300",
+                            (!isMounted || view === 'byArtist') ? "bg-white text-black" : "bg-white/5 text-white/40 hover:text-white"
+                        )}
+                    >
+                        {t('byArtist') || 'By Artist'}
+                    </button>
                     <button
                         onClick={() => setView('collection')}
                         className={cn(
                             "px-8 py-3 text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300",
-                            (!isMounted || view === 'collection') ? "bg-white text-black" : "bg-white/5 text-white/40 hover:text-white"
+                            (isMounted && view === 'collection') ? "bg-white text-black" : "bg-white/5 text-white/40 hover:text-white"
                         )}
                     >
                         {t('title') || 'Collection'}
@@ -162,8 +206,8 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                     </button>
                 </div>
 
-                {(isMounted && view === 'collection') && (
-                    <div className="w-full md:max-w-xl relative group">
+                {(isMounted && view !== 'artists') && (
+                    <div className="w-full lg:max-w-xl relative group">
                         <input
                             type="text"
                             placeholder={t('searchPlaceholder') || "Search collection"}
@@ -180,7 +224,7 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                 )}
             </div>
 
-            {(isMounted && view === 'collection') && (
+            {(isMounted && view !== 'artists') && (
                 <>
                     {/* Filters Row */}
                     <div className="space-y-8">
@@ -288,14 +332,33 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                         </div>
                     </div>
 
-                    {/* Results Grid - Using columns for true masonry */}
-                    <div className="columns-1 md:columns-2 lg:columns-4 gap-8 [column-fill:_balance]">
-                        <AnimatePresence mode="popLayout">
-                            {filteredItems.map((item, index) => (
-                                <WorkCard key={item._id} item={item} locale={locale} index={index} />
+                    {/* Results Grid — masonry (Collection) or grouped by artist (By Artist) */}
+                    {view === 'collection' ? (
+                        <div className="columns-1 md:columns-2 lg:columns-4 gap-8 [column-fill:_balance]">
+                            <AnimatePresence mode="popLayout">
+                                {filteredItems.map((item, index) => (
+                                    <WorkCard key={item._id} item={item} locale={locale} index={index} />
+                                ))}
+                            </AnimatePresence>
+                        </div>
+                    ) : (
+                        // Studio-Museum-style artist directory: one card per artist
+                        // (representative thumbnail + name + work count) that expands
+                        // that artist's works inline on click.
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-16">
+                            {worksByArtist.map((group) => (
+                                <ArtistCard
+                                    key={group.key}
+                                    group={group}
+                                    locale={locale}
+                                    isExpanded={expandedArtist === group.key}
+                                    onToggle={() =>
+                                        setExpandedArtist(prev => (prev === group.key ? null : group.key))
+                                    }
+                                />
                             ))}
-                        </AnimatePresence>
-                    </div>
+                        </div>
+                    )}
 
                     {filteredItems.length === 0 && (
                         <div className="py-48 text-center border-t border-white/5">
@@ -369,6 +432,108 @@ function FilterDropdown({ label, value, options, onChange, allLabel }: { label: 
                 )}
             </AnimatePresence>
         </div>
+    )
+}
+
+interface ArtistGroup {
+    key: string;
+    name: string;
+    slug?: string;
+    works: CollectionItem[];
+    thumbnail?: any;
+}
+
+function ArtistCard({ group, locale, isExpanded, onToggle }: { group: ArtistGroup, locale: string, isExpanded: boolean, onToggle: () => void }) {
+    const t = useTranslations('Pages.collection')
+    const cardRef = React.useRef<HTMLDivElement>(null)
+    const count = group.works.length
+    const countLabel = `${count} ${count === 1 ? t('workLabel') : t('worksLabel')}`
+    const thumb = group.thumbnail
+
+    // Bring a freshly-opened artist into view.
+    React.useEffect(() => {
+        if (isExpanded) {
+            cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+    }, [isExpanded])
+
+    return (
+        <>
+            <div ref={cardRef} className="group scroll-mt-8">
+                <button
+                    type="button"
+                    onClick={onToggle}
+                    aria-expanded={isExpanded}
+                    aria-label={isExpanded ? t('hideWorks') : t('viewWorks')}
+                    className="relative block w-full aspect-[4/5] bg-white/5 overflow-hidden"
+                >
+                    {thumb?.asset ? (
+                        <Image
+                            src={urlFor(thumb).width(600).height(750).url()}
+                            alt={group.name}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                        />
+                    ) : (
+                        <div className="w-full h-full flex items-center justify-center text-white/10 text-[10px] uppercase tracking-widest">
+                            {t('noImageAvailable')}
+                        </div>
+                    )}
+                    <div className={cn(
+                        "absolute bottom-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-sm text-white transition-transform duration-300",
+                        isExpanded ? "rotate-45" : "rotate-0 group-hover:bg-black/70"
+                    )}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 5V19M5 12H19" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                    </div>
+                </button>
+                <div className="mt-5 space-y-1">
+                    {group.slug ? (
+                        <Link
+                            href={`/${locale}/artists/${group.slug}`}
+                            className="text-lg md:text-xl font-bold text-white hover:text-white/60 transition-colors uppercase tracking-tight leading-tight block"
+                        >
+                            {group.name}
+                        </Link>
+                    ) : (
+                        <h3 className="text-lg md:text-xl font-bold text-white uppercase tracking-tight leading-tight">
+                            {group.name}
+                        </h3>
+                    )}
+                    <button
+                        type="button"
+                        onClick={onToggle}
+                        className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 hover:text-white transition-colors"
+                    >
+                        {countLabel}{' · '}{isExpanded ? t('hideWorks') : t('viewWorks')}
+                    </button>
+                </div>
+            </div>
+
+            <AnimatePresence initial={false}>
+                {isExpanded && (
+                    <motion.div
+                        key={`${group.key}-works`}
+                        layout
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.5, ease: 'easeInOut' }}
+                        className="col-span-full overflow-hidden"
+                    >
+                        <div className="pt-8 pb-4 border-t border-white/10">
+                            <div className="columns-1 md:columns-2 lg:columns-4 gap-8 [column-fill:_balance]">
+                                {group.works.map((item, index) => (
+                                    <WorkCard key={item._id} item={item} locale={locale} index={index} />
+                                ))}
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </>
     )
 }
 

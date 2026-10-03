@@ -24,11 +24,13 @@ interface HeaderClientProps {
     }>;
     utilityLinks?: Array<{ label: string; href: string }>;
     featuredImages?: any[];
+    freeEntryBadge?: FreeEntryBadgeProps | null;
 }
 
 import { MegaMenu } from '../MegaMenu'
+import { FreeEntryBadge, type FreeEntryBadgeProps } from '../FreeEntryBadge'
 
-export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utilityLinks = [], featuredImages = [] }: HeaderClientProps) {
+export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utilityLinks = [], featuredImages = [], freeEntryBadge }: HeaderClientProps) {
     const t = useTranslations('HomePage')
     const pathname = usePathname()
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -259,7 +261,7 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
         setActiveMenuIndex(null)
     }
 
-    const isDark = activeMenuIndex !== null || isHoveringHeader || isMobileMenuOpen
+    const isDark = isMobileMenuOpen
     const isSolid = isScrolled || isMobileMenuOpen || activeMenuIndex !== null
 
     if (isImmersive) return null
@@ -368,6 +370,7 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
 
                             {/* Bottom Tier Links */}
                             <div className="flex justify-end items-center gap-8">
+                                {freeEntryBadge && <FreeEntryBadge {...freeEntryBadge} />}
                                 <nav className="flex items-center gap-8">
                                     {displayLinks.map((link, idx) => (
                                         <Link

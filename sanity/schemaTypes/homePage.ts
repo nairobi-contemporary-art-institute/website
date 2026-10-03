@@ -237,6 +237,13 @@ export const homePage = defineType({
                                             description: 'Used if no internal reference is set.'
                                         })
                                     ]
+                                }),
+                                defineField({
+                                    name: 'durationSeconds',
+                                    title: 'Slide Duration (seconds)',
+                                    type: 'number',
+                                    description: 'How long this slide displays in carousel mode. Blank uses the hero default above.',
+                                    validation: (Rule) => Rule.min(1)
                                 })
                             ],
                             preview: {
@@ -382,6 +389,29 @@ export const homePage = defineType({
                     type: 'internationalizedArrayString',
                     description: 'Label for the accordion toggle, e.g. "Read Full Press Release".'
                 })
+            ]
+        }),
+        defineField({
+            name: 'about',
+            title: 'About Section',
+            type: 'object',
+            description: 'Introductory section displayed directly below the hero.',
+            fields: [
+                defineField({ name: 'enabled', title: 'Enable About Section', type: 'boolean', initialValue: true }),
+                defineField({ name: 'heading', title: 'Heading', type: 'internationalizedArrayString' }),
+                defineField({ name: 'intro', title: 'Introduction', type: 'internationalizedArrayBlockContent' }),
+                defineField({ name: 'subheading', title: 'Sub-section Heading', type: 'internationalizedArrayString' }),
+                defineField({ name: 'subBody', title: 'Sub-section Body', type: 'internationalizedArrayBlockContent' }),
+                defineField({
+                    name: 'image',
+                    title: 'Section Image',
+                    type: 'image',
+                    description: 'Optional. When present, displays in the right column.',
+                    options: { hotspot: true },
+                    fields: [
+                        defineField({ name: 'alt', title: 'Alt Text', type: 'string' })
+                    ]
+                }),
             ]
         }),
         defineField({

@@ -66,7 +66,7 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
     const imageProps = post.mainImage ? urlFor(post.mainImage).width(1200).height(700).url() : null
 
     // Media props
-    const mediaType = post.mediaType || 'article'
+    const mediaType = post.mediaType || 'text'
     const videoUrl = post.videoUrl
     const audioUrl = post.audioUrl
     
@@ -116,7 +116,7 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
                                             {getLocalizedValue(author.name, locale)}
                                         </span>
                                         {author.roles && (
-                                            <span className="block text-[9px] text-umber/60 capitalize tracking-tight">
+                                            <span className="block text-[9px] text-umber/80 capitalize tracking-tight">
                                                 {author.roles[0]}
                                             </span>
                                         )}
@@ -134,17 +134,17 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
 
             {/* Media Player or Main Image */}
             <div className="w-full max-w-4xl mx-auto mb-16 space-y-6">
-                {(mediaType === 'video' && videoUrl) || (mediaType === 'audio' && audioUrl) ? (
+                {(mediaType === 'film' && videoUrl) || (mediaType === 'audio' && audioUrl) ? (
                     <div className="space-y-4">
                         <MediaPlayer
-                            type={mediaType}
+                            type={mediaType === 'film' ? 'video' : 'audio'}
                             url={videoUrl}
                             audioUrl={audioUrl}
                             thumbnail={imageProps || undefined}
                         />
-                        {(mediaType === 'video' ? post.videoCaption : post.audioCaption) && (
-                            <div className="text-sm text-umber/60 leading-relaxed border-l-2 border-umber/10 pl-4 mt-2">
-                                <ArtCaption content={getLocalizedValue(mediaType === 'video' ? post.videoCaption : post.audioCaption, locale)} />
+                        {(mediaType === 'film' ? post.videoCaption : post.audioCaption) && (
+                            <div className="text-sm text-umber/80 leading-relaxed border-l-2 border-umber/10 pl-4 mt-2">
+                                <ArtCaption content={getLocalizedValue(mediaType === 'film' ? post.videoCaption : post.audioCaption, locale)} />
                             </div>
                         )}
                     </div>
@@ -163,7 +163,7 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
                             />
                         </div>
                         {post.mainImage?.caption && (
-                            <div className="text-sm text-umber/60 leading-relaxed border-l-2 border-umber/10 pl-4 mt-2">
+                            <div className="text-sm text-umber/80 leading-relaxed border-l-2 border-umber/10 pl-4 mt-2">
                                 <ArtCaption content={getLocalizedValue(post.mainImage.caption, locale)} />
                             </div>
                         )}
@@ -198,7 +198,7 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
                                 <h3 className="text-xl font-bold tracking-tight text-charcoal">
                                     {getLocalizedValue(artist.name, locale)}
                                 </h3>
-                                <div className="text-sm text-umber/70 leading-relaxed line-clamp-6 prose-sm">
+                                <div className="text-sm text-umber/80 leading-relaxed line-clamp-6 prose-sm">
                                     {artist.bio && <PortableTextComponent value={getLocalizedValue(artist.bio, locale)} locale={locale} />}
                                 </div>
                                 <Link 
@@ -213,7 +213,7 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
 
                         {/* Works Gallery */}
                         <div className="md:col-span-8">
-                            <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-umber/40 mb-8">
+                            <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-umber/80 mb-8">
                                 Featured Works
                             </h4>
                             {artist.works && artist.works.length > 0 ? (
@@ -239,7 +239,7 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
                                                         {getLocalizedValue(work.title, locale)}
                                                     </p>
                                                     {work.year && (
-                                                        <p className="text-[9px] text-umber/50 font-mono">
+                                                        <p className="text-[9px] text-umber/80 font-mono">
                                                             {work.year}
                                                         </p>
                                                     )}
@@ -250,20 +250,20 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
                                 </div>
                             ) : (
                                 <div className="aspect-[16/9] bg-charcoal/5 flex items-center justify-center border border-dashed border-umber/10">
-                                    <p className="text-[10px] uppercase tracking-widest text-umber/30">Works gallery arriving soon</p>
+                                    <p className="text-[10px] uppercase tracking-widest text-umber/80">Works gallery arriving soon</p>
                                 </div>
                             )}
                             
                             {/* Exhibitions List */}
                             {artist.featuredExhibitions && artist.featuredExhibitions.length > 0 && (
                                 <div className="mt-12 pt-8 border-t border-umber/5">
-                                    <h5 className="text-[9px] font-bold uppercase tracking-[0.3em] text-umber/30 mb-5">Exhibitions</h5>
+                                    <h5 className="text-[9px] font-bold uppercase tracking-[0.3em] text-umber/80 mb-5">Exhibitions</h5>
                                     <div className="flex flex-wrap gap-3">
                                         {artist.featuredExhibitions.map((exh: any) => (
                                             <Link 
                                                 key={exh._id} 
                                                 href={`/exhibitions/${exh.slug}`}
-                                                className="text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 bg-umber/[0.03] text-umber/60 hover:bg-umber/[0.08] hover:text-charcoal transition-all border border-umber/5 rounded-full"
+                                                className="text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 bg-umber/[0.03] text-umber/80 hover:bg-umber/[0.08] hover:text-charcoal transition-all border border-umber/5 rounded-full"
                                             >
                                                 {getLocalizedValue(exh.title, locale)}
                                             </Link>
@@ -277,8 +277,8 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
             )}
 
             <footer className="max-w-3xl mx-auto mt-16">
-                <ResponsiveDivider variant="straight" weight="thin" className="text-umber/20 mb-8" />
-                <Link href="/channel" className="inline-block text-sm font-bold capitalize tracking-widest text-umber/50 hover:text-amber-800 transition-colors">
+                <ResponsiveDivider variant="straight" weight="thin" className="text-umber/80 mb-8" />
+                <Link href="/channel" className="inline-block text-sm font-bold capitalize tracking-widest text-umber/80 hover:text-amber-800 transition-colors">
                     ← Back to Channel
                 </Link>
             </footer>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo, useEffect } from "react"
+import { useState, useMemo, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Link } from "@/i18n"
 import { ArrowLeft, ArrowRight } from "lucide-react"
@@ -10,11 +10,15 @@ import { MuseumGrid } from "@/components/ui/MuseumGrid"
 import { MuseumResultRow } from "@/components/ui/MuseumResultRow"
 import { MuseumCardData } from "@/lib/types/museum-card"
 import { getLocalizedValue } from "@/sanity/lib/utils"
+import { cn } from "@/lib/utils"
+
+const ARCHIVE_PAGE = 12
 
 interface WhatsOnClientProps {
     items: MuseumCardData[]
     categories?: string[]
     locale: string
+    showYearNav?: boolean
     noticeBarSettings?: {
         enabled: boolean
         autoMondayClosing: boolean
@@ -26,12 +30,14 @@ interface WhatsOnClientProps {
     }
 }
 
-export function WhatsOnClient({ items, locale, noticeBarSettings, categories = ["All", "Exhibitions", "Performances", "Screenings", "Events", "Talks", "Tours", "Workshops", "Members"] }: WhatsOnClientProps) {
+export function WhatsOnClient({ items, locale, noticeBarSettings, showYearNav = false, categories = ["All", "Exhibitions", "Performances", "Screenings", "Events", "Talks", "Tours", "Workshops", "Members"] }: WhatsOnClientProps) {
     const [activeCategory, setActiveCategory] = useState<string>("")
     const [activeTags, setActiveTags] = useState<string[]>([])
     const [isCalendarOpen, setIsCalendarOpen] = useState(false)
     const [selectedDate, setSelectedDate] = useState<string | null>(null) // YYYY-MM-DD
-    const [visibleArchiveCount, setVisibleArchiveCount] = useState(8)
+    const [visibleArchiveCount, setVisibleArchiveCount] = useState(ARCHIVE_PAGE)
+    const [activeYear, setActiveYear] = useState<number | null>(null)
+    const sentinelRef = useRef<HTMLDivElement | null>(null)
     const [baseDate, setBaseDate] = useState(() => {
         const d = new Date()
         d.setDate(1)
@@ -154,6 +160,96 @@ export function WhatsOnClient({ items, locale, noticeBarSettings, categories = [
             return endB - endA 
         })
     }, [filteredItems, nowTime])
+
+    // Derive the year an archived item belongs to (prefer end date, fall back to start).
+    const yearOf = (item: MuseumCardData): number | null => {
+        const d = item.rawEndDate || item.rawStartDate
+        return d ? new Date(d).getFullYear() : null
+    }
+
+    // All distinct archive years, newest first — powers the year jump rail.
+    const archiveYears = useMemo(() => {
+        const set = new Set<number>()
+        archiveItems.forEach(item => {
+            const y = yearOf(item)
+            if (y) set.add(y)
+        })
+        return Array.from(set).sort((a, b) => b - a)
+    }, [archiveItems])
+
+    const visibleArchive = useMemo(
+        () => archiveItems.slice(0, visibleArchiveCount),
+        [archiveItems, visibleArchiveCount]
+    )
+
+    // Split the currently-visible archive slice into consecutive year groups.
+    const archiveGroups = useMemo(() => {
+        const groups: { year: number | null; items: MuseumCardData[] }[] = []
+        visibleArchive.forEach(item => {
+            const y = yearOf(item)
+            const last = groups[groups.length - 1]
+            if (last && last.year === y) last.items.push(item)
+            else groups.push({ year: y, items: [item] })
+        })
+        return groups
+    }, [visibleArchive])
+
+    // Infinite scroll: auto-load the next page when the sentinel enters view.
+    useEffect(() => {
+        const el = sentinelRef.current
+        if (!el) return
+        const obs = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    setVisibleArchiveCount(prev => Math.min(prev + ARCHIVE_PAGE, archiveItems.length))
+                }
+            },
+            { rootMargin: '600px 0px' }
+        )
+        obs.observe(el)
+        return () => obs.disconnect()
+    }, [archiveItems.length, visibleArchiveCount])
+
+    // Reset pagination when the filtered set changes.
+    useEffect(() => {
+        setVisibleArchiveCount(ARCHIVE_PAGE)
+    }, [activeCategory, activeTags, selectedDate])
+
+    // Highlight the year currently in view in the rail.
+    useEffect(() => {
+        if (!showYearNav) return
+        const headers = Array.from(document.querySelectorAll<HTMLElement>('[data-year-header]'))
+        if (headers.length === 0) return
+        const obs = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setActiveYear(Number((entry.target as HTMLElement).dataset.yearHeader))
+                    }
+                })
+            },
+            { rootMargin: '-15% 0px -75% 0px' }
+        )
+        headers.forEach(h => obs.observe(h))
+        return () => obs.disconnect()
+    }, [showYearNav, archiveGroups])
+
+    // Jump to a year: ensure its items are loaded, then scroll to the anchor.
+    const jumpToYear = (year: number) => {
+        let lastIdx = -1
+        for (let i = 0; i < archiveItems.length; i++) {
+            if (yearOf(archiveItems[i]) === year) lastIdx = i
+        }
+        if (lastIdx + 1 > visibleArchiveCount) {
+            setVisibleArchiveCount(lastIdx + 1)
+        }
+        setActiveYear(year)
+        requestAnimationFrame(() => {
+            setTimeout(() => {
+                document.getElementById(`year-${year}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            }, 60)
+        })
+    }
 
     const handlePrevDay = useMemo(() => () => {
         const d = selectedDate ? new Date(selectedDate) : new Date()
@@ -312,24 +408,86 @@ export function WhatsOnClient({ items, locale, noticeBarSettings, categories = [
                         </div>
 
                         <div className="container">
-                            <MuseumGrid 
-                                items={archiveItems.slice(0, visibleArchiveCount)} 
-                                showFilters={false}
-                                gridColumns="grid-cols-1 min-[501px]:grid-cols-2 min-[801px]:grid-cols-3 min-[1291px]:grid-cols-4"
-                                cardAspectRatio="aspect-[3/4]"
-                                gridGap="gap-4"
-                            />
-                            
-                            {visibleArchiveCount < archiveItems.length && (
-                                <div className="mt-12 flex justify-center">
-                                    <button 
-                                        onClick={() => setVisibleArchiveCount(prev => prev + 8)}
-                                        className="border border-[#1a1a1a] text-[#1a1a1a] uppercase text-xs font-bold tracking-widest px-8 py-3 hover:bg-[#1a1a1a] hover:text-white transition-colors"
-                                    >
-                                        Load More
-                                    </button>
+                            <div className={cn(showYearNav && "flex gap-8 lg:gap-12 items-start")}>
+                                {showYearNav && archiveYears.length > 0 && (
+                                    <nav aria-label="Jump to year" className="hidden md:block sticky top-28 shrink-0 w-16 lg:w-20 max-h-[calc(100vh-8rem)] overflow-y-auto">
+                                        <ul className="space-y-3">
+                                            {archiveYears.map(y => (
+                                                <li key={y}>
+                                                    <button
+                                                        onClick={() => jumpToYear(y)}
+                                                        className={cn(
+                                                            "text-sm font-bold tracking-widest transition-colors",
+                                                            activeYear === y ? "text-[#1a1a1a] underline underline-offset-4" : "text-[#1a1a1a]/40 hover:text-[#1a1a1a]"
+                                                        )}
+                                                    >
+                                                        {y}
+                                                    </button>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </nav>
+                                )}
+
+                                <div className="flex-1 min-w-0">
+                                    {showYearNav && archiveYears.length > 0 && (
+                                        <div className="md:hidden flex gap-3 overflow-x-auto pb-4 mb-6 border-b border-[#1a1a1a]/10">
+                                            {archiveYears.map(y => (
+                                                <button
+                                                    key={y}
+                                                    onClick={() => jumpToYear(y)}
+                                                    className={cn(
+                                                        "shrink-0 text-sm font-bold tracking-widest transition-colors",
+                                                        activeYear === y ? "text-[#1a1a1a] underline underline-offset-4" : "text-[#1a1a1a]/40"
+                                                    )}
+                                                >
+                                                    {y}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {showYearNav ? (
+                                        <div className="space-y-16">
+                                            {archiveGroups.map(group => (
+                                                <div key={group.year ?? 'undated'} id={group.year ? `year-${group.year}` : undefined}>
+                                                    {group.year && (
+                                                        <h3
+                                                            data-year-header={group.year}
+                                                            className="scroll-mt-28 text-3xl md:text-5xl font-black tracking-tighter text-[#1a1a1a] mb-6"
+                                                        >
+                                                            {group.year}
+                                                        </h3>
+                                                    )}
+                                                    <MuseumGrid
+                                                        items={group.items}
+                                                        showFilters={false}
+                                                        gridColumns="grid-cols-1 min-[501px]:grid-cols-2 min-[801px]:grid-cols-3 min-[1291px]:grid-cols-4"
+                                                        cardAspectRatio="aspect-[3/4]"
+                                                        gridGap="gap-4"
+                                                    />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <MuseumGrid
+                                            items={visibleArchive}
+                                            showFilters={false}
+                                            gridColumns="grid-cols-1 min-[501px]:grid-cols-2 min-[801px]:grid-cols-3 min-[1291px]:grid-cols-4"
+                                            cardAspectRatio="aspect-[3/4]"
+                                            gridGap="gap-4"
+                                        />
+                                    )}
+
+                                    {visibleArchiveCount < archiveItems.length && (
+                                        <div ref={sentinelRef} className="mt-12 flex justify-center">
+                                            <span className="text-xs uppercase tracking-widest text-[#1a1a1a]/40 animate-pulse">
+                                                Loading more…
+                                            </span>
+                                        </div>
+                                    )}
                                 </div>
-                            )}
+                            </div>
                         </div>
                     </div>
                 )}

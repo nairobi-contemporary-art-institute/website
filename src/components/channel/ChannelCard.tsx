@@ -19,19 +19,19 @@ export function ChannelCard({ post, locale, variant = 'light' }: ChannelCardProp
     const title = getLocalizedValue(post.title, locale)
 
     // Determine type label and icon
-    const type = post.mediaType || 'article'
+    const type = post.mediaType || 'text'
 
     const Icon = {
-        video: PlayCircle,
+        film: PlayCircle,
         audio: Headphones,
-        article: BookOpen
-    }[type as 'video' | 'audio' | 'article'] || BookOpen
+        text: BookOpen
+    }[type as 'film' | 'audio' | 'text'] || BookOpen
 
     const typeLabel = {
-        video: 'Watch',
+        film: 'Watch',
         audio: 'Listen',
-        article: 'Read'
-    }[type as 'video' | 'audio' | 'article'] || 'Read'
+        text: 'Read'
+    }[type as 'film' | 'audio' | 'text'] || 'Read'
 
     return (
         <Link
@@ -50,14 +50,14 @@ export function ChannelCard({ post, locale, variant = 'light' }: ChannelCardProp
                         blurDataURL={post.mainImage.asset?.metadata?.lqip}
                     />
                 ) : (
-                    <div className={cn("absolute inset-0 flex items-center justify-center", isDark ? "text-sun-bleached-paper/20" : "text-umber/20")}>
+                    <div className={cn("absolute inset-0 flex items-center justify-center", isDark ? "text-sun-bleached-paper/20" : "text-umber/80")}>
                         <Icon className="w-12 h-12 opacity-50" />
                     </div>
                 )}
 
                 {/* Media Indicator Overlay */}
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                    {(type === 'video' || type === 'audio') && (
+                    {(type === 'film' || type === 'audio') && (
                         <div className="w-12 h-12 bg-white/90 backdrop-blur text-charcoal flex items-center justify-center shadow-lg transform scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300">
                             <Icon className="w-6 h-6 fill-current" />
                         </div>
@@ -78,7 +78,7 @@ export function ChannelCard({ post, locale, variant = 'light' }: ChannelCardProp
                     <span className={isDark ? "text-sun-bleached-paper" : ""}>{typeLabel}</span>
                     {post.publishedAt && (
                         <>
-                            <span className={cn("mx-1", isDark ? "text-sun-bleached-paper/20" : "text-umber/30")}>/</span>
+                            <span className={cn("mx-1", isDark ? "text-sun-bleached-paper/20" : "text-umber/80")}>/</span>
                             <span>
                                 {new Date(post.publishedAt).toLocaleDateString(locale, { month: 'short', day: 'numeric', year: 'numeric' })}
                             </span>
@@ -86,12 +86,12 @@ export function ChannelCard({ post, locale, variant = 'light' }: ChannelCardProp
                     )}
                 </div>
 
-                <h3 className={cn("text-xl font-bold transition-colors leading-tight", isDark ? "text-white group-hover:text-ochre" : "text-charcoal group-hover:text-ochre")}>
+                <h2 className={cn("text-xl font-bold transition-colors leading-tight", isDark ? "text-white group-hover:text-ochre" : "text-charcoal group-hover:text-ochre")}>
                     {title}
-                </h3>
+                </h2>
 
                 {post.excerpt && (
-                    <div className={cn("text-sm line-clamp-2 mt-auto leading-relaxed prose-sm", isDark ? "text-sun-bleached-paper/60" : "text-charcoal/60")}>
+                    <div className={cn("text-sm line-clamp-2 mt-auto leading-relaxed prose-sm", isDark ? "text-sun-bleached-paper/60" : "text-charcoal/70")}>
                         {typeof getLocalizedValue(post.excerpt, locale) === 'string' ? (
                             <p>{getLocalizedValue(post.excerpt, locale) as unknown as string}</p>
                         ) : (

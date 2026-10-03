@@ -1,8 +1,19 @@
 import type { Metadata } from "next";
-import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
+import localFont from "next/font/local";
 import { Noto_Sans_Arabic, Noto_Sans_Devanagari, Noto_Sans_Ethiopic } from "next/font/google";
 import "../globals.css";
+
+const inter = localFont({
+  src: [
+    { path: "../fonts/InterVariable.woff2", style: "normal", weight: "100 900" },
+    { path: "../fonts/InterVariable-Italic.woff2", style: "italic", weight: "100 900" },
+  ],
+  variable: "--font-inter",
+  display: "swap",
+  adjustFontFallback: "Arial",
+  fallback: ["Helvetica Neue", "Arial", "sans-serif"],
+});
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -109,7 +120,7 @@ export default async function RootLayout({
 
   // Decide which font classes to apply
   const fontClasses = [
-    GeistSans.variable,
+    inter.variable,
     GeistMono.variable,
     notoArabic.variable,
     notoHindi.variable,
@@ -125,6 +136,7 @@ export default async function RootLayout({
         asset?: { url: string } 
       }[];
       newsletterPopup?: any;
+      entranceAnimationEnabled?: boolean;
     }>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'], revalidate: 60 }),
     sanityFetch<any[]>({ query: COLLECTION_QUERY, tags: ['work', 'collectionItem'], revalidate: 60 })
   ]);
@@ -138,6 +150,8 @@ export default async function RootLayout({
     alt: img.alt || "NCAI Entrance Animation Backdrop",
   }));
 
+  const entranceAnimationEnabled = settings?.entranceAnimationEnabled !== false;
+
   return (
     <html lang={locale} dir={isRtl ? 'rtl' : 'ltr'} className={fontClasses} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className="antialiased min-h-screen flex flex-col" suppressHydrationWarning>
@@ -149,7 +163,7 @@ export default async function RootLayout({
                 settings={settings?.newsletterPopup} 
                 works={works}
               />
-              <EntranceAnimation backgroundImages={entranceAnimImages} />
+              {entranceAnimationEnabled && <EntranceAnimation backgroundImages={entranceAnimImages} />}
               <ConditionalWrapper
                 header={<Header locale={locale} />}
                 footer={<Footer locale={locale} />}

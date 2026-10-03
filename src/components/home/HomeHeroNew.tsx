@@ -33,6 +33,7 @@ interface HeroSlide {
     location?: any
     description?: any
     layout?: 'auto' | 'split-left' | 'split-right' | 'centered'
+    durationSeconds?: number
     contentPosition?: 'left' | 'center' | 'right'
     contentWidth?: number
     imageAlignment?: 'left' | 'center' | 'right'
@@ -186,7 +187,7 @@ function SlideContent({ slide, locale, textOnRight = true }: { slide: HeroSlide;
 export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
     const slides = heroData.slides || []
     const isCarousel = heroData.mode === 'carousel' && slides.length > 1
-    const autoAdvance = heroData.autoAdvanceSeconds ?? 6
+    const defaultAdvance = heroData.autoAdvanceSeconds ?? 6
     const [currentSlide, setCurrentSlide] = useState(0)
     const [isPaused, setIsPaused] = useState(false)
 
@@ -198,12 +199,13 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
         setCurrentSlide((prev) => (prev + 1) % slides.length)
     }, [slides.length])
 
-    // Auto-advance carousel
+    // Auto-advance carousel (per-slide timing, hero default as fallback)
+    const slideDuration = slides[currentSlide]?.durationSeconds ?? defaultAdvance
     useEffect(() => {
         if (!isCarousel || isPaused || slides.length <= 1) return
-        const timer = setInterval(nextSlide, autoAdvance * 1000)
-        return () => clearInterval(timer)
-    }, [isCarousel, isPaused, autoAdvance, nextSlide, slides.length])
+        const timer = setTimeout(nextSlide, Math.max(slideDuration, 1) * 1000)
+        return () => clearTimeout(timer)
+    }, [isCarousel, isPaused, slideDuration, nextSlide, slides.length])
 
     if (slides.length === 0) return null
 

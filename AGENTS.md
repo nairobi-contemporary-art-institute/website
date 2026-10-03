@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 
-NCAI (Nairobi Contemporary Art Institute) website — Next.js 15 App Router + Sanity CMS + next-intl.
+NCAI (Nairobi Contemporary Art Institute) website — Next.js 16 App Router + Sanity CMS + next-intl.
 
 Key non-obvious relationships:
 
