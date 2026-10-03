@@ -76,11 +76,6 @@ export const post = defineType({
                     { title: 'Text', value: 'text' },
                     { title: 'Film', value: 'film' },
                     { title: 'Audio', value: 'audio' },
-                    // Legacy values (expand step of post-type migration): existing
-                    // documents may still carry these; UI treats them as their
-                    // canonical equivalents. Do not assign to new posts.
-                    { title: 'Video (legacy, do not use)', value: 'video' },
-                    { title: 'Article (legacy, do not use)', value: 'article' },
                 ],
                 layout: 'radio',
             },
@@ -90,13 +85,13 @@ export const post = defineType({
             name: 'videoUrl',
             title: 'Video URL (YouTube/Vimeo)',
             type: 'url',
-            hidden: ({ document }) => document?.mediaType !== 'film' && document?.mediaType !== 'video',
+            hidden: ({ document }) => document?.mediaType !== 'film',
         }),
         defineField({
             name: 'videoCaption',
             title: 'Video Caption',
             type: 'internationalizedArrayString',
-            hidden: ({ document }) => document?.mediaType !== 'film' && document?.mediaType !== 'video',
+            hidden: ({ document }) => document?.mediaType !== 'film',
         }),
         defineField({
             name: 'audioFile',
@@ -115,7 +110,7 @@ export const post = defineType({
             name: 'duration',
             title: 'Duration (e.g. 12:30)',
             type: 'string',
-            hidden: ({ document }) => document?.mediaType === 'text' || document?.mediaType === 'article',
+            hidden: ({ document }) => document?.mediaType === 'text',
         }),
         defineField({
             name: 'relatedArtist',

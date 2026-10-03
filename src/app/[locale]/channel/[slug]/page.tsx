@@ -65,9 +65,8 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
     const title = getLocalizedValue(post.title, locale)
     const imageProps = post.mainImage ? urlFor(post.mainImage).width(1200).height(700).url() : null
 
-    // Media props (legacy 'video'/'article' map to canonical 'film'/'text')
-    const rawMediaType = post.mediaType || 'text'
-    const mediaType = rawMediaType === 'video' ? 'film' : rawMediaType === 'article' ? 'text' : rawMediaType
+    // Media props
+    const mediaType = post.mediaType || 'text'
     const videoUrl = post.videoUrl
     const audioUrl = post.audioUrl
     

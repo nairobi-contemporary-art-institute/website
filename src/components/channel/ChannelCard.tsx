@@ -18,9 +18,8 @@ export function ChannelCard({ post, locale, variant = 'light' }: ChannelCardProp
     const isDark = variant === 'dark'
     const title = getLocalizedValue(post.title, locale)
 
-    // Determine type label and icon (legacy 'video'/'article' map to canonical)
-    const rawType = post.mediaType || 'text'
-    const type = rawType === 'video' ? 'film' : rawType === 'article' ? 'text' : rawType
+    // Determine type label and icon
+    const type = post.mediaType || 'text'
 
     const Icon = {
         film: PlayCircle,

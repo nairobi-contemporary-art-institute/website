@@ -55,13 +55,8 @@ export function ChannelFilter({ posts, locale }: ChannelFilterProps) {
             .map(t => JSON.stringify({ _id: t._id, slug: t.slug, title: t.title }))
     )).map(s => JSON.parse(s))
 
-    // Legacy media values (expand step of post-type migration): treat as canonical
-    const canonicalMediaType = (t: string | undefined) =>
-        t === 'video' ? 'film' : t === 'article' ? 'text' : t
-
     const filtered = posts.filter(p => {
-        const type = canonicalMediaType(p.mediaType)
-        const typeMatch = filter === 'all' || type === filter || (filter === 'text' && !p.mediaType)
+        const typeMatch = filter === 'all' || p.mediaType === filter || (filter === 'text' && !p.mediaType)
         const seriesMatch = seriesFilter === 'all' || (p.tags || []).some((t: any) => t.slug === seriesFilter)
         return typeMatch && seriesMatch
     })
