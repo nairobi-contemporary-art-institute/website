@@ -3,6 +3,13 @@ import { DocumentTextIcon } from '@sanity/icons'
 import { SlugLinkField } from './components/SlugLinkField'
 import { TEXT_TYPES, TEXT_TYPE_LABELS, type TextType } from '../../src/lib/texts'
 
+const SPEAKER_ROLES = [
+    { title: 'Interviewer', value: 'interviewer' },
+    { title: 'Interviewee', value: 'interviewee' },
+    { title: 'Moderator', value: 'moderator' },
+    { title: 'Participant', value: 'participant' },
+]
+
 const englishOrFirst = (array: any) =>
     Array.isArray(array) ? array.find((t: any) => t._key === 'en')?.value || array[0]?.value : undefined
 
@@ -111,12 +118,7 @@ export const textPiece = defineType({
                             title: 'Role',
                             type: 'string',
                             options: {
-                                list: [
-                                    { title: 'Interviewer', value: 'interviewer' },
-                                    { title: 'Interviewee', value: 'interviewee' },
-                                    { title: 'Moderator', value: 'moderator' },
-                                    { title: 'Participant', value: 'participant' },
-                                ],
+                                list: SPEAKER_ROLES,
                                 layout: 'radio',
                                 direction: 'horizontal',
                             },
@@ -129,7 +131,8 @@ export const textPiece = defineType({
                         select: { name: 'name', personName: 'person.name', role: 'role', initials: 'initials', media: 'person.image' },
                         prepare({ name, personName, role, initials, media }) {
                             const title = name || englishOrFirst(personName) || 'Unnamed speaker'
-                            return { title, subtitle: [role, initials].filter(Boolean).join(' · '), media }
+                            const roleTitle = SPEAKER_ROLES.find((r) => r.value === role)?.title
+                            return { title, subtitle: [roleTitle, initials].filter(Boolean).join(' · '), media }
                         },
                     },
                 }),
