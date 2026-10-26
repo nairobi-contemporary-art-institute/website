@@ -27,6 +27,27 @@ export function getLocalizedValue<T = string>(
 }
 
 /**
+ * Like getLocalizedValue, but also reports which locale was actually used,
+ * so long-form content can set `lang`/`dir` when it falls back.
+ */
+export function getLocalizedEntry<T = unknown>(
+    array: any,
+    locale: string = 'en'
+): { value: T; locale: string } | undefined {
+    if (!Array.isArray(array)) return undefined
+    const hasValue = (item: any) => {
+        const v = item?.value ?? item?.text
+        return Array.isArray(v) ? v.length > 0 : v !== undefined && v !== null && v !== ''
+    }
+    const entry =
+        array.find((item: any) => item._key === locale && hasValue(item)) ||
+        array.find((item: any) => item._key === 'en' && hasValue(item)) ||
+        array.find(hasValue)
+    if (!entry) return undefined
+    return { value: (entry.value ?? entry.text) as T, locale: entry._key }
+}
+
+/**
  * Utility to convert Portable Text (blocks) to plain text for metadata.
  */
 export function portableTextToPlainText(blocks: any[]): string {
