@@ -359,7 +359,7 @@ export const exhibition = defineType({
             type: 'array',
             group: 'related',
             of: [
-                { type: 'reference', to: [{ type: 'exhibition' }, { type: 'artist' }, { type: 'work' }, { type: 'event' }, { type: 'publication' }] }
+                { type: 'reference', to: [{ type: 'exhibition' }, { type: 'artist' }, { type: 'work' }, { type: 'event' }, { type: 'publication' }, { type: 'textPiece' }] }
             ],
         }),
         defineField({

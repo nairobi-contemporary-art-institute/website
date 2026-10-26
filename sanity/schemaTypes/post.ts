@@ -73,13 +73,13 @@ export const post = defineType({
             type: 'string',
             options: {
                 list: [
-                    { title: 'Text', value: 'text' },
                     { title: 'Film', value: 'film' },
                     { title: 'Audio', value: 'audio' },
                 ],
                 layout: 'radio',
             },
-            initialValue: 'text',
+            description: 'Written pieces now live under Texts.',
+            initialValue: 'film',
         }),
         defineField({
             name: 'videoUrl',

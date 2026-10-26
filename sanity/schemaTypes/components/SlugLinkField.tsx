@@ -15,6 +15,7 @@ export function SlugLinkField(props: FieldProps) {
     let path = `/${slug}`
     if (documentType === 'exhibition') path = `/exhibitions/${slug}`
     if (documentType === 'post') path = `/channel/${slug}`
+    if (documentType === 'textPiece') path = `/texts/${slug}`
     if (documentType === 'event') path = `/events/${slug}`
     if (documentType === 'publication') path = `/publications/${slug}`
     if (documentType === 'artist') path = `/artists/${slug}`

@@ -1,0 +1,86 @@
+import React from 'react'
+import { defineArrayMember, defineType } from 'sanity'
+import { LinkIcon, UserIcon } from '@sanity/icons'
+
+const SpeakerDecorator = (props: { children?: React.ReactNode }) => (
+    <span style={{ fontWeight: 700, textTransform: 'uppercase', fontSize: '0.85em', letterSpacing: '0.04em' }}>
+        {props.children}
+    </span>
+)
+
+/**
+ * Body of a Text. Deliberately narrow: editors get a fixed set of styles and
+ * three insertable blocks (image, image pair, pull quote) so every Text
+ * renders in the same calm reading layout.
+ */
+export const textBody = defineType({
+    title: 'Text body',
+    name: 'textBody',
+    type: 'array',
+    of: [
+        defineArrayMember({
+            type: 'block',
+            styles: [
+                { title: 'Normal', value: 'normal' },
+                { title: 'Heading', value: 'h2' },
+                { title: 'Subheading', value: 'h3' },
+                { title: 'Quote', value: 'blockquote' },
+            ],
+            lists: [
+                { title: 'Bullet', value: 'bullet' },
+                { title: 'Numbered', value: 'number' },
+            ],
+            marks: {
+                decorators: [
+                    { title: 'Bold', value: 'strong' },
+                    { title: 'Italic', value: 'em' },
+                    {
+                        title: 'Speaker (interviews & conversations)',
+                        value: 'speaker',
+                        icon: UserIcon,
+                        component: SpeakerDecorator,
+                    },
+                ],
+                annotations: [
+                    {
+                        title: 'External link',
+                        name: 'link',
+                        type: 'object',
+                        fields: [
+                            {
+                                title: 'URL',
+                                name: 'href',
+                                type: 'url',
+                                validation: (Rule) => Rule.uri({ scheme: ['http', 'https', 'mailto'] }),
+                            },
+                            {
+                                title: 'Open in new tab',
+                                name: 'blank',
+                                type: 'boolean',
+                                initialValue: true,
+                            },
+                        ],
+                    },
+                    {
+                        title: 'Link to page on this site',
+                        name: 'internalLink',
+                        type: 'object',
+                        icon: LinkIcon,
+                        fields: [
+                            {
+                                title: 'Page',
+                                name: 'reference',
+                                type: 'reference',
+                                to: [{ type: 'textPiece' }, { type: 'exhibition' }, { type: 'artist' }],
+                                validation: (Rule) => Rule.required(),
+                            },
+                        ],
+                    },
+                ],
+            },
+        }),
+        defineArrayMember({ type: 'textFigure' }),
+        defineArrayMember({ type: 'imagePair' }),
+        defineArrayMember({ type: 'pullQuote' }),
+    ],
+})
