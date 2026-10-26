@@ -1,6 +1,6 @@
 # NCAI Website
 
-The digital presence of the Nairobi Contemporary Art Institute: exhibitions, artists, collection, channel, events, education, and publications for an East African contemporary art audience.
+The digital presence of the Nairobi Contemporary Art Institute: exhibitions, artists, collection, channel, texts, events, education, and publications for an East African contemporary art audience.
 
 ## Language
 
@@ -21,8 +21,12 @@ The catalogue record that makes a work visible in the collection. Carries the li
 _Avoid_: work, holding
 
 **Channel Post**:
-An editorial media entry, in film, text, or audio.
+An editorial media entry, in film or audio. Written pieces are Texts.
 _Avoid_: article, video, blog
+
+**Text**:
+A periodically published written piece: an essay, interview, conversation, or artist's writing. Schema type `textPiece`.
+_Avoid_: article, post, blog
 
 **Event**:
 A scheduled occurrence with an event type.
