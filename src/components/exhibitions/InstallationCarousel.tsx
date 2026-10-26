@@ -35,7 +35,7 @@ export function InstallationCarousel({ images, locale, title, className }: Insta
         >
             {title && (
                 <div className="px-6 md:px-12 mb-8">
-                    <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-charcoal/40 border-b border-charcoal/5 pb-4">
+                    <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-charcoal/70 border-b border-charcoal/5 pb-4">
                         {title}
                     </h2>
                 </div>
@@ -60,7 +60,7 @@ export function InstallationCarousel({ images, locale, title, className }: Insta
                                 />
                             </div>
                             {caption && (
-                                <figcaption className="mt-3 w-full text-xs text-charcoal/60 leading-relaxed">
+                                <figcaption className="mt-3 w-full text-xs text-charcoal/70 leading-relaxed">
                                     {caption}
                                 </figcaption>
                             )}

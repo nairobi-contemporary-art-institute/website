@@ -111,7 +111,7 @@ export function HistoryTimeline({ events: initialEvents, locale }: HistoryTimeli
         <div className="relative py-12">
             <div className="max-w-5xl mx-auto relative group">
                 {/* Historical Curvilinear Path */}
-                <TimelinePath className="left-4 md:left-1/2 -translate-x-1/2 md:translate-x-0 text-umber/40 group-hover:text-amber-500/60 transition-colors duration-1000" />
+                <TimelinePath className="left-4 md:left-1/2 -translate-x-1/2 md:translate-x-0 text-umber/80 group-hover:text-amber-500/60 transition-colors duration-1000" />
 
                 <div className="space-y-32">
                     {events.map((event, index) => {

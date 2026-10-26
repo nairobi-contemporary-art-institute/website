@@ -44,7 +44,7 @@ export function EducationFilter({ programs, locale }: EducationFilterProps) {
                             "px-4 py-2 text-sm font-mono capitalize tracking-widest transition-all",
                             filter === f.value
                                 ? "bg-umber/10 text-umber font-bold border-b-2 border-umber"
-                                : "text-charcoal/60 hover:text-charcoal hover:bg-stone-50"
+                                : "text-charcoal/70 hover:text-charcoal hover:bg-stone-50"
                         )}
                     >
                         {f.label}
@@ -67,7 +67,7 @@ export function EducationFilter({ programs, locale }: EducationFilterProps) {
                     </div>
                 ) : (
                     <div className="py-32 text-center border border-dashed border-charcoal/20 bg-stone-50/50">
-                        <p className="text-charcoal/40 font-mono capitalize tracking-widest text-sm">{t('noPrograms')}</p>
+                        <p className="text-charcoal/70 font-mono capitalize tracking-widest text-sm">{t('noPrograms')}</p>
                     </div>
                 )}
             </section>
@@ -76,7 +76,7 @@ export function EducationFilter({ programs, locale }: EducationFilterProps) {
             {past.length > 0 && (
                 <section className="pt-20 border-t border-rich-blue/20">
                     <div className="flex items-center gap-4 mb-8">
-                        <h2 className="text-2xl font-light text-charcoal/60">{tEvents('past')}</h2>
+                        <h2 className="text-2xl font-light text-charcoal/70">{tEvents('past')}</h2>
                         <div className="h-px flex-1 bg-rich-blue/20" />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 opacity-80 hover:opacity-100 transition-opacity">

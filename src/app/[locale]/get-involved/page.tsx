@@ -89,7 +89,7 @@ export default async function GetInvolvedPage({ params }: { params: Promise<{ lo
                                     />
                                     {data.hero.image.caption && (
                                         <div className="absolute bottom-4 right-4">
-                                            <p className="text-[10px] text-charcoal/40 italic bg-ivory/20 px-2 py-1">
+                                            <p className="text-[10px] text-charcoal/70 italic bg-ivory/20 px-2 py-1">
                                                 {getLocalizedValue(data.hero.image.caption, locale)}
                                             </p>
                                         </div>
@@ -105,7 +105,7 @@ export default async function GetInvolvedPage({ params }: { params: Promise<{ lo
                     {data.membershipTiers && data.membershipTiers.length > 0 && (
                         <section className="px-section-clamp px-section-clamp">
                             <div className="mb-16">
-                                <h2 className="text-xs font-bold capitalize tracking-[0.3em] text-umber/60 mb-4">Membership</h2>
+                                <h2 className="text-xs font-bold capitalize tracking-[0.3em] text-umber/80 mb-4">Membership</h2>
                                 <h3 className="text-4xl md:text-5xl font-light tracking-tighter text-charcoal italic">
                                     Join a community dedicated to East African art history.
                                 </h3>
@@ -124,7 +124,7 @@ export default async function GetInvolvedPage({ params }: { params: Promise<{ lo
                                                 className={`relative w-full p-8 border ${isFeatured ? 'bg-charcoal text-ivory border-charcoal' : 'bg-white border-charcoal/5'} flex flex-col h-full group hover:shadow-2xl transition-all duration-500`}
                                             >
                                                 {isFeatured && (
-                                                    <span className="absolute -top-3 left-8 bg-ochre text-ivory text-[10px] capitalize font-bold tracking-widest px-3 py-1 z-20">
+                                                    <span className="absolute -top-3 left-8 bg-ochre text-charcoal text-[10px] capitalize font-bold tracking-widest px-3 py-1 z-20">
                                                         Recommended
                                                     </span>
                                                 )}
@@ -251,7 +251,7 @@ export default async function GetInvolvedPage({ params }: { params: Promise<{ lo
                     )}
 
                     <div className="mt-20">
-                        <ResponsiveDivider variant="curved" weight="medium" className="text-umber/20" />
+                        <ResponsiveDivider variant="curved" weight="medium" className="text-umber/80" />
                     </div>
                 </div>
             </div>

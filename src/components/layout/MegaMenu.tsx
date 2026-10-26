@@ -48,8 +48,13 @@ export function MegaMenu({ isOpen, activeCategory, columns, onClose, featuredIma
 
     return (
         <Popover.Root open={isOpen} onOpenChange={(open) => !open && onClose()}>
-            {/* Hidden trigger to satisfy accessibility context */}
-            <Popover.Trigger className="sr-only" />
+            {/* Hidden trigger to satisfy accessibility context; labelled and removed from tab order (menu is opened via header hover/click) */}
+            <Popover.Trigger
+                className="sr-only"
+                tabIndex={-1}
+                aria-hidden="true"
+                aria-label={activeCategory ? `${activeCategory} menu` : 'Navigation menu'}
+            />
             <Popover.Portal>
                 <Popover.Positioner className="fixed top-[var(--header-height,100px)] left-0 w-full z-[90]">
                     <Popover.Popup
@@ -68,7 +73,7 @@ export function MegaMenu({ isOpen, activeCategory, columns, onClose, featuredIma
                                 {columns.map((column, idx) => (
                                     <div key={idx} className="flex flex-col gap-6">
                                         {column.title && (
-                                            <h3 className="text-[10px] uppercase tracking-[0.3em] font-normal text-charcoal/40 border-b border-charcoal/10 pb-2">
+                                            <h3 className="text-[10px] uppercase tracking-[0.3em] font-normal text-charcoal/70 border-b border-charcoal/10 pb-2">
                                                 {column.title}
                                             </h3>
                                         )}
@@ -94,7 +99,7 @@ export function MegaMenu({ isOpen, activeCategory, columns, onClose, featuredIma
 
                             {/* Right: Featured Images Section */}
                             <div className="w-full md:w-[45%] flex flex-col gap-6 mt-12 md:mt-0">
-                                <h3 className="text-[10px] uppercase tracking-[0.3em] font-normal text-charcoal/40 border-b border-charcoal/10 pb-2">
+                                <h3 className="text-[10px] uppercase tracking-[0.3em] font-normal text-charcoal/70 border-b border-charcoal/10 pb-2">
                                     {activeCategory ? `Featured in ${activeCategory}` : 'Featured'}
                                 </h3>
                                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -168,8 +173,8 @@ export function MegaMenu({ isOpen, activeCategory, columns, onClose, featuredIma
                         {/* High-Converting Quick Action Bar */}
                         <div className="bg-charcoal/[0.03] border-t border-charcoal/10 py-5 px-6 md:px-12">
                             <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-                                <div className="flex items-center gap-8 text-[10px] uppercase tracking-[0.2em] text-charcoal/40 font-bold">
-                                    <span className="text-charcoal/60">Nairobi Contemporary Art Institute</span>
+                                <div className="flex items-center gap-8 text-[10px] uppercase tracking-[0.2em] text-charcoal/70 font-bold">
+                                    <span className="text-charcoal/70">Nairobi Contemporary Art Institute</span>
                                     <Link href="/visit" className="hover:text-ochre transition-colors">Plan your visit</Link>
                                     <Link href="/about" className="hover:text-ochre transition-colors">The Institute</Link>
                                 </div>

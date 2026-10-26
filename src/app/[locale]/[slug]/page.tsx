@@ -34,7 +34,7 @@ export default async function GenericPage({ params }: { params: Promise<{ locale
     const body = getLocalizedValue(data.body, locale)
 
     return (
-        <main className="bg-ivory min-h-screen page-header-padding">
+        <div className="bg-ivory min-h-screen page-header-padding">
             <GridSystem unstable_useContainer className="py-24 px-section-clamp">
                 <Grid columns={{ sm: 1, md: 12 }} gap={64}>
                     <GridCell column={{ sm: 1, md: 12 }} className="p-0 items-start justify-start">
@@ -53,9 +53,9 @@ export default async function GenericPage({ params }: { params: Promise<{ locale
                     </GridCell>
                 </Grid>
                 <div className="mt-20">
-                    <ResponsiveDivider variant="curved" weight="medium" className="text-umber/20" />
+                    <ResponsiveDivider variant="curved" weight="medium" className="text-umber/80" />
                 </div>
             </GridSystem>
-        </main>
+        </div>
     )
 }

@@ -19,7 +19,7 @@ export function MuseumResultRow({ title, items, className }: MuseumResultRowProp
                     <h2 className="text-lg md:text-xl font-bold uppercase tracking-widest text-[#1a1a1a]">
                         {title}
                     </h2>
-                    <span className="text-sm md:text-base text-[#1a1a1a]/60 font-medium shrink-0">
+                    <span className="text-sm md:text-base text-[#1a1a1a]/70 font-medium shrink-0">
                         {items.length} {items.length === 1 ? 'result' : 'results'}
                     </span>
                 </div>

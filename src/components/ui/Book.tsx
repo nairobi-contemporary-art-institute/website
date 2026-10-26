@@ -120,9 +120,10 @@ export function Book({
                         {/* Title & Branding */}
                         <div className="relative z-10 flex-grow p-5 flex flex-col justify-between">
                             {showTitle ? (
-                                <h3
+                                <span
+                                    aria-hidden="true"
                                     className={cn(
-                                        "text-[15px] font-bold leading-[1.2] capitalize tracking-tight",
+                                        "block text-[15px] font-bold leading-[1.2] capitalize tracking-tight",
                                         isDarkText ? "text-charcoal" : "text-white"
                                     )}
                                     style={{
@@ -131,7 +132,7 @@ export function Book({
                                     }}
                                 >
                                     {title}
-                                </h3>
+                                </span>
                             ) : <div />}
 
                             {showBranding && (

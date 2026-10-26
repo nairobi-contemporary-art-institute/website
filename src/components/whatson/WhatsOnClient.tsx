@@ -401,7 +401,7 @@ export function WhatsOnClient({ items, locale, noticeBarSettings, showYearNav = 
                                 <h2 className="text-lg md:text-xl font-bold uppercase tracking-widest text-[#1a1a1a]">
                                     Archive
                                 </h2>
-                                <span className="text-sm md:text-base text-[#1a1a1a]/60 font-medium shrink-0">
+                                <span className="text-sm md:text-base text-[#1a1a1a]/70 font-medium shrink-0">
                                     {archiveItems.length} {archiveItems.length === 1 ? 'result' : 'results'}
                                 </span>
                             </div>
@@ -418,7 +418,7 @@ export function WhatsOnClient({ items, locale, noticeBarSettings, showYearNav = 
                                                         onClick={() => jumpToYear(y)}
                                                         className={cn(
                                                             "text-sm font-bold tracking-widest transition-colors",
-                                                            activeYear === y ? "text-[#1a1a1a] underline underline-offset-4" : "text-[#1a1a1a]/40 hover:text-[#1a1a1a]"
+                                                            activeYear === y ? "text-[#1a1a1a] underline underline-offset-4" : "text-[#1a1a1a]/70 hover:text-[#1a1a1a]"
                                                         )}
                                                     >
                                                         {y}
@@ -438,7 +438,7 @@ export function WhatsOnClient({ items, locale, noticeBarSettings, showYearNav = 
                                                     onClick={() => jumpToYear(y)}
                                                     className={cn(
                                                         "shrink-0 text-sm font-bold tracking-widest transition-colors",
-                                                        activeYear === y ? "text-[#1a1a1a] underline underline-offset-4" : "text-[#1a1a1a]/40"
+                                                        activeYear === y ? "text-[#1a1a1a] underline underline-offset-4" : "text-[#1a1a1a]/70"
                                                     )}
                                                 >
                                                     {y}
@@ -481,7 +481,7 @@ export function WhatsOnClient({ items, locale, noticeBarSettings, showYearNav = 
 
                                     {visibleArchiveCount < archiveItems.length && (
                                         <div ref={sentinelRef} className="mt-12 flex justify-center">
-                                            <span className="text-xs uppercase tracking-widest text-[#1a1a1a]/40 animate-pulse">
+                                            <span className="text-xs uppercase tracking-widest text-charcoal">
                                                 Loading more…
                                             </span>
                                         </div>

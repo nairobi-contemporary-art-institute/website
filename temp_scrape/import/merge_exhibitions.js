@@ -30,6 +30,7 @@ const NEW_SLUGS = [
   'walkingonadream',
   'wayfinder',
   'exhibition-michael-maria-c',
+  'exhibition-resounding-rhizomes',
 ]
 
 async function fetchPublished(slug) {

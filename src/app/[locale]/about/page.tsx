@@ -60,7 +60,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
     ]
 
     return (
-        <main className="bg-ivory min-h-screen page-header-padding">
+        <div className="bg-ivory min-h-screen page-header-padding">
             {/* Hero Section - Full spanning width */}
             {headerStyle === 'ncai' ? (
                 <HeroIMMA
@@ -124,7 +124,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                                         href={item.href}
                                         className={cn(
                                             "block py-3 border-b border-charcoal/5 text-sm uppercase tracking-widest transition-all",
-                                            isActive ? "text-umber font-bold" : "text-charcoal/40 hover:text-charcoal"
+                                            isActive ? "text-umber font-bold" : "text-charcoal/70 hover:text-charcoal"
                                         )}
                                     >
                                         {item.label}
@@ -193,9 +193,9 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                 </Grid>
 
                 <div className="mt-20">
-                    <ResponsiveDivider variant="curved" weight="medium" className="text-umber/20" />
+                    <ResponsiveDivider variant="curved" weight="medium" className="text-umber/80" />
                 </div>
             </GridSystem>
-        </main>
+        </div>
     )
 }

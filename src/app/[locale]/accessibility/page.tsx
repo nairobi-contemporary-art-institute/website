@@ -110,7 +110,7 @@ export default async function AccessibilityPage({ params }: Props) {
                                     <h2 className="text-5xl md:text-7xl font-light tracking-tighter">
                                         {getLocalizedValue(pageData.venueGuide.title, locale)}
                                     </h2>
-                                    <p className="text-xl text-stone-400 font-light max-w-lg leading-relaxed">
+                                    <p className="text-xl text-stone-300 font-light max-w-lg leading-relaxed">
                                         {getLocalizedValue(pageData.venueGuide.description, locale)}
                                     </p>
                                 </div>
@@ -172,7 +172,7 @@ export default async function AccessibilityPage({ params }: Props) {
             <div className="container mx-auto px-section-clamp pt-12 pb-24 border-t border-charcoal/5">
                 <Link
                     href={`/${locale}`}
-                    className="text-xs font-mono capitalize tracking-[0.2em] text-charcoal/40 hover:text-charcoal transition-colors border-b border-transparent hover:border-charcoal/20 pb-1"
+                    className="text-xs font-mono capitalize tracking-[0.2em] text-charcoal/70 hover:text-charcoal transition-colors border-b border-transparent hover:border-charcoal/20 pb-1"
                 >
                     &larr; Back to Home
                 </Link>

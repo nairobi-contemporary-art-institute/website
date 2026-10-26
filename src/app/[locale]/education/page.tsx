@@ -121,7 +121,7 @@ export default async function EducationPage({ params }: Props) {
                     {/* Main Overview Section */}
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
                         <div className="lg:col-span-4">
-                            <h2 className="text-xs font-bold uppercase tracking-[0.4em] text-charcoal/40 sticky top-48">
+                            <h2 className="text-xs font-bold uppercase tracking-[0.4em] text-charcoal/70 sticky top-48">
                                 Overview
                             </h2>
                         </div>
@@ -160,7 +160,7 @@ export default async function EducationPage({ params }: Props) {
             {pageData?.pillars && pageData.pillars.length > 0 && (
                 <section id="pillars" className="py-32 bg-stone-50/50 scroll-mt-32">
                     <div className="container mx-auto px-section-clamp mb-12">
-                        <h2 className="text-xs font-bold uppercase tracking-[0.4em] text-charcoal/40 mb-16">
+                        <h2 className="text-xs font-bold uppercase tracking-[0.4em] text-charcoal/70 mb-16">
                             Explore More
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-y-20 gap-x-8">
@@ -251,7 +251,7 @@ export default async function EducationPage({ params }: Props) {
             <section id="programs" className="py-32 scroll-mt-32">
                 <div className="container mx-auto px-section-clamp">
                     <div className="mb-12">
-                        <h2 className="text-xs font-bold uppercase tracking-[0.4em] text-charcoal/40 border-b border-charcoal/10 pb-4 inline-block mb-16">
+                        <h2 className="text-xs font-bold uppercase tracking-[0.4em] text-charcoal/70 border-b border-charcoal/10 pb-4 inline-block mb-16">
                             {t('allPrograms')}
                         </h2>
                         <EducationFilter programs={programs} locale={locale} />

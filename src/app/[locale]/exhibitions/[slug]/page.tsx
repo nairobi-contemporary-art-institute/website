@@ -129,7 +129,7 @@ export default async function ExhibitionPage({ params }: Props) {
     ].filter(Boolean) as { id: string, label: string }[]
 
     return (
-        <main className="min-h-screen bg-[#F9F8F6]">
+        <div className="min-h-screen bg-[#F9F8F6]">
             {/* INSTALLATION SECTION — breadcrumbs + title block + carousel, white bg, above the hero */}
             {exhibition.installationViews?.length > 0 && (
                 <section id="installation" className="scroll-mt-32 bg-white pt-36 md:pt-44">
@@ -143,7 +143,7 @@ export default async function ExhibitionPage({ params }: Props) {
                         />
 
                         <header className="space-y-4 max-w-5xl">
-                            <span className="inline-block text-[10px] font-black uppercase tracking-[0.3em] text-charcoal/40">
+                            <span className="inline-block text-[10px] font-black uppercase tracking-[0.3em] text-charcoal/70">
                                 {t.Pages?.exhibitions?.label || 'Exhibition'}
                             </span>
                             {artistNames && (
@@ -194,7 +194,7 @@ export default async function ExhibitionPage({ params }: Props) {
                    <header className="max-w-4xl space-y-8">
                         <span className={cn(
                             "inline-block px-3 py-1 border text-xs font-bold tracking-[0.2em] uppercase transition-colors",
-                            isDark ? "border-white/20 text-white/60" : "border-charcoal/20 text-charcoal/60"
+                            isDark ? "border-white/20 text-white/60" : "border-charcoal/20 text-charcoal/70"
                         )}>
                             {t.Pages?.exhibitions?.label || 'Exhibition'}
                         </span>
@@ -232,7 +232,7 @@ export default async function ExhibitionPage({ params }: Props) {
                              {/* Artists Profile Section */}
                              {artists.length > 0 && (
                                 <div className="space-y-12" id="artists">
-                                    <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-charcoal/40 border-b border-charcoal/5 pb-4">
+                                    <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-charcoal/70 border-b border-charcoal/5 pb-4">
                                         {artists.length === 1 ? 'Participating Artist' : 'Participating Artists'}
                                     </h4>
                                     
@@ -275,9 +275,9 @@ export default async function ExhibitionPage({ params }: Props) {
                                                                 </div>
                                                                 {(portraitCaption || portraitCredit) && (
                                                                     <div className="space-y-1">
-                                                                        {portraitCaption && <p className="text-[10px] text-charcoal/60 leading-tight italic">{portraitCaption}</p>}
+                                                                        {portraitCaption && <p className="text-[10px] text-charcoal/70 leading-tight italic">{portraitCaption}</p>}
                                                                         {portraitCredit && (
-                                                                            <p className="text-[8px] uppercase tracking-[0.2em] text-charcoal/40 font-bold">
+                                                                            <p className="text-[8px] uppercase tracking-[0.2em] text-charcoal/70 font-bold">
                                                                                 Image credit: {(portraitCreditSlug && portraitCreditHasProfile) ? (
                                                                                     <Link 
                                                                                         href={`/${locale}/about/team#${portraitCreditSlug}`}
@@ -340,7 +340,7 @@ export default async function ExhibitionPage({ params }: Props) {
                              {/* Curators */}
                              {exhibition.curators?.length > 0 && (
                                 <div className="space-y-6 border-t border-stone-200/50 pt-8">
-                                    <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-charcoal/40">Curated By</h4>
+                                    <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-charcoal/70">Curated By</h4>
                                     <div className="flex flex-col gap-4">
                                         {exhibition.curators.map((curator: any) => {
                                             const name = getLocalizedValue(curator.name, locale)
@@ -370,7 +370,7 @@ export default async function ExhibitionPage({ params }: Props) {
                                                         {name}
                                                     </Link>
                                                     {roleDisplay && (
-                                                        <span className="text-[10px] uppercase tracking-widest text-charcoal/40 block">
+                                                        <span className="text-[10px] uppercase tracking-widest text-charcoal/70 block">
                                                             {roleDisplay}
                                                         </span>
                                                     )}
@@ -384,7 +384,7 @@ export default async function ExhibitionPage({ params }: Props) {
                                                         {name}
                                                     </span>
                                                     {roleDisplay && (
-                                                        <span className="text-[10px] uppercase tracking-widest text-charcoal/40 block">
+                                                        <span className="text-[10px] uppercase tracking-widest text-charcoal/70 block">
                                                             {roleDisplay}
                                                         </span>
                                                     )}
@@ -407,7 +407,7 @@ export default async function ExhibitionPage({ params }: Props) {
                                         {getLocalizedValue(exhibition.enquiryModule.label, locale) || 'Enquire'}
                                     </Link>
                                     {exhibition.bookingUrl && (
-                                        <p className="mt-4 text-[10px] uppercase tracking-widest text-charcoal/40 font-bold">
+                                        <p className="mt-4 text-[10px] uppercase tracking-widest text-charcoal/70 font-bold">
                                             Tickets available now
                                         </p>
                                     )}
@@ -505,7 +505,7 @@ export default async function ExhibitionPage({ params }: Props) {
                                     <GridCell column={{ sm: 1, md: '7 / span 6' }} className="p-4">
                                         <div className="space-y-8">
                                             {sectionTitle && (
-                                                <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-charcoal/40 border-b border-charcoal/5 pb-4">
+                                                <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-charcoal/70 border-b border-charcoal/5 pb-4">
                                                     {sectionTitle}
                                                 </h4>
                                             )}
@@ -577,6 +577,6 @@ export default async function ExhibitionPage({ params }: Props) {
                     </Link>
                 </footer>
             </div>
-        </main>
+        </div>
     )
 }

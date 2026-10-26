@@ -51,13 +51,13 @@ export function AccordionSection({
                             animate={{ rotate: isOpen ? 0 : 90, opacity: isOpen ? 0 : 1 }}
                             className="absolute inset-0 flex items-center justify-center"
                         >
-                            <LucidePlus className="w-6 h-6 text-charcoal/40" />
+                            <LucidePlus className="w-6 h-6 text-charcoal/70" />
                         </motion.div>
                         <motion.div
                             animate={{ rotate: isOpen ? 0 : -90, opacity: isOpen ? 1 : 0 }}
                             className="absolute inset-0 flex items-center justify-center"
                         >
-                            <LucideMinus className="w-6 h-6 text-charcoal/40" />
+                            <LucideMinus className="w-6 h-6 text-charcoal/70" />
                         </motion.div>
                     </div>
                 </div>

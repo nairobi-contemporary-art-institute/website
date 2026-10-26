@@ -6,7 +6,7 @@ export function EditorialContent() {
     return (
         <div className="space-y-16">
             <header>
-                <h2 className="text-xs font-bold text-umber/40 capitalize tracking-[0.4em] mb-4">Section 07</h2>
+                <h2 className="text-xs font-bold text-umber/80 capitalize tracking-[0.4em] mb-4">Section 07</h2>
                 <h1 className="text-5xl md:text-7xl font-bold text-charcoal capitalize tracking-tighter mb-8">
                     Editorial & Content
                 </h1>

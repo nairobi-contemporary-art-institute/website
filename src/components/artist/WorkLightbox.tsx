@@ -97,7 +97,7 @@ export function WorkLightbox({ isOpen, onClose, works, initialIndex, locale, art
                     className="group flex flex-col items-center gap-2 transition-transform hover:scale-110"
                 >
                     <X className="w-8 h-8 text-charcoal" strokeWidth={1} />
-                    <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-charcoal/40 group-hover:text-charcoal transition-colors">Close</span>
+                    <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-charcoal/70 group-hover:text-charcoal transition-colors">Close</span>
                 </button>
             </div>
 
@@ -164,7 +164,7 @@ export function WorkLightbox({ isOpen, onClose, works, initialIndex, locale, art
                                 <p className="block max-w-[75ch]">{medium}</p>
                                 <p className="block">{getLocalizedValueAsString(currentWork.dimensions, locale)}</p>
                                 {currentWork.edition && (
-                                    <p className="text-[11px] text-charcoal/60 pt-2">{getLocalizedValueAsString(currentWork.edition, locale)}</p>
+                                    <p className="text-[11px] text-charcoal/70 pt-2">{getLocalizedValueAsString(currentWork.edition, locale)}</p>
                                 )}
                             </div>
 
@@ -188,13 +188,13 @@ export function WorkLightbox({ isOpen, onClose, works, initialIndex, locale, art
                             onClick={(e) => { e.stopPropagation(); prev(); }}
                             className="pointer-events-auto p-2 hover:translate-x-[-4px] transition-transform hidden md:block z-[110]"
                         >
-                            <ChevronLeft className="w-10 h-10 text-charcoal/30 hover:text-charcoal" strokeWidth={1} />
+                            <ChevronLeft className="w-10 h-10 text-charcoal/70 hover:text-charcoal" strokeWidth={1} />
                         </button>
                         <button
                             onClick={(e) => { e.stopPropagation(); next(); }}
                             className="pointer-events-auto p-2 hover:translate-x-[4px] transition-transform hidden md:block z-[110]"
                         >
-                            <ChevronRight className="w-10 h-10 text-charcoal/30 hover:text-charcoal" strokeWidth={1} />
+                            <ChevronRight className="w-10 h-10 text-charcoal/70 hover:text-charcoal" strokeWidth={1} />
                         </button>
                     </div>
                 )}

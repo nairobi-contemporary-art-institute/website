@@ -84,7 +84,7 @@ export function HeroIMMA({ title, image, headline, intro, caption, className, li
                                 )}
                                 
                                 {intro && (
-                                    <p className="text-lg md:text-xl text-white/90 max-w-2xl leading-relaxed">
+                                    <p className="text-lg md:text-xl text-white max-w-2xl leading-relaxed drop-shadow-sm">
                                         {intro}
                                     </p>
                                 )}

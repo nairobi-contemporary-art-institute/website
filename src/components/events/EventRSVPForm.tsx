@@ -78,7 +78,7 @@ export function EventRSVPForm({ eventTitle, eventSlug, locale }: EventRSVPFormPr
     return (
         <div className="bg-white p-8 border border-charcoal/5 shadow-sm space-y-8">
             <div className="space-y-2">
-                <h3 className="font-mono text-xs capitalize tracking-widest text-charcoal/60">
+                <h3 className="font-mono text-xs capitalize tracking-widest text-charcoal/70">
                     {locale === 'en' ? 'Registration' : 'Usajili'}
                 </h3>
                 <p className="text-charcoal font-medium">
@@ -92,7 +92,7 @@ export function EventRSVPForm({ eventTitle, eventSlug, locale }: EventRSVPFormPr
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-4">
                     <div className="relative group">
-                        <label htmlFor="name" className="block text-xs font-mono capitalize tracking-widest text-charcoal/40 mb-2 transition-colors group-focus-within:text-umber">
+                        <label htmlFor="name" className="block text-xs font-mono capitalize tracking-widest text-charcoal/70 mb-2 transition-colors group-focus-within:text-umber">
                             {locale === 'en' ? 'Full Name' : 'Jina Kamili'}
                         </label>
                         <input
@@ -106,7 +106,7 @@ export function EventRSVPForm({ eventTitle, eventSlug, locale }: EventRSVPFormPr
                     </div>
 
                     <div className="relative group">
-                        <label htmlFor="email" className="block text-xs font-mono capitalize tracking-widest text-charcoal/40 mb-2 transition-colors group-focus-within:text-umber">
+                        <label htmlFor="email" className="block text-xs font-mono capitalize tracking-widest text-charcoal/70 mb-2 transition-colors group-focus-within:text-umber">
                             {locale === 'en' ? 'Email Address' : 'Anwani ya Barua Pepe'}
                         </label>
                         <input
@@ -127,7 +127,7 @@ export function EventRSVPForm({ eventTitle, eventSlug, locale }: EventRSVPFormPr
                         name="consent"
                         className="mt-1.5 h-4 w-4 border-charcoal/20 text-umber focus:ring-umber accent-umber"
                     />
-                    <label htmlFor="consent" className="text-xs text-charcoal/60 leading-relaxed cursor-pointer group-hover:text-charcoal transition-colors">
+                    <label htmlFor="consent" className="text-xs text-charcoal/70 leading-relaxed cursor-pointer group-hover:text-charcoal transition-colors">
                         {locale === 'en'
                             ? 'I consent to receive updates about future events and news from NCAI. You can unsubscribe at any time.'
                             : 'Ninakubali kupokea taarifa kuhusu matukio ya baadaye na habari kutoka NCAI. Unaweza kujiondoa wakati wowote.'
@@ -147,7 +147,7 @@ export function EventRSVPForm({ eventTitle, eventSlug, locale }: EventRSVPFormPr
                     className={cn(
                         "w-full py-5 font-mono text-xs capitalize tracking-[0.3em] transition-all duration-300",
                         status === 'loading'
-                            ? "bg-charcoal/20 text-charcoal/40 cursor-wait"
+                            ? "bg-charcoal/20 text-charcoal/70 cursor-wait"
                             : "bg-charcoal text-off-white hover:bg-umber"
                     )}
                 >
@@ -158,7 +158,7 @@ export function EventRSVPForm({ eventTitle, eventSlug, locale }: EventRSVPFormPr
                 </button>
             </form>
 
-            <p className="text-[10px] text-charcoal/30 font-mono capitalize tracking-widest leading-relaxed">
+            <p className="text-[10px] text-charcoal/70 font-mono capitalize tracking-widest leading-relaxed">
                 By registering, you agree to our privacy policy and terms of service.
             </p>
         </div>

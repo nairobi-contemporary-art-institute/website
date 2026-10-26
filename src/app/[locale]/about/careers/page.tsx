@@ -46,7 +46,7 @@ export default async function CareersPage({ params }: Props) {
 
     return (
         <GridSystem>
-            <main className="min-h-screen bg-ivory">
+            <div className="min-h-screen bg-ivory">
                 <header className="page-header-padding pb-12 px-section-clamp">
                     <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-charcoal capitalize leading-[0.9] mb-8">
                         {title}
@@ -66,25 +66,25 @@ export default async function CareersPage({ params }: Props) {
                                 <h2 className="text-3xl font-bold tracking-tight text-charcoal">
                                     {t('careersTeaser.title')}
                                 </h2>
-                                <p className="text-xl text-charcoal/60 leading-relaxed font-light">
+                                <p className="text-xl text-charcoal/70 leading-relaxed font-light">
                                     {t('careersTeaser.empty')}
                                 </p>
                             </div>
                             
                             <div className="pt-8 border-t border-charcoal/5">
-                                <p className="text-sm font-mono uppercase tracking-widest text-umber/60">
+                                <p className="text-sm font-mono uppercase tracking-widest text-umber/80">
                                     Stay Connected
                                 </p>
-                                <div className="mt-4 flex gap-6 text-charcoal/40 hover:text-charcoal transition-colors">
-                                    <a href="#" className="hover:text-umber transition-colors">Instagram</a>
-                                    <a href="#" className="hover:text-umber transition-colors">LinkedIn</a>
-                                    <a href="#" className="hover:text-umber transition-colors">Newsletter</a>
+                                <div className="mt-4 flex gap-6 text-charcoal/70 hover:text-charcoal transition-colors">
+                                    <button type="button" className="hover:text-umber transition-colors">Instagram</button>
+                                    <button type="button" className="hover:text-umber transition-colors">LinkedIn</button>
+                                    <button type="button" className="hover:text-umber transition-colors">Newsletter</button>
                                 </div>
                             </div>
                         </div>
                     )}
                 </div>
-            </main>
+            </div>
         </GridSystem>
     )
 }

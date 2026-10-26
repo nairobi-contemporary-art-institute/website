@@ -212,7 +212,7 @@ export default function ExitIntentPopup({ settings, works = [] }: ExitIntentPopu
                     >
                         <button
                             onClick={handleClose}
-                            className="absolute top-4 right-4 p-2 text-stone-400 hover:text-stone-900 transition-colors z-20"
+                            className="absolute top-4 right-4 p-2 text-stone-600 hover:text-stone-900 transition-colors z-20"
                         >
                             <X size={20} />
                         </button>
@@ -277,15 +277,20 @@ export default function ExitIntentPopup({ settings, works = [] }: ExitIntentPopu
                                             </div>
 
                                             <div className="space-y-4">
-                                                <p className="text-[11px] font-bold uppercase tracking-widest text-stone-400 mb-6">
+                                                <p className="text-[11px] font-bold uppercase tracking-widest text-stone-600 mb-6">
                                                     Select your preferences
                                                 </p>
                                                 <div className="grid grid-cols-2 gap-y-6 gap-x-8">
                                                     {Object.entries(preferences).map(([key, value]) => (
-                                                        <label key={key} className="flex items-center gap-3 cursor-pointer group">
+                                                        <div key={key} className="flex items-center gap-3 cursor-pointer group">
                                                             <div
+                                                                role="checkbox"
+                                                                aria-checked={value}
+                                                                aria-label={key}
+                                                                tabIndex={0}
                                                                 onClick={() => togglePreference(key as keyof typeof preferences)}
-                                                                className={`w-5 h-5 border transition-colors flex items-center justify-center ${value ? 'bg-stone-900 border-stone-900' : 'border-stone-300 group-hover:border-stone-500'
+                                                                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togglePreference(key as keyof typeof preferences); } }}
+                                                                className={`w-5 h-5 border transition-colors flex items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${value ? 'bg-stone-900 border-stone-900' : 'border-stone-300 group-hover:border-stone-500'
                                                                     }`}
                                                             >
                                                                 {value && (
@@ -295,7 +300,7 @@ export default function ExitIntentPopup({ settings, works = [] }: ExitIntentPopu
                                                             <span className="text-sm font-medium text-stone-600 capitalize">
                                                                 {key.replace(/([A-Z])/g, ' $1').trim()}
                                                             </span>
-                                                        </label>
+                                                        </div>
                                                     ))}
                                                 </div>
                                             </div>

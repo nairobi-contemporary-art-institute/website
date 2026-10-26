@@ -45,9 +45,9 @@ export function NewsletterSignup() {
 
     return (
         <div className="max-w-md">
-            <h3 className="text-xl md:text-2xl font-bold mb-2 text-white">
+            <h2 className="text-xl md:text-2xl font-bold mb-2 text-white">
                 Keep in touch
-            </h3>
+            </h2>
             <p className="text-sm text-sun-bleached-paper/60 mb-6 font-light leading-relaxed">
                 Receive regular updates on our exhibitions, public programs, and publications.
             </p>
@@ -64,7 +64,7 @@ export function NewsletterSignup() {
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Email address"
                         required
-                        className="w-full px-4 py-3 bg-transparent text-sun-bleached-paper placeholder:text-sun-bleached-paper/40 focus:outline-none"
+                        className="w-full px-4 py-3 bg-transparent text-sun-bleached-paper placeholder:text-sun-bleached-paper/70 focus:outline-none"
                     />
                 </div>
                 <button

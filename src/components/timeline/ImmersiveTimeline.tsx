@@ -143,13 +143,13 @@ export function ImmersiveTimeline({ events, locale }: ImmersiveTimelineProps) {
                     </h1>
                     <div className="flex items-center gap-3">
                         <div className="w-8 h-px bg-ochre/40" />
-                        <span className="text-[9px] capitalize tracking-[0.5em] text-ivory/40 font-bold">Spatial History Repository</span>
+                        <span className="text-[9px] capitalize tracking-[0.5em] text-ivory/70 font-bold">Spatial History Repository</span>
                     </div>
                 </div>
 
                 <div className="flex items-center gap-16 pointer-events-auto">
                     {/* Decade Scrubber */}
-                    <nav className="hidden xl:flex items-center gap-8">
+                    <nav aria-label="Timeline eras" className="hidden xl:flex items-center gap-8">
                         {decades.map((d) => (
                             <button
                                 key={d.label}
@@ -166,7 +166,7 @@ export function ImmersiveTimeline({ events, locale }: ImmersiveTimelineProps) {
                                     "text-[10px] font-bold tracking-[0.4em] capitalize transition-all duration-500 hover:text-ochre relative py-2",
                                     events[currentIndex].year.startsWith(d.label.substring(0, 3))
                                         ? "text-ochre scale-110"
-                                        : "text-ivory/20"
+                                        : "text-ivory/60"
                                 )}
                             >
                                 {d.label}
@@ -279,7 +279,7 @@ export function ImmersiveTimeline({ events, locale }: ImmersiveTimelineProps) {
                                             </h2>
                                         </div>
 
-                                        <div className="text-xl md:text-2xl text-ivory/50 leading-relaxed font-light max-w-lg">
+                                        <div className="text-xl md:text-2xl text-ivory/70 leading-relaxed font-light max-w-lg">
                                             {description ? (
                                                 typeof description === 'string' ? description : portableTextToPlainText(description)
                                             ) : "A pivotal moment in the artistic development of the region, defining the framework for generations of spatial and conceptual practice."}
@@ -327,10 +327,10 @@ export function ImmersiveTimeline({ events, locale }: ImmersiveTimelineProps) {
 
                     <div className="flex flex-col items-end gap-1 text-right">
                         <div className="flex items-baseline gap-4">
-                            <span className="text-[10vw] font-black opacity-[0.05] leading-none select-none">
+                            <span aria-hidden="true" className="text-[10vw] font-black opacity-50 leading-none select-none">
                                 {((currentIndex + 1) / events.length * 100).toFixed(0)}%
                             </span>
-                            <span className="text-6xl font-black text-ochre/20 tracking-tighter tabular-nums leading-none">
+                            <span className="text-6xl font-black text-ochre/60 tracking-tighter tabular-nums leading-none">
                                 {events[currentIndex].year}
                             </span>
                         </div>
@@ -342,21 +342,38 @@ export function ImmersiveTimeline({ events, locale }: ImmersiveTimelineProps) {
 
                 {/* Progress Bar Line */}
                 <div
-                    className="w-full h-px bg-white/10 relative pointer-events-auto cursor-pointer group"
-                    role="scrollbar"
+                    className="w-full h-px bg-white/10 relative pointer-events-auto cursor-pointer group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"
+                    role="slider"
+                    tabIndex={0}
                     aria-label="Timeline progress"
-                    aria-valuemin={0}
-                    aria-valuemax={100}
-                    aria-valuenow={Math.round(((currentIndex + 1) / events.length) * 100)}
+                    aria-valuemin={1}
+                    aria-valuemax={events.length}
+                    aria-valuenow={currentIndex + 1}
+                    aria-valuetext={`Phase ${currentIndex + 1} of ${events.length}`}
                     onClick={(e) => {
                         const rect = e.currentTarget.getBoundingClientRect()
                         const x = e.clientX - rect.left
                         const pct = x / rect.width
                         const idx = Math.round(pct * (events.length - 1))
                         scrollToEvent(idx)
+                    }}
+                    onKeyDown={(e) => {
+                        if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+                            e.preventDefault()
+                            scrollToEvent(Math.min(currentIndex + 1, events.length - 1))
+                        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+                            e.preventDefault()
+                            scrollToEvent(Math.max(currentIndex - 1, 0))
+                        } else if (e.key === 'Home') {
+                            e.preventDefault()
+                            scrollToEvent(0)
+                        } else if (e.key === 'End') {
+                            e.preventDefault()
+                            scrollToEvent(events.length - 1)
+                        }
                     }}>
                     <div className="progress-active absolute top-0 left-0 h-1 bg-ochre transition-all duration-300" style={{ width: '0%' }} />
-                    <div className="absolute -top-1 right-0 text-[8px] font-mono opacity-30">END ARCHIVE</div>
+                    <div className="absolute -top-1 right-0 text-[8px] font-mono opacity-70">END ARCHIVE</div>
                 </div>
             </div>
 

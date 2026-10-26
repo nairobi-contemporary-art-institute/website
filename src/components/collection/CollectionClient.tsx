@@ -181,7 +181,7 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                         onClick={() => setView('byArtist')}
                         className={cn(
                             "px-8 py-3 text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300",
-                            (!isMounted || view === 'byArtist') ? "bg-white text-black" : "bg-white/5 text-white/40 hover:text-white"
+                            (!isMounted || view === 'byArtist') ? "bg-white text-black" : "bg-white/5 text-white/70 hover:text-white"
                         )}
                     >
                         {t('byArtist') || 'By Artist'}
@@ -190,7 +190,7 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                         onClick={() => setView('collection')}
                         className={cn(
                             "px-8 py-3 text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300",
-                            (isMounted && view === 'collection') ? "bg-white text-black" : "bg-white/5 text-white/40 hover:text-white"
+                            (isMounted && view === 'collection') ? "bg-white text-black" : "bg-white/5 text-white/70 hover:text-white"
                         )}
                     >
                         {t('title') || 'Collection'}
@@ -199,7 +199,7 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                         onClick={() => setView('artists')}
                         className={cn(
                             "px-8 py-3 text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300",
-                            (isMounted && view === 'artists') ? "bg-white text-black" : "bg-white/5 text-white/40 hover:text-white"
+                            (isMounted && view === 'artists') ? "bg-white text-black" : "bg-white/5 text-white/70 hover:text-white"
                         )}
                     >
                         {t('artistsAZ') || 'Artists A-Z'}
@@ -237,7 +237,7 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                                 allLabel={t('allLabel', { label: 'Artist' })}
                             />
                             {/* Artwork Title search can be handled by Search, but let's keep it as an option if desired */}
-                            <div className="border-b border-white/20 py-2 text-white/20 text-sm font-medium tracking-wide">
+                            <div className="border-b border-white/20 py-2 text-white/60 text-sm font-medium tracking-wide">
                                 Artwork Title
                             </div>
                             <FilterDropdown
@@ -259,7 +259,7 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                         {/* Footer Filter Bar */}
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-6">
-                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40">FILTER BY:</span>
+                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/70">FILTER BY:</span>
                                 <label className="flex items-center gap-3 cursor-pointer group">
                                     <div className="relative">
                                         <input
@@ -287,15 +287,16 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
 
                                 <div className="flex items-center gap-6">
                                     <div className="flex flex-col items-center gap-3 group/btn">
-                                        <button 
+                                        <button
                                             onClick={reShuffle}
-                                            className="w-12 h-12 flex items-center justify-center text-white/40 hover:text-white transition-all bg-white/5 rounded-full hover:bg-white/10"
+                                            aria-label={t('shuffleWorks') || 'Shuffle Works'}
+                                            className="w-12 h-12 flex items-center justify-center text-white/70 hover:text-white transition-all bg-white/5 rounded-full hover:bg-white/10"
                                         >
                                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="group-hover/btn:rotate-180 transition-transform duration-500">
                                                 <path d="M4 4V9H4.58152M19.9381 11C19.979 11.3276 20 11.6613 20 12C20 16.4183 16.4183 20 12 20C9.49944 20 7.26677 18.8527 5.7998 17.0558M20 20V15H19.4185M4.06189 13C4.02104 12.6724 4 12.3387 4 12C4 7.58172 7.58172 4 12 4C14.5006 4 16.7332 5.14727 18.2002 6.94416" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                                             </svg>
                                         </button>
-                                        <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/20 group-hover/btn:text-white/60 transition-colors text-center">
+                                        <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/60 group-hover/btn:text-white transition-colors text-center">
                                             {t('shuffleWorks') || 'Shuffle Works'}
                                         </span>
                                     </div>
@@ -304,12 +305,12 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                                             onClick={() => setSortBy('az')}
                                             className={cn(
                                                 "w-12 h-12 flex items-center justify-center transition-all rounded-full",
-                                                sortBy === 'az' ? "bg-white text-black" : "bg-white/5 text-white/40 hover:text-white hover:bg-white/10"
+                                                sortBy === 'az' ? "bg-white text-black" : "bg-white/5 text-white/70 hover:text-white hover:bg-white/10"
                                             )}
                                         >
                                             <span className="text-[12px] font-black">A–Z</span>
                                         </button>
-                                        <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/20 group-hover/btn:text-white/60 transition-colors text-center">
+                                        <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/60 group-hover/btn:text-white transition-colors text-center">
                                             {t('sortAZ') || 'Alphabetise'}
                                         </span>
                                     </div>
@@ -317,15 +318,16 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                             </div>
 
                             <div className="flex flex-col items-center gap-3 group/btn">
-                                <button 
+                                <button
                                     onClick={resetFilters}
-                                    className="w-12 h-12 flex items-center justify-center text-white/40 hover:text-white transition-all bg-white/5 rounded-full hover:bg-white/10"
+                                    aria-label={t('resetFilters') || 'Reset filters'}
+                                    className="w-12 h-12 flex items-center justify-center text-white/70 hover:text-white transition-all bg-white/5 rounded-full hover:bg-white/10"
                                 >
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="group-hover/btn:-rotate-180 transition-transform duration-500">
                                         <path d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C15.2235 2 18.0481 3.52352 19.8284 5.82843M19.8284 5.82843V1M19.8284 5.82843H15" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                                     </svg>
                                 </button>
-                                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/20 group-hover/btn:text-white/60 transition-colors text-center">
+                                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/60 group-hover/btn:text-white transition-colors text-center">
                                     {t('resetFilters') || 'Reset Filters'}
                                 </span>
                             </div>
@@ -362,7 +364,7 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
 
                     {filteredItems.length === 0 && (
                         <div className="py-48 text-center border-t border-white/5">
-                            <p className="text-white/20 italic text-xl">{t('noFilteredResults')}</p>
+                            <p className="text-white/60 italic text-xl">{t('noFilteredResults')}</p>
                             <button onClick={resetFilters} className="mt-8 text-white/60 hover:text-white border-b border-white/20 pb-1 text-sm uppercase tracking-widest">{t('clearFilters')}</button>
                         </div>
                     )}
@@ -412,7 +414,7 @@ function FilterDropdown({ label, value, options, onChange, allLabel }: { label: 
                     >
                         <button 
                             onClick={() => { onChange(''); setIsOpen(false); }}
-                            className="w-full text-left px-4 py-3 text-xs uppercase tracking-widest text-white/40 hover:bg-white hover:text-black transition-colors"
+                            className="w-full text-left px-4 py-3 text-xs uppercase tracking-widest text-white/70 hover:bg-white hover:text-black transition-colors"
                         >
                             {allLabel}
                         </button>
@@ -505,7 +507,7 @@ function ArtistCard({ group, locale, isExpanded, onToggle }: { group: ArtistGrou
                     <button
                         type="button"
                         onClick={onToggle}
-                        className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 hover:text-white transition-colors"
+                        className="text-[10px] font-black uppercase tracking-[0.2em] text-white/70 hover:text-white transition-colors"
                     >
                         {countLabel}{' · '}{isExpanded ? t('hideWorks') : t('viewWorks')}
                     </button>
@@ -614,7 +616,7 @@ function WorkCard({ item, locale, index }: { item: CollectionItem, locale: strin
                     </h3>
                     <div className="space-y-1">
                         <p className="text-sm font-semibold uppercase tracking-wider text-white/60">{artistName}</p>
-                        <p className="text-xs text-white/40 uppercase tracking-widest">
+                        <p className="text-xs text-white/70 uppercase tracking-widest">
                             {getLocalizedValue(item.medium, locale)}
                             {date && ` / ${date}`}
                         </p>

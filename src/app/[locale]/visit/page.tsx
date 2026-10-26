@@ -71,7 +71,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                     
                     {/* Mobile Navigation (Horizontal Scroll) */}
                     <div className="lg:hidden col-span-12 -mx-section-clamp px-section-clamp overflow-x-auto scrollbar-hide pb-4 mb-4 border-b border-black/5">
-                        <nav className="flex flex-nowrap items-center gap-6 text-[11px] font-bold capitalize tracking-widest text-charcoal/60">
+                        <nav className="flex flex-nowrap items-center gap-6 text-[11px] font-bold capitalize tracking-widest text-charcoal/70">
                             <a href="#overview" className="hover:text-charcoal transition-colors whitespace-nowrap">{t('overviewLink') || 'Overview'}</a>
                             <a href="#opening-hours" className="hover:text-charcoal transition-colors whitespace-nowrap">{t('hours') || 'Opening Hours'}</a>
                             <a href="#directions-map" className="hover:text-charcoal transition-colors whitespace-nowrap">{t('directionsMapLink') || 'Directions & Map'}</a>
@@ -96,7 +96,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
 
                     {/* Desktop Navigation (Sticky Left Sidebar) */}
                     <div className="hidden lg:block lg:col-span-3 lg:sticky lg:top-[calc(var(--header-height,64px)+2rem)] space-y-8 pr-8">
-                        <nav className="flex flex-col gap-4 text-xs font-bold capitalize tracking-widest text-charcoal/60">
+                        <nav className="flex flex-col gap-4 text-xs font-bold capitalize tracking-widest text-charcoal/70">
                             <a href="#overview" className="hover:text-charcoal transition-colors py-2 border-b border-black/5">{t('overviewLink') || 'Overview'}</a>
                             <a href="#opening-hours" className="hover:text-charcoal transition-colors py-2 border-b border-black/5">{t('hours') || 'Opening Hours'}</a>
                             <a href="#directions-map" className="hover:text-charcoal transition-colors py-2 border-b border-black/5">{t('directionsMapLink') || 'Directions & Map'}</a>
@@ -150,7 +150,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
 
                         <div className="space-y-10">
                             <div className="flex items-center gap-4">
-                                <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-charcoal/40">
+                                <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-charcoal/70">
                                     {t('normalOpeningHours')}
                                 </h3>
                                 <div className="h-px flex-1 bg-black/5" />
@@ -175,7 +175,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                                     {/* Primary Hours Card */}
                                     <div className="p-10 bg-[#FDFBF7] border border-black/5 rounded-sm space-y-8 shadow-sm">
                                         <div className="flex justify-between items-end border-b border-black/5 pb-4">
-                                            <h4 className="text-xs font-bold uppercase tracking-widest text-charcoal/40">Galleries</h4>
+                                            <h4 className="text-xs font-bold uppercase tracking-widest text-charcoal/70">Galleries</h4>
                                             <span className="text-[10px] uppercase tracking-widest text-amber-600 font-bold">Today</span>
                                         </div>
                                         <div className="space-y-4">
@@ -191,11 +191,11 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                                                     )}>
                                                         <span className={cn(
                                                             "font-bold capitalize transition-colors",
-                                                            isToday ? "text-charcoal" : "text-charcoal/40"
+                                                            isToday ? "text-charcoal" : "text-charcoal/70"
                                                         )}>{day}</span>
                                                         <span className={cn(
                                                             "font-light tracking-tight",
-                                                            isClosed ? "text-umber/20 italic" : "text-umber/90",
+                                                            isClosed ? "text-umber/80 italic" : "text-umber/90",
                                                             isToday && "font-normal"
                                                         )}>
                                                             {isClosed ? (t('closed') || 'Closed') : `${dayHours.open} – ${dayHours.close}`}
@@ -210,7 +210,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                                     <div className="p-10 bg-[#1A1A1A] text-white rounded-sm space-y-8 flex flex-col justify-between shadow-xl relative overflow-hidden group">
                                         <div className="absolute bottom-0 right-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 translate-x-1/2 blur-3xl group-hover:bg-white/10 transition-all duration-1000" />
                                         <div className="space-y-6 relative z-10">
-                                            <h4 className="text-xs font-bold uppercase tracking-widest text-white/30 border-b border-white/10 pb-4">NCAI Library</h4>
+                                            <h4 className="text-xs font-bold uppercase tracking-widest text-white/70 border-b border-white/10 pb-4">NCAI Library</h4>
                                             <div className="space-y-4">
                                                 <p className="text-lg font-light leading-relaxed text-white/70">
                                                     Accessible to student and researchers by scheduled appointment.
@@ -232,7 +232,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                             {visitData?.openingHoursNote && (
                                 <div className="flex items-center gap-3 pt-4">
                                     <div className="w-4 h-[1px] bg-black/10" />
-                                    <p className="text-[10px] text-umber/50 italic tracking-wide uppercase">
+                                    <p className="text-[10px] text-umber/80 italic tracking-wide uppercase">
                                         {getLocalizedValue(visitData.openingHoursNote, locale)}
                                     </p>
                                 </div>
@@ -293,7 +293,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                                                     <Icon className="w-7 h-7" strokeWidth={1} />
                                                 </div>
                                                 <div className="space-y-1">
-                                                    <h3 className="text-xs font-bold uppercase tracking-[0.3em] text-charcoal/40 group-hover:text-charcoal transition-colors">
+                                                    <h3 className="text-xs font-bold uppercase tracking-[0.3em] text-charcoal/70 group-hover:text-charcoal transition-colors">
                                                         {methodValue}
                                                     </h3>
                                                     <div className="h-px w-8 bg-black/10 group-hover:w-16 transition-all duration-700" />
@@ -310,14 +310,14 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                                 })
                             ) : (
                                 <div className="col-span-full">
-                                    <p className="text-umber/50 italic">{t('noDirections') || 'Directions coming soon.'}</p>
+                                    <p className="text-umber/80 italic">{t('noDirections') || 'Directions coming soon.'}</p>
                                 </div>
                             )}
                         </div>
 
                         <div className="pt-20 border-t border-black/5 grid md:grid-cols-[1.5fr_1fr] gap-12 items-end">
                             <div className="space-y-8">
-                                <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-charcoal/30">Registry</h3>
+                                <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-charcoal/70">Registry</h3>
                                 <div className="space-y-4">
                                     <p className="text-3xl font-normal tracking-tight text-charcoal leading-none">{contactInfo?.name || 'NCAI'}</p>
                                     <p className="text-xl text-umber/80 leading-snug font-serif italic max-w-sm">
@@ -328,11 +328,11 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                             <div className="flex gap-4">
                                 <a href={`tel:${contactInfo?.phone}`} className="flex-1 h-20 border border-black/5 flex flex-col items-center justify-center hover:bg-charcoal hover:text-white transition-all duration-700 group">
                                     <LucidePhone className="w-5 h-5 mb-2 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
-                                    <span className="text-[9px] font-bold uppercase tracking-widest opacity-40 group-hover:opacity-100">Call Us</span>
+                                    <span className="text-[9px] font-bold uppercase tracking-widest opacity-70 group-hover:opacity-100">Call Us</span>
                                 </a>
                                 <a href={`mailto:${contactInfo?.email}`} className="flex-1 h-20 border border-black/5 flex flex-col items-center justify-center hover:bg-charcoal hover:text-white transition-all duration-700 group">
                                     <LucideMail className="w-5 h-5 mb-2 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
-                                    <span className="text-[9px] font-bold uppercase tracking-widest opacity-40 group-hover:opacity-100">Email</span>
+                                    <span className="text-[9px] font-bold uppercase tracking-widest opacity-70 group-hover:opacity-100">Email</span>
                                 </a>
                             </div>
                         </div>
@@ -451,14 +451,14 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                 
                 <div className="container mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
                     <div className="space-y-8">
-                         <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/40">{t('stayConnected')}</h2>
+                         <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/70">{t('stayConnected')}</h2>
                          <p className="text-5xl md:text-8xl font-normal tracking-tighter leading-[0.9]">
                             {locale === 'en' ? 'Keep in touch.' : 'Endelea kuwasiliana.'}
                          </p>
                     </div>
                     
                     <div className="space-y-12">
-                        <p className="text-xl md:text-2xl font-light text-white/50 max-w-2xl leading-relaxed">
+                        <p className="text-xl md:text-2xl font-light text-white/70 max-w-2xl leading-relaxed">
                             {t('subscribeText') || 'Sign up to our newsletter for the latest exhibition announcements, events, and NCAI news.'}
                         </p>
 

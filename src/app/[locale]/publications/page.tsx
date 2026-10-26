@@ -38,9 +38,9 @@ export default async function PublicationsPage({ params }: PublicationsPageProps
     return (
         <div className="bg-sun-bleached-paper min-h-screen page-header-padding pb-24 px-section-clamp md:px-20">
             <header className="max-w-4xl mb-24">
-                <h2 className="text-xs font-bold text-deep-umber/40 capitalize tracking-[0.4em] mb-4">
+                <p className="text-xs font-bold text-deep-umber/80 capitalize tracking-[0.4em] mb-4">
                     {pageLabel}
-                </h2>
+                </p>
                 <h1 className="text-heading-72 text-charcoal mb-8">
                     {pageTitle}
                 </h1>
@@ -58,9 +58,9 @@ export default async function PublicationsPage({ params }: PublicationsPageProps
             <ResponsiveDivider className="mb-24" />
 
             <section className="px-section-clamp mb-32">
-                <h3 className="text-xs font-bold text-charcoal capitalize tracking-widest mb-16 border-b border-deep-umber/10 pb-4">
+                <h2 className="text-xs font-bold text-charcoal capitalize tracking-widest mb-16 border-b border-deep-umber/10 pb-4">
                     {locale === 'en' ? 'Recent Imprints' : 'Recent Publications'}
-                </h3>
+                </h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24">
                     {featuredPublications?.map((pub: any) => (
@@ -76,10 +76,10 @@ export default async function PublicationsPage({ params }: PublicationsPageProps
                                 coverImage={pub.coverImage?.asset?.url || (pub.coverImage && urlFor(pub.coverImage).width(400).url())}
                             />
                             <div className="space-y-2">
-                                <h4 className="text-lg font-bold text-charcoal capitalize tracking-tighter">
+                                <h3 className="text-lg font-bold text-charcoal capitalize tracking-tighter">
                                     {getLocalizedValue(pub.title, locale)}
-                                </h4>
-                                <div className="text-[10px] text-deep-umber/60 capitalize tracking-widest italic prose-details">
+                                </h3>
+                                <div className="text-[10px] text-deep-umber/80 capitalize tracking-widest italic prose-details">
                                     {typeof getLocalizedValue(pub.details, locale) === 'string' ? (
                                         <p>{getLocalizedValue(pub.details, locale) as unknown as string}</p>
                                     ) : (
@@ -104,9 +104,9 @@ export default async function PublicationsPage({ params }: PublicationsPageProps
             {ctaSection && (
                 <section className="px-section-clamp bg-charcoal text-sun-bleached-paper p-12 md:p-24">
                     <div className="max-w-3xl">
-                        <h3 className="text-xs font-bold text-sun-bleached-paper/40 capitalize tracking-[0.4em] mb-4">
+                        <p className="text-xs font-bold text-sun-bleached-paper/70 capitalize tracking-[0.4em] mb-4">
                             {getLocalizedValue(ctaSection.label, locale)}
-                        </h3>
+                        </p>
                         <h2 className="text-4xl md:text-6xl font-light tracking-tighter mb-8 italic">
                             {getLocalizedValue(ctaSection.headline, locale)}
                         </h2>

@@ -19,7 +19,7 @@ export default function ContactPage() {
                 <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-charcoal mb-4">
                     {t('title')}
                 </h1>
-                <ResponsiveDivider variant="curved" weight="medium" className="text-umber/20" />
+                <ResponsiveDivider variant="curved" weight="medium" className="text-umber/80" />
             </header>
 
             <section className="px-section-clamp max-w-xl text-umber/80 space-y-12">

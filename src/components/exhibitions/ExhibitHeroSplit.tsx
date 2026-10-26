@@ -127,7 +127,7 @@ export function ExhibitHeroSplit({
                                         {formatExhibitionDate(startDate, endDate, locale)}
                                     </div>
                                     {(location || admission) && (
-                                        <div className={cn("text-[0.65rem] md:text-[0.75rem] font-medium uppercase tracking-[0.15em] mt-1 flex flex-wrap gap-x-4", mutedTextColor === 'white/60' ? 'text-white/60' : 'text-charcoal/60')}>
+                                        <div className={cn("text-[0.65rem] md:text-[0.75rem] font-medium uppercase tracking-[0.15em] mt-1 flex flex-wrap gap-x-4", mutedTextColor === 'white/60' ? 'text-white/60' : 'text-charcoal/70')}>
                                             {location && <span>{location}</span>}
                                             {admission && <span className="opacity-70">{admission}</span>}
                                         </div>

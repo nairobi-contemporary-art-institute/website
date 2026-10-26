@@ -13,6 +13,8 @@
   --color-umber: #4A3B32;
   --umber: #4A3B32;
   --color-ochre: #CCA43B;
+  /* AA-compliant ochre for small text / links on light backgrounds (>=4.5:1 on white) */
+  --color-ochre-dark: #8A6A12;
   --color-rich-blue: #3F51B5;
   --rich-blue: #3F51B5;
   --color-green: #2E7D32;

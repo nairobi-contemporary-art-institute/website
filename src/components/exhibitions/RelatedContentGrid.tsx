@@ -22,7 +22,7 @@ export function RelatedContentGrid({ items, locale, title = "Related Content", c
     return (
         <section className={cn("py-32", className)}>
             <div className="flex flex-col gap-4 mb-16">
-                <div className="flex items-center gap-4 text-[10px] font-black tracking-[0.3em] text-umber/40">
+                <div className="flex items-center gap-4 text-[10px] font-black tracking-[0.3em] text-umber/80">
                     Explore More
                 </div>
                 <h2 className="text-xl md:text-2xl font-black tracking-tight text-charcoal">
@@ -67,7 +67,7 @@ export function RelatedContentGrid({ items, locale, title = "Related Content", c
                                     ? (item.title || item.name) 
                                     : getLocalizedValue(item.title || item.name, locale)}
                              </h3>
-                            <p className="text-xs uppercase tracking-widest text-umber/50">{type}</p>
+                            <p className="text-xs uppercase tracking-widest text-umber/80">{type}</p>
                         </div>
                     )
                 })}

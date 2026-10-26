@@ -18,8 +18,8 @@ export default async function TimelinePage({ params }: { params: Promise<{ local
     })
 
     return (
-        <main className="min-h-screen bg-charcoal">
+        <div className="min-h-screen bg-charcoal">
             <ImmersiveTimeline events={events} locale={locale} />
-        </main>
+        </div>
     )
 }

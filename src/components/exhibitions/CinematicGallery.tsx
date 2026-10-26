@@ -155,7 +155,7 @@ export function CinematicGallery({ images, locale, title, className }: Cinematic
         >
             {title && (
                 <div className="px-6 md:px-12 mb-8">
-                    <h3 className="premium-gallery-text text-[10px] tracking-[0.4em] text-white/40 border-b border-white/10 pb-4">
+                    <h3 className="premium-gallery-text text-[10px] tracking-[0.4em] text-white/70 border-b border-white/10 pb-4">
                         {title}
                     </h3>
                 </div>
@@ -174,10 +174,15 @@ export function CinematicGallery({ images, locale, title, className }: Cinematic
                         <figure
                             key={i}
                             ref={el => { itemRefs.current[i] = el }}
-                            className="group flex-none flex-shrink-0 cursor-pointer flex flex-col"
-                            onClick={() => setSelectedIndex(i)}
+                            className="group flex-none flex-shrink-0 flex flex-col"
                         >
                             <div
+                                role="button"
+                                tabIndex={0}
+                                aria-label={localizedCaption || `View image ${i + 1}`}
+                                onClick={() => setSelectedIndex(i)}
+                                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedIndex(i); } }}
+                                className="cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                                 style={{
                                     height: 'max(52vh, 400px)',
                                     maxHeight: '68vh',
@@ -284,7 +289,7 @@ export function CinematicGallery({ images, locale, title, className }: Cinematic
                                             onClick={(e) => e.stopPropagation()}
                                         >
                                             <div className="space-y-2">
-                                                <div className="premium-gallery-text text-[10px] tracking-[0.3em] text-white/40">
+                                                <div className="premium-gallery-text text-[10px] tracking-[0.3em] text-white/70">
                                                     Information
                                                 </div>
                                                 <p className="premium-gallery-text text-base md:text-lg leading-relaxed normal-case">
@@ -298,7 +303,7 @@ export function CinematicGallery({ images, locale, title, className }: Cinematic
                         </div>
 
                         {/* Counter */}
-                        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40 text-[10px] premium-gallery-text tracking-[0.3em]">
+                        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/70 text-[10px] premium-gallery-text tracking-[0.3em]">
                             {selectedIndex + 1} / {validImages.length}
                         </div>
                     </motion.div>

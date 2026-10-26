@@ -10,7 +10,7 @@ export function MuseumModules() {
     return (
         <div className="space-y-16">
             <header>
-                <h2 className="text-xs font-bold text-umber/40 capitalize tracking-[0.4em] mb-4">Section 06</h2>
+                <h2 className="text-xs font-bold text-umber/80 capitalize tracking-[0.4em] mb-4">Section 06</h2>
                 <h1 className="text-5xl md:text-7xl font-bold text-charcoal capitalize tracking-tighter mb-8">
                     Museum Modules
                 </h1>
@@ -30,13 +30,13 @@ export function MuseumModules() {
                     <div className="grid md:grid-cols-2 gap-8">
                         <div className="space-y-4">
                             <h4 className="text-sm font-bold text-charcoal">HeaderClientNCAI</h4>
-                            <p className="text-xs text-umber/60 leading-relaxed">
+                            <p className="text-xs text-umber/80 leading-relaxed">
                                 Used everywhere except the homepage. Provides a static, two-tiered navigation framework revealing deeper archive and education links. Features a smooth GSAP-powered logo scroll transition to maintain spatial continuity.
                             </p>
                         </div>
                         <div className="space-y-4">
                             <h4 className="text-sm font-bold text-charcoal">HeaderSwitcher Context</h4>
-                            <p className="text-xs text-umber/60 leading-relaxed">
+                            <p className="text-xs text-umber/80 leading-relaxed">
                                 Operates silently to determine which header to render based on the active route and the `siteSettings` schema retrieved from Sanity. Admins can globally force the legacy standard header if needed.
                             </p>
                         </div>
@@ -54,7 +54,7 @@ export function MuseumModules() {
                     <div className="family-mono text-xs space-y-4">
                         <div className="border-l-2 border-ochre pl-4">
                             <strong className="text-white block mb-1">Museum Exhibitions Array</strong>
-                            <span className="text-white/50 block">`sanity/schemaTypes/artist.ts`</span>
+                            <span className="text-white/70 block">`sanity/schemaTypes/artist.ts`</span>
                             A specialized array linking artists to past museum exhibitions globally, rendered specifically within the `ArtistContent` component.
                         </div>
                     </div>
@@ -74,7 +74,7 @@ export function MuseumModules() {
                     <div className="space-y-4">
                         <div className="px-8">
                             <h4 className="text-sm font-bold text-charcoal uppercase tracking-widest border-l-2 border-ochre pl-3">Variant A: Home Page Style</h4>
-                            <p className="text-xs text-umber/60 mt-2">Full width, no gaps, 3 columns, 1:1 square aspect ratio.</p>
+                            <p className="text-xs text-umber/80 mt-2">Full width, no gaps, 3 columns, 1:1 square aspect ratio.</p>
                         </div>
                         <div className="bg-[#0f0f0f] w-full min-h-[400px]">
                             <MuseumGrid 
@@ -88,7 +88,7 @@ export function MuseumModules() {
                     <div className="space-y-4">
                         <div className="px-8">
                             <h4 className="text-sm font-bold text-charcoal uppercase tracking-widest border-l-2 border-ochre pl-3">Variant B: What's On Calendar Style</h4>
-                            <p className="text-xs text-umber/60 mt-2">Contained with padding, gap-4 spacing, 4 columns, 3:4 portrait aspect ratio.</p>
+                            <p className="text-xs text-umber/80 mt-2">Contained with padding, gap-4 spacing, 4 columns, 3:4 portrait aspect ratio.</p>
                         </div>
                         <div className="w-full relative border border-umber/10">
                             {/* Rendering the complete What's On Client including filters and calendar */}
@@ -135,7 +135,7 @@ export function MuseumModules() {
                         <p className="text-sm text-umber/80 leading-relaxed font-medium">
                             A legacy-driven storytelling architecture designed for high-impact museum narratives. 
                         </p>
-                        <p className="text-xs text-umber/60 leading-relaxed max-w-2xl">
+                        <p className="text-xs text-umber/80 leading-relaxed max-w-2xl">
                             Optimized for NCAI&apos;s transition from an archival collective to a contemporary institution, this component features GSAP-orchestrated scroll reveals, interactive mouse-following media triggers, and deep-parallax spatial effects to create a sense of transcendence and temporal depth.
                         </p>
                     </div>

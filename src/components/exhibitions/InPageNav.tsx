@@ -69,7 +69,7 @@ export function InPageNav({ items, className }: InPageNavProps) {
                             "text-[10px] font-black uppercase tracking-[0.2em] whitespace-nowrap transition-all border-b-2 py-5",
                             activeId === item.id 
                                 ? "border-charcoal text-charcoal" 
-                                : "border-transparent text-charcoal/40 hover:text-charcoal"
+                                : "border-transparent text-charcoal/70 hover:text-charcoal"
                         )}
                     >
                         {item.label}

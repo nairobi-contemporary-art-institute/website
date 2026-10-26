@@ -105,7 +105,7 @@ export default async function EventPage({ params }: Props) {
                             <span className="font-mono text-xs capitalize tracking-widest text-umber mt-1.5 w-16">When</span>
                             <div>
                                 <p className="font-medium">{formattedDate}</p>
-                                <p className="text-charcoal/60">{formattedTime} {endDate && `- ${endDate.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })}`}</p>
+                                <p className="text-charcoal/70">{formattedTime} {endDate && `- ${endDate.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })}`}</p>
                             </div>
                         </div>
                         {event.location && (
@@ -150,7 +150,7 @@ export default async function EventPage({ params }: Props) {
 
                                 {event.registrationLink && (
                                     <div className="mt-6 text-center">
-                                        <p className="text-[10px] font-mono capitalize tracking-widest text-charcoal/30 mb-2">
+                                        <p className="text-[10px] font-mono capitalize tracking-widest text-charcoal/70 mb-2">
                                             Alternative Link
                                         </p>
                                         <a
@@ -186,7 +186,7 @@ export default async function EventPage({ params }: Props) {
                                             <div>
                                                 <p className="font-bold text-charcoal">{getLocalizedValue(person.name, locale)}</p>
                                                 {person.roles && (
-                                                    <p className="text-xs text-charcoal/60">{person.roles.join(', ')}</p>
+                                                    <p className="text-xs text-charcoal/70">{person.roles.join(', ')}</p>
                                                 )}
                                             </div>
                                         </div>

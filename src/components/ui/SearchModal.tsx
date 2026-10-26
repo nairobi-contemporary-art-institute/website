@@ -89,12 +89,15 @@ export function SearchModal({ isOpen, onClose, locale }: { isOpen: boolean; onCl
         return () => clearTimeout(timer)
     }, [query])
 
-    // Cleanup state when closed
+    // Cleanup state when closed; move focus to input when opened (user-initiated)
     useEffect(() => {
         if (!isOpen) {
             setQuery('')
             setResults([])
             setActiveCategory('all')
+        } else {
+            const id = window.setTimeout(() => inputRef.current?.focus(), 50)
+            return () => window.clearTimeout(id)
         }
     }, [isOpen])
 
@@ -145,7 +148,7 @@ export function SearchModal({ isOpen, onClose, locale }: { isOpen: boolean; onCl
                                     className="w-full bg-transparent text-4xl md:text-6xl font-bold tracking-tighter text-white outline-none placeholder:text-white/20"
                                     value={query}
                                     onChange={(e) => setQuery(e.target.value)}
-                                    autoFocus
+                                    aria-label={t('placeholder')}
                                 />
                                 {isLoading && (
                                     <div className="absolute right-0 top-1/2 -translate-y-1/2">
@@ -198,7 +201,7 @@ export function SearchModal({ isOpen, onClose, locale }: { isOpen: boolean; onCl
                     <div className="flex-1 overflow-y-auto pt-10 pb-20">
                         <div className="container mx-auto px-6 max-w-4xl">
                             {query.trim().length >= 2 && filteredResults.length === 0 && !isLoading && (
-                                <div className="py-20 text-center text-white/40 italic text-xl">
+                                <div className="py-20 text-center text-white/70 italic text-xl">
                                     {t('noResults')} "{query}"
                                 </div>
                             )}

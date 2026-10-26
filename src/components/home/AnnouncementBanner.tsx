@@ -109,7 +109,7 @@ export function AnnouncementBanner({ data, locale }: AnnouncementBannerProps) {
           <div className="flex items-start justify-between gap-8 mb-8">
             <div className="flex-1">
               {preHeading && (
-                <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] font-bold text-white/50 mb-6">
+                <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] font-bold text-white/70 mb-6">
                   {preHeading}
                 </p>
               )}
@@ -176,13 +176,13 @@ export function AnnouncementBanner({ data, locale }: AnnouncementBannerProps) {
               <motion.span
                 animate={{ rotate: isOpen ? 90 : 0 }}
                 transition={{ duration: 0.2 }}
-                className="flex items-center justify-center w-6 h-6 border border-white/10 rounded-full text-white/40 group-hover:text-white group-hover:border-white/30"
+                className="flex items-center justify-center w-6 h-6 border border-white/10 rounded-full text-white/70 group-hover:text-white group-hover:border-white/30"
               >
                 <svg width="8" height="8" viewBox="0 0 12 12" fill="none">
                   <path d="M4 2L8 6L4 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </motion.span>
-              <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/40 group-hover:text-white transition-colors">
+              <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/70 group-hover:text-white transition-colors">
                 {accordionLabel}
               </span>
             </button>
@@ -245,7 +245,7 @@ export function AnnouncementBanner({ data, locale }: AnnouncementBannerProps) {
                                   <div className="w-6 h-[1px] bg-white/10 group-hover:w-10 group-hover:bg-white transition-all duration-300" />
                                 </a>
                               ) : (
-                                <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/30 italic">
+                                <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/70 italic">
                                   {btn || 'Coming Soon'}
                                 </div>
                               )}
@@ -263,7 +263,7 @@ export function AnnouncementBanner({ data, locale }: AnnouncementBannerProps) {
                             rel="noopener noreferrer"
                             className="group flex flex-col items-start lg:items-end gap-2"
                           >
-                            <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/40 group-hover:text-white transition-colors">
+                            <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/70 group-hover:text-white transition-colors">
                               {secondaryText}
                             </span>
                             <div className="h-[1px] w-12 bg-white/20 group-hover:w-full transition-all duration-500" />

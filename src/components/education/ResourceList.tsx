@@ -30,7 +30,7 @@ export function ResourceList({ resources }: ResourceListProps) {
                             className="group flex items-center justify-between p-3 border border-charcoal/10 hover:border-charcoal/30 bg-white transition-all hover:bg-stone-50"
                         >
                             <div className="flex items-center gap-3">
-                                <svg className="w-5 h-5 text-umber/60 group-hover:text-umber transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg className="w-5 h-5 text-umber/80 group-hover:text-umber transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
                                 <span className="text-sm font-medium text-charcoal group-hover:text-black transition-colors">
@@ -38,7 +38,7 @@ export function ResourceList({ resources }: ResourceListProps) {
                                 </span>
                             </div>
                             {res.size && (
-                                <span className="text-xs font-mono text-charcoal/40 group-hover:text-charcoal/60 transition-colors">
+                                <span className="text-xs font-mono text-charcoal/70 group-hover:text-charcoal/70 transition-colors">
                                     {formatBytes(res.size)}
                                 </span>
                             )}

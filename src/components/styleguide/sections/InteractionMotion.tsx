@@ -49,26 +49,26 @@ export function InteractionMotion() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div className="p-8 border border-umber/10 bg-white space-y-4">
-                    <h3 className="text-xs font-bold capitalize tracking-widest text-umber/60">GSAP Core Check</h3>
+                    <h3 className="text-xs font-bold capitalize tracking-widest text-umber/80">GSAP Core Check</h3>
                     <div
                         ref={boxRef}
                         className="w-20 h-20 bg-ochre flex items-center justify-center text-ivory font-bold text-xs"
                     >
                         GSAP
                     </div>
-                    <p className="text-sm text-umber/60 italic">
+                    <p className="text-sm text-umber/80 italic">
                         If the box above is rotating, the core GSAP library and <code>useGSAP</code> hook are functioning correctly.
                     </p>
                 </div>
 
                 <div className="p-8 border border-umber/10 bg-white space-y-4 scroll-section overflow-hidden">
-                    <h3 className="text-xs font-bold capitalize tracking-widest text-umber/60">ScrollTrigger Check</h3>
+                    <h3 className="text-xs font-bold capitalize tracking-widest text-umber/80">ScrollTrigger Check</h3>
                     <div className="h-40 relative border-l border-dashed border-umber/20 pl-4">
                         <div className="scroll-box w-16 h-16 bg-charcoal flex items-center justify-center text-ivory font-bold text-[10px] capitalize">
                             Scroll Me
                         </div>
                     </div>
-                    <p className="text-sm text-umber/60 italic">
+                    <p className="text-sm text-umber/80 italic">
                         Scroll down to see this box move horizontally and change color.
                     </p>
                 </div>

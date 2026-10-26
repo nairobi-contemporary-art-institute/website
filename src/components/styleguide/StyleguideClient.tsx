@@ -50,7 +50,7 @@ export function StyleguideClient() {
             <aside className="w-full md:w-80 border-r border-deep-umber/10 bg-white md:h-screen md:sticky md:top-0 overflow-y-auto z-10">
                 <div className="p-8 border-b border-deep-umber/10">
                     <h1 className="text-2xl font-bold text-charcoal capitalize tracking-tighter">NCAI Hub</h1>
-                    <p className="text-[10px] text-deep-umber/60 capitalize tracking-widest mt-1">Design System v1.0</p>
+                    <p className="text-[10px] text-deep-umber/80 capitalize tracking-widest mt-1">Design System v1.0</p>
                 </div>
                 <StyleguideNav activeSection={activeSection} onSectionChange={setActiveSection} />
             </aside>
@@ -63,13 +63,13 @@ export function StyleguideClient() {
 
                 <footer className="mt-24 pt-12 border-t border-deep-umber/10">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-                        <p className="text-[10px] text-deep-umber/40 capitalize tracking-[0.3em]">
+                        <p className="text-[10px] text-deep-umber/80 capitalize tracking-[0.3em]">
                             Nairobi Contemporary Art Institute — 2026
                         </p>
-                        <nav className="flex gap-8 text-[10px] font-bold capitalize tracking-widest text-deep-umber/40">
-                            <a href="#" className="hover:text-ochre">GitHub</a>
-                            <a href="#" className="hover:text-ochre">Sanity</a>
-                            <a href="#" className="hover:text-ochre">Docs</a>
+                        <nav aria-label="Styleguide tabs" className="flex gap-8 text-[10px] font-bold capitalize tracking-widest text-deep-umber/80">
+                            <button type="button" className="hover:text-ochre">GitHub</button>
+                            <button type="button" className="hover:text-ochre">Sanity</button>
+                            <button type="button" className="hover:text-ochre">Docs</button>
                         </nav>
                     </div>
                 </footer>

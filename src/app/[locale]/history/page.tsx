@@ -33,7 +33,7 @@ export default async function HistoryPage({ params }: { params: Promise<{ locale
                 <p className="text-xl md:text-2xl text-umber/80 font-light max-w-2xl mx-auto leading-relaxed">
                     {t.Pages?.history?.description || 'Tracing the journey of art in East Africa through the lens of NCAI.'}
                 </p>
-                <ResponsiveDivider variant="curved" weight="medium" className="text-umber/20 mt-12 mx-auto max-w-xs" />
+                <ResponsiveDivider variant="curved" weight="medium" className="text-umber/80 mt-12 mx-auto max-w-xs" />
             </header>
 
             <div className="max-w-5xl mx-auto relative">
@@ -87,7 +87,7 @@ export default async function HistoryPage({ params }: { params: Promise<{ locale
             </div>
 
             {timelineEvents.length === 0 && (
-                <div className="text-center py-20 text-umber/50">
+                <div className="text-center py-20 text-umber/80">
                     <p>Timeline data coming soon.</p>
                 </div>
             )}

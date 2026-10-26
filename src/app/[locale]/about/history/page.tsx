@@ -38,7 +38,7 @@ export default async function HistoryPage({ params }: Props) {
 
     return (
         <GridSystem>
-            <main className="min-h-screen bg-ivory">
+            <div className="min-h-screen bg-ivory">
                 <header className="page-header-padding pb-12 px-section-clamp">
                     <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-charcoal capitalize leading-[0.9] mb-8">
                         {title}
@@ -50,7 +50,7 @@ export default async function HistoryPage({ params }: Props) {
                 <div className="py-20">
                     <HistoryTimeline events={timelineEvents} locale={locale} />
                 </div>
-            </main>
+            </div>
         </GridSystem>
     )
 }

@@ -6,7 +6,7 @@ export function MediaGuidelines() {
     return (
         <div className="space-y-16">
             <header>
-                <h2 className="text-xs font-bold text-umber/40 capitalize tracking-[0.4em] mb-4">Section 08</h2>
+                <h2 className="text-xs font-bold text-umber/80 capitalize tracking-[0.4em] mb-4">Section 08</h2>
                 <h1 className="text-5xl md:text-7xl font-bold text-charcoal capitalize tracking-tighter mb-8">
                     Media Guidelines
                 </h1>
@@ -24,8 +24,8 @@ export function MediaGuidelines() {
                     <div className="bg-charcoal text-ivory/80 p-6 font-mono text-xs mt-4 space-y-4">
                         <div className="border-l-2 border-ochre pl-4">
                             <strong className="text-white block mb-1">Image Builder Utility</strong>
-                            <span className="text-white/50 block">`src/sanity/lib/image.ts`</span>
-                            <p className="mt-2 text-umber/40">
+                            <span className="text-white/70 block">`src/sanity/lib/image.ts`</span>
+                            <p className="mt-2 text-umber/80">
                                 Uses `@sanity/image-url` to construct optimized URLs dynamically.
                             </p>
                             <p className="mt-2 text-ochre/80">
@@ -34,7 +34,7 @@ export function MediaGuidelines() {
                         </div>
                         <div className="border-l-2 border-umber/20 pl-4">
                             <strong className="text-white block mb-1">Next.js `&lt;Image /&gt;` Component</strong>
-                            <p className="mt-2 text-umber/40">
+                            <p className="mt-2 text-umber/80">
                                 We always pair Sanity's builder with the `next/image` component to leverage automated layout shifting prevention and lazy loading.
                             </p>
                         </div>
@@ -47,14 +47,14 @@ export function MediaGuidelines() {
                 <div className="grid md:grid-cols-2 gap-8">
                     <div className="space-y-4">
                         <h4 className="text-sm font-bold text-charcoal">Fidelity</h4>
-                        <p className="text-xs text-umber/60 leading-relaxed">
+                        <p className="text-xs text-umber/80 leading-relaxed">
                             Images of artworks must prioritize accurate color profiles (sRGB) over aggressive artifact-introducing compression. 
                             Sanity's `fit('clip')` should be utilized to maintain aspect ratios accurately instead of generic cropping.
                         </p>
                     </div>
                     <div className="space-y-4">
                         <h4 className="text-sm font-bold text-charcoal">Alt Text & Accessibility</h4>
-                        <p className="text-xs text-umber/60 leading-relaxed">
+                        <p className="text-xs text-umber/80 leading-relaxed">
                             All decorative images receive `alt=""`. For artworks, the Sanity schema mandates a distinct alternative text string. If none is provided, it falls back to dynamically describing the title and author.
                         </p>
                     </div>

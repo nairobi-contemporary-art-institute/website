@@ -307,7 +307,7 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
 
                         {/* Desktop Nav Section */}
                         <div className="hidden md:flex items-center px-8">
-                            <nav className="flex items-center gap-8 w-full">
+                            <nav aria-label="Primary" className="flex items-center gap-8 w-full">
                                 {displayLinks.map((link, idx) => (
                                     <Link
                                         key={link.href}
@@ -385,7 +385,7 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
                         "fixed inset-0 bg-white z-40 flex flex-col pt-32 px-6 pb-12 transition-all duration-500 ease-in-out md:hidden overflow-y-auto",
                         isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
                     )}>
-                        <nav className="flex flex-col gap-10">
+                        <nav aria-label="Mobile" className="flex flex-col gap-10">
                             {displayLinks.map((link, i) => (
                                 <div key={link.href} className="flex flex-col gap-4">
                                     <Link

@@ -9,7 +9,7 @@ export function BackgroundColors() {
     return (
         <section className="space-y-16">
             <header className="space-y-4">
-                <p className="text-[10px] font-bold tracking-widest text-deep-umber/50 uppercase">16. Background Colors</p>
+                <p className="text-[10px] font-bold tracking-widest text-deep-umber/80 uppercase">16. Background Colors</p>
                 <h2 className="text-4xl md:text-5xl font-black tracking-tighter text-charcoal capitalize">Page Background Colors</h2>
                 <div className="max-w-3xl space-y-6 text-charcoal/80 leading-relaxed font-serif text-lg md:text-xl">
                     <p>
@@ -69,7 +69,7 @@ function ColorTier({ title, description, colors, columns = 'grid-cols-2 md:grid-
         <div className="space-y-6">
             <div>
                 <h3 className="text-2xl font-bold tracking-tighter text-charcoal">{title}</h3>
-                <p className="text-deep-umber/70 mt-2 font-serif text-lg">{description}</p>
+                <p className="text-deep-umber/80 mt-2 font-serif text-lg">{description}</p>
                 {showUniqueCount && (
                     <p className="text-sm text-ochre/80 mt-1">*{uniqueColors.length} unique values shown cycling in animation.</p>
                 )}
@@ -82,10 +82,10 @@ function ColorTier({ title, description, colors, columns = 'grid-cols-2 md:grid-
                             style={{ backgroundColor: color }}
                         />
                         <div className="flex items-center justify-between px-1">
-                            <span className="text-[10px] font-mono tracking-wider text-charcoal/60 uppercase">{color}</span>
+                            <span className="text-[10px] font-mono tracking-wider text-charcoal/70 uppercase">{color}</span>
                             <button 
                                 onClick={() => handleCopy(color, index)}
-                                className="p-1 hover:bg-black/5 rounded text-charcoal/60 transition-colors"
+                                className="p-1 hover:bg-black/5 rounded text-charcoal/70 transition-colors"
                                 title="Copy hex code"
                             >
                                 {copiedIndex === index ? (

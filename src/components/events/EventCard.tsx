@@ -42,7 +42,7 @@ export function EventCard({ event, locale, variant = 'default' }: EventCardProps
                 <h3 className="text-lg font-medium leading-tight group-hover:text-umber transition-colors">
                     {title}
                 </h3>
-                <div className="text-sm text-charcoal/60 mt-auto">
+                <div className="text-sm text-charcoal/70 mt-auto">
                     {date} • {time}
                 </div>
             </Link>
@@ -66,7 +66,7 @@ export function EventCard({ event, locale, variant = 'default' }: EventCardProps
                         blurDataURL={event.mainImage.asset?.metadata?.lqip}
                     />
                 ) : (
-                    <div className="absolute inset-0 flex items-center justify-center text-umber/20 font-mono text-xs">
+                    <div className="absolute inset-0 flex items-center justify-center text-umber/80 font-mono text-xs">
                         NO IMAGE
                     </div>
                 )}
@@ -87,7 +87,7 @@ export function EventCard({ event, locale, variant = 'default' }: EventCardProps
                 </h3>
 
                 {event.location && (
-                    <p className="text-sm text-charcoal/60 line-clamp-1">{event.location}</p>
+                    <p className="text-sm text-charcoal/70 line-clamp-1">{event.location}</p>
                 )}
 
                 {event.tags && event.tags.length > 0 && (
@@ -95,7 +95,7 @@ export function EventCard({ event, locale, variant = 'default' }: EventCardProps
                         {event.tags.slice(0, 3).map((tag: any) => (
                             <span
                                 key={tag._id}
-                                className="text-[10px] capitalize tracking-widest text-charcoal/60 border border-charcoal/10 px-2 py-0.5"
+                                className="text-[10px] capitalize tracking-widest text-charcoal/70 border border-charcoal/10 px-2 py-0.5"
                             >
                                 {getLocalizedValue(tag.title, locale)}
                             </span>
