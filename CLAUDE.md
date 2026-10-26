@@ -35,6 +35,8 @@ Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Tailwind CSS v4 
 
 **Composed, schema-driven pages.** Detail pages assemble many section components based on schema fields rather than hardcoded layout. Example: the exhibition detail page (`src/app/[locale]/exhibitions/[slug]/page.tsx`) reads fields like `heroLayout`, `galleryLayout`, `extraSections[]`, and `mediaModule`, then renders matching components from `src/components/exhibitions/`. When changing a page's layout, expect to touch both the schema (`sanity/schemaTypes/`) and the query (`src/sanity/lib/queries.ts`), not just the component.
 
+**Texts (`/texts`).** Essays, interviews, conversations and artists' writings are the `textPiece` document type (`text` is a Sanity built-in). The body is `textBody`, rendered by its own serializer `src/components/texts/TextBody.tsx` (per-block widths: column / wide / full bleed) — not the shared `components/ui/PortableText.tsx`. Interviews list `participants` (Speakers) and mark turns with an inline `speaker` object; `labelSpeakerTurns()` in `src/lib/texts.ts` shows full name first, initials after. Text pages emit Article + Person JSON-LD (`src/lib/jsonld.ts`). Pages that list texts carry the `textPiece` cache tag. Live nav for Texts is added by `scripts/patch-nav-texts.mjs` (dry run by default). See ADR 0004.
+
 **Images.** Build URLs with `urlFor()` from `src/sanity/lib/image.ts`. Remote image hosts are whitelisted in `next.config.ts` (`cdn.sanity.io`, `images.unsplash.com`, etc.) — add new hosts there or `next/image` will reject them.
 
 **Redirects.** `/support` and `/membership` permanently redirect to `/get-involved` (in `next.config.ts`).
