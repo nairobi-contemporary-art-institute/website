@@ -19,6 +19,7 @@
         "visit": "Visit",
         "exhibitions": "Exhibitions",
         "channel": "Channel",
+        "texts": "Texts",
         "collection": "Collection",
         "education": "Education",
         "support": "Get Involved",
@@ -158,6 +159,48 @@
             "filterAudio": "Audio",
             "filterText": "Text"
         },
+        "texts": {
+            "title": "Texts",
+            "description": "Essays, interviews, conversations and artists' writings, published periodically by NCAI.",
+            "filterLabel": "Filter texts by type",
+            "filterAll": "All",
+            "types": {
+                "essay": {
+                    "singular": "Essay",
+                    "plural": "Essays"
+                },
+                "interview": {
+                    "singular": "Interview",
+                    "plural": "Interviews"
+                },
+                "conversation": {
+                    "singular": "Conversation",
+                    "plural": "Conversations"
+                },
+                "artistWriting": {
+                    "singular": "Artist's writing",
+                    "plural": "Artists' writings"
+                }
+            },
+            "by": "By",
+            "minRead": "{minutes} min read",
+            "notes": "Notes",
+            "credit": "Credit",
+            "relatedTexts": "Related texts",
+            "relatedExhibitions": "Related exhibitions",
+            "moreTexts": "More texts",
+            "previousText": "Previous text",
+            "nextText": "Next text",
+            "textNavigation": "More texts",
+            "pagination": "Pagination",
+            "newer": "Newer",
+            "older": "Older",
+            "pageOf": "Page {page} of {total}",
+            "noContent": "No texts published yet.",
+            "noContentForType": "No texts of this type yet.",
+            "viewAll": "View all texts",
+            "textsTitle": "Texts"
+        },
         "education": {
             "title": "Education",
             "description": "Workshops, talks, and programs at NCAI.",
@@ -227,6 +270,7 @@
         "filterArtist": "Artists",
         "filterWork": "Works",
         "filterPost": "Channel",
+        "filterText": "Texts",
         "filterProgram": "Education",
         "filterEvent": "Events",
         "collectionItem": "Artwork",
