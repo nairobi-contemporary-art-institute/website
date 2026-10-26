@@ -1,17 +1,11 @@
-import React from 'react'
 import { defineArrayMember, defineType } from 'sanity'
-import { LinkIcon, UserIcon } from '@sanity/icons'
-
-const SpeakerDecorator = (props: { children?: React.ReactNode }) => (
-    <span style={{ fontWeight: 700, textTransform: 'uppercase', fontSize: '0.85em', letterSpacing: '0.04em' }}>
-        {props.children}
-    </span>
-)
+import { LinkIcon } from '@sanity/icons'
 
 /**
  * Body of a Text. Deliberately narrow: editors get a fixed set of styles and
  * three insertable blocks (image, image pair, pull quote) so every Text
- * renders in the same calm reading layout.
+ * renders in the same calm reading layout. Interviews and conversations mark
+ * each turn with an inline Speaker chosen from the Text's Speakers list.
  */
 export const textBody = defineType({
     title: 'Text body',
@@ -34,12 +28,6 @@ export const textBody = defineType({
                 decorators: [
                     { title: 'Bold', value: 'strong' },
                     { title: 'Italic', value: 'em' },
-                    {
-                        title: 'Speaker (interviews & conversations)',
-                        value: 'speaker',
-                        icon: UserIcon,
-                        component: SpeakerDecorator,
-                    },
                 ],
                 annotations: [
                     {
@@ -78,6 +66,7 @@ export const textBody = defineType({
                     },
                 ],
             },
+            of: [defineArrayMember({ type: 'speaker' })],
         }),
         defineArrayMember({ type: 'textFigure' }),
         defineArrayMember({ type: 'imagePair' }),

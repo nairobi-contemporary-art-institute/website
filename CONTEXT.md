@@ -28,6 +28,10 @@ _Avoid_: article, video, blog
 A periodically published written piece: an essay, interview, conversation, or artist's writing. Schema type `textPiece`.
 _Avoid_: article, post, blog
 
+**Speaker**:
+A person taking part in an interview or conversation Text, listed once on the Text and chosen at the start of each turn. Shown by full name on their first turn, by initials after.
+_Avoid_: participant (in UI copy), interviewee label
+
 **Event**:
 A scheduled occurrence with an event type.
 _Avoid_: happening

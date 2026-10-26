@@ -6,7 +6,8 @@ import { SITEMAP_QUERY, TEXT_BY_SLUG_QUERY } from '@/sanity/lib/queries'
 import { getLocalizedEntry, getLocalizedValue } from '@/sanity/lib/utils'
 import { urlFor } from '@/sanity/lib/image'
 import { Link, locales } from '@/i18n'
-import { isTextType, pickRelatedTexts, readingTime } from '@/lib/texts'
+import { isTextType, labelSpeakerTurns, pickRelatedTexts, readingTime, resolveSpeakers } from '@/lib/texts'
+import { jsonLdString, textArticleJsonLd } from '@/lib/jsonld'
 import { PortableText } from '@/components/ui/PortableText'
 import { ExhibitionCard } from '@/components/exhibitions/ExhibitionCard'
 import { TextBody } from '@/components/texts/TextBody'
@@ -91,6 +92,8 @@ export default async function TextPage({ params }: { params: Params }) {
     const standfirst = getLocalizedValue<string>(text.standfirst, locale)
     const byline = getLocalizedValue<string>(text.byline, locale)
     const bodyEntry = getLocalizedEntry<any[]>(text.body, locale)
+    const speakers = resolveSpeakers(text.participants, locale)
+    const body = labelSpeakerTurns(bodyEntry?.value, speakers)
     const notes = getLocalizedValue<any[]>(text.notes, locale)
     const minutes = readingTime(bodyEntry?.value)
     const typeLabel = isTextType(text.textType) ? t(`types.${text.textType}.singular`) : null
@@ -98,9 +101,18 @@ export default async function TextPage({ params }: { params: Params }) {
     const showLead = text.leadLayout !== 'none' && text.leadImage?.asset
     const relatedExhibitions: any[] = (text.relatedExhibitions || []).filter((e: any) => e?.slug)
     const relatedTexts = pickRelatedTexts(text)
+    const jsonLd = textArticleJsonLd({
+        text,
+        locale,
+        title: titleEntry?.value,
+        description: standfirst,
+        bodyLocale: bodyEntry?.locale,
+        speakers,
+    })
 
     return (
         <article className="pt-36 md:pt-48 pb-24">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
             <header className="measure" {...langProps(titleEntry?.locale, locale)}>
                 {typeLabel && (
                     <Link
@@ -147,7 +159,7 @@ export default async function TextPage({ params }: { params: Params }) {
             )}
 
             <div className="mt-12 md:mt-16" {...langProps(bodyEntry?.locale, locale)}>
-                <TextBody value={bodyEntry?.value} />
+                <TextBody value={body} />
             </div>
 
             {notes?.length ? (

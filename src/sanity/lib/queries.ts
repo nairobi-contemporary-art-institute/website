@@ -1452,6 +1452,19 @@ export const TEAM_QUERY = groq`
   }
 `
 
+/** Person/artist fields used for bylines and Person JSON-LD on Text pages. */
+const PERSON_PROFILE_PROJECTION = `
+    _id,
+    _type,
+    name,
+    "slug": slug.current,
+    hasProfile,
+    category,
+    roles,
+    sameAs,
+    image { asset-> { _id, url } }
+`
+
 /**
  * Texts index: one page of cards plus the total for pagination.
  * $type is null for all types; $start/$end slice the page.
@@ -1473,8 +1486,17 @@ export const TEXTS_QUERY = groq`
 export const TEXT_BY_SLUG_QUERY = groq`
   *[_type == "textPiece" && slug.current == $slug][0] {
     ${TEXT_CARD_PROJECTION},
+    _updatedAt,
     byline,
     leadLayout,
+    "authorProfiles": authors[]-> { ${PERSON_PROFILE_PROJECTION} },
+    participants[] {
+        _key,
+        name,
+        initials,
+        role,
+        "person": person-> { ${PERSON_PROFILE_PROJECTION} }
+    },
     "body": body[] {
         _key,
         "value": value[] {

@@ -32,6 +32,7 @@ const components: PortableTextComponents = {
     marks: {
         strong: ({ children }) => <strong className="font-bold">{children}</strong>,
         em: ({ children }) => <em className="italic">{children}</em>,
+        // Legacy: speaker was briefly a text decorator before Speakers became a list
         speaker: ({ children }) => (
             <span className="font-bold uppercase tracking-[0.06em] text-[0.8em]">{children}</span>
         ),
@@ -58,6 +59,11 @@ const components: PortableTextComponents = {
         },
     },
     types: {
+        // Inline turn marker in interviews/conversations; label set by labelSpeakerTurns()
+        speaker: ({ value }) =>
+            value?.label ? (
+                <span className="me-[0.6em] font-bold uppercase tracking-[0.06em] text-[0.8em]">{value.label}</span>
+            ) : null,
         textFigure: ({ value }) => (
             <TextFigure
                 image={value}

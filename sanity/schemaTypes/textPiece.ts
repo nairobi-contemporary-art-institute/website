@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 import { DocumentTextIcon } from '@sanity/icons'
 import { SlugLinkField } from './components/SlugLinkField'
 import { TEXT_TYPES, TEXT_TYPE_LABELS, type TextType } from '../../src/lib/texts'
@@ -71,6 +71,69 @@ export const textPiece = defineType({
             type: 'internationalizedArrayString',
             group: 'content',
             description: 'Optional extra line, e.g. "In conversation with …" or "Translated by …".',
+        }),
+        defineField({
+            name: 'participants',
+            title: 'Speakers',
+            type: 'array',
+            group: 'content',
+            description:
+                'Everyone who speaks in the interview or conversation. Add them here, then in the text insert a Speaker (person icon) at the start of each turn and choose who is speaking.',
+            hidden: ({ document }) => !['interview', 'conversation'].includes(document?.textType as string),
+            of: [
+                defineArrayMember({
+                    name: 'participant',
+                    title: 'Speaker',
+                    type: 'object',
+                    fields: [
+                        defineField({
+                            name: 'person',
+                            title: 'Person or artist',
+                            type: 'reference',
+                            to: [{ type: 'person' }, { type: 'artist' }],
+                            description: 'Choose them if they have a record in Artists or People. Their name, photo and links are then used automatically.',
+                        }),
+                        defineField({
+                            name: 'name',
+                            title: 'Name',
+                            type: 'string',
+                            description: 'Type the name if they have no record. If both are filled in, this name is shown.',
+                        }),
+                        defineField({
+                            name: 'initials',
+                            title: 'Initials',
+                            type: 'string',
+                            description: 'Shown instead of the full name after their first turn, e.g. "WK". Leave empty to work them out from the name.',
+                            validation: (Rule) => Rule.max(6),
+                        }),
+                        defineField({
+                            name: 'role',
+                            title: 'Role',
+                            type: 'string',
+                            options: {
+                                list: [
+                                    { title: 'Interviewer', value: 'interviewer' },
+                                    { title: 'Interviewee', value: 'interviewee' },
+                                    { title: 'Moderator', value: 'moderator' },
+                                    { title: 'Participant', value: 'participant' },
+                                ],
+                                layout: 'radio',
+                                direction: 'horizontal',
+                            },
+                            initialValue: 'participant',
+                        }),
+                    ],
+                    validation: (Rule) =>
+                        Rule.custom((value: any) => (value?.person || value?.name ? true : 'Choose a person or type a name.')),
+                    preview: {
+                        select: { name: 'name', personName: 'person.name', role: 'role', initials: 'initials', media: 'person.image' },
+                        prepare({ name, personName, role, initials, media }) {
+                            const title = name || englishOrFirst(personName) || 'Unnamed speaker'
+                            return { title, subtitle: [role, initials].filter(Boolean).join(' · '), media }
+                        },
+                    },
+                }),
+            ],
         }),
         defineField({
             name: 'standfirst',
