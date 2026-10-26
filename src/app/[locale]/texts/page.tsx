@@ -81,13 +81,13 @@ export default async function TextsPage({ params, searchParams }: { params: Prom
                 <nav aria-label={t('pagination')} className="mt-20 flex items-center justify-between border-t border-charcoal/15 pt-6 text-sm">
                     {page > 1 ? (
                         <Link href={pageHref(page - 1)} rel="prev" className="text-charcoal underline underline-offset-4">
-                            ← {t('newer')}
+                            <span aria-hidden="true" className="inline-block rtl:-scale-x-100">←</span> {t('newer')}
                         </Link>
                     ) : <span />}
                     <span className="text-umber">{t('pageOf', { page, total: totalPages })}</span>
                     {page < totalPages ? (
                         <Link href={pageHref(page + 1)} rel="next" className="text-charcoal underline underline-offset-4">
-                            {t('older')} →
+                            {t('older')} <span aria-hidden="true" className="inline-block rtl:-scale-x-100">→</span>
                         </Link>
                     ) : <span />}
                 </nav>

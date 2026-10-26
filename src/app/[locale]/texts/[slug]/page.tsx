@@ -194,7 +194,7 @@ export default async function TextPage({ params }: { params: Params }) {
                             <div>
                                 {text.prev && (
                                     <Link href={`/texts/${text.prev.slug}`} className="group block">
-                                        <span className="block text-umber">← {t('previousText')}</span>
+                                        <span className="block text-umber"><span aria-hidden="true" className="inline-block rtl:-scale-x-100">←</span> {t('previousText')}</span>
                                         <span className="mt-1 block font-bold text-charcoal group-hover:underline underline-offset-4">
                                             {getLocalizedValue<string>(text.prev.title, locale)}
                                         </span>
@@ -204,7 +204,7 @@ export default async function TextPage({ params }: { params: Params }) {
                             <div className="text-end">
                                 {text.next && (
                                     <Link href={`/texts/${text.next.slug}`} className="group block">
-                                        <span className="block text-umber">{t('nextText')} →</span>
+                                        <span className="block text-umber">{t('nextText')} <span aria-hidden="true" className="inline-block rtl:-scale-x-100">→</span></span>
                                         <span className="mt-1 block font-bold text-charcoal group-hover:underline underline-offset-4">
                                             {getLocalizedValue<string>(text.next.title, locale)}
                                         </span>

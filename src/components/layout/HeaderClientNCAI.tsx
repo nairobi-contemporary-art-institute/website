@@ -201,6 +201,20 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
         },
         { href: '/channel', label: 'Channel' },
         {
+            href: '/texts',
+            label: 'Texts',
+            columns: [
+                {
+                    title: 'Read', links: [
+                        { label: 'Essays', href: '/texts?type=essay' },
+                        { label: 'Interviews', href: '/texts?type=interview' },
+                        { label: 'Conversations', href: '/texts?type=conversation' },
+                        { label: "Artists' Writings", href: '/texts?type=artistWriting' }
+                    ]
+                }
+            ]
+        },
+        {
             href: '/get-involved',
             label: 'Support',
             columns: [
