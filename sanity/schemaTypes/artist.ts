@@ -147,6 +147,13 @@ export const artist = defineType({
             of: [{ type: 'reference', to: [{ type: 'exhibition' }] }],
         }),
         defineField({
+            name: 'sameAs',
+            title: 'Other profiles',
+            description: 'Links that identify this person elsewhere: Wikipedia, Wikidata, their own website, Instagram, LinkedIn. Helps search engines recognise them.',
+            type: 'array',
+            of: [{ type: 'url', validation: (Rule) => Rule.uri({ scheme: ['http', 'https'] }) }],
+        }),
+        defineField({
             name: 'tags',
             title: 'Tags',
             type: 'array',

@@ -8,6 +8,7 @@ import { getLocalizedValue } from '@/sanity/lib/utils'
 import { cn } from '@/lib/utils'
 
 import { ChannelCard } from '@/components/channel/ChannelCard'
+import { TextCard } from '@/components/texts/TextCard'
 
 interface RelatedContentGridProps {
     items: any[]
@@ -54,6 +55,14 @@ export function RelatedContentGrid({ items, locale, title = "Related Content", c
                         return (
                             <div key={item._id}>
                                 <ChannelCard post={item} locale={locale} />
+                            </div>
+                        )
+                    }
+
+                    if (type === 'textPiece') {
+                        return (
+                            <div key={item._id}>
+                                <TextCard text={item} locale={locale} headingLevel="h3" />
                             </div>
                         )
                     }

@@ -45,7 +45,8 @@ export default async function ArtistProfilePage({ params }: { params: Promise<{ 
     const artist = await sanityFetch<any>({
         query: ARTIST_BY_SLUG_QUERY,
         params: { slug },
-        tags: [`artist:${slug}`]
+        // textPiece: Texts by or about the artist are listed on the page
+        tags: [`artist:${slug}`, 'textPiece']
     })
 
     if (!artist) {

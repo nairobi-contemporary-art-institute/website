@@ -10,6 +10,8 @@ import { media } from 'sanity-plugin-media'
 import { colorInput } from '@sanity/color-input'
 import { table } from '@sanity/table'
 import { googleMapsInput } from '@sanity/google-maps-input'
+import { DocumentTextIcon } from '@sanity/icons'
+import { TEXT_TYPES, TEXT_TYPE_LABELS } from './src/lib/texts'
 
 // Singleton document types
 const singletonTypes = new Set(['siteSettings', 'aboutPage', 'getInvolvedPage', 'homePage', 'visitPage', 'publicationsPage', 'educationPage'])
@@ -17,11 +19,29 @@ const singletonTypes = new Set(['siteSettings', 'aboutPage', 'getInvolvedPage', 
 // Singleton document actions (disable create/delete)
 const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
 
+// Types with a hand-built list item, excluded from the generic type list
+const customListTypes = new Set(['textPiece'])
+
+// "New essay", "New interview", … — fixed starting points for Texts
+const textTemplates = TEXT_TYPES.map((textType) => ({
+    id: `text-${textType}`,
+    title: `New ${TEXT_TYPE_LABELS[textType].singular.toLowerCase()}`,
+    schemaType: 'textPiece',
+    value: () => ({ textType, publishedAt: new Date().toISOString(), leadLayout: 'wide' }),
+}))
+
 export default defineConfig({
     basePath: '/studio',
     projectId,
     dataset,
-    schema,
+    schema: {
+        types: schema.types,
+        templates: (prev) => [
+            // Plain "Text" template is replaced by the per-type ones
+            ...prev.filter((template) => template.schemaType !== 'textPiece'),
+            ...textTemplates,
+        ],
+    },
     plugins: [
         structureTool({
             structure: (S) =>
@@ -92,16 +112,57 @@ export default defineConfig({
                                     .documentId('educationPage')
                             ),
                         S.divider(),
-                        // Other document types (filter out singletons)
-                        ...S.documentTypeListItems().filter(
-                            (item) => !singletonTypes.has(item.getId() as string)
-                        ),
+                        // Texts: all, then one list per type with its own template
+                        S.listItem()
+                            .title('Texts')
+                            .id('texts')
+                            .icon(DocumentTextIcon)
+                            .child(
+                                S.list()
+                                    .title('Texts')
+                                    .items([
+                                        S.listItem()
+                                            .title('All texts')
+                                            .id('texts-all')
+                                            .child(
+                                                S.documentTypeList('textPiece')
+                                                    .title('All texts')
+                                                    .defaultOrdering([{ field: 'publishedAt', direction: 'desc' }])
+                                                    .initialValueTemplates(
+                                                        textTemplates.map((t) => S.initialValueTemplateItem(t.id))
+                                                    )
+                                            ),
+                                        S.divider(),
+                                        ...TEXT_TYPES.map((textType) =>
+                                            S.listItem()
+                                                .title(TEXT_TYPE_LABELS[textType].plural)
+                                                .id(`texts-${textType}`)
+                                                .child(
+                                                    S.documentList()
+                                                        .title(TEXT_TYPE_LABELS[textType].plural)
+                                                        .schemaType('textPiece')
+                                                        .filter('_type == "textPiece" && textType == $textType')
+                                                        .params({ textType })
+                                                        .defaultOrdering([{ field: 'publishedAt', direction: 'desc' }])
+                                                        .initialValueTemplates([
+                                                            S.initialValueTemplateItem(`text-${textType}`),
+                                                        ])
+                                                )
+                                        ),
+                                    ])
+                            ),
+                        S.divider(),
+                        // Other document types (filter out singletons and custom lists)
+                        ...S.documentTypeListItems().filter((item) => {
+                            const id = item.getId() as string
+                            return !singletonTypes.has(id) && !customListTypes.has(id)
+                        }),
                     ]),
         }),
         internationalizedArray({
             languages: languages.map(l => ({ id: l.id, title: l.title })),
             defaultLanguages: ['en'],
-            fieldTypes: ['string', 'text', 'slug', 'blockContent']
+            fieldTypes: ['string', 'text', 'slug', 'blockContent', 'textBody']
         }),
         media(),
         colorInput(),

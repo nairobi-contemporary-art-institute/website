@@ -61,6 +61,7 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
             title: 'Collection',
             links: [
                 { label: 'The Channel', url: '/channel' },
+                { label: 'Texts', url: '/texts' },
                 { label: 'Artists', url: '/artists' },
                 { label: 'Collection', url: '/collection' },
                 { label: 'Publications', url: '/publications' },

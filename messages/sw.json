@@ -18,6 +18,7 @@
         "visit": "Tembelea",
         "exhibitions": "Maonyesho",
         "channel": "Chaneli",
+        "texts": "Maandishi",
         "collection": "Mkusanyiko",
         "education": "Elimu",
         "support": "Tuunge Mkono",
@@ -157,6 +158,48 @@
             "filterAudio": "Sauti",
             "filterText": "Maandishi"
         },
+        "texts": {
+            "title": "Maandishi",
+            "description": "Insha, mahojiano, mazungumzo na maandishi ya wasanii, yanayochapishwa mara kwa mara na NCAI.",
+            "filterLabel": "Chuja maandishi kwa aina",
+            "filterAll": "Yote",
+            "types": {
+                "essay": {
+                    "singular": "Insha",
+                    "plural": "Insha"
+                },
+                "interview": {
+                    "singular": "Mahojiano",
+                    "plural": "Mahojiano"
+                },
+                "conversation": {
+                    "singular": "Mazungumzo",
+                    "plural": "Mazungumzo"
+                },
+                "artistWriting": {
+                    "singular": "Maandishi ya msanii",
+                    "plural": "Maandishi ya wasanii"
+                }
+            },
+            "by": "Na",
+            "minRead": "Dakika {minutes} za kusoma",
+            "notes": "Maelezo",
+            "credit": "Hisani",
+            "relatedTexts": "Maandishi yanayohusiana",
+            "relatedExhibitions": "Maonyesho yanayohusiana",
+            "moreTexts": "Maandishi zaidi",
+            "previousText": "Maandishi yaliyotangulia",
+            "nextText": "Maandishi yanayofuata",
+            "textNavigation": "Maandishi zaidi",
+            "pagination": "Kurasa",
+            "newer": "Mapya zaidi",
+            "older": "Ya zamani zaidi",
+            "pageOf": "Ukurasa {page} kati ya {total}",
+            "noContent": "Bado hakuna maandishi yaliyochapishwa.",
+            "noContentForType": "Bado hakuna maandishi ya aina hii.",
+            "viewAll": "Tazama maandishi yote",
+            "textsTitle": "Maandishi"
+        },
         "education": {
             "title": "Elimu",
             "description": "Warsha, mazungumzo, na programu katika NCAI.",
@@ -206,6 +249,7 @@
         "filterArtist": "Wasanii",
         "filterWork": "Kazi",
         "filterPost": "Chaneli",
+        "filterTextPiece": "Maandishi",
         "filterProgram": "Elimu",
         "filterEvent": "Matukio",
         "collectionItem": "Kazi ya Sanaa",
@@ -213,6 +257,7 @@
         "artist": "Msanii",
         "exhibition": "Maonyesho",
         "post": "Chapisho",
+        "textPiece": "Maandishi",
         "program": "Programu",
         "event": "Tukio"
     }

@@ -8,6 +8,7 @@
         "visit": "زيارة",
         "exhibitions": "المعارض",
         "channel": "المجلة",
+        "texts": "نصوص",
         "collection": "المجموعة",
         "education": "التعليم",
         "support": "ادعمنا"
@@ -32,6 +33,48 @@
         "channel": {
             "title": "المجلة",
             "description": "أخبار ومقابلات ورؤى من المعهد."
+        },
+        "texts": {
+            "title": "نصوص",
+            "description": "مقالات ومقابلات وحوارات وكتابات فنانين، ينشرها المعهد بشكل دوري.",
+            "filterLabel": "تصفية النصوص حسب النوع",
+            "filterAll": "الكل",
+            "types": {
+                "essay": {
+                    "singular": "مقالة",
+                    "plural": "مقالات"
+                },
+                "interview": {
+                    "singular": "مقابلة",
+                    "plural": "مقابلات"
+                },
+                "conversation": {
+                    "singular": "حوار",
+                    "plural": "حوارات"
+                },
+                "artistWriting": {
+                    "singular": "كتابة فنان",
+                    "plural": "كتابات الفنانين"
+                }
+            },
+            "by": "بقلم",
+            "minRead": "{minutes} دقيقة قراءة",
+            "notes": "ملاحظات",
+            "credit": "حقوق الصورة",
+            "relatedTexts": "نصوص ذات صلة",
+            "relatedExhibitions": "معارض ذات صلة",
+            "moreTexts": "المزيد من النصوص",
+            "previousText": "النص السابق",
+            "nextText": "النص التالي",
+            "textNavigation": "المزيد من النصوص",
+            "pagination": "التنقل بين الصفحات",
+            "newer": "الأحدث",
+            "older": "الأقدم",
+            "pageOf": "الصفحة {page} من {total}",
+            "noContent": "لم تُنشر أي نصوص بعد.",
+            "noContentForType": "لا توجد نصوص من هذا النوع بعد.",
+            "viewAll": "عرض جميع النصوص",
+            "textsTitle": "نصوص"
         },
         "education": {
             "title": "التعليم",

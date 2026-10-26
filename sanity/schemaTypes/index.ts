@@ -30,7 +30,13 @@ import { artistsPage } from './artistsPage'
 import { resource } from './resource'
 
 import { timelineTeaser } from './objects/timelineTeaser'
+import { textPiece } from './textPiece'
+import { textBody } from './objects/textBody'
+import { speaker } from './objects/speaker'
+import { textFigure } from './objects/textFigure'
+import { imagePair } from './objects/imagePair'
+import { pullQuote } from './objects/pullQuote'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-    types: [artist, work, exhibition, collectionItem, timelineEvent, event, person, category, partner, siteSettings, post, program, blockContent, page, aboutPage, getInvolvedPage, homePage, visitPage, publication, publicationsPage, educationPage, eventsPage, accessibilityPage, collectionPage, exhibitionsPage, artistsPage, resource, timelineTeaser],
+    types: [artist, work, exhibition, collectionItem, timelineEvent, event, person, category, partner, siteSettings, post, program, blockContent, page, aboutPage, getInvolvedPage, homePage, visitPage, publication, publicationsPage, educationPage, eventsPage, accessibilityPage, collectionPage, exhibitionsPage, artistsPage, resource, timelineTeaser, textPiece, textBody, textFigure, imagePair, pullQuote, speaker],
 }

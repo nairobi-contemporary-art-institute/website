@@ -1,6 +1,29 @@
 import { groq } from 'next-sanity'
 
 /**
+ * Card fields for a Text (`textPiece`). Shared by the /texts index, related
+ * texts and the reverse links on exhibition and artist pages.
+ */
+const TEXT_CARD_PROJECTION = `
+    _id,
+    _type,
+    title,
+    "slug": slug.current,
+    textType,
+    publishedAt,
+    standfirst,
+    "authors": authors[]->{ _id, _type, name, "slug": slug.current, hasProfile },
+    leadImage {
+        alt,
+        caption,
+        credit,
+        hotspot,
+        crop,
+        asset-> { _id, url, metadata { lqip, dimensions } }
+    }
+`
+
+/**
  * Fetch all exhibitions with basic info for listing.
  */
 export const EXHIBITIONS_QUERY = groq`
@@ -51,7 +74,8 @@ export const EXHIBITION_BY_SLUG_QUERY = groq`
         },
         startDate,
         endDate,
-        "artistNames": artists[]->name[@._key == $locale][0].value
+        "artistNames": artists[]->name[@._key == $locale][0].value,
+        _type == "textPiece" => { ${TEXT_CARD_PROJECTION} }
     },
     extraSections[] {
         _type,
@@ -153,6 +177,9 @@ export const EXHIBITION_BY_SLUG_QUERY = groq`
           }
         },
         website
+    },
+    "texts": *[_type == "textPiece" && defined(slug.current) && ^._id in relatedExhibitions[]._ref] | order(publishedAt desc)[0...6] {
+        ${TEXT_CARD_PROJECTION}
     },
     "relatedPosts": *[_type == "post" && (references(^._id) || references(^.artists[]._ref) || count(tags[@._ref in ^.tags[]._ref]) > 0)] | order(publishedAt desc)[0...4] {
         _id,
@@ -270,6 +297,9 @@ export const ARTIST_BY_SLUG_QUERY = groq`*[_type == "artist" && slug.current == 
             caption,
             asset-> { _id, metadata { lqip } }
         }
+    },
+    "texts": *[_type == "textPiece" && defined(slug.current) && (^._id in authors[]._ref || ^._id in relatedArtists[]._ref)] | order(publishedAt desc)[0...6] {
+        ${TEXT_CARD_PROJECTION}
     },
     "artistPosts": *[_type == "post" && references(^._id)] | order(publishedAt desc) {
         _id,
@@ -493,7 +523,7 @@ export const PROGRAM_BY_SLUG_QUERY = groq`
  * Fetch all searchable documents for sitemap.
  */
 export const SITEMAP_QUERY = groq`
-  *[_type in ["exhibition", "artist", "post", "program", "collectionItem"]] {
+  *[_type in ["exhibition", "artist", "post", "program", "collectionItem", "textPiece"]] {
     "slug": slug.current,
     _type,
     _updatedAt
@@ -706,6 +736,7 @@ export const SITE_SETTINGS_QUERY = groq`
           "url": select(
             _type == "exhibition" => "/exhibitions/" + slug.current,
             _type == "post" => "/channel/" + slug.current,
+            _type == "textPiece" => "/texts/" + slug.current,
             _type == "artist" => "/artists/" + slug.current,
             _type == "event" => "/events/" + slug.current,
             _type == "program" => "/programs/" + slug.current,
@@ -734,6 +765,7 @@ export const SITE_SETTINGS_QUERY = groq`
           "url": select(
             _type == "exhibition" => "/exhibitions/" + slug.current,
             _type == "post" => "/channel/" + slug.current,
+            _type == "textPiece" => "/texts/" + slug.current,
             _type == "artist" => "/artists/" + slug.current,
             _type == "event" => "/events/" + slug.current,
             _type == "program" => "/programs/" + slug.current,
@@ -763,6 +795,7 @@ export const SITE_SETTINGS_QUERY = groq`
               "url": select(
                 _type == "exhibition" => "/exhibitions/" + slug.current,
                 _type == "post" => "/channel/" + slug.current,
+                _type == "textPiece" => "/texts/" + slug.current,
                 _type == "artist" => "/artists/" + slug.current,
                 _type == "event" => "/events/" + slug.current,
                 _type == "program" => "/programs/" + slug.current,
@@ -795,6 +828,7 @@ export const SITE_SETTINGS_QUERY = groq`
             "url": select(
               _type == "exhibition" => "/exhibitions/" + slug.current,
               _type == "post" => "/channel/" + slug.current,
+              _type == "textPiece" => "/texts/" + slug.current,
               _type == "artist" => "/artists/" + slug.current,
               _type == "event" => "/events/" + slug.current,
               _type == "program" => "/programs/" + slug.current,
@@ -1415,5 +1449,92 @@ export const TEAM_QUERY = groq`
       imageCredit-> { name, "slug": slug.current }
     },
     bio
+  }
+`
+
+/** Person/artist fields used for bylines and Person JSON-LD on Text pages. */
+const PERSON_PROFILE_PROJECTION = `
+    _id,
+    _type,
+    name,
+    "slug": slug.current,
+    hasProfile,
+    category,
+    roles,
+    sameAs,
+    image { asset-> { _id, url } }
+`
+
+/**
+ * Texts index: one page of cards plus the total for pagination.
+ * $type is null for all types; $start/$end slice the page.
+ */
+export const TEXTS_QUERY = groq`
+  {
+    "items": *[_type == "textPiece" && defined(slug.current) && ($type == null || textType == $type)] | order(publishedAt desc) [$start...$end] {
+        ${TEXT_CARD_PROJECTION}
+    },
+    "total": count(*[_type == "textPiece" && defined(slug.current) && ($type == null || textType == $type)])
+  }
+`
+
+/**
+ * A single Text with body, notes, links and neighbours.
+ * Related texts: manual picks win; otherwise the page merges the
+ * linked → same type → recent candidates (deduped, top 3).
+ */
+export const TEXT_BY_SLUG_QUERY = groq`
+  *[_type == "textPiece" && slug.current == $slug][0] {
+    ${TEXT_CARD_PROJECTION},
+    _updatedAt,
+    byline,
+    leadLayout,
+    "authorProfiles": authors[]-> { ${PERSON_PROFILE_PROJECTION} },
+    participants[] {
+        _key,
+        name,
+        initials,
+        role,
+        "person": person-> { ${PERSON_PROFILE_PROJECTION} }
+    },
+    "body": body[] {
+        _key,
+        "value": value[] {
+            ...,
+            _type == "block" => {
+                markDefs[] {
+                    ...,
+                    _type == "internalLink" => { "type": reference->_type, "slug": reference->slug.current }
+                }
+            },
+            _type == "textFigure" => {
+                asset-> { _id, url, metadata { lqip, dimensions } }
+            },
+            _type == "imagePair" => {
+                images[] { ..., asset-> { _id, url, metadata { lqip, dimensions } } }
+            }
+        }
+    },
+    notes,
+    "relatedExhibitions": relatedExhibitions[]-> {
+        _id,
+        title,
+        "slug": slug.current,
+        startDate,
+        endDate,
+        listImage { asset-> { _id, metadata { lqip } } },
+        mainImage { asset-> { _id, metadata { lqip } } },
+        "artistNames": artists[]->name
+    },
+    "relatedManual": relatedTexts[]-> { ${TEXT_CARD_PROJECTION} },
+    "relatedLinked": *[_type == "textPiece" && defined(slug.current) && _id != ^._id && (
+        references(coalesce(^.relatedExhibitions[]._ref, [])) ||
+        references(coalesce(^.relatedArtists[]._ref, [])) ||
+        references(coalesce(^.authors[]._ref, []))
+    )] | order(publishedAt desc)[0...3] { ${TEXT_CARD_PROJECTION} },
+    "relatedSameType": *[_type == "textPiece" && defined(slug.current) && _id != ^._id && textType == ^.textType] | order(publishedAt desc)[0...3] { ${TEXT_CARD_PROJECTION} },
+    "relatedRecent": *[_type == "textPiece" && defined(slug.current) && _id != ^._id] | order(publishedAt desc)[0...3] { ${TEXT_CARD_PROJECTION} },
+    "prev": *[_type == "textPiece" && defined(slug.current) && publishedAt < ^.publishedAt] | order(publishedAt desc)[0] { title, "slug": slug.current, textType },
+    "next": *[_type == "textPiece" && defined(slug.current) && publishedAt > ^.publishedAt] | order(publishedAt asc)[0] { title, "slug": slug.current, textType }
   }
 `

@@ -25,6 +25,7 @@ import { GridSystem, GridRoot as Grid, Cell as GridCell } from '@/components/ui/
 import { cn, formatExhibitionDate } from '@/lib/utils'
 import { InPageNav } from '@/components/exhibitions/InPageNav'
 import { ChannelCard } from '@/components/channel/ChannelCard'
+import { TextCard } from '@/components/texts/TextCard'
 
 type Props = {
     params: Promise<{ locale: string; slug: string }>
@@ -66,7 +67,8 @@ export default async function ExhibitionPage({ params }: Props) {
     const exhibition = await sanityFetch<any>({
         query: EXHIBITION_BY_SLUG_QUERY,
         params: { slug, locale },
-        tags: [`exhibition:${slug}`]
+        // textPiece: Texts that link this exhibition are listed on the page
+        tags: [`exhibition:${slug}`, 'textPiece']
     })
 
     if (!exhibition) {
@@ -125,6 +127,7 @@ export default async function ExhibitionPage({ params }: Props) {
             }
             return null
         }).filter(Boolean) || []),
+        exhibition.texts?.length > 0 && { id: 'texts', label: t.Pages?.texts?.textsTitle || 'Texts' },
         relatedContentItems.length > 0 && { id: 'related', label: 'Related' }
     ].filter(Boolean) as { id: string, label: string }[]
 
@@ -560,6 +563,22 @@ export default async function ExhibitionPage({ params }: Props) {
                             title={t.Common?.partners || 'Exhibition Partners'}
                         />
                     </div>
+                )}
+
+                {/* Texts linked to this exhibition */}
+                {exhibition.texts?.length > 0 && (
+                    <section id="texts" aria-labelledby="exhibition-texts" className="border-t border-charcoal/5 py-20">
+                        <h2 id="exhibition-texts" className="mb-10 text-3xl md:text-4xl font-light tracking-tight text-charcoal">
+                            {t.Pages?.texts?.textsTitle || 'Texts'}
+                        </h2>
+                        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+                            {exhibition.texts.map((text: any) => (
+                                <li key={text._id}>
+                                    <TextCard text={text} locale={locale} headingLevel="h3" />
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
                 )}
 
                 {/* Related Content */}
