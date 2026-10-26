@@ -40,7 +40,7 @@ export function ArtistIndex({ artists, locale }: ArtistIndexProps) {
     return (
         <div className="space-y-16">
             {/* A-Z Navigation */}
-            <nav className="flex flex-wrap gap-4 border-b border-white/10 pb-12">
+            <nav aria-label="Artist index" className="flex flex-wrap gap-4 border-b border-white/10 pb-12">
                 <button
                     onClick={() => setActiveLetter(null)}
                     className={cn(
@@ -77,9 +77,9 @@ export function ArtistIndex({ artists, locale }: ArtistIndexProps) {
                         href={`/${locale}/artists/${artist.slug}`}
                         className="group flex flex-col pt-4 pb-6 border-b border-white/5 hover:border-white/20 transition-all"
                     >
-                        <h3 className="text-2xl md:text-3xl text-white/60 group-hover:text-white transition-colors duration-300">
+                        <h2 className="text-2xl md:text-3xl text-white/60 group-hover:text-white transition-colors duration-300">
                             {artist.displayName}
-                        </h3>
+                        </h2>
                     </Link>
                 ))}
             </div>

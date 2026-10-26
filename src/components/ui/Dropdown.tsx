@@ -23,7 +23,7 @@ export function Dropdown({ trigger, items, className }: DropdownProps) {
                 className
             )}>
                 {trigger}
-                <ChevronDown className="w-3 h-3 text-charcoal/40" />
+                <ChevronDown className="w-3 h-3 text-charcoal/70" />
             </Menu.Trigger>
             <Menu.Portal>
                 <Menu.Positioner sideOffset={8} align="start">

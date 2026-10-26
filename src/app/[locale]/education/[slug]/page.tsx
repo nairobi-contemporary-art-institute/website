@@ -154,7 +154,7 @@ export default async function ProgramPage({ params }: Props) {
                         {/* Registration */}
                         {isUpcoming && program.registrationUrl && (
                             <div className="bg-white p-6 border border-charcoal/5 shadow-sm space-y-4">
-                                <h3 className="font-mono text-xs capitalize tracking-widest text-charcoal/60">Participation</h3>
+                                <h3 className="font-mono text-xs capitalize tracking-widest text-charcoal/70">Participation</h3>
                                 <p className="text-sm text-charcoal/80 mb-4">
                                     Register to participate in this program.
                                 </p>
@@ -195,7 +195,7 @@ export default async function ProgramPage({ params }: Props) {
                                             <div>
                                                 <p className="font-bold text-charcoal">{getLocalizedValue(person.name, locale)}</p>
                                                 {person.roles && (
-                                                    <p className="text-xs text-charcoal/60">{person.roles.join(', ')}</p>
+                                                    <p className="text-xs text-charcoal/70">{person.roles.join(', ')}</p>
                                                 )}
                                             </div>
                                         </div>

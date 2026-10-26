@@ -84,7 +84,9 @@ function CustomAudioPlayer({ url }: { url: string }) {
                 onTimeUpdate={onTimeUpdate}
                 onLoadedMetadata={onLoadedMetadata}
                 onEnded={() => { if (isMounted.current) setIsPlaying(false) }}
-            />
+            >
+                <track kind="captions" />
+            </audio>
             <div className="flex items-center gap-6">
                 <button
                     onClick={togglePlay}
@@ -95,7 +97,7 @@ function CustomAudioPlayer({ url }: { url: string }) {
                 </button>
 
                 <div className="flex-1 space-y-2">
-                    <div className="flex justify-between text-[10px] font-mono tracking-widest text-charcoal/40 uppercase">
+                    <div className="flex justify-between text-[10px] font-mono tracking-widest text-charcoal/70 uppercase">
                         <span>{formatTime(audioRef.current?.currentTime || 0)}</span>
                         <span>{formatTime(duration)}</span>
                     </div>

@@ -27,7 +27,7 @@ export const components = (locale?: string) => ({
                         />
                     </div>
                     {caption && (
-                        <figcaption className="text-sm text-umber/60 leading-relaxed border-l-2 border-umber/10 pl-4 mt-2">
+                        <figcaption className="text-sm text-umber/80 leading-relaxed border-l-2 border-umber/10 pl-4 mt-2">
                             <ArtCaption content={caption} />
                         </figcaption>
                     )}

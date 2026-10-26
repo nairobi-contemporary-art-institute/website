@@ -54,7 +54,7 @@ export function EventFilter({ events, locale }: EventFilterProps) {
                                 "px-5 py-2 text-[10px] font-bold capitalize tracking-[0.2em] transition-all border",
                                 filter === cat
                                     ? "bg-charcoal text-off-white border-charcoal shadow-sm"
-                                    : "bg-transparent text-charcoal/50 hover:text-charcoal border-charcoal/10 hover:border-charcoal/30"
+                                    : "bg-transparent text-charcoal/70 hover:text-charcoal border-charcoal/10 hover:border-charcoal/30"
                             )}
                         >
                             {cat}
@@ -68,7 +68,7 @@ export function EventFilter({ events, locale }: EventFilterProps) {
                         onClick={() => setView('grid')}
                         className={cn(
                             "p-2 transition-all",
-                            view === 'grid' ? "bg-white text-charcoal shadow-sm" : "text-charcoal/40 hover:text-charcoal"
+                            view === 'grid' ? "bg-white text-charcoal shadow-sm" : "text-charcoal/70 hover:text-charcoal"
                         )}
                         aria-label="Grid View"
                     >
@@ -78,7 +78,7 @@ export function EventFilter({ events, locale }: EventFilterProps) {
                         onClick={() => setView('calendar')}
                         className={cn(
                             "p-2 transition-all",
-                            view === 'calendar' ? "bg-white text-charcoal shadow-sm" : "text-charcoal/40 hover:text-charcoal"
+                            view === 'calendar' ? "bg-white text-charcoal shadow-sm" : "text-charcoal/70 hover:text-charcoal"
                         )}
                         aria-label="Calendar View"
                     >
@@ -97,7 +97,7 @@ export function EventFilter({ events, locale }: EventFilterProps) {
                     <section>
                         <div className="flex items-center justify-between mb-12">
                             <h2 className="text-4xl font-light tracking-tight">Upcoming</h2>
-                            <span className="font-mono text-sm text-umber/40">({upcoming.length})</span>
+                            <span className="font-mono text-sm text-umber/80">({upcoming.length})</span>
                         </div>
 
                         {upcoming.length > 0 ? (
@@ -108,7 +108,7 @@ export function EventFilter({ events, locale }: EventFilterProps) {
                             </div>
                         ) : (
                             <div className="py-32 text-center border border-dashed border-charcoal/10 bg-stone-50/50">
-                                <p className="text-charcoal/30 font-mono capitalize tracking-[0.3em] text-[10px]">No upcoming events found</p>
+                                <p className="text-charcoal/70 font-mono capitalize tracking-[0.3em] text-[10px]">No upcoming events found</p>
                             </div>
                         )}
                     </section>
@@ -117,7 +117,7 @@ export function EventFilter({ events, locale }: EventFilterProps) {
                     {past.length > 0 && (
                         <section className="pt-24 border-t border-rich-blue/10">
                             <div className="flex items-center gap-6 mb-12">
-                                <h2 className="text-2xl font-light text-charcoal/40">Past Events</h2>
+                                <h2 className="text-2xl font-light text-charcoal/70">Past Events</h2>
                                 <div className="h-px flex-1 bg-rich-blue/10" />
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 opacity-60 hover:opacity-100 transition-opacity duration-300">

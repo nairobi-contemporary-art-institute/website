@@ -7,7 +7,7 @@ export function GridSystem() {
     return (
         <div className="space-y-24 pb-24">
             <header>
-                <h2 className="text-xs font-bold text-deep-umber/40 capitalize tracking-[0.4em] mb-4">Section 04</h2>
+                <h2 className="text-xs font-bold text-deep-umber/80 capitalize tracking-[0.4em] mb-4">Section 04</h2>
                 <h1 className="text-5xl md:text-7xl font-bold text-charcoal capitalize tracking-tighter mb-8">
                     Grid System
                 </h1>
@@ -20,7 +20,7 @@ export function GridSystem() {
             <section className="space-y-8">
                 <header>
                     <h3 className="text-sm font-bold text-charcoal capitalize tracking-widest border-l-2 border-ochre pl-4 mb-2">Page Sections & Padding</h3>
-                    <p className="text-xs text-deep-umber/60 italic">Standard spacing rules for major layout blocks.</p>
+                    <p className="text-xs text-deep-umber/80 italic">Standard spacing rules for major layout blocks.</p>
                 </header>
                 <div className="bg-white border border-deep-umber/10 p-6 md:p-12">
                     <div className="grid md:grid-cols-2 gap-12 items-start">
@@ -30,19 +30,19 @@ export function GridSystem() {
                                     <span className="w-2 h-2 rounded-full bg-ochre"></span>
                                 <h4 className="text-[10px] font-bold capitalize tracking-widest text-charcoal">Global Section Padding</h4>
                                 </div>
-                                <p className="text-sm text-deep-umber/70 leading-relaxed pl-4 border-l border-ochre/20">
+                                <p className="text-sm text-deep-umber/80 leading-relaxed pl-4 border-l border-ochre/20">
                                     Primary rule: Responsive fluid padding using a CSS clamp rule. This ensures a smooth transition between mobile and desktop without layout jumps.
                                 </p>
                             </div>
                             
                             <div className="grid grid-cols-1 gap-4 pl-4">
                                 <div className="space-y-4">
-                                    <span className="text-[9px] font-mono text-deep-umber/40 uppercase">Fluid Implementation</span>
+                                    <span className="text-[9px] font-mono text-deep-umber/80 uppercase">Fluid Implementation</span>
                                     <div className="px-4 py-3 bg-ivory border border-deep-umber/10 rounded-sm">
                                         <code className="text-[10px] text-ochre font-bold block mb-2">
                                             clamp(1rem, 0.75rem + 1vw, 1.5rem)
                                         </code>
-                                        <div className="flex justify-between items-center text-[9px] text-deep-umber/40 font-mono">
+                                        <div className="flex justify-between items-center text-[9px] text-deep-umber/80 font-mono">
                                             <span>Min: 16px</span>
                                             <div className="h-0.5 flex-1 mx-4 bg-ochre/20 relative">
                                                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-ochre"></div>
@@ -53,7 +53,7 @@ export function GridSystem() {
                                 </div>
                             </div>
 
-                            <p className="text-[10px] text-deep-umber/50 leading-relaxed pl-4 italic">
+                            <p className="text-[10px] text-deep-umber/80 leading-relaxed pl-4 italic">
                                 Use the class <code className="text-charcoal font-bold p-[p-section-clamp]">p-section-clamp</code> for consistent fluid spacing.
                             </p>
                         </div>
@@ -72,7 +72,7 @@ export function GridSystem() {
                             {/* Inner Content Area */}
                             <div className="absolute inset-[clamp(12px,1.5vw,24px)] bg-white shadow-sm flex flex-col items-center justify-center gap-2">
                                 <span className="text-[10px] font-bold text-ochre capitalize tracking-widest">Fluid Safe Zone</span>
-                                <span className="text-[8px] text-ochre/40 font-mono">scaling...</span>
+                                <span className="text-[8px] text-ochre/70 font-mono">scaling...</span>
                             </div>
 
                             {/* Annotations */}
@@ -88,7 +88,7 @@ export function GridSystem() {
             <section className="space-y-8">
                 <header>
                     <h3 className="text-sm font-bold text-charcoal capitalize tracking-widest border-l-2 border-rich-blue pl-4 mb-2">Breakpoints & Transitions</h3>
-                    <p className="text-xs text-deep-umber/60 italic">Standard responsive breakpoints for the NCAI ecosystem.</p>
+                    <p className="text-xs text-deep-umber/80 italic">Standard responsive breakpoints for the NCAI ecosystem.</p>
                 </header>
                 <div className="bg-white border border-deep-umber/10 overflow-hidden">
                     <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-deep-umber/10">
@@ -97,7 +97,7 @@ export function GridSystem() {
                                 <span className="text-[10px] font-bold text-charcoal uppercase tracking-widest">Mobile</span>
                                 <span className="text-[9px] font-mono text-ochre">&lt; 768px</span>
                             </div>
-                            <p className="text-xs text-deep-umber/70 leading-relaxed">
+                            <p className="text-xs text-deep-umber/80 leading-relaxed">
                                 Single column focus. Sidebars collapse into drawers. Top-level navigation adopts the hamburger menu transition.
                             </p>
                         </div>
@@ -106,7 +106,7 @@ export function GridSystem() {
                                 <span className="text-[10px] font-bold text-charcoal uppercase tracking-widest">Tablet</span>
                                 <span className="text-[9px] font-mono text-ochre">768px - 1024px</span>
                             </div>
-                            <p className="text-xs text-deep-umber/70 leading-relaxed">
+                            <p className="text-xs text-deep-umber/80 leading-relaxed">
                                 Content spreads to 2 columns. Sidebar remains hidden or compact. Grid gutters reduce to 16px.
                             </p>
                         </div>
@@ -115,7 +115,7 @@ export function GridSystem() {
                                 <span className="text-[10px] font-bold text-charcoal uppercase tracking-widest">Desktop</span>
                                 <span className="text-[9px] font-mono text-ochre">1024px+</span>
                             </div>
-                            <p className="text-xs text-deep-umber/70 leading-relaxed font-medium">
+                            <p className="text-xs text-deep-umber/80 leading-relaxed font-medium">
                                 Full 12-column grid active. Standard section padding of 24px enforced across all layout modules.
                             </p>
                         </div>
@@ -127,7 +127,7 @@ export function GridSystem() {
             <section className="space-y-8">
                 <header>
                     <h3 className="text-sm font-bold text-charcoal capitalize tracking-widest border-l-2 border-ochre pl-4 mb-2">Basic Grid</h3>
-                    <p className="text-xs text-deep-umber/60 italic">A non-responsive single grid with auto flowing cells.</p>
+                    <p className="text-xs text-deep-umber/80 italic">A non-responsive single grid with auto flowing cells.</p>
                 </header>
                 <div className="bg-white border border-deep-umber/10">
                     <Grid.System>
@@ -147,7 +147,7 @@ export function GridSystem() {
             <section className="space-y-8">
                 <header>
                     <h3 className="text-sm font-bold text-charcoal capitalize tracking-widest border-l-2 border-rich-blue pl-4 mb-2">Gaps</h3>
-                    <p className="text-xs text-deep-umber/60 italic">Grid cells can have specific spacing while maintaining guide alignment.</p>
+                    <p className="text-xs text-deep-umber/80 italic">Grid cells can have specific spacing while maintaining guide alignment.</p>
                 </header>
                 <div className="bg-white border border-deep-umber/10">
                     <Grid.System>
@@ -167,13 +167,13 @@ export function GridSystem() {
             <section className="space-y-8">
                 <header>
                     <h3 className="text-sm font-bold text-charcoal capitalize tracking-widest border-l-2 border-deep-umber pl-4 mb-2">Solid Cells</h3>
-                    <p className="text-xs text-deep-umber/60 italic">Cells with the 'solid' prop cover the background guides.</p>
+                    <p className="text-xs text-deep-umber/80 italic">Cells with the 'solid' prop cover the background guides.</p>
                 </header>
                 <div className="bg-white border border-deep-umber/10">
                     <Grid.System>
                         <Grid columns={3} rows={1}>
                             <Grid.Cell solid className="text-[10px] font-bold italic">Solid Cell</Grid.Cell>
-                            <Grid.Cell className="text-[10px] font-mono text-charcoal/30">Transparent</Grid.Cell>
+                            <Grid.Cell className="text-[10px] font-mono text-charcoal/70">Transparent</Grid.Cell>
                             <Grid.Cell solid className="text-[10px] font-bold italic">Solid Cell</Grid.Cell>
                         </Grid>
                     </Grid.System>
@@ -184,7 +184,7 @@ export function GridSystem() {
             <section className="space-y-8">
                 <header>
                     <h3 className="text-sm font-bold text-charcoal capitalize tracking-widest border-l-2 border-ochre pl-4 mb-2">Solid Clipping</h3>
-                    <p className="text-xs text-deep-umber/60 italic">Advanced clipping where solid cells cover specific sections of the grid guides.</p>
+                    <p className="text-xs text-deep-umber/80 italic">Advanced clipping where solid cells cover specific sections of the grid guides.</p>
                 </header>
                 <div className="bg-white border border-deep-umber/10">
                     <Grid.System>
@@ -204,7 +204,7 @@ export function GridSystem() {
             <section className="space-y-8">
                 <header>
                     <h3 className="text-sm font-bold text-charcoal capitalize tracking-widest border-l-2 border-rich-blue pl-4 mb-2">Rows and Columns</h3>
-                    <p className="text-xs text-deep-umber/60 italic">Responsive column and row definitions.</p>
+                    <p className="text-xs text-deep-umber/80 italic">Responsive column and row definitions.</p>
                 </header>
                 <div className="bg-white border border-deep-umber/10">
                     <Grid.System>
@@ -224,7 +224,7 @@ export function GridSystem() {
             <section className="space-y-8">
                 <header>
                     <h3 className="text-sm font-bold text-charcoal capitalize tracking-widest border-l-2 border-deep-umber pl-4 mb-2">Overlaying Cells</h3>
-                    <p className="text-xs text-deep-umber/60 italic">Overlapping cells with Z-index management.</p>
+                    <p className="text-xs text-deep-umber/80 italic">Overlapping cells with Z-index management.</p>
                 </header>
                 <div className="bg-white border border-deep-umber/10 h-64">
                     <Grid.System>
@@ -241,7 +241,7 @@ export function GridSystem() {
             <section className="space-y-8">
                 <header>
                     <h3 className="text-sm font-bold text-charcoal capitalize tracking-widest border-l-2 border-ochre pl-4 mb-2">Hide Guides</h3>
-                    <p className="text-xs text-deep-umber/60 italic">Toggle visibility of row or column guides.</p>
+                    <p className="text-xs text-deep-umber/80 italic">Toggle visibility of row or column guides.</p>
                 </header>
                 <div className="grid md:grid-cols-2 gap-8">
                     <div className="bg-white border border-deep-umber/10 aspect-video">
@@ -259,7 +259,7 @@ export function GridSystem() {
             <section className="space-y-8">
                 <header>
                     <h3 className="text-sm font-bold text-charcoal capitalize tracking-widest border-l-2 border-rich-blue pl-4 mb-2">Preserve Aspect Ratio</h3>
-                    <p className="text-xs text-deep-umber/60 italic">Maintains a consistent aspect ratio based on grid units.</p>
+                    <p className="text-xs text-deep-umber/80 italic">Maintains a consistent aspect ratio based on grid units.</p>
                 </header>
                 <div className="bg-white border border-deep-umber/10">
                     <Grid.System text-xs>
@@ -274,7 +274,7 @@ export function GridSystem() {
             <section className="space-y-8">
                 <header>
                     <h3 className="text-sm font-bold text-charcoal capitalize tracking-widest border-l-2 border-emerald-600 pl-4 mb-2">Debug Mode</h3>
-                    <p className="text-xs text-deep-umber/60 italic">Visualize cell boundaries and grid structure during development.</p>
+                    <p className="text-xs text-deep-umber/80 italic">Visualize cell boundaries and grid structure during development.</p>
                 </header>
                 <div className="bg-white border border-deep-umber/10 mt-12">
                     <Grid.System debug>

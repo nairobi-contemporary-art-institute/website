@@ -41,7 +41,7 @@ export function AboutSubNav({ locale }: AboutSubNavProps) {
             style={{ top: 'var(--header-offset, 96px)' }}
         >
             <GridSystem unstable_useContainer className="py-4 md:py-6">
-                <nav className="flex items-center gap-6 md:gap-12 overflow-x-auto no-scrollbar scroll-smooth">
+                <nav aria-label="About sections" className="flex items-center gap-6 md:gap-12 overflow-x-auto no-scrollbar scroll-smooth">
                     {navItems.map((item) => {
                         const isActive = pathname === item.href
                         
@@ -53,7 +53,7 @@ export function AboutSubNav({ locale }: AboutSubNavProps) {
                                     "text-sm md:text-base font-bold uppercase tracking-widest whitespace-nowrap transition-all duration-300 relative py-2",
                                     isActive 
                                         ? "text-umber" 
-                                        : "text-charcoal/40 hover:text-charcoal"
+                                        : "text-charcoal/70 hover:text-charcoal"
                                 )}
                             >
                                 {item.label}

@@ -23,11 +23,22 @@ interface HeaderMenuItem {
     columns?: HeaderMenuColumn[];
 }
 
+interface FreeEntryBadgeSetting {
+    enabled?: boolean;
+    text?: LocalizedString;
+    color?: { hex?: string };
+    link?: string;
+    visiblePages?: string[];
+    curvedText?: boolean;
+    rotation?: number;
+}
+
 interface SiteSettings {
     headerFeaturedImages?: any[];
     headerStyle?: string;
     headerMenu?: HeaderMenuItem[];
     utilityNav?: HeaderMenuLink[];
+    freeEntryBadge?: FreeEntryBadgeSetting;
 }
 
 export async function Header({ locale }: { locale: string }) {
@@ -61,6 +72,18 @@ export async function Header({ locale }: { locale: string }) {
 
     const headerStyle = settings?.headerStyle || 'ncai';
 
+    const badge = settings?.freeEntryBadge;
+    const freeEntryBadge = badge && badge.enabled !== false
+        ? {
+            text: getLocalizedValue(badge.text, locale) || 'Entry is Free',
+            colorHex: badge.color?.hex,
+            link: badge.link,
+            visiblePages: badge.visiblePages || [],
+            curvedText: badge.curvedText || false,
+            rotation: badge.rotation || 0,
+        }
+        : null;
+
     return (
         <HeaderSwitcher
             locale={locale}
@@ -69,6 +92,7 @@ export async function Header({ locale }: { locale: string }) {
             utilityLinks={utilityLinks}
             headerStyle={headerStyle}
             featuredImages={settings?.headerFeaturedImages}
+            freeEntryBadge={freeEntryBadge}
         />
     );
 }

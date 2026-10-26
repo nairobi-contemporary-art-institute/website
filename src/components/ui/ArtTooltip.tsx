@@ -36,12 +36,26 @@ export function ArtTooltip({ content, children, className, align = 'right' }: Ar
         <div className={cn("relative inline-block", className)} ref={tooltipRef}>
             {children ? (
                 <div
+                    role="button"
+                    tabIndex={0}
+                    aria-expanded={isVisible}
+                    aria-label="Toggle tooltip"
                     onMouseEnter={() => setIsVisible(true)}
                     onMouseLeave={() => setIsVisible(false)}
+                    onFocus={() => setIsVisible(true)}
+                    onBlur={() => setIsVisible(false)}
                     onClick={(e) => {
                         e.preventDefault()
                         e.stopPropagation()
                         setIsVisible(!isVisible)
+                    }}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault()
+                            setIsVisible(!isVisible)
+                        } else if (e.key === 'Escape') {
+                            setIsVisible(false)
+                        }
                     }}
                 >
                     {children}

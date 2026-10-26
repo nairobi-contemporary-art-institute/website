@@ -196,10 +196,10 @@ export function CollectionTeaser({ data, locale }: CollectionTeaserProps) {
                       </div>
                       
                       <div className="flex flex-col gap-1.5">
-                        <h4 className="text-sm font-bold text-white group-hover:text-white/70 transition-colors uppercase tracking-[0.15em]">
+                        <h3 className="text-sm font-bold text-white group-hover:text-white/70 transition-colors uppercase tracking-[0.15em]">
                           {itemTitle}
-                        </h4>
-                        <p className="text-[11px] text-white/40 italic tracking-wider uppercase font-medium">
+                        </h3>
+                        <p className="text-[11px] text-white/70 italic tracking-wider uppercase font-medium">
                           {artistName}{date ? ` / ${date}` : ''}
                         </p>
                       </div>
@@ -216,7 +216,7 @@ export function CollectionTeaser({ data, locale }: CollectionTeaserProps) {
           {hasMore && visibleLimit < 24 && (
             <button 
               onClick={handleLoadMore}
-              className="text-[10px] font-black uppercase tracking-[0.4em] text-white/40 hover:text-white transition-colors border-b border-white/5 hover:border-white pb-2"
+              className="text-[10px] font-black uppercase tracking-[0.4em] text-white/70 hover:text-white transition-colors border-b border-white/5 hover:border-white pb-2"
             >
               {t('loadMore')}
             </button>

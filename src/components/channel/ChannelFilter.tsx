@@ -43,9 +43,9 @@ export function ChannelFilter({ posts, locale }: ChannelFilterProps) {
 
     const MEDIA_FILTERS = [
         { label: t('filterAll'), value: 'all' },
-        { label: t('filterWatch'), value: 'video' },
-        { label: t('filterListen'), value: 'audio' },
-        { label: t('filterRead'), value: 'article' },
+        { label: t('filterFilm'), value: 'film' },
+        { label: t('filterAudio'), value: 'audio' },
+        { label: t('filterText'), value: 'text' },
     ]
 
     // Extract unique series from posts that have tags of type 'series'
@@ -56,7 +56,7 @@ export function ChannelFilter({ posts, locale }: ChannelFilterProps) {
     )).map(s => JSON.parse(s))
 
     const filtered = posts.filter(p => {
-        const typeMatch = filter === 'all' || p.mediaType === filter || (filter === 'article' && !p.mediaType)
+        const typeMatch = filter === 'all' || p.mediaType === filter || (filter === 'text' && !p.mediaType)
         const seriesMatch = seriesFilter === 'all' || (p.tags || []).some((t: any) => t.slug === seriesFilter)
         return typeMatch && seriesMatch
     })
@@ -77,7 +77,7 @@ export function ChannelFilter({ posts, locale }: ChannelFilterProps) {
                                 "px-4 py-2 text-sm font-mono capitalize tracking-widest transition-all",
                                 filter === f.value
                                     ? "bg-umber/10 text-umber font-bold border-b-2 border-umber"
-                                    : "text-charcoal/60 hover:text-charcoal hover:bg-stone-50"
+                                    : "text-charcoal/70 hover:text-charcoal hover:bg-stone-50"
                             )}
                         >
                             {f.label}
@@ -87,14 +87,14 @@ export function ChannelFilter({ posts, locale }: ChannelFilterProps) {
 
                 {availableSeries.length > 0 && (
                     <div className="flex flex-wrap gap-2 items-center">
-                        <span className="text-[10px] capitalize tracking-widest text-charcoal/40 font-bold mr-2">Series:</span>
+                        <span className="text-[10px] capitalize tracking-widest text-charcoal/70 font-bold mr-2">Series:</span>
                         <button
                             onClick={() => handleFilterChange(filter, 'all')}
                             className={cn(
                                 "px-3 py-1 text-[10px] capitalize tracking-widest font-bold border transition-all",
                                 seriesFilter === 'all'
                                     ? "bg-charcoal text-white border-charcoal"
-                                    : "text-charcoal/40 border-charcoal/10 hover:border-charcoal/30"
+                                    : "text-charcoal/70 border-charcoal/10 hover:border-charcoal/30"
                             )}
                         >
                             All
@@ -107,7 +107,7 @@ export function ChannelFilter({ posts, locale }: ChannelFilterProps) {
                                     "px-3 py-1 text-[10px] capitalize tracking-widest font-bold border transition-all",
                                     seriesFilter === series.slug
                                         ? "bg-amber-800 text-white border-amber-800"
-                                        : "text-charcoal/40 border-charcoal/10 hover:border-charcoal/30"
+                                        : "text-charcoal/70 border-charcoal/10 hover:border-charcoal/30"
                                 )}
                             >
                                 {series.title ? (series.title.find((t: any) => t._key === locale)?.value || series.title[0]?.value) : 'Untitled'}
@@ -127,7 +127,7 @@ export function ChannelFilter({ posts, locale }: ChannelFilterProps) {
 
             {filtered.length === 0 && (
                 <div className="py-32 text-center border border-dashed border-charcoal/20 bg-stone-50/50">
-                    <p className="text-charcoal/40 font-mono capitalize tracking-widest text-sm">{t('noContent')}</p>
+                    <p className="text-charcoal/70 font-mono capitalize tracking-widest text-sm">{t('noContent')}</p>
                 </div>
             )}
         </div>

@@ -29,7 +29,7 @@ interface StyleguideNavProps {
 
 export function StyleguideNav({ activeSection, onSectionChange }: StyleguideNavProps) {
     return (
-        <nav className="flex flex-col gap-1 py-4">
+        <nav aria-label="Styleguide sections" className="flex flex-col gap-1 py-4">
             {styleguideSections.map((section) => (
                 <button
                     key={section.id}
@@ -39,7 +39,7 @@ export function StyleguideNav({ activeSection, onSectionChange }: StyleguideNavP
                         "hover:bg-ivory hover:text-charcoal",
                         activeSection === section.id
                             ? "bg-charcoal text-ivory border-l-4 border-ochre"
-                            : "text-umber/60 border-l-4 border-transparent"
+                            : "text-umber/80 border-l-4 border-transparent"
                     )}
                 >
                     <div className="flex items-center justify-between gap-2">

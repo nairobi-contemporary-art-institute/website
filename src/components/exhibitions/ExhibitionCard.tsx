@@ -56,7 +56,7 @@ export function ExhibitionCard({ exhibition, locale, variant = 'default' }: Exhi
                             {formatExhibitionDate(exhibition.startDate, exhibition.endDate, locale)}
                         </p>
                         {exhibition.location && (
-                            <p className="text-xs capitalize tracking-widest text-umber/40 mt-2">
+                            <p className="text-xs capitalize tracking-widest text-umber/80 mt-2">
                                 {getLocalizedValue(exhibition.location, locale)}
                             </p>
                         )}
@@ -90,7 +90,7 @@ export function ExhibitionCard({ exhibition, locale, variant = 'default' }: Exhi
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                 ) : (
-                    <div className="w-full aspect-[4/5] flex items-center justify-center text-umber/20">
+                    <div className="w-full aspect-[4/5] flex items-center justify-center text-umber/80">
                         {t('noImage')}
                     </div>
                 )}
@@ -104,7 +104,7 @@ export function ExhibitionCard({ exhibition, locale, variant = 'default' }: Exhi
                     {title || t('untitled')}
                 </h2>
                 {artistNames.length > 0 && (
-                    <p className="text-sm text-umber/60 font-normal">
+                    <p className="text-sm text-umber/80 font-normal">
                         {artistNames.join(', ')}
                     </p>
                 )}
@@ -112,7 +112,7 @@ export function ExhibitionCard({ exhibition, locale, variant = 'default' }: Exhi
                     {formatExhibitionDate(exhibition.startDate, exhibition.endDate, locale)}
                 </p>
                 {exhibition.location && (
-                    <p className="text-[10px] capitalize tracking-widest text-umber/40 mt-1">
+                    <p className="text-[10px] capitalize tracking-widest text-umber/80 mt-1">
                         {getLocalizedValue(exhibition.location, locale)}
                     </p>
                 )}

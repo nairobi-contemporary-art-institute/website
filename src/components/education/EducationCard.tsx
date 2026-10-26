@@ -54,7 +54,7 @@ export function EducationCard({ program, locale }: EducationCardProps) {
                         blurDataURL={program.mainImage.asset?.metadata?.lqip}
                     />
                 ) : (
-                    <div className="absolute inset-0 flex items-center justify-center text-umber/20 font-mono text-xs">
+                    <div className="absolute inset-0 flex items-center justify-center text-umber/80 font-mono text-xs">
                         NO IMAGE
                     </div>
                 )}
@@ -82,7 +82,7 @@ export function EducationCard({ program, locale }: EducationCardProps) {
                 </h3>
 
                 {program.excerpt && (
-                    <div className="text-sm text-charcoal/60 line-clamp-3 mt-auto leading-relaxed prose-sm">
+                    <div className="text-sm text-charcoal/70 line-clamp-3 mt-auto leading-relaxed prose-sm">
                         {typeof getLocalizedValue(program.excerpt, locale) === 'string' ? (
                             <p>{getLocalizedValue(program.excerpt, locale) as unknown as string}</p>
                         ) : (

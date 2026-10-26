@@ -7,7 +7,7 @@ export function PageTemplates() {
     return (
         <div className="space-y-16">
             <header>
-                <h2 className="text-xs font-bold text-umber/40 capitalize tracking-[0.4em] mb-4">Section 13</h2>
+                <h2 className="text-xs font-bold text-umber/80 capitalize tracking-[0.4em] mb-4">Section 13</h2>
                 <h1 className="text-5xl md:text-7xl font-bold text-charcoal capitalize tracking-tighter mb-8">
                     Page Templates
                 </h1>
@@ -70,7 +70,7 @@ function TemplateCard({ title, type, description }: { title: string, type: strin
         <div className="bg-ivory border border-umber/10 p-6 space-y-4 hover:border-ochre/50 transition-colors">
             <div>
                 <h4 className="text-lg font-bold text-charcoal">{title}</h4>
-                <p className="text-[10px] text-umber/60 font-mono mt-1">{type}</p>
+                <p className="text-[10px] text-umber/80 font-mono mt-1">{type}</p>
             </div>
             <p className="text-sm text-umber/80 leading-relaxed">
                 {description}

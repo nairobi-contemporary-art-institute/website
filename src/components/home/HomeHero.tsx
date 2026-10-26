@@ -82,7 +82,7 @@ export function HomeHero({ exhibition, featuredCards, locale }: HomeHeroProps) {
                 </Link>
 
                 <div className="flex flex-col">
-                    <p className="text-[20px] font-black tracking-tighter capitalize mb-0.5 text-charcoal/40 leading-[0.85]">
+                    <p className="text-[20px] font-black tracking-tighter capitalize mb-0.5 text-charcoal/70 leading-[0.85]">
                         {exhibition && new Date(exhibition.startDate) > new Date() ? 'Upcoming Exhibition' : 'Current Exhibition'}
                     </p>
                     <Link href={`/${locale}/exhibitions/${exhibitionSlug}`} className="group inline-block">
@@ -96,10 +96,10 @@ export function HomeHero({ exhibition, featuredCards, locale }: HomeHeroProps) {
                     <div className="flex flex-col gap-1.5">
                         {exhibition?.startDate && (
                             <div className="flex flex-col">
-                                <span className="text-[10px] font-bold tracking-[0.4em] capitalize text-charcoal/60 mb-0.5">Opens</span>
+                                <span className="text-[10px] font-bold tracking-[0.4em] capitalize text-charcoal/70 mb-0.5">Opens</span>
                                 <span className="text-2xl md:text-3xl lg:text-[32px] font-black tracking-tighter leading-none text-charcoal">
                                     {new Date(exhibition.startDate).toLocaleDateString(locale, { month: 'long', day: 'numeric', year: 'numeric' })}
-                                    <span className="ml-4 text-charcoal/30 text-xl md:text-2xl lg:text-[24px]">
+                                    <span className="ml-4 text-charcoal/70 text-xl md:text-2xl lg:text-[24px]">
                                         {new Date(exhibition.startDate).toLocaleTimeString(locale, { hour: 'numeric', minute: '2-digit' })}
                                     </span>
                                 </span>
@@ -108,7 +108,7 @@ export function HomeHero({ exhibition, featuredCards, locale }: HomeHeroProps) {
 
                         {exhibition?.endDate && (
                             <div className="flex flex-col gap-0.5">
-                                <span className="text-[10px] font-bold tracking-[0.4em] capitalize text-charcoal/60">Through</span>
+                                <span className="text-[10px] font-bold tracking-[0.4em] capitalize text-charcoal/70">Through</span>
                                 <span
                                     className="text-[20px] font-black tracking-tighter leading-none capitalize text-charcoal"
                                 >
@@ -156,7 +156,7 @@ export function HomeHero({ exhibition, featuredCards, locale }: HomeHeroProps) {
                                     >
                                         {cardTitle}
                                     </h3>
-                                    <p className="text-[10px] font-bold tracking-[0.2em] capitalize text-charcoal/40 group-hover:text-charcoal transition-colors">
+                                    <p className="text-[10px] font-bold tracking-[0.2em] capitalize text-charcoal/70 group-hover:text-charcoal transition-colors">
                                         {cardSubtitle}
                                     </p>
                                 </div>

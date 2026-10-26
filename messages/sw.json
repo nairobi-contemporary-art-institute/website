@@ -133,6 +133,9 @@
             "currentlyOnDisplay": "Inaonyeshwa sasa",
             "outOnLoan": "Imekopeshwa",
             "artistsAZ": "Wasanii A-Z",
+            "byArtist": "Kwa Msanii",
+            "workLabel": "kazi",
+            "worksLabel": "kazi",
             "searchPlaceholder": "Tafuta mkusanyiko",
             "noFilteredResults": "Hakuna vitu vilivyopatikana vinavyolingana na machujio yako.",
             "clearFilters": "Futa machujio yote",
@@ -141,16 +144,18 @@
             "sortRandom": "Nasibu",
             "sortAZ": "Alfabeti",
             "shuffleWorks": "Changanya",
-            "resetFilters": "Futa Machujio"
+            "resetFilters": "Futa Machujio",
+            "viewWorks": "Tazama Kazi",
+            "hideWorks": "Ficha Kazi"
         },
         "channel": {
             "title": "Chaneli",
             "description": "Habari, mahojiano, na maarifa kutoka NCAI.",
             "noContent": "Hakuna maudhui yaliyopatikana",
             "filterAll": "Zote",
-            "filterWatch": "Tazama (Video)",
-            "filterListen": "Sikiliza (Audio)",
-            "filterRead": "Soma (Makala)"
+            "filterFilm": "Filamu",
+            "filterAudio": "Sauti",
+            "filterText": "Maandishi"
         },
         "education": {
             "title": "Elimu",

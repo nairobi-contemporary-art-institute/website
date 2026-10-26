@@ -28,9 +28,10 @@ interface WorkCarouselProps {
     locale: string
     artistName: string
     onOpenGrid: () => void
+    intervalMs?: number
 }
 
-export function WorkCarousel({ works, locale, artistName, onOpenGrid }: WorkCarouselProps) {
+export function WorkCarousel({ works, locale, artistName, onOpenGrid, intervalMs = 4000 }: WorkCarouselProps) {
     const [currentIndex, setCurrentIndex] = useState(0)
     const [direction, setDirection] = useState(0)
     const [isPaused, setIsPaused] = useState(false)
@@ -49,10 +50,10 @@ export function WorkCarousel({ works, locale, artistName, onOpenGrid }: WorkCaro
 
         const timer = setInterval(() => {
             next()
-        }, 4000)
+        }, intervalMs)
 
         return () => clearInterval(timer)
-    }, [currentIndex, isPaused, works])
+    }, [currentIndex, isPaused, works, intervalMs])
 
     if (!works || works.length === 0) return null
 
@@ -178,7 +179,7 @@ export function WorkCarousel({ works, locale, artistName, onOpenGrid }: WorkCaro
                         className="p-1 hover:bg-charcoal/5 transition-colors mb-2 block"
                         title="Grid"
                     >
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-charcoal/60">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-charcoal/70">
                             <rect width="4" height="4" fill="currentColor" />
                             <rect x="7" width="4" height="4" fill="currentColor" />
                             <rect x="14" width="4" height="4" fill="currentColor" />
@@ -198,7 +199,7 @@ export function WorkCarousel({ works, locale, artistName, onOpenGrid }: WorkCaro
                         <p className="block max-w-[75ch]">{medium}</p>
                         <p className="block">{getLocalizedValueAsString(currentWork.dimensions, locale)}</p>
                         {currentWork.edition && (
-                            <p className="text-[10px] text-charcoal/60 pt-1 max-w-[75ch]">{getLocalizedValueAsString(currentWork.edition, locale)}</p>
+                            <p className="text-[10px] text-charcoal/70 pt-1 max-w-[75ch]">{getLocalizedValueAsString(currentWork.edition, locale)}</p>
                         )}
                     </div>
 

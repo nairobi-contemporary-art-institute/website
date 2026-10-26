@@ -37,7 +37,7 @@ export function WrittenPiece({ title, content, author, locale, className }: Writ
 
                              {author && (
                                 <footer className="pt-8 flex justify-end">
-                                    <p className="text-sm font-black italic uppercase tracking-[0.2em] text-charcoal/60">
+                                    <p className="text-sm font-black italic uppercase tracking-[0.2em] text-charcoal/70">
                                         — {author} —
                                     </p>
                                 </footer>

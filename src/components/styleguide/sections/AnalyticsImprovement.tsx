@@ -6,7 +6,7 @@ export function AnalyticsImprovement() {
     return (
         <div className="space-y-16">
             <header>
-                <h2 className="text-xs font-bold text-umber/40 capitalize tracking-[0.4em] mb-4">Section 15</h2>
+                <h2 className="text-xs font-bold text-umber/80 capitalize tracking-[0.4em] mb-4">Section 15</h2>
                 <h1 className="text-5xl md:text-7xl font-bold text-charcoal capitalize tracking-tighter mb-8">
                     Analytics & Improvement
                 </h1>
@@ -25,13 +25,13 @@ export function AnalyticsImprovement() {
                     <div className="grid md:grid-cols-2 gap-8 pt-4">
                         <div className="space-y-4">
                             <h4 className="text-sm font-bold text-charcoal">Utility Layer: `src/lib/analytics.ts`</h4>
-                            <p className="text-xs text-umber/60 leading-relaxed">
+                            <p className="text-xs text-umber/80 leading-relaxed">
                                 A specialized abstraction module that ensures interactions (such as the `trackEvent` properties inside the Search Modal) are correctly piped and standardized before transmitting.
                             </p>
                         </div>
                         <div className="space-y-4">
                             <h4 className="text-sm font-bold text-charcoal">Mailing Operations: `listmonk.ts`</h4>
-                            <p className="text-xs text-umber/60 leading-relaxed">
+                            <p className="text-xs text-umber/80 leading-relaxed">
                                 A dedicated integration tracking user subscription rates and campaign performance via self-hosted Listmonk infrastructure. Handled securely through `src/app/api/newsletter/subscribe/route.ts`.
                             </p>
                         </div>

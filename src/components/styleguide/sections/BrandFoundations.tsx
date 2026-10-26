@@ -7,7 +7,7 @@ export function BrandFoundations() {
     return (
         <div className="space-y-16">
             <header>
-                <h2 className="text-xs font-bold text-umber/40 capitalize tracking-[0.4em] mb-4">Section 02</h2>
+                <h2 className="text-xs font-bold text-umber/80 capitalize tracking-[0.4em] mb-4">Section 02</h2>
                 <h1 className="text-5xl md:text-7xl font-bold text-charcoal capitalize tracking-tighter mb-8">
                     Brand foundations
                 </h1>
@@ -18,7 +18,7 @@ export function BrandFoundations() {
 
             <section className="bg-charcoal p-12 md:p-20 text-ivory relative overflow-hidden">
                 <div className="relative z-10 max-w-2xl">
-                    <h3 className="text-xs font-bold capitalize tracking-[0.3em] mb-8 text-ivory/40">Philosophy</h3>
+                    <h3 className="text-xs font-bold capitalize tracking-[0.3em] mb-8 text-ivory/70">Philosophy</h3>
                     <p className="text-3xl font-light italic leading-snug mb-8">
                         "The interface honors the city's layered visual culture while maintaining the breathable, gallery-quality minimalism."
                     </p>
@@ -43,7 +43,7 @@ export function BrandFoundations() {
                             <span className="text-5xl font-bold tracking-tighter capitalize pt-3">NCAI</span>
                         </div>
                     </div>
-                    <p className="text-sm text-umber/70 leading-relaxed">
+                    <p className="text-sm text-umber/80 leading-relaxed">
                         The primary identity is a synthesis of typographic authority and architectural abstraction. The three vertical bars represent Nairobi's rising skyline and the institutional pillars of the institute, while the bold wordmark maintains a museum-grade presence.
                     </p>
                 </div>
@@ -53,7 +53,7 @@ export function BrandFoundations() {
                         <div className="aspect-square bg-umber/5" />
                         <div className="aspect-square bg-umber/10" />
                     </div>
-                    <p className="text-sm text-umber/70 leading-relaxed">
+                    <p className="text-sm text-umber/80 leading-relaxed">
                         Exhibition photography should prioritize scale, texture, and silence. We use large bleed formats and generous negative space to simulate the physical gallery experience.
                     </p>
                 </div>

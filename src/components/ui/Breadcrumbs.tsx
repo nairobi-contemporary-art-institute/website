@@ -30,7 +30,7 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
                             {item.href && !isLast ? (
                                 <Link
                                     href={item.href}
-                                    className="text-charcoal/50 hover:text-ochre transition-colors"
+                                    className="text-charcoal/70 hover:text-ochre transition-colors"
                                 >
                                     {item.label}
                                 </Link>
@@ -39,7 +39,7 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
                                     {item.label}
                                 </span>
                             )}
-                            {!isLast && <span className="text-charcoal/25" aria-hidden="true">/</span>}
+                            {!isLast && <span className="text-charcoal/70" aria-hidden="true">/</span>}
                         </li>
                     )
                 })}

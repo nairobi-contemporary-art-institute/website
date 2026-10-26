@@ -66,7 +66,7 @@ export default async function CollectionItemPage({ params }: { params: Promise<{
 
     return (
         <GridSystem unstable_useContainer>
-            <main className="pt-32 pb-24">
+            <div className="pt-32 pb-24">
                 <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-start">
                     {/* Left: Image */}
                     <div className="space-y-6">
@@ -87,7 +87,7 @@ export default async function CollectionItemPage({ params }: { params: Promise<{
                             )}
                         </div>
                         {work.mainImage?.caption && (
-                            <div className="text-xs text-charcoal/50 leading-relaxed border-l border-charcoal/20 pl-4 italic">
+                            <div className="text-xs text-charcoal/70 leading-relaxed border-l border-charcoal/20 pl-4 italic">
                                 {getLocalizedValue(work.mainImage.caption, locale)}
                             </div>
                         )}
@@ -109,32 +109,32 @@ export default async function CollectionItemPage({ params }: { params: Promise<{
 
                         <div className="grid grid-cols-2 gap-x-8 gap-y-6 py-8 border-y border-charcoal/10">
                             <div>
-                                <p className="text-[10px] tracking-widest capitalize font-bold text-charcoal/40 mb-1">{t('year')}</p>
+                                <p className="text-[10px] tracking-widest capitalize font-bold text-charcoal/70 mb-1">{t('year')}</p>
                                 <p className="text-sm text-charcoal">{work.creationDate || t('notAvailable')}</p>
                             </div>
                             <div>
-                                <p className="text-[10px] tracking-widest capitalize font-bold text-charcoal/40 mb-1">{t('medium')}</p>
+                                <p className="text-[10px] tracking-widest capitalize font-bold text-charcoal/70 mb-1">{t('medium')}</p>
                                 <p className="text-sm text-charcoal">{work.medium || t('notAvailable')}</p>
                             </div>
                             <div>
-                                <p className="text-[10px] tracking-widest capitalize font-bold text-charcoal/40 mb-1">{t('dimensions')}</p>
+                                <p className="text-[10px] tracking-widest capitalize font-bold text-charcoal/70 mb-1">{t('dimensions')}</p>
                                 <p className="text-sm text-charcoal">{work.dimensions || t('notAvailable')}</p>
                             </div>
                             {work.edition && (
                                 <div>
-                                    <p className="text-[10px] tracking-widest capitalize font-bold text-charcoal/40 mb-1">{t('edition')}</p>
+                                    <p className="text-[10px] tracking-widest capitalize font-bold text-charcoal/70 mb-1">{t('edition')}</p>
                                     <p className="text-sm text-charcoal">{work.edition}</p>
                                 </div>
                             )}
                             {work.acquisitionDate && (
                                 <div>
-                                    <p className="text-[10px] tracking-widest capitalize font-bold text-charcoal/40 mb-1">{t('acquisitionDate')}</p>
+                                    <p className="text-[10px] tracking-widest capitalize font-bold text-charcoal/70 mb-1">{t('acquisitionDate')}</p>
                                     <p className="text-sm text-charcoal">{work.acquisitionDate}</p>
                                 </div>
                             )}
                             {work.creditLine && (
                                 <div className="col-span-2 mt-2">
-                                    <p className="text-[10px] tracking-widest capitalize font-bold text-charcoal/40 mb-1">{t('creditLine')}</p>
+                                    <p className="text-[10px] tracking-widest capitalize font-bold text-charcoal/70 mb-1">{t('creditLine')}</p>
                                     <p className="text-sm text-charcoal italic">{getLocalizedValue(work.creditLine, locale)}</p>
                                 </div>
                             )}
@@ -151,7 +151,7 @@ export default async function CollectionItemPage({ params }: { params: Promise<{
                                 {work.tags.map((tag: any) => (
                                     <span
                                         key={tag._id}
-                                        className="inline-flex items-center px-2 py-1 bg-charcoal/5 text-charcoal/60 text-[10px] tracking-wider font-bold capitalize"
+                                        className="inline-flex items-center px-2 py-1 bg-charcoal/5 text-charcoal/70 text-[10px] tracking-wider font-bold capitalize"
                                     >
                                         {getLocalizedValue(tag.title, locale)}
                                     </span>
@@ -160,7 +160,7 @@ export default async function CollectionItemPage({ params }: { params: Promise<{
                         )}
                     </div>
                 </div>
-            </main>
+            </div>
         </GridSystem>
     )
 }

@@ -49,20 +49,20 @@ export default async function ArtistsPage({ params }: Props) {
     return (
         <div className="bg-[#0A0A0A] min-h-screen">
             <GridSystem unstable_useContainer>
-                <main className="page-header-padding pb-24">
+                <div className="page-header-padding pb-24">
                     <header className="mb-24">
                         <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-white leading-none uppercase">
                             {title}
                         </h1>
                         {description && (
-                            <div className="mt-12 text-xl md:text-2xl text-white/40 max-w-3xl leading-relaxed font-light">
+                            <div className="mt-12 text-xl md:text-2xl text-white/70 max-w-3xl leading-relaxed font-light">
                                 <PortableText value={description} locale={locale} />
                             </div>
                         )}
                     </header>
 
                     <ArtistIndex artists={artists} locale={locale} />
-                </main>
+                </div>
             </GridSystem>
         </div>
     )

@@ -44,7 +44,7 @@ export function ResourceGallery({ resources, locale }: ResourceGalleryProps) {
         <section id="resources" className="py-24 bg-white">
             <div className="container mx-auto px-6">
                 <div className="flex flex-col mb-16">
-                    <span className="text-[10px] uppercase tracking-[0.4em] text-ochre font-bold mb-4">
+                    <span className="text-[10px] uppercase tracking-[0.4em] text-ochre-dark font-bold mb-4">
                         {t('subtitle')}
                     </span>
                     <h2 className="text-4xl md:text-5xl font-light tracking-tight text-charcoal mb-6">
@@ -71,14 +71,14 @@ export function ResourceGallery({ resources, locale }: ResourceGalleryProps) {
                                         {title}
                                     </h3>
                                     <div className="flex items-center space-x-2 mt-1">
-                                        <span className="text-[10px] uppercase tracking-widest text-stone-400 font-bold">
+                                        <span className="text-[10px] uppercase tracking-widest text-stone-600 font-bold">
                                             {t(`types.${resource.type}`)}
                                             {ageRange && ` — ${ageRange}`}
                                         </span>
                                         {exhTitle && (
                                             <>
                                                 <span className="text-[10px] text-stone-300">•</span>
-                                                <span className="text-[10px] uppercase tracking-widest text-stone-400 font-medium italic">
+                                                <span className="text-[10px] uppercase tracking-widest text-stone-600 font-medium italic">
                                                     {exhTitle}
                                                 </span>
                                             </>
@@ -87,9 +87,13 @@ export function ResourceGallery({ resources, locale }: ResourceGalleryProps) {
                                 </div>
 
                                 {/* Square Card with Hover Reveals */}
-                                <div 
-                                    className="relative aspect-square bg-stone-100 overflow-hidden cursor-pointer group/card"
+                                <div
+                                    role="button"
+                                    tabIndex={0}
+                                    aria-label={`View ${title}`}
+                                    className="relative aspect-square bg-stone-100 overflow-hidden cursor-pointer group/card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                                     onClick={() => setSelectedResource(resource)}
+                                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedResource(resource); } }}
                                 >
                                     {resource.coverImage && (
                                         <Image

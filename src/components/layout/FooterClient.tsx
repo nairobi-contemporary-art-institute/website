@@ -67,7 +67,7 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
             ],
         },
         {
-            title: 'Learn',
+            title: 'Education',
             links: [
                 { label: 'Academy', url: '/education' },
                 { label: 'Resources', url: '/education#resources' },
@@ -148,11 +148,11 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
                     <div className="lg:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
                         {displayCategories.map((category, index) => (
                             <div key={`${category.title}-${index}`} className="flex flex-col h-full">
-                                <h4 className="text-sm font-bold mb-6 text-white min-h-[1.5rem]">
+                                <h2 className="text-sm font-bold mb-6 text-white min-h-[1.5rem]">
                                     {category.title}
-                                </h4>
+                                </h2>
                                 <ul className="space-y-3 flex-grow">
-                                    {category.links.map((link, linkIndex) => (
+                                    {category.links.filter(link => link?.url).map((link, linkIndex) => (
                                          <li key={`${link.label}-${link.url}-${linkIndex}`}>
                                              <Link
                                                  href={link.url}
@@ -180,7 +180,7 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
                             <Link
                                 key={`${link.label}-${link.url}-${idx}`}
                                 href={link.url}
-                                className="text-sun-bleached-paper/40 hover:text-white transition-colors duration-200"
+                                className="text-sun-bleached-paper/70 hover:text-white transition-colors duration-200"
                             >
                                 {link.label}
                             </Link>
@@ -191,7 +191,7 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
                     </div>
 
                     {/* Copyright */}
-                    <p className="text-[11px] font-normal text-sun-bleached-paper/30">
+                    <p className="text-[11px] font-normal text-sun-bleached-paper/70">
                         {copyrightText || `© ${currentYear} Nairobi Contemporary Art Institute`}
                     </p>
                 </div>

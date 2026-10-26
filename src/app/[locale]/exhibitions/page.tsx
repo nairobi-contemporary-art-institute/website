@@ -78,11 +78,12 @@ export default async function ExhibitionsPage({ params }: Props) {
                 </header>
             </div>
             
-            <WhatsOnClient 
+            <WhatsOnClient
                 items={items}
                 locale={locale}
                 categories={["All", "Exhibitions"]}
                 noticeBarSettings={pageData?.noticeBar}
+                showYearNav
             />
         </div>
     )

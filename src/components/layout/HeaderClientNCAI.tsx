@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils'
 import { gsap } from '@/lib/gsap'
 import { useGSAP } from '@gsap/react'
 import { MegaMenu } from './MegaMenu'
+import { FreeEntryBadge, type FreeEntryBadgeProps } from './FreeEntryBadge'
 
 interface HeaderClientProps {
     locale: string;
@@ -25,9 +26,10 @@ interface HeaderClientProps {
     }>;
     utilityLinks?: Array<{ label: string; href: string }>;
     featuredImages?: any[];
+    freeEntryBadge?: FreeEntryBadgeProps | null;
 }
 
-export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utilityLinks = [], featuredImages = [] }: HeaderClientProps) {
+export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utilityLinks = [], featuredImages = [], freeEntryBadge }: HeaderClientProps) {
     const t = useTranslations('HomePage')
     const pathname = usePathname()
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -186,7 +188,7 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
         },
         {
             href: '/education',
-            label: 'Learn',
+            label: 'Education',
             columns: [
                 {
                     title: 'Engagement', links: [
@@ -234,21 +236,23 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
     // 2. The user is hovering over the header bar
     // 3. We are on an artist portrait page
     const isArtistPortrait = pathname?.includes('/artist-portrait-')
-    const isArtist = pathname?.includes('/artists/')
+    const isArtist = pathname?.includes('/artists')
     const isExhibition = pathname?.includes('/exhibitions/')
     const isChannel = pathname?.includes('/channel')
     const isCollection = pathname?.includes('/collection')
-    
+    // Dark-background listing pages (not detail routes) that also need the dark header treatment
+    const isWhatsOn = pathname?.includes('/whats-on')
+
     // Header turns dark (white text -> dark background)
-    const isDark = activeMenuIndex !== null || isHoveringHeader || isArtistPortrait || isArtist || isExhibition || isChannel || isCollection || isMobileMenuOpen
-    
+    const isDark = isArtistPortrait || isArtist || isExhibition || isChannel || isCollection || isWhatsOn || isMobileMenuOpen
+
     // Header becomes solid (non-transparent)
-    const isSolid = isScrolled || isMobileMenuOpen || activeMenuIndex !== null || isArtistPortrait || isArtist || isExhibition || isChannel || isCollection
+    const isSolid = isScrolled || isMobileMenuOpen || activeMenuIndex !== null || isArtistPortrait || isArtist || isExhibition || isChannel || isCollection || isWhatsOn
 
     return (
         <>
             {/* The header is fixed, meaning it overlays the hero section like IMMA */}
-                <div
+                <header
                     ref={headerRef}
                     className={cn(
                         "fixed top-0 left-0 right-0 z-[100] flex flex-col w-full transition-all duration-500 ease-in-out",
@@ -271,14 +275,14 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                     </div>
                 </div>
 
-                <header
+                <div
                     className={cn(
                         "transition-all duration-300",
-                        isDark 
-                            ? "bg-background-dark text-white shadow-sm" 
-                            : isSolid 
+                        isDark
+                            ? "bg-background-dark text-white shadow-sm"
+                            : isSolid
                                 ? "bg-white text-charcoal shadow-sm"
-                                : "bg-transparent text-ivory" 
+                                : "bg-transparent text-charcoal"
                     )}
                     onMouseEnter={() => setIsHoveringHeader(true)}
                     onMouseLeave={() => setIsHoveringHeader(false)}
@@ -290,7 +294,7 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                                 href="/"
                                 className={cn(
                                     "flex items-center group relative h-full w-full transition-colors duration-300",
-                                    isDark ? "text-white" : isSolid ? "text-charcoal" : "text-ivory"
+                                    isDark ? "text-white" : isSolid ? "text-charcoal" : "text-charcoal"
                                 )}
                                 aria-label="NCAI Home"
                                 onMouseEnter={closeMegaMenu}
@@ -340,7 +344,8 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
 
                             {/* Bottom Tier Links (Large) */}
                             <div className="flex justify-end items-center gap-8">
-                                <nav className="flex items-center gap-8">
+                                {freeEntryBadge && <FreeEntryBadge {...freeEntryBadge} />}
+                                <nav aria-label="Primary" className="flex items-center gap-8">
                                     {displayLinks.map((link, idx) => (
                                         <Link
                                             key={`${link.label}-${link.href}-${idx}`}
@@ -351,7 +356,7 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                                             {link.label}
                                             <span className={cn(
                                                 "absolute bottom-0 left-0 h-0.5 transition-all ease-in-out duration-300",
-                                                isDark ? "bg-white" : isSolid ? "bg-charcoal" : "bg-ivory",
+                                                isDark ? "bg-white" : isSolid ? "bg-charcoal" : "bg-charcoal",
                                                 activeMenuIndex === idx ? "w-full opacity-100" : "w-0 opacity-0 group-hover:w-full group-hover:opacity-100"
                                             )} />
                                         </Link>
@@ -430,7 +435,7 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                         "fixed inset-0 bg-background-dark text-white z-40 flex flex-col pt-44 px-6 pb-12 transition-all duration-500 ease-in-out md:hidden overflow-y-auto",
                         isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
                     )}>
-                        <nav className="flex flex-col gap-10">
+                        <nav aria-label="Mobile" className="flex flex-col gap-10">
                             {displayLinks.map((link, i) => (
                                 <div key={`${link.label}-${link.href}-${i}`} className="flex flex-col gap-4">
                                     <Link
@@ -473,8 +478,8 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                             <LanguageSwitcher />
                         </div>
                     </div>
-                </header>
-            </div>
+                </div>
+            </header>
 
             <SearchModal
                 isOpen={isSearchOpen}

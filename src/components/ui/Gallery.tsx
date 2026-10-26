@@ -60,7 +60,7 @@ export function Gallery({ images, locale }: GalleryProps) {
                                 />
                             </div>
                             {localizedCaption && (
-                                <div className="max-w-md text-xs text-umber/50 leading-relaxed">
+                                <div className="max-w-md text-xs text-umber/80 leading-relaxed">
                                     <ArtCaption content={localizedCaption} />
                                 </div>
                             )}
@@ -111,7 +111,7 @@ export function Gallery({ images, locale }: GalleryProps) {
                                 />
                             </div>
                             {localizedCaption && (
-                                <div className="max-w-md text-xs text-umber/50 leading-relaxed">
+                                <div className="max-w-md text-xs text-umber/80 leading-relaxed">
                                     <ArtCaption content={localizedCaption} />
                                 </div>
                             )}

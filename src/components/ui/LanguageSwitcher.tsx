@@ -101,7 +101,7 @@ export function LanguageSwitcher() {
                             className="absolute top-full right-[-1.5rem] md:right-[-3rem] lg:right-[-3rem] mt-3 pt-2 group z-[100]"
                         >
                             <div className="bg-background-dark/95 backdrop-blur-md shadow-2xl border border-white/10 py-3 min-w-[140px] rounded-none overflow-hidden flex flex-col">
-                                <div className="px-4 py-2 mb-1 text-[7px] tracking-[0.2em] text-white/40 border-b border-white/5 uppercase font-black">
+                                <div className="px-4 py-2 mb-1 text-[7px] tracking-[0.2em] text-white/70 border-b border-white/5 uppercase font-black">
                                     More Languages (Coming Soon)
                                 </div>
                                 {otherLocales.map((lang) => (
@@ -110,7 +110,7 @@ export function LanguageSwitcher() {
                                         className="px-4 py-2.5 text-left transition-all capitalize tracking-widest text-[10px] text-white/20 cursor-not-allowed flex items-center justify-between group/lang"
                                     >
                                         <span>{lang.title}</span>
-                                        <span className="text-[6px] font-black uppercase tracking-tighter opacity-0 group-hover/lang:opacity-100 transition-opacity text-white/40">Soon</span>
+                                        <span className="text-[6px] font-black uppercase tracking-tighter opacity-0 group-hover/lang:opacity-100 transition-opacity text-white/70">Soon</span>
                                     </div>
                                 ))}
                             </div>

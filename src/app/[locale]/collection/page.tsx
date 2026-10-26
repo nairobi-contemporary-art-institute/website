@@ -54,7 +54,7 @@ export default async function CollectionPage({ params }: Props) {
     return (
         <div className="bg-[#0A0A0A] min-h-screen text-white">
             <GridSystem unstable_useContainer>
-                <main className="pt-64 pb-24">
+                <div className="pt-64 pb-24">
                     <header className="mb-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                         <div>
                             <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-white leading-none uppercase">
@@ -73,7 +73,7 @@ export default async function CollectionPage({ params }: Props) {
                         items={allWorks} 
                         artists={allArtists}
                     />
-                </main>
+                </div>
             </GridSystem>
         </div>
     )

@@ -81,7 +81,7 @@ export function PDFViewerModal({ isOpen, onClose, fileUrl, title }: PDFViewerMod
                         {/* Custom Header - Clinical Luxury */}
                         <div className="bg-charcoal text-white px-6 py-4 flex items-center justify-between border-b border-white/10 shrink-0">
                             <div className="flex flex-col min-w-0 flex-1 mr-4">
-                                <span className="text-[10px] uppercase tracking-[0.3em] text-stone-400 font-bold mb-1">Resource Viewer</span>
+                                <span className="text-[10px] uppercase tracking-[0.3em] text-stone-600 font-bold mb-1">Resource Viewer</span>
                                 <h3 className={cn(
                                     "text-sm font-light tracking-wide truncate transition-all duration-300",
                                     viewMode === 'standard' ? "max-w-[100px] md:max-w-[200px] lg:max-w-[300px]" : "max-w-[150px] md:max-w-xl"
@@ -97,7 +97,7 @@ export function PDFViewerModal({ isOpen, onClose, fileUrl, title }: PDFViewerMod
                                         onClick={() => setViewMode('standard')}
                                         className={cn(
                                             "px-3 py-1 text-[9px] uppercase tracking-widest font-bold transition-all duration-300",
-                                            viewMode === 'standard' ? "bg-white text-charcoal" : "text-stone-400 hover:text-white"
+                                            viewMode === 'standard' ? "bg-white text-charcoal" : "text-stone-600 hover:text-white"
                                         )}
                                     >
                                         Standard
@@ -106,7 +106,7 @@ export function PDFViewerModal({ isOpen, onClose, fileUrl, title }: PDFViewerMod
                                         onClick={() => setViewMode('wide')}
                                         className={cn(
                                             "px-3 py-1 text-[9px] uppercase tracking-widest font-bold transition-all duration-300",
-                                            viewMode === 'wide' ? "bg-white text-charcoal" : "text-stone-400 hover:text-white"
+                                            viewMode === 'wide' ? "bg-white text-charcoal" : "text-stone-600 hover:text-white"
                                         )}
                                     >
                                         Wide
@@ -115,7 +115,7 @@ export function PDFViewerModal({ isOpen, onClose, fileUrl, title }: PDFViewerMod
                                         onClick={() => setViewMode('full')}
                                         className={cn(
                                             "px-3 py-1 text-[9px] uppercase tracking-widest font-bold transition-all duration-300",
-                                            viewMode === 'full' ? "bg-white text-charcoal" : "text-stone-400 hover:text-white"
+                                            viewMode === 'full' ? "bg-white text-charcoal" : "text-stone-600 hover:text-white"
                                         )}
                                     >
                                         Full

@@ -85,7 +85,7 @@ export function CalendarView({ events, locale }: CalendarViewProps) {
             {/* Weekdays */}
             <div className="grid grid-cols-7 border-b bg-stone-50">
                 {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
-                    <div key={d} className="py-3 text-center text-[10px] capitalize tracking-[0.2em] font-bold text-charcoal/40">
+                    <div key={d} className="py-3 text-center text-[10px] capitalize tracking-[0.2em] font-bold text-charcoal/70">
                         {d}
                     </div>
                 ))}
@@ -107,7 +107,7 @@ export function CalendarView({ events, locale }: CalendarViewProps) {
                                     "text-sm font-mono",
                                     item.date?.toDateString() === new Date().toDateString()
                                         ? "w-8 h-8 flex items-center justify-center bg-charcoal text-off-white"
-                                        : "text-charcoal/40"
+                                        : "text-charcoal/70"
                                 )}>
                                     {item.day}
                                 </span>

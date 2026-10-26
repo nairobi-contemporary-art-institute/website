@@ -126,7 +126,7 @@ export function TeamGrid({ people, locale }: TeamGridProps) {
                     {isExpanded && (
                         <button 
                             onClick={() => setExpandedId(null)}
-                            className="absolute top-8 right-8 text-charcoal/40 hover:text-umber transition-colors"
+                            className="absolute top-8 right-8 text-charcoal/70 hover:text-umber transition-colors"
                         >
                             <X className="w-5 h-5" />
                         </button>
@@ -137,7 +137,7 @@ export function TeamGrid({ people, locale }: TeamGridProps) {
                             {name}
                         </h3>
                         {person.roles && person.roles.length > 0 && (
-                            <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-umber/60 leading-relaxed">
+                            <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-umber/80 leading-relaxed">
                                 {person.roles.join(' / ')}
                             </p>
                         )}
@@ -178,7 +178,7 @@ export function TeamGrid({ people, locale }: TeamGridProps) {
                         className={`px-6 py-2 rounded-full text-xs font-mono uppercase tracking-widest transition-all duration-300 border ${
                             activeFilter === cat.id 
                             ? 'bg-umber text-ivory border-umber shadow-lg' 
-                            : 'bg-transparent text-charcoal/40 border-charcoal/10 hover:border-umber/40'
+                            : 'bg-transparent text-charcoal/70 border-charcoal/10 hover:border-umber/40'
                         }`}
                     >
                         {cat.label}
@@ -191,7 +191,7 @@ export function TeamGrid({ people, locale }: TeamGridProps) {
                 {/* Staff Section */}
                 {staffMembers.length > 0 && (
                     <div className="space-y-12">
-                        <h2 className="text-sm font-mono uppercase tracking-[0.3em] text-charcoal/30 flex items-center gap-4">
+                        <h2 className="text-sm font-mono uppercase tracking-[0.3em] text-charcoal/70 flex items-center gap-4">
                             <span className="w-8 h-[1px] bg-charcoal/10" />
                             {tc('staff')}
                         </h2>
@@ -206,7 +206,7 @@ export function TeamGrid({ people, locale }: TeamGridProps) {
                 {/* Contributors Section */}
                 {contributors.length > 0 && (
                     <div className="space-y-12">
-                        <h2 className="text-sm font-mono uppercase tracking-[0.3em] text-charcoal/30 flex items-center gap-4">
+                        <h2 className="text-sm font-mono uppercase tracking-[0.3em] text-charcoal/70 flex items-center gap-4">
                             <span className="w-8 h-[1px] bg-charcoal/10" />
                             {tc('contributors')}
                         </h2>

@@ -24,11 +24,13 @@ interface HeaderClientProps {
     }>;
     utilityLinks?: Array<{ label: string; href: string }>;
     featuredImages?: any[];
+    freeEntryBadge?: FreeEntryBadgeProps | null;
 }
 
 import { MegaMenu } from '../MegaMenu'
+import { FreeEntryBadge, type FreeEntryBadgeProps } from '../FreeEntryBadge'
 
-export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utilityLinks = [], featuredImages = [] }: HeaderClientProps) {
+export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utilityLinks = [], featuredImages = [], freeEntryBadge }: HeaderClientProps) {
     const t = useTranslations('HomePage')
     const pathname = usePathname()
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -259,14 +261,14 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
         setActiveMenuIndex(null)
     }
 
-    const isDark = activeMenuIndex !== null || isHoveringHeader || isMobileMenuOpen
+    const isDark = isMobileMenuOpen
     const isSolid = isScrolled || isMobileMenuOpen || activeMenuIndex !== null
 
     if (isImmersive) return null
 
     return (
         <>
-            <div
+            <header
                 ref={headerRef}
                 className={cn(
                     "fixed top-0 left-0 right-0 z-50 flex flex-col w-full transition-all duration-500 ease-in-out",
@@ -287,7 +289,7 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
                         {openingStatus}
                     </div>
                 </div>
-                <header
+                <div
                     className={cn(
                         "transition-all duration-300",
                         isDark 
@@ -368,7 +370,8 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
 
                             {/* Bottom Tier Links */}
                             <div className="flex justify-end items-center gap-8">
-                                <nav className="flex items-center gap-8">
+                                {freeEntryBadge && <FreeEntryBadge {...freeEntryBadge} />}
+                                <nav aria-label="Primary" className="flex items-center gap-8">
                                     {displayLinks.map((link, idx) => (
                                         <Link
                                             key={link.href}
@@ -466,7 +469,7 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
                         "fixed inset-0 bg-background-dark text-white z-40 flex flex-col pt-44 px-6 pb-12 transition-all duration-500 ease-in-out md:hidden overflow-y-auto",
                         isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
                     )}>
-                        <nav className="flex flex-col gap-10">
+                        <nav aria-label="Mobile" className="flex flex-col gap-10">
                             {displayLinks.map((link, i) => (
                                 <div key={link.href} className="flex flex-col gap-4">
                                     <Link
@@ -509,8 +512,8 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
                             <LanguageSwitcher />
                         </div>
                     </div>
-                </header>
-            </div>
+                </div>
+            </header>
 
             <SearchModal
                 isOpen={isSearchOpen}

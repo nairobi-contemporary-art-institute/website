@@ -33,7 +33,7 @@ export function DesignTokens() {
     return (
         <div className="space-y-20">
             <header>
-                <h2 className="text-xs font-bold text-deep-umber/40 capitalize tracking-[0.4em] mb-4">Section 03</h2>
+                <h2 className="text-xs font-bold text-deep-umber/80 capitalize tracking-[0.4em] mb-4">Section 03</h2>
                 <h1 className="text-5xl md:text-7xl font-bold text-charcoal capitalize tracking-tighter mb-8">
                     Design Tokens
                 </h1>
@@ -50,11 +50,11 @@ export function DesignTokens() {
                         <div key={color.name} className="flex gap-4 items-center">
                             <div className={`w-20 h-20 shrink-0 shadow-sm ${color.class}`} />
                             <div>
-                                <h4 className="text-[10px] font-bold text-deep-umber/40 capitalize tracking-widest mb-1">{color.type}</h4>
+                                <h4 className="text-[10px] font-bold text-deep-umber/80 capitalize tracking-widest mb-1">{color.type}</h4>
                                 <h5 className="text-sm font-bold text-charcoal capitalize tracking-tighter">{color.name}</h5>
                                 <div className="mt-2 flex gap-2">
-                                    <code className="text-[10px] bg-charcoal/5 px-1.5 py-0.5 text-charcoal/60 lowercase">{color.token}</code>
-                                    <code className="text-[10px] bg-charcoal/5 px-1.5 py-0.5 text-charcoal/60">{color.hex}</code>
+                                    <code className="text-[10px] bg-charcoal/5 px-1.5 py-0.5 text-charcoal/70 lowercase">{color.token}</code>
+                                    <code className="text-[10px] bg-charcoal/5 px-1.5 py-0.5 text-charcoal/70">{color.hex}</code>
                                 </div>
                             </div>
                         </div>
@@ -66,19 +66,19 @@ export function DesignTokens() {
             <section className="space-y-12">
                 <header className="border-b border-deep-umber/10 pb-4">
                     <h3 className="text-xs font-bold text-charcoal capitalize tracking-widest mb-2">Typography Scale</h3>
-                    <p className="text-xs text-deep-umber/60 italic">NCAI uses Helvetica Neue for architectural clarity and institutional precision.</p>
+                    <p className="text-xs text-deep-umber/80 italic">NCAI uses Helvetica Neue for architectural clarity and institutional precision.</p>
                 </header>
 
                 <div className="grid lg:grid-cols-2 gap-16">
                     {/* Headings */}
                     <div className="space-y-8">
-                        <h4 className="text-[10px] font-bold text-deep-umber/40 capitalize tracking-widest border-l-2 border-ochre pl-3">Headings</h4>
+                        <h4 className="text-[10px] font-bold text-deep-umber/80 capitalize tracking-widest border-l-2 border-ochre pl-3">Headings</h4>
                         <div className="space-y-6">
                             {GEIST_HEADINGS.map(h => (
                                 <div key={h.id} className="group">
                                     <div className="flex justify-between items-end mb-1">
-                                        <span className="text-[9px] font-mono text-deep-umber/40 lowercase">text-heading-{h.id}</span>
-                                        <span className="text-[9px] font-mono text-deep-umber/40">{h.size} / {h.line}</span>
+                                        <span className="text-[9px] font-mono text-deep-umber/80 lowercase">text-heading-{h.id}</span>
+                                        <span className="text-[9px] font-mono text-deep-umber/80">{h.size} / {h.line}</span>
                                     </div>
                                     <h5
                                         className={`text-charcoal font-bold capitalize truncate text-heading-${h.id}`}
@@ -94,13 +94,13 @@ export function DesignTokens() {
                     {/* Copy & Labels */}
                     <div className="space-y-12">
                         <div className="space-y-8">
-                            <h4 className="text-[10px] font-bold text-deep-umber/40 capitalize tracking-widest border-l-2 border-rich-blue pl-3">Copy (Body)</h4>
+                            <h4 className="text-[10px] font-bold text-deep-umber/80 capitalize tracking-widest border-l-2 border-rich-blue pl-3">Copy (Body)</h4>
                             <div className="space-y-8">
                                 {GEIST_COPY.map(c => (
                                     <div key={c.id}>
                                         <div className="flex justify-between items-end mb-2">
-                                            <span className="text-[9px] font-mono text-deep-umber/40 lowercase">text-copy-{c.id}</span>
-                                            <span className="text-[9px] font-mono text-deep-umber/40 capitalize">{c.size} / {c.line}</span>
+                                            <span className="text-[9px] font-mono text-deep-umber/80 lowercase">text-copy-{c.id}</span>
+                                            <span className="text-[9px] font-mono text-deep-umber/80 capitalize">{c.size} / {c.line}</span>
                                         </div>
                                         <p
                                             className={`text-deep-umber/90 leading-relaxed text-copy-${c.id}`}
@@ -113,14 +113,14 @@ export function DesignTokens() {
                         </div>
 
                         <div className="pt-8 border-t border-deep-umber/5">
-                            <h4 className="text-[10px] font-bold text-deep-umber/40 capitalize tracking-widest border-l-2 border-charcoal pl-3 mb-6">Font Families</h4>
+                            <h4 className="text-[10px] font-bold text-deep-umber/80 capitalize tracking-widest border-l-2 border-charcoal pl-3 mb-6">Font Families</h4>
                             <div className="grid grid-cols-2 gap-8">
                                 <div className="space-y-2">
-                                    <span className="text-[9px] font-mono text-deep-umber/40 capitalize">Sans (Primary)</span>
+                                    <span className="text-[9px] font-mono text-deep-umber/80 capitalize">Sans (Primary)</span>
                                     <p className="text-xl font-bold text-charcoal">Helvetica Neue</p>
                                 </div>
                                 <div className="space-y-2">
-                                    <span className="text-[9px] font-mono text-deep-umber/40 capitalize">Mono (System)</span>
+                                    <span className="text-[9px] font-mono text-deep-umber/80 capitalize">Mono (System)</span>
                                     <p className="text-xl font-mono text-charcoal">Geist Mono</p>
                                 </div>
                             </div>

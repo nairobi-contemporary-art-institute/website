@@ -130,7 +130,7 @@ export function MuseumGrid({
                     <motion.div 
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="col-span-full py-24 text-center text-charcoal/50"
+                        className="col-span-full py-24 text-center text-charcoal/70"
                     >
                         No content matches the selected filters.
                     </motion.div>
