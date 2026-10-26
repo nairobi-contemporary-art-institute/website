@@ -47,6 +47,8 @@ Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Tailwind CSS v4 
 
 Issues live in GitHub Issues via `gh` CLI. See `docs/agents/issue-tracker.md`.
 
+**GitHub account for this repo: `nairobi-contemporary-art-institute`** (not the machine's default `gh` account). `git` is set per-repo in `.git/config` to use it. Claude sessions get `GH_TOKEN` for it from a SessionStart hook in `.claude/settings.local.json`. Any other agent or shell must prefix `gh` commands: `GH_TOKEN=$(gh auth token --user nairobi-contemporary-art-institute) gh …`.
+
 ### Triage labels
 
 Using default five canonical labels (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
