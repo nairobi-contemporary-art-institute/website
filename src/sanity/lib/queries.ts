@@ -74,7 +74,8 @@ export const EXHIBITION_BY_SLUG_QUERY = groq`
         },
         startDate,
         endDate,
-        "artistNames": artists[]->name[@._key == $locale][0].value
+        "artistNames": artists[]->name[@._key == $locale][0].value,
+        _type == "textPiece" => { ${TEXT_CARD_PROJECTION} }
     },
     extraSections[] {
         _type,

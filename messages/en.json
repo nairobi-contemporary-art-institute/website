@@ -270,7 +270,7 @@
         "filterArtist": "Artists",
         "filterWork": "Works",
         "filterPost": "Channel",
-        "filterText": "Texts",
+        "filterTextPiece": "Texts",
         "filterProgram": "Education",
         "filterEvent": "Events",
         "collectionItem": "Artwork",
@@ -278,6 +278,7 @@
         "artist": "Artist",
         "exhibition": "Exhibition",
         "post": "Post",
+        "textPiece": "Text",
         "program": "Program",
         "event": "Event"
     },

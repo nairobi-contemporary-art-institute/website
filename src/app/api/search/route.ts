@@ -13,7 +13,7 @@ export async function GET(request: Request) {
   // We use match and score for basic relevance
   // Note: title/name are often internationalized arrays, so we search their values
   const query = `
-    *[_type in ["post", "exhibition", "artist", "program", "event", "collectionItem", "work"] && 
+    *[_type in ["post", "textPiece", "exhibition", "artist", "program", "event", "collectionItem", "work"] && 
       (
         title match $term + "*" || 
         title[].value match $term + "*" ||
@@ -26,6 +26,7 @@ export async function GET(request: Request) {
         description[].value match $term + "*" ||
         pt::text(description[].value) match $term + "*" ||
         pt::text(body[].value) match $term + "*" ||
+        standfirst[].value match $term + "*" ||
         artist->name[].value match $term + "*"
       )
     ] | score(
@@ -38,7 +39,7 @@ export async function GET(request: Request) {
       _type,
       "title": coalesce(title, name),
       "slug": coalesce(slug.current, artist->slug.current),
-      "image": coalesce(mainImage, image),
+      "image": coalesce(mainImage, leadImage, image),
       "date": coalesce(publishedAt, startDate, year, creationDate),
       "artistName": artist->name
     } | order(_score desc, date desc)[0...15]

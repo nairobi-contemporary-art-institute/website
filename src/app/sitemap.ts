@@ -15,6 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/exhibitions',
         '/artists',
         '/channel',
+        '/texts',
         '/education',
         '/collection',
         '/get-involved',
@@ -25,11 +26,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // 2. Dynamic Routes from Sanity
     const dynamicData = await sanityFetch<any[]>({
         query: SITEMAP_QUERY,
-        tags: ['sitemap']
+        tags: ['sitemap', 'textPiece']
     })
 
     interface SanitySitemapItem {
-        _type: 'exhibition' | 'artist' | 'post' | 'program'
+        _type: 'exhibition' | 'artist' | 'post' | 'program' | 'textPiece'
         slug: string
         _updatedAt: string
     }
@@ -40,6 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             case 'exhibition': path = `/exhibitions/${item.slug}`; break;
             case 'artist': path = `/artists/${item.slug}`; break;
             case 'post': path = `/channel/${item.slug}`; break;
+            case 'textPiece': path = `/texts/${item.slug}`; break;
             case 'program': path = `/education/${item.slug}`; break;
         }
         return {

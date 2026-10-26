@@ -21,7 +21,7 @@ interface SearchResult {
     artistName?: any
 }
 
-const CATEGORIES = ['all', 'exhibition', 'artist', 'work', 'post', 'program', 'event'] as const
+const CATEGORIES = ['all', 'exhibition', 'artist', 'work', 'post', 'textPiece', 'program', 'event'] as const
 type Category = typeof CATEGORIES[number]
 
 export function SearchModal({ isOpen, onClose, locale }: { isOpen: boolean; onClose: () => void; locale: string }) {
@@ -113,6 +113,7 @@ export function SearchModal({ isOpen, onClose, locale }: { isOpen: boolean; onCl
     const getRoute = (type: string, slug: string) => {
         switch (type) {
             case 'post': return `/channel/${slug}`
+            case 'textPiece': return `/texts/${slug}`
             case 'program': return `/education/${slug}`
             case 'artist': return `/artists/${slug}`
             case 'exhibition': return `/exhibitions/${slug}`

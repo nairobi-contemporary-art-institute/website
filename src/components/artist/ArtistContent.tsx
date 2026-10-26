@@ -12,6 +12,7 @@ import { ArtCaption } from '@/components/ui/ArtCaption'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
+import { TextCard } from '@/components/texts/TextCard'
 
 interface ArtistContentProps {
     artist: any
@@ -20,6 +21,7 @@ interface ArtistContentProps {
 
 export function ArtistContent({ artist, locale }: ArtistContentProps) {
     const t = useTranslations('Pages.artists')
+    const tTexts = useTranslations('Pages.texts')
     const [isGridOpen, setIsGridOpen] = useState(false)
     const [isLightboxOpen, setIsLightboxOpen] = useState(false)
     const [selectedWorkIndex, setSelectedWorkIndex] = useState(0) // Track selected work for lightbox
@@ -199,6 +201,20 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                             )
                         })}
                     </div>
+                </section>
+            )}
+
+            {/* Texts by or about the artist */}
+            {artist.texts && artist.texts.length > 0 && (
+                <section aria-labelledby="artist-texts" className="space-y-12 border-t border-rich-blue/10 pt-24">
+                    <h2 id="artist-texts" className="text-[26px] leading-[31px] font-bold text-charcoal tracking-tight">{tTexts('textsTitle')}</h2>
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+                        {artist.texts.map((text: any) => (
+                            <li key={text._id}>
+                                <TextCard text={text} locale={locale} headingLevel="h3" />
+                            </li>
+                        ))}
+                    </ul>
                 </section>
             )}
 
