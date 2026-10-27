@@ -230,36 +230,36 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                     <div className="space-y-8">
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-8">
                             <FilterDropdown
-                                label="Artist"
+                                label={t('filterArtist')}
                                 value={filterArtist}
                                 options={sortedArtists.map(a => getLocalizedValue(a.name, locale)).filter((n): n is string => !!n)}
                                 onChange={setFilterArtist}
-                                allLabel={t('allLabel', { label: 'Artist' })}
+                                allLabel={t('allArtists')}
                             />
                             {/* Artwork Title search can be handled by Search, but let's keep it as an option if desired */}
                             <div className="border-b border-white/20 py-2 text-white/60 text-sm font-medium tracking-wide">
-                                Artwork Title
+                                {t('filterArtworkTitle')}
                             </div>
                             <FilterDropdown
-                                label="Category"
+                                label={t('filterCategory')}
                                 value={filterMedium}
                                 options={mediums}
                                 onChange={setFilterMedium}
-                                allLabel={t('allLabel', { label: 'Category' })}
+                                allLabel={t('allCategories')}
                             />
                             <FilterDropdown
-                                label="Year"
+                                label={t('year')}
                                 value={filterYear}
                                 options={years}
                                 onChange={setFilterYear}
-                                allLabel={t('allLabel', { label: 'Year' })}
+                                allLabel={t('allYears')}
                             />
                         </div>
 
                         {/* Footer Filter Bar */}
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-6">
-                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/70">FILTER BY:</span>
+                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/70">{t('filterBy')}</span>
                                 <label className="flex items-center gap-3 cursor-pointer group">
                                     <div className="relative">
                                         <input
@@ -279,7 +279,7 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                                         )}
                                     </div>
                                     <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors">
-                                        Works with images
+                                        {t('worksWithImages')}
                                     </span>
                                 </label>
 
@@ -541,7 +541,7 @@ function ArtistCard({ group, locale, isExpanded, onToggle }: { group: ArtistGrou
 
 function WorkCard({ item, locale, index }: { item: CollectionItem, locale: string, index: number }) {
     const tCol = useTranslations('Pages.collection')
-    const title = getLocalizedValue(item.title, locale) || 'Untitled'
+    const title = getLocalizedValue(item.title, locale) || tCol('untitled')
     const artistName = (getLocalizedValue(item.artist?.name, locale) || item.artistName || '')
     const date = item.creationDate || item.year || ''
     const image = item.mainImage
