@@ -39,6 +39,25 @@ export const routing = defineRouting({
 export const { Link, redirect, usePathname, useRouter, getPathname } =
     createNavigation(routing);
 
+type Messages = { [key: string]: string | Messages };
+
+/**
+ * Layer a locale's messages over the default locale's, so any key a
+ * translation hasn't caught up with falls back to English instead of
+ * rendering as a raw key path.
+ */
+function mergeMessages(base: Messages, override: Messages): Messages {
+    const merged: Messages = { ...base };
+    for (const [key, value] of Object.entries(override)) {
+        const baseValue = base[key];
+        merged[key] =
+            typeof value === 'object' && typeof baseValue === 'object'
+                ? mergeMessages(baseValue, value)
+                : value;
+    }
+    return merged;
+}
+
 /**
  * Next-Intl Request configuration (Server-side).
  * This is the default export expected by the next-intl/plugin.
@@ -51,8 +70,11 @@ export default getRequestConfig(async ({ requestLocale }) => {
         locale = defaultLocale;
     }
 
-    return {
-        locale,
-        messages: (await import(`../messages/${locale}.json`)).default
-    };
+    const fallback: Messages = (await import(`../messages/${defaultLocale}.json`)).default;
+    const messages =
+        locale === defaultLocale
+            ? fallback
+            : mergeMessages(fallback, (await import(`../messages/${locale}.json`)).default);
+
+    return { locale, messages };
 });
