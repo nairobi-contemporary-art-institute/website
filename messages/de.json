@@ -1,1 +1,303 @@
-{"HomePage": {"title": "NCAI (de)", "description": "Placeholder"}}
+{
+    "HomePage": {
+        "title": "Institut für Zeitgenössische Kunst Nairobi",
+        "description": "Ein gemeinnütziger Ort für bildende Kunst, der sich der Förderung und Bewahrung zeitgenössischer Kunst in Ostafrika widmet.",
+        "fromJournal": "Aus dem Journal",
+        "currentExh": "Aktuelle Ausstellung",
+        "getInvolved": "Mitmachen",
+        "supportNcai": "NCAI unterstützen",
+        "joinCommunity": "Werden Sie Teil der Community",
+        "stayConnected": "In Verbindung bleiben",
+        "subscribeText": "Erhalten Sie regelmäßig Neuigkeiten zu unseren Ausstellungen, öffentlichen Programmen und Publikationen.",
+        "viewExh": "Ausstellung ansehen",
+        "exploreCollection": "NCAI entdecken",
+        "viewFullCollection": "Gesamte Sammlung ansehen",
+        "loadMore": "Mehr laden"
+    },
+    "Navigation": {
+        "about": "Über uns",
+        "visit": "Besuch",
+        "exhibitions": "Ausstellungen",
+        "channel": "Kanal",
+        "texts": "Texte",
+        "collection": "Sammlung",
+        "education": "Vermittlung",
+        "support": "Mitmachen",
+        "aboutOverview": "Überblick",
+        "aboutMission": "Mission",
+        "aboutHistory": "Geschichte",
+        "aboutTeam": "Team",
+        "aboutCareers": "Karriere"
+    },
+    "Pages": {
+        "about": {
+            "title": "Über NCAI",
+            "description": "NCAI ist ein gemeinnütziger Ort für bildende Kunst mit Sitz in Nairobi.",
+            "teamFilters": {
+                "all": "Alle",
+                "curator": "Kuratorisches Team",
+                "education": "Vermittlung & öffentliche Programme",
+                "administration": "Verwaltung",
+                "management": "Galeriemanagement",
+                "frontdesk": "Empfang",
+                "production": "Produktion",
+                "press": "Presse"
+            },
+            "teamCategories": {
+                "staff": "Unser Team",
+                "contributors": "Mitwirkende & Kooperationspartner"
+            },
+            "historyTeaser": {
+                "title": "Unser Weg",
+                "cta": "Unsere Geschichte entdecken"
+            },
+            "missionTeaser": {
+                "title": "Unsere Mission",
+                "cta": "Unsere Mission lesen"
+            },
+            "teamTeaser": {
+                "title": "Das Team",
+                "cta": "Das Team kennenlernen"
+            },
+            "careersTeaser": {
+                "title": "Arbeiten bei uns",
+                "cta": "Offene Stellen ansehen",
+                "empty": "Derzeit sind keine Stellen ausgeschrieben. Schauen Sie später wieder vorbei oder folgen Sie unseren sozialen Kanälen für Neuigkeiten."
+            }
+        },
+        "visit": {
+            "title": "Besucherinformationen",
+            "description": "Informationen zum Besuch unserer Galerie.",
+            "location": "Standort",
+            "hours": "Öffnungszeiten",
+            "normalOpeningHours": "Reguläre Öffnungszeiten",
+            "NORMALOPENINGHOURS": "Reguläre Öffnungszeiten",
+            "locationLink": "So finden Sie uns",
+            "overviewLink": "Überblick",
+            "directionsMapLink": "Anfahrt & Karte",
+            "directionsLink": "Anfahrt",
+            "infoLink": "Informationen",
+            "howToGetHere": "Anreise",
+            "visitorInfo": "Besucherinformationen",
+            "callUs": "Rufen Sie uns an",
+            "emailUs": "Schreiben Sie uns",
+            "closed": "Geschlossen",
+            "stayConnected": "In Verbindung bleiben",
+            "joinCommunity": "Werden Sie Teil der Community",
+            "subscribeText": "Erhalten Sie regelmäßig Neuigkeiten zu unseren Ausstellungen, öffentlichen Programmen und Publikationen.",
+            "subscribe": "Abonnieren"
+        },
+        "exhibitions": {
+            "title": "Ausstellungen",
+            "description": "Aktuelle, kommende und vergangene Ausstellungen im NCAI.",
+            "untitled": "Ohne Titel",
+            "untitledExhibition": "Ausstellung ohne Titel",
+            "noImage": "Kein Bild",
+            "current": "Aktuell",
+            "upcoming": "Demnächst",
+            "past": "Vergangen",
+            "found": "Ausstellungen gefunden.",
+            "notFound": "Keine Ausstellungen gefunden."
+        },
+        "artists": {
+            "title": "Künstler*innen",
+            "description": "Verzeichnis der im NCAI ausgestellten Künstler*innen.",
+            "noArtists": "Für diese Auswahl wurden keine Künstler*innen gefunden.",
+            "relatedTitle": "Künstler*innen mit ähnlichem Schwerpunkt",
+            "projectsTitle": "Jüngste, aktuelle und kommende Projekte",
+            "newsTitle": "Neuigkeiten & Ressourcen",
+            "noNews": "Derzeit sind keine Neuigkeiten verfügbar.",
+            "museumExhibitionsTitle": "Museumsausstellungen",
+            "ncaiExhibitionsTitle": "Ausstellungen im NCAI",
+            "worksArchive": "Werkarchiv",
+            "noImage": "Kein Bild",
+            "exhibition": "Ausstellung",
+            "artistLabel": "Künstler*in",
+            "artworkLabel": "Kunstwerk"
+        },
+        "collection": {
+            "title": "Sammlung",
+            "description": "Unsere Sammlung ist ein wachsendes Archiv moderner und zeitgenössischer künstlerischer Produktion mit Schwerpunkt Ostafrika.",
+            "noItems": "Sammlungsobjekte werden in Kürze hinzugefügt.",
+            "year": "Jahr",
+            "medium": "Technik",
+            "dimensions": "Maße",
+            "edition": "Auflage",
+            "acquisitionDate": "Erwerbungsdatum",
+            "creditLine": "Creditline",
+            "notAvailable": "k. A.",
+            "by": "von",
+            "untitled": "Ohne Titel",
+            "unknownArtist": "Künstler*in unbekannt",
+            "noImage": "Kein Bild",
+            "detailsDescription": "Details zum Kunstwerk {title} in der Sammlung des NCAI.",
+            "onDisplayAt": "Ausgestellt in {location}",
+            "currentlyOnDisplay": "Derzeit ausgestellt",
+            "outOnLoan": "Verliehen",
+            "artistsAZ": "Künstler*innen A–Z",
+            "byArtist": "Nach Künstler*in",
+            "workLabel": "Werk",
+            "worksLabel": "Werke",
+            "searchPlaceholder": "Sammlung durchsuchen",
+            "noFilteredResults": "Keine Objekte entsprechen Ihren Filtern.",
+            "clearFilters": "Alle Filter löschen",
+            "filterArtist": "Künstler*in",
+            "filterArtworkTitle": "Werktitel",
+            "filterCategory": "Kategorie",
+            "filterBy": "Filtern nach:",
+            "allArtists": "Alle Künstler*innen",
+            "allCategories": "Alle Kategorien",
+            "allYears": "Alle Jahre",
+            "worksWithImages": "Werke mit Abbildung",
+            "noImageAvailable": "Kein Bild verfügbar",
+            "sortRandom": "Zufällig",
+            "sortAZ": "Alphabetisch",
+            "shuffleWorks": "Werke mischen",
+            "resetFilters": "Filter zurücksetzen",
+            "viewWorks": "Werke ansehen",
+            "hideWorks": "Werke ausblenden"
+        },
+        "channel": {
+            "title": "Kanal",
+            "description": "Neuigkeiten, Interviews und Einblicke aus dem NCAI.",
+            "noContent": "Keine Inhalte gefunden",
+            "filterAll": "Alle",
+            "filterFilm": "Film",
+            "filterAudio": "Audio",
+            "filterText": "Text"
+        },
+        "texts": {
+            "title": "Texte",
+            "description": "Essays, Interviews, Gespräche und Texte von Künstler*innen, regelmäßig veröffentlicht vom NCAI.",
+            "filterLabel": "Texte nach Art filtern",
+            "filterAll": "Alle",
+            "types": {
+                "essay": {
+                    "singular": "Essay",
+                    "plural": "Essays"
+                },
+                "interview": {
+                    "singular": "Interview",
+                    "plural": "Interviews"
+                },
+                "conversation": {
+                    "singular": "Gespräch",
+                    "plural": "Gespräche"
+                },
+                "artistWriting": {
+                    "singular": "Künstler*innentext",
+                    "plural": "Künstler*innentexte"
+                }
+            },
+            "by": "Von",
+            "minRead": "{minutes} Min. Lesezeit",
+            "notes": "Anmerkungen",
+            "credit": "Nachweis",
+            "relatedTexts": "Verwandte Texte",
+            "relatedExhibitions": "Verwandte Ausstellungen",
+            "moreTexts": "Weitere Texte",
+            "previousText": "Vorheriger Text",
+            "nextText": "Nächster Text",
+            "textNavigation": "Weitere Texte",
+            "pagination": "Seitennavigation",
+            "newer": "Neuer",
+            "older": "Älter",
+            "pageOf": "Seite {page} von {total}",
+            "noContent": "Noch keine Texte veröffentlicht.",
+            "noContentForType": "Noch keine Texte dieser Art.",
+            "viewAll": "Alle Texte ansehen",
+            "textsTitle": "Texte"
+        },
+        "education": {
+            "title": "Vermittlung",
+            "description": "Workshops, Vorträge und Programme im NCAI.",
+            "allPrograms": "Alle Programme",
+            "noPrograms": "Keine Programme gefunden",
+            "filterAll": "Alle",
+            "filterSchools": "Schulen",
+            "filterFamilies": "Familien",
+            "filterPublic": "Öffentlichkeit",
+            "resources": {
+                "title": "Ressourcen",
+                "subtitle": "Lernmaterialien",
+                "description": "Arbeitsblätter, Aktivitätspakete und Leitfäden zum Herunterladen, entwickelt vom NCAI und unseren Partnern.",
+                "viewResource": "Ressource ansehen",
+                "download": "PDF herunterladen",
+                "types": {
+                    "worksheet": "Arbeitsblatt",
+                    "activityPack": "Aktivitätspaket",
+                    "teacherGuide": "Leitfaden für Lehrkräfte",
+                    "essay": "Essay",
+                    "reference": "Nachschlagewerk"
+                },
+                "audiences": {
+                    "children": "Kinder & Familien",
+                    "youth": "Schulen & Jugendliche",
+                    "adults": "Erwachsene & Öffentlichkeit",
+                    "ujuzi": "UJUZI-Fachleute"
+                }
+            }
+        },
+        "contact": {
+            "title": "Kontakt",
+            "description": "Nehmen Sie Kontakt mit dem NCAI-Team auf."
+        },
+        "support": {
+            "title": "Unterstützen Sie uns",
+            "description": "Helfen Sie uns, zeitgenössische Kunst in Ostafrika zu bewahren und zu fördern."
+        },
+        "events": {
+            "title": "Veranstaltungen",
+            "description": "Workshops, Vorträge und Eröffnungen im NCAI.",
+            "upcoming": "Demnächst",
+            "past": "Vergangene Veranstaltungen",
+            "backToCalendar": "Zurück zum Kalender",
+            "when": "Wann",
+            "where": "Wo",
+            "rsvp": "Zusagen / Anmelden",
+            "facilitators": "Leitung",
+            "relatedExhibitions": "Im Kontext von",
+            "archived": "Archiviert",
+            "noUpcoming": "Keine kommenden Veranstaltungen in dieser Kategorie."
+        },
+        "accessibility": {
+            "title": "Barrierefreiheit",
+            "description": "Informationen zur physischen und digitalen Barrierefreiheit im NCAI.",
+            "intro": "Kunst ist für alle da. Wir halten uns strikt an die Standards WCAG 2.2 AAA, damit das digitale Angebot des NCAI für Menschen mit unterschiedlichen Fähigkeiten nutzbar ist. Auch unsere Räume sind so gestaltet, dass sie einladend und für alle zugänglich sind."
+        }
+    },
+    "Search": {
+        "placeholder": "NCAI durchsuchen...",
+        "close": "Schließen",
+        "noResults": "Keine Ergebnisse für",
+        "results": "Ergebnisse",
+        "modalLabel": "Website-Inhalte durchsuchen",
+        "filterAll": "Alle",
+        "filterExhibition": "Ausstellungen",
+        "filterArtist": "Künstler*innen",
+        "filterWork": "Werke",
+        "filterPost": "Kanal",
+        "filterTextPiece": "Texte",
+        "filterProgram": "Vermittlung",
+        "filterEvent": "Veranstaltungen",
+        "collectionItem": "Kunstwerk",
+        "work": "Kunstwerk",
+        "artist": "Künstler*in",
+        "exhibition": "Ausstellung",
+        "post": "Beitrag",
+        "textPiece": "Text",
+        "program": "Programm",
+        "event": "Veranstaltung"
+    },
+    "NotFound": {
+        "title": "Seite nicht gefunden",
+        "description": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+        "goHome": "Zur Startseite"
+    },
+    "Error": {
+        "title": "Etwas ist schiefgelaufen",
+        "description": "Ein unerwarteter Fehler ist aufgetreten. Wir wurden benachrichtigt und kümmern uns darum.",
+        "tryAgain": "Erneut versuchen",
+        "goHome": "Zur Startseite"
+    }
+}

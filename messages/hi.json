@@ -1,1 +1,303 @@
-{"HomePage": {"title": "NCAI (hi)", "description": "Placeholder"}}
+{
+    "HomePage": {
+        "title": "नैरोबी समकालीन कला संस्थान",
+        "description": "पूर्वी अफ़्रीका में समकालीन कला के विकास और संरक्षण के लिए समर्पित एक गैर-लाभकारी दृश्य कला स्थल।",
+        "fromJournal": "जर्नल से",
+        "currentExh": "वर्तमान प्रदर्शनी",
+        "getInvolved": "जुड़ें",
+        "supportNcai": "NCAI का समर्थन करें",
+        "joinCommunity": "समुदाय से जुड़ें",
+        "stayConnected": "जुड़े रहें",
+        "subscribeText": "हमारी प्रदर्शनियों, सार्वजनिक कार्यक्रमों और प्रकाशनों के बारे में नियमित अपडेट पाएँ।",
+        "viewExh": "प्रदर्शनी देखें",
+        "exploreCollection": "NCAI को जानें",
+        "viewFullCollection": "पूरा संग्रह देखें",
+        "loadMore": "और देखें"
+    },
+    "Navigation": {
+        "about": "परिचय",
+        "visit": "भ्रमण",
+        "exhibitions": "प्रदर्शनियाँ",
+        "channel": "चैनल",
+        "texts": "लेख",
+        "collection": "संग्रह",
+        "education": "शिक्षा",
+        "support": "जुड़ें",
+        "aboutOverview": "अवलोकन",
+        "aboutMission": "उद्देश्य",
+        "aboutHistory": "इतिहास",
+        "aboutTeam": "टीम",
+        "aboutCareers": "करियर"
+    },
+    "Pages": {
+        "about": {
+            "title": "NCAI के बारे में",
+            "description": "NCAI नैरोबी स्थित एक गैर-लाभकारी दृश्य कला स्थल है।",
+            "teamFilters": {
+                "all": "सभी",
+                "curator": "क्यूरेटोरियल",
+                "education": "शिक्षा और सार्वजनिक कार्यक्रम",
+                "administration": "प्रशासन",
+                "management": "गैलरी प्रबंधन",
+                "frontdesk": "स्वागत डेस्क",
+                "production": "प्रोडक्शन",
+                "press": "प्रेस"
+            },
+            "teamCategories": {
+                "staff": "हमारी टीम",
+                "contributors": "योगदानकर्ता और सहयोगी"
+            },
+            "historyTeaser": {
+                "title": "हमारी यात्रा",
+                "cta": "हमारा इतिहास जानें"
+            },
+            "missionTeaser": {
+                "title": "हमारा उद्देश्य",
+                "cta": "हमारा उद्देश्य पढ़ें"
+            },
+            "teamTeaser": {
+                "title": "टीम",
+                "cta": "टीम से मिलें"
+            },
+            "careersTeaser": {
+                "title": "हमसे जुड़ें",
+                "cta": "अवसर देखें",
+                "empty": "इस समय कोई पद रिक्त नहीं है। कृपया बाद में दोबारा देखें या अपडेट के लिए हमारे सोशल चैनल फ़ॉलो करें।"
+            }
+        },
+        "visit": {
+            "title": "आगंतुक जानकारी",
+            "description": "हमारी गैलरी देखने आने से संबंधित जानकारी।",
+            "location": "स्थान",
+            "hours": "खुलने का समय",
+            "normalOpeningHours": "सामान्य समय",
+            "NORMALOPENINGHOURS": "सामान्य समय",
+            "locationLink": "हमें खोजें",
+            "overviewLink": "अवलोकन",
+            "directionsMapLink": "रास्ता और नक्शा",
+            "directionsLink": "रास्ता",
+            "infoLink": "जानकारी",
+            "howToGetHere": "यहाँ कैसे पहुँचें",
+            "visitorInfo": "आगंतुक जानकारी",
+            "callUs": "हमें कॉल करें",
+            "emailUs": "हमें ईमेल करें",
+            "closed": "बंद",
+            "stayConnected": "जुड़े रहें",
+            "joinCommunity": "समुदाय से जुड़ें",
+            "subscribeText": "हमारी प्रदर्शनियों, सार्वजनिक कार्यक्रमों और प्रकाशनों के बारे में नियमित अपडेट पाएँ।",
+            "subscribe": "सदस्यता लें"
+        },
+        "exhibitions": {
+            "title": "प्रदर्शनियाँ",
+            "description": "NCAI में वर्तमान, आगामी और पिछली प्रदर्शनियाँ।",
+            "untitled": "शीर्षकहीन",
+            "untitledExhibition": "शीर्षकहीन प्रदर्शनी",
+            "noImage": "कोई चित्र नहीं",
+            "current": "वर्तमान",
+            "upcoming": "आगामी",
+            "past": "पिछली",
+            "found": "प्रदर्शनियाँ मिलीं।",
+            "notFound": "कोई प्रदर्शनी नहीं मिली।"
+        },
+        "artists": {
+            "title": "कलाकार",
+            "description": "NCAI में प्रदर्शित कलाकारों की सूची।",
+            "noArtists": "इस चयन के लिए कोई कलाकार नहीं मिला।",
+            "relatedTitle": "समान दृष्टिकोण वाले कलाकार",
+            "projectsTitle": "हाल की, वर्तमान और आगामी परियोजनाएँ",
+            "newsTitle": "समाचार और संसाधन",
+            "noNews": "इस समय कोई समाचार उपलब्ध नहीं है।",
+            "museumExhibitionsTitle": "संग्रहालय प्रदर्शनियाँ",
+            "ncaiExhibitionsTitle": "NCAI में प्रदर्शनियाँ",
+            "worksArchive": "कृतियों का अभिलेखागार",
+            "noImage": "कोई चित्र नहीं",
+            "exhibition": "प्रदर्शनी",
+            "artistLabel": "कलाकार",
+            "artworkLabel": "कलाकृति"
+        },
+        "collection": {
+            "title": "संग्रह",
+            "description": "हमारा संग्रह पूर्वी अफ़्रीका पर केंद्रित आधुनिक और समकालीन कलात्मक सृजन का एक बढ़ता हुआ अभिलेखागार है।",
+            "noItems": "संग्रह की वस्तुएँ जल्द ही जोड़ी जाएँगी।",
+            "year": "वर्ष",
+            "medium": "माध्यम",
+            "dimensions": "आयाम",
+            "edition": "संस्करण",
+            "acquisitionDate": "अधिग्रहण तिथि",
+            "creditLine": "क्रेडिट लाइन",
+            "notAvailable": "उपलब्ध नहीं",
+            "by": "–",
+            "untitled": "शीर्षकहीन",
+            "unknownArtist": "अज्ञात कलाकार",
+            "noImage": "कोई चित्र नहीं",
+            "detailsDescription": "NCAI संग्रह में कलाकृति {title} का विवरण।",
+            "onDisplayAt": "{location} में प्रदर्शित",
+            "currentlyOnDisplay": "वर्तमान में प्रदर्शित",
+            "outOnLoan": "उधार पर दी गई",
+            "artistsAZ": "कलाकार A–Z",
+            "byArtist": "कलाकार के अनुसार",
+            "workLabel": "कृति",
+            "worksLabel": "कृतियाँ",
+            "searchPlaceholder": "संग्रह में खोजें",
+            "noFilteredResults": "आपके फ़िल्टर से मेल खाती कोई वस्तु नहीं मिली।",
+            "clearFilters": "सभी फ़िल्टर हटाएँ",
+            "filterArtist": "कलाकार",
+            "filterArtworkTitle": "कलाकृति का शीर्षक",
+            "filterCategory": "श्रेणी",
+            "filterBy": "फ़िल्टर करें:",
+            "allArtists": "सभी कलाकार",
+            "allCategories": "सभी श्रेणियाँ",
+            "allYears": "सभी वर्ष",
+            "worksWithImages": "चित्रों वाली कृतियाँ",
+            "noImageAvailable": "कोई चित्र उपलब्ध नहीं",
+            "sortRandom": "यादृच्छिक क्रम",
+            "sortAZ": "वर्णानुक्रम",
+            "shuffleWorks": "कृतियों का क्रम बदलें",
+            "resetFilters": "फ़िल्टर रीसेट करें",
+            "viewWorks": "कृतियाँ देखें",
+            "hideWorks": "कृतियाँ छिपाएँ"
+        },
+        "channel": {
+            "title": "चैनल",
+            "description": "NCAI से समाचार, साक्षात्कार और विचार।",
+            "noContent": "कोई सामग्री नहीं मिली",
+            "filterAll": "सभी",
+            "filterFilm": "फ़िल्म",
+            "filterAudio": "ऑडियो",
+            "filterText": "लेख"
+        },
+        "texts": {
+            "title": "लेख",
+            "description": "NCAI द्वारा समय-समय पर प्रकाशित निबंध, साक्षात्कार, संवाद और कलाकारों के लेखन।",
+            "filterLabel": "प्रकार के अनुसार लेख फ़िल्टर करें",
+            "filterAll": "सभी",
+            "types": {
+                "essay": {
+                    "singular": "निबंध",
+                    "plural": "निबंध"
+                },
+                "interview": {
+                    "singular": "साक्षात्कार",
+                    "plural": "साक्षात्कार"
+                },
+                "conversation": {
+                    "singular": "संवाद",
+                    "plural": "संवाद"
+                },
+                "artistWriting": {
+                    "singular": "कलाकार का लेखन",
+                    "plural": "कलाकारों के लेखन"
+                }
+            },
+            "by": "लेखक:",
+            "minRead": "पढ़ने में {minutes} मिनट",
+            "notes": "टिप्पणियाँ",
+            "credit": "श्रेय",
+            "relatedTexts": "संबंधित लेख",
+            "relatedExhibitions": "संबंधित प्रदर्शनियाँ",
+            "moreTexts": "और लेख",
+            "previousText": "पिछला लेख",
+            "nextText": "अगला लेख",
+            "textNavigation": "और लेख",
+            "pagination": "पृष्ठ क्रमांकन",
+            "newer": "नए",
+            "older": "पुराने",
+            "pageOf": "पृष्ठ {page}, कुल {total}",
+            "noContent": "अभी तक कोई लेख प्रकाशित नहीं हुआ है।",
+            "noContentForType": "इस प्रकार का अभी कोई लेख नहीं है।",
+            "viewAll": "सभी लेख देखें",
+            "textsTitle": "लेख"
+        },
+        "education": {
+            "title": "शिक्षा",
+            "description": "NCAI में कार्यशालाएँ, वार्ताएँ और कार्यक्रम।",
+            "allPrograms": "सभी कार्यक्रम",
+            "noPrograms": "कोई कार्यक्रम नहीं मिला",
+            "filterAll": "सभी",
+            "filterSchools": "विद्यालय",
+            "filterFamilies": "परिवार",
+            "filterPublic": "सार्वजनिक",
+            "resources": {
+                "title": "संसाधन",
+                "subtitle": "शिक्षण सामग्री",
+                "description": "NCAI और हमारे साझेदारों द्वारा विकसित डाउनलोड करने योग्य वर्कशीट, गतिविधि पैक और मार्गदर्शिकाएँ।",
+                "viewResource": "संसाधन देखें",
+                "download": "PDF डाउनलोड करें",
+                "types": {
+                    "worksheet": "वर्कशीट",
+                    "activityPack": "गतिविधि पैक",
+                    "teacherGuide": "शिक्षक मार्गदर्शिका",
+                    "essay": "निबंध",
+                    "reference": "संदर्भ"
+                },
+                "audiences": {
+                    "children": "बच्चे और परिवार",
+                    "youth": "विद्यालय और युवा",
+                    "adults": "वयस्क और आम जनता",
+                    "ujuzi": "UJUZI पेशेवर"
+                }
+            }
+        },
+        "contact": {
+            "title": "संपर्क",
+            "description": "NCAI टीम से संपर्क करें।"
+        },
+        "support": {
+            "title": "हमारा समर्थन करें",
+            "description": "पूर्वी अफ़्रीका में समकालीन कला को संरक्षित करने और आगे बढ़ाने में हमारी मदद करें।"
+        },
+        "events": {
+            "title": "आयोजन",
+            "description": "NCAI में कार्यशालाएँ, वार्ताएँ और उद्घाटन।",
+            "upcoming": "आगामी",
+            "past": "पिछले आयोजन",
+            "backToCalendar": "कैलेंडर पर वापस जाएँ",
+            "when": "कब",
+            "where": "कहाँ",
+            "rsvp": "RSVP / पंजीकरण करें",
+            "facilitators": "संचालक",
+            "relatedExhibitions": "संदर्भ में",
+            "archived": "संग्रहीत",
+            "noUpcoming": "इस श्रेणी में कोई आगामी आयोजन नहीं मिला।"
+        },
+        "accessibility": {
+            "title": "सुलभता",
+            "description": "NCAI में भौतिक और डिजिटल सुलभता के बारे में जानकारी।",
+            "intro": "कला सबके लिए है। हम WCAG 2.2 AAA मानकों का सख़्ती से पालन करते हैं, ताकि NCAI का डिजिटल अनुभव विविध क्षमताओं वाले लोगों के लिए उपयोगी हो। हमारा भौतिक स्थल भी सभी के लिए स्वागतयोग्य और सुलभ बनाया गया है।"
+        }
+    },
+    "Search": {
+        "placeholder": "NCAI में खोजें...",
+        "close": "बंद करें",
+        "noResults": "कोई परिणाम नहीं मिला:",
+        "results": "परिणाम",
+        "modalLabel": "साइट की सामग्री खोजें",
+        "filterAll": "सभी",
+        "filterExhibition": "प्रदर्शनियाँ",
+        "filterArtist": "कलाकार",
+        "filterWork": "कृतियाँ",
+        "filterPost": "चैनल",
+        "filterTextPiece": "लेख",
+        "filterProgram": "शिक्षा",
+        "filterEvent": "आयोजन",
+        "collectionItem": "कलाकृति",
+        "work": "कलाकृति",
+        "artist": "कलाकार",
+        "exhibition": "प्रदर्शनी",
+        "post": "पोस्ट",
+        "textPiece": "लेख",
+        "program": "कार्यक्रम",
+        "event": "आयोजन"
+    },
+    "NotFound": {
+        "title": "पृष्ठ नहीं मिला",
+        "description": "आप जिस पृष्ठ को खोज रहे हैं वह मौजूद नहीं है या कहीं और ले जाया गया है।",
+        "goHome": "मुखपृष्ठ पर वापस जाएँ"
+    },
+    "Error": {
+        "title": "कुछ गलत हो गया",
+        "description": "एक अप्रत्याशित त्रुटि हुई। हमें सूचित कर दिया गया है और हम इसकी जाँच कर रहे हैं।",
+        "tryAgain": "फिर से प्रयास करें",
+        "goHome": "मुखपृष्ठ पर वापस जाएँ"
+    }
+}

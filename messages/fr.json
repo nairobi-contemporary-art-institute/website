@@ -1,1 +1,303 @@
-{"HomePage": {"title": "NCAI (fr)", "description": "Placeholder"}}
+{
+    "HomePage": {
+        "title": "Institut d'art contemporain de Nairobi",
+        "description": "Un espace d'arts visuels à but non lucratif, dédié à l'essor et à la préservation de l'art contemporain en Afrique de l'Est.",
+        "fromJournal": "Dans le journal",
+        "currentExh": "Exposition en cours",
+        "getInvolved": "S'engager",
+        "supportNcai": "Soutenir le NCAI",
+        "joinCommunity": "Rejoignez la communauté",
+        "stayConnected": "Restez en contact",
+        "subscribeText": "Recevez régulièrement des nouvelles de nos expositions, programmes publics et publications.",
+        "viewExh": "Voir l'exposition",
+        "exploreCollection": "Explorer le NCAI",
+        "viewFullCollection": "Voir toute la collection",
+        "loadMore": "Charger plus"
+    },
+    "Navigation": {
+        "about": "À propos",
+        "visit": "Visiter",
+        "exhibitions": "Expositions",
+        "channel": "Chaîne",
+        "texts": "Textes",
+        "collection": "Collection",
+        "education": "Éducation",
+        "support": "S'engager",
+        "aboutOverview": "Présentation",
+        "aboutMission": "Mission",
+        "aboutHistory": "Histoire",
+        "aboutTeam": "Équipe",
+        "aboutCareers": "Carrières"
+    },
+    "Pages": {
+        "about": {
+            "title": "À propos du NCAI",
+            "description": "Le NCAI est un espace d'arts visuels à but non lucratif basé à Nairobi.",
+            "teamFilters": {
+                "all": "Tous",
+                "curator": "Commissariat",
+                "education": "Éducation et programmes publics",
+                "administration": "Administration",
+                "management": "Gestion de la galerie",
+                "frontdesk": "Accueil",
+                "production": "Production",
+                "press": "Presse"
+            },
+            "teamCategories": {
+                "staff": "Notre équipe",
+                "contributors": "Contributeurs et collaborateurs"
+            },
+            "historyTeaser": {
+                "title": "Notre parcours",
+                "cta": "Découvrir notre histoire"
+            },
+            "missionTeaser": {
+                "title": "Notre mission",
+                "cta": "Lire notre mission"
+            },
+            "teamTeaser": {
+                "title": "L'équipe",
+                "cta": "Rencontrer l'équipe"
+            },
+            "careersTeaser": {
+                "title": "Nous rejoindre",
+                "cta": "Voir les offres",
+                "empty": "Aucun poste n'est ouvert pour le moment. Revenez plus tard ou suivez nos réseaux sociaux pour être informé."
+            }
+        },
+        "visit": {
+            "title": "Informations pratiques",
+            "description": "Informations pour visiter notre galerie.",
+            "location": "Adresse",
+            "hours": "Horaires d'ouverture",
+            "normalOpeningHours": "Horaires habituels",
+            "NORMALOPENINGHOURS": "Horaires habituels",
+            "locationLink": "Nous trouver",
+            "overviewLink": "Présentation",
+            "directionsMapLink": "Itinéraire et plan",
+            "directionsLink": "Itinéraire",
+            "infoLink": "Informations",
+            "howToGetHere": "Comment venir",
+            "visitorInfo": "Informations visiteurs",
+            "callUs": "Appelez-nous",
+            "emailUs": "Écrivez-nous",
+            "closed": "Fermé",
+            "stayConnected": "Restez en contact",
+            "joinCommunity": "Rejoignez la communauté",
+            "subscribeText": "Recevez régulièrement des nouvelles de nos expositions, programmes publics et publications.",
+            "subscribe": "S'abonner"
+        },
+        "exhibitions": {
+            "title": "Expositions",
+            "description": "Expositions en cours, à venir et passées au NCAI.",
+            "untitled": "Sans titre",
+            "untitledExhibition": "Exposition sans titre",
+            "noImage": "Pas d'image",
+            "current": "En cours",
+            "upcoming": "À venir",
+            "past": "Passées",
+            "found": "Expositions trouvées.",
+            "notFound": "Aucune exposition trouvée."
+        },
+        "artists": {
+            "title": "Artistes",
+            "description": "Répertoire des artistes exposés au NCAI.",
+            "noArtists": "Aucun artiste trouvé pour cette sélection.",
+            "relatedTitle": "Artistes aux démarches proches",
+            "projectsTitle": "Projets récents, en cours et à venir",
+            "newsTitle": "Actualités et ressources",
+            "noNews": "Aucune actualité pour le moment.",
+            "museumExhibitionsTitle": "Expositions muséales",
+            "ncaiExhibitionsTitle": "Expositions au NCAI",
+            "worksArchive": "Archive des œuvres",
+            "noImage": "Pas d'image",
+            "exhibition": "Exposition",
+            "artistLabel": "Artiste",
+            "artworkLabel": "Œuvre"
+        },
+        "collection": {
+            "title": "Collection",
+            "description": "Notre collection est une archive en constante expansion de la production artistique moderne et contemporaine, centrée sur l'Afrique de l'Est.",
+            "noItems": "Les œuvres de la collection seront bientôt ajoutées.",
+            "year": "Année",
+            "medium": "Technique",
+            "dimensions": "Dimensions",
+            "edition": "Édition",
+            "acquisitionDate": "Date d'acquisition",
+            "creditLine": "Mention de crédit",
+            "notAvailable": "N.C.",
+            "by": "par",
+            "untitled": "Sans titre",
+            "unknownArtist": "Artiste inconnu",
+            "noImage": "Pas d'image",
+            "detailsDescription": "Détails de l'œuvre {title} dans la collection du NCAI.",
+            "onDisplayAt": "Exposée à {location}",
+            "currentlyOnDisplay": "Actuellement exposée",
+            "outOnLoan": "En prêt",
+            "artistsAZ": "Artistes A–Z",
+            "byArtist": "Par artiste",
+            "workLabel": "œuvre",
+            "worksLabel": "œuvres",
+            "searchPlaceholder": "Rechercher dans la collection",
+            "noFilteredResults": "Aucun élément ne correspond à vos filtres.",
+            "clearFilters": "Effacer tous les filtres",
+            "filterArtist": "Artiste",
+            "filterArtworkTitle": "Titre de l'œuvre",
+            "filterCategory": "Catégorie",
+            "filterBy": "Filtrer par :",
+            "allArtists": "Tous les artistes",
+            "allCategories": "Toutes les catégories",
+            "allYears": "Toutes les années",
+            "worksWithImages": "Œuvres avec images",
+            "noImageAvailable": "Aucune image disponible",
+            "sortRandom": "Aléatoire",
+            "sortAZ": "Ordre alphabétique",
+            "shuffleWorks": "Mélanger les œuvres",
+            "resetFilters": "Réinitialiser les filtres",
+            "viewWorks": "Voir les œuvres",
+            "hideWorks": "Masquer les œuvres"
+        },
+        "channel": {
+            "title": "Chaîne",
+            "description": "Actualités, entretiens et regards du NCAI.",
+            "noContent": "Aucun contenu trouvé",
+            "filterAll": "Tous",
+            "filterFilm": "Film",
+            "filterAudio": "Audio",
+            "filterText": "Texte"
+        },
+        "texts": {
+            "title": "Textes",
+            "description": "Essais, entretiens, conversations et écrits d'artistes, publiés régulièrement par le NCAI.",
+            "filterLabel": "Filtrer les textes par type",
+            "filterAll": "Tous",
+            "types": {
+                "essay": {
+                    "singular": "Essai",
+                    "plural": "Essais"
+                },
+                "interview": {
+                    "singular": "Entretien",
+                    "plural": "Entretiens"
+                },
+                "conversation": {
+                    "singular": "Conversation",
+                    "plural": "Conversations"
+                },
+                "artistWriting": {
+                    "singular": "Écrit d'artiste",
+                    "plural": "Écrits d'artistes"
+                }
+            },
+            "by": "Par",
+            "minRead": "{minutes} min de lecture",
+            "notes": "Notes",
+            "credit": "Crédit",
+            "relatedTexts": "Textes associés",
+            "relatedExhibitions": "Expositions associées",
+            "moreTexts": "Autres textes",
+            "previousText": "Texte précédent",
+            "nextText": "Texte suivant",
+            "textNavigation": "Autres textes",
+            "pagination": "Pagination",
+            "newer": "Plus récents",
+            "older": "Plus anciens",
+            "pageOf": "Page {page} sur {total}",
+            "noContent": "Aucun texte publié pour le moment.",
+            "noContentForType": "Aucun texte de ce type pour le moment.",
+            "viewAll": "Voir tous les textes",
+            "textsTitle": "Textes"
+        },
+        "education": {
+            "title": "Éducation",
+            "description": "Ateliers, conférences et programmes au NCAI.",
+            "allPrograms": "Tous les programmes",
+            "noPrograms": "Aucun programme trouvé",
+            "filterAll": "Tous",
+            "filterSchools": "Scolaires",
+            "filterFamilies": "Familles",
+            "filterPublic": "Tout public",
+            "resources": {
+                "title": "Ressources",
+                "subtitle": "Supports pédagogiques",
+                "description": "Fiches d'activités, kits pédagogiques et guides à télécharger, conçus par le NCAI et ses partenaires.",
+                "viewResource": "Voir la ressource",
+                "download": "Télécharger le PDF",
+                "types": {
+                    "worksheet": "Fiche d'activité",
+                    "activityPack": "Kit d'activités",
+                    "teacherGuide": "Guide de l'enseignant",
+                    "essay": "Essai",
+                    "reference": "Référence"
+                },
+                "audiences": {
+                    "children": "Enfants et familles",
+                    "youth": "Scolaires et jeunes",
+                    "adults": "Adultes et grand public",
+                    "ujuzi": "Professionnels UJUZI"
+                }
+            }
+        },
+        "contact": {
+            "title": "Contact",
+            "description": "Contactez l'équipe du NCAI."
+        },
+        "support": {
+            "title": "Nous soutenir",
+            "description": "Aidez-nous à préserver et à faire grandir l'art contemporain en Afrique de l'Est."
+        },
+        "events": {
+            "title": "Événements",
+            "description": "Ateliers, conférences et vernissages au NCAI.",
+            "upcoming": "À venir",
+            "past": "Événements passés",
+            "backToCalendar": "Retour au calendrier",
+            "when": "Quand",
+            "where": "Où",
+            "rsvp": "Réserver / S'inscrire",
+            "facilitators": "Intervenants",
+            "relatedExhibitions": "Dans le cadre de",
+            "archived": "Archivé",
+            "noUpcoming": "Aucun événement à venir dans cette catégorie."
+        },
+        "accessibility": {
+            "title": "Accessibilité",
+            "description": "Informations sur l'accessibilité physique et numérique au NCAI.",
+            "intro": "L'art est pour tous. Nous respectons strictement les normes WCAG 2.2 AAA afin que l'expérience numérique du NCAI soit utilisable par des personnes aux capacités diverses. Sur place, notre espace est conçu pour être accueillant et accessible à toutes et à tous."
+        }
+    },
+    "Search": {
+        "placeholder": "Rechercher sur le NCAI...",
+        "close": "Fermer",
+        "noResults": "Aucun résultat pour",
+        "results": "Résultats",
+        "modalLabel": "Rechercher dans le contenu du site",
+        "filterAll": "Tous",
+        "filterExhibition": "Expositions",
+        "filterArtist": "Artistes",
+        "filterWork": "Œuvres",
+        "filterPost": "Chaîne",
+        "filterTextPiece": "Textes",
+        "filterProgram": "Éducation",
+        "filterEvent": "Événements",
+        "collectionItem": "Œuvre",
+        "work": "Œuvre",
+        "artist": "Artiste",
+        "exhibition": "Exposition",
+        "post": "Article",
+        "textPiece": "Texte",
+        "program": "Programme",
+        "event": "Événement"
+    },
+    "NotFound": {
+        "title": "Page introuvable",
+        "description": "La page que vous cherchez n'existe pas ou a été déplacée.",
+        "goHome": "Retour à l'accueil"
+    },
+    "Error": {
+        "title": "Une erreur s'est produite",
+        "description": "Une erreur inattendue est survenue. Nous en avons été informés et nous y travaillons.",
+        "tryAgain": "Réessayer",
+        "goHome": "Retour à l'accueil"
+    }
+}
