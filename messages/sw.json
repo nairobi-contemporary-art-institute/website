@@ -10,8 +10,9 @@
         "stayConnected": "Endelea Kuungana",
         "subscribeText": "Pokea sasisho za mara kwa mara kuhusu maonyesho yetu, programu za umma, na machapisho.",
         "viewExh": "Tazama Onyesho",
-        "exploreCollection": "Explore NCAI",
-        "viewFullCollection": "View Full Collection"
+        "exploreCollection": "Gundua NCAI",
+        "viewFullCollection": "Tazama Mkusanyiko Wote",
+        "loadMore": "Pakia Zaidi"
     },
     "Navigation": {
         "about": "Kuhusu",
@@ -22,7 +23,7 @@
         "collection": "Mkusanyiko",
         "education": "Elimu",
         "support": "Tuunge Mkono",
-        "aboutOverview": "Overview",
+        "aboutOverview": "Muhtasari",
         "aboutMission": "Dhamira",
         "aboutHistory": "Historia",
         "aboutTeam": "Timu",
@@ -140,7 +141,14 @@
             "searchPlaceholder": "Tafuta mkusanyiko",
             "noFilteredResults": "Hakuna vitu vilivyopatikana vinavyolingana na machujio yako.",
             "clearFilters": "Futa machujio yote",
-            "allLabel": "{label} Zote",
+            "filterArtist": "Msanii",
+            "filterArtworkTitle": "Jina la Kazi ya Sanaa",
+            "filterCategory": "Kategoria",
+            "filterBy": "Chuja kwa:",
+            "allArtists": "Wasanii Wote",
+            "allCategories": "Kategoria Zote",
+            "allYears": "Miaka Yote",
+            "worksWithImages": "Kazi zenye picha",
             "noImageAvailable": "Hakuna Picha Inayopatikana",
             "sortRandom": "Nasibu",
             "sortAZ": "Alfabeti",
@@ -208,7 +216,27 @@
             "filterAll": "Zote",
             "filterSchools": "Shule",
             "filterFamilies": "Familia",
-            "filterPublic": "Umma"
+            "filterPublic": "Umma",
+            "resources": {
+                "title": "Rasilimali",
+                "subtitle": "Vifaa vya Kujifunzia",
+                "description": "Karatasi za mazoezi, vifurushi vya shughuli na miongozo inayoweza kupakuliwa, iliyoandaliwa na NCAI na washirika wetu.",
+                "viewResource": "Tazama Rasilimali",
+                "download": "Pakua PDF",
+                "types": {
+                    "worksheet": "Karatasi ya Mazoezi",
+                    "activityPack": "Kifurushi cha Shughuli",
+                    "teacherGuide": "Mwongozo wa Mwalimu",
+                    "essay": "Insha",
+                    "reference": "Marejeleo"
+                },
+                "audiences": {
+                    "children": "Watoto na Familia",
+                    "youth": "Shule na Vijana",
+                    "adults": "Watu Wazima na Umma",
+                    "ujuzi": "Wataalamu wa UJUZI"
+                }
+            }
         },
         "contact": {
             "title": "Wasiliana nasi",
@@ -260,5 +288,16 @@
         "textPiece": "Maandishi",
         "program": "Programu",
         "event": "Tukio"
+    },
+    "NotFound": {
+        "title": "Ukurasa Haukupatikana",
+        "description": "Ukurasa unaoutafuta haupo au umehamishwa.",
+        "goHome": "Rudi Mwanzo"
+    },
+    "Error": {
+        "title": "Hitilafu Imetokea",
+        "description": "Hitilafu isiyotarajiwa imetokea. Tumearifiwa na tunaishughulikia.",
+        "tryAgain": "Jaribu Tena",
+        "goHome": "Rudi Mwanzo"
     }
 }

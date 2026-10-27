@@ -1,1 +1,303 @@
-{"HomePage": {"title": "NCAI (am)", "description": "Placeholder"}}
+{
+    "HomePage": {
+        "title": "የናይሮቢ ዘመናዊ ሥነ ጥበብ ተቋም",
+        "description": "በምሥራቅ አፍሪካ የዘመናዊ ሥነ ጥበብ እድገትና ጥበቃ ላይ ያተኮረ ለትርፍ ያልተቋቋመ የእይታ ጥበባት ማዕከል።",
+        "fromJournal": "ከመጽሔቱ",
+        "currentExh": "ወቅታዊ ኤግዚቢሽን",
+        "getInvolved": "ይሳተፉ",
+        "supportNcai": "NCAIን ይደግፉ",
+        "joinCommunity": "ማኅበረሰቡን ይቀላቀሉ",
+        "stayConnected": "ይከታተሉን",
+        "subscribeText": "ስለ ኤግዚቢሽኖቻችን፣ ሕዝባዊ ፕሮግራሞቻችንና ሕትመቶቻችን መደበኛ መረጃ ይቀበሉ።",
+        "viewExh": "ኤግዚቢሽኑን ይመልከቱ",
+        "exploreCollection": "NCAIን ያስሱ",
+        "viewFullCollection": "ሙሉ ስብስቡን ይመልከቱ",
+        "loadMore": "ተጨማሪ ጫን"
+    },
+    "Navigation": {
+        "about": "ስለ እኛ",
+        "visit": "ይጎብኙ",
+        "exhibitions": "ኤግዚቢሽኖች",
+        "channel": "ቻናል",
+        "texts": "ጽሑፎች",
+        "collection": "ስብስብ",
+        "education": "ትምህርት",
+        "support": "ይሳተፉ",
+        "aboutOverview": "አጠቃላይ እይታ",
+        "aboutMission": "ተልዕኮ",
+        "aboutHistory": "ታሪክ",
+        "aboutTeam": "ቡድን",
+        "aboutCareers": "የሥራ ዕድሎች"
+    },
+    "Pages": {
+        "about": {
+            "title": "ስለ NCAI",
+            "description": "NCAI በናይሮቢ የሚገኝ ለትርፍ ያልተቋቋመ የእይታ ጥበባት ማዕከል ነው።",
+            "teamFilters": {
+                "all": "ሁሉም",
+                "curator": "ኪዩሬሽን",
+                "education": "ትምህርትና ሕዝባዊ ፕሮግራሞች",
+                "administration": "አስተዳደር",
+                "management": "የጋለሪ አስተዳደር",
+                "frontdesk": "እንግዳ መቀበያ",
+                "production": "ፕሮዳክሽን",
+                "press": "ፕሬስ"
+            },
+            "teamCategories": {
+                "staff": "ቡድናችን",
+                "contributors": "አስተዋጽኦ አበርካቾችና ተባባሪዎች"
+            },
+            "historyTeaser": {
+                "title": "ጉዟችን",
+                "cta": "ታሪካችንን ያስሱ"
+            },
+            "missionTeaser": {
+                "title": "ተልዕኳችን",
+                "cta": "ተልዕኳችንን ያንብቡ"
+            },
+            "teamTeaser": {
+                "title": "ቡድኑ",
+                "cta": "ቡድኑን ይተዋወቁ"
+            },
+            "careersTeaser": {
+                "title": "ይቀላቀሉን",
+                "cta": "ክፍት የሥራ ቦታዎችን ይመልከቱ",
+                "empty": "በአሁኑ ጊዜ ክፍት የሥራ ቦታ የለም። እባክዎ ቆይተው ይመልከቱ ወይም ለአዳዲስ መረጃዎች የማኅበራዊ ሚዲያ ገጾቻችንን ይከተሉ።"
+            }
+        },
+        "visit": {
+            "title": "የጎብኚዎች መረጃ",
+            "description": "ጋለሪያችንን ለመጎብኘት የሚያስፈልግ መረጃ።",
+            "location": "አድራሻ",
+            "hours": "የመክፈቻ ሰዓታት",
+            "normalOpeningHours": "መደበኛ የመክፈቻ ሰዓታት",
+            "NORMALOPENINGHOURS": "መደበኛ የመክፈቻ ሰዓታት",
+            "locationLink": "እኛን ለማግኘት",
+            "overviewLink": "አጠቃላይ እይታ",
+            "directionsMapLink": "አቅጣጫና ካርታ",
+            "directionsLink": "አቅጣጫ",
+            "infoLink": "መረጃ",
+            "howToGetHere": "እንዴት መድረስ እንደሚቻል",
+            "visitorInfo": "የጎብኚዎች መረጃ",
+            "callUs": "ይደውሉልን",
+            "emailUs": "ኢሜይል ይላኩልን",
+            "closed": "ዝግ ነው",
+            "stayConnected": "ይከታተሉን",
+            "joinCommunity": "ማኅበረሰቡን ይቀላቀሉ",
+            "subscribeText": "ስለ ኤግዚቢሽኖቻችን፣ ሕዝባዊ ፕሮግራሞቻችንና ሕትመቶቻችን መደበኛ መረጃ ይቀበሉ።",
+            "subscribe": "ይመዝገቡ"
+        },
+        "exhibitions": {
+            "title": "ኤግዚቢሽኖች",
+            "description": "በNCAI ወቅታዊ፣ መጪና ያለፉ ኤግዚቢሽኖች።",
+            "untitled": "ርዕስ አልባ",
+            "untitledExhibition": "ርዕስ አልባ ኤግዚቢሽን",
+            "noImage": "ምስል የለም",
+            "current": "ወቅታዊ",
+            "upcoming": "መጪ",
+            "past": "ያለፉ",
+            "found": "ኤግዚቢሽኖች ተገኝተዋል።",
+            "notFound": "ምንም ኤግዚቢሽን አልተገኘም።"
+        },
+        "artists": {
+            "title": "አርቲስቶች",
+            "description": "በNCAI ሥራዎቻቸው የቀረቡ አርቲስቶች ማውጫ።",
+            "noArtists": "ለዚህ ምርጫ ምንም አርቲስት አልተገኘም።",
+            "relatedTitle": "ተመሳሳይ ትኩረት ያላቸው አርቲስቶች",
+            "projectsTitle": "የቅርብ ጊዜ፣ ወቅታዊና መጪ ፕሮጀክቶች",
+            "newsTitle": "ዜናና መረጃዎች",
+            "noNews": "በአሁኑ ጊዜ ምንም ዜና የለም።",
+            "museumExhibitionsTitle": "የሙዚየም ኤግዚቢሽኖች",
+            "ncaiExhibitionsTitle": "በNCAI የተካሄዱ ኤግዚቢሽኖች",
+            "worksArchive": "የሥራዎች ማኅደር",
+            "noImage": "ምስል የለም",
+            "exhibition": "ኤግዚቢሽን",
+            "artistLabel": "አርቲስት",
+            "artworkLabel": "የጥበብ ሥራ"
+        },
+        "collection": {
+            "title": "ስብስብ",
+            "description": "ስብስባችን በምሥራቅ አፍሪካ ላይ ያተኮረ፣ እያደገ የመጣ የዘመናዊና የወቅታዊ ጥበባዊ ፈጠራ ማኅደር ነው።",
+            "noItems": "የስብስብ ሥራዎች በቅርቡ ይጨመራሉ።",
+            "year": "ዓመት",
+            "medium": "የአሠራር ዘዴ",
+            "dimensions": "መጠን",
+            "edition": "እትም",
+            "acquisitionDate": "የተገኘበት ቀን",
+            "creditLine": "የምስጋና መግለጫ",
+            "notAvailable": "የለም",
+            "by": "–",
+            "untitled": "ርዕስ አልባ",
+            "unknownArtist": "ያልታወቀ አርቲስት",
+            "noImage": "ምስል የለም",
+            "detailsDescription": "በNCAI ስብስብ ውስጥ ያለው {title} የጥበብ ሥራ ዝርዝሮች።",
+            "onDisplayAt": "በ{location} ለዕይታ ቀርቧል",
+            "currentlyOnDisplay": "በአሁኑ ጊዜ ለዕይታ ቀርቧል",
+            "outOnLoan": "በውሰት ተሰጥቷል",
+            "artistsAZ": "አርቲስቶች A–Z",
+            "byArtist": "በአርቲስት",
+            "workLabel": "ሥራ",
+            "worksLabel": "ሥራዎች",
+            "searchPlaceholder": "ስብስቡን ይፈልጉ",
+            "noFilteredResults": "ከማጣሪያዎችዎ ጋር የሚዛመድ ምንም ነገር አልተገኘም።",
+            "clearFilters": "ሁሉንም ማጣሪያዎች አጽዳ",
+            "filterArtist": "አርቲስት",
+            "filterArtworkTitle": "የሥራው ርዕስ",
+            "filterCategory": "ምድብ",
+            "filterBy": "አጣራ በ፦",
+            "allArtists": "ሁሉም አርቲስቶች",
+            "allCategories": "ሁሉም ምድቦች",
+            "allYears": "ሁሉም ዓመታት",
+            "worksWithImages": "ምስል ያላቸው ሥራዎች",
+            "noImageAvailable": "ምስል አይገኝም",
+            "sortRandom": "በዘፈቀደ",
+            "sortAZ": "በፊደል ቅደም ተከተል",
+            "shuffleWorks": "ሥራዎቹን አቀላቅል",
+            "resetFilters": "ማጣሪያዎችን ዳግም አስጀምር",
+            "viewWorks": "ሥራዎቹን አሳይ",
+            "hideWorks": "ሥራዎቹን ደብቅ"
+        },
+        "channel": {
+            "title": "ቻናል",
+            "description": "ከNCAI የተገኙ ዜናዎች፣ ቃለ መጠይቆችና ግንዛቤዎች።",
+            "noContent": "ምንም ይዘት አልተገኘም",
+            "filterAll": "ሁሉም",
+            "filterFilm": "ፊልም",
+            "filterAudio": "ድምፅ",
+            "filterText": "ጽሑፍ"
+        },
+        "texts": {
+            "title": "ጽሑፎች",
+            "description": "በNCAI በየጊዜው የሚታተሙ መጣጥፎች፣ ቃለ መጠይቆች፣ ውይይቶችና የአርቲስቶች ጽሑፎች።",
+            "filterLabel": "ጽሑፎችን በዓይነት አጣራ",
+            "filterAll": "ሁሉም",
+            "types": {
+                "essay": {
+                    "singular": "መጣጥፍ",
+                    "plural": "መጣጥፎች"
+                },
+                "interview": {
+                    "singular": "ቃለ መጠይቅ",
+                    "plural": "ቃለ መጠይቆች"
+                },
+                "conversation": {
+                    "singular": "ውይይት",
+                    "plural": "ውይይቶች"
+                },
+                "artistWriting": {
+                    "singular": "የአርቲስት ጽሑፍ",
+                    "plural": "የአርቲስቶች ጽሑፎች"
+                }
+            },
+            "by": "ጸሐፊ፦",
+            "minRead": "የ{minutes} ደቂቃ ንባብ",
+            "notes": "ማስታወሻዎች",
+            "credit": "ምስጋና",
+            "relatedTexts": "ተዛማጅ ጽሑፎች",
+            "relatedExhibitions": "ተዛማጅ ኤግዚቢሽኖች",
+            "moreTexts": "ተጨማሪ ጽሑፎች",
+            "previousText": "ቀዳሚ ጽሑፍ",
+            "nextText": "ቀጣይ ጽሑፍ",
+            "textNavigation": "ተጨማሪ ጽሑፎች",
+            "pagination": "የገጽ ማሰሻ",
+            "newer": "አዳዲስ",
+            "older": "የቆዩ",
+            "pageOf": "ገጽ {page} ከ{total}",
+            "noContent": "እስካሁን ምንም ጽሑፍ አልታተመም።",
+            "noContentForType": "የዚህ ዓይነት ጽሑፍ እስካሁን የለም።",
+            "viewAll": "ሁሉንም ጽሑፎች ይመልከቱ",
+            "textsTitle": "ጽሑፎች"
+        },
+        "education": {
+            "title": "ትምህርት",
+            "description": "በNCAI የሚካሄዱ ዎርክሾፖች፣ ንግግሮችና ፕሮግራሞች።",
+            "allPrograms": "ሁሉም ፕሮግራሞች",
+            "noPrograms": "ምንም ፕሮግራም አልተገኘም",
+            "filterAll": "ሁሉም",
+            "filterSchools": "ትምህርት ቤቶች",
+            "filterFamilies": "ቤተሰቦች",
+            "filterPublic": "ለሕዝብ",
+            "resources": {
+                "title": "መርጃዎች",
+                "subtitle": "የመማሪያ ቁሳቁሶች",
+                "description": "በNCAI እና በአጋሮቻችን የተዘጋጁ ሊወርዱ የሚችሉ የሥራ ሉሆች፣ የእንቅስቃሴ ጥቅሎችና መመሪያዎች።",
+                "viewResource": "መርጃውን ይመልከቱ",
+                "download": "PDF አውርድ",
+                "types": {
+                    "worksheet": "የሥራ ሉህ",
+                    "activityPack": "የእንቅስቃሴ ጥቅል",
+                    "teacherGuide": "የመምህር መመሪያ",
+                    "essay": "መጣጥፍ",
+                    "reference": "ማጣቀሻ"
+                },
+                "audiences": {
+                    "children": "ልጆችና ቤተሰቦች",
+                    "youth": "ትምህርት ቤቶችና ወጣቶች",
+                    "adults": "አዋቂዎችና ሕዝብ",
+                    "ujuzi": "የUJUZI ባለሙያዎች"
+                }
+            }
+        },
+        "contact": {
+            "title": "ያግኙን",
+            "description": "የNCAI ቡድንን ያግኙ።"
+        },
+        "support": {
+            "title": "ይደግፉን",
+            "description": "በምሥራቅ አፍሪካ ዘመናዊ ሥነ ጥበብን ለመጠበቅና ለማሳደግ ያግዙን።"
+        },
+        "events": {
+            "title": "ዝግጅቶች",
+            "description": "በNCAI የሚካሄዱ ዎርክሾፖች፣ ንግግሮችና የመክፈቻ ሥነ ሥርዓቶች።",
+            "upcoming": "መጪ",
+            "past": "ያለፉ ዝግጅቶች",
+            "backToCalendar": "ወደ ቀን መቁጠሪያ ተመለስ",
+            "when": "መቼ",
+            "where": "የት",
+            "rsvp": "ይመዝገቡ",
+            "facilitators": "አመቻቾች",
+            "relatedExhibitions": "ተዛማጅ ኤግዚቢሽን",
+            "archived": "በማኅደር የተቀመጠ",
+            "noUpcoming": "በዚህ ምድብ ምንም መጪ ዝግጅት አልተገኘም።"
+        },
+        "accessibility": {
+            "title": "ተደራሽነት",
+            "description": "በNCAI ስላለው አካላዊና ዲጂታል ተደራሽነት መረጃ።",
+            "intro": "ጥበብ ለሁሉም ነው። የNCAI ዲጂታል ተሞክሮ የተለያየ ችሎታ ባላቸው ሰዎች ጥቅም ላይ እንዲውል የWCAG 2.2 AAA መስፈርቶችን በጥብቅ እንከተላለን። አካላዊ ቦታችንም ለሁሉም ምቹና ተደራሽ እንዲሆን ተደርጎ የተነደፈ ነው።"
+        }
+    },
+    "Search": {
+        "placeholder": "NCAIን ይፈልጉ...",
+        "close": "ዝጋ",
+        "noResults": "ምንም ውጤት አልተገኘም፦",
+        "results": "ውጤቶች",
+        "modalLabel": "የድረ-ገጹን ይዘት ይፈልጉ",
+        "filterAll": "ሁሉም",
+        "filterExhibition": "ኤግዚቢሽኖች",
+        "filterArtist": "አርቲስቶች",
+        "filterWork": "ሥራዎች",
+        "filterPost": "ቻናል",
+        "filterTextPiece": "ጽሑፎች",
+        "filterProgram": "ትምህርት",
+        "filterEvent": "ዝግጅቶች",
+        "collectionItem": "የጥበብ ሥራ",
+        "work": "የጥበብ ሥራ",
+        "artist": "አርቲስት",
+        "exhibition": "ኤግዚቢሽን",
+        "post": "ልጥፍ",
+        "textPiece": "ጽሑፍ",
+        "program": "ፕሮግራም",
+        "event": "ዝግጅት"
+    },
+    "NotFound": {
+        "title": "ገጹ አልተገኘም",
+        "description": "የሚፈልጉት ገጽ የለም ወይም ተዛውሯል።",
+        "goHome": "ወደ መነሻ ገጽ ተመለስ"
+    },
+    "Error": {
+        "title": "የሆነ ችግር ተፈጥሯል",
+        "description": "ያልተጠበቀ ስህተት ተከስቷል። ማሳወቂያ ደርሶናል፤ እየተመለከትነው ነው።",
+        "tryAgain": "እንደገና ይሞክሩ",
+        "goHome": "ወደ መነሻ ገጽ ተመለስ"
+    }
+}

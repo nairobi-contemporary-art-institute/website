@@ -1,7 +1,18 @@
 {
     "HomePage": {
         "title": "معهد نيروبي للفن المعاصر",
-        "description": "مساحة فنية بصرية غير ربحية مخصصة لنمو وحماية الفن المعاصر في شرق أفريقيا."
+        "description": "مساحة فنية بصرية غير ربحية مخصصة لنمو وحماية الفن المعاصر في شرق أفريقيا.",
+        "fromJournal": "من المجلة",
+        "currentExh": "المعرض الحالي",
+        "getInvolved": "شارك معنا",
+        "supportNcai": "ادعم المعهد",
+        "joinCommunity": "انضم إلى مجتمعنا",
+        "stayConnected": "ابقَ على تواصل",
+        "subscribeText": "تلقَّ تحديثات منتظمة حول معارضنا وبرامجنا العامة ومنشوراتنا.",
+        "viewExh": "عرض المعرض",
+        "exploreCollection": "استكشف المعهد",
+        "viewFullCollection": "عرض المجموعة كاملة",
+        "loadMore": "تحميل المزيد"
     },
     "Navigation": {
         "about": "حول",
@@ -11,28 +22,149 @@
         "texts": "نصوص",
         "collection": "المجموعة",
         "education": "التعليم",
-        "support": "ادعمنا"
+        "support": "ادعمنا",
+        "aboutOverview": "نظرة عامة",
+        "aboutMission": "رسالتنا",
+        "aboutHistory": "تاريخنا",
+        "aboutTeam": "الفريق",
+        "aboutCareers": "الوظائف"
     },
     "Pages": {
         "about": {
             "title": "حول المعهد",
-            "description": "معهد نيروبي للفن المعاصر (NCAI) هو مساحة فنية بصرية غير ربحية."
+            "description": "معهد نيروبي للفن المعاصر (NCAI) هو مساحة فنية بصرية غير ربحية.",
+            "teamFilters": {
+                "all": "الكل",
+                "curator": "القيّمون الفنيون",
+                "education": "التعليم والبرامج العامة",
+                "administration": "الإدارة",
+                "management": "إدارة المعرض",
+                "frontdesk": "الاستقبال",
+                "production": "الإنتاج",
+                "press": "الصحافة"
+            },
+            "teamCategories": {
+                "staff": "فريقنا",
+                "contributors": "المساهمون والمتعاونون"
+            },
+            "historyTeaser": {
+                "title": "مسيرتنا",
+                "cta": "اكتشف تاريخنا"
+            },
+            "missionTeaser": {
+                "title": "رسالتنا",
+                "cta": "اقرأ رسالتنا"
+            },
+            "teamTeaser": {
+                "title": "الفريق",
+                "cta": "تعرّف على الفريق"
+            },
+            "careersTeaser": {
+                "title": "انضم إلينا",
+                "cta": "عرض الفرص المتاحة",
+                "empty": "لا توجد وظائف شاغرة حاليًا. يُرجى المراجعة لاحقًا أو متابعة حساباتنا على وسائل التواصل الاجتماعي للاطلاع على المستجدات."
+            }
         },
         "visit": {
             "title": "زيارة المعهد",
-            "description": "معلومات حول كيفية زيارة مساحة المعرض الخاصة بنا."
+            "description": "معلومات حول كيفية زيارة مساحة المعرض الخاصة بنا.",
+            "location": "الموقع",
+            "hours": "ساعات العمل",
+            "normalOpeningHours": "ساعات العمل المعتادة",
+            "NORMALOPENINGHOURS": "ساعات العمل المعتادة",
+            "locationLink": "اعثر علينا",
+            "overviewLink": "نظرة عامة",
+            "directionsMapLink": "الاتجاهات والخريطة",
+            "directionsLink": "الاتجاهات",
+            "infoLink": "معلومات",
+            "howToGetHere": "كيفية الوصول",
+            "visitorInfo": "معلومات الزوار",
+            "callUs": "اتصل بنا",
+            "emailUs": "راسلنا عبر البريد الإلكتروني",
+            "closed": "مغلق",
+            "stayConnected": "ابقَ على تواصل",
+            "joinCommunity": "انضم إلى مجتمعنا",
+            "subscribeText": "تلقَّ تحديثات منتظمة حول معارضنا وبرامجنا العامة ومنشوراتنا.",
+            "subscribe": "اشترك"
         },
         "exhibitions": {
             "title": "المعارض",
-            "description": "المعارض الحالية والقادمة والسابقة في المعهد."
+            "description": "المعارض الحالية والقادمة والسابقة في المعهد.",
+            "untitled": "بدون عنوان",
+            "untitledExhibition": "معرض بدون عنوان",
+            "noImage": "لا توجد صورة",
+            "current": "الحالية",
+            "upcoming": "القادمة",
+            "past": "السابقة",
+            "found": "تم العثور على معارض.",
+            "notFound": "لم يتم العثور على معارض."
         },
         "artists": {
             "title": "الفنانون",
-            "description": "دليل الفنانين المشاركين في المعهد."
+            "description": "دليل الفنانين المشاركين في المعهد.",
+            "noArtists": "لم يتم العثور على فنانين لهذا الاختيار.",
+            "relatedTitle": "فنانون ذوو اهتمامات مشابهة",
+            "projectsTitle": "مشاريع حديثة وحالية وقادمة",
+            "newsTitle": "أخبار وموارد",
+            "noNews": "لا توجد أخبار متاحة حاليًا.",
+            "museumExhibitionsTitle": "معارض المتاحف",
+            "ncaiExhibitionsTitle": "معارض في المعهد",
+            "worksArchive": "أرشيف الأعمال",
+            "noImage": "لا توجد صورة",
+            "exhibition": "معرض",
+            "artistLabel": "الفنان",
+            "artworkLabel": "العمل الفني"
+        },
+        "collection": {
+            "title": "المجموعة",
+            "description": "مجموعتنا أرشيف متنامٍ للإنتاج الفني الحديث والمعاصر، يتمحور حول شرق أفريقيا.",
+            "noItems": "ستُضاف عناصر المجموعة قريبًا.",
+            "year": "السنة",
+            "medium": "الوسيط",
+            "dimensions": "الأبعاد",
+            "edition": "الإصدار",
+            "acquisitionDate": "تاريخ الاقتناء",
+            "creditLine": "بيان المصدر",
+            "notAvailable": "غير متوفر",
+            "by": "–",
+            "untitled": "بدون عنوان",
+            "unknownArtist": "فنان غير معروف",
+            "noImage": "لا توجد صورة",
+            "detailsDescription": "تفاصيل العمل الفني {title} في مجموعة المعهد.",
+            "onDisplayAt": "معروض في {location}",
+            "currentlyOnDisplay": "معروض حاليًا",
+            "outOnLoan": "مُعار",
+            "artistsAZ": "الفنانون أ–ي",
+            "byArtist": "حسب الفنان",
+            "workLabel": "عمل",
+            "worksLabel": "أعمال",
+            "searchPlaceholder": "ابحث في المجموعة",
+            "noFilteredResults": "لا توجد عناصر تطابق عوامل التصفية.",
+            "clearFilters": "مسح جميع عوامل التصفية",
+            "filterArtist": "الفنان",
+            "filterArtworkTitle": "عنوان العمل الفني",
+            "filterCategory": "الفئة",
+            "filterBy": "تصفية حسب:",
+            "allArtists": "جميع الفنانين",
+            "allCategories": "جميع الفئات",
+            "allYears": "جميع السنوات",
+            "worksWithImages": "أعمال مصوّرة",
+            "noImageAvailable": "لا تتوفر صورة",
+            "sortRandom": "ترتيب عشوائي",
+            "sortAZ": "ترتيب أبجدي",
+            "shuffleWorks": "خلط الأعمال",
+            "resetFilters": "إعادة ضبط عوامل التصفية",
+            "viewWorks": "عرض الأعمال",
+            "hideWorks": "إخفاء الأعمال"
         },
         "channel": {
             "title": "المجلة",
-            "description": "أخبار ومقابلات ورؤى من المعهد."
+            "description": "أخبار ومقابلات ورؤى من المعهد.",
+            "noContent": "لم يتم العثور على محتوى",
+            "filterAll": "الكل",
+            "filterFilm": "أفلام",
+            "filterAudio": "صوتيات",
+            "filterText": "نصوص"
         },
         "texts": {
             "title": "نصوص",
@@ -78,7 +210,33 @@
         },
         "education": {
             "title": "التعليم",
-            "description": "ورش عمل ومحادثات وبرامج في المعهد."
+            "description": "ورش عمل ومحادثات وبرامج في المعهد.",
+            "allPrograms": "جميع البرامج",
+            "noPrograms": "لم يتم العثور على برامج",
+            "filterAll": "الكل",
+            "filterSchools": "المدارس",
+            "filterFamilies": "العائلات",
+            "filterPublic": "الجمهور العام",
+            "resources": {
+                "title": "الموارد",
+                "subtitle": "مواد تعليمية",
+                "description": "أوراق عمل وحزم أنشطة وأدلة قابلة للتنزيل، أعدّها المعهد وشركاؤه.",
+                "viewResource": "عرض المورد",
+                "download": "تنزيل PDF",
+                "types": {
+                    "worksheet": "ورقة عمل",
+                    "activityPack": "حزمة أنشطة",
+                    "teacherGuide": "دليل المعلم",
+                    "essay": "مقالة",
+                    "reference": "مرجع"
+                },
+                "audiences": {
+                    "children": "الأطفال والعائلات",
+                    "youth": "المدارس والشباب",
+                    "adults": "البالغون والجمهور",
+                    "ujuzi": "مهنيو UJUZI"
+                }
+            }
         },
         "contact": {
             "title": "اتصل بنا",
@@ -87,6 +245,25 @@
         "support": {
             "title": "ادعمنا",
             "description": "ساعدنا في حماية وتنمية الفن المعاصر في شرق أفريقيا."
+        },
+        "events": {
+            "title": "الفعاليات",
+            "description": "ورش عمل ومحاضرات وافتتاحات في المعهد.",
+            "upcoming": "القادمة",
+            "past": "الفعاليات السابقة",
+            "backToCalendar": "العودة إلى التقويم",
+            "when": "متى",
+            "where": "أين",
+            "rsvp": "تأكيد الحضور / التسجيل",
+            "facilitators": "الميسّرون",
+            "relatedExhibitions": "في سياق",
+            "archived": "مؤرشف",
+            "noUpcoming": "لا توجد فعاليات قادمة في هذه الفئة."
+        },
+        "accessibility": {
+            "title": "إمكانية الوصول",
+            "description": "معلومات حول إمكانية الوصول المادي والرقمي في المعهد.",
+            "intro": "الفن للجميع. نلتزم التزامًا صارمًا بمعايير WCAG 2.2 AAA لضمان أن تكون تجربة المعهد الرقمية قابلة للاستخدام من قِبل أشخاص ذوي قدرات متنوعة. أما مساحتنا المادية فهي مصممة لتكون مرحِّبة ومتاحة للجميع."
         }
     },
     "Search": {
@@ -94,6 +271,33 @@
         "close": "إغلاق",
         "noResults": "لم يتم العثور على نتائج لـ",
         "results": "النتائج",
-        "modalLabel": "البحث في محتوى الموقع"
+        "modalLabel": "البحث في محتوى الموقع",
+        "filterAll": "الكل",
+        "filterExhibition": "المعارض",
+        "filterArtist": "الفنانون",
+        "filterWork": "الأعمال",
+        "filterPost": "المجلة",
+        "filterTextPiece": "نصوص",
+        "filterProgram": "التعليم",
+        "filterEvent": "الفعاليات",
+        "collectionItem": "عمل فني",
+        "work": "عمل فني",
+        "artist": "فنان",
+        "exhibition": "معرض",
+        "post": "مقال",
+        "textPiece": "نص",
+        "program": "برنامج",
+        "event": "فعالية"
+    },
+    "NotFound": {
+        "title": "الصفحة غير موجودة",
+        "description": "الصفحة التي تبحث عنها غير موجودة أو تم نقلها.",
+        "goHome": "العودة إلى الرئيسية"
+    },
+    "Error": {
+        "title": "حدث خطأ ما",
+        "description": "حدث خطأ غير متوقع. تم إبلاغنا ونعمل على معالجته.",
+        "tryAgain": "حاول مرة أخرى",
+        "goHome": "العودة إلى الرئيسية"
     }
 }

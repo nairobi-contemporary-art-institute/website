@@ -1,1 +1,303 @@
-{"HomePage": {"title": "NCAI (so)", "description": "Placeholder"}}
+{
+    "HomePage": {
+        "title": "Machadka Farshaxanka Casriga ah ee Nairobi",
+        "description": "Goob farshaxan muuqaal ah oo aan faa'iido doon ahayn, una heellan koritaanka iyo ilaalinta farshaxanka casriga ah ee Bariga Afrika.",
+        "fromJournal": "Ka Joornaalka",
+        "currentExh": "Bandhigga Hadda Socda",
+        "getInvolved": "Ka Qayb Qaado",
+        "supportNcai": "Taageer NCAI",
+        "joinCommunity": "Ku biir bulshada",
+        "stayConnected": "Nala Sii Xiriir",
+        "subscribeText": "Hel warar joogto ah oo ku saabsan bandhigyadeena, barnaamijyadeena dadweynaha iyo daabacaadyadeena.",
+        "viewExh": "Daawo Bandhigga",
+        "exploreCollection": "Baadh NCAI",
+        "viewFullCollection": "Daawo Ururinta Oo Dhan",
+        "loadMore": "Soo Rar Dheeraad"
+    },
+    "Navigation": {
+        "about": "Nagu Saabsan",
+        "visit": "Booqo",
+        "exhibitions": "Bandhigyo",
+        "channel": "Kanaalka",
+        "texts": "Qoraallo",
+        "collection": "Ururinta",
+        "education": "Waxbarasho",
+        "support": "Ka Qayb Qaado",
+        "aboutOverview": "Guudmar",
+        "aboutMission": "Hadafka",
+        "aboutHistory": "Taariikhda",
+        "aboutTeam": "Kooxda",
+        "aboutCareers": "Shaqooyin"
+    },
+    "Pages": {
+        "about": {
+            "title": "Ku Saabsan NCAI",
+            "description": "NCAI waa goob farshaxan muuqaal ah oo aan faa'iido doon ahayn, kuna taal Nairobi.",
+            "teamFilters": {
+                "all": "Dhammaan",
+                "curator": "Habaynta Bandhigyada",
+                "education": "Waxbarashada & Barnaamijyada Dadweynaha",
+                "administration": "Maamulka",
+                "management": "Maareynta Gallery-ga",
+                "frontdesk": "Soo Dhaweynta",
+                "production": "Wax Soo Saarka",
+                "press": "Saxaafadda"
+            },
+            "teamCategories": {
+                "staff": "Kooxdeena",
+                "contributors": "Ka Qayb Qaatayaasha & Wada Shaqeeyayaasha"
+            },
+            "historyTeaser": {
+                "title": "Safarkeenna",
+                "cta": "Baadh Taariikhdeena"
+            },
+            "missionTeaser": {
+                "title": "Hadafkeenna",
+                "cta": "Akhri Hadafkeenna"
+            },
+            "teamTeaser": {
+                "title": "Kooxda",
+                "cta": "La Kulan Kooxda"
+            },
+            "careersTeaser": {
+                "title": "Nagu Soo Biir",
+                "cta": "Daawo Fursadaha",
+                "empty": "Hadda ma jiraan jagooyin bannaan. Fadlan dib u soo eeg ama raac baraha bulshada si aad u hesho warar cusub."
+            }
+        },
+        "visit": {
+            "title": "Macluumaadka Booqdayaasha",
+            "description": "Macluumaad ku saabsan sida loo booqdo gallery-geena.",
+            "location": "Goobta",
+            "hours": "Saacadaha Furitaanka",
+            "normalOpeningHours": "Saacadaha Caadiga ah",
+            "NORMALOPENINGHOURS": "Saacadaha Caadiga ah",
+            "locationLink": "Na Hel",
+            "overviewLink": "Guudmar",
+            "directionsMapLink": "Tilmaamaha & Khariidadda",
+            "directionsLink": "Tilmaamaha",
+            "infoLink": "Macluumaad",
+            "howToGetHere": "Sida loo yimaado",
+            "visitorInfo": "Macluumaadka Booqdayaasha",
+            "callUs": "Na Soo Wac",
+            "emailUs": "Iimayl Noo Soo Dir",
+            "closed": "Xiran",
+            "stayConnected": "Nala Sii Xiriir",
+            "joinCommunity": "Ku biir bulshada",
+            "subscribeText": "Hel warar joogto ah oo ku saabsan bandhigyadeena, barnaamijyadeena dadweynaha iyo daabacaadyadeena.",
+            "subscribe": "Is Diiwaangeli"
+        },
+        "exhibitions": {
+            "title": "Bandhigyo",
+            "description": "Bandhigyada hadda socda, soo socda iyo kuwii hore ee NCAI.",
+            "untitled": "Cinwaan La'aan",
+            "untitledExhibition": "Bandhig Cinwaan La'aan ah",
+            "noImage": "Sawir Ma Jiro",
+            "current": "Hadda",
+            "upcoming": "Soo Socda",
+            "past": "Hore",
+            "found": "Bandhigyo la helay.",
+            "notFound": "Lama helin bandhigyo."
+        },
+        "artists": {
+            "title": "Fanaaniinta",
+            "description": "Liiska fanaaniinta lagu soo bandhigay NCAI.",
+            "noArtists": "Lama helin fanaaniin doorashadan.",
+            "relatedTitle": "Fanaaniin leh xiise la mid ah",
+            "projectsTitle": "Mashaariicda dhowaan, hadda iyo kuwa soo socda",
+            "newsTitle": "Warar & Kheyraad",
+            "noNews": "Hadda ma jiraan warar la heli karo.",
+            "museumExhibitionsTitle": "Bandhigyada Matxafyada",
+            "ncaiExhibitionsTitle": "Bandhigyada NCAI",
+            "worksArchive": "Kaydka Shaqooyinka",
+            "noImage": "Sawir Ma Jiro",
+            "exhibition": "Bandhig",
+            "artistLabel": "Fanaan",
+            "artworkLabel": "Shaqo Farshaxan"
+        },
+        "collection": {
+            "title": "Ururinta",
+            "description": "Ururintayadu waa kayd sii koraya oo ah wax soo saarka farshaxanka casriga ah iyo kan wakhtigan, diiradduna tahay Bariga Afrika.",
+            "noItems": "Walxaha ururinta dhowaan ayaa lagu dari doonaa.",
+            "year": "Sanadka",
+            "medium": "Qalabka",
+            "dimensions": "Cabbirka",
+            "edition": "Daabacaad",
+            "acquisitionDate": "Taariikhda La Helay",
+            "creditLine": "Xusitaanka",
+            "notAvailable": "Lama hayo",
+            "by": "–",
+            "untitled": "Cinwaan La'aan",
+            "unknownArtist": "Fanaan Aan La Aqoon",
+            "noImage": "Sawir Ma Jiro",
+            "detailsDescription": "Faahfaahinta shaqada farshaxanka {title} ee Ururinta NCAI.",
+            "onDisplayAt": "Lagu soo bandhigay {location}",
+            "currentlyOnDisplay": "Hadda la soo bandhigay",
+            "outOnLoan": "Amaah ahaan loo bixiyay",
+            "artistsAZ": "Fanaaniinta A–Z",
+            "byArtist": "Fanaan ahaan",
+            "workLabel": "shaqo",
+            "worksLabel": "shaqooyin",
+            "searchPlaceholder": "Ka raadi ururinta",
+            "noFilteredResults": "Lama helin walxo ku habboon shaandhaynta.",
+            "clearFilters": "Tirtir dhammaan shaandhaynta",
+            "filterArtist": "Fanaan",
+            "filterArtworkTitle": "Cinwaanka Shaqada",
+            "filterCategory": "Qaybta",
+            "filterBy": "Ku shaandhee:",
+            "allArtists": "Dhammaan Fanaaniinta",
+            "allCategories": "Dhammaan Qaybaha",
+            "allYears": "Dhammaan Sanadaha",
+            "worksWithImages": "Shaqooyin sawir leh",
+            "noImageAvailable": "Sawir lama heli karo",
+            "sortRandom": "Kala daadi",
+            "sortAZ": "Alifbeeto",
+            "shuffleWorks": "Isku qas shaqooyinka",
+            "resetFilters": "Dib u deji shaandhaynta",
+            "viewWorks": "Daawo Shaqooyinka",
+            "hideWorks": "Qari Shaqooyinka"
+        },
+        "channel": {
+            "title": "Kanaalka",
+            "description": "Warar, wareysiyo iyo aragtiyo ka yimid NCAI.",
+            "noContent": "Wax nuxur ah lama helin",
+            "filterAll": "Dhammaan",
+            "filterFilm": "Filim",
+            "filterAudio": "Cod",
+            "filterText": "Qoraal"
+        },
+        "texts": {
+            "title": "Qoraallo",
+            "description": "Maqaallo, wareysiyo, wada sheekaysi iyo qoraallada fanaaniinta, oo NCAI si joogto ah u daabaco.",
+            "filterLabel": "Ku shaandhee qoraallada nooca",
+            "filterAll": "Dhammaan",
+            "types": {
+                "essay": {
+                    "singular": "Maqaal",
+                    "plural": "Maqaallo"
+                },
+                "interview": {
+                    "singular": "Wareysi",
+                    "plural": "Wareysiyo"
+                },
+                "conversation": {
+                    "singular": "Wada sheekaysi",
+                    "plural": "Wada sheekaysiyo"
+                },
+                "artistWriting": {
+                    "singular": "Qoraalka fanaanka",
+                    "plural": "Qoraallada fanaaniinta"
+                }
+            },
+            "by": "Qoraa:",
+            "minRead": "{minutes} daqiiqo akhris",
+            "notes": "Faallooyin",
+            "credit": "Xusitaan",
+            "relatedTexts": "Qoraallo la xiriira",
+            "relatedExhibitions": "Bandhigyo la xiriira",
+            "moreTexts": "Qoraallo kale",
+            "previousText": "Qoraalkii hore",
+            "nextText": "Qoraalka xiga",
+            "textNavigation": "Qoraallo kale",
+            "pagination": "Bogagga",
+            "newer": "Kuwa cusub",
+            "older": "Kuwa hore",
+            "pageOf": "Bogga {page} ee {total}",
+            "noContent": "Weli wax qoraal ah lama daabicin.",
+            "noContentForType": "Weli ma jiraan qoraallo noocan ah.",
+            "viewAll": "Daawo dhammaan qoraallada",
+            "textsTitle": "Qoraallo"
+        },
+        "education": {
+            "title": "Waxbarasho",
+            "description": "Aqoon-is-weydaarsiyo, muxaadarooyin iyo barnaamijyo ka dhaca NCAI.",
+            "allPrograms": "Dhammaan Barnaamijyada",
+            "noPrograms": "Lama helin barnaamijyo",
+            "filterAll": "Dhammaan",
+            "filterSchools": "Iskuullada",
+            "filterFamilies": "Qoysaska",
+            "filterPublic": "Dadweynaha",
+            "resources": {
+                "title": "Kheyraad",
+                "subtitle": "Agabka Waxbarashada",
+                "description": "Xaashiyo shaqo, xirmooyin hawleed iyo hagayaal la soo dejisan karo, oo ay diyaariyeen NCAI iyo la-hawlgalayaasheenu.",
+                "viewResource": "Daawo Kheyraadka",
+                "download": "Soo Deji PDF",
+                "types": {
+                    "worksheet": "Xaashi Shaqo",
+                    "activityPack": "Xirmo Hawleed",
+                    "teacherGuide": "Hagaha Macallinka",
+                    "essay": "Maqaal",
+                    "reference": "Tixraac"
+                },
+                "audiences": {
+                    "children": "Carruurta & Qoysaska",
+                    "youth": "Iskuullada & Dhallinyarada",
+                    "adults": "Dadka Waaweyn & Dadweynaha",
+                    "ujuzi": "Xirfadlayaasha UJUZI"
+                }
+            }
+        },
+        "contact": {
+            "title": "La Xiriir",
+            "description": "La xiriir kooxda NCAI."
+        },
+        "support": {
+            "title": "Na Taageer",
+            "description": "Naga caawi ilaalinta iyo kobcinta farshaxanka casriga ah ee Bariga Afrika."
+        },
+        "events": {
+            "title": "Dhacdooyin",
+            "description": "Aqoon-is-weydaarsiyo, muxaadarooyin iyo furitaanno ka dhaca NCAI.",
+            "upcoming": "Soo Socda",
+            "past": "Dhacdooyinkii Hore",
+            "backToCalendar": "Ku Noqo Jadwalka",
+            "when": "Goorma",
+            "where": "Halkee",
+            "rsvp": "Is Diiwaangeli",
+            "facilitators": "Hagayaasha",
+            "relatedExhibitions": "Xiriirka la leh",
+            "archived": "La kaydiyay",
+            "noUpcoming": "Lama helin dhacdooyin soo socda qaybtan."
+        },
+        "accessibility": {
+            "title": "Helitaanka",
+            "description": "Macluumaad ku saabsan helitaanka jireed iyo dijitaal ee NCAI.",
+            "intro": "Farshaxanku qof kasta wuu u furan yahay. Waxaan si adag u raacnaa heerarka WCAG 2.2 AAA si khibradda dijitaalka ah ee NCAI ay u isticmaali karaan dad leh awoodo kala duwan. Goobteenna jireed sidoo kale waxaa loo naqshadeeyay inay noqoto mid soo dhaweyn leh oo qof walba u furan."
+        }
+    },
+    "Search": {
+        "placeholder": "Ka raadi NCAI...",
+        "close": "Xir",
+        "noResults": "Natiijo lama helin:",
+        "results": "Natiijooyin",
+        "modalLabel": "Raadi nuxurka bogga",
+        "filterAll": "Dhammaan",
+        "filterExhibition": "Bandhigyo",
+        "filterArtist": "Fanaaniin",
+        "filterWork": "Shaqooyin",
+        "filterPost": "Kanaalka",
+        "filterTextPiece": "Qoraallo",
+        "filterProgram": "Waxbarasho",
+        "filterEvent": "Dhacdooyin",
+        "collectionItem": "Shaqo Farshaxan",
+        "work": "Shaqo Farshaxan",
+        "artist": "Fanaan",
+        "exhibition": "Bandhig",
+        "post": "Boost",
+        "textPiece": "Qoraal",
+        "program": "Barnaamij",
+        "event": "Dhacdo"
+    },
+    "NotFound": {
+        "title": "Bogga Lama Helin",
+        "description": "Bogga aad raadinayso ma jiro ama waa la wareejiyay.",
+        "goHome": "Ku Noqo Bogga Hore"
+    },
+    "Error": {
+        "title": "Wax baa khaldamay",
+        "description": "Khalad lama filaan ah ayaa dhacay. Waa nala ogeysiiyay, waanu eegaynaa.",
+        "tryAgain": "Isku Day Mar Kale",
+        "goHome": "Ku Noqo Bogga Hore"
+    }
+}
