@@ -89,7 +89,7 @@ export const exhibition = defineType({
                     name: 'url',
                     title: 'Enquiry URL / Email',
                     type: 'string',
-                    description: 'Can be a link (https://...) or an email (mailto:info@ncai.art)',
+                    description: 'Can be a link (https://...) or an email (mailto:info@ncai254.com)',
                 }),
                 defineField({
                     name: 'openInNewTab',

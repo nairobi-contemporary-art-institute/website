@@ -63,7 +63,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       default: siteTitle,
     },
     description: siteDescription,
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://ncai.art'),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ncai254.com'),
     openGraph: {
       type: 'website',
       siteName: siteTitle,
