@@ -2,7 +2,7 @@ import { urlFor } from '@/sanity/lib/image'
 import { getLocalizedValue } from '@/sanity/lib/utils'
 import { TEXT_TYPE_LABELS, isTextType, type Speaker } from '@/lib/texts'
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://ncai.art'
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ncai254.com'
 
 const ORGANIZATION = {
     '@type': 'Organization',

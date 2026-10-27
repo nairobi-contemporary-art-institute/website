@@ -3,7 +3,7 @@ import { sanityFetch } from '@/sanity/lib/client'
 import { SITEMAP_QUERY } from '@/sanity/lib/queries'
 import { MetadataRoute } from 'next'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://ncai.art'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ncai254.com'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // 1. Static Routes
