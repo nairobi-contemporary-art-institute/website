@@ -39,3 +39,15 @@ _Avoid_: happening
 **Publication**:
 A printed or digital edition with cover art.
 _Avoid_: book, paper
+
+**Page container**:
+The one outer column every section sits in. Sets where content starts on the left and the page padding. One width (max 1440px, centred) and one padding set (24px phone, 48px desktop) site-wide, shared by header, page sections and footer; sections do not choose their own.
+_Avoid_: wrapper, layout width, `max-w-*` per section
+
+**Measure**:
+The width of a block of reading text, set by line length (45-75 characters), not by the page. Chosen from the named set in `globals.css` (`measure`, `measure-wide`, or full container width) and sits inside the Page container.
+_Avoid_: container, max-width, column width
+
+**Lede**:
+The large introductory paragraph under a page title. Uses the `measure` width; today's `max-w-2xl` ledes should move to it.
+_Avoid_: intro, subtitle, hero text

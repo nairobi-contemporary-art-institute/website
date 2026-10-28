@@ -39,6 +39,8 @@ Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Tailwind CSS v4 
 
 **Images.** Build URLs with `urlFor()` from `src/sanity/lib/image.ts`. Remote image hosts are whitelisted in `next.config.ts` (`cdn.sanity.io`, `images.unsplash.com`, etc.) — add new hosts there or `next/image` will reject them.
 
+**Design principles.** UI follows Swiss-style rules in `docs/DESIGN_PRINCIPLES.md` (8px base, 12-col grid, one shared container, 3 hierarchy levels, Inter only, reduction first). Check new layouts against its review checklist; fix misalignment in the system (container/tokens), not with per-section nudges. See ADR 0005.
+
 **Redirects.** `/support` and `/membership` permanently redirect to `/get-involved` (in `next.config.ts`).
 
 ## Agent skills
