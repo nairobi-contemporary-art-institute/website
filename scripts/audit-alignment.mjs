@@ -126,7 +126,16 @@ for (const [family, paths] of Object.entries(PAGES)) {
                 try {
                     const res = await page.goto(url, { waitUntil: 'networkidle', timeout: 90000 })
                     if (!res || res.status() >= 400) err = `HTTP ${res ? res.status() : '?'}`
-                    else m = await page.evaluate(measure, [isRtl, width]).catch((e) => ((err = e.message), null))
+                    else {
+                        const run = () => page.evaluate(measure, [isRtl, width]).catch((e) => ((err = e.message), null))
+                        m = await run()
+                        // A page compiling for the first time in dev can be measured before it renders:
+                        // if the header, content or footer is missing, reload once and measure again.
+                        if (m && (m.header === null || m.content === null || m.footer === null)) {
+                            await page.reload({ waitUntil: 'networkidle', timeout: 90000 })
+                            m = await run()
+                        }
+                    }
                 } catch (e) {
                     err = e.message.split('\n')[0]
                 }
