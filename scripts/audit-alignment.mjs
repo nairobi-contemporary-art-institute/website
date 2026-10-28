@@ -59,9 +59,10 @@ function scanLegacy() {
             if (statSync(p).isDirectory()) walk(p)
             else if (p.endsWith('.tsx')) {
                 readFileSync(p, 'utf8').split('\n').forEach((line, i) => {
-                    // `container` as a CSS class token (not containerRef etc.)
-                    const m = line.match(/["'`\s]container(?=[\s"'`])[^"'`]*/)
-                    if (m && !m[0].includes('page-container')) uses.push({ kind: 'class', at: `${p}:${i + 1}` })
+                    // `container` as a CSS class token inside a string literal (not comments,
+                    // containerRef, page-container, max-w-container, etc.)
+                    const code = line.replace(/\/\/.*$/, '').replace(/\/\*.*?\*\//g, '')
+                    if (/["'`][^"'`]*(?<![-\w])container(?![-\w])[^"'`]*["'`]/.test(code)) uses.push({ kind: 'class', at: `${p}:${i + 1}` })
                     // GridSystem pulls in the legacy class via this prop
                     // (skip the component that defines the prop: its own `"container"` string is counted above)
                     if (!p.endsWith('Grid/Grid.tsx') && /unstable_useContainer(?!=\{false\})(\s|>|=\{true\})/.test(line)) uses.push({ kind: 'grid-prop', at: `${p}:${i + 1}` })

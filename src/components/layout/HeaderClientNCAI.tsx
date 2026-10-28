@@ -301,7 +301,7 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                     onMouseEnter={() => setIsHoveringHeader(true)}
                     onMouseLeave={() => setIsHoveringHeader(false)}
                 >
-                    <div className="flex justify-between items-stretch px-6 md:px-12 transition-all duration-300 relative z-50">
+                    <div className="page-container flex justify-between items-stretch transition-all duration-300 relative z-50">
                         {/* Logo Section */}
                         <div className="flex items-center py-6">
                             <Link

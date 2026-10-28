@@ -140,7 +140,7 @@ export function SearchModal({ isOpen, onClose, locale }: { isOpen: boolean; onCl
                 >
                     {/* Header */}
                     <div className="border-b border-white/10">
-                        <div className="container mx-auto px-6 py-10 flex items-center justify-between">
+                        <div className="page-container py-10 flex items-center justify-between">
                             <div className="flex-1 max-w-4xl relative">
                                 <input
                                     ref={inputRef}
@@ -170,7 +170,7 @@ export function SearchModal({ isOpen, onClose, locale }: { isOpen: boolean; onCl
                         </div>
 
                         {/* Category Filters */}
-                        <div className="container mx-auto px-6 pb-6">
+                        <div className="page-container pb-6">
                             <div className="flex flex-wrap gap-2">
                                 {CATEGORIES.map((cat) => (
                                     <button
@@ -200,63 +200,65 @@ export function SearchModal({ isOpen, onClose, locale }: { isOpen: boolean; onCl
 
                     {/* Results */}
                     <div className="flex-1 overflow-y-auto pt-10 pb-20">
-                        <div className="container mx-auto px-6 max-w-4xl">
-                            {query.trim().length >= 2 && filteredResults.length === 0 && !isLoading && (
-                                <div className="py-20 text-center text-white/70 italic text-xl">
-                                    {t('noResults')} "{query}"
-                                </div>
-                            )}
+                        <div className="page-container">
+                            <div className="max-w-4xl">
+                                {query.trim().length >= 2 && filteredResults.length === 0 && !isLoading && (
+                                    <div className="py-20 text-center text-white/70 italic text-xl">
+                                        {t('noResults')} "{query}"
+                                    </div>
+                                )}
 
-                            <div className="grid grid-cols-1 gap-8">
-                                {filteredResults.map((result) => (
-                                    <Link
-                                        key={result._id}
-                                        href={getRoute(result._type, result.slug)}
-                                        onClick={() => {
-                                            trackEvent({
-                                                action: 'search_result_click',
-                                                category: 'discovery',
-                                                label: `${result._type}: ${result.slug}`
-                                            })
-                                            onClose()
-                                        }}
-                                        className="search-result-item group flex items-center gap-6 p-4 hover:bg-white/5 transition-colors border-b border-white/5 last:border-0"
-                                    >
-                                        <div className="w-20 h-20 relative bg-white/5 overflow-hidden shrink-0">
-                                            {result.image ? (
-                                                <Image
-                                                    src={urlFor(result.image).width(160).height(160).url()}
-                                                    alt=""
-                                                    fill
-                                                    className="object-cover"
-                                                    sizes="80px"
-                                                />
-                                            ) : (
-                                                <div className="w-full h-full flex items-center justify-center text-[10px] text-white/20 capitalize font-bold tracking-widest">
-                                                    {result._type}
-                                                </div>
-                                            )}
-                                        </div>
-                                        <div className="flex flex-col">
-                                            <span className="text-[10px] capitalize tracking-widest text-ochre font-bold mb-1">
-                                                {t.has(result._type) ? t(result._type) : result._type}
-                                            </span>
-                                            <h3 className="text-2xl font-bold text-white leading-tight group-hover:text-ochre transition-colors">
-                                                {getLocalizedTitle(result.title)}
-                                            </h3>
-                                            {result.artistName && (
-                                                <p className="text-sm text-white/60 mt-1">
-                                                    {getLocalizedTitle(result.artistName)}
-                                                </p>
-                                            )}
-                                            {result.date && (
-                                                <span className="text-xs text-white/60 mt-1">
-                                                    {new Date(result.date).toLocaleDateString(locale, { year: 'numeric', month: 'short' })}
+                                <div className="grid grid-cols-1 gap-8">
+                                    {filteredResults.map((result) => (
+                                        <Link
+                                            key={result._id}
+                                            href={getRoute(result._type, result.slug)}
+                                            onClick={() => {
+                                                trackEvent({
+                                                    action: 'search_result_click',
+                                                    category: 'discovery',
+                                                    label: `${result._type}: ${result.slug}`
+                                                })
+                                                onClose()
+                                            }}
+                                            className="search-result-item group flex items-center gap-6 p-4 hover:bg-white/5 transition-colors border-b border-white/5 last:border-0"
+                                        >
+                                            <div className="w-20 h-20 relative bg-white/5 overflow-hidden shrink-0">
+                                                {result.image ? (
+                                                    <Image
+                                                        src={urlFor(result.image).width(160).height(160).url()}
+                                                        alt=""
+                                                        fill
+                                                        className="object-cover"
+                                                        sizes="80px"
+                                                    />
+                                                ) : (
+                                                    <div className="w-full h-full flex items-center justify-center text-[10px] text-white/20 capitalize font-bold tracking-widest">
+                                                        {result._type}
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <div className="flex flex-col">
+                                                <span className="text-[10px] capitalize tracking-widest text-ochre font-bold mb-1">
+                                                    {t.has(result._type) ? t(result._type) : result._type}
                                                 </span>
-                                            )}
-                                        </div>
-                                    </Link>
-                                ))}
+                                                <h3 className="text-2xl font-bold text-white leading-tight group-hover:text-ochre transition-colors">
+                                                    {getLocalizedTitle(result.title)}
+                                                </h3>
+                                                {result.artistName && (
+                                                    <p className="text-sm text-white/60 mt-1">
+                                                        {getLocalizedTitle(result.artistName)}
+                                                    </p>
+                                                )}
+                                                {result.date && (
+                                                    <span className="text-xs text-white/60 mt-1">
+                                                        {new Date(result.date).toLocaleDateString(locale, { year: 'numeric', month: 'short' })}
+                                                    </span>
+                                                )}
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>

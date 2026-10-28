@@ -301,7 +301,7 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
                     onMouseEnter={() => setIsHoveringHeader(true)}
                     onMouseLeave={() => setIsHoveringHeader(false)}
                 >
-                    <div ref={headerInnerRef} className="flex justify-between items-stretch px-6 md:px-12 transition-all duration-300 relative z-50">
+                    <div ref={headerInnerRef} className="page-container flex justify-between items-stretch transition-all duration-300 relative z-50">
                         {/* Logo Section */}
                         <div ref={logoContainerRef} className={cn(
                             "flex items-center py-6 overflow-hidden transition-colors duration-300",
