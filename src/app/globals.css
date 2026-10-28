@@ -1,5 +1,7 @@
 @layer inherited;
 @import "tailwindcss";
+/* Emit page-container even before any page uses it (migration batches adopt it per page family). */
+@source inline("page-container");
 
 @theme {
   /* Color Palette - Institutional Minimalism */
@@ -124,6 +126,21 @@
 @utility measure-wide {
   width: min(var(--container-reading-wide), 100% - 2 * var(--spacing-section-clamp));
   margin-inline: auto;
+}
+
+/* Page container: one outer column for header, page sections and footer.
+   Max 1440px, centred, 24px side padding on phones and 48px from md up.
+   Replaces the legacy `.container` below; never put both on one element.
+   Rules: docs/DESIGN_PRINCIPLES.md */
+@utility page-container {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+
+  @media (width >= 48rem) {
+    padding-inline: 3rem;
+  }
 }
 
 @layer components {
