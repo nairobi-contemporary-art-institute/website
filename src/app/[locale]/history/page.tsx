@@ -25,7 +25,7 @@ export default async function HistoryPage({ params }: { params: Promise<{ locale
     const t = await getMessages({ locale }) as any
 
     return (
-        <div className="page-container py-24 min-h-screen">
+        <div className="page-container page-header-padding pb-24 min-h-screen">
             <header className="max-w-4xl mb-20">
                 <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-charcoal mb-6">
                     {t.Pages?.history?.title || 'Our History'}
