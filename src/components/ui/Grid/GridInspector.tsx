@@ -31,7 +31,7 @@ export function GridInspector() {
     return (
         <div className="fixed inset-0 z-[9999] pointer-events-none">
             {/* Global Grid Overlay */}
-            <div className="container mx-auto px-6 h-full">
+            <div className="page-container h-full">
                 <div
                     className="w-full h-full relative grid-guide-lines grid-guide-lines-rows"
                     style={{

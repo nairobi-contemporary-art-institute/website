@@ -52,7 +52,7 @@ export function GridSystem({
         <GridSystemContext.Provider value={{ debug, guideWidth }}>
             <div className={cn(
                 "relative transition-all duration-300",
-                unstable_useContainer && "container",
+                unstable_useContainer && "page-container",
                 className
             )}>
                 {debug && (
