@@ -303,7 +303,7 @@ export function WhatsOnClient({ items, locale, noticeBarSettings, showYearNav = 
                 
                 {/* Notice Bar */}
                 {config.enabled && (
-                    <div className="w-full py-4 px-4 flex justify-between items-center text-sm md:text-base border-b border-[#eee]">
+                    <div className="page-container py-4 flex justify-between items-center text-sm md:text-base border-b border-[#eee]">
                         {showAutoClosing || customLabel ? (
                             <>
                                 <span className="font-bold">
@@ -396,7 +396,7 @@ export function WhatsOnClient({ items, locale, noticeBarSettings, showYearNav = 
 
                 {archiveItems.length > 0 && (
                     <div id="archive" className="w-full py-16 pb-24 md:pb-32 lg:pb-40">
-                        <div className="container mb-8">
+                        <div className="page-container mb-8">
                             <div className="flex flex-col md:flex-row md:items-baseline justify-between border-b border-[#1a1a1a]/10 pb-4 gap-4">
                                 <h2 className="text-lg md:text-xl font-bold uppercase tracking-widest text-[#1a1a1a]">
                                     Archive
@@ -407,7 +407,7 @@ export function WhatsOnClient({ items, locale, noticeBarSettings, showYearNav = 
                             </div>
                         </div>
 
-                        <div className="container">
+                        <div className="page-container">
                             <div className={cn(showYearNav && "flex gap-8 lg:gap-12 items-start")}>
                                 {showYearNav && archiveYears.length > 0 && (
                                     <nav aria-label="Jump to year" className="hidden md:block sticky top-28 shrink-0 w-16 lg:w-20 max-h-[calc(100vh-8rem)] overflow-y-auto">

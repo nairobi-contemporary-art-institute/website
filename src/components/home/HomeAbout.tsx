@@ -26,7 +26,7 @@ export function HomeAbout({ data, locale }: HomeAboutProps) {
 
   return (
     <section className="bg-white py-24 md:py-32 border-b border-charcoal/10">
-      <div className="container mx-auto px-6 md:px-12">
+      <div className="page-container">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-24">
 
           {/* Left column: heading + intro + Library & Archive (when image present) */}

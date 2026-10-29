@@ -29,7 +29,7 @@ export function WhatsOnFilter({
         <div className="bg-[#2A2A2A] text-white w-full">
             {/* Top Row: Event Type Selector */}
             <div className="">
-                <div className="container py-0 flex items-center">
+                <div className="page-container flex items-center">
                     <div className="flex flex-wrap w-full md:w-fit border-l border-t border-[#333]">
                         {categories.map((cat) => {
                             const isActive = activeCategory === cat || (cat === 'All' && !activeCategory);
@@ -56,7 +56,7 @@ export function WhatsOnFilter({
             <div className="flex flex-col md:flex-row md:items-end w-full relative">
                 
                 {/* Left Side: Checkboxes - within container */}
-                <div className="container py-6 md:pt-10 md:pb-8 flex-1">
+                <div className="page-container py-6 md:pt-10 md:pb-8 flex-1">
                     <div className="flex flex-wrap items-center gap-x-6 gap-y-4 text-xs md:text-sm text-[#ccc] font-medium tracking-wide">
                         <span className="uppercase text-[10px] md:text-xs font-bold tracking-widest text-white mr-2">
                             Event suitable for:

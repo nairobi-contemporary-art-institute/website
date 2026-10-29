@@ -51,7 +51,7 @@ export default async function AccessibilityPage({ params }: Props) {
 
     return (
         <div className="min-h-screen bg-stone-50/20 pb-32">
-            <header className="container mx-auto px-section-clamp page-header-padding pb-20 border-b border-charcoal/5">
+            <header className="page-container page-header-padding pb-20 border-b border-charcoal/5">
                 <div className="max-w-4xl">
                     <h1 className="text-6xl md:text-8xl font-light tracking-tighter text-charcoal mb-8">
                         {title}
@@ -70,7 +70,7 @@ export default async function AccessibilityPage({ params }: Props) {
 
             {/* Accessibility Sections */}
             {pageData?.sections && pageData.sections.length > 0 && (
-                <section className="px-section-clamp container mx-auto px-section-clamp py-24">
+                <section className="page-container py-24">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-24">
                         {pageData.sections.map((section: any, i: number) => (
                             <div key={i} className="flex flex-col space-y-12">
@@ -102,8 +102,8 @@ export default async function AccessibilityPage({ params }: Props) {
 
             {/* Venue Guide Section */}
             {pageData?.venueGuide && (
-                <section className="px-section-clamp bg-charcoal text-white py-32 mt-12">
-                    <div className="container mx-auto px-section-clamp">
+                <section className="bg-charcoal text-white py-32 mt-12">
+                    <div className="page-container">
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
                             <div className="space-y-12">
                                 <div className="space-y-6">
@@ -147,7 +147,7 @@ export default async function AccessibilityPage({ params }: Props) {
 
             {/* Facility Policies */}
             {pageData?.policies && pageData.policies.length > 0 && (
-                <section className="px-section-clamp container mx-auto px-section-clamp py-32">
+                <section className="page-container py-32">
                     <div className="max-w-4xl">
                         <h2 className="text-xs font-bold capitalize tracking-[0.3em] text-umber border-b border-umber/10 pb-4 inline-block mb-16">
                             Facility Policies
@@ -169,7 +169,7 @@ export default async function AccessibilityPage({ params }: Props) {
             )}
 
             {/* Back to Home CTA */}
-            <div className="container mx-auto px-section-clamp pt-12 pb-24 border-t border-charcoal/5">
+            <div className="page-container pt-12 pb-24 border-t border-charcoal/5">
                 <Link
                     href={`/${locale}`}
                     className="text-xs font-mono capitalize tracking-[0.2em] text-charcoal/70 hover:text-charcoal transition-colors border-b border-transparent hover:border-charcoal/20 pb-1"

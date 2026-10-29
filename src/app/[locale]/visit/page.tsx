@@ -50,8 +50,8 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
 
             {/* Announcement Banner */}
             {announcement?.show && (
-                <div className="bg-amber-50 border-y border-amber-200 py-4 px-section-clamp">
-                    <div className="container mx-auto flex items-start gap-4 text-amber-900">
+                <div className="bg-amber-50 border-y border-amber-200 py-4">
+                    <div className="page-container flex items-start gap-4 text-amber-900">
                         <TooltipIcon className="w-5 h-5 mt-0.5 flex-shrink-0 rounded-circle" size={20} />
                         <div>
                             <h3 className="font-bold text-sm capitalize tracking-wider mb-1">
@@ -66,11 +66,11 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
             )}
 
             {/* Sticky Sidebar & Main Content Wrapper */}
-            <div className="container mx-auto px-section-clamp py-20 pt-8 lg:pt-20">
-                <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+            <div className="page-container py-20 pt-8 lg:pt-20">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
                     
                     {/* Mobile Navigation (Horizontal Scroll) */}
-                    <div className="lg:hidden col-span-12 -mx-section-clamp px-section-clamp overflow-x-auto scrollbar-hide pb-4 mb-4 border-b border-black/5">
+                    <div className="lg:hidden col-span-full min-w-0 -mx-6 px-6 md:-mx-12 md:px-12 overflow-x-auto scrollbar-hide pb-4 mb-4 border-b border-black/5">
                         <nav className="flex flex-nowrap items-center gap-6 text-[11px] font-bold capitalize tracking-widest text-charcoal/70">
                             <a href="#overview" className="hover:text-charcoal transition-colors whitespace-nowrap">{t('overviewLink') || 'Overview'}</a>
                             <a href="#opening-hours" className="hover:text-charcoal transition-colors whitespace-nowrap">{t('hours') || 'Opening Hours'}</a>
@@ -120,7 +120,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                     </div>
 
                     {/* Main Content Column */}
-                    <div className="col-span-12 lg:col-span-9 space-y-24 lg:space-y-32 overflow-visible">
+                    <div className="col-span-full min-w-0 lg:col-span-9 space-y-24 lg:space-y-32 overflow-visible">
 
                 {/* Overview Anchor */}
                 <div id="overview" className="scroll-mt-[120px]" />
@@ -444,12 +444,12 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
     </div>
 
             {/* Newsletter CTA / Keep in touch area */}
-            <section className="bg-[#1C1C1C] text-white py-32 px-section-clamp mt-32 relative overflow-hidden">
+            <section className="bg-[#1C1C1C] text-white py-32 mt-32 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-[60%] h-full pointer-events-none opacity-10">
                     <div className="w-full h-full border-l border-white/5 skew-x-[-20deg] translate-x-1/2" />
                 </div>
                 
-                <div className="container mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
+                <div className="page-container grid lg:grid-cols-2 gap-16 items-center relative z-10">
                     <div className="space-y-8">
                          <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/70">{t('stayConnected')}</h2>
                          <p className="text-5xl md:text-8xl font-normal tracking-tighter leading-[0.9]">

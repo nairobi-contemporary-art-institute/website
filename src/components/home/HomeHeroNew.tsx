@@ -298,12 +298,14 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                             </div>
 
                             {/* Text content layer (z-20) */}
-                            <div className={`absolute inset-0 z-20 flex px-6 md:px-12 lg:px-16 ${justifyClass}`}>
-                                <div 
-                                    className="h-full flex items-center"
-                                    style={{ width: `${contentWidth}%` }}
-                                >
-                                    <SlideContent slide={slide} locale={locale} textOnRight={textOnRight} />
+                            <div className="absolute inset-0 z-20">
+                                <div className={`page-container h-full flex ${justifyClass}`}>
+                                    <div
+                                        className="h-full flex items-center"
+                                        style={{ width: `${contentWidth}%` }}
+                                    >
+                                        <SlideContent slide={slide} locale={locale} textOnRight={textOnRight} />
+                                    </div>
                                 </div>
                             </div>
                         </div>

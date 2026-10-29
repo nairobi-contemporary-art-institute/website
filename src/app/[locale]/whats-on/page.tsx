@@ -68,7 +68,7 @@ export default async function WhatsOnPage({ params }: { params: Promise<{ locale
         <div className="min-h-screen bg-stone-50">
             {/* Minimal Header could go here, but Filter starts sticky typically */}
             <div className="bg-black w-full border-b border-[#333]">
-                <div className="text-ivory page-header-padding pb-16 px-4 lg:px-8 max-w-[1600px] mx-auto">
+                <div className="page-container text-ivory page-header-padding pb-16">
                     <h1 className="text-6xl md:text-8xl font-bold tracking-tighter">What's On</h1>
                 </div>
             </div>
