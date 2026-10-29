@@ -41,8 +41,8 @@ const TOLERANCE = 1 // px
 const PAGES = {
     home: ['/'],
     shell: ['/contact'],
-    programme: ['/education', '/education/curator-masterclass', '/events', '/channel', '/channel/artist-portrait-elimo-njau', '/whats-on'],
-    editorial: ['/texts', '/texts/sample-artist-writing', '/exhibitions', '/history', '/artists', '/artists/adamu', '/collection'],
+    programme: ['/education', '/education/curator-masterclass', '/events', '/events/accessibility-in-art-spaces-workshop', '/channel', '/channel/artist-portrait-elimo-njau', '/whats-on'],
+    editorial: ['/texts', '/texts/sample-artist-writing', '/exhibitions', '/exhibitions/kaspale-syowia-kyambi', '/history', '/artists', '/artists/adamu', '/collection'],
     information: ['/visit', '/contact', '/accessibility'],
     about: ['/about', '/get-involved'],
 }
