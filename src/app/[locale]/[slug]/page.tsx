@@ -35,7 +35,7 @@ export default async function GenericPage({ params }: { params: Promise<{ locale
 
     return (
         <div className="bg-ivory min-h-screen page-header-padding">
-            <GridSystem unstable_useContainer className="py-24 px-section-clamp">
+            <GridSystem unstable_useContainer className="py-24">
                 <Grid columns={{ sm: 1, md: 12 }} gap={64}>
                     <GridCell column={{ sm: 1, md: 12 }} className="p-0 items-start justify-start">
                         <div className="max-w-4xl space-y-12">

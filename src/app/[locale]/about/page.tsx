@@ -111,7 +111,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             <AboutSubNav locale={locale} />
 
             {/* Main Content (Contained) */}
-            <GridSystem unstable_useContainer className="py-24 px-section-clamp">
+            <GridSystem unstable_useContainer className="py-24">
                 <Grid columns={{ sm: 1, md: 12 }} gap={64}>
                     {/* Sidebar Column (3 columns) */}
                     <GridCell column={{ sm: 1, md: 3 }} className="p-0 hidden md:block">
