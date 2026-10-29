@@ -61,12 +61,13 @@ lint_output.txt
 dist/
 build/
 
-# Documentation (selective: agent contract + ADRs are tracked)
+# Documentation (selective: agent contract, ADRs and design principles are tracked)
 docs/*
 !docs/agents/
 !docs/agents/**
 !docs/adr/
 !docs/adr/**
+!docs/DESIGN_PRINCIPLES.md
 ARCHITECTURE.md
 STACK.md
 ROADMAP.md
