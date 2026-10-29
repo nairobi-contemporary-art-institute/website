@@ -46,7 +46,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
         <div className="space-y-24">
             {/* Top Section: Split Layout */}
             <header className="border-b border-charcoal/5 pb-8 mb-16">
-                <h1 className="text-[39px] leading-[46px] font-bold text-charcoal tracking-tight">
+                <h1 className="text-4xl leading-[46px] font-bold text-charcoal tracking-tight">
                     {name}
                 </h1>
             </header>
@@ -56,7 +56,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                 <div className="md:col-span-5 space-y-12">
                     {bio && (
                         <div className="space-y-4">
-                            <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-charcoal/70 border-b border-charcoal/5 pb-2">
+                            <h2 className="text-xs font-black uppercase tracking-widest text-charcoal/70 border-b border-charcoal/5 pb-2">
                                 Brief Bio
                             </h2>
                             <div className="text-base leading-[20px] font-normal text-charcoal/80">
@@ -82,7 +82,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                                 />
                             </div>
                             {artist.image.caption && (
-                                <div className="text-[10px] text-charcoal/70 mt-4 leading-relaxed border-l border-rich-blue/20 pl-3 italic">
+                                <div className="text-xs text-charcoal/70 mt-4 leading-relaxed border-l border-rich-blue/20 pl-4 italic">
                                     <ArtCaption content={getLocalizedValue(artist.image.caption, locale)} />
                                 </div>
                             )}
@@ -96,7 +96,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                         
                         return (
                             <div className="pt-16 max-w-none">
-                                <h2 className="text-[26px] leading-[31px] font-bold text-charcoal mb-8 tracking-tight border-b border-charcoal/5 pb-4">
+                                <h2 className="text-2xl leading-[31px] font-bold text-charcoal mb-8 tracking-tight border-b border-charcoal/5 pb-4">
                                     More on {name}
                                 </h2>
                                 <div className="text-base leading-[20px] font-normal text-charcoal/80">
@@ -138,7 +138,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
             {/* Section: Forthcoming Projects */}
             {artist.forthcomingProjects && artist.forthcomingProjects.length > 0 && (
                 <section className="space-y-8 pt-24 border-t border-rich-blue/20">
-                    <h2 className="text-[26px] leading-[31px] font-bold text-charcoal tracking-tight">{t('projectsTitle')}</h2>
+                    <h2 className="text-2xl leading-[31px] font-bold text-charcoal tracking-tight">{t('projectsTitle')}</h2>
                     <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {artist.forthcomingProjects.map((project: any, i: number) => {
                             const pTitle = getLocalizedValueAsString(project.title, locale)
@@ -162,7 +162,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
             {/* NCAI Exhibitions Section */}
             {allExhibitions.length > 0 && (
                 <section className={cn("space-y-12", !artist.forthcomingProjects && "pt-24 border-t border-rich-blue/20")}>
-                    <h2 className="text-[26px] leading-[31px] font-bold text-charcoal tracking-tight">{t('ncaiExhibitionsTitle')}</h2>
+                    <h2 className="text-2xl leading-[31px] font-bold text-charcoal tracking-tight">{t('ncaiExhibitionsTitle')}</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         {allExhibitions.map((exhibition: any) => {
                             const exTitle = getLocalizedValueAsString(exhibition.title, locale)
@@ -192,7 +192,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                                     <div className="space-y-1">
                                         <h3 className="font-bold text-charcoal leading-snug group-hover:underline italic transition-all decoration-charcoal/20">{exTitle}</h3>
                                         {exhibition.startDate && (
-                                            <p className="text-[10px] tracking-widest text-charcoal/70 mt-2 font-medium">
+                                            <p className="text-xs tracking-widest text-charcoal/70 mt-2 font-medium">
                                                 {new Date(exhibition.startDate).getFullYear()}
                                             </p>
                                         )}
@@ -207,7 +207,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
             {/* Texts by or about the artist */}
             {artist.texts && artist.texts.length > 0 && (
                 <section aria-labelledby="artist-texts" className="space-y-12 border-t border-rich-blue/10 pt-24">
-                    <h2 id="artist-texts" className="text-[26px] leading-[31px] font-bold text-charcoal tracking-tight">{tTexts('textsTitle')}</h2>
+                    <h2 id="artist-texts" className="text-2xl leading-[31px] font-bold text-charcoal tracking-tight">{tTexts('textsTitle')}</h2>
                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
                         {artist.texts.map((text: any) => (
                             <li key={text._id}>
@@ -221,7 +221,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
             {/* Artist Posts Section (Channel Content) */}
             {artist.artistPosts && artist.artistPosts.length > 0 && (
                 <section className="space-y-12 border-t border-rich-blue/10 pt-24">
-                    <h2 className="text-[26px] leading-[31px] font-bold text-charcoal tracking-tight">From the Channel</h2>
+                    <h2 className="text-2xl leading-[31px] font-bold text-charcoal tracking-tight">From the Channel</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {artist.artistPosts.map((post: any) => {
                             const postTitle = getLocalizedValueAsString(post.title, locale)
@@ -241,13 +241,13 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                                             />
                                         )}
                                     </div>
-                                    <div className="flex-1 space-y-3">
-                                        <div className="flex items-center gap-3">
-                                            <span className="text-[10px] uppercase tracking-widest text-ochre font-bold">
+                                    <div className="flex-1 space-y-4">
+                                        <div className="flex items-center gap-4">
+                                            <span className="text-xs uppercase tracking-widest text-ochre font-bold">
                                                 {post.mediaType === 'film' ? 'VIDEO' : 'STORY'}
                                             </span>
                                             {post.publishedAt && (
-                                                <span className="text-[10px] text-charcoal/70 uppercase tracking-widest">
+                                                <span className="text-xs text-charcoal/70 uppercase tracking-widest">
                                                     {new Date(post.publishedAt).toLocaleDateString(locale, { month: 'short', year: 'numeric' })}
                                                 </span>
                                             )}
@@ -274,7 +274,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
             {/* Bottom Section: Museum Exhibitions */}
             {artist.museumExhibitions && artist.museumExhibitions.length > 0 && (
                 <section className="space-y-12">
-                    <h2 className="text-[26px] leading-[31px] font-bold text-charcoal tracking-tight">{t('museumExhibitionsTitle')}</h2>
+                    <h2 className="text-2xl leading-[31px] font-bold text-charcoal tracking-tight">{t('museumExhibitionsTitle')}</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         {artist.museumExhibitions.map((exh: any, i: number) => {
                             const caption = getLocalizedValueAsString(exh.image?.caption, locale)
@@ -284,7 +284,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                             
                             return (
                                 <div key={i} className="group space-y-4">
-                                    <div className="space-y-3">
+                                    <div className="space-y-4">
                                         <div className="aspect-[4/3] relative bg-charcoal/5 overflow-hidden">
                                             {exh.image?.asset && (
                                                 <Image
@@ -299,7 +299,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                                             )}
                                         </div>
                                         {caption && (
-                                            <div className="text-[10px] text-charcoal/70 leading-relaxed border-l border-rich-blue/20 pl-3">
+                                            <div className="text-xs text-charcoal/70 leading-relaxed border-l border-rich-blue/20 pl-4">
                                                 <ArtCaption content={caption} />
                                             </div>
                                         )}
@@ -318,7 +318,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
             {/* Related Artists Section */}
             {artist.relatedArtists && artist.relatedArtists.length > 0 && (
                 <section className="space-y-12">
-                    <h2 className="text-[26px] leading-[31px] font-bold text-charcoal tracking-tight">{t('relatedTitle')}</h2>
+                    <h2 className="text-2xl leading-[31px] font-bold text-charcoal tracking-tight">{t('relatedTitle')}</h2>
                     <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8">
                         {artist.relatedArtists.map((related: any) => {
                             const relName = getLocalizedValueAsString(related.name, locale)
@@ -326,7 +326,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                                 <Link
                                     key={related._id}
                                     href={`/${locale}/artists/${related.slug || ''}`}
-                                    className="group space-y-3"
+                                    className="group space-y-4"
                                 >
                                     <div className="aspect-[3/4] relative bg-charcoal/5 overflow-hidden">
                                         {related.image?.asset ? (
@@ -360,7 +360,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
             {/* Section: News / Links (Moved to bottom) */}
             {(artist.news && artist.news.length > 0) && (
                 <section className="space-y-12 pt-12 border-t border-rich-blue/10">
-                    <h2 className="text-[26px] leading-[31px] font-bold text-charcoal tracking-tight">{t('newsTitle')}</h2>
+                    <h2 className="text-2xl leading-[31px] font-bold text-charcoal tracking-tight">{t('newsTitle')}</h2>
                     <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
                         {artist.news.map((item: any, i: number) => (
                             <li key={i} className="group">
@@ -372,7 +372,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
                                 >
                                     <h3 className="font-bold text-charcoal leading-snug">{getLocalizedValueAsString(item.title, locale)}</h3>
                                     {item.date && (
-                                        <p className="text-[10px] tracking-widest text-charcoal/70 mt-3 font-bold uppercase">{new Date(item.date).toLocaleDateString(locale, { month: 'short', year: 'numeric' })}</p>
+                                        <p className="text-xs tracking-widest text-charcoal/70 mt-4 font-bold uppercase">{new Date(item.date).toLocaleDateString(locale, { month: 'short', year: 'numeric' })}</p>
                                     )}
                                 </a>
                             </li>

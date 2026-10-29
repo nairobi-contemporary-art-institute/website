@@ -49,10 +49,10 @@ export function MediaModule({
 
             <div className="relative z-10 w-full flex items-center justify-between gap-8">
                 <div className="flex flex-col gap-2">
-                    <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tighter leading-[0.8] max-w-3xl transition-transform duration-500 group-hover:translate-x-2">
+                    <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tighter leading-display max-w-3xl transition-transform duration-500 group-hover:translate-x-2">
                         {title}
                     </h3>
-                    <div className="flex items-center gap-3 text-white/70 font-bold uppercase tracking-[0.2em] text-[10px] mt-6 transition-all duration-300 group-hover:text-white group-hover:gap-5">
+                    <div className="flex items-center gap-4 text-white/70 font-bold uppercase tracking-widest text-xs mt-6 transition-all duration-300 group-hover:text-white group-hover:gap-6">
                         <span className="w-8 h-[1px] bg-white/30 group-hover:w-12 transition-all" />
                         <span>{label}</span>
                         <LucideArrowRight className="w-3 h-3" />

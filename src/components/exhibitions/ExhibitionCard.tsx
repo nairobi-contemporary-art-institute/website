@@ -43,7 +43,7 @@ export function ExhibitionCard({ exhibition, locale, variant = 'default' }: Exhi
                     )}
                 </div>
                 <div className="flex flex-col gap-4 max-w-4xl">
-                    <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-charcoal group-hover:text-amber-900 transition-colors capitalize leading-[0.9]">
+                    <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-charcoal group-hover:text-amber-900 transition-colors capitalize leading-display">
                         {title || t('untitledExhibition')}
                     </h2>
                     <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
@@ -112,7 +112,7 @@ export function ExhibitionCard({ exhibition, locale, variant = 'default' }: Exhi
                     {formatExhibitionDate(exhibition.startDate, exhibition.endDate, locale)}
                 </p>
                 {exhibition.location && (
-                    <p className="text-[10px] capitalize tracking-widest text-umber/80 mt-1">
+                    <p className="text-xs capitalize tracking-widest text-umber/80 mt-1">
                         {getLocalizedValue(exhibition.location, locale)}
                     </p>
                 )}

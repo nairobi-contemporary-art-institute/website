@@ -141,9 +141,9 @@ export function ImmersiveTimeline({ events, locale }: ImmersiveTimelineProps) {
                     <h1>
                         <Link href="/" className="text-3xl font-black tracking-tighter hover:text-ochre transition-all duration-500">NCAI / WING</Link>
                     </h1>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-4">
                         <div className="w-8 h-px bg-ochre/40" />
-                        <span className="text-[9px] capitalize tracking-[0.5em] text-ivory/70 font-bold">Spatial History Repository</span>
+                        <span className="text-xs capitalize tracking-widest text-ivory/70 font-bold">Spatial History Repository</span>
                     </div>
                 </div>
 
@@ -163,7 +163,7 @@ export function ImmersiveTimeline({ events, locale }: ImmersiveTimelineProps) {
                                 }}
                                 aria-label={`Jump to ${d.label}`}
                                 className={cn(
-                                    "text-[10px] font-bold tracking-[0.4em] capitalize transition-all duration-500 hover:text-ochre relative py-2",
+                                    "text-xs font-bold tracking-widest capitalize transition-all duration-500 hover:text-ochre relative py-2",
                                     events[currentIndex].year.startsWith(d.label.substring(0, 3))
                                         ? "text-ochre scale-110"
                                         : "text-ivory/60"
@@ -182,7 +182,7 @@ export function ImmersiveTimeline({ events, locale }: ImmersiveTimelineProps) {
                         className="group flex items-center gap-4 bg-ivory/5 hover:bg-ochre px-8 py-4 border border-ivory/10 hover:border-ochre transition-all duration-500 rounded-full"
                         onClick={() => trackEvent({ action: 'timeline_exit', category: 'engagement', label: 'header' })}
                     >
-                        <span className="text-[10px] font-bold capitalize tracking-[0.4em] group-hover:text-charcoal transition-colors">Exit Wing</span>
+                        <span className="text-xs font-bold capitalize tracking-widest group-hover:text-charcoal transition-colors">Exit Wing</span>
                         <X className="w-5 h-5 group-hover:rotate-90 group-hover:text-charcoal transition-all duration-500" />
                     </Link>
                 </div>
@@ -257,11 +257,11 @@ export function ImmersiveTimeline({ events, locale }: ImmersiveTimelineProps) {
                                         {/* Captions / Meta info floating below media */}
                                         <div className="mt-8 flex gap-12">
                                             <div className="flex flex-col gap-1">
-                                                <span className="text-[10px] font-bold capitalize tracking-widest text-ochre">Collection Ref</span>
+                                                <span className="text-xs font-bold capitalize tracking-widest text-ochre">Collection Ref</span>
                                                 <span className="text-xs font-mono opacity-40 capitalize tracking-tighter">ARCH-00{i + 1}-EP{event.year}</span>
                                             </div>
                                             <div className="flex flex-col gap-1">
-                                                <span className="text-[10px] font-bold capitalize tracking-widest text-ochre">Location</span>
+                                                <span className="text-xs font-bold capitalize tracking-widest text-ochre">Location</span>
                                                 <span className="text-xs font-mono opacity-40 capitalize tracking-tighter">Nairobi, KE</span>
                                             </div>
                                         </div>
@@ -274,7 +274,7 @@ export function ImmersiveTimeline({ events, locale }: ImmersiveTimelineProps) {
                                                 <div className="w-16 h-px bg-ochre" />
                                                 <span className="text-2xl font-black text-ochre tracking-tight font-mono">{event.year}</span>
                                             </div>
-                                            <h2 className="text-6xl md:text-[8rem] font-black leading-[0.8] tracking-tighter capitalize break-words">
+                                            <h2 className="text-6xl md:text-9xl font-black leading-display tracking-tighter capitalize break-words">
                                                 {getLocalizedValueAsString(event.title, locale)}
                                             </h2>
                                         </div>
@@ -287,7 +287,7 @@ export function ImmersiveTimeline({ events, locale }: ImmersiveTimelineProps) {
 
                                         <button
                                             onClick={() => setSelectedEvent(event)}
-                                            className="inline-flex items-center gap-4 text-xs font-bold capitalize tracking-[0.3em] group"
+                                            className="inline-flex items-center gap-4 text-xs font-bold capitalize tracking-widest group"
                                         >
                                             <span className="group-hover:text-ochre transition-colors">View Details</span>
                                             <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:border-ochre group-hover:bg-ochre group-hover:text-charcoal transition-all">
@@ -334,7 +334,7 @@ export function ImmersiveTimeline({ events, locale }: ImmersiveTimelineProps) {
                                 {events[currentIndex].year}
                             </span>
                         </div>
-                        <div className="text-[10px] font-bold capitalize tracking-[0.5em] text-ochre pl-2">
+                        <div className="text-xs font-bold capitalize tracking-widest text-ochre pl-2">
                             Phase {currentIndex + 1} / {events.length}
                         </div>
                     </div>
@@ -373,7 +373,7 @@ export function ImmersiveTimeline({ events, locale }: ImmersiveTimelineProps) {
                         }
                     }}>
                     <div className="progress-active absolute top-0 left-0 h-1 bg-ochre transition-all duration-300" style={{ width: '0%' }} />
-                    <div className="absolute -top-1 right-0 text-[8px] font-mono opacity-70">END ARCHIVE</div>
+                    <div className="absolute -top-1 right-0 text-xs font-mono opacity-70">END ARCHIVE</div>
                 </div>
             </div>
 
@@ -417,9 +417,9 @@ export function ImmersiveTimeline({ events, locale }: ImmersiveTimelineProps) {
                                     </div>
                                 </div>
                                 <div className="pt-8 border-t border-white/10 flex flex-wrap gap-4">
-                                    <span className="px-4 py-2 bg-white/5 border border-white/10 text-[10px] capitalize tracking-widest font-bold">Post-Independence</span>
-                                    <span className="px-4 py-2 bg-white/5 border border-white/10 text-[10px] capitalize tracking-widest font-bold">Nairobi Modernism</span>
-                                    <span className="px-4 py-2 bg-white/5 border border-white/10 text-[10px] capitalize tracking-widest font-bold">Archival Item</span>
+                                    <span className="px-4 py-2 bg-white/5 border border-white/10 text-xs capitalize tracking-widest font-bold">Post-Independence</span>
+                                    <span className="px-4 py-2 bg-white/5 border border-white/10 text-xs capitalize tracking-widest font-bold">Nairobi Modernism</span>
+                                    <span className="px-4 py-2 bg-white/5 border border-white/10 text-xs capitalize tracking-widest font-bold">Archival Item</span>
                                 </div>
                             </div>
                         </div>

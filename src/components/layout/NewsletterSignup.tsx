@@ -84,7 +84,7 @@ export function NewsletterSignup() {
                     className="mt-1 h-3 w-3 rounded-none border-sun-bleached-paper/30 bg-transparent text-white focus:ring-white"
                     required
                 />
-                <label htmlFor="newsletter-consent" className="text-[10px] text-sun-bleached-paper/60 leading-tight">
+                <label htmlFor="newsletter-consent" className="text-xs text-sun-bleached-paper/60 leading-tight">
                     By subscribing, you agree to our{' '}
                     <Link href="/privacy" className="underline hover:text-white">
                         Privacy Policy

@@ -86,11 +86,11 @@ export function ChannelFilter({ posts, locale }: ChannelFilterProps) {
 
                 {availableSeries.length > 0 && (
                     <div className="flex flex-wrap gap-2 items-center">
-                        <span className="text-[10px] capitalize tracking-widest text-charcoal/70 font-bold mr-2">Series:</span>
+                        <span className="text-xs capitalize tracking-widest text-charcoal/70 font-bold mr-2">Series:</span>
                         <button
                             onClick={() => handleFilterChange(filter, 'all')}
                             className={cn(
-                                "px-3 py-1 text-[10px] capitalize tracking-widest font-bold border transition-all",
+                                "px-4 py-1 text-xs capitalize tracking-widest font-bold border transition-all",
                                 seriesFilter === 'all'
                                     ? "bg-charcoal text-white border-charcoal"
                                     : "text-charcoal/70 border-charcoal/10 hover:border-charcoal/30"
@@ -103,7 +103,7 @@ export function ChannelFilter({ posts, locale }: ChannelFilterProps) {
                                 key={series._id}
                                 onClick={() => handleFilterChange(filter, series.slug)}
                                 className={cn(
-                                    "px-3 py-1 text-[10px] capitalize tracking-widest font-bold border transition-all",
+                                    "px-4 py-1 text-xs capitalize tracking-widest font-bold border transition-all",
                                     seriesFilter === series.slug
                                         ? "bg-amber-800 text-white border-amber-800"
                                         : "text-charcoal/70 border-charcoal/10 hover:border-charcoal/30"

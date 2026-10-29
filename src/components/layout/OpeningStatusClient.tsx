@@ -43,7 +43,7 @@ export function OpeningStatusClient({ locale, hours, specialStatus, weather }: O
         const message = getLocalizedValue(specialStatus.message, locale);
         return (
             <div 
-                className="w-full text-center py-2 px-4 text-[10px] font-bold uppercase tracking-[0.2em] transition-colors duration-300 bg-black text-ivory group-[.notice-theme-dark]/header:bg-white group-[.notice-theme-dark]/header:text-charcoal"
+                className="w-full text-center py-2 px-4 text-xs font-bold uppercase tracking-widest transition-colors duration-300 bg-black text-ivory group-[.notice-theme-dark]/header:bg-white group-[.notice-theme-dark]/header:text-charcoal"
                 suppressHydrationWarning
             >
                 {message ? (typeof message === 'string' ? message : portableTextToPlainText(message)) : "Temporarily Closed"}
@@ -107,7 +107,7 @@ export function OpeningStatusClient({ locale, hours, specialStatus, weather }: O
 
     return (
         <div 
-            className="w-full py-1.5 flex justify-center items-center gap-4 text-[10px] uppercase tracking-[0.2em] font-bold transition-colors duration-300 bg-black text-ivory/90 group-[.notice-theme-dark]/header:bg-white group-[.notice-theme-dark]/header:text-charcoal"
+            className="w-full py-1.5 flex justify-center items-center gap-4 text-xs uppercase tracking-widest font-bold transition-colors duration-300 bg-black text-ivory/90 group-[.notice-theme-dark]/header:bg-white group-[.notice-theme-dark]/header:text-charcoal"
             suppressHydrationWarning
         >
             <div className="flex items-center gap-2" suppressHydrationWarning>

@@ -56,7 +56,7 @@ export function GridSystem({
                 className
             )}>
                 {debug && (
-                    <div className="absolute -top-6 right-0 flex gap-4 text-[10px] font-mono text-rich-blue/40 capitalize tracking-widest pointer-events-none">
+                    <div className="absolute -top-6 right-0 flex gap-4 text-xs font-mono text-rich-blue/40 capitalize tracking-widest pointer-events-none">
                         <span>Grid Debug Mode</span>
                         <div className="flex items-center gap-1">
                             <div className="w-2 h-2 bg-rich-blue/10 outline outline-1 outline-rich-blue/20" />

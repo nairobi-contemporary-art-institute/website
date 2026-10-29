@@ -38,7 +38,7 @@ export default async function PublicationsPage({ params }: PublicationsPageProps
     return (
         <div className="bg-sun-bleached-paper min-h-screen page-header-padding pb-24 px-section-clamp md:px-20">
             <header className="max-w-4xl mb-24">
-                <p className="text-xs font-bold text-deep-umber/80 capitalize tracking-[0.4em] mb-4">
+                <p className="text-xs font-bold text-deep-umber/80 capitalize tracking-widest mb-4">
                     {pageLabel}
                 </p>
                 <h1 className="text-heading-72 text-charcoal mb-8">
@@ -79,7 +79,7 @@ export default async function PublicationsPage({ params }: PublicationsPageProps
                                 <h3 className="text-lg font-bold text-charcoal capitalize tracking-tighter">
                                     {getLocalizedValue(pub.title, locale)}
                                 </h3>
-                                <div className="text-[10px] text-deep-umber/80 capitalize tracking-widest italic prose-details">
+                                <div className="text-xs text-deep-umber/80 capitalize tracking-widest italic prose-details">
                                     {typeof getLocalizedValue(pub.details, locale) === 'string' ? (
                                         <p>{getLocalizedValue(pub.details, locale) as unknown as string}</p>
                                     ) : (
@@ -104,7 +104,7 @@ export default async function PublicationsPage({ params }: PublicationsPageProps
             {ctaSection && (
                 <section className="px-section-clamp bg-charcoal text-sun-bleached-paper p-12 md:p-24">
                     <div className="max-w-3xl">
-                        <p className="text-xs font-bold text-sun-bleached-paper/70 capitalize tracking-[0.4em] mb-4">
+                        <p className="text-xs font-bold text-sun-bleached-paper/70 capitalize tracking-widest mb-4">
                             {getLocalizedValue(ctaSection.label, locale)}
                         </p>
                         <h2 className="text-4xl md:text-6xl font-light tracking-tighter mb-8 italic">

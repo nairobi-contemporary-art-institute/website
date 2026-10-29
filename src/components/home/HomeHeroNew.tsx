@@ -121,7 +121,7 @@ function SlideContent({ slide, locale, textOnRight = true }: { slide: HeroSlide;
                 )}>
                     {preHeading && (
                         <p 
-                            className="text-[10px] md:text-xs uppercase tracking-[0.3em] font-bold mb-3 md:mb-4 opacity-60"
+                            className="text-xs md:text-xs uppercase tracking-widest font-bold mb-4 md:mb-4 opacity-60"
                             style={textStyle}
                         >
                             {preHeading}
@@ -129,7 +129,7 @@ function SlideContent({ slide, locale, textOnRight = true }: { slide: HeroSlide;
                     )}
                     {title && (
                         <h1 
-                            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[0.9] mb-4 md:mb-6 capitalize transition-all duration-700"
+                            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-display mb-4 md:mb-6 capitalize transition-all duration-700"
                             style={textStyle}
                         >
                             {title.split('\n').map((line, i) => (

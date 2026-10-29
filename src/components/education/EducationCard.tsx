@@ -60,14 +60,14 @@ export function EducationCard({ program, locale }: EducationCardProps) {
                 )}
 
                 {/* Badges */}
-                <div className="absolute top-0 left-0 flex flex-col items-start gap-1 p-3">
-                    <span className="bg-white/90 backdrop-blur px-2 py-1 text-[10px] capitalize tracking-widest font-medium border border-charcoal/5 shadow-sm">
+                <div className="absolute top-0 left-0 flex flex-col items-start gap-1 p-4">
+                    <span className="bg-white/90 backdrop-blur px-2 py-1 text-xs capitalize tracking-widest font-medium border border-charcoal/5 shadow-sm">
                         {audience}
                     </span>
                 </div>
             </div>
 
-            <div className="flex flex-col flex-1 space-y-3">
+            <div className="flex flex-col flex-1 space-y-4">
                 <div className="flex items-center justify-between text-xs font-mono capitalize tracking-widest text-umber border-b border-umber/10 pb-2">
                     <span>{type}</span>
                     {startDate && (

@@ -77,9 +77,9 @@ export function TimelineTeaser({ events, locale, headline }: TimelineTeaserProps
                     <div className="max-w-3xl">
                         <div className="flex items-center gap-4 mb-8">
                             <div className="w-12 h-px bg-ochre/50" />
-                            <span className="text-[10px] capitalize tracking-[0.5em] font-bold text-ochre">The Institutional Journey</span>
+                            <span className="text-xs capitalize tracking-widest font-bold text-ochre">The Institutional Journey</span>
                         </div>
-                        <h2 className="text-5xl md:text-8xl font-bold tracking-tighter leading-[0.9] capitalize italic sm:not-italic">
+                        <h2 className="text-5xl md:text-8xl font-bold tracking-tighter leading-display capitalize italic sm:not-italic">
                             {headline || (
                                 <>A Legacy of <br /><span className="text-ochre">Transcendence</span></>
                             )}
@@ -87,7 +87,7 @@ export function TimelineTeaser({ events, locale, headline }: TimelineTeaserProps
                     </div>
                     <Link
                         href="/timeline"
-                        className="group flex items-center gap-6 text-[10px] font-bold capitalize tracking-[0.3em] py-4 px-8 border border-ivory/20 hover:border-ochre hover:bg-ochre hover:text-charcoal transition-all duration-500 rounded-full"
+                        className="group flex items-center gap-6 text-xs font-bold capitalize tracking-widest py-4 px-8 border border-ivory/20 hover:border-ochre hover:bg-ochre hover:text-charcoal transition-all duration-500 rounded-full"
                     >
                         Enter Archive
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
@@ -150,7 +150,7 @@ export function TimelineTeaser({ events, locale, headline }: TimelineTeaserProps
                                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent opacity-90 group-hover:opacity-70 transition-opacity z-10" />
 
                                 <div className="relative z-20 space-y-6">
-                                    <span className="text-xs font-bold tracking-[0.3em] text-ochre block transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                    <span className="text-xs font-bold tracking-widest text-ochre block transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                                         {event.year}
                                     </span>
                                     <h3 className="text-2xl font-bold tracking-tight leading-tight transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">

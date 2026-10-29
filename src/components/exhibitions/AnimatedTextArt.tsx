@@ -120,7 +120,7 @@ export function AnimatedTextArt({
             {Array.from({ length: 3 }).map((_, i) => (
                 <span 
                     key={i} 
-                    className="pulsing-item text-3xl md:text-[8vw] font-black uppercase tracking-tighter flex-shrink-0 leading-[0.9] max-w-[90vw] break-words md:break-normal"
+                    className="pulsing-item text-3xl md:text-[8vw] font-black uppercase tracking-tighter flex-shrink-0 leading-display max-w-[90vw] break-words md:break-normal"
                     style={{ opacity: 0.1 }}
                 >
                     {text}

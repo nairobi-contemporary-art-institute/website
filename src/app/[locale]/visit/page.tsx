@@ -71,7 +71,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                     
                     {/* Mobile Navigation (Horizontal Scroll) */}
                     <div className="lg:hidden col-span-full min-w-0 -mx-6 px-6 md:-mx-12 md:px-12 overflow-x-auto scrollbar-hide pb-4 mb-4 border-b border-black/5">
-                        <nav className="flex flex-nowrap items-center gap-6 text-[11px] font-bold capitalize tracking-widest text-charcoal/70">
+                        <nav className="flex flex-nowrap items-center gap-6 text-xs font-bold capitalize tracking-widest text-charcoal/70">
                             <a href="#overview" className="hover:text-charcoal transition-colors whitespace-nowrap">{t('overviewLink') || 'Overview'}</a>
                             <a href="#opening-hours" className="hover:text-charcoal transition-colors whitespace-nowrap">{t('hours') || 'Opening Hours'}</a>
                             <a href="#directions-map" className="hover:text-charcoal transition-colors whitespace-nowrap">{t('directionsMapLink') || 'Directions & Map'}</a>
@@ -129,7 +129,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                 <section id="opening-hours" className="grid lg:grid-cols-[1fr_2px_2.5fr] gap-12 lg:gap-24 items-start scroll-mt-[120px]">
                     <div className="pt-2">
                         <div className="space-y-8">
-                            <h2 className="text-4xl md:text-5xl lg:text-7xl font-normal text-charcoal tracking-tighter capitalize leading-[0.9] lg:max-w-[320px]">
+                            <h2 className="text-4xl md:text-5xl lg:text-7xl font-normal text-charcoal tracking-tighter capitalize leading-display lg:max-w-[320px]">
                                 {visitData?.title ? getLocalizedValue(visitData.title, locale) : (locale === 'en' ? 'Admission & Hours' : 'Saa za Kufungua')}
                             </h2>
                         </div>
@@ -150,7 +150,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
 
                         <div className="space-y-10">
                             <div className="flex items-center gap-4">
-                                <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-charcoal/70">
+                                <h3 className="text-xs font-bold uppercase tracking-widest text-charcoal/70">
                                     {t('normalOpeningHours')}
                                 </h3>
                                 <div className="h-px flex-1 bg-black/5" />
@@ -163,7 +163,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                                         <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center shrink-0">
                                             <LucideClock className="w-6 h-6 text-amber-500" />
                                         </div>
-                                        <div className="space-y-3">
+                                        <div className="space-y-4">
                                              <p className="text-2xl font-normal leading-tight tracking-tight">
                                                 {getLocalizedValue(siteSettings.specialStatus.message, locale)}
                                             </p>
@@ -176,7 +176,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                                     <div className="p-10 bg-[#FDFBF7] border border-black/5 rounded-sm space-y-8 shadow-sm">
                                         <div className="flex justify-between items-end border-b border-black/5 pb-4">
                                             <h4 className="text-xs font-bold uppercase tracking-widest text-charcoal/70">Galleries</h4>
-                                            <span className="text-[10px] uppercase tracking-widest text-amber-600 font-bold">Today</span>
+                                            <span className="text-xs uppercase tracking-widest text-amber-600 font-bold">Today</span>
                                         </div>
                                         <div className="space-y-4">
                                             {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map((day) => {
@@ -215,14 +215,14 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                                                 <p className="text-lg font-light leading-relaxed text-white/70">
                                                     Accessible to student and researchers by scheduled appointment.
                                                 </p>
-                                                <Link href="/about/library" className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-amber-500 hover:text-white transition-colors gap-3 group/link">
+                                                <Link href="/about/library" className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-amber-500 hover:text-white transition-colors gap-4 group/link">
                                                     Request Access
                                                     <div className="w-8 h-px bg-amber-500/30 group-hover/link:w-12 group-hover/link:bg-white transition-all duration-500" />
                                                 </Link>
                                             </div>
                                         </div>
                                         <div className="pt-8 border-t border-white/10 relative z-10">
-                                            <p className="text-[10px] uppercase tracking-[0.3em] text-amber-500 font-bold mb-2">Admission</p>
+                                            <p className="text-xs uppercase tracking-widest text-amber-500 font-bold mb-2">Admission</p>
                                             <p className="text-3xl font-normal tracking-tighter leading-none">Free entrance for everyone</p>
                                         </div>
                                     </div>
@@ -230,9 +230,9 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                             )}
                             
                             {visitData?.openingHoursNote && (
-                                <div className="flex items-center gap-3 pt-4">
+                                <div className="flex items-center gap-4 pt-4">
                                     <div className="w-4 h-[1px] bg-black/10" />
-                                    <p className="text-[10px] text-umber/80 italic tracking-wide uppercase">
+                                    <p className="text-xs text-umber/80 italic tracking-wide uppercase">
                                         {getLocalizedValue(visitData.openingHoursNote, locale)}
                                     </p>
                                 </div>
@@ -246,7 +246,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                 <section id="directions-map" className="grid lg:grid-cols-[1fr_2px_2.5fr] gap-12 lg:gap-24 items-start scroll-mt-[120px]">
                     <div className="pt-2">
                         <div className="space-y-8">
-                            <h2 className="text-4xl md:text-5xl lg:text-7xl font-normal text-charcoal tracking-tighter capitalize leading-[0.9] lg:max-w-[320px]">
+                            <h2 className="text-4xl md:text-5xl lg:text-7xl font-normal text-charcoal tracking-tighter capitalize leading-display lg:max-w-[320px]">
                                 {locale === 'en' ? 'Directions & Map' : 'Ramani & Maelekezo'}
                             </h2>
                         </div>
@@ -269,7 +269,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                                     href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contactInfo?.address || 'NCAI Nairobi')}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-white text-[10px] font-bold uppercase tracking-[0.4em] bg-white/10 backdrop-blur-xl px-10 py-5 rounded-full border border-white/20 hover:bg-white hover:text-black hover:border-white transition-all duration-500 pointer-events-auto"
+                                    className="text-white text-xs font-bold uppercase tracking-widest bg-white/10 backdrop-blur-xl px-10 py-6 rounded-full border border-white/20 hover:bg-white hover:text-black hover:border-white transition-all duration-500 pointer-events-auto"
                                 >
                                     Launch Navigation
                                 </a>
@@ -293,7 +293,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                                                     <Icon className="w-7 h-7" strokeWidth={1} />
                                                 </div>
                                                 <div className="space-y-1">
-                                                    <h3 className="text-xs font-bold uppercase tracking-[0.3em] text-charcoal/70 group-hover:text-charcoal transition-colors">
+                                                    <h3 className="text-xs font-bold uppercase tracking-widest text-charcoal/70 group-hover:text-charcoal transition-colors">
                                                         {methodValue}
                                                     </h3>
                                                     <div className="h-px w-8 bg-black/10 group-hover:w-16 transition-all duration-700" />
@@ -317,7 +317,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
 
                         <div className="pt-20 border-t border-black/5 grid md:grid-cols-[1.5fr_1fr] gap-12 items-end">
                             <div className="space-y-8">
-                                <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-charcoal/70">Registry</h3>
+                                <h3 className="text-xs font-bold uppercase tracking-widest text-charcoal/70">Registry</h3>
                                 <div className="space-y-4">
                                     <p className="text-3xl font-normal tracking-tight text-charcoal leading-none">{contactInfo?.name || 'NCAI'}</p>
                                     <p className="text-xl text-umber/80 leading-snug font-serif italic max-w-sm">
@@ -328,11 +328,11 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                             <div className="flex gap-4">
                                 <a href={`tel:${contactInfo?.phone}`} className="flex-1 h-20 border border-black/5 flex flex-col items-center justify-center hover:bg-charcoal hover:text-white transition-all duration-700 group">
                                     <LucidePhone className="w-5 h-5 mb-2 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
-                                    <span className="text-[9px] font-bold uppercase tracking-widest opacity-70 group-hover:opacity-100">Call Us</span>
+                                    <span className="text-xs font-bold uppercase tracking-widest opacity-70 group-hover:opacity-100">Call Us</span>
                                 </a>
                                 <a href={`mailto:${contactInfo?.email}`} className="flex-1 h-20 border border-black/5 flex flex-col items-center justify-center hover:bg-charcoal hover:text-white transition-all duration-700 group">
                                     <LucideMail className="w-5 h-5 mb-2 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
-                                    <span className="text-[9px] font-bold uppercase tracking-widest opacity-70 group-hover:opacity-100">Email</span>
+                                    <span className="text-xs font-bold uppercase tracking-widest opacity-70 group-hover:opacity-100">Email</span>
                                 </a>
                             </div>
                         </div>
@@ -361,10 +361,10 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                                         <div className="pt-10">
                                             <Link 
                                                 href={card.button?.link || card.ctaUrl}
-                                                className="inline-flex items-center text-[10px] font-bold uppercase tracking-[0.2em] text-charcoal group-hover:text-amber-800 transition-colors"
+                                                className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-charcoal group-hover:text-amber-800 transition-colors"
                                             >
                                                 {getLocalizedValue(card.button?.text || card.ctaLabel, locale) || t('learnMore')}
-                                                <div className="ml-3 w-8 h-[1px] bg-charcoal/20 group-hover:bg-amber-800 transition-all duration-700 group-hover:w-12" />
+                                                <div className="ml-4 w-8 h-[1px] bg-charcoal/20 group-hover:bg-amber-800 transition-all duration-700 group-hover:w-12" />
                                             </Link>
                                         </div>
                                     )}
@@ -386,7 +386,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                                 className="grid lg:grid-cols-[1fr_2px_2.5fr] gap-12 lg:gap-24 items-start scroll-mt-[120px]"
                             >
                                 <div className="pt-2">
-                                     <h2 className="text-4xl md:text-5xl lg:text-7xl font-normal text-charcoal tracking-tighter capitalize leading-[0.9] lg:max-w-[320px]">
+                                     <h2 className="text-4xl md:text-5xl lg:text-7xl font-normal text-charcoal tracking-tighter capitalize leading-display lg:max-w-[320px]">
                                         {getLocalizedValue(section.title, locale)}
                                     </h2>
                                 </div>
@@ -451,8 +451,8 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                 
                 <div className="page-container grid lg:grid-cols-2 gap-16 items-center relative z-10">
                     <div className="space-y-8">
-                         <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/70">{t('stayConnected')}</h2>
-                         <p className="text-5xl md:text-8xl font-normal tracking-tighter leading-[0.9]">
+                         <h2 className="text-xs font-bold uppercase tracking-widest text-white/70">{t('stayConnected')}</h2>
+                         <p className="text-5xl md:text-8xl font-normal tracking-tighter leading-display">
                             {locale === 'en' ? 'Keep in touch.' : 'Endelea kuwasiliana.'}
                          </p>
                     </div>

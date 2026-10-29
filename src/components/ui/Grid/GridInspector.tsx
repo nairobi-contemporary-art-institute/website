@@ -50,14 +50,14 @@ export function GridInspector() {
                             key={i}
                             className="h-full border-x border-rich-blue/20 bg-rich-blue/5 flex items-start justify-center pt-2"
                         >
-                            <span className="text-[10px] font-mono text-rich-blue/40 font-bold">{i + 1}</span>
+                            <span className="text-xs font-mono text-rich-blue/40 font-bold">{i + 1}</span>
                         </div>
                     ))}
                 </div>
             </div>
 
             {/* Status Indicator */}
-            <div className="fixed bottom-4 right-4 bg-charcoal text-white px-3 py-1.5 rounded-full text-[10px] font-mono shadow-2xl flex items-center gap-2 pointer-events-auto border border-white/10">
+            <div className="fixed bottom-4 right-4 bg-charcoal text-white px-4 py-2 rounded-full text-xs font-mono shadow-2xl flex items-center gap-2 pointer-events-auto border border-white/10">
                 <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 GRID INSPECTOR ACTIVE (Shift + G to toggle)
             </div>

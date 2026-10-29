@@ -62,7 +62,7 @@ export default async function GetInvolvedPage({ params }: { params: Promise<{ lo
                         <Grid columns={{ sm: 1, md: 12 }} gap={24}>
                             <GridCell column={{ sm: 1, md: 8 }} className="items-start justify-start p-0">
                                 <div className="max-w-4xl space-y-8">
-                                    <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-charcoal capitalize leading-[0.9]">
+                                    <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-charcoal capitalize leading-display">
                                         {title}
                                     </h1>
                                     {heroHeadline && (
@@ -89,7 +89,7 @@ export default async function GetInvolvedPage({ params }: { params: Promise<{ lo
                                     />
                                     {data.hero.image.caption && (
                                         <div className="absolute bottom-4 right-4">
-                                            <p className="text-[10px] text-charcoal/70 italic bg-ivory/20 px-2 py-1">
+                                            <p className="text-xs text-charcoal/70 italic bg-ivory/20 px-2 py-1">
                                                 {getLocalizedValue(data.hero.image.caption, locale)}
                                             </p>
                                         </div>
@@ -105,7 +105,7 @@ export default async function GetInvolvedPage({ params }: { params: Promise<{ lo
                     {data.membershipTiers && data.membershipTiers.length > 0 && (
                         <section className="px-section-clamp px-section-clamp">
                             <div className="mb-16">
-                                <h2 className="text-xs font-bold capitalize tracking-[0.3em] text-umber/80 mb-4">Membership</h2>
+                                <h2 className="text-xs font-bold capitalize tracking-widest text-umber/80 mb-4">Membership</h2>
                                 <h3 className="text-4xl md:text-5xl font-light tracking-tighter text-charcoal italic">
                                     Join a community dedicated to East African art history.
                                 </h3>
@@ -124,7 +124,7 @@ export default async function GetInvolvedPage({ params }: { params: Promise<{ lo
                                                 className={`relative w-full p-8 border ${isFeatured ? 'bg-charcoal text-ivory border-charcoal' : 'bg-white border-charcoal/5'} flex flex-col h-full group hover:shadow-2xl transition-all duration-500`}
                                             >
                                                 {isFeatured && (
-                                                    <span className="absolute -top-3 left-8 bg-ochre text-charcoal text-[10px] capitalize font-bold tracking-widest px-3 py-1 z-20">
+                                                    <span className="absolute -top-3 left-8 bg-ochre text-charcoal text-xs capitalize font-bold tracking-widest px-4 py-1 z-20">
                                                         Recommended
                                                     </span>
                                                 )}
@@ -140,7 +140,7 @@ export default async function GetInvolvedPage({ params }: { params: Promise<{ lo
                                                 {tier.benefits && (
                                                     <ul className="space-y-4 mb-12">
                                                         {tier.benefits.map((benefit: any, bIdx: number) => (
-                                                            <li key={bIdx} className="flex gap-3 items-start text-sm">
+                                                            <li key={bIdx} className="flex gap-4 items-start text-sm">
                                                                 <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${isFeatured ? 'text-ochre' : 'text-umber'}`} />
                                                                 <span>{getLocalizedValue(benefit, locale)}</span>
                                                             </li>
@@ -150,7 +150,7 @@ export default async function GetInvolvedPage({ params }: { params: Promise<{ lo
 
                                                 <Link
                                                     href={tier.ctaUrl || '#'}
-                                                    className={`w-full py-4 text-center text-xs font-bold capitalize tracking-[0.2em] transition-all border ${isFeatured
+                                                    className={`w-full py-4 text-center text-xs font-bold capitalize tracking-widest transition-all border ${isFeatured
                                                         ? 'bg-ivory text-charcoal border-ivory hover:bg-ochre hover:text-ivory hover:border-ochre'
                                                         : 'bg-charcoal text-ivory border-charcoal hover:bg-white hover:text-charcoal'
                                                         }`}
@@ -215,7 +215,7 @@ export default async function GetInvolvedPage({ params }: { params: Promise<{ lo
                                                     />
                                                     {section.image.caption && (
                                                         <div className="absolute bottom-4 left-4 right-4 z-20">
-                                                            <p className="text-[10px] text-ivory font-bold capitalize tracking-widest bg-charcoal/60 backdrop-blur-sm px-3 py-1 inline-block">
+                                                            <p className="text-xs text-ivory font-bold capitalize tracking-widest bg-charcoal/60 backdrop-blur-sm px-4 py-1 inline-block">
                                                                 {getLocalizedValue(section.image.caption, locale)}
                                                             </p>
                                                         </div>

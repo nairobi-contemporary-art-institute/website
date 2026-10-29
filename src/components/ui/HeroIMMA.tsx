@@ -73,7 +73,7 @@ export function HeroIMMA({ title, image, headline, intro, caption, className, li
                     <Grid columns={{ sm: 1, md: 12 }} gap={24}>
                         <GridCell column={{ sm: '1 / -1', md: '7 / 13', lg: '7 / 13' }} className="p-0 flex flex-col justify-center pointer-events-auto">
                             <div className="space-y-4 md:space-y-6 max-w-2xl">
-                                <h1 className="text-5xl md:text-7xl lg:text-[7rem] font-sans font-medium tracking-tight text-white capitalize leading-[0.85] hero-title text-shadow-sm">
+                                <h1 className="text-5xl md:text-7xl lg:text-8xl font-sans font-medium tracking-tight text-white capitalize leading-display hero-title text-shadow-sm">
                                     {title}
                                 </h1>
                                 

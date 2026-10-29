@@ -47,7 +47,7 @@ export function WorksGridOverlay({ isOpen, onClose, onWorkClick, works, locale, 
                 <header className="flex justify-between items-end mb-16 border-b border-rich-blue/10 pb-8">
                     <div>
                         <h2 className="text-3xl md:text-5xl font-bold text-charcoal tracking-tighter">{artistName}</h2>
-                        <p className="text-xs text-charcoal/70 font-bold uppercase tracking-[0.2em] mt-2">{t('worksArchive')}</p>
+                        <p className="text-xs text-charcoal/70 font-bold uppercase tracking-widest mt-2">{t('worksArchive')}</p>
                     </div>
                     
                     <button
@@ -55,7 +55,7 @@ export function WorksGridOverlay({ isOpen, onClose, onWorkClick, works, locale, 
                         className="group flex flex-col items-center gap-2 transition-transform hover:scale-105"
                     >
                         <X className="w-8 h-8 text-charcoal" strokeWidth={1} />
-                        <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-charcoal/70 group-hover:text-charcoal transition-colors">Close</span>
+                        <span className="text-xs font-bold tracking-widest uppercase text-charcoal/70 group-hover:text-charcoal transition-colors">Close</span>
                     </button>
                 </header>
 

@@ -349,8 +349,8 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                                     ))
                                 ) : (
                                     <>
-                                        <Link href="#" className="opacity-80 hover:opacity-100 text-[10px] font-bold tracking-[0.2em] uppercase transition-opacity">Shop</Link>
-                                        <Link href="/get-involved#membership" className="opacity-80 hover:opacity-100 text-[10px] font-bold tracking-[0.2em] uppercase transition-opacity">Membership</Link>
+                                        <Link href="#" className="opacity-80 hover:opacity-100 text-xs font-bold tracking-widest uppercase transition-opacity">Shop</Link>
+                                        <Link href="/get-involved#membership" className="opacity-80 hover:opacity-100 text-xs font-bold tracking-widest uppercase transition-opacity">Membership</Link>
                                     </>
                                 )}
                                 <LanguageSwitcher />

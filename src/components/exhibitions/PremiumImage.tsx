@@ -42,7 +42,7 @@ export function PremiumImage({
             </div>
             
             {caption && (
-                <p className="premium-gallery-text text-center text-[17px] md:text-[21px] lg:text-[22px] max-w-2xl px-4 animate-in fade-in slide-in-from-bottom-2 duration-700">
+                <p className="premium-gallery-text text-center text-base md:text-xl lg:text-xl max-w-2xl px-4 animate-in fade-in slide-in-from-bottom-2 duration-700">
                     {caption ? <MarkdownText text={caption} /> : null}
                 </p>
             )}

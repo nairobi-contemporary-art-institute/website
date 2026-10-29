@@ -25,7 +25,7 @@ export function WrittenPiece({ title, content, author, locale, className }: Writ
                         <article className="space-y-8">
                             {title && (
                                 <header className="space-y-4">
-                                    <h3 className="text-3xl md:text-4xl font-black tracking-tighter leading-[0.9] text-charcoal">
+                                    <h3 className="text-3xl md:text-4xl font-black tracking-tighter leading-display text-charcoal">
                                         {title}
                                     </h3>
                                 </header>
@@ -37,7 +37,7 @@ export function WrittenPiece({ title, content, author, locale, className }: Writ
 
                              {author && (
                                 <footer className="pt-8 flex justify-end">
-                                    <p className="text-sm font-black italic uppercase tracking-[0.2em] text-charcoal/70">
+                                    <p className="text-sm font-black italic uppercase tracking-widest text-charcoal/70">
                                         — {author} —
                                     </p>
                                 </footer>

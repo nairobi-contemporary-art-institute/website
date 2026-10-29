@@ -44,7 +44,7 @@ export function ResourceGallery({ resources, locale }: ResourceGalleryProps) {
         <section id="resources" className="py-24 bg-white">
             <div className="page-container">
                 <div className="flex flex-col mb-16">
-                    <span className="text-[10px] uppercase tracking-[0.4em] text-ochre-dark font-bold mb-4">
+                    <span className="text-xs uppercase tracking-widest text-ochre-dark font-bold mb-4">
                         {t('subtitle')}
                     </span>
                     <h2 className="text-4xl md:text-5xl font-light tracking-tight text-charcoal mb-6">
@@ -66,19 +66,19 @@ export function ResourceGallery({ resources, locale }: ResourceGalleryProps) {
                         return (
                             <div key={resource._id} className="group flex flex-col h-full">
                                 {/* External Left-Aligned Title - Fixed height to align images */}
-                                <div className="mb-3 min-h-[75px] flex flex-col justify-between">
+                                <div className="mb-4 min-h-[75px] flex flex-col justify-between">
                                     <h3 className="text-lg font-bold tracking-tight text-charcoal group-hover:text-ochre transition-colors duration-300">
                                         {title}
                                     </h3>
                                     <div className="flex items-center space-x-2 mt-1">
-                                        <span className="text-[10px] uppercase tracking-widest text-stone-600 font-bold">
+                                        <span className="text-xs uppercase tracking-widest text-stone-600 font-bold">
                                             {t(`types.${resource.type}`)}
                                             {ageRange && ` — ${ageRange}`}
                                         </span>
                                         {exhTitle && (
                                             <>
-                                                <span className="text-[10px] text-stone-300">•</span>
-                                                <span className="text-[10px] uppercase tracking-widest text-stone-600 font-medium italic">
+                                                <span className="text-xs text-stone-300">•</span>
+                                                <span className="text-xs uppercase tracking-widest text-stone-600 font-medium italic">
                                                     {exhTitle}
                                                 </span>
                                             </>
@@ -110,7 +110,7 @@ export function ResourceGallery({ resources, locale }: ResourceGalleryProps) {
                                             <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center mb-4">
                                                 <Eye className="w-6 h-6 text-white" />
                                             </div>
-                                            <span className="text-[10px] uppercase tracking-[0.3em] font-black text-white">
+                                            <span className="text-xs uppercase tracking-widest font-black text-white">
                                                 {t('viewResource')}
                                             </span>
                                         </div>
@@ -119,14 +119,14 @@ export function ResourceGallery({ resources, locale }: ResourceGalleryProps) {
                                     {/* Size Badge */}
                                     <div className="absolute bottom-6 left-6 flex items-center space-x-2 translate-y-2 opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-500 delay-100">
                                         <FileText className="w-4 h-4 text-white/60" />
-                                        <span className="text-[10px] uppercase tracking-widest font-bold text-white/60">
+                                        <span className="text-xs uppercase tracking-widest font-bold text-white/60">
                                             {formatFileSize(resource.fileSize)}
                                         </span>
                                     </div>
                                     
                                     {/* Audience Tag */}
                                     <div className="absolute top-6 right-6">
-                                        <span className="px-3 py-1 bg-white/10 backdrop-blur-md border border-white/10 text-[9px] uppercase tracking-widest font-black text-white">
+                                        <span className="px-4 py-1 bg-white/10 backdrop-blur-md border border-white/10 text-xs uppercase tracking-widest font-black text-white">
                                             {t(`audiences.${resource.audience}`)}
                                         </span>
                                     </div>

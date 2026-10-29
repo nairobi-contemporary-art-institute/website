@@ -120,7 +120,7 @@ export default async function AccessibilityPage({ params }: Props) {
                                         href={pageData.venueGuide.guideUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-4 bg-white text-charcoal px-8 py-5 text-sm capitalize tracking-widest font-medium hover:bg-stone-200 transition-colors group"
+                                        className="inline-flex items-center gap-4 bg-white text-charcoal px-8 py-6 text-sm capitalize tracking-widest font-medium hover:bg-stone-200 transition-colors group"
                                     >
                                         <DownloadIcon className="w-5 h-5 transition-transform group-hover:translate-y-0.5" />
                                         Download Venue Guide (PDF)
@@ -149,7 +149,7 @@ export default async function AccessibilityPage({ params }: Props) {
             {pageData?.policies && pageData.policies.length > 0 && (
                 <section className="page-container py-32">
                     <div className="max-w-4xl">
-                        <h2 className="text-xs font-bold capitalize tracking-[0.3em] text-umber border-b border-umber/10 pb-4 inline-block mb-16">
+                        <h2 className="text-xs font-bold capitalize tracking-widest text-umber border-b border-umber/10 pb-4 inline-block mb-16">
                             Facility Policies
                         </h2>
                         <div className="grid grid-cols-1 gap-16">
@@ -172,7 +172,7 @@ export default async function AccessibilityPage({ params }: Props) {
             <div className="page-container pt-12 pb-24 border-t border-charcoal/5">
                 <Link
                     href={`/${locale}`}
-                    className="text-xs font-mono capitalize tracking-[0.2em] text-charcoal/70 hover:text-charcoal transition-colors border-b border-transparent hover:border-charcoal/20 pb-1"
+                    className="text-xs font-mono capitalize tracking-widest text-charcoal/70 hover:text-charcoal transition-colors border-b border-transparent hover:border-charcoal/20 pb-1"
                 >
                     &larr; Back to Home
                 </Link>

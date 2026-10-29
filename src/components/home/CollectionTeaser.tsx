@@ -85,7 +85,7 @@ export function CollectionTeaser({ data, locale }: CollectionTeaserProps) {
           
           {/* Headline Panel */}
           <div className="lg:w-1/2">
-            <h2 className="text-3xl md:text-5xl lg:text-7xl font-black text-white tracking-tighter uppercase leading-[0.9]">
+            <h2 className="text-3xl md:text-5xl lg:text-7xl font-black text-white tracking-tighter uppercase leading-display">
               {headline}
             </h2>
           </div>
@@ -100,7 +100,7 @@ export function CollectionTeaser({ data, locale }: CollectionTeaserProps) {
             
             <Link 
               href="/collection" 
-              className="group flex items-center gap-4 text-xs font-bold uppercase tracking-[0.3em] text-white mt-4"
+              className="group flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-white mt-4"
             >
               <span className="border-b border-white/20 group-hover:border-white transition-colors pb-1">
                 {data.viewFullCollectionLabel || 'EXPLORE COLLECTION'}
@@ -188,18 +188,18 @@ export function CollectionTeaser({ data, locale }: CollectionTeaserProps) {
                             />
                           </div>
                         ) : (
-                          <div className="aspect-[4/5] w-full h-full flex items-center justify-center text-white/10 text-[10px] uppercase tracking-widest bg-charcoal">
+                          <div className="aspect-[4/5] w-full h-full flex items-center justify-center text-white/10 text-xs uppercase tracking-widest bg-charcoal">
                             {tCol('noImageAvailable')}
                           </div>
                         )}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       </div>
                       
-                      <div className="flex flex-col gap-1.5">
-                        <h3 className="text-sm font-bold text-white group-hover:text-white/70 transition-colors uppercase tracking-[0.15em]">
+                      <div className="flex flex-col gap-2">
+                        <h3 className="text-sm font-bold text-white group-hover:text-white/70 transition-colors uppercase tracking-widest">
                           {itemTitle}
                         </h3>
-                        <p className="text-[11px] text-white/70 italic tracking-wider uppercase font-medium">
+                        <p className="text-xs text-white/70 italic tracking-wider uppercase font-medium">
                           {artistName}{date ? ` / ${date}` : ''}
                         </p>
                       </div>
@@ -216,7 +216,7 @@ export function CollectionTeaser({ data, locale }: CollectionTeaserProps) {
           {hasMore && visibleLimit < 24 && (
             <button 
               onClick={handleLoadMore}
-              className="text-[10px] font-black uppercase tracking-[0.4em] text-white/70 hover:text-white transition-colors border-b border-white/5 hover:border-white pb-2"
+              className="text-xs font-black uppercase tracking-widest text-white/70 hover:text-white transition-colors border-b border-white/5 hover:border-white pb-2"
             >
               {t('loadMore')}
             </button>
@@ -225,7 +225,7 @@ export function CollectionTeaser({ data, locale }: CollectionTeaserProps) {
           {/* Persistent Explore Button at the bottom */}
           <Link 
             href="/collection"
-            className="px-12 py-4 border border-white/10 hover:border-white text-[10px] font-black uppercase tracking-[0.5em] text-white transition-all hover:bg-white hover:text-black"
+            className="px-12 py-4 border border-white/10 hover:border-white text-xs font-black uppercase tracking-widest text-white transition-all hover:bg-white hover:text-black"
           >
             {data.viewFullCollectionLabel || 'EXPLORE FULL COLLECTION'}
           </Link>

@@ -48,12 +48,12 @@ export function MuseumCard({ data, className, aspectRatio = "aspect-square", pri
             <div className="relative z-10 flex flex-col justify-between h-full p-6 md:p-8">
                 {/* Top Section: Label & Date */}
                 <div className="flex justify-between items-start gap-4">
-                    <span className="inline-block text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-white/90">
+                    <span className="inline-block text-xs md:text-xs font-bold uppercase tracking-widest text-white/90">
                         {label}
                     </span>
                     
                     {date && (
-                        <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-white/100">
+                        <span className="text-xs md:text-xs font-bold uppercase tracking-widest text-white/100">
                             {date}
                         </span>
                     )}

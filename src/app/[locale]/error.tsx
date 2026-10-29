@@ -28,13 +28,13 @@ export default function Error({
             <div className="flex gap-4">
                 <button
                     onClick={() => reset()}
-                    className="px-8 py-3 border border-charcoal text-charcoal text-xs font-bold capitalize tracking-widest hover:bg-charcoal hover:text-ivory transition-all"
+                    className="px-8 py-4 border border-charcoal text-charcoal text-xs font-bold capitalize tracking-widest hover:bg-charcoal hover:text-ivory transition-all"
                 >
                     {t('tryAgain')}
                 </button>
                 <Link
                     href="/"
-                    className="px-8 py-3 bg-charcoal text-ivory text-xs font-bold capitalize tracking-widest hover:bg-amber-900 transition-colors"
+                    className="px-8 py-4 bg-charcoal text-ivory text-xs font-bold capitalize tracking-widest hover:bg-amber-900 transition-colors"
                 >
                     {t('goHome')}
                 </Link>

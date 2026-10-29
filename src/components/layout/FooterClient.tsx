@@ -176,7 +176,7 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
             <div className="page-container py-8">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                     {/* Legal Links & Accessibility */}
-                    <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-[11px] font-normal">
+                    <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-xs font-normal">
                         {legalLinks.map((link, idx) => (
                             <Link
                                 key={`${link.label}-${link.url}-${idx}`}
@@ -192,7 +192,7 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
                     </div>
 
                     {/* Copyright */}
-                    <p className="text-[11px] font-normal text-sun-bleached-paper/70">
+                    <p className="text-xs font-normal text-sun-bleached-paper/70">
                         {copyrightText || `© ${currentYear} Nairobi Contemporary Art Institute`}
                     </p>
                 </div>

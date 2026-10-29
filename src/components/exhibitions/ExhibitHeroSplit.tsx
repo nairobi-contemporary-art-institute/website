@@ -105,11 +105,11 @@ export function ExhibitHeroSplit({
                              {/* Heading Block: Moved right by 5vw (half of 10vw) */}
                             <div className="space-y-4 md:pl-[5vw]">
                                 {artistName && (
-                                    <h3 className={cn("text-[0.8rem] font-medium uppercase tracking-[0.2em] opacity-90", textColor === 'white' ? 'text-white' : 'text-charcoal')}>
+                                    <h3 className={cn("text-xs font-medium uppercase tracking-widest opacity-90", textColor === 'white' ? 'text-white' : 'text-charcoal')}>
                                         {artistName}
                                     </h3>
                                 )}
-                                <h1 className={cn("text-[3.5rem] font-black uppercase tracking-tighter leading-[0.85]", textColor === 'white' ? 'text-white' : 'text-charcoal')}>
+                                <h1 className={cn("text-5xl font-black uppercase tracking-tighter leading-display", textColor === 'white' ? 'text-white' : 'text-charcoal')}>
                                     {localizedTitle}
                                 </h1>
                             </div>
@@ -127,7 +127,7 @@ export function ExhibitHeroSplit({
                                         {formatExhibitionDate(startDate, endDate, locale)}
                                     </div>
                                     {(location || admission) && (
-                                        <div className={cn("text-[0.65rem] md:text-[0.75rem] font-medium uppercase tracking-[0.15em] mt-1 flex flex-wrap gap-x-4", mutedTextColor === 'white/60' ? 'text-white/60' : 'text-charcoal/70')}>
+                                        <div className={cn("text-xs md:text-xs font-medium uppercase tracking-widest mt-1 flex flex-wrap gap-x-4", mutedTextColor === 'white/60' ? 'text-white/60' : 'text-charcoal/70')}>
                                             {location && <span>{location}</span>}
                                             {admission && <span className="opacity-70">{admission}</span>}
                                         </div>
@@ -141,7 +141,7 @@ export function ExhibitHeroSplit({
                                             target={enquiryModule.openInNewTab ? "_blank" : "_self"} 
                                             rel={enquiryModule.openInNewTab ? "noopener noreferrer" : undefined}
                                             className={cn(
-                                                "inline-flex items-center px-8 py-3 text-xs font-black uppercase tracking-[0.2em] transition-all",
+                                                "inline-flex items-center px-8 py-4 text-xs font-black uppercase tracking-widest transition-all",
                                                 isDark(bgColor) ? "bg-white text-charcoal hover:bg-umber" : "bg-charcoal text-white hover:bg-umber"
                                             )}
                                         >
@@ -154,7 +154,7 @@ export function ExhibitHeroSplit({
                                             target="_blank" 
                                             rel="noopener noreferrer"
                                             className={cn(
-                                                "inline-flex items-center px-8 py-3 text-xs font-black uppercase tracking-[0.2em] transition-all border",
+                                                "inline-flex items-center px-8 py-4 text-xs font-black uppercase tracking-widest transition-all border",
                                                 isDark(bgColor) 
                                                     ? "border-white/20 text-white hover:border-white hover:bg-white/10" 
                                                     : "border-charcoal/20 text-charcoal hover:border-charcoal hover:bg-charcoal/5"

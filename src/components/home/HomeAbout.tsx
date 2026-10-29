@@ -32,7 +32,7 @@ export function HomeAbout({ data, locale }: HomeAboutProps) {
           {/* Left column: heading + intro + Library & Archive (when image present) */}
           <div className="lg:w-1/2 flex flex-col gap-8">
             {heading && (
-              <h2 className="text-3xl md:text-4xl font-black tracking-tighter text-charcoal uppercase leading-[0.95]">
+              <h2 className="text-3xl md:text-4xl font-black tracking-tighter text-charcoal uppercase leading-display">
                 {heading}
               </h2>
             )}
@@ -44,7 +44,7 @@ export function HomeAbout({ data, locale }: HomeAboutProps) {
             {hasImage && (subheading || subBody) && (
               <div className="flex flex-col gap-4 pt-2">
                 {subheading && (
-                  <h3 className="text-[10px] uppercase tracking-[0.3em] font-normal text-charcoal/70 border-b border-charcoal/10 pb-2">
+                  <h3 className="text-xs uppercase tracking-widest font-normal text-charcoal/70 border-b border-charcoal/10 pb-2">
                     {subheading}
                   </h3>
                 )}
@@ -74,7 +74,7 @@ export function HomeAbout({ data, locale }: HomeAboutProps) {
           ) : (subheading || subBody) ? (
             <div className="lg:w-1/2 flex flex-col gap-6 lg:pt-2">
               {subheading && (
-                <h3 className="text-[10px] uppercase tracking-[0.3em] font-normal text-charcoal/70 border-b border-charcoal/10 pb-2">
+                <h3 className="text-xs uppercase tracking-widest font-normal text-charcoal/70 border-b border-charcoal/10 pb-2">
                   {subheading}
                 </h3>
               )}

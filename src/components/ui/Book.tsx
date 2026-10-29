@@ -118,12 +118,12 @@ export function Book({
                         />
 
                         {/* Title & Branding */}
-                        <div className="relative z-10 flex-grow p-5 flex flex-col justify-between">
+                        <div className="relative z-10 flex-grow p-6 flex flex-col justify-between">
                             {showTitle ? (
                                 <span
                                     aria-hidden="true"
                                     className={cn(
-                                        "block text-[15px] font-bold leading-[1.2] capitalize tracking-tight",
+                                        "block text-sm font-bold leading-tight capitalize tracking-tight",
                                         isDarkText ? "text-charcoal" : "text-white"
                                     )}
                                     style={{
@@ -136,7 +136,7 @@ export function Book({
                             ) : <div />}
 
                             {showBranding && (
-                                <div className="flex flex-col gap-3">
+                                <div className="flex flex-col gap-4">
                                     {variant !== 'simple' && (
                                         <div className={cn("w-6 h-6 rounded-sm opacity-20", isDarkText ? "bg-black" : "bg-white")} />
                                     )}
@@ -146,7 +146,7 @@ export function Book({
                                         </svg>
                                     )}
                                     <p className={cn(
-                                        "text-[7px] capitalize tracking-[0.3em] font-bold opacity-40",
+                                        "text-xs capitalize tracking-widest font-bold opacity-40",
                                         (variant === 'simple' || isDarkText) ? "text-black" : "text-white"
                                     )}>
                                         NCAI Press

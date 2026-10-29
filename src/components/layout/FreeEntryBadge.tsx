@@ -62,7 +62,7 @@ export function FreeEntryBadge({ text, colorHex, link, visiblePages, curvedText 
         </svg>
     ) : (
         <div
-            className={cn(badgeClasses, 'text-[11px] font-bold uppercase leading-tight tracking-wide text-charcoal px-3 shadow-sm')}
+            className={cn(badgeClasses, 'text-xs font-bold uppercase leading-tight tracking-wide text-charcoal px-3 shadow-sm')}
             style={{ ...wrapperStyle, backgroundColor: bg }}
         >
             <span>{text}</span>

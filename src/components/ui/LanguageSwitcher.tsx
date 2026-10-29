@@ -55,7 +55,7 @@ export function LanguageSwitcher() {
     return (
         <div 
             ref={containerRef}
-            className="relative flex items-center gap-4 text-[10px] md:text-xs font-semibold capitalize tracking-widest leading-none"
+            className="relative flex items-center gap-4 text-xs md:text-xs font-semibold capitalize tracking-widest leading-none"
             onMouseEnter={() => setIsOpen(true)}
             onMouseLeave={() => setIsOpen(false)}
         >
@@ -98,19 +98,19 @@ export function LanguageSwitcher() {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 10, scale: 0.95 }}
                             transition={{ duration: 0.15, ease: "easeOut" }}
-                            className="absolute top-full right-[-1.5rem] md:right-[-3rem] lg:right-[-3rem] mt-3 pt-2 group z-[100]"
+                            className="absolute top-full right-[-1.5rem] md:right-[-3rem] lg:right-[-3rem] mt-4 pt-2 group z-[100]"
                         >
-                            <div className="bg-background-dark/95 backdrop-blur-md shadow-2xl border border-white/10 py-3 min-w-[140px] rounded-none overflow-hidden flex flex-col">
-                                <div className="px-4 py-2 mb-1 text-[7px] tracking-[0.2em] text-white/70 border-b border-white/5 uppercase font-black">
+                            <div className="bg-background-dark/95 backdrop-blur-md shadow-2xl border border-white/10 py-4 min-w-[140px] rounded-none overflow-hidden flex flex-col">
+                                <div className="px-4 py-2 mb-1 text-xs tracking-widest text-white/70 border-b border-white/5 uppercase font-black">
                                     More Languages (Coming Soon)
                                 </div>
                                 {otherLocales.map((lang) => (
                                     <div
                                         key={lang.id}
-                                        className="px-4 py-2.5 text-left transition-all capitalize tracking-widest text-[10px] text-white/20 cursor-not-allowed flex items-center justify-between group/lang"
+                                        className="px-4 py-2 text-left transition-all capitalize tracking-widest text-xs text-white/20 cursor-not-allowed flex items-center justify-between group/lang"
                                     >
                                         <span>{lang.title}</span>
-                                        <span className="text-[6px] font-black uppercase tracking-tighter opacity-0 group-hover/lang:opacity-100 transition-opacity text-white/70">Soon</span>
+                                        <span className="text-xs font-black uppercase tracking-tighter opacity-0 group-hover/lang:opacity-100 transition-opacity text-white/70">Soon</span>
                                     </div>
                                 ))}
                             </div>

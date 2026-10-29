@@ -64,7 +64,7 @@ export function TextFigure({
                 className="block w-full h-auto bg-charcoal/5"
             />
             {(caption || credit) && (
-                <figcaption className={cn('mt-3 text-sm leading-relaxed text-umber', layout.caption)}>
+                <figcaption className={cn('mt-4 text-sm leading-relaxed text-umber', layout.caption)}>
                     {caption && <ArtCaption content={caption} className="block" />}
                     {credit && <span className="block mt-1 text-xs tracking-wide">{credit}</span>}
                 </figcaption>

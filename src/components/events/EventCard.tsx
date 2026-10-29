@@ -70,13 +70,13 @@ export function EventCard({ event, locale, variant = 'default' }: EventCardProps
                         NO IMAGE
                     </div>
                 )}
-                <div className="absolute top-0 left-0 bg-white/90 backdrop-blur px-3 py-1 text-xs capitalize tracking-widest font-medium border-b border-r border-charcoal/10">
+                <div className="absolute top-0 left-0 bg-white/90 backdrop-blur px-4 py-1 text-xs capitalize tracking-widest font-medium border-b border-r border-charcoal/10">
                     {event.eventType}
                 </div>
             </div>
 
             <div className="space-y-2">
-                <div className="flex items-center gap-3 text-sm font-mono text-umber">
+                <div className="flex items-center gap-4 text-sm font-mono text-umber">
                     <span>{date}</span>
                     <span className="w-1.5 h-1.5 bg-umber/40" />
                     <span>{time}</span>
@@ -95,7 +95,7 @@ export function EventCard({ event, locale, variant = 'default' }: EventCardProps
                         {event.tags.slice(0, 3).map((tag: any) => (
                             <span
                                 key={tag._id}
-                                className="text-[10px] capitalize tracking-widest text-charcoal/70 border border-charcoal/10 px-2 py-0.5"
+                                className="text-xs capitalize tracking-widest text-charcoal/70 border border-charcoal/10 px-2 py-0.5"
                             >
                                 {getLocalizedValue(tag.title, locale)}
                             </span>

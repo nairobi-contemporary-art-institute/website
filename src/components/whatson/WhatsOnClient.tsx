@@ -295,7 +295,7 @@ export function WhatsOnClient({ items, locale, noticeBarSettings, showYearNav = 
                     <button onClick={handlePrevDay} className="p-2 text-black hover:text-[#666] transition-colors">
                         <ArrowLeft className="w-6 h-6 font-light" strokeWidth={1} />
                     </button>
-                    <span className="font-bold text-sm tracking-[0.1em]">{monthShort} {day}</span>
+                    <span className="font-bold text-sm tracking-widest">{monthShort} {day}</span>
                     <button onClick={handleNextDay} className="p-2 text-black hover:text-[#666] transition-colors">
                         <ArrowRight className="w-6 h-6 font-light" strokeWidth={1} />
                     </button>
@@ -411,7 +411,7 @@ export function WhatsOnClient({ items, locale, noticeBarSettings, showYearNav = 
                             <div className={cn(showYearNav && "flex gap-8 lg:gap-12 items-start")}>
                                 {showYearNav && archiveYears.length > 0 && (
                                     <nav aria-label="Jump to year" className="hidden md:block sticky top-28 shrink-0 w-16 lg:w-20 max-h-[calc(100vh-8rem)] overflow-y-auto">
-                                        <ul className="space-y-3">
+                                        <ul className="space-y-4">
                                             {archiveYears.map(y => (
                                                 <li key={y}>
                                                     <button
@@ -431,7 +431,7 @@ export function WhatsOnClient({ items, locale, noticeBarSettings, showYearNav = 
 
                                 <div className="flex-1 min-w-0">
                                     {showYearNav && archiveYears.length > 0 && (
-                                        <div className="md:hidden flex gap-3 overflow-x-auto pb-4 mb-6 border-b border-[#1a1a1a]/10">
+                                        <div className="md:hidden flex gap-4 overflow-x-auto pb-4 mb-6 border-b border-[#1a1a1a]/10">
                                             {archiveYears.map(y => (
                                                 <button
                                                     key={y}

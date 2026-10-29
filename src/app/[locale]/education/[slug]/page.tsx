@@ -109,14 +109,14 @@ export default async function ProgramPage({ params }: Props) {
                         <span className="px-2 py-1 bg-stone-200 text-stone-600">{audienceLabel}</span>
                     </div>
 
-                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tighter text-charcoal mb-8 leading-[0.95]">
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tighter text-charcoal mb-8 leading-display">
                         {title}
                     </h1>
 
                     {startDate && (
                         <div className="flex flex-col md:flex-row gap-8 md:gap-16 text-lg text-charcoal/80">
                             <div className="flex items-start gap-4">
-                                <span className="font-mono text-xs capitalize tracking-widest text-umber mt-1.5 w-16">Dates</span>
+                                <span className="font-mono text-xs capitalize tracking-widest text-umber mt-2 w-16">Dates</span>
                                 <div>
                                     <p className="font-medium">
                                         {startDate.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' })}
@@ -162,7 +162,7 @@ export default async function ProgramPage({ params }: Props) {
                                     href={program.registrationUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="block w-full py-3 bg-charcoal text-off-white text-center font-medium tracking-wide hover:bg-umber transition-colors"
+                                    className="block w-full py-4 bg-charcoal text-off-white text-center font-medium tracking-wide hover:bg-umber transition-colors"
                                 >
                                     Register Now
                                 </a>
@@ -210,7 +210,7 @@ export default async function ProgramPage({ params }: Props) {
                                 <h3 className="font-mono text-xs capitalize tracking-widest text-umber border-b border-umber/20 pb-2">Related Topics</h3>
                                 <div className="flex flex-wrap gap-2">
                                     {program.tags.map((tag: any) => (
-                                        <span key={tag._id} className="px-2 py-1 bg-stone-100 text-charcoal/70 text-[10px] capitalize tracking-wider">
+                                        <span key={tag._id} className="px-2 py-1 bg-stone-100 text-charcoal/70 text-xs capitalize tracking-wider">
                                             {getLocalizedValue(tag.title, locale)}
                                         </span>
                                     ))}
@@ -243,7 +243,7 @@ export default async function ProgramPage({ params }: Props) {
                                     )}
                                 </div>
                                 <div className="space-y-1">
-                                    <span className="text-[10px] capitalize tracking-widest text-umber font-bold">Exhibition</span>
+                                    <span className="text-xs capitalize tracking-widest text-umber font-bold">Exhibition</span>
                                     <h3 className="text-xl font-bold text-charcoal group-hover:text-umber transition-colors">
                                         {getLocalizedValue(exh.title, locale)}
                                     </h3>

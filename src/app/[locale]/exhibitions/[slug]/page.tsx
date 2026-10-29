@@ -146,7 +146,7 @@ export default async function ExhibitionPage({ params }: Props) {
                         />
 
                         <header className="space-y-4 max-w-5xl">
-                            <span className="inline-block text-[10px] font-black uppercase tracking-[0.3em] text-charcoal/70">
+                            <span className="inline-block text-xs font-black uppercase tracking-widest text-charcoal/70">
                                 {t.Pages?.exhibitions?.label || 'Exhibition'}
                             </span>
                             {artistNames && (
@@ -154,7 +154,7 @@ export default async function ExhibitionPage({ params }: Props) {
                                     {artistNames}
                                 </h3>
                             )}
-                            <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.85] text-charcoal">
+                            <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-display text-charcoal">
                                 {title || 'Untitled'}
                             </h1>
                             <p className="text-sm md:text-base font-bold tracking-tight text-charcoal/80">
@@ -196,14 +196,14 @@ export default async function ExhibitionPage({ params }: Props) {
                 >
                    <header className="max-w-4xl space-y-8">
                         <span className={cn(
-                            "inline-block px-3 py-1 border text-xs font-bold tracking-[0.2em] uppercase transition-colors",
+                            "inline-block px-4 py-1 border text-xs font-bold tracking-widest uppercase transition-colors",
                             isDark ? "border-white/20 text-white/60" : "border-charcoal/20 text-charcoal/70"
                         )}>
                             {t.Pages?.exhibitions?.label || 'Exhibition'}
                         </span>
 
                         <h1 className={cn(
-                            "text-4xl md:text-5xl font-black tracking-tighter uppercase leading-[0.85] transition-colors",
+                            "text-4xl md:text-5xl font-black tracking-tighter uppercase leading-display transition-colors",
                             isDark ? "text-white" : "text-charcoal"
                         )}>
                             {title || 'Untitled'}
@@ -235,14 +235,14 @@ export default async function ExhibitionPage({ params }: Props) {
                              {/* Artists Profile Section */}
                              {artists.length > 0 && (
                                 <div className="space-y-12" id="artists">
-                                    <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-charcoal/70 border-b border-charcoal/5 pb-4">
+                                    <h4 className="text-xs font-black uppercase tracking-widest text-charcoal/70 border-b border-charcoal/5 pb-4">
                                         {artists.length === 1 ? 'Participating Artist' : 'Participating Artists'}
                                     </h4>
                                     
                                     {exhibition.artistListLayout === 'sentence' ? (
                                         <div className="text-sm md:text-base font-medium text-charcoal leading-relaxed">
                                             {artists.map((artist: any, index: number) => (
-                                                <span key={artist._id} className="inline-block whitespace-nowrap mr-1.5">
+                                                <span key={artist._id} className="inline-block whitespace-nowrap mr-2">
                                                     <Link 
                                                         href={`/${locale}/artists/${artist.slug}`}
                                                         className="hover:text-ochre hover:underline decoration-ochre underline-offset-4 transition-all duration-300"
@@ -265,7 +265,7 @@ export default async function ExhibitionPage({ params }: Props) {
                                                 return (
                                                     <div key={artist._id} className="space-y-6">
                                                         {artist.image?.asset && (
-                                                            <div className="space-y-3">
+                                                            <div className="space-y-4">
                                                                 <div className="aspect-[4/5] relative overflow-hidden bg-stone-100">
                                                                     <Image
                                                                         src={urlFor(artist.image).width(800).height(1000).url()}
@@ -278,9 +278,9 @@ export default async function ExhibitionPage({ params }: Props) {
                                                                 </div>
                                                                 {(portraitCaption || portraitCredit) && (
                                                                     <div className="space-y-1">
-                                                                        {portraitCaption && <p className="text-[10px] text-charcoal/70 leading-tight italic">{portraitCaption}</p>}
+                                                                        {portraitCaption && <p className="text-xs text-charcoal/70 leading-tight italic">{portraitCaption}</p>}
                                                                         {portraitCredit && (
-                                                                            <p className="text-[8px] uppercase tracking-[0.2em] text-charcoal/70 font-bold">
+                                                                            <p className="text-xs uppercase tracking-widest text-charcoal/70 font-bold">
                                                                                 Image credit: {(portraitCreditSlug && portraitCreditHasProfile) ? (
                                                                                     <Link 
                                                                                         href={`/${locale}/about/team#${portraitCreditSlug}`}
@@ -312,7 +312,7 @@ export default async function ExhibitionPage({ params }: Props) {
                                                             <div className="flex flex-col gap-2">
                                                                 <Link 
                                                                     href={`/${locale}/artists/${artist.slug}`}
-                                                                    className="text-[10px] items-center gap-2 font-bold uppercase tracking-widest text-charcoal inline-flex hover:text-ochre transition-colors group"
+                                                                    className="text-xs items-center gap-2 font-bold uppercase tracking-widest text-charcoal inline-flex hover:text-ochre transition-colors group"
                                                                 >
                                                                     View Artist Profile <span className="transition-transform group-hover:translate-x-1">→</span>
                                                                 </Link>
@@ -322,7 +322,7 @@ export default async function ExhibitionPage({ params }: Props) {
                                                         {artist.portraitPost && (
                                                             <div className="pt-6 border-t border-stone-200/50">
                                                                 <div className="mb-4">
-                                                                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-ochre">FEATURED PORTRAIT</span>
+                                                                    <span className="text-xs font-black uppercase tracking-widest text-ochre">FEATURED PORTRAIT</span>
                                                                 </div>
                                                                 <div className="bg-stone-50/50 p-2">
                                                                     <ChannelCard 
@@ -343,7 +343,7 @@ export default async function ExhibitionPage({ params }: Props) {
                              {/* Curators */}
                              {exhibition.curators?.length > 0 && (
                                 <div className="space-y-6 border-t border-stone-200/50 pt-8">
-                                    <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-charcoal/70">Curated By</h4>
+                                    <h4 className="text-xs font-black uppercase tracking-widest text-charcoal/70">Curated By</h4>
                                     <div className="flex flex-col gap-4">
                                         {exhibition.curators.map((curator: any) => {
                                             const name = getLocalizedValue(curator.name, locale)
@@ -373,7 +373,7 @@ export default async function ExhibitionPage({ params }: Props) {
                                                         {name}
                                                     </Link>
                                                     {roleDisplay && (
-                                                        <span className="text-[10px] uppercase tracking-widest text-charcoal/70 block">
+                                                        <span className="text-xs uppercase tracking-widest text-charcoal/70 block">
                                                             {roleDisplay}
                                                         </span>
                                                     )}
@@ -387,7 +387,7 @@ export default async function ExhibitionPage({ params }: Props) {
                                                         {name}
                                                     </span>
                                                     {roleDisplay && (
-                                                        <span className="text-[10px] uppercase tracking-widest text-charcoal/70 block">
+                                                        <span className="text-xs uppercase tracking-widest text-charcoal/70 block">
                                                             {roleDisplay}
                                                         </span>
                                                     )}
@@ -405,12 +405,12 @@ export default async function ExhibitionPage({ params }: Props) {
                                         href={exhibition.enquiryModule.url || `/${locale}/contact?subject=Enquiry: ${title}`}
                                         target={exhibition.enquiryModule.openInNewTab ? "_blank" : "_self"}
                                         rel={exhibition.enquiryModule.openInNewTab ? "noopener noreferrer" : undefined}
-                                        className="inline-flex items-center gap-4 px-10 py-5 bg-charcoal text-white text-[10px] font-black uppercase tracking-[0.2em] hover:bg-ochre transition-all"
+                                        className="inline-flex items-center gap-4 px-10 py-6 bg-charcoal text-white text-xs font-black uppercase tracking-widest hover:bg-ochre transition-all"
                                     >
                                         {getLocalizedValue(exhibition.enquiryModule.label, locale) || 'Enquire'}
                                     </Link>
                                     {exhibition.bookingUrl && (
-                                        <p className="mt-4 text-[10px] uppercase tracking-widest text-charcoal/70 font-bold">
+                                        <p className="mt-4 text-xs uppercase tracking-widest text-charcoal/70 font-bold">
                                             Tickets available now
                                         </p>
                                     )}
@@ -430,12 +430,12 @@ export default async function ExhibitionPage({ params }: Props) {
                                 <AccordionSection id="visitor-info" title="Visitor Information">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-sm text-charcoal/70 leading-relaxed">
                                         <div className="space-y-4">
-                                            <h5 className="font-black uppercase tracking-widest text-[10px]">Location</h5>
+                                            <h5 className="font-black uppercase tracking-widest text-xs">Location</h5>
                                             <p className="whitespace-pre-line">{locationName || settings?.contactInfo?.address}</p>
                                             <Link href={settings?.contactInfo?.googleMapsUrl || '#'} target="_blank" className="underline underline-offset-4 font-bold">View Map</Link>
                                         </div>
                                         <div className="space-y-4">
-                                            <h5 className="font-black uppercase tracking-widest text-[10px]">Information</h5>
+                                            <h5 className="font-black uppercase tracking-widest text-xs">Information</h5>
                                             <p className="flex flex-col gap-2">
                                                 <span>Hours: 10:00am – 6:00pm</span>
                                                 {admissionStatus && <span>Admission: {admissionStatus}</span>}
@@ -508,7 +508,7 @@ export default async function ExhibitionPage({ params }: Props) {
                                     <GridCell column={{ sm: 1, md: '7 / span 6' }} className="p-4">
                                         <div className="space-y-8">
                                             {sectionTitle && (
-                                                <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-charcoal/70 border-b border-charcoal/5 pb-4">
+                                                <h4 className="text-xs font-black uppercase tracking-widest text-charcoal/70 border-b border-charcoal/5 pb-4">
                                                     {sectionTitle}
                                                 </h4>
                                             )}
@@ -591,7 +591,7 @@ export default async function ExhibitionPage({ params }: Props) {
                 </div>
 
                 <footer className="pt-20 flex justify-between items-center border-t border-charcoal/5">
-                    <Link href={`/${locale}/exhibitions`} className="text-xs font-black uppercase tracking-[0.2em] text-charcoal hover:translate-x-[-8px] transition-transform inline-flex items-center gap-4">
+                    <Link href={`/${locale}/exhibitions`} className="text-xs font-black uppercase tracking-widest text-charcoal hover:translate-x-[-8px] transition-transform inline-flex items-center gap-4">
                         ← Back to Exhibitions
                     </Link>
                 </footer>

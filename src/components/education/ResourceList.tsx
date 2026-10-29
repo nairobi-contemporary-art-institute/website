@@ -20,16 +20,16 @@ export function ResourceList({ resources }: ResourceListProps) {
     return (
         <div className="space-y-4">
             <h3 className="font-mono text-xs capitalize tracking-widest text-umber border-b border-umber/20 pb-2">Resources</h3>
-            <ul className="space-y-3">
+            <ul className="space-y-4">
                 {resources.map((res, i) => (
                     <li key={res.url + i}>
                         <a
                             href={`${res.url}?dl=`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group flex items-center justify-between p-3 border border-charcoal/10 hover:border-charcoal/30 bg-white transition-all hover:bg-stone-50"
+                            className="group flex items-center justify-between p-4 border border-charcoal/10 hover:border-charcoal/30 bg-white transition-all hover:bg-stone-50"
                         >
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-4">
                                 <svg className="w-5 h-5 text-umber/80 group-hover:text-umber transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>

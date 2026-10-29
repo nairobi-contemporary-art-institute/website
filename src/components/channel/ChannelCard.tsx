@@ -38,7 +38,7 @@ export function ChannelCard({ post, locale, variant = 'light' }: ChannelCardProp
             href={`/${locale}/channel/${post.slug}`}
             className="group block h-full flex flex-col"
         >
-            <div className="relative aspect-[16/10] bg-charcoal/5 overflow-hidden mb-5 group">
+            <div className="relative aspect-[16/10] bg-charcoal/5 overflow-hidden mb-6 group">
                 {post.mainImage?.asset ? (
                     <Image
                         src={urlFor(post.mainImage).width(800).height(500).url()}
@@ -66,13 +66,13 @@ export function ChannelCard({ post, locale, variant = 'light' }: ChannelCardProp
 
                 {/* Duration Badge */}
                 {post.duration && (
-                    <div className="absolute bottom-3 right-3 px-2 py-1 bg-black/70 backdrop-blur text-white text-[10px] font-mono tracking-wider">
+                    <div className="absolute bottom-3 right-3 px-2 py-1 bg-black/70 backdrop-blur text-white text-xs font-mono tracking-wider">
                         {post.duration}
                     </div>
                 )}
             </div>
 
-            <div className="flex flex-col flex-1 space-y-3">
+            <div className="flex flex-col flex-1 space-y-4">
                 <div className={cn("flex items-center gap-2 text-xs font-mono capitalize tracking-widest", isDark ? "text-sun-bleached-paper/60" : "text-umber")}>
                     <Icon className="w-3 h-3" />
                     <span className={isDark ? "text-sun-bleached-paper" : ""}>{typeLabel}</span>
@@ -103,7 +103,7 @@ export function ChannelCard({ post, locale, variant = 'light' }: ChannelCardProp
                 {post.tags && post.tags.length > 0 && (
                     <div className="flex gap-2 flex-wrap pt-2">
                         {post.tags.slice(0, 3).map((tag: any) => (
-                            <span key={tag._id || Math.random()} className={cn("text-[10px] capitalize tracking-widest font-bold px-2 py-0.5", isDark ? "text-ochre bg-white/5" : "text-ochre bg-charcoal/5")}>
+                            <span key={tag._id || Math.random()} className={cn("text-xs capitalize tracking-widest font-bold px-2 py-0.5", isDark ? "text-ochre bg-white/5" : "text-ochre bg-charcoal/5")}>
                                 {getLocalizedValue(tag.title, locale)}
                             </span>
                         ))}

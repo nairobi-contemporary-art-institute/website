@@ -38,7 +38,7 @@ export function WhatsOnFilter({
                                     key={cat}
                                     onClick={() => onCategoryChange(cat === 'All' ? '' : cat)}
                                     className={cn(
-                                        "px-4 md:px-6 py-3 text-[10px] md:text-sm font-bold uppercase tracking-[0.1em] transition-colors flex-grow md:flex-grow-0 border-r border-b border-[#333]",
+                                        "px-4 md:px-6 py-4 text-xs md:text-sm font-bold uppercase tracking-widest transition-colors flex-grow md:flex-grow-0 border-r border-b border-[#333]",
                                         isActive 
                                             ? "bg-white text-black" 
                                             : "bg-[#2A2A2A] text-[#aaa] hover:bg-[#333] hover:text-white"
@@ -58,7 +58,7 @@ export function WhatsOnFilter({
                 {/* Left Side: Checkboxes - within container */}
                 <div className="page-container py-6 md:pt-10 md:pb-8 flex-1">
                     <div className="flex flex-wrap items-center gap-x-6 gap-y-4 text-xs md:text-sm text-[#ccc] font-medium tracking-wide">
-                        <span className="uppercase text-[10px] md:text-xs font-bold tracking-widest text-white mr-2">
+                        <span className="uppercase text-xs md:text-xs font-bold tracking-widest text-white mr-2">
                             Event suitable for:
                         </span>
                         {tags.map((tag) => {
@@ -90,7 +90,7 @@ export function WhatsOnFilter({
                 <div className="flex-shrink-0 md:pb-0 h-full">
                     <button 
                         onClick={onCalendarToggle}
-                        className="bg-black hover:bg-[#111] text-white border-l border-t border-[#333] px-8 h-[60px] md:h-[72px] flex items-center gap-8 font-bold text-xs uppercase tracking-[0.2em] transition-colors min-w-[200px] w-full md:w-auto justify-between"
+                        className="bg-black hover:bg-[#111] text-white border-l border-t border-[#333] px-8 h-[60px] md:h-[72px] flex items-center gap-8 font-bold text-xs uppercase tracking-widest transition-colors min-w-[200px] w-full md:w-auto justify-between"
                     >
                         <span>Calendar</span>
                         <div className="w-6 h-6 flex items-center justify-center relative">

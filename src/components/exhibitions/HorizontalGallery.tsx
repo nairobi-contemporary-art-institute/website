@@ -28,7 +28,7 @@ export function HorizontalGallery({ images, locale, title, className }: Horizont
         <section className={cn("w-full py-20 bg-sun-bleached-paper/30", className)}>
             {title && (
                 <div className="px-6 md:px-12 mb-12">
-                    <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-charcoal/70 border-b border-charcoal/5 pb-4">
+                    <h3 className="text-xs font-black uppercase tracking-widest text-charcoal/70 border-b border-charcoal/5 pb-4">
                         {title}
                     </h3>
                 </div>

@@ -62,9 +62,9 @@ export function TextCard({
                     />
                 )}
             </div>
-            <div className={cn('mt-5', feature && 'md:col-span-5 md:mt-0')}>
-                <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1 text-xs">
-                    {typeLabel && <span className="font-bold uppercase tracking-[0.14em] text-ochre-dark">{typeLabel}</span>}
+            <div className={cn('mt-6', feature && 'md:col-span-5 md:mt-0')}>
+                <p className="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-xs">
+                    {typeLabel && <span className="font-bold uppercase tracking-widest text-ochre-dark">{typeLabel}</span>}
                     {text.publishedAt && (
                         <time dateTime={text.publishedAt} className="text-umber">
                             {formatTextDate(text.publishedAt, locale)}
@@ -73,15 +73,15 @@ export function TextCard({
                 </p>
                 <Heading
                     className={cn(
-                        'mt-3 font-bold leading-snug tracking-tight text-charcoal decoration-1 underline-offset-4 group-hover:underline',
-                        feature ? 'text-3xl md:text-5xl md:leading-[1.08]' : 'text-xl md:text-2xl'
+                        'mt-4 font-bold leading-snug tracking-tight text-charcoal decoration-1 underline-offset-4 group-hover:underline',
+                        feature ? 'text-3xl md:text-5xl md:leading-none' : 'text-xl md:text-2xl'
                     )}
                 >
                     {title}
                 </Heading>
                 {authors && <p className="mt-2 text-sm text-umber">{authors}</p>}
                 {standfirst && (
-                    <p className={cn('mt-3 font-normal text-charcoal leading-relaxed', feature ? 'text-lg' : 'text-base line-clamp-3')}>
+                    <p className={cn('mt-4 font-normal text-charcoal leading-relaxed', feature ? 'text-lg' : 'text-base line-clamp-3')}>
                         {standfirst}
                     </p>
                 )}

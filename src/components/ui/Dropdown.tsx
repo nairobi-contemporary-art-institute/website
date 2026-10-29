@@ -19,7 +19,7 @@ export function Dropdown({ trigger, items, className }: DropdownProps) {
     return (
         <Menu.Root>
             <Menu.Trigger className={cn(
-                "flex items-center gap-2 px-4 py-2 text-[10px] font-bold capitalize tracking-[0.2em] border border-charcoal/10 hover:border-charcoal/30 transition-all",
+                "flex items-center gap-2 px-4 py-2 text-xs font-bold capitalize tracking-widest border border-charcoal/10 hover:border-charcoal/30 transition-all",
                 className
             )}>
                 {trigger}
@@ -31,7 +31,7 @@ export function Dropdown({ trigger, items, className }: DropdownProps) {
                         {items.map((item, idx) => (
                             <Menu.Item
                                 key={idx}
-                                className="px-4 py-2 text-[10px] font-bold capitalize tracking-[0.1em] text-charcoal/70 hover:text-charcoal hover:bg-charcoal/5 cursor-pointer outline-none transition-colors"
+                                className="px-4 py-2 text-xs font-bold capitalize tracking-widest text-charcoal/70 hover:text-charcoal hover:bg-charcoal/5 cursor-pointer outline-none transition-colors"
                                 onClick={item.onClick}
                             >
                                 {item.label}

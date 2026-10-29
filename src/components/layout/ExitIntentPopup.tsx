@@ -234,7 +234,7 @@ export default function ExitIntentPopup({ settings, works = [] }: ExitIntentPopu
                                     </div>
                                 </div>
 
-                                <div className="text-[10px] text-stone-500 uppercase tracking-[0.2em] z-10 relative font-medium">
+                                <div className="text-xs text-stone-500 uppercase tracking-widest z-10 relative font-medium">
                                     © {new Date().getFullYear()} NAIROBI CONTEMPORARY ART INSTITUTE
                                 </div>
                             </div>
@@ -277,7 +277,7 @@ export default function ExitIntentPopup({ settings, works = [] }: ExitIntentPopu
                                             </div>
 
                                             <div className="space-y-4">
-                                                <p className="text-[11px] font-bold uppercase tracking-widest text-stone-600 mb-6">
+                                                <p className="text-xs font-bold uppercase tracking-widest text-stone-600 mb-6">
                                                     Select your preferences
                                                 </p>
                                                 <div className="grid grid-cols-2 gap-y-6 gap-x-8">
@@ -324,7 +324,7 @@ export default function ExitIntentPopup({ settings, works = [] }: ExitIntentPopu
                                                 <p className="text-sm text-red-500 text-center mt-4">{message}</p>
                                             )}
 
-                                            <p className="text-[11px] text-stone-500 text-center leading-relaxed mt-8">
+                                            <p className="text-xs text-stone-500 text-center leading-relaxed mt-8">
                                                 By subscribing, you agree to receive promotional emails. <br /> You can unsubscribe at any time.
                                             </p>
                                         </form>

@@ -76,9 +76,9 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
             <header className="max-w-3xl mb-16 space-y-6">
                 {/* Tags */}
                 {post.tags && post.tags.length > 0 && (
-                    <div className="flex gap-3 flex-wrap">
+                    <div className="flex gap-4 flex-wrap">
                         {post.tags.map((tag: any, i: number) => (
-                            <span key={i} className="text-[10px] capitalize tracking-[0.2em] text-amber-800 font-bold bg-amber-50 px-3 py-1">
+                            <span key={i} className="text-xs capitalize tracking-widest text-amber-800 font-bold bg-amber-50 px-4 py-1">
                                 {getLocalizedValue(tag.title, locale)}
                             </span>
                         ))}
@@ -112,11 +112,11 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
                                         </div>
                                     )}
                                     <div className="text-left leading-tight">
-                                        <span className="block font-bold text-charcoal text-[10px] capitalize tracking-wider">
+                                        <span className="block font-bold text-charcoal text-xs capitalize tracking-wider">
                                             {getLocalizedValue(author.name, locale)}
                                         </span>
                                         {author.roles && (
-                                            <span className="block text-[9px] text-umber/80 capitalize tracking-tight">
+                                            <span className="block text-xs text-umber/80 capitalize tracking-tight">
                                                 {author.roles[0]}
                                             </span>
                                         )}
@@ -203,7 +203,7 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
                                 </div>
                                 <Link 
                                     href={`/artists/${artist.slug}`}
-                                    className="inline-flex items-center text-xs font-bold uppercase tracking-[0.2em] text-ochre hover:text-amber-900 transition-colors group"
+                                    className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-ochre hover:text-amber-900 transition-colors group"
                                 >
                                     Full Artist Profile
                                     <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
@@ -213,7 +213,7 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
 
                         {/* Works Gallery */}
                         <div className="md:col-span-8">
-                            <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-umber/80 mb-8">
+                            <h4 className="text-xs font-bold uppercase tracking-widest text-umber/80 mb-8">
                                 Featured Works
                             </h4>
                             {artist.works && artist.works.length > 0 ? (
@@ -221,7 +221,7 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
                                     {artist.works.map((work: any) => (
                                         <div key={work._id} className="group">
                                             <Link href={`/artists/${artist.slug}`} className="block">
-                                                <div className="relative aspect-[4/3] overflow-hidden bg-charcoal/5 mb-3 rounded-sm">
+                                                <div className="relative aspect-[4/3] overflow-hidden bg-charcoal/5 mb-4 rounded-sm">
                                                     {work.image && (
                                                         <Image
                                                             src={urlFor(work.image).width(500).height(400).url()}
@@ -235,11 +235,11 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
                                                     )}
                                                 </div>
                                                 <div className="space-y-0.5">
-                                                    <p className="text-[10px] font-bold text-charcoal truncate uppercase tracking-wider group-hover:text-ochre transition-colors">
+                                                    <p className="text-xs font-bold text-charcoal truncate uppercase tracking-wider group-hover:text-ochre transition-colors">
                                                         {getLocalizedValue(work.title, locale)}
                                                     </p>
                                                     {work.year && (
-                                                        <p className="text-[9px] text-umber/80 font-mono">
+                                                        <p className="text-xs text-umber/80 font-mono">
                                                             {work.year}
                                                         </p>
                                                     )}
@@ -250,20 +250,20 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
                                 </div>
                             ) : (
                                 <div className="aspect-[16/9] bg-charcoal/5 flex items-center justify-center border border-dashed border-umber/10">
-                                    <p className="text-[10px] uppercase tracking-widest text-umber/80">Works gallery arriving soon</p>
+                                    <p className="text-xs uppercase tracking-widest text-umber/80">Works gallery arriving soon</p>
                                 </div>
                             )}
                             
                             {/* Exhibitions List */}
                             {artist.featuredExhibitions && artist.featuredExhibitions.length > 0 && (
                                 <div className="mt-12 pt-8 border-t border-umber/5">
-                                    <h5 className="text-[9px] font-bold uppercase tracking-[0.3em] text-umber/80 mb-5">Exhibitions</h5>
-                                    <div className="flex flex-wrap gap-3">
+                                    <h5 className="text-xs font-bold uppercase tracking-widest text-umber/80 mb-6">Exhibitions</h5>
+                                    <div className="flex flex-wrap gap-4">
                                         {artist.featuredExhibitions.map((exh: any) => (
                                             <Link 
                                                 key={exh._id} 
                                                 href={`/exhibitions/${exh.slug}`}
-                                                className="text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 bg-umber/[0.03] text-umber/80 hover:bg-umber/[0.08] hover:text-charcoal transition-all border border-umber/5 rounded-full"
+                                                className="text-xs font-bold uppercase tracking-wider px-4 py-2 bg-umber/[0.03] text-umber/80 hover:bg-umber/[0.08] hover:text-charcoal transition-all border border-umber/5 rounded-full"
                                             >
                                                 {getLocalizedValue(exh.title, locale)}
                                             </Link>

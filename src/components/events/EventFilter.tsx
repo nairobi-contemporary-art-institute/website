@@ -45,13 +45,13 @@ export function EventFilter({ events, locale }: EventFilterProps) {
         <div className="space-y-12">
             {/* Filter Bar */}
             <div className="flex flex-col sm:flex-row gap-6 border-b border-rich-blue/10 pb-8 sticky top-20 bg-background/95 backdrop-blur z-20 transition-all">
-                <div className="flex flex-wrap gap-3 flex-1">
+                <div className="flex flex-wrap gap-4 flex-1">
                     {categories.map(cat => (
                         <button
                             key={cat}
                             onClick={() => setFilter(cat)}
                             className={cn(
-                                "px-5 py-2 text-[10px] font-bold capitalize tracking-[0.2em] transition-all border",
+                                "px-6 py-2 text-xs font-bold capitalize tracking-widest transition-all border",
                                 filter === cat
                                     ? "bg-charcoal text-off-white border-charcoal shadow-sm"
                                     : "bg-transparent text-charcoal/70 hover:text-charcoal border-charcoal/10 hover:border-charcoal/30"
@@ -108,7 +108,7 @@ export function EventFilter({ events, locale }: EventFilterProps) {
                             </div>
                         ) : (
                             <div className="py-32 text-center border border-dashed border-charcoal/10 bg-stone-50/50">
-                                <p className="text-charcoal/70 font-mono capitalize tracking-[0.3em] text-[10px]">No upcoming events found</p>
+                                <p className="text-charcoal/70 font-mono capitalize tracking-widest text-xs">No upcoming events found</p>
                             </div>
                         )}
                     </section>

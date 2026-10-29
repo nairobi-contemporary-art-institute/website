@@ -81,7 +81,7 @@ export function PDFViewerModal({ isOpen, onClose, fileUrl, title }: PDFViewerMod
                         {/* Custom Header - Clinical Luxury */}
                         <div className="bg-charcoal text-white px-6 py-4 flex items-center justify-between border-b border-white/10 shrink-0">
                             <div className="flex flex-col min-w-0 flex-1 mr-4">
-                                <span className="text-[10px] uppercase tracking-[0.3em] text-stone-600 font-bold mb-1">Resource Viewer</span>
+                                <span className="text-xs uppercase tracking-widest text-stone-600 font-bold mb-1">Resource Viewer</span>
                                 <h3 className={cn(
                                     "text-sm font-light tracking-wide truncate transition-all duration-300",
                                     viewMode === 'standard' ? "max-w-[100px] md:max-w-[200px] lg:max-w-[300px]" : "max-w-[150px] md:max-w-xl"
@@ -96,7 +96,7 @@ export function PDFViewerModal({ isOpen, onClose, fileUrl, title }: PDFViewerMod
                                     <button 
                                         onClick={() => setViewMode('standard')}
                                         className={cn(
-                                            "px-3 py-1 text-[9px] uppercase tracking-widest font-bold transition-all duration-300",
+                                            "px-4 py-1 text-xs uppercase tracking-widest font-bold transition-all duration-300",
                                             viewMode === 'standard' ? "bg-white text-charcoal" : "text-stone-600 hover:text-white"
                                         )}
                                     >
@@ -105,7 +105,7 @@ export function PDFViewerModal({ isOpen, onClose, fileUrl, title }: PDFViewerMod
                                     <button 
                                         onClick={() => setViewMode('wide')}
                                         className={cn(
-                                            "px-3 py-1 text-[9px] uppercase tracking-widest font-bold transition-all duration-300",
+                                            "px-4 py-1 text-xs uppercase tracking-widest font-bold transition-all duration-300",
                                             viewMode === 'wide' ? "bg-white text-charcoal" : "text-stone-600 hover:text-white"
                                         )}
                                     >
@@ -114,7 +114,7 @@ export function PDFViewerModal({ isOpen, onClose, fileUrl, title }: PDFViewerMod
                                     <button 
                                         onClick={() => setViewMode('full')}
                                         className={cn(
-                                            "px-3 py-1 text-[9px] uppercase tracking-widest font-bold transition-all duration-300",
+                                            "px-4 py-1 text-xs uppercase tracking-widest font-bold transition-all duration-300",
                                             viewMode === 'full' ? "bg-white text-charcoal" : "text-stone-600 hover:text-white"
                                         )}
                                     >
@@ -136,7 +136,7 @@ export function PDFViewerModal({ isOpen, onClose, fileUrl, title }: PDFViewerMod
                                     download 
                                     className="flex items-center space-x-2 text-stone-300 hover:text-white transition-colors group"
                                 >
-                                    <span className="hidden md:inline text-[10px] uppercase tracking-widest font-bold opacity-0 group-hover:opacity-100 transition-opacity">Download</span>
+                                    <span className="hidden md:inline text-xs uppercase tracking-widest font-bold opacity-0 group-hover:opacity-100 transition-opacity">Download</span>
                                     <Download className="w-5 h-5" />
                                 </a>
 
@@ -161,7 +161,7 @@ export function PDFViewerModal({ isOpen, onClose, fileUrl, title }: PDFViewerMod
                             
                             {/* Branded Loading State Placeholder */}
                             <div className="absolute inset-0 flex items-center justify-center pointer-events-none -z-10 bg-stone-50">
-                                <div className="text-[10px] uppercase tracking-[0.4em] text-charcoal/20 animate-pulse font-black">
+                                <div className="text-xs uppercase tracking-widest text-charcoal/20 animate-pulse font-black">
                                     NCAI DIGITAL RESOURCE
                                 </div>
                             </div>

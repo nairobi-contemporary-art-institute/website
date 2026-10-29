@@ -155,7 +155,7 @@ export function CinematicGallery({ images, locale, title, className }: Cinematic
         >
             {title && (
                 <div className="px-6 md:px-12 mb-8">
-                    <h3 className="premium-gallery-text text-[10px] tracking-[0.4em] text-white/70 border-b border-white/10 pb-4">
+                    <h3 className="premium-gallery-text text-xs tracking-widest text-white/70 border-b border-white/10 pb-4">
                         {title}
                     </h3>
                 </div>
@@ -202,7 +202,7 @@ export function CinematicGallery({ images, locale, title, className }: Cinematic
                             </div>
 
                             {localizedCaption && (
-                                <figcaption className="mt-3 max-w-md whitespace-normal premium-gallery-text text-xs md:text-sm normal-case text-white/70 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <figcaption className="mt-4 max-w-md whitespace-normal premium-gallery-text text-xs md:text-sm normal-case text-white/70 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                     <MarkdownText text={localizedCaption} />
                                 </figcaption>
                             )}
@@ -229,7 +229,7 @@ export function CinematicGallery({ images, locale, title, className }: Cinematic
                                     setShowCaption(!showCaption);
                                 }}
                                 className={cn(
-                                    "p-3 rounded-circle transition-all duration-300",
+                                    "p-4 rounded-circle transition-all duration-300",
                                     showCaption ? "bg-white text-black" : "bg-white/10 text-white hover:bg-white/20"
                                 )}
                                 title="Image Info"
@@ -238,7 +238,7 @@ export function CinematicGallery({ images, locale, title, className }: Cinematic
                             </button>
                             <button 
                                 onClick={() => setSelectedIndex(null)}
-                                className="p-3 bg-white/5 hover:bg-white/10 rounded-full text-white transition-colors"
+                                className="p-4 bg-white/5 hover:bg-white/10 rounded-full text-white transition-colors"
                             >
                                 <X size={24} />
                             </button>
@@ -285,11 +285,11 @@ export function CinematicGallery({ images, locale, title, className }: Cinematic
                                             initial={{ opacity: 0, y: 12 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             exit={{ opacity: 0, y: 8 }}
-                                            className="shrink-0 w-full max-w-3xl mx-auto px-6 py-5 bg-black/60 border-t border-white/10 text-white"
+                                            className="shrink-0 w-full max-w-3xl mx-auto px-6 py-6 bg-black/60 border-t border-white/10 text-white"
                                             onClick={(e) => e.stopPropagation()}
                                         >
                                             <div className="space-y-2">
-                                                <div className="premium-gallery-text text-[10px] tracking-[0.3em] text-white/70">
+                                                <div className="premium-gallery-text text-xs tracking-widest text-white/70">
                                                     Information
                                                 </div>
                                                 <p className="premium-gallery-text text-base md:text-lg leading-relaxed normal-case">
@@ -303,7 +303,7 @@ export function CinematicGallery({ images, locale, title, className }: Cinematic
                         </div>
 
                         {/* Counter */}
-                        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/70 text-[10px] premium-gallery-text tracking-[0.3em]">
+                        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/70 text-xs premium-gallery-text tracking-widest">
                             {selectedIndex + 1} / {validImages.length}
                         </div>
                     </motion.div>

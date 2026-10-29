@@ -15,7 +15,7 @@ export default async function NotFound() {
             </p>
             <Link
                 href="/"
-                className="px-8 py-3 bg-charcoal text-ivory text-xs font-bold capitalize tracking-widest hover:bg-amber-900 transition-colors"
+                className="px-8 py-4 bg-charcoal text-ivory text-xs font-bold capitalize tracking-widest hover:bg-amber-900 transition-colors"
             >
                 {t('goHome')}
             </Link>

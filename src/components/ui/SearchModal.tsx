@@ -160,7 +160,7 @@ export function SearchModal({ isOpen, onClose, locale }: { isOpen: boolean; onCl
                             <Dialog.Close
                                 className="ml-8 text-white/90 hover:text-white flex flex-col items-center gap-1 group shrink-0"
                             >
-                                <span className="text-[10px] capitalize tracking-widest font-bold">{t('close')}</span>
+                                <span className="text-xs capitalize tracking-widest font-bold">{t('close')}</span>
                                 <div className="w-10 h-10 border border-white/20 flex items-center justify-center group-hover:border-white transition-colors">
                                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                                         <path d="M1 1L13 13M1 13L13 1" stroke="currentColor" strokeWidth="2" />
@@ -185,7 +185,7 @@ export function SearchModal({ isOpen, onClose, locale }: { isOpen: boolean; onCl
                                             setTimeout(animateResults, 10)
                                         }}
                                         className={cn(
-                                            "px-4 py-1.5 text-[10px] capitalize tracking-[0.2em] font-bold border transition-all duration-300",
+                                            "px-4 py-2 text-xs capitalize tracking-widest font-bold border transition-all duration-300",
                                             activeCategory === cat
                                                 ? "bg-white text-background-dark border-white"
                                                 : "bg-transparent text-white/60 border-white/10 hover:border-white/30 hover:text-white"
@@ -233,13 +233,13 @@ export function SearchModal({ isOpen, onClose, locale }: { isOpen: boolean; onCl
                                                         sizes="80px"
                                                     />
                                                 ) : (
-                                                    <div className="w-full h-full flex items-center justify-center text-[10px] text-white/20 capitalize font-bold tracking-widest">
+                                                    <div className="w-full h-full flex items-center justify-center text-xs text-white/20 capitalize font-bold tracking-widest">
                                                         {result._type}
                                                     </div>
                                                 )}
                                             </div>
                                             <div className="flex flex-col">
-                                                <span className="text-[10px] capitalize tracking-widest text-ochre font-bold mb-1">
+                                                <span className="text-xs capitalize tracking-widest text-ochre font-bold mb-1">
                                                     {t.has(result._type) ? t(result._type) : result._type}
                                                 </span>
                                                 <h3 className="text-2xl font-bold text-white leading-tight group-hover:text-ochre transition-colors">

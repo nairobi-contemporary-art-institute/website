@@ -137,7 +137,7 @@ export function TeamGrid({ people, locale }: TeamGridProps) {
                             {name}
                         </h3>
                         {person.roles && person.roles.length > 0 && (
-                            <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-umber/80 leading-relaxed">
+                            <p className="text-xs font-mono uppercase tracking-widest text-umber/80 leading-relaxed">
                                 {person.roles.join(' / ')}
                             </p>
                         )}
@@ -153,7 +153,7 @@ export function TeamGrid({ people, locale }: TeamGridProps) {
                         <div className="pt-8 border-t border-charcoal/5">
                             <button 
                                 onClick={() => setExpandedId(null)}
-                                className="text-[10px] font-mono uppercase tracking-[0.2em] text-umber hover:gap-3 transition-all flex items-center gap-2"
+                                className="text-xs font-mono uppercase tracking-widest text-umber hover:gap-4 transition-all flex items-center gap-2"
                             >
                                 Close Details <ChevronDown className="w-3 h-3 rotate-180" />
                             </button>
@@ -191,7 +191,7 @@ export function TeamGrid({ people, locale }: TeamGridProps) {
                 {/* Staff Section */}
                 {staffMembers.length > 0 && (
                     <div className="space-y-12">
-                        <h2 className="text-sm font-mono uppercase tracking-[0.3em] text-charcoal/70 flex items-center gap-4">
+                        <h2 className="text-sm font-mono uppercase tracking-widest text-charcoal/70 flex items-center gap-4">
                             <span className="w-8 h-[1px] bg-charcoal/10" />
                             {tc('staff')}
                         </h2>
@@ -206,7 +206,7 @@ export function TeamGrid({ people, locale }: TeamGridProps) {
                 {/* Contributors Section */}
                 {contributors.length > 0 && (
                     <div className="space-y-12">
-                        <h2 className="text-sm font-mono uppercase tracking-[0.3em] text-charcoal/70 flex items-center gap-4">
+                        <h2 className="text-sm font-mono uppercase tracking-widest text-charcoal/70 flex items-center gap-4">
                             <span className="w-8 h-[1px] bg-charcoal/10" />
                             {tc('contributors')}
                         </h2>

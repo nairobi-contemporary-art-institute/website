@@ -312,7 +312,7 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
                                     <Link
                                         key={link.href}
                                         href={link.href}
-                                        className="text-sm font-bold transition-all duration-200 uppercase tracking-[0.2em] text-deep-umber hover:text-ochre relative py-4 group"
+                                        className="text-sm font-bold transition-all duration-200 uppercase tracking-widest text-deep-umber hover:text-ochre relative py-4 group"
                                         onMouseEnter={() => handleMouseEnter(idx)}
                                     >
                                         {link.label}

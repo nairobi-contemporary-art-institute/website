@@ -76,7 +76,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                         <Grid columns={{ sm: 1, md: 12 }} gap={24}>
                             <GridCell column={{ sm: 1, md: 8 }} className="items-start justify-start p-0">
                                 <div className="max-w-4xl space-y-8">
-                                    <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-charcoal capitalize leading-[0.9]">
+                                    <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-charcoal capitalize leading-display">
                                         {title}
                                     </h1>
                                     {heroHeadline && (
@@ -123,7 +123,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                                         key={idx} 
                                         href={item.href}
                                         className={cn(
-                                            "block py-3 border-b border-charcoal/5 text-sm uppercase tracking-widest transition-all",
+                                            "block py-4 border-b border-charcoal/5 text-sm uppercase tracking-widest transition-all",
                                             isActive ? "text-umber font-bold" : "text-charcoal/70 hover:text-charcoal"
                                         )}
                                     >

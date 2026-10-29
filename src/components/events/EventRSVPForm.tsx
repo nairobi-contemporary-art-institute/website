@@ -101,7 +101,7 @@ export function EventRSVPForm({ eventTitle, eventSlug, locale }: EventRSVPFormPr
                             name="name"
                             required
                             placeholder={locale === 'en' ? 'e.g. Jane Doe' : 'k.m. Jane Doe'}
-                            className="w-full bg-stone-50 border-b border-charcoal/10 py-3 px-0 focus:outline-none focus:border-umber transition-colors text-charcoal placeholder:text-charcoal/20"
+                            className="w-full bg-stone-50 border-b border-charcoal/10 py-4 px-0 focus:outline-none focus:border-umber transition-colors text-charcoal placeholder:text-charcoal/20"
                         />
                     </div>
 
@@ -115,17 +115,17 @@ export function EventRSVPForm({ eventTitle, eventSlug, locale }: EventRSVPFormPr
                             name="email"
                             required
                             placeholder="jane@example.com"
-                            className="w-full bg-stone-50 border-b border-charcoal/10 py-3 px-0 focus:outline-none focus:border-umber transition-colors text-charcoal placeholder:text-charcoal/20"
+                            className="w-full bg-stone-50 border-b border-charcoal/10 py-4 px-0 focus:outline-none focus:border-umber transition-colors text-charcoal placeholder:text-charcoal/20"
                         />
                     </div>
                 </div>
 
-                <div className="flex items-start gap-3 select-none cursor-pointer group">
+                <div className="flex items-start gap-4 select-none cursor-pointer group">
                     <input
                         type="checkbox"
                         id="consent"
                         name="consent"
-                        className="mt-1.5 h-4 w-4 border-charcoal/20 text-umber focus:ring-umber accent-umber"
+                        className="mt-2 h-4 w-4 border-charcoal/20 text-umber focus:ring-umber accent-umber"
                     />
                     <label htmlFor="consent" className="text-xs text-charcoal/70 leading-relaxed cursor-pointer group-hover:text-charcoal transition-colors">
                         {locale === 'en'
@@ -145,7 +145,7 @@ export function EventRSVPForm({ eventTitle, eventSlug, locale }: EventRSVPFormPr
                     type="submit"
                     disabled={status === 'loading'}
                     className={cn(
-                        "w-full py-5 font-mono text-xs capitalize tracking-[0.3em] transition-all duration-300",
+                        "w-full py-6 font-mono text-xs capitalize tracking-widest transition-all duration-300",
                         status === 'loading'
                             ? "bg-charcoal/20 text-charcoal/70 cursor-wait"
                             : "bg-charcoal text-off-white hover:bg-umber"
@@ -158,7 +158,7 @@ export function EventRSVPForm({ eventTitle, eventSlug, locale }: EventRSVPFormPr
                 </button>
             </form>
 
-            <p className="text-[10px] text-charcoal/70 font-mono capitalize tracking-widest leading-relaxed">
+            <p className="text-xs text-charcoal/70 font-mono capitalize tracking-widest leading-relaxed">
                 By registering, you agree to our privacy policy and terms of service.
             </p>
         </div>

@@ -109,13 +109,13 @@ export function AnnouncementBanner({ data, locale }: AnnouncementBannerProps) {
           <div className="flex items-start justify-between gap-8 mb-8">
             <div className="flex-1">
               {preHeading && (
-                <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] font-bold text-white/70 mb-6">
+                <p className="text-xs md:text-xs uppercase tracking-widest font-bold text-white/70 mb-6">
                   {preHeading}
                 </p>
               )}
 
               {heading && (
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-8">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tighter uppercase leading-display mb-8">
                   {heading}
                 </h2>
               )}
@@ -154,7 +154,7 @@ export function AnnouncementBanner({ data, locale }: AnnouncementBannerProps) {
                 href={data.ctaUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-4 text-xs font-bold uppercase tracking-[0.3em] text-white"
+                className="group inline-flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-white"
               >
                 <span className="border-b border-white/20 group-hover:border-white transition-colors pb-1">
                   {ctaLabel}
@@ -182,7 +182,7 @@ export function AnnouncementBanner({ data, locale }: AnnouncementBannerProps) {
                   <path d="M4 2L8 6L4 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </motion.span>
-              <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/70 group-hover:text-white transition-colors">
+              <span className="text-xs font-bold uppercase tracking-widest text-white/70 group-hover:text-white transition-colors">
                 {accordionLabel}
               </span>
             </button>
@@ -237,7 +237,7 @@ export function AnnouncementBanner({ data, locale }: AnnouncementBannerProps) {
                                 <a 
                                   href={card.url || '#'} 
                                   target={card.url?.startsWith('http') ? '_blank' : '_self'}
-                                  className="group flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] text-white"
+                                  className="group flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-white"
                                 >
                                   <span className="border-b border-white/10 group-hover:border-white transition-colors pb-1">
                                     {btn || 'Explore'}
@@ -245,7 +245,7 @@ export function AnnouncementBanner({ data, locale }: AnnouncementBannerProps) {
                                   <div className="w-6 h-[1px] bg-white/10 group-hover:w-10 group-hover:bg-white transition-all duration-300" />
                                 </a>
                               ) : (
-                                <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/70 italic">
+                                <div className="text-xs font-bold uppercase tracking-widest text-white/70 italic">
                                   {btn || 'Coming Soon'}
                                 </div>
                               )}
@@ -263,7 +263,7 @@ export function AnnouncementBanner({ data, locale }: AnnouncementBannerProps) {
                             rel="noopener noreferrer"
                             className="group flex flex-col items-start lg:items-end gap-2"
                           >
-                            <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/70 group-hover:text-white transition-colors">
+                            <span className="text-xs font-medium uppercase tracking-widest text-white/70 group-hover:text-white transition-colors">
                               {secondaryText}
                             </span>
                             <div className="h-[1px] w-12 bg-white/20 group-hover:w-full transition-all duration-500" />

@@ -76,13 +76,13 @@ export default async function EducationPage({ params }: Props) {
                 <div className="relative z-10 page-container h-full flex flex-col justify-end pb-24">
                     <div className="w-full lg:w-1/2 text-start">
                         <div className="mb-6">
-                            <h1 className="text-4xl md:text-[3.5rem] font-medium tracking-tighter text-white leading-[1]">
+                            <h1 className="text-4xl md:text-5xl font-medium tracking-tighter text-white leading-none">
                                 {title}
                             </h1>
                         </div>
                         <div>
                             {description && (
-                                <div className="text-[1.125rem] text-stone-100/90 font-light leading-[1.05] drop-shadow-md">
+                                <div className="text-lg text-stone-100/90 font-light leading-none drop-shadow-md">
                                     <PortableText value={description} locale={locale} />
                                 </div>
                             )}
@@ -95,22 +95,22 @@ export default async function EducationPage({ params }: Props) {
             <nav className="sticky top-[var(--header-height)] z-30 bg-charcoal text-white border-b border-white/10 backdrop-blur-md">
                 <div className="page-container">
                     <ul className="flex items-center space-x-8 py-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
-                        <li><a href="#overview" className="text-[10px] uppercase tracking-[0.2em] font-bold hover:text-stone-300 transition-colors">Overview</a></li>
+                        <li><a href="#overview" className="text-xs uppercase tracking-widest font-bold hover:text-stone-300 transition-colors">Overview</a></li>
                         {pageData?.sections?.map((section: any, idx: number) => {
                             const sectionTitle = getLocalizedValue(section.title, locale)
                             return sectionTitle ? (
                                 <li key={idx}>
-                                    <a href={`#section-${idx}`} className="text-[10px] uppercase tracking-[0.2em] font-bold hover:text-stone-300 transition-colors">
+                                    <a href={`#section-${idx}`} className="text-xs uppercase tracking-widest font-bold hover:text-stone-300 transition-colors">
                                         {sectionTitle}
                                     </a>
                                 </li>
                             ) : null
                         })}
-                        <li><a href="#pillars" className="text-[10px] uppercase tracking-[0.2em] font-bold hover:text-stone-300 transition-colors">Audience Groups</a></li>
+                        <li><a href="#pillars" className="text-xs uppercase tracking-widest font-bold hover:text-stone-300 transition-colors">Audience Groups</a></li>
                         {resources && resources.length > 0 && (
-                            <li><a href="#resources" className="text-[10px] uppercase tracking-[0.2em] font-bold hover:text-stone-300 transition-colors">Resources</a></li>
+                            <li><a href="#resources" className="text-xs uppercase tracking-widest font-bold hover:text-stone-300 transition-colors">Resources</a></li>
                         )}
-                        <li><a href="#programs" className="text-[10px] uppercase tracking-[0.2em] font-bold hover:text-stone-300 transition-colors">All Programs</a></li>
+                        <li><a href="#programs" className="text-xs uppercase tracking-widest font-bold hover:text-stone-300 transition-colors">All Programs</a></li>
                     </ul>
                 </div>
             </nav>
@@ -121,7 +121,7 @@ export default async function EducationPage({ params }: Props) {
                     {/* Main Overview Section */}
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
                         <div className="lg:col-span-4">
-                            <h2 className="text-xs font-bold uppercase tracking-[0.4em] text-charcoal/70 sticky top-48">
+                            <h2 className="text-xs font-bold uppercase tracking-widest text-charcoal/70 sticky top-48">
                                 Overview
                             </h2>
                         </div>
@@ -160,7 +160,7 @@ export default async function EducationPage({ params }: Props) {
             {pageData?.pillars && pageData.pillars.length > 0 && (
                 <section id="pillars" className="py-32 bg-stone-50/50 scroll-mt-32">
                     <div className="page-container mb-12">
-                        <h2 className="text-xs font-bold uppercase tracking-[0.4em] text-charcoal/70 mb-16">
+                        <h2 className="text-xs font-bold uppercase tracking-widest text-charcoal/70 mb-16">
                             Explore More
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-y-20 gap-x-8">
@@ -205,11 +205,11 @@ export default async function EducationPage({ params }: Props) {
                                                 isExternal ? "bg-charcoal/30 backdrop-blur-[4px]" : "bg-charcoal/20"
                                             )}>
                                                 {isExternal && (
-                                                    <div className="flex flex-col items-center space-y-3 transform scale-90 group-hover:scale-100 transition-transform duration-500">
+                                                    <div className="flex flex-col items-center space-y-4 transform scale-90 group-hover:scale-100 transition-transform duration-500">
                                                         <div className="w-14 h-14 rounded-full border border-white/50 flex items-center justify-center bg-white/20 backdrop-blur-xl shadow-2xl">
                                                             <ArrowUpRight className="w-7 h-7 text-white" />
                                                         </div>
-                                                        <span className="text-[10px] uppercase tracking-[0.4em] text-white font-black drop-shadow-md">
+                                                        <span className="text-xs uppercase tracking-widest text-white font-black drop-shadow-md">
                                                             {locale === 'sw' ? 'TEMBELEA' : 'VISIT SITE'}
                                                         </span>
                                                     </div>
@@ -251,7 +251,7 @@ export default async function EducationPage({ params }: Props) {
             <section id="programs" className="py-32 scroll-mt-32">
                 <div className="page-container">
                     <div className="mb-12">
-                        <h2 className="text-xs font-bold uppercase tracking-[0.4em] text-charcoal/70 border-b border-charcoal/10 pb-4 inline-block mb-16">
+                        <h2 className="text-xs font-bold uppercase tracking-widest text-charcoal/70 border-b border-charcoal/10 pb-4 inline-block mb-16">
                             {t('allPrograms')}
                         </h2>
                         <EducationFilter programs={programs} locale={locale} />

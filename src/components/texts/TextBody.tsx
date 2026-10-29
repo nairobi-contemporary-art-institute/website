@@ -15,7 +15,7 @@ const components: PortableTextComponents = {
     block: {
         normal: ({ children }) => <p className="measure mb-6">{children}</p>,
         h2: ({ children }) => (
-            <h2 className="measure mt-14 mb-5 text-2xl md:text-[1.75rem] font-bold leading-tight tracking-tight">
+            <h2 className="measure mt-14 mb-6 text-2xl md:text-2xl font-bold leading-tight tracking-tight">
                 {children}
             </h2>
         ),
@@ -34,7 +34,7 @@ const components: PortableTextComponents = {
         em: ({ children }) => <em className="italic">{children}</em>,
         // Legacy: speaker was briefly a text decorator before Speakers became a list
         speaker: ({ children }) => (
-            <span className="font-bold uppercase tracking-[0.06em] text-[0.8em]">{children}</span>
+            <span className="font-bold uppercase tracking-wider text-[0.8em]">{children}</span>
         ),
         link: ({ children, value }) => {
             const external = value?.blank !== false
@@ -62,7 +62,7 @@ const components: PortableTextComponents = {
         // Inline turn marker in interviews/conversations; label set by labelSpeakerTurns()
         speaker: ({ value }) =>
             value?.label ? (
-                <span className="me-[0.6em] font-bold uppercase tracking-[0.06em] text-[0.8em]">{value.label}</span>
+                <span className="me-[0.6em] font-bold uppercase tracking-wider text-[0.8em]">{value.label}</span>
             ) : null,
         textFigure: ({ value }) => (
             <TextFigure

@@ -97,7 +97,7 @@ export function WorkLightbox({ isOpen, onClose, works, initialIndex, locale, art
                     className="group flex flex-col items-center gap-2 transition-transform hover:scale-110"
                 >
                     <X className="w-8 h-8 text-charcoal" strokeWidth={1} />
-                    <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-charcoal/70 group-hover:text-charcoal transition-colors">Close</span>
+                    <span className="text-xs font-bold tracking-widest uppercase text-charcoal/70 group-hover:text-charcoal transition-colors">Close</span>
                 </button>
             </div>
 
@@ -164,14 +164,14 @@ export function WorkLightbox({ isOpen, onClose, works, initialIndex, locale, art
                                 <p className="block max-w-[75ch]">{medium}</p>
                                 <p className="block">{getLocalizedValueAsString(currentWork.dimensions, locale)}</p>
                                 {currentWork.edition && (
-                                    <p className="text-[11px] text-charcoal/70 pt-2">{getLocalizedValueAsString(currentWork.edition, locale)}</p>
+                                    <p className="text-xs text-charcoal/70 pt-2">{getLocalizedValueAsString(currentWork.edition, locale)}</p>
                                 )}
                             </div>
 
                             <div className="shrink-0">
                                 <a
                                     href={`mailto:info@ncai254.com?subject=Enquiry: ${artistName} - ${title}`}
-                                    className="inline-block px-12 py-3 border border-charcoal text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-charcoal hover:text-white transition-all duration-300"
+                                    className="inline-block px-12 py-4 border border-charcoal text-xs font-bold tracking-widest uppercase hover:bg-charcoal hover:text-white transition-all duration-300"
                                 >
                                     Enquire
                                 </a>

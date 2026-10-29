@@ -82,24 +82,24 @@ export function HomeHero({ exhibition, featuredCards, locale }: HomeHeroProps) {
                 </Link>
 
                 <div className="flex flex-col">
-                    <p className="text-[20px] font-black tracking-tighter capitalize mb-0.5 text-charcoal/70 leading-[0.85]">
+                    <p className="text-xl font-black tracking-tighter capitalize mb-0.5 text-charcoal/70 leading-display">
                         {exhibition && new Date(exhibition.startDate) > new Date() ? 'Upcoming Exhibition' : 'Current Exhibition'}
                     </p>
                     <Link href={`/${locale}/exhibitions/${exhibitionSlug}`} className="group inline-block">
                         <h1
-                            className="text-4xl md:text-6xl lg:text-7xl font-black leading-[0.9] tracking-tighter mb-3 group-hover:text-umber transition-colors duration-500 capitalize"
+                            className="text-4xl md:text-6xl lg:text-7xl font-black leading-display tracking-tighter mb-4 group-hover:text-umber transition-colors duration-500 capitalize"
                         >
                             {exhibitionTitle}
                         </h1>
                     </Link>
 
-                    <div className="flex flex-col gap-1.5">
+                    <div className="flex flex-col gap-2">
                         {exhibition?.startDate && (
                             <div className="flex flex-col">
-                                <span className="text-[10px] font-bold tracking-[0.4em] capitalize text-charcoal/70 mb-0.5">Opens</span>
-                                <span className="text-2xl md:text-3xl lg:text-[32px] font-black tracking-tighter leading-none text-charcoal">
+                                <span className="text-xs font-bold tracking-widest capitalize text-charcoal/70 mb-0.5">Opens</span>
+                                <span className="text-2xl md:text-3xl lg:text-3xl font-black tracking-tighter leading-none text-charcoal">
                                     {new Date(exhibition.startDate).toLocaleDateString(locale, { month: 'long', day: 'numeric', year: 'numeric' })}
-                                    <span className="ml-4 text-charcoal/70 text-xl md:text-2xl lg:text-[24px]">
+                                    <span className="ml-4 text-charcoal/70 text-xl md:text-2xl lg:text-2xl">
                                         {new Date(exhibition.startDate).toLocaleTimeString(locale, { hour: 'numeric', minute: '2-digit' })}
                                     </span>
                                 </span>
@@ -108,9 +108,9 @@ export function HomeHero({ exhibition, featuredCards, locale }: HomeHeroProps) {
 
                         {exhibition?.endDate && (
                             <div className="flex flex-col gap-0.5">
-                                <span className="text-[10px] font-bold tracking-[0.4em] capitalize text-charcoal/70">Through</span>
+                                <span className="text-xs font-bold tracking-widest capitalize text-charcoal/70">Through</span>
                                 <span
-                                    className="text-[20px] font-black tracking-tighter leading-none capitalize text-charcoal"
+                                    className="text-xl font-black tracking-tighter leading-none capitalize text-charcoal"
                                 >
                                     {new Date(exhibition.endDate).toLocaleDateString(locale, { month: 'short', day: 'numeric' }).replace('.', '')}
                                 </span>
@@ -119,7 +119,7 @@ export function HomeHero({ exhibition, featuredCards, locale }: HomeHeroProps) {
                     </div>
 
                     {/* Divider at the bottom of the content */}
-                    <div className="mt-5 border-b-[3px] border-charcoal w-full" />
+                    <div className="mt-6 border-b-[3px] border-charcoal w-full" />
                 </div>
             </div>
 
@@ -152,11 +152,11 @@ export function HomeHero({ exhibition, featuredCards, locale }: HomeHeroProps) {
                                 <div className="space-y-2">
                                     <h3
                                         style={{ textTransform: 'capitalize' }}
-                                        className="text-3xl lg:text-5xl font-black leading-[0.85] tracking-tighter text-charcoal group-hover:text-umber transition-colors duration-500"
+                                        className="text-3xl lg:text-5xl font-black leading-display tracking-tighter text-charcoal group-hover:text-umber transition-colors duration-500"
                                     >
                                         {cardTitle}
                                     </h3>
-                                    <p className="text-[10px] font-bold tracking-[0.2em] capitalize text-charcoal/70 group-hover:text-charcoal transition-colors">
+                                    <p className="text-xs font-bold tracking-widest capitalize text-charcoal/70 group-hover:text-charcoal transition-colors">
                                         {cardSubtitle}
                                     </p>
                                 </div>

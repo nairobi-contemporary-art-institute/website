@@ -97,7 +97,7 @@ function CustomAudioPlayer({ url }: { url: string }) {
                 </button>
 
                 <div className="flex-1 space-y-2">
-                    <div className="flex justify-between text-[10px] font-mono tracking-widest text-charcoal/70 uppercase">
+                    <div className="flex justify-between text-xs font-mono tracking-widest text-charcoal/70 uppercase">
                         <span>{formatTime(audioRef.current?.currentTime || 0)}</span>
                         <span>{formatTime(duration)}</span>
                     </div>
@@ -234,7 +234,7 @@ export function MediaPlayer({ type, url, audioUrl, thumbnail }: MediaPlayerProps
                             <p className="text-sm font-bold capitalize tracking-widest opacity-80">Video failed to load</p>
                             <button 
                                 onClick={() => { setHasError(false); setMounted(false); setTimeout(() => setMounted(true), 10); }}
-                                className="mt-4 flex items-center gap-2 text-[10px] uppercase tracking-widest bg-white/10 px-4 py-2 hover:bg-white/20 transition-colors"
+                                className="mt-4 flex items-center gap-2 text-xs uppercase tracking-widest bg-white/10 px-4 py-2 hover:bg-white/20 transition-colors"
                             >
                                 <RotateCcw className="w-3 h-3" /> Retry
                             </button>
@@ -267,14 +267,14 @@ export function MediaPlayer({ type, url, audioUrl, thumbnail }: MediaPlayerProps
                         <>
                             {/* Theater controls - moved to top-left (offset) to avoid YouTube's native corner overlays */}
                             <div className={cn(
-                                "absolute top-24 left-6 z-[200] flex items-center gap-3 transition-all duration-300",
+                                "absolute top-24 left-6 z-[200] flex items-center gap-4 transition-all duration-300",
                                 isTheater 
                                     ? "opacity-100 translate-y-0" 
                                     : "opacity-0 translate-y-[-10px] pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto"
                             )}>
                                 {isTheater && (
                                     <div className="flex flex-col items-start gap-1">
-                                        <span className="text-[10px] uppercase tracking-[0.2em] text-white font-bold bg-charcoal/80 px-4 py-2 backdrop-blur-md shadow-2xl ring-1 ring-white/20">
+                                        <span className="text-xs uppercase tracking-widest text-white font-bold bg-charcoal/80 px-4 py-2 backdrop-blur-md shadow-2xl ring-1 ring-white/20">
                                             Theater Mode
                                         </span>
                                     </div>

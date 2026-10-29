@@ -85,7 +85,7 @@ export function CalendarView({ events, locale }: CalendarViewProps) {
             {/* Weekdays */}
             <div className="grid grid-cols-7 border-b bg-stone-50">
                 {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
-                    <div key={d} className="py-3 text-center text-[10px] capitalize tracking-[0.2em] font-bold text-charcoal/70">
+                    <div key={d} className="py-4 text-center text-xs capitalize tracking-widest font-bold text-charcoal/70">
                         {d}
                     </div>
                 ))}
@@ -97,7 +97,7 @@ export function CalendarView({ events, locale }: CalendarViewProps) {
                     <div
                         key={idx}
                         className={cn(
-                            "min-h-[140px] border-r border-b p-3 transition-colors",
+                            "min-h-[140px] border-r border-b p-4 transition-colors",
                             !item.day ? "bg-stone-50/30" : "hover:bg-stone-50/50"
                         )}
                     >
@@ -119,9 +119,9 @@ export function CalendarView({ events, locale }: CalendarViewProps) {
                                             <Link
                                                 key={event._id}
                                                 href={`/${locale}/events/${event.slug}`}
-                                                className="block p-2 text-[10px] leading-tight bg-umber/5 border-l-2 border-umber text-charcoal hover:bg-umber/10 transition-all font-medium"
+                                                className="block p-2 text-xs leading-tight bg-umber/5 border-l-2 border-umber text-charcoal hover:bg-umber/10 transition-all font-medium"
                                             >
-                                                <div className="font-mono text-[8px] capitalize tracking-wider text-umber mb-1">
+                                                <div className="font-mono text-xs capitalize tracking-wider text-umber mb-1">
                                                     {new Date(event.startDate).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', hour12: false })}
                                                 </div>
                                                 <div className="line-clamp-2 capitalize tracking-wide">

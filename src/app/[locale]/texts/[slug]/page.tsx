@@ -117,12 +117,12 @@ export default async function TextPage({ params }: { params: Params }) {
                 {typeLabel && (
                     <Link
                         href={{ pathname: '/texts', query: { type: text.textType } }}
-                        className="text-xs font-bold uppercase tracking-[0.14em] text-ochre-dark hover:text-charcoal transition-colors"
+                        className="text-xs font-bold uppercase tracking-widest text-ochre-dark hover:text-charcoal transition-colors"
                     >
                         {typeLabel}
                     </Link>
                 )}
-                <h1 className="mt-5 text-4xl md:text-6xl font-light leading-[1.08] tracking-tight text-charcoal text-balance">
+                <h1 className="mt-6 text-4xl md:text-6xl font-light leading-none tracking-tight text-charcoal text-balance">
                     {titleEntry?.value}
                 </h1>
                 {standfirst && (
@@ -164,7 +164,7 @@ export default async function TextPage({ params }: { params: Params }) {
 
             {notes?.length ? (
                 <section aria-labelledby="text-notes" className="measure mt-16 pt-8 border-t border-charcoal/15">
-                    <h2 id="text-notes" className="mb-4 text-xs font-bold uppercase tracking-[0.14em] text-umber">
+                    <h2 id="text-notes" className="mb-4 text-xs font-bold uppercase tracking-widest text-umber">
                         {t('notes')}
                     </h2>
                     <PortableText value={notes} locale={locale} noProse className="text-sm leading-relaxed text-charcoal" />

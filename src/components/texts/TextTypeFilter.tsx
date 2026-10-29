@@ -25,7 +25,7 @@ export function TextTypeFilter({ active }: { active: TextType | null }) {
                                 href={type ? { pathname: '/texts', query: { type } } : '/texts'}
                                 aria-current={isActive ? 'page' : undefined}
                                 className={cn(
-                                    'inline-block py-3 text-sm border-b-2 -mb-px transition-colors',
+                                    'inline-block py-4 text-sm border-b-2 -mb-px transition-colors',
                                     isActive
                                         ? 'border-charcoal font-bold text-charcoal'
                                         : 'border-transparent text-umber hover:text-charcoal'

@@ -157,13 +157,13 @@ export function WorkCarousel({ works, locale, artistName, onOpenGrid, intervalMs
                     <>
                         <button
                             onClick={(e) => { e.stopPropagation(); prev(); }}
-                            className="absolute left-4 top-1/2 -translate-y-1/2 p-1.5 bg-white/20 hover:bg-white backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity z-20"
+                            className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white/20 hover:bg-white backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity z-20"
                         >
                             <ChevronLeft className="w-4 h-4 text-charcoal" />
                         </button>
                         <button
                             onClick={(e) => { e.stopPropagation(); next(); }}
-                            className="absolute right-4 top-1/2 -translate-y-1/2 p-1.5 bg-white/20 hover:bg-white backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity z-20"
+                            className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-white/20 hover:bg-white backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity z-20"
                         >
                             <ChevronRight className="w-4 h-4 text-charcoal" />
                         </button>
@@ -192,21 +192,21 @@ export function WorkCarousel({ works, locale, artistName, onOpenGrid, intervalMs
                         </svg>
                     </button>
 
-                    <div className="space-y-0.5 text-[11px] md:text-xs text-charcoal leading-snug">
+                    <div className="space-y-0.5 text-xs md:text-xs text-charcoal leading-snug">
                         <p className="font-normal">{artistName}</p>
                         <p className="italic font-normal">{title}</p>
                         <p className="block">{getLocalizedValueAsString(currentWork.year, locale)}</p>
                         <p className="block max-w-[75ch]">{medium}</p>
                         <p className="block">{getLocalizedValueAsString(currentWork.dimensions, locale)}</p>
                         {currentWork.edition && (
-                            <p className="text-[10px] text-charcoal/70 pt-1 max-w-[75ch]">{getLocalizedValueAsString(currentWork.edition, locale)}</p>
+                            <p className="text-xs text-charcoal/70 pt-1 max-w-[75ch]">{getLocalizedValueAsString(currentWork.edition, locale)}</p>
                         )}
                     </div>
 
                     <div className="mt-8">
                         <a
                             href={`mailto:info@ncai254.com?subject=Enquiry: ${artistName} - ${title}`}
-                            className="inline-block px-8 py-2.5 border border-charcoal text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-charcoal hover:text-white transition-all duration-300"
+                            className="inline-block px-8 py-2 border border-charcoal text-xs font-bold tracking-widest uppercase hover:bg-charcoal hover:text-white transition-all duration-300"
                         >
                             Enquire
                         </a>

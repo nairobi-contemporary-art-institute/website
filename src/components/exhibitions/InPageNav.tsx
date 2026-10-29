@@ -66,7 +66,7 @@ export function InPageNav({ items, className }: InPageNavProps) {
                         key={item.id}
                         onClick={() => scrollTo(item.id)}
                         className={cn(
-                            "text-[10px] font-black uppercase tracking-[0.2em] whitespace-nowrap transition-all border-b-2 py-5",
+                            "text-xs font-black uppercase tracking-widest whitespace-nowrap transition-all border-b-2 py-6",
                             activeId === item.id 
                                 ? "border-charcoal text-charcoal" 
                                 : "border-transparent text-charcoal/70 hover:text-charcoal"

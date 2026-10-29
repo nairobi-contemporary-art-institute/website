@@ -109,32 +109,32 @@ export default async function CollectionItemPage({ params }: { params: Promise<{
 
                         <div className="grid grid-cols-2 gap-x-8 gap-y-6 py-8 border-y border-charcoal/10">
                             <div>
-                                <p className="text-[10px] tracking-widest capitalize font-bold text-charcoal/70 mb-1">{t('year')}</p>
+                                <p className="text-xs tracking-widest capitalize font-bold text-charcoal/70 mb-1">{t('year')}</p>
                                 <p className="text-sm text-charcoal">{work.creationDate || t('notAvailable')}</p>
                             </div>
                             <div>
-                                <p className="text-[10px] tracking-widest capitalize font-bold text-charcoal/70 mb-1">{t('medium')}</p>
+                                <p className="text-xs tracking-widest capitalize font-bold text-charcoal/70 mb-1">{t('medium')}</p>
                                 <p className="text-sm text-charcoal">{work.medium || t('notAvailable')}</p>
                             </div>
                             <div>
-                                <p className="text-[10px] tracking-widest capitalize font-bold text-charcoal/70 mb-1">{t('dimensions')}</p>
+                                <p className="text-xs tracking-widest capitalize font-bold text-charcoal/70 mb-1">{t('dimensions')}</p>
                                 <p className="text-sm text-charcoal">{work.dimensions || t('notAvailable')}</p>
                             </div>
                             {work.edition && (
                                 <div>
-                                    <p className="text-[10px] tracking-widest capitalize font-bold text-charcoal/70 mb-1">{t('edition')}</p>
+                                    <p className="text-xs tracking-widest capitalize font-bold text-charcoal/70 mb-1">{t('edition')}</p>
                                     <p className="text-sm text-charcoal">{work.edition}</p>
                                 </div>
                             )}
                             {work.acquisitionDate && (
                                 <div>
-                                    <p className="text-[10px] tracking-widest capitalize font-bold text-charcoal/70 mb-1">{t('acquisitionDate')}</p>
+                                    <p className="text-xs tracking-widest capitalize font-bold text-charcoal/70 mb-1">{t('acquisitionDate')}</p>
                                     <p className="text-sm text-charcoal">{work.acquisitionDate}</p>
                                 </div>
                             )}
                             {work.creditLine && (
                                 <div className="col-span-2 mt-2">
-                                    <p className="text-[10px] tracking-widest capitalize font-bold text-charcoal/70 mb-1">{t('creditLine')}</p>
+                                    <p className="text-xs tracking-widest capitalize font-bold text-charcoal/70 mb-1">{t('creditLine')}</p>
                                     <p className="text-sm text-charcoal italic">{getLocalizedValue(work.creditLine, locale)}</p>
                                 </div>
                             )}
@@ -151,7 +151,7 @@ export default async function CollectionItemPage({ params }: { params: Promise<{
                                 {work.tags.map((tag: any) => (
                                     <span
                                         key={tag._id}
-                                        className="inline-flex items-center px-2 py-1 bg-charcoal/5 text-charcoal/70 text-[10px] tracking-wider font-bold capitalize"
+                                        className="inline-flex items-center px-2 py-1 bg-charcoal/5 text-charcoal/70 text-xs tracking-wider font-bold capitalize"
                                     >
                                         {getLocalizedValue(tag.title, locale)}
                                     </span>

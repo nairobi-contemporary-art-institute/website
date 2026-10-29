@@ -32,7 +32,7 @@ export default async function TeamPage({ params }: Props) {
         <GridSystem>
             <div className="min-h-screen bg-ivory">
                 <header className="page-header-padding pb-12 px-section-clamp">
-                    <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-charcoal capitalize leading-[0.9] mb-8">
+                    <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-charcoal capitalize leading-display mb-8">
                         {locale === 'en' ? 'Our Team' : 'Timu Yetu'}
                     </h1>
                     <p className="text-xl md:text-2xl text-umber/80 font-light max-w-2xl leading-relaxed">

@@ -96,13 +96,13 @@ export default async function EventPage({ params }: Props) {
                         {isPast && <span className="px-2 py-1 bg-stone-200 text-stone-500">Archived</span>}
                     </div>
 
-                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tighter text-charcoal mb-8 leading-[0.9]">
+                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tighter text-charcoal mb-8 leading-display">
                         {title}
                     </h1>
 
                     <div className="flex flex-col md:flex-row gap-8 md:gap-16 text-lg text-charcoal/80">
                         <div className="flex items-start gap-4">
-                            <span className="font-mono text-xs capitalize tracking-widest text-umber mt-1.5 w-16">When</span>
+                            <span className="font-mono text-xs capitalize tracking-widest text-umber mt-2 w-16">When</span>
                             <div>
                                 <p className="font-medium">{formattedDate}</p>
                                 <p className="text-charcoal/70">{formattedTime} {endDate && `- ${endDate.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })}`}</p>
@@ -110,7 +110,7 @@ export default async function EventPage({ params }: Props) {
                         </div>
                         {event.location && (
                             <div className="flex items-start gap-4">
-                                <span className="font-mono text-xs capitalize tracking-widest text-umber mt-1.5 w-16">Where</span>
+                                <span className="font-mono text-xs capitalize tracking-widest text-umber mt-2 w-16">Where</span>
                                 <p className="font-medium max-w-xs">{event.location}</p>
                             </div>
                         )}
@@ -150,7 +150,7 @@ export default async function EventPage({ params }: Props) {
 
                                 {event.registrationLink && (
                                     <div className="mt-6 text-center">
-                                        <p className="text-[10px] font-mono capitalize tracking-widest text-charcoal/70 mb-2">
+                                        <p className="text-xs font-mono capitalize tracking-widest text-charcoal/70 mb-2">
                                             Alternative Link
                                         </p>
                                         <a
@@ -209,7 +209,7 @@ export default async function EventPage({ params }: Props) {
                                                 className="block group"
                                             >
                                                 {exhibition.mainImage && (
-                                                    <div className="relative aspect-video mb-3 overflow-hidden bg-stone-100">
+                                                    <div className="relative aspect-video mb-4 overflow-hidden bg-stone-100">
                                                         <Image
                                                             src={urlFor(exhibition.mainImage).width(600).height(400).url()}
                                                             alt={exTitle || 'Exhibition'}

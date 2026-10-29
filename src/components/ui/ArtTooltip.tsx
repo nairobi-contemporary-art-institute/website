@@ -84,11 +84,11 @@ export function ArtTooltip({ content, children, className, align = 'right' }: Ar
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.2, ease: "easeOut" }}
                         className={cn(
-                            "absolute bottom-full mb-3 z-50 w-64 p-4 bg-white text-charcoal shadow-2xl rounded-sm border border-black/5 whitespace-normal",
+                            "absolute bottom-full mb-4 z-50 w-64 p-4 bg-white text-charcoal shadow-2xl rounded-sm border border-black/5 whitespace-normal",
                             align === 'right' ? "right-0" : align === 'left' ? "left-0" : "left-1/2 -translate-x-1/2"
                         )}
                     >
-                        <div className="text-[10px] leading-relaxed font-sans tracking-wide">
+                        <div className="text-xs leading-relaxed font-sans tracking-wide">
                             {typeof content === 'string' ? (
                                 <MarkdownText text={content} />
                             ) : (

@@ -40,7 +40,7 @@ export default async function GenericPage({ params }: { params: Promise<{ locale
                     <GridCell column={{ sm: 1, md: 12 }} className="p-0 items-start justify-start">
                         <div className="max-w-4xl space-y-12">
                             {title && (
-                                <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-charcoal capitalize leading-[0.9]">
+                                <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-charcoal capitalize leading-display">
                                     {title}
                                 </h1>
                             )}

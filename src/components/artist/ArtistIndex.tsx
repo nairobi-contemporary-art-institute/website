@@ -44,7 +44,7 @@ export function ArtistIndex({ artists, locale }: ArtistIndexProps) {
                 <button
                     onClick={() => setActiveLetter(null)}
                     className={cn(
-                        "text-[10px] font-black uppercase tracking-[0.3em] transition-all",
+                        "text-xs font-black uppercase tracking-widest transition-all",
                         !activeLetter ? "text-white" : "text-white/20 hover:text-white"
                     )}
                 >
@@ -58,7 +58,7 @@ export function ArtistIndex({ artists, locale }: ArtistIndexProps) {
                             disabled={!hasArtists}
                             onClick={() => setActiveLetter(letter)}
                             className={cn(
-                                "text-[10px] font-black uppercase tracking-[0.3em] transition-all",
+                                "text-xs font-black uppercase tracking-widest transition-all",
                                 activeLetter === letter ? "text-white" : 
                                 hasArtists ? "text-white/20 hover:text-white" : "text-white/5 cursor-not-allowed"
                             )}

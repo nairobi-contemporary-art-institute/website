@@ -180,7 +180,7 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                     <button
                         onClick={() => setView('byArtist')}
                         className={cn(
-                            "px-8 py-3 text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300",
+                            "px-8 py-4 text-xs font-black uppercase tracking-widest transition-all duration-300",
                             (!isMounted || view === 'byArtist') ? "bg-white text-black" : "bg-white/5 text-white/70 hover:text-white"
                         )}
                     >
@@ -189,7 +189,7 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                     <button
                         onClick={() => setView('collection')}
                         className={cn(
-                            "px-8 py-3 text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300",
+                            "px-8 py-4 text-xs font-black uppercase tracking-widest transition-all duration-300",
                             (isMounted && view === 'collection') ? "bg-white text-black" : "bg-white/5 text-white/70 hover:text-white"
                         )}
                     >
@@ -198,7 +198,7 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                     <button
                         onClick={() => setView('artists')}
                         className={cn(
-                            "px-8 py-3 text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300",
+                            "px-8 py-4 text-xs font-black uppercase tracking-widest transition-all duration-300",
                             (isMounted && view === 'artists') ? "bg-white text-black" : "bg-white/5 text-white/70 hover:text-white"
                         )}
                     >
@@ -259,8 +259,8 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                         {/* Footer Filter Bar */}
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-6">
-                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/70">{t('filterBy')}</span>
-                                <label className="flex items-center gap-3 cursor-pointer group">
+                                <span className="text-xs font-black uppercase tracking-widest text-white/70">{t('filterBy')}</span>
+                                <label className="flex items-center gap-4 cursor-pointer group">
                                     <div className="relative">
                                         <input
                                             type="checkbox"
@@ -278,7 +278,7 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                                             </svg>
                                         )}
                                     </div>
-                                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors">
+                                    <span className="text-xs font-bold uppercase tracking-widest text-white/60 group-hover:text-white transition-colors">
                                         {t('worksWithImages')}
                                     </span>
                                 </label>
@@ -286,7 +286,7 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                                 <div className="h-4 w-[1px] bg-white/10" />
 
                                 <div className="flex items-center gap-6">
-                                    <div className="flex flex-col items-center gap-3 group/btn">
+                                    <div className="flex flex-col items-center gap-4 group/btn">
                                         <button
                                             onClick={reShuffle}
                                             aria-label={t('shuffleWorks') || 'Shuffle Works'}
@@ -296,11 +296,11 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                                                 <path d="M4 4V9H4.58152M19.9381 11C19.979 11.3276 20 11.6613 20 12C20 16.4183 16.4183 20 12 20C9.49944 20 7.26677 18.8527 5.7998 17.0558M20 20V15H19.4185M4.06189 13C4.02104 12.6724 4 12.3387 4 12C4 7.58172 7.58172 4 12 4C14.5006 4 16.7332 5.14727 18.2002 6.94416" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                                             </svg>
                                         </button>
-                                        <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/60 group-hover/btn:text-white transition-colors text-center">
+                                        <span className="text-xs font-black uppercase tracking-widest text-white/60 group-hover/btn:text-white transition-colors text-center">
                                             {t('shuffleWorks') || 'Shuffle Works'}
                                         </span>
                                     </div>
-                                    <div className="flex flex-col items-center gap-3 group/btn">
+                                    <div className="flex flex-col items-center gap-4 group/btn">
                                         <button 
                                             onClick={() => setSortBy('az')}
                                             className={cn(
@@ -308,16 +308,16 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                                                 sortBy === 'az' ? "bg-white text-black" : "bg-white/5 text-white/70 hover:text-white hover:bg-white/10"
                                             )}
                                         >
-                                            <span className="text-[12px] font-black">A–Z</span>
+                                            <span className="text-xs font-black">A–Z</span>
                                         </button>
-                                        <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/60 group-hover/btn:text-white transition-colors text-center">
+                                        <span className="text-xs font-black uppercase tracking-widest text-white/60 group-hover/btn:text-white transition-colors text-center">
                                             {t('sortAZ') || 'Alphabetise'}
                                         </span>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="flex flex-col items-center gap-3 group/btn">
+                            <div className="flex flex-col items-center gap-4 group/btn">
                                 <button
                                     onClick={resetFilters}
                                     aria-label={t('resetFilters') || 'Reset filters'}
@@ -327,7 +327,7 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                                         <path d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C15.2235 2 18.0481 3.52352 19.8284 5.82843M19.8284 5.82843V1M19.8284 5.82843H15" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                                     </svg>
                                 </button>
-                                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/60 group-hover/btn:text-white transition-colors text-center">
+                                <span className="text-xs font-black uppercase tracking-widest text-white/60 group-hover/btn:text-white transition-colors text-center">
                                     {t('resetFilters') || 'Reset Filters'}
                                 </span>
                             </div>
@@ -414,7 +414,7 @@ function FilterDropdown({ label, value, options, onChange, allLabel }: { label: 
                     >
                         <button 
                             onClick={() => { onChange(''); setIsOpen(false); }}
-                            className="w-full text-left px-4 py-3 text-xs uppercase tracking-widest text-white/70 hover:bg-white hover:text-black transition-colors"
+                            className="w-full text-left px-4 py-4 text-xs uppercase tracking-widest text-white/70 hover:bg-white hover:text-black transition-colors"
                         >
                             {allLabel}
                         </button>
@@ -423,7 +423,7 @@ function FilterDropdown({ label, value, options, onChange, allLabel }: { label: 
                                 key={opt}
                                 onClick={() => { onChange(opt); setIsOpen(false); }}
                                 className={cn(
-                                    "w-full text-left px-4 py-3 text-xs uppercase tracking-widest transition-colors",
+                                    "w-full text-left px-4 py-4 text-xs uppercase tracking-widest transition-colors",
                                     value === opt ? "bg-white text-black" : "text-white/60 hover:bg-white hover:text-black"
                                 )}
                             >
@@ -478,7 +478,7 @@ function ArtistCard({ group, locale, isExpanded, onToggle }: { group: ArtistGrou
                             sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                         />
                     ) : (
-                        <div className="w-full h-full flex items-center justify-center text-white/10 text-[10px] uppercase tracking-widest">
+                        <div className="w-full h-full flex items-center justify-center text-white/10 text-xs uppercase tracking-widest">
                             {t('noImageAvailable')}
                         </div>
                     )}
@@ -491,7 +491,7 @@ function ArtistCard({ group, locale, isExpanded, onToggle }: { group: ArtistGrou
                         </svg>
                     </div>
                 </button>
-                <div className="mt-5 space-y-1">
+                <div className="mt-6 space-y-1">
                     {group.slug ? (
                         <Link
                             href={`/${locale}/artists/${group.slug}`}
@@ -507,7 +507,7 @@ function ArtistCard({ group, locale, isExpanded, onToggle }: { group: ArtistGrou
                     <button
                         type="button"
                         onClick={onToggle}
-                        className="text-[10px] font-black uppercase tracking-[0.2em] text-white/70 hover:text-white transition-colors"
+                        className="text-xs font-black uppercase tracking-widest text-white/70 hover:text-white transition-colors"
                     >
                         {countLabel}{' · '}{isExpanded ? t('hideWorks') : t('viewWorks')}
                     </button>
@@ -578,7 +578,7 @@ function WorkCard({ item, locale, index }: { item: CollectionItem, locale: strin
                             />
                         </div>
                     ) : (
-                        <div className="aspect-[4/5] w-full h-full flex items-center justify-center text-white/10 text-[10px] uppercase tracking-widest">
+                        <div className="aspect-[4/5] w-full h-full flex items-center justify-center text-white/10 text-xs uppercase tracking-widest">
                             {tCol('noImageAvailable')}
                         </div>
                     )}
