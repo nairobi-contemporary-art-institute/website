@@ -18,6 +18,11 @@ export function formatExhibitionDate(startDate: string, endDate: string | undefi
         })
     }
 
+    // Past exhibitions read as a date range, not "Now until <a past date>".
+    if (endDate && new Date(endDate) < now) {
+        return `${format(startDate)} — ${format(endDate)}`
+    }
+
     if (start <= now) {
         if (endDate) {
             return `Now until ${format(endDate)}`

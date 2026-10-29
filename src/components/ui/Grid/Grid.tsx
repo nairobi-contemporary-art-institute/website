@@ -18,6 +18,16 @@ function getResponsiveValue<T>(v: ResponsiveValue<T> | undefined, fallback: T): 
     return (val.lg ?? val.md ?? val.sm ?? fallback) as T;
 }
 
+/** Mobile-first per-breakpoint values: md inherits sm, lg inherits md; a missing sm takes the smallest set value. */
+function getBreakpoints<T>(v: ResponsiveValue<T> | undefined, fallback: T): { sm: T; md: T; lg: T } {
+    if (v === undefined) return { sm: fallback, md: fallback, lg: fallback };
+    if (typeof v !== 'object' || v === null) return { sm: v as T, md: v as T, lg: v as T };
+    const val = v as { sm?: T; md?: T; lg?: T };
+    const sm = (val.sm ?? val.md ?? val.lg ?? fallback) as T;
+    const md = (val.md ?? sm) as T;
+    return { sm, md, lg: (val.lg ?? md) as T };
+}
+
 interface GridSystemContextType {
     debug: boolean;
     guideWidth: number;
@@ -98,16 +108,19 @@ export function GridRoot({
     const gridStyles = useMemo(() => {
         const colCount = getResponsiveValue(columns, 12);
         const rowCount = getResponsiveValue(rows, 1);
-        const gapVal = getResponsiveValue(gap, 0);
+        const cols = getBreakpoints(columns, 12);
+        const rowBp = getBreakpoints(rows, 1);
+        const gaps = getBreakpoints(gap, 0);
 
+        // Per-breakpoint values go in custom properties; the classes below switch between them.
         const styles: React.CSSProperties = {
             '--grid-columns': colCount,
             '--grid-rows': rowCount,
             '--grid-guide-width': `${guideWidth}px`,
+            '--gc-sm': cols.sm, '--gc-md': cols.md, '--gc-lg': cols.lg,
+            '--gr-sm': rowBp.sm, '--gr-md': rowBp.md, '--gr-lg': rowBp.lg,
+            '--gg-sm': `${gaps.sm}px`, '--gg-md': `${gaps.md}px`, '--gg-lg': `${gaps.lg}px`,
             display: 'grid',
-            gridTemplateColumns: `repeat(${colCount}, 1fr)`,
-            gridTemplateRows: `repeat(${rowCount}, 1fr)`,
-            gap: gapVal ? `${gapVal}px` : '0px',
         } as any;
 
         if (height === 'preserve-aspect-ratio') {
@@ -124,6 +137,9 @@ export function GridRoot({
             style={gridStyles}
             className={cn(
                 "w-full relative",
+                "[grid-template-columns:repeat(var(--gc-sm),minmax(0,1fr))] md:[grid-template-columns:repeat(var(--gc-md),minmax(0,1fr))] lg:[grid-template-columns:repeat(var(--gc-lg),minmax(0,1fr))]",
+                "[grid-template-rows:repeat(var(--gr-sm),1fr)] md:[grid-template-rows:repeat(var(--gr-md),1fr)] lg:[grid-template-rows:repeat(var(--gr-lg),1fr)]",
+                "[gap:var(--gg-sm)] md:[gap:var(--gg-md)] lg:[gap:var(--gg-lg)]",
                 hideGuides !== 'column' && hideGuides !== 'both' && "grid-guide-lines",
                 hideGuides !== 'row' && hideGuides !== 'both' && "grid-guide-lines-rows",
                 className
@@ -155,23 +171,23 @@ export function Cell({
     const { debug } = useContext(GridSystemContext);
 
     const cellStyles = useMemo(() => {
-        const parseValue = (v: ResponsiveValue<string | number> | undefined) => {
-            if (v === undefined) return undefined;
-            const val = getResponsiveValue(v, '');
-            return typeof val === 'number' ? `span ${val}` : val;
+        const toCss = (val: string | number) => (typeof val === 'number' ? `span ${val}` : val);
+        const vars = (prefix: string, v: ResponsiveValue<string | number> | undefined) => {
+            if (v === undefined) return {};
+            const bp = getBreakpoints(v, '');
+            return { [`--${prefix}-sm`]: toCss(bp.sm), [`--${prefix}-md`]: toCss(bp.md), [`--${prefix}-lg`]: toCss(bp.lg) };
         };
 
-        return {
-            gridColumn: parseValue(column),
-            gridRow: parseValue(row),
-        } as React.CSSProperties;
+        return { ...vars('cc', column), ...vars('cr', row) } as React.CSSProperties;
     }, [column, row]);
 
     return (
         <div
             style={cellStyles}
             className={cn(
-                "relative h-full w-full flex items-center justify-center p-4",
+                "relative h-full w-full flex items-center justify-center p-4 min-w-0",
+                column !== undefined && "[grid-column:var(--cc-sm)] md:[grid-column:var(--cc-md)] lg:[grid-column:var(--cc-lg)]",
+                row !== undefined && "[grid-row:var(--cr-sm)] md:[grid-row:var(--cr-md)] lg:[grid-row:var(--cr-lg)]",
                 "transition-all duration-300 min-h-[4rem]",
                 solid ? "bg-white z-10" : "bg-transparent",
                 debug && "bg-rich-blue/5 outline outline-1 outline-rich-blue/20",

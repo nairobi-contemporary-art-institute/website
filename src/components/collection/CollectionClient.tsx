@@ -176,11 +176,11 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
         <div className="space-y-12">
             {/* Upper Action Bar: Tabs (Left) and Search (Right) */}
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 lg:gap-12 border-b border-white/5 pb-8">
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                     <button
                         onClick={() => setView('byArtist')}
                         className={cn(
-                            "px-8 py-4 text-xs font-black uppercase tracking-widest transition-all duration-300",
+                            "px-4 md:px-8 py-4 text-xs font-black uppercase tracking-widest transition-all duration-300",
                             (!isMounted || view === 'byArtist') ? "bg-white text-black" : "bg-white/5 text-white/70 hover:text-white"
                         )}
                     >
@@ -189,7 +189,7 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                     <button
                         onClick={() => setView('collection')}
                         className={cn(
-                            "px-8 py-4 text-xs font-black uppercase tracking-widest transition-all duration-300",
+                            "px-4 md:px-8 py-4 text-xs font-black uppercase tracking-widest transition-all duration-300",
                             (isMounted && view === 'collection') ? "bg-white text-black" : "bg-white/5 text-white/70 hover:text-white"
                         )}
                     >
@@ -198,7 +198,7 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                     <button
                         onClick={() => setView('artists')}
                         className={cn(
-                            "px-8 py-4 text-xs font-black uppercase tracking-widest transition-all duration-300",
+                            "px-4 md:px-8 py-4 text-xs font-black uppercase tracking-widest transition-all duration-300",
                             (isMounted && view === 'artists') ? "bg-white text-black" : "bg-white/5 text-white/70 hover:text-white"
                         )}
                     >
@@ -257,8 +257,8 @@ export function CollectionClient({ locale, items, artists }: CollectionClientPro
                         </div>
 
                         {/* Footer Filter Bar */}
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-6">
+                        <div className="flex flex-wrap items-center justify-between gap-6">
+                            <div className="flex flex-wrap items-center gap-6">
                                 <span className="text-xs font-black uppercase tracking-widest text-white/70">{t('filterBy')}</span>
                                 <label className="flex items-center gap-4 cursor-pointer group">
                                     <div className="relative">
