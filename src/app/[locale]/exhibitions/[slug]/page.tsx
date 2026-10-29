@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const exhibition = await sanityFetch<any>({
         query: EXHIBITION_BY_SLUG_QUERY,
         params: { slug, locale },
-        tags: [`exhibition:${slug}`]
+        tags: [`exhibition:${slug}`, 'exhibition']
     })
 
     if (!exhibition) {
@@ -67,8 +67,9 @@ export default async function ExhibitionPage({ params }: Props) {
     const exhibition = await sanityFetch<any>({
         query: EXHIBITION_BY_SLUG_QUERY,
         params: { slug, locale },
+        // exhibition/artist/work: the page joins artists and works, so edits to those refresh it too.
         // textPiece: Texts that link this exhibition are listed on the page
-        tags: [`exhibition:${slug}`, 'textPiece']
+        tags: [`exhibition:${slug}`, 'exhibition', 'artist', 'work', 'person', 'textPiece']
     })
 
     if (!exhibition) {

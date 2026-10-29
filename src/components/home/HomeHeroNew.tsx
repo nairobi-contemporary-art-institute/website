@@ -109,16 +109,13 @@ function SlideContent({ slide, locale, textOnRight = true }: { slide: HeroSlide;
     const textAlignClass = isCentered ? 'text-center' : 'text-left'
 
     return (
-        <div className="flex flex-col justify-center py-10 md:py-16 pointer-events-none h-full w-full">
+        <div className="flex flex-col justify-center max-md:justify-end py-10 md:py-16 pointer-events-none h-full w-full">
             <div className={cn(
                 "pointer-events-auto w-full transition-all duration-700",
                 textAlignClass
             )}>
-                {/* Heading Block: Moved right by 12.5% (half of 25%) */}
-                <div className={cn(
-                    "mb-4 md:mb-6 transition-all duration-700",
-                    !isCentered && (textOnRight ? "md:pl-[5vw]" : "md:pr-[5vw]")
-                )}>
+                {/* Heading and content share one left edge (docs/DESIGN_PRINCIPLES.md) */}
+                <div className="mb-4 md:mb-6 transition-all duration-700">
                     {preHeading && (
                         <p 
                             className="text-xs md:text-xs uppercase tracking-widest font-bold mb-4 md:mb-4 opacity-60"
@@ -142,11 +139,7 @@ function SlideContent({ slide, locale, textOnRight = true }: { slide: HeroSlide;
                     )}
                 </div>
 
-                {/* Content Block: Translated right 25% on desktop */}
-                <div className={cn(
-                    "flex flex-col gap-y-4 transition-all duration-700",
-                    !isCentered && (textOnRight ? "md:pl-[10vw]" : "md:pr-[10vw]")
-                )}>
+                <div className="flex flex-col gap-y-4 transition-all duration-700">
                     {subtitle && (
                         <p 
                             className="text-base md:text-lg max-w-xl font-medium tracking-tight leading-relaxed"
@@ -222,12 +215,11 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                     if (isCarousel && index !== currentSlide) return null
 
                     const href = getSlideLink(slide)
-                    const { 
-                        layout = 'auto', 
-                        contentPosition = 'left', 
-                        contentWidth = 50, 
-                        imageAlignment = 'center' 
-                    } = slide
+                    // `??` rather than destructuring defaults: GROQ returns null for unset fields.
+                    const layout = slide.layout ?? 'auto'
+                    const contentPosition = slide.contentPosition ?? 'left'
+                    const contentWidth = slide.contentWidth ?? 50
+                    const imageAlignment = slide.imageAlignment ?? 'center'
 
                     const imageCaption = getLocalizedValue(slide.image?.caption, locale)
                     const bgColor = slide.gradientColor?.hex || '#1A1A1A'
@@ -238,7 +230,6 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                     
                     const assetDims = slide.image?.asset?.metadata?.dimensions
                     const aspectRatio = assetDims?.aspectRatio || 16/9
-                    const imgHeightPercent = imgWidthPercent / aspectRatio
 
                     let finalImgLeft = (hotspot.x * 100) - (imgWidthPercent / 2)
                     if (layout !== 'auto') {
@@ -246,16 +237,17 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                         else if (imageAlignment === 'right') finalImgLeft = 95 - imgWidthPercent
                         else if (imageAlignment === 'center') finalImgLeft = 50 - (imgWidthPercent / 2)
                     }
-                    const finalImgTop = (hotspot.y * 100) - (imgHeightPercent / 2)
-
+                    // Box takes the image's own proportions (height from width), centred on the
+                    // hotspot's y and capped so tall images never overflow the hero.
                     const imageElement = slide.image?.asset && (
                         <div
-                            className="absolute overflow-hidden"
+                            className="absolute overflow-hidden -translate-y-1/2 max-md:!left-0 max-md:!top-36 max-md:!w-full max-md:!max-h-[35%] max-md:!translate-y-0"
                             style={{
                                 width: `${imgWidthPercent}%`,
-                                height: `${imgHeightPercent}%`,
+                                aspectRatio: `${aspectRatio}`,
+                                maxHeight: '70%',
                                 left: `${finalImgLeft}%`,
-                                top: `${finalImgTop}%`,
+                                top: `${hotspot.y * 100}%`,
                             }}
                         >
                             <Image
@@ -300,8 +292,9 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                             {/* Text content layer (z-20) */}
                             <div className="absolute inset-0 z-20">
                                 <div className={`page-container h-full flex ${justifyClass}`}>
+                                    {/* Phones: image fills the top, text sits below it at full width */}
                                     <div
-                                        className="h-full flex items-center"
+                                        className="h-full flex items-center max-md:!w-full max-md:items-end max-md:pb-12"
                                         style={{ width: `${contentWidth}%` }}
                                     >
                                         <SlideContent slide={slide} locale={locale} textOnRight={textOnRight} />

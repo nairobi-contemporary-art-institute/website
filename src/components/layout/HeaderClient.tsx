@@ -310,7 +310,7 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
                             <nav aria-label="Primary" className="flex items-center gap-8 w-full">
                                 {displayLinks.map((link, idx) => (
                                     <Link
-                                        key={link.href}
+                                        key={`${link.href}-${idx}`}
                                         href={link.href}
                                         className="text-sm font-bold transition-all duration-200 uppercase tracking-widest text-deep-umber hover:text-ochre relative py-4 group"
                                         onMouseEnter={() => handleMouseEnter(idx)}
@@ -387,7 +387,7 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
                     )}>
                         <nav aria-label="Mobile" className="flex flex-col gap-10">
                             {displayLinks.map((link, i) => (
-                                <div key={link.href} className="flex flex-col gap-4">
+                                <div key={`${link.href}-${i}`} className="flex flex-col gap-4">
                                     <Link
                                         href={link.href}
                                         className={cn(

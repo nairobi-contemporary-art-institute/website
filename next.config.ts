@@ -37,6 +37,21 @@ const nextConfig: NextConfig = {
         destination: '/get-involved',
         permanent: true,
       },
+      // Old nav paths (CMS links now point at the real routes; these catch bookmarks).
+      ...[
+        ['/showing', '/exhibitions#current'],
+        ['/upcoming', '/exhibitions#upcoming'],
+        ['/archive', '/exhibitions#archive'],
+        ['/programme', '/whats-on'],
+        ['/careers', '/about/careers'],
+        ['/members', '/get-involved'],
+        ['/shop', '/publications'],
+        ['/venue-hire', '/contact'],
+      ].flatMap(([from, to]) => [
+        { source: from, destination: to, permanent: false },
+        { source: `/:locale(en|sw|ar|hi|de|pt|fr|es|am|so)${from}`, destination: `/:locale${to}`, permanent: false },
+      ]),
+      { source: '/:locale(en|sw|ar|hi|de|pt|fr|es|am|so)/support', destination: '/:locale/get-involved', permanent: true },
     ];
   },
 };

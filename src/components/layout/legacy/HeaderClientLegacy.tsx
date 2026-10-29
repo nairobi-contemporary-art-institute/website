@@ -348,9 +348,9 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
                             {/* Top Tier Links */}
                             <div className="flex justify-end items-center gap-6">
                                 {utilityLinks.length > 0 ? (
-                                    utilityLinks.map((link) => (
+                                    utilityLinks.map((link, idx) => (
                                         <Link 
-                                            key={link.href} 
+                                            key={`${link.href}-${idx}`} 
                                             href={link.href} 
                                             className="opacity-80 hover:opacity-100 text-xs font-semibold tracking-widest uppercase transition-opacity"
                                         >
@@ -374,7 +374,7 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
                                 <nav aria-label="Primary" className="flex items-center gap-8">
                                     {displayLinks.map((link, idx) => (
                                         <Link
-                                            key={link.href}
+                                            key={`${link.href}-${idx}`}
                                             href={link.href}
                                             className={cn(
                                                 "text-lg md:text-xl font-bold transition-all duration-200 uppercase tracking-tight relative py-2 group",
@@ -471,7 +471,7 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
                     )}>
                         <nav aria-label="Mobile" className="flex flex-col gap-10">
                             {displayLinks.map((link, i) => (
-                                <div key={link.href} className="flex flex-col gap-4">
+                                <div key={`${link.href}-${i}`} className="flex flex-col gap-4">
                                     <Link
                                         href={link.href}
                                         className={cn(
