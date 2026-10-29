@@ -60,6 +60,14 @@ interface HomeHeroNewProps {
     locale: string
 }
 
+function ChevronIcon({ className }: { className?: string }) {
+    return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className={className}>
+            <path d="M15 5l-7 7 7 7" />
+        </svg>
+    )
+}
+
 function getSlideLink(slide: HeroSlide): string {
     if (slide.link?.externalUrl) return slide.link.externalUrl
     if (slide.link?.reference) {
@@ -106,7 +114,7 @@ function SlideContent({ slide, locale, textOnRight = true }: { slide: HeroSlide;
     const textStyle = { color: baseColor }
     const mutedTextStyle = { color: baseColor, opacity: 0.6 }
     const isCentered = slide.layout === 'centered' || slide.contentPosition === 'center'
-    const textAlignClass = isCentered ? 'text-center' : 'text-left'
+    const textAlignClass = isCentered ? 'text-center' : 'text-start'
 
     return (
         <div className="flex flex-col justify-center max-md:justify-end py-10 md:py-16 pointer-events-none h-full w-full">
@@ -190,6 +198,10 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
 
     const nextSlide = useCallback(() => {
         setCurrentSlide((prev) => (prev + 1) % slides.length)
+    }, [slides.length])
+
+    const prevSlide = useCallback(() => {
+        setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
     }, [slides.length])
 
     // Auto-advance carousel (per-slide timing, hero default as fallback)
@@ -281,7 +293,37 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                     if (layout === 'split-right' || contentPosition === 'right') justifyClass = 'justify-end'
                     if (contentPosition === 'center') justifyClass = 'justify-center'
 
-                    const content = (
+                    // Split (image left / text right): artwork fills its half edge to edge, text sits
+                    // in the container's right column. `start`/`ps` flip automatically in RTL.
+                    const splitContent = layout === 'split-right' && (
+                        <div className="relative w-full h-full flex flex-col md:block">
+                            <div className="relative overflow-hidden max-md:mt-36 max-md:h-[28%] md:absolute md:inset-y-0 md:start-0 md:w-1/2">
+                                {slide.image?.asset && (
+                                    <Image
+                                        src={urlFor(slide.image).width(1920).quality(85).url()}
+                                        alt={getLocalizedValue(slide.title, locale) || 'Hero image'}
+                                        fill
+                                        className="object-cover"
+                                        style={{ objectPosition: `${hotspot.x * 100}% ${hotspot.y * 100}%` }}
+                                        priority={index === 0}
+                                        placeholder={slide.image.asset.metadata?.lqip ? 'blur' : 'empty'}
+                                        blurDataURL={slide.image.asset.metadata?.lqip}
+                                        sizes="(min-width: 768px) 50vw, 100vw"
+                                    />
+                                )}
+                                {captionTooltip}
+                            </div>
+                            <div className="flex-1 min-h-0 md:absolute md:inset-0 md:z-20">
+                                <div className="page-container h-full md:grid md:grid-cols-2">
+                                    <div className="max-md:pt-5 max-md:pb-24 md:h-full md:flex md:items-center md:col-start-2 md:ps-12">
+                                        <SlideContent slide={slide} locale={locale} textOnRight />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )
+
+                    const content = splitContent || (
                         <div className="relative w-full h-full">
                             {/* Image layer (z-0) */}
                             <div className="absolute inset-0 z-0">
@@ -326,7 +368,21 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
 
             {/* Carousel dot navigation */}
             {isCarousel && slides.length > 1 && (
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2">
+                <div
+                    className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1 rounded-full bg-black/40 px-1 backdrop-blur-sm"
+                    onKeyDown={(e) => {
+                        const rtl = document.documentElement.dir === 'rtl'
+                        if (e.key === 'ArrowLeft') (rtl ? nextSlide : prevSlide)()
+                        if (e.key === 'ArrowRight') (rtl ? prevSlide : nextSlide)()
+                    }}
+                >
+                    <button
+                        onClick={prevSlide}
+                        className="flex h-11 w-11 items-center justify-center text-white/80 hover:text-white transition-colors"
+                        aria-label="Previous slide"
+                    >
+                        <ChevronIcon className="rtl:-scale-x-100" />
+                    </button>
                     {slides.map((_, index) => (
                         <button
                             key={index}
@@ -340,6 +396,13 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                             aria-label={`Go to slide ${index + 1}`}
                         />
                     ))}
+                    <button
+                        onClick={nextSlide}
+                        className="flex h-11 w-11 items-center justify-center text-white/80 hover:text-white transition-colors"
+                        aria-label="Next slide"
+                    >
+                        <ChevronIcon className="rotate-180 rtl:rotate-0" />
+                    </button>
                 </div>
             )}
         </section>

@@ -51,13 +51,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         ? descriptionBlocks
         : (descriptionBlocks ? portableTextToPlainText(descriptionBlocks) : `Exhibition: ${title}`)
 
+    const ogImages = exhibition.mainImage?.asset
+        ? [{
+            url: urlFor(exhibition.mainImage).width(1200).height(630).fit('crop').url(),
+            width: 1200,
+            height: 630,
+            alt: exhibition.mainImage.alt || title,
+        }]
+        : []
+
     return {
         title,
         description,
         openGraph: {
             title,
             description,
-            images: exhibition.mainImage?.asset ? [urlFor(exhibition.mainImage).width(1200).height(630).url()] : [],
+            images: ogImages,
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title,
+            description,
+            images: ogImages,
         },
     }
 }
