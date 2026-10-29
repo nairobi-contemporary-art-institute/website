@@ -26,7 +26,7 @@ export function MuseumResultRow({ title, items, className }: MuseumResultRowProp
             </div>
             
             <div className="page-container">
-                <MuseumGrid 
+                <MuseumGrid
                     items={items} 
                     showFilters={false}
                     gridColumns="grid-cols-1 min-[501px]:grid-cols-2 min-[801px]:grid-cols-3 min-[1291px]:grid-cols-4"

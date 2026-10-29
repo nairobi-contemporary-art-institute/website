@@ -80,7 +80,7 @@ export function CollectionTeaser({ data, locale }: CollectionTeaserProps) {
 
   return (
     <section className="bg-background-dark py-24 md:py-48 overflow-hidden">
-      <div className="container mx-auto px-section-clamp">
+      <div className="page-container">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 mb-20 md:mb-32">
           
           {/* Headline Panel */}

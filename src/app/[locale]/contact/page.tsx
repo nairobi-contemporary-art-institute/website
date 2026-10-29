@@ -14,7 +14,7 @@ export default function ContactPage() {
     const t = useTranslations('Pages.contact')
 
     return (
-        <div className="container mx-auto px-section-clamp page-header-padding pb-20">
+        <div className="page-container page-header-padding pb-20">
             <header className="max-w-3xl mb-16">
                 <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-charcoal mb-4">
                     {t('title')}
@@ -22,7 +22,7 @@ export default function ContactPage() {
                 <ResponsiveDivider variant="curved" weight="medium" className="text-umber/80" />
             </header>
 
-            <section className="px-section-clamp max-w-xl text-umber/80 space-y-12">
+            <section className="max-w-xl text-umber/80 space-y-12">
                 <p>We welcome inquiries regarding our exhibitions, research, and programming.</p>
 
                 <div className="grid gap-6">

@@ -62,8 +62,8 @@ export function MuseumGrid({
         <div className={cn("w-full flex flex-col", className)}>
             {/* Filter Bar */}
             {showFilters && (
-                <div className="bg-background-dark text-white py-4 px-6 md:px-8 border-b border-white/10 z-40">
-                    <div className="flex flex-col md:flex-row md:items-center gap-4 text-xs tracking-widest uppercase">
+                <div className="bg-background-dark text-white py-4 border-b border-white/10 z-40">
+                    <div className="page-container flex flex-col md:flex-row md:items-center gap-4 text-xs tracking-widest uppercase">
                         <span className="opacity-70 font-bold shrink-0">{filterPrefix}</span>
                         
                         <div className="flex flex-wrap items-center gap-6">

@@ -118,7 +118,7 @@ export function WhatsOnCalendar({
                 </button>
             </div>
 
-            <div className="container pt-8">
+            <div className="page-container pt-8">
                 
                 {/* Mobile Navigation */}
                 <div className="flex lg:hidden justify-end gap-4 mb-4">

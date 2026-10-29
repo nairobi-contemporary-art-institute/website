@@ -54,7 +54,7 @@ export function GridSystem() {
                             </div>
 
                             <p className="text-[10px] text-deep-umber/80 leading-relaxed pl-4 italic">
-                                Use the class <code className="text-charcoal font-bold p-[p-section-clamp]">p-section-clamp</code> for consistent fluid spacing.
+                                Use the class <code className="text-charcoal font-bold">p-section-clamp</code> for consistent fluid spacing.
                             </p>
                         </div>
 

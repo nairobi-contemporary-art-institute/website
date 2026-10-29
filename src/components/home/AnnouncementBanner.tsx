@@ -103,7 +103,7 @@ export function AnnouncementBanner({ data, locale }: AnnouncementBannerProps) {
         </>
       )}
 
-      <div className="container relative z-20 mx-auto px-6 md:px-12">
+      <div className="page-container relative z-20">
         {/* Top Section: Title & Brief Text (Persistent) */}
         <div className="mb-12 lg:mb-16">
           <div className="flex items-start justify-between gap-8 mb-8">

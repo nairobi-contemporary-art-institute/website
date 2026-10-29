@@ -72,7 +72,7 @@ export function TimelineTeaser({ events, locale, headline }: TimelineTeaserProps
             {/* Subtle background grain or texture could go here */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/asfalt-dark.png')]" />
 
-            <div className="container mx-auto px-6 relative z-10">
+            <div className="page-container relative z-10">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-12">
                     <div className="max-w-3xl">
                         <div className="flex items-center gap-4 mb-8">
