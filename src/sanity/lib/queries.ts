@@ -944,6 +944,7 @@ export const HOME_PAGE_QUERY = groq`
             _id,
             metadata {
               lqip,
+              palette { dominant { background } },
               dimensions { width, height, aspectRatio }
             }
           }

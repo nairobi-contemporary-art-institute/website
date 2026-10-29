@@ -14,7 +14,8 @@ import { MuseumCardData } from '@/lib/types/museum-card'
 import { CollectionTeaser } from '@/components/home/CollectionTeaser'
 import { AnnouncementBanner } from '@/components/home/AnnouncementBanner'
 import { HomeAbout } from '@/components/home/HomeAbout'
-import { COLLECTION_QUERY } from '@/sanity/lib/queries'
+import { COLLECTION_QUERY, SITE_SETTINGS_QUERY } from '@/sanity/lib/queries'
+import { VisitUs } from '@/components/home/VisitUs'
 
 // Define interfaces for fetched data
 interface Exhibition {
@@ -39,11 +40,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const t = await getTranslations({ locale, namespace: 'HomePage' })
 
   // Fetch latest exhibition, news, and home data using sanityFetch for better cache control
-  const [exhibitions, posts, homeData] = await Promise.all([
+  const [exhibitions, posts, homeData, , siteSettings] = await Promise.all([
     sanityFetch<Exhibition[]>({ query: EXHIBITIONS_QUERY, tags: ['exhibition'] }),
     sanityFetch<Post[]>({ query: POSTS_QUERY, tags: ['post'] }),
     sanityFetch<any>({ query: HOME_PAGE_QUERY, tags: ['homePage'] }),
-    sanityFetch<any[]>({ query: COLLECTION_QUERY, tags: ['collectionItem'] })
+    sanityFetch<any[]>({ query: COLLECTION_QUERY, tags: ['collectionItem'] }),
+    sanityFetch<any>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] }),
   ])
 
   // Process collection items for the teaser
@@ -139,16 +141,44 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Hero Section — new configurable hero or legacy fallback */}
-      {homeData?.hero?.enabled && homeData?.hero?.slides?.length > 0 ? (
-        <HomeHeroNew heroData={homeData.hero} locale={locale} />
-      ) : (
-        <HomeHero
-          exhibition={latestExhibition}
-          featuredCards={homeData?.featuredCards}
+      {/* First viewport: hero fills what's left above the Visit us band */}
+      <div className="flex min-h-dvh flex-col">
+        {/* Hero Section — new configurable hero or legacy fallback */}
+        {homeData?.hero?.enabled && homeData?.hero?.slides?.length > 0 ? (
+          <HomeHeroNew heroData={homeData.hero} locale={locale} />
+        ) : (
+          <HomeHero
+            exhibition={latestExhibition}
+            featuredCards={homeData?.featuredCards}
+            locale={locale}
+          />
+        )}
+
+        {/* Visit us */}
+        <VisitUs
           locale={locale}
+          hours={siteSettings?.hours}
+          specialStatus={siteSettings?.specialStatus}
+          contactInfo={siteSettings?.contactInfo}
+          labels={{
+            title: t('visitUs'),
+            openingHours: t('visitOpeningHours'),
+            location: t('visitLocation'),
+            open: t('visitOpen'),
+            closed: t('visitClosed'),
+            today: t('visitToday'),
+            tomorrow: t('visitTomorrow'),
+            fullHours: t('visitFullHours'),
+            viewMap: t('visitViewMap'),
+            directions: t('visitDirections'),
+            walk: t('visitWalk'),
+            car: t('visitCar'),
+            taxi: t('visitTaxi'),
+            matatu: t('visitMatatu'),
+            bodaBoda: t('visitBodaBoda'),
+          }}
         />
-      )}
+      </div>
 
       {/* About Section */}
       {homeData?.about?.enabled && (

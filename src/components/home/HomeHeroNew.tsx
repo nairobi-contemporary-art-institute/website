@@ -17,6 +17,7 @@ interface HeroSlide {
         asset?: {
             metadata?: {
                 lqip?: string
+                palette?: { dominant?: { background?: string } }
                 dimensions?: { width: number; height: number; aspectRatio: number }
             }
         }
@@ -60,10 +61,25 @@ interface HomeHeroNewProps {
     locale: string
 }
 
-function ChevronIcon({ className }: { className?: string }) {
+// WCAG relative luminance; above ~0.18 black reads better than white.
+function isLight(hex?: string): boolean {
+    const m = hex?.match(/^#?([0-9a-f]{6})$/i)
+    if (!m) return false
+    const [r, g, b] = [0, 2, 4].map((i) => {
+        const c = parseInt(m[1].slice(i, i + 2), 16) / 255
+        return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
+    })
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b > 0.18
+}
+
+// Arrow paths from imma.ie icon_arrow_left/right.svg (30×30), white or black
+function ArrowIcon({ direction, dark }: { direction: 'left' | 'right'; dark?: boolean }) {
+    const points = direction === 'right'
+        ? '0.896,15.91 26.113,15.91 17.035,24.926 18.323,26.205 29.605,15 18.323,3.795 17.035,5.074 26.113,14.09 0.396,14.09 0.396,15.41 0.396,15.91'
+        : '29.104,14.09 3.887,14.09 12.965,5.074 11.677,3.795 0.395,15 11.677,26.205 12.965,24.926 3.887,15.91 29.604,15.91 29.604,14.59 29.604,14.09'
     return (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className={className}>
-            <path d="M15 5l-7 7 7 7" />
+        <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true">
+            <polygon fill={dark ? '#000000' : '#FFFFFF'} points={points} className="transition-colors duration-[600ms]" />
         </svg>
     )
 }
@@ -191,10 +207,42 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
     const defaultAdvance = heroData.autoAdvanceSeconds ?? 6
     const [currentSlide, setCurrentSlide] = useState(0)
     const [isPaused, setIsPaused] = useState(false)
+    const isRtl = locale === 'ar'
+    const [sampledLight, setSampledLight] = useState<boolean | null>(null)
 
-    const goToSlide = useCallback((index: number) => {
-        setCurrentSlide(index)
-    }, [])
+    // Brightness of the image strip behind the arrow, sampled from the tiny blur placeholder.
+    const activeImage = slides[currentSlide]?.image
+    const lqip = activeImage?.asset?.metadata?.lqip
+    const aspect = activeImage?.asset?.metadata?.dimensions?.aspectRatio
+    const hotspotX = activeImage?.hotspot?.x ?? 0.5
+    useEffect(() => {
+        setSampledLight(null)
+        if (!lqip) return
+        const img = new window.Image()
+        img.onload = () => {
+            const canvas = document.createElement('canvas')
+            canvas.width = img.width
+            canvas.height = img.height
+            const ctx = canvas.getContext('2d')
+            if (!ctx) return
+            ctx.drawImage(img, 0, 0)
+            // Half-width panel (~0.94 aspect) shows a centred slice of wider images; arrow sits near its left edge.
+            const visible = Math.min(1, 0.94 / (aspect || 1.78))
+            const start = (1 - visible) * hotspotX
+            const sx = Math.floor((start + visible * 0.01) * img.width)
+            const sw = Math.max(1, Math.ceil(visible * 0.1 * img.width))
+            const sy = Math.floor(img.height * 0.4)
+            const sh = Math.max(1, Math.ceil(img.height * 0.2))
+            try {
+                const d = ctx.getImageData(sx, sy, sw, sh).data
+                let r = 0, g = 0, b = 0
+                const n = d.length / 4
+                for (let i = 0; i < d.length; i += 4) { r += d[i]; g += d[i + 1]; b += d[i + 2] }
+                setSampledLight(isLight('#' + [r, g, b].map((v) => Math.round(v / n).toString(16).padStart(2, '0')).join('')))
+            } catch { /* fall back to palette */ }
+        }
+        img.src = lqip
+    }, [lqip, aspect, hotspotX])
 
     const nextSlide = useCallback(() => {
         setCurrentSlide((prev) => (prev + 1) % slides.length)
@@ -214,11 +262,16 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
 
     if (slides.length === 0) return null
 
+    // Split-right: left arrow sits over the image, right arrow over the colour panel.
+    const active = slides[currentSlide] ?? slides[0]
+    const darkOnImage = sampledLight ?? isLight(active.image?.asset?.metadata?.palette?.dominant?.background)
+    const darkOnPanel = isLight(active.gradientColor?.hex || '#1A1A1A')
+
     const displaySlides = heroData.mode === 'static' ? [slides[0]] : slides
 
     return (
         <section
-            className="relative w-full overflow-hidden h-dvh"
+            className="relative w-full overflow-hidden flex-1 min-h-[600px] max-md:min-h-dvh"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
         >
@@ -314,7 +367,8 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                                 {captionTooltip}
                             </div>
                             <div className="flex-1 min-h-0 md:absolute md:inset-0 md:z-20">
-                                <div className="page-container h-full md:grid md:grid-cols-2">
+                                {/* md: clear the fixed header (~132px incl. status bar) so text centres in the visible hero */}
+                                <div className="page-container h-full md:grid md:grid-cols-2 md:pt-[132px]">
                                     <div className="max-md:pt-5 max-md:pb-24 md:h-full md:flex md:items-center md:col-start-2 md:ps-12">
                                         <SlideContent slide={slide} locale={locale} textOnRight />
                                     </div>
@@ -366,43 +420,34 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                 })}
             </AnimatePresence>
 
-            {/* Carousel dot navigation */}
+            {/* Carousel arrows (left/right edges, dull until hovered) */}
             {isCarousel && slides.length > 1 && (
                 <div
-                    className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1 rounded-full bg-black/40 px-1 backdrop-blur-sm"
+                    className="pointer-events-none absolute inset-x-0 z-30 top-1/2 md:top-[calc(50%+66px)] max-md:top-[calc(9rem+14%)]"
                     onKeyDown={(e) => {
                         const rtl = document.documentElement.dir === 'rtl'
                         if (e.key === 'ArrowLeft') (rtl ? nextSlide : prevSlide)()
                         if (e.key === 'ArrowRight') (rtl ? prevSlide : nextSlide)()
                     }}
                 >
-                    <button
-                        onClick={prevSlide}
-                        className="flex h-11 w-11 items-center justify-center text-white/80 hover:text-white transition-colors"
-                        aria-label="Previous slide"
-                    >
-                        <ChevronIcon className="rtl:-scale-x-100" />
-                    </button>
-                    {slides.map((_, index) => (
+                    <div className="relative">
                         <button
-                            key={index}
-                            onClick={() => goToSlide(index)}
-                            className={cn(
-                                'w-2 h-2 rounded-full transition-all duration-300',
-                                currentSlide === index
-                                    ? 'bg-white w-6'
-                                    : 'bg-white/40 hover:bg-white/60'
-                            )}
-                            aria-label={`Go to slide ${index + 1}`}
-                        />
-                    ))}
-                    <button
-                        onClick={nextSlide}
-                        className="flex h-11 w-11 items-center justify-center text-white/80 hover:text-white transition-colors"
-                        aria-label="Next slide"
-                    >
-                        <ChevronIcon className="rotate-180 rtl:rotate-0" />
-                    </button>
+                            type="button"
+                            onClick={() => (isRtl ? nextSlide : prevSlide)()}
+                            className="pointer-events-auto absolute top-1/2 -translate-y-1/2 left-6 flex h-[30px] w-[30px] items-center justify-center opacity-35 transition-opacity duration-[600ms] ease-in-out hover:opacity-100 focus-visible:opacity-100 after:absolute after:-inset-3 after:content-['']"
+                            aria-label={isRtl ? 'Next slide' : 'Previous slide'}
+                        >
+                            <ArrowIcon direction="left" dark={isRtl ? darkOnPanel : darkOnImage} />
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => (isRtl ? prevSlide : nextSlide)()}
+                            className="pointer-events-auto absolute top-1/2 -translate-y-1/2 right-6 flex h-[30px] w-[30px] items-center justify-center opacity-35 transition-opacity duration-[600ms] ease-in-out hover:opacity-100 focus-visible:opacity-100 after:absolute after:-inset-3 after:content-['']"
+                            aria-label={isRtl ? 'Previous slide' : 'Next slide'}
+                        >
+                            <ArrowIcon direction="right" dark={isRtl ? darkOnImage : darkOnPanel} />
+                        </button>
+                    </div>
                 </div>
             )}
         </section>
