@@ -41,8 +41,8 @@ const TOLERANCE = 1 // px
 const PAGES = {
     home: ['/'],
     shell: ['/contact'],
-    programme: ['/education', '/education/curator-masterclass', '/events', '/channel', '/channel/artist-portrait-elimo-njau', '/whats-on'],
-    editorial: ['/texts', '/texts/sample-artist-writing', '/exhibitions', '/history', '/artists', '/artists/adamu', '/collection'],
+    programme: ['/education', '/education/curator-masterclass', '/events', '/events/accessibility-in-art-spaces-workshop', '/channel', '/channel/artist-portrait-elimo-njau', '/whats-on'],
+    editorial: ['/texts', '/texts/sample-artist-writing', '/exhibitions', '/exhibitions/kaspale-syowia-kyambi', '/history', '/artists', '/artists/adamu', '/collection'],
     information: ['/visit', '/contact', '/accessibility'],
     about: ['/about', '/get-involved'],
 }
@@ -59,9 +59,10 @@ function scanLegacy() {
             if (statSync(p).isDirectory()) walk(p)
             else if (p.endsWith('.tsx')) {
                 readFileSync(p, 'utf8').split('\n').forEach((line, i) => {
-                    // `container` as a CSS class token (not containerRef etc.)
-                    const m = line.match(/["'`\s]container(?=[\s"'`])[^"'`]*/)
-                    if (m && !m[0].includes('page-container')) uses.push({ kind: 'class', at: `${p}:${i + 1}` })
+                    // `container` as a CSS class token inside a string literal (not comments,
+                    // containerRef, page-container, max-w-container, etc.)
+                    const code = line.replace(/\/\/.*$/, '').replace(/\/\*.*?\*\//g, '')
+                    if (/["'`][^"'`]*(?<![-\w])container(?![-\w])[^"'`]*["'`]/.test(code)) uses.push({ kind: 'class', at: `${p}:${i + 1}` })
                     // GridSystem pulls in the legacy class via this prop
                     // (skip the component that defines the prop: its own `"container"` string is counted above)
                     if (!p.endsWith('Grid/Grid.tsx') && /unstable_useContainer(?!=\{false\})(\s|>|=\{true\})/.test(line)) uses.push({ kind: 'grid-prop', at: `${p}:${i + 1}` })
@@ -125,7 +126,16 @@ for (const [family, paths] of Object.entries(PAGES)) {
                 try {
                     const res = await page.goto(url, { waitUntil: 'networkidle', timeout: 90000 })
                     if (!res || res.status() >= 400) err = `HTTP ${res ? res.status() : '?'}`
-                    else m = await page.evaluate(measure, [isRtl, width]).catch((e) => ((err = e.message), null))
+                    else {
+                        const run = () => page.evaluate(measure, [isRtl, width]).catch((e) => ((err = e.message), null))
+                        m = await run()
+                        // A page compiling for the first time in dev can be measured before it renders:
+                        // if the header, content or footer is missing, reload once and measure again.
+                        if (m && (m.header === null || m.content === null || m.footer === null)) {
+                            await page.reload({ waitUntil: 'networkidle', timeout: 90000 })
+                            m = await run()
+                        }
+                    }
                 } catch (e) {
                     err = e.message.split('\n')[0]
                 }
@@ -153,10 +163,10 @@ await browser.close()
 // --- Report ---
 console.log(`\nAlignment audit @ ${BASE}   target: ${48}px desktop / ${24}px phone, max ${MAX_WIDTH}px\n`)
 const pad = (s, n) => String(s).padEnd(n)
-console.log(`${pad('family', 12)}${pad('loc', 4)}${pad('w', 6)}${pad('path', 40)}${pad('header', 8)}${pad('content', 9)}${pad('footer', 8)}result`)
+console.log(`${pad('family', 12)}${pad('loc', 4)}${pad('w', 6)}${pad('path', 56)}${pad('header', 8)}${pad('content', 9)}${pad('footer', 8)}result`)
 for (const r of rows) {
     const g = (k) => (r.m && r.m[k] !== null ? r.m[k] : '-')
-    console.log(`${pad(r.family, 12)}${pad(r.locale, 4)}${pad(r.width, 6)}${pad(r.path, 40)}${pad(g('header'), 8)}${pad(g('content'), 9)}${pad(g('footer'), 8)}${r.problems.length ? 'FAIL ' + r.problems.join('; ') : 'ok'}`)
+    console.log(`${pad(r.family, 12)}${pad(r.locale, 4)}${pad(r.width, 6)}${pad(r.path, 56)}${pad(g('header'), 8)}${pad(g('content'), 9)}${pad(g('footer'), 8)}${r.problems.length ? 'FAIL ' + r.problems.join('; ') : 'ok'}`)
 }
 
 console.log(`\nLegacy container uses in src/: ${legacy.length}  (class: ${byKind.class || 0}, GridSystem prop: ${byKind['grid-prop'] || 0})`)

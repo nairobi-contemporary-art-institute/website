@@ -89,7 +89,7 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
     return (
         <footer className="bg-background-dark text-sun-bleached-paper">
             {/* Newsletter Row - Full Width Section above the swoosh line */}
-            <div className="container pt-20 pb-4">
+            <div className="page-container pt-20 pb-4">
                 <div className="max-w-2xl">
                     <NewsletterSignup />
                 </div>
@@ -99,7 +99,7 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
             <ResponsiveDivider variant="curved" weight="medium" className="text-white" />
 
             {/* Main Footer Content */}
-            <div className="container py-24">
+            <div className="page-container py-24">
                 {/* Main Links Row */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
                     {/* Contact Info Column (Visit Us) */}
@@ -173,7 +173,7 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
             {/* Bottom Swoosh/Divider */}
             <ResponsiveDivider variant="straight" weight="thin" className="text-white/10" />
 
-            <div className="container py-8">
+            <div className="page-container py-8">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                     {/* Legal Links & Accessibility */}
                     <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-[11px] font-normal">

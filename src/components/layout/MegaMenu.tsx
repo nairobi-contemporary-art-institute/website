@@ -61,7 +61,7 @@ export function MegaMenu({ isOpen, activeCategory, columns, onClose, featuredIma
                         className="w-full bg-white border-b border-charcoal/10 shadow-2xl overflow-hidden outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in data-[state=closed]:fade-out data-[state=open]:slide-in-from-top-2 data-[state=closed]:slide-out-to-top-2 duration-300"
                         onMouseLeave={onClose}
                     >
-                        <div className="container mx-auto px-6 py-12 md:px-12 flex flex-col md:flex-row gap-16">
+                        <div className="page-container py-12 flex flex-col md:flex-row gap-16">
                             {/* Left: Navigation Columns */}
                             <div className={cn(
                                 "grid gap-12 flex-1",
@@ -171,8 +171,8 @@ export function MegaMenu({ isOpen, activeCategory, columns, onClose, featuredIma
                         </div>
 
                         {/* High-Converting Quick Action Bar */}
-                        <div className="bg-charcoal/[0.03] border-t border-charcoal/10 py-5 px-6 md:px-12">
-                            <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <div className="bg-charcoal/[0.03] border-t border-charcoal/10 py-5">
+                            <div className="page-container flex flex-col sm:flex-row justify-between items-center gap-4">
                                 <div className="flex items-center gap-8 text-[10px] uppercase tracking-[0.2em] text-charcoal/70 font-bold">
                                     <span className="text-charcoal/70">Nairobi Contemporary Art Institute</span>
                                     <Link href="/visit" className="hover:text-ochre transition-colors">Plan your visit</Link>
