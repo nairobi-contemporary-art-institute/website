@@ -999,5 +999,75 @@
     "id": "c13ed460-05cd-4572-bb1b-34b0db14016e",
     "type": "program",
     "note": "mock/test data"
+  },
+  {
+    "at": "2026-10-29T12:45:54.519Z",
+    "action": "upsert",
+    "id": "textPiece-makerere-margaret-trowell-east-african-modernism",
+    "type": "textPiece",
+    "note": "essay · 6a/1x"
+  },
+  {
+    "at": "2026-10-29T12:45:54.519Z",
+    "action": "upsert",
+    "id": "textPiece-chemchemi-paa-ya-paa-elimo-njau-nairobi",
+    "type": "textPiece",
+    "note": "essay · 3a/1x"
+  },
+  {
+    "at": "2026-10-29T12:45:54.519Z",
+    "action": "upsert",
+    "id": "textPiece-gallery-watatu-ruth-schaffner-ngecha-artists",
+    "type": "textPiece",
+    "note": "essay · 6a/3x"
+  },
+  {
+    "at": "2026-10-29T12:45:54.520Z",
+    "action": "upsert",
+    "id": "textPiece-ugandan-artists-amin-years-1970s",
+    "type": "textPiece",
+    "note": "essay · 8a/2x"
+  },
+  {
+    "at": "2026-10-29T12:45:54.520Z",
+    "action": "upsert",
+    "id": "textPiece-kuona-trust-godown-nairobi-artist-collectives",
+    "type": "textPiece",
+    "note": "essay · 9a/2x"
+  },
+  {
+    "at": "2026-10-29T12:45:54.520Z",
+    "action": "upsert",
+    "id": "textPiece-women-sculptors-in-east-africa",
+    "type": "textPiece",
+    "note": "essay · 3a/4x"
+  },
+  {
+    "at": "2026-10-29T12:45:54.520Z",
+    "action": "upsert",
+    "id": "textPiece-sane-wadu-and-kenyas-self-taught-painters",
+    "type": "textPiece",
+    "note": "essay · 3a/3x"
+  },
+  {
+    "at": "2026-10-29T12:45:54.520Z",
+    "action": "upsert",
+    "id": "textPiece-why-an-archive",
+    "type": "textPiece",
+    "note": "essay · 4a/2x"
+  },
+  {
+    "at": "2026-10-29T12:45:54.521Z",
+    "action": "upsert",
+    "id": "textPiece-armitage-and-van-rampelberg-in-conversation",
+    "type": "textPiece",
+    "note": "conversation · 2a/1x"
+  },
+  {
+    "at": "2026-10-29T12:45:54.521Z",
+    "action": "upsert",
+    "id": "textPiece-rumanzi-and-mukholi-in-conversation",
+    "type": "textPiece",
+    "note": "conversation · 1a/1x"
   }
 ]
