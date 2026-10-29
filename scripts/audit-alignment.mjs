@@ -163,10 +163,10 @@ await browser.close()
 // --- Report ---
 console.log(`\nAlignment audit @ ${BASE}   target: ${48}px desktop / ${24}px phone, max ${MAX_WIDTH}px\n`)
 const pad = (s, n) => String(s).padEnd(n)
-console.log(`${pad('family', 12)}${pad('loc', 4)}${pad('w', 6)}${pad('path', 40)}${pad('header', 8)}${pad('content', 9)}${pad('footer', 8)}result`)
+console.log(`${pad('family', 12)}${pad('loc', 4)}${pad('w', 6)}${pad('path', 56)}${pad('header', 8)}${pad('content', 9)}${pad('footer', 8)}result`)
 for (const r of rows) {
     const g = (k) => (r.m && r.m[k] !== null ? r.m[k] : '-')
-    console.log(`${pad(r.family, 12)}${pad(r.locale, 4)}${pad(r.width, 6)}${pad(r.path, 40)}${pad(g('header'), 8)}${pad(g('content'), 9)}${pad(g('footer'), 8)}${r.problems.length ? 'FAIL ' + r.problems.join('; ') : 'ok'}`)
+    console.log(`${pad(r.family, 12)}${pad(r.locale, 4)}${pad(r.width, 6)}${pad(r.path, 56)}${pad(g('header'), 8)}${pad(g('content'), 9)}${pad(g('footer'), 8)}${r.problems.length ? 'FAIL ' + r.problems.join('; ') : 'ok'}`)
 }
 
 console.log(`\nLegacy container uses in src/: ${legacy.length}  (class: ${byKind.class || 0}, GridSystem prop: ${byKind['grid-prop'] || 0})`)
