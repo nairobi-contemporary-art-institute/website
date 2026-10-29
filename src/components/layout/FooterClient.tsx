@@ -1,12 +1,14 @@
 'use client'
 
 import { Link } from '@/i18n'
+import { cn } from '@/lib/utils'
 
 import { ResponsiveDivider } from '@/components/ui/ResponsiveDivider'
 import { SocialIcons } from './SocialIcons'
 import { AccessibilityToggles } from './AccessibilityToggles'
 import { NewsletterSignup } from './NewsletterSignup'
 import { usePathname } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 
 const legalLinks = [
     { label: 'Privacy policy', url: '/privacy' },
@@ -41,6 +43,7 @@ interface FooterClientProps {
 export function FooterClient({ categories = [], socialUrls, contactInfo, copyrightText }: FooterClientProps) {
     const currentYear = new Date().getFullYear()
     const pathname = usePathname()
+    const tNav = useTranslations('Navigation')
     // Check if the current route is the immersive timeline
     const isImmersive = pathname?.includes('/timeline')
 
@@ -52,36 +55,29 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
             title: 'What\'s On',
             links: [
                 { label: 'Exhibitions', url: '/exhibitions' },
-                { label: 'Public Programs', url: '/education' },
                 { label: 'Events', url: '/events' },
-                { label: 'Visit Us', url: '/visit' },
+                { label: 'Calendar', url: '/whats-on' },
+                { label: 'Education', url: '/education' },
             ],
         },
         {
-            title: 'Collection',
+            title: 'Explore',
             links: [
-                { label: 'The Channel', url: '/channel' },
-                { label: 'Texts', url: '/texts' },
                 { label: 'Artists', url: '/artists' },
                 { label: 'Collection', url: '/collection' },
+                { label: 'Texts', url: '/texts' },
+                { label: 'The Channel', url: '/channel' },
                 { label: 'Publications', url: '/publications' },
             ],
         },
         {
-            title: 'Education',
+            title: 'About',
             links: [
-                { label: 'Academy', url: '/education' },
-                { label: 'Resources', url: '/education#resources' },
-                { label: 'Fellowships', url: '/about' },
-            ],
-        },
-        {
-            title: 'Support',
-            links: [
-                { label: 'Membership', url: '/get-involved' },
-                { label: 'Support NCAI', url: '/get-involved' },
+                { label: 'About NCAI', url: '/about' },
+                { label: 'Team', url: '/about/team' },
                 { label: 'Careers', url: '/about/careers' },
-                { label: 'About us', url: '/about' },
+                { label: 'Support NCAI', url: '/get-involved' },
+                { label: 'Contact', url: '/contact' },
             ],
         },
     ]
@@ -106,7 +102,9 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
                     <div className="lg:col-span-3 space-y-8">
                         <div className="text-sm text-sun-bleached-paper/80 space-y-6">
                             <div className="leading-relaxed">
-                                <strong className="block font-bold text-white mb-6">Visit Us</strong>
+                                <h2 className="text-sm font-bold mb-6 text-white min-h-[1.5rem]">
+                                    <Link href="/visit" className="hover:underline underline-offset-4 decoration-white/20">{tNav('visit')}</Link>
+                                </h2>
                                 {contactInfo?.address ? (
                                     contactInfo.googleMapsUrl ? (
                                         <a href={contactInfo.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors block">
@@ -146,7 +144,10 @@ export function FooterClient({ categories = [], socialUrls, contactInfo, copyrig
                     </div>
 
                     {/* Link Categories - Now taking more space (9 columns) */}
-                    <div className="lg:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+                    <div className={cn(
+                        "lg:col-span-9 grid grid-cols-1 sm:grid-cols-2 gap-12 lg:gap-8",
+                        displayCategories.length <= 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"
+                    )}>
                         {displayCategories.map((category, index) => (
                             <div key={`${category.title}-${index}`} className="flex flex-col h-full">
                                 <h2 className="text-sm font-bold mb-6 text-white min-h-[1.5rem]">
