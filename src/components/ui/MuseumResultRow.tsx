@@ -14,7 +14,7 @@ export function MuseumResultRow({ title, items, className }: MuseumResultRowProp
 
     return (
         <div className={cn("w-full py-12", className)}>
-            <div className="container mb-6 md:mb-8">
+            <div className="page-container mb-6 md:mb-8">
                 <div className="flex flex-col md:flex-row md:items-baseline justify-between border-b border-[#1a1a1a]/10 pb-4 gap-4">
                     <h2 className="text-lg md:text-xl font-bold uppercase tracking-widest text-[#1a1a1a]">
                         {title}
@@ -25,7 +25,7 @@ export function MuseumResultRow({ title, items, className }: MuseumResultRowProp
                 </div>
             </div>
             
-            <div className="container">
+            <div className="page-container">
                 <MuseumGrid 
                     items={items} 
                     showFilters={false}

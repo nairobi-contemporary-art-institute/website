@@ -48,7 +48,7 @@ export default async function TextsPage({ params, searchParams }: { params: Prom
     })
 
     return (
-        <div className="container mx-auto pt-40 md:pt-52 pb-24 min-h-screen">
+        <div className="page-container pt-40 md:pt-52 pb-24 min-h-screen">
             <header className="mb-12 md:mb-16 max-w-3xl">
                 <h1 className="text-5xl md:text-7xl font-light tracking-tight text-charcoal">{t('title')}</h1>
                 <p className="mt-6 text-lg md:text-xl font-normal leading-relaxed text-umber">{t('description')}</p>

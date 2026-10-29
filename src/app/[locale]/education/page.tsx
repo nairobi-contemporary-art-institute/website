@@ -70,13 +70,13 @@ export default async function EducationPage({ params }: Props) {
                         blurDataURL={heroImage.asset.metadata?.lqip}
                     />
                 )}
-                {/* Subtle diagonal corner gradient: Bottom Right to Top Left */}
-                <div className="absolute inset-0 bg-gradient-to-tl from-charcoal/60 via-charcoal/10 to-transparent pointer-events-none" />
+                {/* Subtle diagonal corner gradient: Bottom Left to Top Right (behind the title) */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-charcoal/60 via-charcoal/10 to-transparent pointer-events-none" />
                 
-                <div className="relative z-10 container mx-auto px-section-clamp h-full flex flex-col justify-end pb-24">
-                    <div className="ml-auto w-full lg:w-1/2 text-left px-8 lg:px-0">
+                <div className="relative z-10 page-container h-full flex flex-col justify-end pb-24">
+                    <div className="w-full lg:w-1/2 text-start">
                         <div className="mb-6">
-                            <h1 className="text-4xl md:text-[3.5rem] font-medium tracking-tighter text-white leading-[1] transform -translate-x-1">
+                            <h1 className="text-4xl md:text-[3.5rem] font-medium tracking-tighter text-white leading-[1]">
                                 {title}
                             </h1>
                         </div>
@@ -93,7 +93,7 @@ export default async function EducationPage({ params }: Props) {
 
             {/* Sub-Navigation Bar */}
             <nav className="sticky top-[var(--header-height)] z-30 bg-charcoal text-white border-b border-white/10 backdrop-blur-md">
-                <div className="container mx-auto px-section-clamp">
+                <div className="page-container">
                     <ul className="flex items-center space-x-8 py-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
                         <li><a href="#overview" className="text-[10px] uppercase tracking-[0.2em] font-bold hover:text-stone-300 transition-colors">Overview</a></li>
                         {pageData?.sections?.map((section: any, idx: number) => {
@@ -117,7 +117,7 @@ export default async function EducationPage({ params }: Props) {
 
             {/* Content Sections (IMMA Style) */}
             <div id="overview" className="bg-white py-32 scroll-mt-32">
-                <div className="container mx-auto px-section-clamp">
+                <div className="page-container">
                     {/* Main Overview Section */}
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
                         <div className="lg:col-span-4">
@@ -159,7 +159,7 @@ export default async function EducationPage({ params }: Props) {
             {/* Pillars Section */}
             {pageData?.pillars && pageData.pillars.length > 0 && (
                 <section id="pillars" className="py-32 bg-stone-50/50 scroll-mt-32">
-                    <div className="container mx-auto px-section-clamp mb-12">
+                    <div className="page-container mb-12">
                         <h2 className="text-xs font-bold uppercase tracking-[0.4em] text-charcoal/70 mb-16">
                             Explore More
                         </h2>
@@ -249,7 +249,7 @@ export default async function EducationPage({ params }: Props) {
 
             {/* All Programs Section */}
             <section id="programs" className="py-32 scroll-mt-32">
-                <div className="container mx-auto px-section-clamp">
+                <div className="page-container">
                     <div className="mb-12">
                         <h2 className="text-xs font-bold uppercase tracking-[0.4em] text-charcoal/70 border-b border-charcoal/10 pb-4 inline-block mb-16">
                             {t('allPrograms')}

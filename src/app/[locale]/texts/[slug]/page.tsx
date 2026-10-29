@@ -172,65 +172,67 @@ export default async function TextPage({ params }: { params: Params }) {
             ) : null}
 
             {(relatedExhibitions.length > 0 || relatedTexts.length > 0 || text.prev || text.next) && (
-                <footer className="container mx-auto mt-24 border-t border-charcoal/15">
-                    {relatedExhibitions.length > 0 && (
-                        <section aria-labelledby="related-exhibitions" className="pt-16">
-                            <h2 id="related-exhibitions" className="mb-8 text-2xl md:text-3xl font-light tracking-tight text-charcoal">
-                                {t('relatedExhibitions')}
-                            </h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                {relatedExhibitions.map((exhibition: any) => (
-                                    <ExhibitionCard key={exhibition._id} exhibition={exhibition} locale={locale} variant="compact" />
-                                ))}
-                            </div>
-                        </section>
-                    )}
+                <footer className="page-container mt-24">
+                    <div className="border-t border-charcoal/15">
+                        {relatedExhibitions.length > 0 && (
+                            <section aria-labelledby="related-exhibitions" className="pt-16">
+                                <h2 id="related-exhibitions" className="mb-8 text-2xl md:text-3xl font-light tracking-tight text-charcoal">
+                                    {t('relatedExhibitions')}
+                                </h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                    {relatedExhibitions.map((exhibition: any) => (
+                                        <ExhibitionCard key={exhibition._id} exhibition={exhibition} locale={locale} variant="compact" />
+                                    ))}
+                                </div>
+                            </section>
+                        )}
 
-                    {relatedTexts.length > 0 && (
-                        <section aria-labelledby="related-texts" className="pt-16">
-                            <h2 id="related-texts" className="mb-8 text-2xl md:text-3xl font-light tracking-tight text-charcoal">
-                                {t('relatedTexts')}
-                            </h2>
-                            <ul className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
-                                {relatedTexts.map((related: any) => (
-                                    <li key={related._id}>
-                                        <TextCard text={related} locale={locale} headingLevel="h3" />
-                                    </li>
-                                ))}
-                            </ul>
-                        </section>
-                    )}
+                        {relatedTexts.length > 0 && (
+                            <section aria-labelledby="related-texts" className="pt-16">
+                                <h2 id="related-texts" className="mb-8 text-2xl md:text-3xl font-light tracking-tight text-charcoal">
+                                    {t('relatedTexts')}
+                                </h2>
+                                <ul className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
+                                    {relatedTexts.map((related: any) => (
+                                        <li key={related._id}>
+                                            <TextCard text={related} locale={locale} headingLevel="h3" />
+                                        </li>
+                                    ))}
+                                </ul>
+                            </section>
+                        )}
 
-                    {(text.prev || text.next) && (
-                        <nav aria-label={t('textNavigation')} className="mt-16 pt-6 border-t border-charcoal/15 grid grid-cols-2 gap-8 text-sm">
-                            <div>
-                                {text.prev && (
-                                    <Link href={`/texts/${text.prev.slug}`} className="group block">
-                                        <span className="block text-umber"><span aria-hidden="true" className="inline-block rtl:-scale-x-100">←</span> {t('previousText')}</span>
-                                        <span className="mt-1 block font-bold text-charcoal group-hover:underline underline-offset-4">
-                                            {getLocalizedValue<string>(text.prev.title, locale)}
-                                        </span>
-                                    </Link>
-                                )}
-                            </div>
-                            <div className="text-end">
-                                {text.next && (
-                                    <Link href={`/texts/${text.next.slug}`} className="group block">
-                                        <span className="block text-umber">{t('nextText')} <span aria-hidden="true" className="inline-block rtl:-scale-x-100">→</span></span>
-                                        <span className="mt-1 block font-bold text-charcoal group-hover:underline underline-offset-4">
-                                            {getLocalizedValue<string>(text.next.title, locale)}
-                                        </span>
-                                    </Link>
-                                )}
-                            </div>
-                        </nav>
-                    )}
+                        {(text.prev || text.next) && (
+                            <nav aria-label={t('textNavigation')} className="mt-16 pt-6 border-t border-charcoal/15 grid grid-cols-2 gap-8 text-sm">
+                                <div>
+                                    {text.prev && (
+                                        <Link href={`/texts/${text.prev.slug}`} className="group block">
+                                            <span className="block text-umber"><span aria-hidden="true" className="inline-block rtl:-scale-x-100">←</span> {t('previousText')}</span>
+                                            <span className="mt-1 block font-bold text-charcoal group-hover:underline underline-offset-4">
+                                                {getLocalizedValue<string>(text.prev.title, locale)}
+                                            </span>
+                                        </Link>
+                                    )}
+                                </div>
+                                <div className="text-end">
+                                    {text.next && (
+                                        <Link href={`/texts/${text.next.slug}`} className="group block">
+                                            <span className="block text-umber">{t('nextText')} <span aria-hidden="true" className="inline-block rtl:-scale-x-100">→</span></span>
+                                            <span className="mt-1 block font-bold text-charcoal group-hover:underline underline-offset-4">
+                                                {getLocalizedValue<string>(text.next.title, locale)}
+                                            </span>
+                                        </Link>
+                                    )}
+                                </div>
+                            </nav>
+                        )}
 
-                    <p className="mt-12 text-center text-sm">
-                        <Link href="/texts" className="text-charcoal underline underline-offset-4">
-                            {t('viewAll')}
-                        </Link>
-                    </p>
+                        <p className="mt-12 text-center text-sm">
+                            <Link href="/texts" className="text-charcoal underline underline-offset-4">
+                                {t('viewAll')}
+                            </Link>
+                        </p>
+                    </div>
                 </footer>
             )}
         </article>

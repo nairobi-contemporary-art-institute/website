@@ -25,15 +25,15 @@ export default async function HistoryPage({ params }: { params: Promise<{ locale
     const t = await getMessages({ locale }) as any
 
     return (
-        <div className="container mx-auto px-section-clamp py-24 min-h-screen">
-            <header className="max-w-4xl mx-auto mb-20 text-center">
+        <div className="page-container py-24 min-h-screen">
+            <header className="max-w-4xl mb-20">
                 <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-charcoal mb-6">
                     {t.Pages?.history?.title || 'Our History'}
                 </h1>
-                <p className="text-xl md:text-2xl text-umber/80 font-light max-w-2xl mx-auto leading-relaxed">
+                <p className="text-xl md:text-2xl text-umber/80 font-light max-w-2xl leading-relaxed">
                     {t.Pages?.history?.description || 'Tracing the journey of art in East Africa through the lens of NCAI.'}
                 </p>
-                <ResponsiveDivider variant="curved" weight="medium" className="text-umber/80 mt-12 mx-auto max-w-xs" />
+                <ResponsiveDivider variant="curved" weight="medium" className="text-umber/80 mt-12 max-w-xs" />
             </header>
 
             <div className="max-w-5xl mx-auto relative">

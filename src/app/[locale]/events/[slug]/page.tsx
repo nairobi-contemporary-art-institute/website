@@ -81,7 +81,7 @@ export default async function EventPage({ params }: Props) {
     const isPast = new Date() > (endDate || startDate)
 
     return (
-        <div className="container mx-auto px-section-clamp py-20 min-h-screen bg-stone-50/30">
+        <div className="page-container py-20 min-h-screen bg-stone-50/30">
             <Link
                 href={`/${locale}/events`}
                 className="inline-flex items-center gap-2 text-xs font-mono capitalize tracking-widest text-umber hover:text-charcoal mb-12 transition-colors"
@@ -89,7 +89,7 @@ export default async function EventPage({ params }: Props) {
                 ← Back to Calendar
             </Link>
 
-            <div className="max-w-6xl mx-auto">
+            <div>
                 <header className="mb-16 border-b border-charcoal/10 pb-12">
                     <div className="flex flex-wrap items-center gap-4 text-xs font-mono capitalize tracking-widest text-umber mb-6">
                         <span className="px-2 py-1 bg-umber/10">{event.eventType}</span>

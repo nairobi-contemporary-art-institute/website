@@ -43,7 +43,7 @@ export function WorksGridOverlay({ isOpen, onClose, onWorkClick, works, locale, 
 
     return (
         <div className="fixed inset-0 z-[70] bg-white overflow-y-auto pt-32">
-            <div className="container pb-24">
+            <div className="page-container pb-24">
                 <header className="flex justify-between items-end mb-16 border-b border-rich-blue/10 pb-8">
                     <div>
                         <h2 className="text-3xl md:text-5xl font-bold text-charcoal tracking-tighter">{artistName}</h2>

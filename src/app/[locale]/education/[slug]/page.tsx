@@ -94,7 +94,7 @@ export default async function ProgramPage({ params }: Props) {
     const isUpcoming = !startDate || (startDate && startDate >= new Date()) || (endDate && endDate >= new Date())
 
     return (
-        <div className="container mx-auto px-section-clamp py-20 min-h-screen bg-stone-50/30">
+        <div className="page-container py-20 min-h-screen bg-stone-50/30">
             <Link
                 href={`/${locale}/education`}
                 className="inline-flex items-center gap-2 text-xs font-mono capitalize tracking-widest text-umber hover:text-charcoal mb-12 transition-colors"
@@ -102,7 +102,7 @@ export default async function ProgramPage({ params }: Props) {
                 ← Back to Education
             </Link>
 
-            <div className="max-w-6xl mx-auto">
+            <div>
                 <header className="mb-16 border-b border-charcoal/10 pb-12">
                     <div className="flex flex-wrap items-center gap-4 text-xs font-mono capitalize tracking-widest text-umber mb-6">
                         <span className="px-2 py-1 bg-umber/10">{typeLabel}</span>
@@ -222,7 +222,7 @@ export default async function ProgramPage({ params }: Props) {
             </div>
 
             {program.relatedExhibitions && program.relatedExhibitions.length > 0 && (
-                <section className="px-section-clamp mt-24 pt-24 border-t border-charcoal/10">
+                <section className="mt-24 pt-24 border-t border-charcoal/10">
                     <h2 className="text-3xl font-light tracking-tight mb-12">Related Exhibition</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {program.relatedExhibitions.map((exh: any) => (

@@ -42,7 +42,7 @@ export function ResourceGallery({ resources, locale }: ResourceGalleryProps) {
 
     return (
         <section id="resources" className="py-24 bg-white">
-            <div className="container mx-auto px-6">
+            <div className="page-container">
                 <div className="flex flex-col mb-16">
                     <span className="text-[10px] uppercase tracking-[0.4em] text-ochre-dark font-bold mb-4">
                         {t('subtitle')}

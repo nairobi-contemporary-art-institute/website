@@ -72,11 +72,11 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
     
     return (
         <>
-            <article className={cn("container mx-auto px-section-clamp pb-20", isArtistPortrait ? "pt-32 md:pt-48" : "pt-20")}>
-            <header className="max-w-3xl mx-auto mb-16 space-y-6 text-center">
+            <article className={cn("page-container pb-20", isArtistPortrait ? "pt-32 md:pt-48" : "pt-20")}>
+            <header className="max-w-3xl mb-16 space-y-6">
                 {/* Tags */}
                 {post.tags && post.tags.length > 0 && (
-                    <div className="flex gap-3 justify-center flex-wrap">
+                    <div className="flex gap-3 flex-wrap">
                         {post.tags.map((tag: any, i: number) => (
                             <span key={i} className="text-[10px] capitalize tracking-[0.2em] text-amber-800 font-bold bg-amber-50 px-3 py-1">
                                 {getLocalizedValue(tag.title, locale)}
@@ -89,7 +89,7 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
                     {title || 'Untitled'}
                 </h1>
 
-                <div className="flex items-center justify-center gap-6 text-sm text-umber/80">
+                <div className="flex items-center gap-6 text-sm text-umber/80">
                     {post.publishedAt && (
                         <span className="font-medium tracking-wide">
                             {new Date(post.publishedAt).toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' })}
@@ -97,7 +97,7 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
                     )}
 
                     {post.authors && post.authors.length > 0 && (
-                        <div className="flex flex-wrap items-center justify-center gap-y-4 gap-x-8 pl-6 border-l border-umber/20">
+                        <div className="flex flex-wrap items-center gap-y-4 gap-x-8 ps-6 border-s border-umber/20">
                             {post.authors.map((author: any, idx: number) => (
                                 <div key={idx} className="flex items-center gap-2">
                                     {author.image && (
@@ -133,7 +133,7 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
             </header>
 
             {/* Media Player or Main Image */}
-            <div className="w-full max-w-4xl mx-auto mb-16 space-y-6">
+            <div className="w-full max-w-4xl mb-16 space-y-6">
                 {(mediaType === 'film' && videoUrl) || (mediaType === 'audio' && audioUrl) ? (
                     <div className="space-y-4">
                         <MediaPlayer
@@ -171,13 +171,13 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
                 ) : null}
             </div>
 
-            <div className="prose prose-lg max-w-3xl mx-auto text-charcoal">
+            <div className="prose prose-lg max-w-3xl text-charcoal">
                 {post.body && <PortableTextComponent value={post.body} locale={locale} />}
             </div>
 
             {/* Artist Detail Section (if linked) */}
             {artist && (
-                <section className="max-w-4xl mx-auto mt-24 pt-24 border-t border-umber/10">
+                <section className="max-w-4xl mt-24 pt-24 border-t border-umber/10">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
                         {/* Bio & Link */}
                         <div className="md:col-span-4 space-y-6">
@@ -276,7 +276,7 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
                 </section>
             )}
 
-            <footer className="max-w-3xl mx-auto mt-16">
+            <footer className="max-w-3xl mt-16">
                 <ResponsiveDivider variant="straight" weight="thin" className="text-umber/80 mb-8" />
                 <Link href="/channel" className="inline-block text-sm font-bold capitalize tracking-widest text-umber/80 hover:text-amber-800 transition-colors">
                     ← Back to Channel
@@ -287,8 +287,8 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
 
         {isArtistPortrait && otherPortraits && otherPortraits.length > 0 && (
             <section className="bg-background-dark text-sun-bleached-paper mt-32 py-24">
-                <div className="container mx-auto px-section-clamp">
-                    <h2 className="text-2xl font-bold tracking-tighter mb-16 text-white text-center">
+                <div className="page-container">
+                    <h2 className="text-2xl font-bold tracking-tighter mb-16 text-white">
                         Other Artist Portraits
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
