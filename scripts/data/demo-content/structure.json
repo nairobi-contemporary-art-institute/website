@@ -1,0 +1,329 @@
+{
+ "exhibitionArtists": [
+  {
+   "exhibitionId": "140ee65e-4ef5-4114-bfbc-0b80335c952a",
+   "exhibitionTitle": "Eltayeb Dawelbait & Immy Mali",
+   "artistIds": [
+    "77593fc8-d34a-4af6-ab13-239433d103ae",
+    "g1ZmKN4M24s3sGbBtMc7b0"
+   ],
+   "evidence": "Wix page /exhbition-eltayeb-dawelbait-immy-mali: two-artist exhibition, Immy Mali's 'Dear Marcue Love Immy' with Eltayeb Dawelbait's studio archive; Sanity description names both."
+  },
+  {
+   "exhibitionId": "4e76056f-abdc-4f49-82f9-c1605ad15c65",
+   "exhibitionTitle": "Michael Armitage, Maria Lassnig, Chelenge van Rampelberg",
+   "artistIds": [
+    "mg2pWkoVlcJRqpFC3I1r0h",
+    "44GKG42L9vsYQRMOxJpzry",
+    "44GKG42L9vsYQRMOxJyYaq"
+   ],
+   "evidence": "Title and description name Michael Armitage, Maria Lassnig and Chelenge Van Rampelberg."
+  },
+  {
+   "exhibitionId": "exhibition-michael-maria-c",
+   "exhibitionTitle": "Michael + Maria C.",
+   "artistIds": [
+    "mg2pWkoVlcJRqpFC3I1r0h",
+    "44GKG42L9vsYQRMOxJpzry",
+    "44GKG42L9vsYQRMOxJyYaq"
+   ],
+   "evidence": "Description: intergenerational dialogue between Michael Armitage, Maria Lassnig and Chelenge Van Rampelberg."
+  },
+  {
+   "exhibitionId": "exhibitionbreakingbread",
+   "exhibitionTitle": "Notes on Friendship: Breaking Bread",
+   "artistIds": [
+    "J8bUuVdLTgk7BYxDfy5kQv",
+    "44GKG42L9vsYQRMOxJvAlL",
+    "mg2pWkoVlcJRqpFC3I2hq4",
+    "mg2pWkoVlcJRqpFC3I1uD5",
+    "g1ZmKN4M24s3sGbBtMe5EG",
+    "44GKG42L9vsYQRMOxKS77i",
+    "44GKG42L9vsYQRMOxK8h7O",
+    "6fZih3WFD2heuKkIkZZDdc",
+    "J8bUuVdLTgk7BYxDfy2TJh",
+    "44GKG42L9vsYQRMOxJyDJu",
+    "J8bUuVdLTgk7BYxDfy3fLt",
+    "HSGS2Q2gODgEBcEO5BRrzk",
+    "J8bUuVdLTgk7BYxDfyT55V",
+    "44GKG42L9vsYQRMOxJvWUp",
+    "J8bUuVdLTgk7BYxDfxygTF",
+    "44GKG42L9vsYQRMOxJpS1f",
+    "6fZih3WFD2heuKkIkZb7Rw",
+    "6fZih3WFD2heuKkIkZZD4O",
+    "J8bUuVdLTgk7BYxDfyVTxZ",
+    "44GKG42L9vsYQRMOxJvDWd",
+    "HSGS2Q2gODgEBcEO5BJn3g"
+   ],
+   "evidence": "Sanity description biographies name these 21 artists present in the artists collection (exhibition has 23 artists total); 18 of them also have bio notes stating their work was shown in Notes on Friendship: Breaking Bread (2025). Morris Foit, Taabu Munyoki, Dennis Muraguri, Araba Opoku, Wairimu Nduba are matched from the exhibition text only."
+  },
+  {
+   "exhibitionId": "exhibitioncanongriffinrumanzi",
+   "exhibitionTitle": "Canon Griffin Rumanzi: Looking into the Mad Eye of History Without Blinking",
+   "artistIds": [
+    "g1ZmKN4M24s3sGbBtMjwc6"
+   ],
+   "evidence": "Solo show; bio notes: 'Looking into the Mad Eye of History Without Blinking was shown at NCAI in 2025'."
+  },
+  {
+   "exhibitionId": "exhibitionpetersonkamwathi",
+   "exhibitionTitle": "Peterson Kamwathi",
+   "artistIds": [
+    "31bc83ee-5358-43d0-9eb3-67fce49d8379"
+   ],
+   "evidence": "Solo show Tabula Rasa: 'Peterson Kamwathi's first institutional solo exhibition in Kenya' (Sanity description)."
+  },
+  {
+   "exhibitionId": "ncaiinvenice",
+   "exhibitionTitle": "NCAI in Venice",
+   "artistIds": [
+    "g1ZmKN4M24s3sGbBtMde9A",
+    "g1ZmKN4M24s3sGbBtMcH5Z",
+    "8df917c2-a3b9-4eef-9ea3-eecacde0eab1",
+    "6fZih3WFD2heuKkIkZZQW4",
+    "6fZih3WFD2heuKkIkZZ0JU",
+    "J8bUuVdLTgk7BYxDfy2jDn",
+    "HSGS2Q2gODgEBcEO5BRYca",
+    "J8bUuVdLTgk7BYxDfy2K3v",
+    "44GKG42L9vsYQRMOxJvbvh"
+   ],
+   "evidence": "Description lists the Makerere-trained painters (Sam Ntiro, Charles Mukiibi, Kefa Ssempangi, C. Driciru, Josephine Alacu, Peter Mulindwa, Banadda Godfrey) plus artist portrait films of Asaph Ng'ethe Macua and Elimo Njau. Duplicate artist docs exist: 'Sam Joseph Ntiro' (9e00e16f-...), 'Kefa Frederick Sempangi' (44GKG42L9vsYQRMOxKAubw), 'Bannada Godfrey' (q1ZGjvWodBtgwLMouTwrh7) - merge duplicates in the CMS."
+  },
+  {
+   "exhibitionId": "walkingonadream",
+   "exhibitionTitle": "Walking on a Dream",
+   "artistIds": [
+    "44GKG42L9vsYQRMOxJuv0z",
+    "J8bUuVdLTgk7BYxDfyVVgN"
+   ],
+   "evidence": "Wix /walkingonadream: Elias Mung'ora, Jared Onyango and Sandra Wauye (UJUZI participants). Jared Onyango has no artist document."
+  },
+  {
+   "exhibitionId": "wayfinder",
+   "exhibitionTitle": "Wayfinder",
+   "artistIds": [
+    "g1ZmKN4M24s3sGbBtMeAyv"
+   ],
+   "evidence": "Solo show: 'Mumbai-based artist Sahej Rahal's first exhibition in Kenya and East Africa'."
+  }
+ ],
+ "exhibitionFixes": [
+  {
+   "exhibitionId": "14a17b11-2484-474e-8e97-3dfecb341762",
+   "field": "description",
+   "value": "Olidde Mupipa is Xenson’s first-ever solo exhibition in Nairobi and his first institutional exhibition in East Africa. With an emphasis on sculpture and installation, this exhibition brings together six newly produced works which broaden Xenson’s exploration of objects and materials, and the stories they tell about the specific cultural contexts from which they are drawn.\n\n“At the end of the day, whatever I do, the nucleus is these objects and how they begin to tell the story. From Uganda, Kenya, East Africa, and then incorporating these other sensibilities of the world.” - Xenson, 2024\n\n‘Olidde mupipa’ (Luganda) is an idiomatic expression that translates to ‘you have eaten from the barrel (the dustbin)’. The phrase implies that one has arrived too late for something that they have to make do with leftovers. More specifically, the expression refers to the steel drums, which are used for storing and transporting various liquid substances. Often these barrels are resold and repurposed for different uses, including storage for alternative substances/materials (such as rubbish), and they are also broken down to produce other functional objects such as troughs and karayi. In his practice, Xenson has adopted these steel barrels, and their offshoots, as a support for painting and as building blocks for the sculptures and installations that make up this exhibition.\n\nXenson has long been fascinated by language and its capacity to preserve and communicate cultural experiences. This fascination extends to his engagement with different objects, mining them for their illustrative, associative, and idiomatic potential. It has informed the development of the sculptures and installations featured in Olidde Mupipa, constructed using commonplace objects such as sigiri (charcoal-burning stoves) and pipa (steel barrels). By reconfiguring these objects, he transforms their everyday utility to foreground their physical and formal characteristics. However, the knowledge of their use in everyday life remains central to the work, as this knowledge provides an entry point for considering their pasts within local, regional, and global cycles of production, distribution, and the consumption of goods and labour.",
+   "alt": null,
+   "source": "https://www.ncai254.com/xensonoliddemupipa"
+  },
+  {
+   "exhibitionId": "8c843060-d023-4dd3-ad5d-be8d67f0dd08",
+   "field": "description",
+   "value": "Best known as a sculptor and printmaker, Chelenge Van Rampelberg has, in a career spanning almost four decades exceptional works in painting, printmaking, engraving, and sculpture. 'The Long Way Home' marks the first-ever exhibition to cover the entirety of her career, inviting attention to Chelenge's artistic methods and the subjects with which she has been preoccupied all through - the concept of home; our connection with the natural world; motherhood and family; and the position and power of women in our society.\n\nThis exhibition chronicles the evolution of Chelenge’ practice, commencing with her initial forays into painting with oil on paper, and wood sculpture in the early to mid 1980s. This phase was succeeded by her exploration of printmaking, a transition that began after her participation in a printmaking workshop at the French Cultural Centre in Nairobi, organized by Gallery Watatu in 1992. This, in turn, paved the way for her embrace of engraving, a technique for which she has gained recognition.\n\nA masterful storyteller, Chelenge weaves narratives that are deeply rooted in her own life experiences. Her artistic approach shuttles effortlessly between keen observation and abstract interpretation, enabling her creations to serve not only as personal chronicles but also as profound reflections on the circumstances of our being in the world.",
+   "alt": null,
+   "source": "https://www.ncai254.com/exhibitionchelengevanrampelberg"
+  },
+  {
+   "exhibitionId": "ccfb2f30-934d-4422-920f-ef094434c9cb",
+   "field": "description",
+   "value": "Common Ground brings together artworks by four artists active in Kenya today, featuring depictions of social groups, specifically students, uniformed officers, protesters, and family. In these works, each of the artists considers the behaviour of these groups as a unit and their relationships with the physical and social spaces they inhabit.\n\nComprised of drawing, painting and sculpture, the exhibition highlights artworks that were created within the last decade. Among them are a large-scale drawing by Peterson Kamwathi from 2012, and a recently completed group of sculptures by Morris Foit, both of which form part of the NCAI collection. Alongside these is a significant painting by Elias Mung'ora from 2017, and a selection of artworks from an ongoing series by Paul Njihia.",
+   "alt": null,
+   "source": "https://www.ncai254.com/commonground"
+  },
+  {
+   "exhibitionId": "140ee65e-4ef5-4114-bfbc-0b80335c952a",
+   "field": "mainImage",
+   "value": "https://static.wixstatic.com/media/7b6770_59692cc16585406e98d4d3349260893d~mv2.png",
+   "alt": "Installation view, Eltayeb Dawelbait & Immy Mali, Nairobi Contemporary Art Institute, 2022 (file 'NCAI Eltayeb x Immy-83.png', first image on the exhibition page; the source file is PNG, not JPG)",
+   "source": "https://www.ncai254.com/exhbition-eltayeb-dawelbait-immy-mali"
+  }
+ ],
+ "timeline": [
+  {
+   "year": 1937,
+   "title": "Makerere art school founded in Kampala",
+   "descriptionMarkdown": "Margaret Trowell founded the School of Art at Makerere College in Uganda in 1937, later named the Margaret Trowell School of Industrial and Fine Art. It is described as the oldest art school in East Africa and trained many of the painters later collected by NCAI.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Margaret_Trowell",
+    "https://cedat.mak.ac.ug/mtsifa/"
+   ]
+  },
+  {
+   "year": 1963,
+   "title": "Chemchemi Creative Centre opens in Nairobi",
+   "descriptionMarkdown": "Elimo Njau, with the exiled South African writer Es'kia Mphahlele, founded the Chemchemi Creative Centre in Nairobi in 1963. It became an early meeting place for writers and artists in the new Kenya.",
+   "sources": [
+    "https://www.ncai254.com/exhibition-mwili-akili-na-roho",
+    "https://en.wikipedia.org/wiki/Es%27kia_Mphahlele"
+   ]
+  },
+  {
+   "year": 1965,
+   "title": "Paa ya Paa opens on Koinange Street",
+   "descriptionMarkdown": "Paa ya Paa opened in Nairobi in 1965 and is directed to this day by the artist and educator Elimo Njau. It is described as Kenya's oldest indigenous arts centre.",
+   "sources": [
+    "http://margarettawagacheru.blogspot.com/2013/08/gallery-watatu-has-glorious-history-but.html",
+    "https://www.facebook.com/PaaYaPaaArtsCentre/"
+   ]
+  },
+  {
+   "year": 1969,
+   "title": "Gallery Watatu founded",
+   "descriptionMarkdown": "Gallery Watatu was founded in 1969 by two artists and one graphic designer and became a central hub of Nairobi's art scene. Its workshops, including printmaking sessions in the early 1990s, shaped the careers of artists such as Chelenge Van Rampelberg.",
+   "sources": [
+    "http://margarettawagacheru.blogspot.com/2013/08/gallery-watatu-has-glorious-history-but.html",
+    "https://www.ncai254.com/exhibitionchelengevanrampelberg"
+   ]
+  },
+  {
+   "year": 1995,
+   "title": "Kuona Trust established",
+   "descriptionMarkdown": "Kuona Trust was founded on 5 June 1995 at the National Museum of Kenya to serve visual artists. Its studios and workshops supported generations of Nairobi artists, including Paul Njihia, who joined in 2014.",
+   "sources": [
+    "https://www.mimeta.org/partners-of-mimeta/2024/6/11/kuona-trust-arts-collective",
+    "https://www.facebook.com/Kuonaartistscollective/posts/today-marks-30-years-since-kuona-was-founded-on-june-5th-1995-over-the-decades-c/1295105165325613/",
+    "https://www.ncai254.com/commonground"
+   ]
+  },
+  {
+   "year": 2003,
+   "title": "The GoDown Arts Centre established",
+   "descriptionMarkdown": "The GoDown Arts Centre opened in 2003 in a former car repair warehouse in Nairobi's Industrial Area. It is a multidisciplinary home for visual arts, music and theatre.",
+   "sources": [
+    "https://thegodown.org/",
+    "https://museums.co.ke/the-godown-arts-centre/"
+   ]
+  },
+  {
+   "year": 2012,
+   "title": "Circle Art Gallery founded",
+   "descriptionMarkdown": "Circle Art Gallery was founded in 2012 to create a strong and sustainable art market for East African artists. It is now one of Nairobi's leading contemporary art galleries.",
+   "sources": [
+    "https://www.artsy.net/partner/circle-art-gallery",
+    "https://museums.co.ke/circle-art-gallery/"
+   ]
+  },
+  {
+   "year": 2020,
+   "title": "Nairobi Contemporary Art Institute established",
+   "descriptionMarkdown": "NCAI was established in 2020 as a non-profit visual art space dedicated to the growth and preservation of contemporary art in East Africa. It builds on the legacy of earlier art projects and institutions in the region and is developing an art library and archive.",
+   "sources": [
+    "https://www.ncai254.com/about"
+   ]
+  },
+  {
+   "year": 2022,
+   "title": "I Hope So: Sane Wadu retrospective",
+   "descriptionMarkdown": "NCAI presented I Hope So, an overview of Sane Wadu's oeuvre in drawings, paintings and prints, from 14 January to 6 August 2022. The retrospective traced decades of his observations on religion, spirituality, gender and politics in Kenyan society.",
+   "sources": [
+    "https://www.ncai254.com/exhibition-i-hope-so-sane-wadu"
+   ]
+  },
+  {
+   "year": 2022,
+   "title": "Mwili, Akili na Roho: Ten Figurative Painters from East Africa",
+   "descriptionMarkdown": "From 27 October 2022 to 28 January 2023 NCAI showed ten figurative painters from East Africa, including Sam Joseph Ntiro, Elimo Njau and Sane Wadu. The exhibition placed Makerere-trained modernists alongside Ngecha-linked and later painters.",
+   "sources": [
+    "https://www.ncai254.com/exhibition-mwili-akili-na-roho"
+   ]
+  },
+  {
+   "year": 2024,
+   "title": "60 Years: the NCAI Collection",
+   "descriptionMarkdown": "From 10 August to 14 September 2024 NCAI presented a selection of artworks from its collection spanning six decades of East African art. The exhibition showed how the institute has been building a permanent collection of the region's artistic heritage.",
+   "sources": [
+    "https://www.ncai254.com/60years-ncaicollection"
+   ]
+  },
+  {
+   "year": 2026,
+   "title": "NCAI at the 61st Venice Biennale",
+   "descriptionMarkdown": "NCAI was included in the 2026 Venice Biennale (In Minor Keys), which ran from 9 May to 22 November 2026. It showed eight paintings from the NCAI Collection made between 1950 and 1984 by Makerere-trained artists, with portrait films of Asaph Ng'ethe Macua and Elimo Njau.",
+   "sources": [
+    "https://universes.art/en/venice-biennale/2026/in-minor-keys-tour-2/nairobi-contemporary-art-institute",
+    "https://www.davidzwirner.com/news/2026/michael-armitage-s-foundation-included-in-the-2026-venice-biennale",
+    "https://www.facebook.com/ncai254/posts/the-nairobi-contemporary-art-institute-ncai-is-participating-in-the-biennale-art/976158311838123/"
+   ]
+  }
+ ],
+ "programs": [
+  {
+   "slug": "ujuzi",
+   "title": "UJUZI",
+   "programType": "Course",
+   "audience": "ujuzi",
+   "descriptionMarkdown": "UJUZI is a collaboratively produced alternative learning program for East African artists. UJUZI adopts a holistic approach to artistic education encompassing creative research methodologies and contextual thinking to develop conceptual and aesthetic rigour.\n\nThe program is delivered through a partnership between the Nairobi Contemporary Art Institute and Untethered Magic.\n\n[Visit UJUZI website](https://ujuzi.ke/)",
+   "excerpt": "An alternative learning program for East African artists, delivered with Untethered Magic.",
+   "imageUrl": null,
+   "sourceUrl": "https://www.ncai254.com/ujuzi"
+  },
+  {
+   "slug": "turn2",
+   "title": "TURN2 Curatorial Research Residencies",
+   "programType": "Other",
+   "audience": "adults",
+   "descriptionMarkdown": "NCAI is excited to announce the three recipients of the TURN 2 residency award in Nairobi: Jumoke Adeyanju, Nathalie Anguezomo Mba Bikoro, and Kathy Ann Tan, who will be joining us between March and December of 2022.\n\nThe German Federal Cultural Foundation in partnership with the Centre for Arts and Urbanistics (ZK/U) and the Triangle Network, has launched the TURN2 - Curatorial Research Residencies in Berlin at ZK/U, Johannesburg at the BagFactory, Lagos at Gas Foundation and in Nairobi at NCAI. This programme aims to facilitate research for curators and cultural practitioners to foster working relationships and sustainable networks between emerging curators and established art and cultural institutions, as well as the exchange between the different art scenes.",
+   "excerpt": "Curatorial research residency (April-July 2022) hosted at NCAI for Jumoke Adeyanju, Nathalie Anguezomo Mba Bikoro and Kathy Ann Tan.",
+   "imageUrl": "https://static.wixstatic.com/media/262c9a_457050fcbf844e04bdf204a674ba104b~mv2.jpg",
+   "sourceUrl": "https://www.ncai254.com/turn2"
+  },
+  {
+   "slug": "the-gathering",
+   "title": "The Gathering",
+   "programType": "Other",
+   "audience": "adults",
+   "descriptionMarkdown": "The Gathering seeks to assemble artists from Africa and its diaspora with the purpose of enabling critical cross-border conversations. The inaugural Gathering saw 52 artists and art practitioners from 12 countries come together in a three day retreat in Naivasha, Kenya. In future, we aim to grow the number of artists invited and initiate a platform that can feasibly rotate in location.\n\nThe Gathering takes the form of a two to three-day symposium, presenting matters of concern to African artists.\n\nThe platform offers space for artists to interrogate and engage with the relevance of their positionality in relation to the continent. The space continues to offer practicing artists a platform to engage with each other across generations and borders. Moreover, The Gathering provides African artists a chance to interact with each other outside of an institutional context. Convened to strengthen collectivity, the Gathering was begun with the aim of fostering artist-oriented networks of support and continues to do so.\n\nThe Gathering is a space that allows artists to further reflect on their work and practice in relation to their communities and to other communities of artists across the continent. With each iteration, the Gathering continues to seek to inspire intellectual rigour and dynamism amongst African artists.",
+   "excerpt": "A two to three-day artists' symposium bringing together artists from Africa and its diaspora; the inaugural edition gathered 52 practitioners from 12 countries in Naivasha.",
+   "imageUrl": "https://static.wixstatic.com/media/19903f_1f19a4ca2d444e81863197383475eaa6~mv2.jpg",
+   "sourceUrl": "https://www.ncai254.com/the-gathering"
+  },
+  {
+   "slug": "offsite",
+   "title": "NCAI Offsite Projects",
+   "programType": "Other",
+   "audience": "all",
+   "descriptionMarkdown": "NCAI OFF SITE is a platform designed to facilitate collaboration with our partners to host exhibitions, screenings, talks and residencies beyond our gallery walls.\n\nNCAI is part of the Triangle Network of international arts organisation that supports artistic exchanges, residencies and knowledge sharing worldwide. Through our network of partners NCAI OFFSITE will offer residencies to both local and international artists in Kenya.\n\nNCAI will host future editions of the Gathering. The Gathering is an artist's forum that offers African artists and art practitioners (local and diaspora) a chance to interact with each other outside of an institutional or commercial context.",
+   "excerpt": "A platform for exhibitions, screenings, talks and residencies with partners beyond NCAI's gallery walls.",
+   "imageUrl": "https://static.wixstatic.com/media/262c9a_ae48b52721674b95b44ba20f10f7a933~mv2.jpg",
+   "sourceUrl": "https://www.ncai254.com/offsite"
+  },
+  {
+   "slug": "education-outreach",
+   "title": "Education Outreach",
+   "programType": "Other",
+   "audience": "all",
+   "descriptionMarkdown": "We are passionate about bringing contemporary art closer to students, educators, and communities across East Africa. Explore our engaging programs, designed to inspire curiosity, creativity, and critical thinking through art.\n\nAt NCAI, we believe in the transformative power of art in education and community building. Through our Educational Outreach Program, we aim to make contemporary art accessible to everyone by offering:\n\n- Interactive Gallery Tours: Tailored for school and community groups, offering in-depth exploration of contemporary art.\n- Educational Workbooks: Age-appropriate resources designed to spark discussions and creative activities.\n- Workshops: Interactive sessions focusing on creativity, art-making, and critical thinking.\n- Beyond-the-Gallery Programs: Collaborations with children’s art clubs, art centres, and community engagement initiatives to expand our impact beyond NCAI’s walls.",
+   "excerpt": "Gallery tours, workbooks and workshops that bring contemporary art to students, educators and communities.",
+   "imageUrl": "https://static.wixstatic.com/media/7b6770_30a1f4126c6841ce8850c7acc078dba8~mv2.jpg",
+   "sourceUrl": "https://www.ncai254.com/educationaloutreach"
+  },
+  {
+   "slug": "residency",
+   "title": "Residencies",
+   "programType": "Other",
+   "audience": "adults",
+   "descriptionMarkdown": "Through our network of partners, NCAI offers residencies to both local and international artists in Kenya.\n\nNCAI is part of a larger network of international art organizations which support artistic exchanges, residencies and knowledge sharing worldwide. Being part of the [Triangle Network](https://www.trianglenetwork.org/) allows NCAI's reach to go beyond Kenya accessing a rich network of resources.\n\nThese residencies provide artists with the opportunity to immerse themselves in the local art scene, engage with the community, and develop their artistic practice.",
+   "excerpt": "Residencies for local and international artists in Kenya through NCAI's partner network, including TURN2 and UJUZI.",
+   "imageUrl": "https://static.wixstatic.com/media/7b6770_0245ca777f284585abdd70c47c5f0cdb~mv2.jpg",
+   "sourceUrl": "https://www.ncai254.com/residency"
+  }
+ ],
+ "mockPrograms": [
+  "0b303018-fd6d-4343-9b8e-c2c72f5b1b94",
+  "5286ab08-e684-499b-99a8-c25390215b33",
+  "a5e1f3b9-c56e-45c4-943e-ea5a8b4eba9a",
+  "c13ed460-05cd-4572-bb1b-34b0db14016e"
+ ],
+ "likelyMockPrograms": {
+  "note": "Not on the client's Wix site and generic placeholder copy with 2026 dates; not verified as real. Hide/unpublish for the demo unless the client confirms.",
+  "ids": [
+   "0b303018-fd6d-4343-9b8e-c2c72f5b1b94",
+   "5286ab08-e684-499b-99a8-c25390215b33",
+   "a5e1f3b9-c56e-45c4-943e-ea5a8b4eba9a"
+  ]
+ },
+ "notes": [
+  "Resounding Rhizomes (Leo Asemota, Rehema Chachage, Jim Chuchu, Letaru Dralega, Fabiana Ex-Souza, Em'kal Eyongakpa, Linda Lamignan, Maggie Otieno), Between Signals (16 artists) and Paths of Desire (Kabi Kimari): none of these artists exist in the Sanity artists collection, so no exhibitionArtists entries.",
+  "Eltayeb Dawelbait & Immy Mali: Sanity description is already populated and matches Wix; only mainImage added. Wix dates (8 Sep-8 Oct 2022) differ from Sanity (14 Jan-6 Aug 2022).",
+  "Kuona Trust, Gallery Watatu, Paa ya Paa years come from secondary sources (blog/Facebook/Mimeta); Chemchemi 1963 per NCAI page and Wikipedia."
+ ]
+}

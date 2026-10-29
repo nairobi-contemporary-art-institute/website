@@ -1,0 +1,1003 @@
+[
+  {
+    "at": "2026-10-29T12:34:59.818Z",
+    "action": "repoint",
+    "id": "6fZih3WFD2heuKkIkZb34C",
+    "type": "work",
+    "note": "q1ZGjvWodBtgwLMouTwrh7 → HSGS2Q2gODgEBcEO5BRYca"
+  },
+  {
+    "at": "2026-10-29T12:34:59.818Z",
+    "action": "rename",
+    "id": "HSGS2Q2gODgEBcEO5BRYca",
+    "type": "artist",
+    "note": "Godfrey Banadda"
+  },
+  {
+    "at": "2026-10-29T12:35:00.874Z",
+    "action": "delete",
+    "id": "q1ZGjvWodBtgwLMouTwrh7",
+    "type": "artist",
+    "note": "merged into HSGS2Q2gODgEBcEO5BRYca"
+  },
+  {
+    "at": "2026-10-29T12:35:00.959Z",
+    "action": "repoint",
+    "id": "J8bUuVdLTgk7BYxDfyGg85",
+    "type": "work",
+    "note": "44GKG42L9vsYQRMOxKAubw → 8df917c2-a3b9-4eef-9ea3-eecacde0eab1"
+  },
+  {
+    "at": "2026-10-29T12:35:01.970Z",
+    "action": "delete",
+    "id": "44GKG42L9vsYQRMOxKAubw",
+    "type": "artist",
+    "note": "merged into 8df917c2-a3b9-4eef-9ea3-eecacde0eab1"
+  },
+  {
+    "at": "2026-10-29T12:35:02.068Z",
+    "action": "repoint",
+    "id": "44GKG42L9vsYQRMOxJy8Ij",
+    "type": "work",
+    "note": "g1ZmKN4M24s3sGbBtMde9A → 9e00e16f-10ce-4d66-90b2-af37fab24db9"
+  },
+  {
+    "at": "2026-10-29T12:35:02.068Z",
+    "action": "repoint",
+    "id": "J8bUuVdLTgk7BYxDfy5dcf",
+    "type": "work",
+    "note": "g1ZmKN4M24s3sGbBtMde9A → 9e00e16f-10ce-4d66-90b2-af37fab24db9"
+  },
+  {
+    "at": "2026-10-29T12:35:02.068Z",
+    "action": "repoint",
+    "id": "J8bUuVdLTgk7BYxDfy5f6Z",
+    "type": "work",
+    "note": "g1ZmKN4M24s3sGbBtMde9A → 9e00e16f-10ce-4d66-90b2-af37fab24db9"
+  },
+  {
+    "at": "2026-10-29T12:35:02.068Z",
+    "action": "repoint",
+    "id": "g1ZmKN4M24s3sGbBtMdegv",
+    "type": "work",
+    "note": "g1ZmKN4M24s3sGbBtMde9A → 9e00e16f-10ce-4d66-90b2-af37fab24db9"
+  },
+  {
+    "at": "2026-10-29T12:35:03.030Z",
+    "action": "delete",
+    "id": "g1ZmKN4M24s3sGbBtMde9A",
+    "type": "artist",
+    "note": "merged into 9e00e16f-10ce-4d66-90b2-af37fab24db9"
+  },
+  {
+    "at": "2026-10-29T12:35:04.085Z",
+    "action": "rename",
+    "id": "g1ZmKN4M24s3sGbBtMcrJD",
+    "type": "artist",
+    "note": "Chemu Ng'ok"
+  },
+  {
+    "at": "2026-10-29T12:35:04.285Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxJyYaq",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.285Z",
+    "action": "patch",
+    "id": "mg2pWkoVlcJRqpFC3I1r0h",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.285Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxJvcwV",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.285Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxJvNbq",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.285Z",
+    "action": "patch",
+    "id": "g1ZmKN4M24s3sGbBtMl9zO",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.285Z",
+    "action": "patch",
+    "id": "J8bUuVdLTgk7BYxDfxygTF",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.285Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxKBViw",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.285Z",
+    "action": "patch",
+    "id": "g1ZmKN4M24s3sGbBtMriuP",
+    "type": "artist",
+    "note": "bio+longBio+image (medium)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.286Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxKAwxX",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.286Z",
+    "action": "patch",
+    "id": "J8bUuVdLTgk7BYxDfy3fzd",
+    "type": "artist",
+    "note": "bio+longBio+image (medium)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.286Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxJpS1f",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.286Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxJxHX5",
+    "type": "artist",
+    "note": "bio+longBio+image (medium)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.286Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxK8h7O",
+    "type": "artist",
+    "note": "bio+longBio+image (medium)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.286Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxKBSDy",
+    "type": "artist",
+    "note": "bio+longBio+image (medium)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.286Z",
+    "action": "patch",
+    "id": "6fZih3WFD2heuKkIkZZQW4",
+    "type": "artist",
+    "note": "bio+longBio+image (medium)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.286Z",
+    "action": "patch",
+    "id": "HSGS2Q2gODgEBcEO5BRYca",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.286Z",
+    "action": "patch",
+    "id": "J8bUuVdLTgk7BYxDfy2TJh",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.286Z",
+    "action": "patch",
+    "id": "J8bUuVdLTgk7BYxDfy5kQv",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.286Z",
+    "action": "patch",
+    "id": "g1ZmKN4M24s3sGbBtMcojE",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.286Z",
+    "action": "patch",
+    "id": "g1ZmKN4M24s3sGbBtMe5g9",
+    "type": "artist",
+    "note": "bio+longBio+image (low)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.286Z",
+    "action": "patch",
+    "id": "g1ZmKN4M24s3sGbBtMrhxh",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.286Z",
+    "action": "patch",
+    "id": "mg2pWkoVlcJRqpFC3I1uD5",
+    "type": "artist",
+    "note": "bio+longBio+image (medium)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.286Z",
+    "action": "patch",
+    "id": "HSGS2Q2gODgEBcEO5BRYca",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.286Z",
+    "action": "patch",
+    "id": "g1ZmKN4M24s3sGbBtMjwc6",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:04.286Z",
+    "action": "patch",
+    "id": "mg2pWkoVlcJRqpFC3I48rr",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.036Z",
+    "action": "patch",
+    "id": "HSGS2Q2gODgEBcEO5BOaQC",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.036Z",
+    "action": "patch",
+    "id": "6fZih3WFD2heuKkIkZZDdc",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.036Z",
+    "action": "patch",
+    "id": "g1ZmKN4M24s3sGbBtMcxPt",
+    "type": "artist",
+    "note": "bio+longBio+image (medium)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.036Z",
+    "action": "patch",
+    "id": "g1ZmKN4M24s3sGbBtMc3fM",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.036Z",
+    "action": "patch",
+    "id": "6fZih3WFD2heuKkIkZZ0JU",
+    "type": "artist",
+    "note": "bio+longBio+image (medium)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.037Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxJpOLH",
+    "type": "artist",
+    "note": "bio+longBio+image (medium)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.037Z",
+    "action": "patch",
+    "id": "J8bUuVdLTgk7BYxDfy2K3v",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.037Z",
+    "action": "patch",
+    "id": "J8bUuVdLTgk7BYxDfyT55V",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.037Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxJuFIV",
+    "type": "artist",
+    "note": "bio+longBio+image (low)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.037Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxJxIPK",
+    "type": "artist",
+    "note": "bio+longBio+image (low)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.037Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxKS77i",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.037Z",
+    "action": "patch",
+    "id": "6fZih3WFD2heuKkIkZb7Rw",
+    "type": "artist",
+    "note": "bio+longBio+image (medium)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.038Z",
+    "action": "patch",
+    "id": "HSGS2Q2gODgEBcEO5BRrzk",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.038Z",
+    "action": "patch",
+    "id": "J8bUuVdLTgk7BYxDfy2ZqZ",
+    "type": "artist",
+    "note": "bio+longBio+image (medium)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.038Z",
+    "action": "patch",
+    "id": "J8bUuVdLTgk7BYxDfyVTxZ",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.038Z",
+    "action": "patch",
+    "id": "g1ZmKN4M24s3sGbBtMcp2J",
+    "type": "artist",
+    "note": "bio+longBio+image (low)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.039Z",
+    "action": "patch",
+    "id": "g1ZmKN4M24s3sGbBtMl2nC",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.039Z",
+    "action": "patch",
+    "id": "g1ZmKN4M24s3sGbBtMtBeG",
+    "type": "artist",
+    "note": "bio+longBio+image (low)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.039Z",
+    "action": "patch",
+    "id": "mg2pWkoVlcJRqpFC3I3mf3",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.039Z",
+    "action": "patch",
+    "id": "34756a03-e040-4cec-b4fa-5b2b591b2e9a",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.039Z",
+    "action": "patch",
+    "id": "J8bUuVdLTgk7BYxDfy2jDn",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.040Z",
+    "action": "patch",
+    "id": "HSGS2Q2gODgEBcEO5BJn3g",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.040Z",
+    "action": "patch",
+    "id": "HSGS2Q2gODgEBcEO5BJd2W",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.040Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxJyEC9",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.040Z",
+    "action": "patch",
+    "id": "g1ZmKN4M24s3sGbBtMcj1V",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.538Z",
+    "action": "patch",
+    "id": "J8bUuVdLTgk7BYxDfyT8Zb",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.538Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxJvAlL",
+    "type": "artist",
+    "note": "bio+longBio+image (medium)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.538Z",
+    "action": "patch",
+    "id": "J8bUuVdLTgk7BYxDfy2Tzv",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.538Z",
+    "action": "patch",
+    "id": "mg2pWkoVlcJRqpFC3I2hq4",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.539Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxJvWUp",
+    "type": "artist",
+    "note": "bio+longBio+image (low)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.539Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxJyC7g",
+    "type": "artist",
+    "note": "bio+longBio+image (medium)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.539Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxKAwMQ",
+    "type": "artist",
+    "note": "bio+longBio+image (low)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.539Z",
+    "action": "patch",
+    "id": "6fZih3WFD2heuKkIkZZD4O",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.539Z",
+    "action": "patch",
+    "id": "6fZih3WFD2heuKkIkZbQ6W",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.539Z",
+    "action": "patch",
+    "id": "J8bUuVdLTgk7BYxDfxyoA9",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.539Z",
+    "action": "patch",
+    "id": "J8bUuVdLTgk7BYxDfy3dLh",
+    "type": "artist",
+    "note": "bio+longBio+image (medium)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.539Z",
+    "action": "patch",
+    "id": "g1ZmKN4M24s3sGbBtMa5bg",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.539Z",
+    "action": "patch",
+    "id": "g1ZmKN4M24s3sGbBtMcrJD",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.539Z",
+    "action": "patch",
+    "id": "g1ZmKN4M24s3sGbBtMl9ki",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.539Z",
+    "action": "patch",
+    "id": "mg2pWkoVlcJRqpFC3I1jPC",
+    "type": "artist",
+    "note": "bio+longBio+image (low)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.539Z",
+    "action": "patch",
+    "id": "mg2pWkoVlcJRqpFC3I3po8",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.539Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxJpzry",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.539Z",
+    "action": "patch",
+    "id": "g1ZmKN4M24s3sGbBtMeAyv",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.539Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxJuv0z",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.539Z",
+    "action": "patch",
+    "id": "J8bUuVdLTgk7BYxDfyVVgN",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.539Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxKRohm",
+    "type": "artist",
+    "note": "bio+longBio+image (medium)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.539Z",
+    "action": "patch",
+    "id": "g1ZmKN4M24s3sGbBtMcAR8",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.539Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxJvDWd",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.539Z",
+    "action": "patch",
+    "id": "J8bUuVdLTgk7BYxDfy2aqf",
+    "type": "artist",
+    "note": "bio+longBio+image (medium)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.539Z",
+    "action": "patch",
+    "id": "mg2pWkoVlcJRqpFC3I3q40",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.965Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxJvbvh",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.971Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxJyDJu",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.972Z",
+    "action": "patch",
+    "id": "44GKG42L9vsYQRMOxKAy43",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.972Z",
+    "action": "patch",
+    "id": "6fZih3WFD2heuKkIkZZDKK",
+    "type": "artist",
+    "note": "bio+longBio+image (medium)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.972Z",
+    "action": "patch",
+    "id": "HSGS2Q2gODgEBcEO5BJWOu",
+    "type": "artist",
+    "note": "bio+longBio+image (low)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.972Z",
+    "action": "patch",
+    "id": "J8bUuVdLTgk7BYxDfxypbZ",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.973Z",
+    "action": "patch",
+    "id": "J8bUuVdLTgk7BYxDfy3fLt",
+    "type": "artist",
+    "note": "bio+longBio+image (medium)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.974Z",
+    "action": "patch",
+    "id": "g1ZmKN4M24s3sGbBtMcH5Z",
+    "type": "artist",
+    "note": "bio+longBio+image (low)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.976Z",
+    "action": "patch",
+    "id": "g1ZmKN4M24s3sGbBtMe5EG",
+    "type": "artist",
+    "note": "bio+longBio+image (medium)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.976Z",
+    "action": "patch",
+    "id": "g1ZmKN4M24s3sGbBtMlONm",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.976Z",
+    "action": "patch",
+    "id": "mg2pWkoVlcJRqpFC3I1kCn",
+    "type": "artist",
+    "note": "bio+longBio+image (low)"
+  },
+  {
+    "at": "2026-10-29T12:35:05.976Z",
+    "action": "patch",
+    "id": "mg2pWkoVlcJRqpFC3I3sVR",
+    "type": "artist",
+    "note": "bio+longBio+image (high)"
+  },
+  {
+    "at": "2026-10-29T12:41:16.899Z",
+    "action": "patch",
+    "id": "140ee65e-4ef5-4114-bfbc-0b80335c952a",
+    "type": "exhibition",
+    "note": "+2 artists"
+  },
+  {
+    "at": "2026-10-29T12:41:16.900Z",
+    "action": "patch",
+    "id": "4e76056f-abdc-4f49-82f9-c1605ad15c65",
+    "type": "exhibition",
+    "note": "+3 artists"
+  },
+  {
+    "at": "2026-10-29T12:41:16.900Z",
+    "action": "patch",
+    "id": "exhibition-michael-maria-c",
+    "type": "exhibition",
+    "note": "+3 artists"
+  },
+  {
+    "at": "2026-10-29T12:41:16.900Z",
+    "action": "patch",
+    "id": "exhibitionbreakingbread",
+    "type": "exhibition",
+    "note": "+21 artists"
+  },
+  {
+    "at": "2026-10-29T12:41:16.900Z",
+    "action": "patch",
+    "id": "exhibitioncanongriffinrumanzi",
+    "type": "exhibition",
+    "note": "+1 artists"
+  },
+  {
+    "at": "2026-10-29T12:41:16.900Z",
+    "action": "patch",
+    "id": "exhibitionpetersonkamwathi",
+    "type": "exhibition",
+    "note": "+1 artists"
+  },
+  {
+    "at": "2026-10-29T12:41:16.900Z",
+    "action": "patch",
+    "id": "ncaiinvenice",
+    "type": "exhibition",
+    "note": "+8 artists"
+  },
+  {
+    "at": "2026-10-29T12:41:16.900Z",
+    "action": "patch",
+    "id": "walkingonadream",
+    "type": "exhibition",
+    "note": "+2 artists"
+  },
+  {
+    "at": "2026-10-29T12:41:16.900Z",
+    "action": "patch",
+    "id": "wayfinder",
+    "type": "exhibition",
+    "note": "+1 artists"
+  },
+  {
+    "at": "2026-10-29T12:42:53.175Z",
+    "action": "patch",
+    "id": "140ee65e-4ef5-4114-bfbc-0b80335c952a",
+    "type": "exhibition",
+    "note": "mainImage"
+  },
+  {
+    "at": "2026-10-29T12:42:53.726Z",
+    "action": "delete",
+    "id": "sample-text-artist-writing",
+    "type": "textPiece",
+    "note": "placeholder sample"
+  },
+  {
+    "at": "2026-10-29T12:42:53.726Z",
+    "action": "delete",
+    "id": "sample-text-essay",
+    "type": "textPiece",
+    "note": "placeholder sample"
+  },
+  {
+    "at": "2026-10-29T12:42:53.726Z",
+    "action": "delete",
+    "id": "sample-text-interview",
+    "type": "textPiece",
+    "note": "placeholder sample"
+  },
+  {
+    "at": "2026-10-29T12:42:53.727Z",
+    "action": "upsert",
+    "id": "textPiece-women-sculptors-in-east-africa",
+    "type": "textPiece",
+    "note": "essay · 3a/4x"
+  },
+  {
+    "at": "2026-10-29T12:42:53.727Z",
+    "action": "upsert",
+    "id": "textPiece-sane-wadu-and-kenyas-self-taught-painters",
+    "type": "textPiece",
+    "note": "essay · 3a/3x"
+  },
+  {
+    "at": "2026-10-29T12:42:53.728Z",
+    "action": "upsert",
+    "id": "textPiece-why-an-archive",
+    "type": "textPiece",
+    "note": "essay · 4a/2x"
+  },
+  {
+    "at": "2026-10-29T12:42:53.728Z",
+    "action": "upsert",
+    "id": "textPiece-armitage-and-van-rampelberg-in-conversation",
+    "type": "textPiece",
+    "note": "conversation · 2a/1x"
+  },
+  {
+    "at": "2026-10-29T12:42:53.728Z",
+    "action": "upsert",
+    "id": "textPiece-rumanzi-and-mukholi-in-conversation",
+    "type": "textPiece",
+    "note": "conversation · 1a/1x"
+  },
+  {
+    "at": "2026-10-29T12:42:54.228Z",
+    "action": "upsert",
+    "id": "timelineEvent-1937-makerere-art-school-founded-in-kampala",
+    "type": "timelineEvent",
+    "note": "2 sources"
+  },
+  {
+    "at": "2026-10-29T12:42:54.228Z",
+    "action": "upsert",
+    "id": "timelineEvent-1963-chemchemi-creative-centre-opens-in-nairo",
+    "type": "timelineEvent",
+    "note": "2 sources"
+  },
+  {
+    "at": "2026-10-29T12:42:54.228Z",
+    "action": "upsert",
+    "id": "timelineEvent-1965-paa-ya-paa-opens-on-koinange-street",
+    "type": "timelineEvent",
+    "note": "2 sources"
+  },
+  {
+    "at": "2026-10-29T12:42:54.228Z",
+    "action": "upsert",
+    "id": "timelineEvent-1969-gallery-watatu-founded",
+    "type": "timelineEvent",
+    "note": "2 sources"
+  },
+  {
+    "at": "2026-10-29T12:42:54.228Z",
+    "action": "upsert",
+    "id": "timelineEvent-1995-kuona-trust-established",
+    "type": "timelineEvent",
+    "note": "3 sources"
+  },
+  {
+    "at": "2026-10-29T12:42:54.228Z",
+    "action": "upsert",
+    "id": "timelineEvent-2003-the-godown-arts-centre-established",
+    "type": "timelineEvent",
+    "note": "2 sources"
+  },
+  {
+    "at": "2026-10-29T12:42:54.228Z",
+    "action": "upsert",
+    "id": "timelineEvent-2012-circle-art-gallery-founded",
+    "type": "timelineEvent",
+    "note": "2 sources"
+  },
+  {
+    "at": "2026-10-29T12:42:54.228Z",
+    "action": "upsert",
+    "id": "timelineEvent-2020-nairobi-contemporary-art-institute-estab",
+    "type": "timelineEvent",
+    "note": "1 sources"
+  },
+  {
+    "at": "2026-10-29T12:42:54.228Z",
+    "action": "upsert",
+    "id": "timelineEvent-2022-i-hope-so-sane-wadu-retrospective",
+    "type": "timelineEvent",
+    "note": "1 sources"
+  },
+  {
+    "at": "2026-10-29T12:42:54.228Z",
+    "action": "upsert",
+    "id": "timelineEvent-2022-mwili-akili-na-roho-ten-figurative-paint",
+    "type": "timelineEvent",
+    "note": "1 sources"
+  },
+  {
+    "at": "2026-10-29T12:42:54.228Z",
+    "action": "upsert",
+    "id": "timelineEvent-2024-60-years-the-ncai-collection",
+    "type": "timelineEvent",
+    "note": "1 sources"
+  },
+  {
+    "at": "2026-10-29T12:42:54.228Z",
+    "action": "upsert",
+    "id": "timelineEvent-2026-ncai-at-the-61st-venice-biennale",
+    "type": "timelineEvent",
+    "note": "3 sources"
+  },
+  {
+    "at": "2026-10-29T12:42:54.228Z",
+    "action": "delete",
+    "id": "e1269d16-39ae-4e2c-94e5-038635875fff",
+    "type": "timelineEvent",
+    "note": "generic placeholder"
+  },
+  {
+    "at": "2026-10-29T12:42:54.228Z",
+    "action": "delete",
+    "id": "e85f7cc6-7de7-46c4-ac0c-d854c34c7f50",
+    "type": "timelineEvent",
+    "note": "generic placeholder"
+  },
+  {
+    "at": "2026-10-29T12:42:54.228Z",
+    "action": "delete",
+    "id": "ed7f43bf-8c2b-451a-94c7-dcd32137b144",
+    "type": "timelineEvent",
+    "note": "generic placeholder"
+  },
+  {
+    "at": "2026-10-29T12:42:54.228Z",
+    "action": "delete",
+    "id": "f996deef-3cd7-4bb9-8429-d7daffd294a2",
+    "type": "timelineEvent",
+    "note": "generic placeholder"
+  },
+  {
+    "at": "2026-10-29T12:42:54.438Z",
+    "action": "upsert",
+    "id": "program-ujuzi",
+    "type": "program",
+    "note": "https://www.ncai254.com/ujuzi"
+  },
+  {
+    "at": "2026-10-29T12:42:58.382Z",
+    "action": "upsert",
+    "id": "program-turn2",
+    "type": "program",
+    "note": "https://www.ncai254.com/turn2"
+  },
+  {
+    "at": "2026-10-29T12:43:06.719Z",
+    "action": "upsert",
+    "id": "program-the-gathering",
+    "type": "program",
+    "note": "https://www.ncai254.com/the-gathering"
+  },
+  {
+    "at": "2026-10-29T12:43:11.308Z",
+    "action": "upsert",
+    "id": "program-offsite",
+    "type": "program",
+    "note": "https://www.ncai254.com/offsite"
+  },
+  {
+    "at": "2026-10-29T12:43:12.809Z",
+    "action": "upsert",
+    "id": "program-education-outreach",
+    "type": "program",
+    "note": "https://www.ncai254.com/educationaloutreach"
+  },
+  {
+    "at": "2026-10-29T12:43:19.288Z",
+    "action": "upsert",
+    "id": "program-residency",
+    "type": "program",
+    "note": "https://www.ncai254.com/residency"
+  },
+  {
+    "at": "2026-10-29T12:43:19.288Z",
+    "action": "patch",
+    "id": "educationPage",
+    "type": "educationPage",
+    "note": "featuredPrograms → real programmes"
+  },
+  {
+    "at": "2026-10-29T12:43:20.702Z",
+    "action": "delete",
+    "id": "0b303018-fd6d-4343-9b8e-c2c72f5b1b94",
+    "type": "program",
+    "note": "mock/test data"
+  },
+  {
+    "at": "2026-10-29T12:43:21.760Z",
+    "action": "delete",
+    "id": "5286ab08-e684-499b-99a8-c25390215b33",
+    "type": "program",
+    "note": "mock/test data"
+  },
+  {
+    "at": "2026-10-29T12:43:22.825Z",
+    "action": "delete",
+    "id": "a5e1f3b9-c56e-45c4-943e-ea5a8b4eba9a",
+    "type": "program",
+    "note": "mock/test data"
+  },
+  {
+    "at": "2026-10-29T12:43:23.902Z",
+    "action": "delete",
+    "id": "c13ed460-05cd-4572-bb1b-34b0db14016e",
+    "type": "program",
+    "note": "mock/test data"
+  }
+]
