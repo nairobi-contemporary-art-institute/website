@@ -147,6 +147,11 @@ function deepReplaceRef(node, from, to) {
 async function stepMerges() {
     const merges = readJson('merges.json') || []
     for (const { keep, drop, name } of merges) {
+        if (!drop) {
+            if (APPLY) await client.patch(keep).set({ name: intl('String', name) }).commit()
+            log('rename', keep, 'artist', name)
+            continue
+        }
         const docs = await client.fetch('*[references($id)]', { id: drop })
         const tx = client.transaction()
         for (const doc of docs) {
@@ -159,13 +164,15 @@ async function stepMerges() {
             log('rename', keep, 'artist', name)
         }
         await commit(tx, `repoint ${docs.length} docs to ${keep}`)
-        if (APPLY) await client.delete(drop)
+        if (APPLY) await client.transaction().delete(drop).delete(`drafts.${drop}`).commit()
         log('delete', drop, 'artist', `merged into ${keep}`)
     }
 }
 
 async function stepBios() {
-    const bios = readBatches('bios-batch-')
+    // A merged-away artist's research lands on the record that was kept.
+    const alias = Object.fromEntries((readJson('merges.json') || []).filter((m) => m.drop).map((m) => [m.drop, m.keep]))
+    const bios = readBatches('bios-batch-').map((b) => ({ ...b, _id: alias[b._id] || b._id }))
     const artists = await client.fetch(
         `*[_type=="artist" && _id in $ids]{_id, "hasBio": defined(bio), "hasLong": defined(longBio), "hasImage": defined(image),
           "work": *[_type=="work" && references(^._id) && defined(image.asset)] | order(year desc)[0]{"title": title[0].value, year, "ref": image.asset._ref}}`,
