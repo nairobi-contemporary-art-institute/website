@@ -69,6 +69,25 @@ One strong lever per level (size, weight, or position). One primary action per v
 - Tabular figures (`font-variant-numeric: tabular-nums`) for dates, years, numbers.
 - Headings signal structure, not importance. Never skip heading levels.
 
+### Type scale
+
+Defined once in `src/app/globals.css` (`@theme`, Tailwind v4 `--text-*`), so the stock `text-*` utilities are the scale. No arbitrary `text-[Npx]`; 12px is the floor. Line heights sit on the 8px grid (4px half-steps below 16px).
+
+| Utility | Size / line | Role |
+|---|---|---|
+| `text-xs` | 12 / 16 | Labels, captions, metadata (uppercase labels take `tracking-widest`) |
+| `text-sm` | 14 / 20 | UI text, secondary copy |
+| `text-base` | 16 / 24 | Body |
+| `text-lg` | 18 / 28 | Lead / reading text |
+| `text-xl` | 20 / 32 | Standfirst, small headings |
+| `text-2xl` | 24 / 32 | h3 |
+| `text-3xl` | 32 / 40 | h2 |
+| `text-4xl` | 40 / 48 | h1 (mobile) |
+| `text-5xl` | 48 / 56 | h1 |
+| `text-6xl`–`text-9xl` | 64 · 80 · 96 · 128, set solid | Display only (heroes) |
+
+Tracking: `tracking-widest` (0.12em) for uppercase labels, `tracking-tight`/`tighter` for display. Display leading: `leading-display` (0.95). `scripts/codemod-type-scale.mjs` snaps stray arbitrary values back onto this scale.
+
 ## Reduction
 
 For each element ask: if I remove this, what do users lose? "Nothing" or "polish" = remove. "They won't understand X" = keep.

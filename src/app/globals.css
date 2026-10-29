@@ -59,31 +59,47 @@
   /* Omnibus: Serif is Sans in this system */
   --font-mono: var(--font-geist-mono), SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
 
-  /* Font Size Tokens (Rem-based) */
-  --font-size-4xl: 3rem;
-  /* 48px */
-  --font-size-3xl: 2.25rem;
-  /* 36px */
-  --font-size-2xl: 1.5rem;
-  /* 24px */
-  --font-size-xl: 1.25rem;
-  /* 20px */
-  --font-size-xl-high: 1.125rem;
-  --font-size-l: 1rem;
-  /* 16px */
-  --font-size-m: 0.875rem;
-  /* 14px */
-  --font-size-s: 0.75rem;
-  /* 12px */
+  /* Type scale — overrides Tailwind's text-* steps so every existing utility snaps to
+     one system. Sizes step 12·14·16·18·20·24·32·40·48·64·80·96·128; line heights sit
+     on the 8px grid (4px half-steps below 16px). Display steps (5xl+) set solid (1.0–1.1).
+     Use ≤5 steps per view. Table: docs/DESIGN_PRINCIPLES.md → Type scale. */
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base: 1rem;
+  --text-base--line-height: 1.5rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 2rem;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 2rem;
+  --text-3xl: 2rem;
+  --text-3xl--line-height: 2.5rem;
+  --text-4xl: 2.5rem;
+  --text-4xl--line-height: 3rem;
+  --text-5xl: 3rem;
+  --text-5xl--line-height: 3.5rem;
+  --text-6xl: 4rem;
+  --text-6xl--line-height: 4.5rem;
+  --text-7xl: 5rem;
+  --text-7xl--line-height: 5.5rem;
+  --text-8xl: 6rem;
+  --text-8xl--line-height: 6rem;
+  --text-9xl: 8rem;
+  --text-9xl--line-height: 8rem;
 
-  /* Line Height Tokens */
-  --line-height-4xl: 3.5rem;
-  --line-height-3xl: 3rem;
-  --line-height-2xl: 2.25rem;
-  --line-height-xl: 2rem;
-  --line-height-l: 1.5rem;
-  --line-height-m: 1.25rem;
-  --line-height-s: 1rem;
+  /* Tracking — one value per role. Uppercase labels: widest. Display: tighter. */
+  --tracking-tighter: -0.03em;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.04em;
+  --tracking-wider: 0.08em;
+  --tracking-widest: 0.12em;
+
+  /* Leading for display headlines set solid */
+  --leading-display: 0.95;
 
   /* Layout Spacing */
   --spacing-section-clamp: clamp(1rem, 0.75rem + 1vw, 1.5rem);
@@ -203,57 +219,50 @@ html {
   .text-heading-72 {
     font-size: 72px;
     line-height: 72px;
-    letter-spacing: -0.06em;
+    letter-spacing: var(--tracking-tighter);
     font-weight: 700;
-    text-transform: capitalize !important;
   }
 
   .text-heading-64 {
     font-size: 64px;
     line-height: 64px;
-    letter-spacing: -0.06em;
+    letter-spacing: var(--tracking-tighter);
     font-weight: 700;
-    text-transform: capitalize !important;
   }
 
   .text-heading-56 {
     font-size: 56px;
     line-height: 56px;
-    letter-spacing: -0.06em;
+    letter-spacing: var(--tracking-tighter);
     font-weight: 700;
-    text-transform: capitalize !important;
   }
 
   .text-heading-48 {
     font-size: 48px;
     line-height: 56px;
-    letter-spacing: -0.06em;
+    letter-spacing: var(--tracking-tighter);
     font-weight: 700;
-    text-transform: capitalize !important;
   }
 
   .text-heading-40 {
     font-size: 40px;
     line-height: 48px;
-    letter-spacing: -0.06em;
+    letter-spacing: var(--tracking-tighter);
     font-weight: 700;
-    text-transform: capitalize !important;
   }
 
   .text-heading-32 {
     font-size: 32px;
     line-height: 40px;
-    letter-spacing: -0.04em;
+    letter-spacing: var(--tracking-tight);
     font-weight: 700;
-    text-transform: capitalize !important;
   }
 
   .text-heading-24 {
     font-size: 24px;
     line-height: 32px;
-    letter-spacing: -0.04em;
+    letter-spacing: var(--tracking-tight);
     font-weight: 700;
-    text-transform: capitalize !important;
   }
 
   .text-copy-24 {
@@ -349,7 +358,7 @@ html {
   font-size: 14px;
   color: #fff;
   text-align: center;
-  padding: 10px 0;
+  padding: 8px 0;
 }
 
 .lg-sub-html .lg-caption .italic {
@@ -367,18 +376,12 @@ html {
     color: #fff;
     text-transform: uppercase;
     font-family: var(--font-inter), Helvetica, Arial, sans-serif;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.08em;
-    word-spacing: -0.05em;
     --cmplz-manage-consent-offset: -35px;
   }
 }
 
-::selection {
-  color: #fff;
-  text-shadow: none;
-  background: #333;
-}
 
 /* Horizontal carousel scrollbar: invisible until hover.
    Styling ::-webkit-scrollbar forces a non-overlay bar on macOS, so a
