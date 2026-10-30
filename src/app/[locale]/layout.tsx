@@ -77,13 +77,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       index: true,
       follow: true,
     },
-    icons: {
-      icon: [
-        { url: '/icon.png', type: 'image/png' },
-        { url: '/icon.svg', type: 'image/svg+xml' },
-      ],
-      apple: '/icon.png',
-    }
+    // Icons come from the file conventions in src/app: favicon.ico, icon.svg, apple-icon.png, manifest.ts
   };
 }
 
