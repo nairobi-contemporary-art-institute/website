@@ -41,7 +41,13 @@ Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Tailwind CSS v4 
 
 **Design principles.** UI follows Swiss-style rules in `docs/DESIGN_PRINCIPLES.md` (8px base, 12-col grid, one shared container, 3 hierarchy levels, Inter only, reduction first). Check new layouts against its review checklist; fix misalignment in the system (container/tokens), not with per-section nudges. See ADR 0005.
 
+**Homepage hero + Visit us.** Hero slides are Sanity content (`homePage.hero.slides[]`), not code: image, `layout` (`split-right` = image left / colour panel right), `gradientColor`, `forceBlackText` all live in the CMS, so changing a slide's colour or image is a Sanity patch (see `scripts/ingest-*-featured-image.mjs`, dry run by default), not a deploy. `HomeHeroNew.tsx` renders it with edge arrows and picks black/white arrow colour from the backdrop. The hero and `VisitUs.tsx` (hours from `siteSettings.hours`, Nairobi time) share the first viewport: hero is `flex-1`, the band sits at the bottom. Icons come from Next file conventions in `src/app/` (`favicon.ico` must have RGBA PNG layers, `icon.svg`, `apple-icon.png`, `manifest.ts`) — don't re-add manual `icons` metadata.
+
 **Redirects.** `/support` and `/membership` permanently redirect to `/get-involved` (in `next.config.ts`).
+
+## Git workflow
+
+`main` is protected (PR required, no force push or deletion; admins can bypass) and auto-deploys to Vercel. Work on a branch, run `npm run build`, open a PR, then merge. After changing Sanity content locally, restart `next dev` — fetched data is cached in memory.
 
 ## Agent skills
 
