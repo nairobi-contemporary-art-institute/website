@@ -108,6 +108,7 @@ export const EXHIBITION_BY_SLUG_QUERY = groq`
     },
     galleryLayout,
     mainImage {
+      alt,
       caption,
       asset-> { _id, metadata { lqip } }
     },
@@ -943,6 +944,7 @@ export const HOME_PAGE_QUERY = groq`
             _id,
             metadata {
               lqip,
+              palette { dominant { background } },
               dimensions { width, height, aspectRatio }
             }
           }
