@@ -175,7 +175,9 @@ export const textPiece = defineType({
             title: 'Lead image',
             type: 'image',
             group: 'image',
-            description: 'Shown at the top of the text and on listing cards. Use a large, high-quality file (2400px wide or more).',
+            description:
+                'Shown at the top of the text and on listing cards. Use a large, high-quality file (2400px wide or more). ' +
+                'TODO(confirm with NCAI): aspect ratio 4:3 or 3:2 crops best on cards, 300 DPI for print use, sRGB colour space, JPEG or PNG.',
             options: { hotspot: true },
             fields: [
                 defineField({
