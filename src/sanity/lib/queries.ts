@@ -217,7 +217,11 @@ export const ARTISTS_INDEX_QUERY = groq`
     tags[]-> {
         title,
         type
-    }
+    },
+    // Exhibited: a work flagged or linked to an NCAI exhibition, or the artist lists featured exhibitions.
+    "exhibited": count(featuredExhibitions) > 0 || count(*[_type == "work" && artist._ref == ^._id && (exhibitedAtNcai == true || count(exhibitions) > 0)]) > 0,
+    // In the collection: at least one work flagged inNcaiCollection.
+    "inCollection": count(*[_type == "work" && artist._ref == ^._id && inNcaiCollection == true]) > 0
   }
 `
 /**

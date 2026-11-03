@@ -118,6 +118,12 @@
             "title": "Artists",
             "description": "Directory of artists exhibited at NCAI.",
             "noArtists": "No artists found for this selection.",
+            "filterLabel": "Show artists",
+            "filter": {
+                "all": "All artists",
+                "exhibited": "Exhibited with NCAI",
+                "collection": "In the collection"
+            },
             "relatedTitle": "Artists with similar focus",
             "projectsTitle": "Recent, current and forthcoming projects",
             "newsTitle": "News & Resources",

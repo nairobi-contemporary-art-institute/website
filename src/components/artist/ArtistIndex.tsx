@@ -16,6 +16,7 @@ interface ArtistIndexProps {
 export function ArtistIndex({ artists, locale }: ArtistIndexProps) {
     const t = useTranslations('Pages.artists')
     const [activeLetter, setActiveLetter] = useState<string | null>(null)
+    const [scope, setScope] = useState<'all' | 'exhibited' | 'collection'>('all')
 
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
@@ -27,18 +28,42 @@ export function ArtistIndex({ artists, locale }: ArtistIndexProps) {
         })).sort((a, b) => a.displayName.localeCompare(b.displayName))
     }, [artists, locale])
 
+    const scopedArtists = useMemo(() => {
+        if (scope === 'exhibited') return processedArtists.filter(a => a.exhibited)
+        if (scope === 'collection') return processedArtists.filter(a => a.inCollection)
+        return processedArtists
+    }, [processedArtists, scope])
+
     const filteredArtists = useMemo(() => {
-        if (!activeLetter) return processedArtists
-        return processedArtists.filter(artist => artist.firstLetter === activeLetter)
-    }, [processedArtists, activeLetter])
+        if (!activeLetter) return scopedArtists
+        return scopedArtists.filter(artist => artist.firstLetter === activeLetter)
+    }, [scopedArtists, activeLetter])
 
     const lettersWithArtists = useMemo(() => {
-        const set = new Set(processedArtists.map(a => a.firstLetter))
+        const set = new Set(scopedArtists.map(a => a.firstLetter))
         return set
-    }, [processedArtists])
+    }, [scopedArtists])
 
     return (
         <div className="space-y-16">
+            {/* Scope filter: an artist can be in both */}
+            <div role="group" aria-label={t('filterLabel')} className="flex flex-wrap gap-6 text-sm font-bold">
+                {(['all', 'exhibited', 'collection'] as const).map(key => (
+                    <button
+                        key={key}
+                        type="button"
+                        aria-pressed={scope === key}
+                        onClick={() => { setScope(key); setActiveLetter(null) }}
+                        className={cn(
+                            "transition-colors underline-offset-8",
+                            scope === key ? "text-white underline" : "text-white/50 hover:text-white"
+                        )}
+                    >
+                        {t(`filter.${key}`)}
+                    </button>
+                ))}
+            </div>
+
             {/* A-Z Navigation */}
             <nav aria-label="Artist index" className="flex flex-wrap gap-4 border-b border-white/10 pb-12">
                 <button
