@@ -6,6 +6,9 @@ import { getLocalizedValue } from '@/sanity/lib/utils'
 import { isTextType } from '@/lib/texts'
 import { cn } from '@/lib/utils'
 
+/** Trial switch: grayscale list thumbnails (colour on hover). Flip to false to compare. */
+export const GRAYSCALE_THUMBNAILS = true
+
 export function formatTextDate(date: string | undefined, locale: string) {
     if (!date) return ''
     return new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(date))
@@ -64,7 +67,7 @@ export function TextCard({
             </div>
             <div className={cn('mt-6', feature && 'md:col-span-5 md:mt-0')}>
                 <p className="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-xs">
-                    {typeLabel && <span className="font-bold uppercase tracking-widest text-ochre-dark">{typeLabel}</span>}
+                    {typeLabel && <span className="font-bold text-ochre-dark">{typeLabel}</span>}
                     {text.publishedAt && (
                         <time dateTime={text.publishedAt} className="text-umber">
                             {formatTextDate(text.publishedAt, locale)}
@@ -86,6 +89,51 @@ export function TextCard({
                     </p>
                 )}
             </div>
+        </Link>
+    )
+}
+
+/** Compact list row: thumbnail, title, author, type and date. */
+export function TextRow({ text, locale }: { text: any; locale: string }) {
+    const t = useTranslations('Pages.texts')
+    if (!text?.slug) return null
+    const title = getLocalizedValue<string>(text.title, locale)
+    const authors = authorNames(text.authors, locale)
+    const typeLabel = isTextType(text.textType) ? t(`types.${text.textType}.singular`) : null
+    const image = text.leadImage?.asset ? text.leadImage : null
+
+    return (
+        <Link
+            href={`/texts/${text.slug}`}
+            className="group grid grid-cols-[96px_1fr] md:grid-cols-[128px_1fr_auto] gap-x-6 gap-y-1 items-center py-6 border-b border-charcoal/15"
+        >
+            <div className="relative aspect-[4/3] overflow-hidden bg-charcoal/5 row-span-2 md:row-span-1">
+                {image && (
+                    <Image
+                        src={urlFor(image).width(400).height(300).fit('crop').auto('format').url()}
+                        alt={image.alt || ''}
+                        fill
+                        sizes="128px"
+                        className={cn(
+                            'object-cover transition-[filter] duration-300',
+                            GRAYSCALE_THUMBNAILS && 'grayscale group-hover:grayscale-0'
+                        )}
+                    />
+                )}
+            </div>
+            <div>
+                <h2 className="text-lg md:text-xl font-bold leading-snug tracking-tight text-charcoal group-hover:underline underline-offset-4 decoration-1">
+                    {title}
+                </h2>
+                {authors && <p className="mt-1 text-sm text-umber">{authors}</p>}
+            </div>
+            <p className="col-start-2 md:col-start-3 text-xs text-umber md:text-end">
+                {typeLabel && <span className="font-bold">{typeLabel}</span>}
+                {typeLabel && text.publishedAt && ' · '}
+                {text.publishedAt && (
+                    <time dateTime={text.publishedAt}>{formatTextDate(text.publishedAt, locale)}</time>
+                )}
+            </p>
         </Link>
     )
 }
