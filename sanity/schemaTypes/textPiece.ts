@@ -177,7 +177,7 @@ export const textPiece = defineType({
             group: 'image',
             description:
                 'Shown at the top of the text and on listing cards. Use a large, high-quality file (2400px wide or more). ' +
-                'TODO(confirm with NCAI): aspect ratio 4:3 or 3:2 crops best on cards, 300 DPI for print use, sRGB colour space, JPEG or PNG.',
+                'Aspect ratio: landscape 4:3 (cards are cropped to 4:3, so keep the subject centred). Resolution: 300 DPI (72 is fine for screen only). Colour space: sRGB (convert CMYK or Adobe RGB files before upload). Format: JPEG or PNG.',
             options: { hotspot: true },
             fields: [
                 defineField({
