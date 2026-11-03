@@ -49,13 +49,13 @@
   --color-background-dark: #1C1C1C;
   --color-foreground: var(--color-charcoal);
 
-  /* Typography - Inter (self-hosted, OFL). Helvetica-adjacent grotesque; free to serve live. */
-  --font-inter-stack: var(--font-inter), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* Typography - Geist (OFL, via the `geist` package). Replaces Helvetica, which needs its own licence off Squarespace. */
+  --font-geist: var(--font-geist-sans), "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-noto: var(--font-noto-arabic), var(--font-noto-hindi), var(--font-noto-ethiopic);
 
   /* Unified Font System */
-  --font-sans: var(--font-inter-stack), var(--font-noto), sans-serif;
-  --font-serif: var(--font-inter-stack), var(--font-noto), serif;
+  --font-sans: var(--font-geist), var(--font-noto), sans-serif;
+  --font-serif: var(--font-geist), var(--font-noto), serif;
   /* Omnibus: Serif is Sans in this system */
   --font-mono: var(--font-geist-mono), SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
 
@@ -375,7 +375,7 @@ html {
     word-spacing: -0.05em;
     color: #fff;
     text-transform: uppercase;
-    font-family: var(--font-inter), Helvetica, Arial, sans-serif;
+    font-family: var(--font-geist-sans), Helvetica, Arial, sans-serif;
     font-weight: 700;
     letter-spacing: 0.08em;
     --cmplz-manage-consent-offset: -35px;
