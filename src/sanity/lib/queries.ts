@@ -13,6 +13,8 @@ const TEXT_CARD_PROJECTION = `
     publishedAt,
     standfirst,
     "authors": authors[]->{ _id, _type, name, "slug": slug.current, hasProfile },
+    "pdfUrl": pdf.asset->url,
+    "event": relatedEvent->{ "slug": slug.current },
     leadImage {
         alt,
         caption,
