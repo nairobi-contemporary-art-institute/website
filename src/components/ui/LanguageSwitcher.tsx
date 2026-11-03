@@ -5,6 +5,7 @@ import { useLocale } from 'next-intl'
 import { usePathname, useRouter, languages } from '@/i18n'
 import { cn } from '@/lib/utils'
 import { motion, AnimatePresence } from 'framer-motion'
+import { SHOW_LANGUAGE_SWITCHER } from '@/lib/flags'
 
 /**
  * Translation symbol provided by user.
@@ -51,6 +52,8 @@ export function LanguageSwitcher() {
         document.addEventListener('mousedown', handleClickOutside)
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [])
+
+    if (!SHOW_LANGUAGE_SWITCHER) return null
 
     return (
         <div 

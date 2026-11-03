@@ -11,6 +11,7 @@ import { MuseumResultRow } from "@/components/ui/MuseumResultRow"
 import { MuseumCardData } from "@/lib/types/museum-card"
 import { getLocalizedValue } from "@/sanity/lib/utils"
 import { cn } from "@/lib/utils"
+import { ARCHIVE_CAROUSEL } from '@/lib/flags'
 
 const ARCHIVE_PAGE = 12
 
@@ -398,7 +399,7 @@ export function WhatsOnClient({ items, locale, noticeBarSettings, showYearNav = 
                     <div id="archive" className="w-full py-16 pb-24 md:pb-32 lg:pb-40">
                         <div className="page-container mb-8">
                             <div className="flex flex-col md:flex-row md:items-baseline justify-between border-b border-[#1a1a1a]/10 pb-4 gap-4">
-                                <h2 className="text-lg md:text-xl font-bold uppercase tracking-widest text-[#1a1a1a]">
+                                <h2 className="text-lg md:text-xl font-bold text-[#1a1a1a]">
                                     Archive
                                 </h2>
                                 <span className="text-sm md:text-base text-[#1a1a1a]/70 font-medium shrink-0">
@@ -462,7 +463,9 @@ export function WhatsOnClient({ items, locale, noticeBarSettings, showYearNav = 
                                                     <MuseumGrid
                                                         items={group.items}
                                                         showFilters={false}
-                                                        gridColumns="grid-cols-1 min-[501px]:grid-cols-2 min-[801px]:grid-cols-3 min-[1291px]:grid-cols-4"
+                                                        gridColumns={ARCHIVE_CAROUSEL
+                                                            ? "flex overflow-x-auto snap-x snap-mandatory pb-2 [&>*]:shrink-0 [&>*]:snap-start [&>*]:!w-[72%] min-[501px]:[&>*]:!w-[44%] min-[801px]:[&>*]:!w-[30%] min-[1291px]:[&>*]:!w-[23%]"
+                                                            : "grid-cols-1 min-[501px]:grid-cols-2 min-[801px]:grid-cols-3 min-[1291px]:grid-cols-4"}
                                                         cardAspectRatio="aspect-[3/4]"
                                                         gridGap="gap-4"
                                                     />
