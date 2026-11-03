@@ -93,7 +93,7 @@ export function TextCard({
     )
 }
 
-/** Compact list row: thumbnail, title, author, type and date. */
+/** Compact list row: thumbnail, title, author, type and date, plus PDF / event links. */
 export function TextRow({ text, locale }: { text: any; locale: string }) {
     const t = useTranslations('Pages.texts')
     if (!text?.slug) return null
@@ -101,13 +101,11 @@ export function TextRow({ text, locale }: { text: any; locale: string }) {
     const authors = authorNames(text.authors, locale)
     const typeLabel = isTextType(text.textType) ? t(`types.${text.textType}.singular`) : null
     const image = text.leadImage?.asset ? text.leadImage : null
+    const eventSlug = text.event?.slug as string | undefined
 
     return (
-        <Link
-            href={`/texts/${text.slug}`}
-            className="group grid grid-cols-[96px_1fr] md:grid-cols-[128px_1fr_auto] gap-x-6 gap-y-1 items-center py-6 border-b border-charcoal/15"
-        >
-            <div className="relative aspect-[4/3] overflow-hidden bg-charcoal/5 row-span-2 md:row-span-1">
+        <div className="group relative grid grid-cols-[96px_1fr] md:grid-cols-[128px_1fr_auto] gap-x-6 gap-y-1 items-center py-6 border-b border-charcoal/15">
+            <div className="relative aspect-[4/3] overflow-hidden bg-charcoal/5 row-span-3 md:row-span-1">
                 {image && (
                     <Image
                         src={urlFor(image).width(400).height(300).fit('crop').auto('format').url()}
@@ -123,7 +121,10 @@ export function TextRow({ text, locale }: { text: any; locale: string }) {
             </div>
             <div>
                 <h2 className="text-lg md:text-xl font-bold leading-snug tracking-tight text-charcoal group-hover:underline underline-offset-4 decoration-1">
-                    {title}
+                    {/* Stretched link: whole row opens the text, PDF/event links sit above it */}
+                    <Link href={`/texts/${text.slug}`} className="after:absolute after:inset-0">
+                        {title}
+                    </Link>
                 </h2>
                 {authors && <p className="mt-1 text-sm text-umber">{authors}</p>}
             </div>
@@ -134,6 +135,20 @@ export function TextRow({ text, locale }: { text: any; locale: string }) {
                     <time dateTime={text.publishedAt}>{formatTextDate(text.publishedAt, locale)}</time>
                 )}
             </p>
-        </Link>
+            {(text.pdfUrl || eventSlug) && (
+                <p className="relative z-10 col-start-2 md:col-start-2 flex gap-4 text-xs font-bold md:col-span-2">
+                    {text.pdfUrl && (
+                        <a href={`${text.pdfUrl}?dl=`} className="underline underline-offset-4 hover:no-underline text-charcoal">
+                            {t('pdf')}
+                        </a>
+                    )}
+                    {eventSlug && (
+                        <Link href={`/events/${eventSlug}`} className="underline underline-offset-4 hover:no-underline text-charcoal">
+                            {t('event')}
+                        </Link>
+                    )}
+                </p>
+            )}
+        </div>
     )
 }
