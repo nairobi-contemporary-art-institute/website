@@ -218,6 +218,22 @@ export const textPiece = defineType({
             initialValue: 'wide',
         }),
         defineField({
+            name: 'pdf',
+            title: 'PDF',
+            type: 'file',
+            group: 'links',
+            description: 'Optional downloadable PDF of the text. Shown as a PDF link on the Texts list.',
+            options: { accept: 'application/pdf' },
+        }),
+        defineField({
+            name: 'relatedEvent',
+            title: 'Related event',
+            type: 'reference',
+            group: 'links',
+            description: 'Optional. The event this text came from (a talk, launch or conversation). Shown as an Event link on the Texts list.',
+            to: [{ type: 'event' }],
+        }),
+        defineField({
             name: 'relatedExhibitions',
             title: 'Related exhibitions',
             type: 'array',
