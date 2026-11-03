@@ -2,7 +2,7 @@
 
 Swiss / International Typographic Style, adapted for NCAI. Core idea: **clarity through reduction.** Every element earns its place; remove until removing more would harm understanding.
 
-Distilled from the `swiss-design` skill by ZempTime (`ZempTime/zemptime-marketplace`), then adapted to what NCAI already ships (Inter, sharp edges, Light/Regular/Bold, Sanity-driven layouts). Where NCAI differs from the source, the NCAI value wins and is marked **NCAI**.
+Distilled from the `swiss-design` skill by ZempTime (`ZempTime/zemptime-marketplace`), then adapted to what NCAI already ships (Geist, sharp edges, Light/Regular/Bold, Sanity-driven layouts). Where NCAI differs from the source, the NCAI value wins and is marked **NCAI**.
 
 Related: ADR 0005 (`docs/adr/0005-swiss-design-principles.md`), tokens in `src/app/globals.css` (`@theme`).
 
@@ -61,7 +61,7 @@ One strong lever per level (size, weight, or position). One primary action per v
 
 ## Typography
 
-- **One family: Inter** (self-hosted), plus Noto for Arabic / Devanagari / Ethiopic. Variety is decoration.
+- **One family: Geist** (`geist` package), plus Noto for Arabic / Devanagari / Ethiopic. Variety is decoration.
 - **NCAI weights: Light / Regular / Bold**, enforced in `@theme`. (Source recommends Regular + Bold only; NCAI keeps Light for display. Do not use Light below body size or for small text; it hurts legibility, especially in non-Latin scripts.)
 - 4-5 sizes per view, following a ratio. If 12, 13, 14, 15, 16px all appear in one view, there is no system.
 - Body: line-height 1.5, measure 45-75 characters (`max-width: 65ch`). Headings: line-height 1.2, `max-width: 25ch`. Check Amharic, Arabic and Hindi measure separately.
