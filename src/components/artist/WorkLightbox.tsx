@@ -8,6 +8,7 @@ import { getLocalizedValue, getLocalizedValueAsString } from '@/sanity/lib/utils
 import { MediaPlayer } from '@/components/channel/MediaPlayer'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslations } from 'next-intl'
+import { SHOW_ENQUIRE } from '@/lib/flags'
 
 interface Work {
     _id: string
@@ -168,14 +169,16 @@ export function WorkLightbox({ isOpen, onClose, works, initialIndex, locale, art
                                 )}
                             </div>
 
+                            {SHOW_ENQUIRE && (
                             <div className="shrink-0">
                                 <a
                                     href={`mailto:info@ncai254.com?subject=Enquiry: ${artistName} - ${title}`}
-                                    className="inline-block px-12 py-4 border border-charcoal text-xs font-bold tracking-widest uppercase hover:bg-charcoal hover:text-white transition-all duration-300"
+                                    className="inline-block px-12 py-4 border border-charcoal text-xs font-bold hover:bg-charcoal hover:text-white transition-all duration-300"
                                 >
                                     Enquire
                                 </a>
                             </div>
+                            )}
                         </div>
                     </div>
                 </motion.div>
