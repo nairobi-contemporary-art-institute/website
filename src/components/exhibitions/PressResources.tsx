@@ -19,22 +19,40 @@ export function PressResources({ pressKitUrl, exhibitionGuideUrl }: PressResourc
             <AccordionSection title="Press & Resources">
                 <div className="flex flex-col gap-4">
                     {pressKitUrl && (
-                        <button 
-                            onClick={() => setActivePdf({ url: pressKitUrl, title: 'Press Kit' })}
-                            className="text-left py-2 flex items-center gap-4 group w-full"
-                        >
-                            <span className="w-10 h-10 rounded-full border border-charcoal/10 flex items-center justify-center group-hover:bg-charcoal group-hover:text-white transition-all">↓</span>
-                            <span className="text-lg font-medium tracking-tight">Download Press Release</span>
-                        </button>
+                        <div className="flex items-center gap-4 py-2">
+                            <button
+                                onClick={() => setActivePdf({ url: pressKitUrl, title: 'Press Kit' })}
+                                className="text-left flex-1 text-lg font-medium tracking-tight hover:underline underline-offset-4"
+                            >
+                                Read press release
+                            </button>
+                            <a
+                                href={pressKitUrl}
+                                download
+                                className="shrink-0 text-sm font-bold underline underline-offset-4 hover:no-underline"
+                                aria-label="Download Read press release"
+                            >
+                                Download
+                            </a>
+                        </div>
                     )}
                     {exhibitionGuideUrl && (
-                        <button 
-                            onClick={() => setActivePdf({ url: exhibitionGuideUrl, title: 'Exhibition Guide' })}
-                            className="text-left py-2 flex items-center gap-4 group w-full"
-                        >
-                            <span className="w-10 h-10 rounded-full border border-charcoal/10 flex items-center justify-center group-hover:bg-charcoal group-hover:text-white transition-all">↓</span>
-                            <span className="text-lg font-medium tracking-tight">Exhibition Guide</span>
-                        </button>
+                        <div className="flex items-center gap-4 py-2">
+                            <button
+                                onClick={() => setActivePdf({ url: exhibitionGuideUrl, title: 'Exhibition Guide' })}
+                                className="text-left flex-1 text-lg font-medium tracking-tight hover:underline underline-offset-4"
+                            >
+                                Read exhibition guide
+                            </button>
+                            <a
+                                href={exhibitionGuideUrl}
+                                download
+                                className="shrink-0 text-sm font-bold underline underline-offset-4 hover:no-underline"
+                                aria-label="Download Read exhibition guide"
+                            >
+                                Download
+                            </a>
+                        </div>
                     )}
                 </div>
             </AccordionSection>

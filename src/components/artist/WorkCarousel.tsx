@@ -8,6 +8,7 @@ import { getLocalizedValue, getLocalizedValueAsString } from '@/sanity/lib/utils
 import { MediaPlayer } from '@/components/channel/MediaPlayer'
 import { cn } from '@/lib/utils'
 import { motion, AnimatePresence } from 'framer-motion'
+import { SHOW_ENQUIRE } from '@/lib/flags'
 
 interface Work {
     _id: string
@@ -203,14 +204,16 @@ export function WorkCarousel({ works, locale, artistName, onOpenGrid, intervalMs
                         )}
                     </div>
 
+                    {SHOW_ENQUIRE && (
                     <div className="mt-8">
                         <a
                             href={`mailto:info@ncai254.com?subject=Enquiry: ${artistName} - ${title}`}
-                            className="inline-block px-8 py-2 border border-charcoal text-xs font-bold tracking-widest uppercase hover:bg-charcoal hover:text-white transition-all duration-300"
+                            className="inline-block px-8 py-2 border border-charcoal text-xs font-bold hover:bg-charcoal hover:text-white transition-all duration-300"
                         >
                             Enquire
                         </a>
                     </div>
+                    )}
                 </div>
             </div>
         </div>
