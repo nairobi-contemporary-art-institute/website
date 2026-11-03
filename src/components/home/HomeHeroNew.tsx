@@ -3,13 +3,12 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion, type Variants } from 'framer-motion'
 import { getLocalizedValue } from '@/sanity/lib/utils'
 import { urlFor } from '@/sanity/lib/image'
 import { cn } from '@/lib/utils'
 import { ArtTooltip } from '@/components/ui/ArtTooltip'
 import { ArtCaption } from '@/components/ui/ArtCaption'
-import { getComplimentaryColor } from '@/lib/colors'
 import { PortableText } from '@/components/ui/PortableText'
 
 interface HeroSlide {
@@ -59,6 +58,25 @@ interface HomeHeroNewProps {
         slides?: HeroSlide[]
     }
     locale: string
+}
+
+// Slide-left swipe: image leaves first, text follows a beat later; both ease back in.
+const SWIPE_EASE_IN = [0.4, 0, 1, 1] as const
+const SWIPE_EASE_OUT = [0, 0, 0.2, 1] as const
+const imageVariants: Variants = {
+    enter: { x: '30%', opacity: 0 },
+    center: { x: 0, opacity: 1, transition: { duration: 0.7, ease: SWIPE_EASE_OUT } },
+    exit: { x: '-100%', opacity: 0, transition: { duration: 0.5, ease: SWIPE_EASE_IN } },
+}
+const textVariants: Variants = {
+    enter: { x: 64, opacity: 0 },
+    center: { x: 0, opacity: 1, transition: { duration: 0.7, delay: 0.12, ease: SWIPE_EASE_OUT } },
+    exit: { x: -96, opacity: 0, transition: { duration: 0.4, delay: 0.08, ease: SWIPE_EASE_IN } },
+}
+const fadeVariants: Variants = {
+    enter: { opacity: 0 },
+    center: { opacity: 1, transition: { duration: 0.4 } },
+    exit: { opacity: 0, transition: { duration: 0.3 } },
 }
 
 // WCAG relative luminance; above ~0.18 black reads better than white.
@@ -117,18 +135,13 @@ function SlideContent({ slide, locale, textOnRight = true }: { slide: HeroSlide;
 
     // Intelligent Contrast & Force Black logic
     const bgColor = slide.gradientColor?.hex || '#1A1A1A'
-    const complColor = slide.intelligentContrast ? getComplimentaryColor(bgColor) : null
-    
-    // Determine base color
-    let baseColor = '#FFFFFF' // Default
-    if (slide.forceBlackText) {
-        baseColor = '#000000'
-    } else if (slide.intelligentContrast && complColor) {
-        baseColor = complColor
-    }
+
+    // Text colour follows the background's luminance (light bg -> black, dark bg -> white);
+    // forceBlackText stays as an editor override.
+    const baseColor = slide.forceBlackText || isLight(bgColor) ? '#000000' : '#FFFFFF'
 
     const textStyle = { color: baseColor }
-    const mutedTextStyle = { color: baseColor, opacity: 0.6 }
+    const mutedTextStyle = { color: baseColor, opacity: 0.85 }
     const isCentered = slide.layout === 'centered' || slide.contentPosition === 'center'
     const textAlignClass = isCentered ? 'text-center' : 'text-start'
 
@@ -142,8 +155,8 @@ function SlideContent({ slide, locale, textOnRight = true }: { slide: HeroSlide;
                 <div className="mb-4 md:mb-6 transition-all duration-700">
                     {preHeading && (
                         <p 
-                            className="text-xs md:text-xs uppercase tracking-widest font-bold mb-4 md:mb-4 opacity-60"
-                            style={textStyle}
+                            className="text-sm font-bold mb-4"
+                            style={mutedTextStyle}
                         >
                             {preHeading}
                         </p>
@@ -173,7 +186,7 @@ function SlideContent({ slide, locale, textOnRight = true }: { slide: HeroSlide;
                         </p>
                     )}
                     {slide.description && (
-                        <div className="text-sm md:text-base max-w-xl leading-relaxed opacity-80" style={{ color: baseColor }}>
+                        <div className="text-sm md:text-base max-w-xl leading-relaxed" style={{ color: baseColor, opacity: 0.9 }}>
                             <PortableText value={getLocalizedValue(slide.description, locale)} locale={locale} noProse={true} />
                         </div>
                     )}
@@ -188,7 +201,7 @@ function SlideContent({ slide, locale, textOnRight = true }: { slide: HeroSlide;
                         )}
                         {location && (
                             <span 
-                                className="text-xs md:text-sm font-bold uppercase tracking-wider"
+                                className="text-sm font-bold"
                                 style={mutedTextStyle}
                             >
                                 {location}
@@ -208,6 +221,9 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
     const [currentSlide, setCurrentSlide] = useState(0)
     const [isPaused, setIsPaused] = useState(false)
     const isRtl = locale === 'ar'
+    const reduceMotion = useReducedMotion()
+    const imgV = reduceMotion ? fadeVariants : imageVariants
+    const txtV = reduceMotion ? fadeVariants : textVariants
     const [sampledLight, setSampledLight] = useState<boolean | null>(null)
 
     // Brightness of the image strip behind the arrow, sampled from the tiny blur placeholder.
@@ -271,7 +287,8 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
 
     return (
         <section
-            className="relative w-full overflow-hidden flex-1 min-h-[600px] max-md:min-h-dvh"
+            className="relative w-full overflow-hidden flex-1 min-h-[600px] max-md:min-h-dvh transition-colors duration-500"
+            style={{ backgroundColor: displaySlides[currentSlide]?.gradientColor?.hex || displaySlides[0]?.gradientColor?.hex || '#1A1A1A' }}
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
         >
@@ -287,7 +304,6 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                     const imageAlignment = slide.imageAlignment ?? 'center'
 
                     const imageCaption = getLocalizedValue(slide.image?.caption, locale)
-                    const bgColor = slide.gradientColor?.hex || '#1A1A1A'
 
                     // Image positioning
                     const hotspot = slide.image?.hotspot || { x: 0.5, y: 0.5 }
@@ -350,7 +366,7 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                     // in the container's right column. `start`/`ps` flip automatically in RTL.
                     const splitContent = layout === 'split-right' && (
                         <div className="relative w-full h-full flex flex-col md:block">
-                            <div className="relative overflow-hidden max-md:mt-36 max-md:h-[28%] md:absolute md:inset-y-0 md:start-0 md:w-1/2">
+                            <motion.div variants={imgV} className="relative overflow-hidden max-md:mt-36 max-md:h-[28%] md:absolute md:inset-y-0 md:start-0 md:w-1/2">
                                 {slide.image?.asset && (
                                     <Image
                                         src={urlFor(slide.image).width(1920).quality(85).url()}
@@ -365,28 +381,28 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                                     />
                                 )}
                                 {captionTooltip}
-                            </div>
-                            <div className="flex-1 min-h-0 md:absolute md:inset-0 md:z-20">
+                            </motion.div>
+                            <motion.div variants={txtV} className="flex-1 min-h-0 md:absolute md:inset-0 md:z-20">
                                 {/* md: clear the fixed header (~132px incl. status bar) so text centres in the visible hero */}
                                 <div className="page-container h-full md:grid md:grid-cols-2 md:pt-[132px]">
                                     <div className="max-md:pt-5 max-md:pb-24 md:h-full md:flex md:items-center md:col-start-2 md:ps-12">
                                         <SlideContent slide={slide} locale={locale} textOnRight />
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
                         </div>
                     )
 
                     const content = splitContent || (
                         <div className="relative w-full h-full">
                             {/* Image layer (z-0) */}
-                            <div className="absolute inset-0 z-0">
+                            <motion.div variants={imgV} className="absolute inset-0 z-0">
                                 {imageElement}
                                 {captionTooltip}
-                            </div>
+                            </motion.div>
 
                             {/* Text content layer (z-20) */}
-                            <div className="absolute inset-0 z-20">
+                            <motion.div variants={txtV} className="absolute inset-0 z-20">
                                 <div className={`page-container h-full flex ${justifyClass}`}>
                                     {/* Phones: image fills the top, text sits below it at full width */}
                                     <div
@@ -396,19 +412,17 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                                         <SlideContent slide={slide} locale={locale} textOnRight={textOnRight} />
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
                         </div>
                     )
 
                     return (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.8, ease: 'easeInOut' }}
+                            initial="enter"
+                            animate="center"
+                            exit="exit"
                             className="absolute inset-0"
-                            style={{ backgroundColor: bgColor }}
                         >
                             {href !== '#' ? (
                                 <Link href={href} className="block w-full h-full">
