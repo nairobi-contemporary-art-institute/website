@@ -73,7 +73,7 @@ export function MegaMenu({ isOpen, activeCategory, columns, onClose, featuredIma
                                 {columns.map((column, idx) => (
                                     <div key={idx} className="flex flex-col gap-6">
                                         {column.title && (
-                                            <h3 className="text-xs uppercase tracking-widest font-normal text-charcoal/70 border-b border-charcoal/10 pb-2">
+                                            <h3 className="text-xs tracking-normal font-normal text-charcoal/70 border-b border-charcoal/10 pb-2">
                                                 {column.title}
                                             </h3>
                                         )}
@@ -99,7 +99,7 @@ export function MegaMenu({ isOpen, activeCategory, columns, onClose, featuredIma
 
                             {/* Right: Featured Images Section */}
                             <div className="w-full md:w-[45%] flex flex-col gap-6 mt-12 md:mt-0">
-                                <h3 className="text-xs uppercase tracking-widest font-normal text-charcoal/70 border-b border-charcoal/10 pb-2">
+                                <h3 className="text-xs tracking-normal font-normal text-charcoal/70 border-b border-charcoal/10 pb-2">
                                     {activeCategory ? `Featured in ${activeCategory}` : 'Featured'}
                                 </h3>
                                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -173,7 +173,7 @@ export function MegaMenu({ isOpen, activeCategory, columns, onClose, featuredIma
                         {/* High-Converting Quick Action Bar */}
                         <div className="bg-charcoal/[0.03] border-t border-charcoal/10 py-5">
                             <div className="page-container flex flex-col sm:flex-row justify-between items-center gap-4">
-                                <div className="flex items-center gap-8 text-xs uppercase tracking-widest text-charcoal/70 font-bold">
+                                <div className="flex items-center gap-8 text-xs tracking-normal text-charcoal/70 font-bold">
                                     <span className="text-charcoal/70">Nairobi Contemporary Art Institute</span>
                                     <Link href="/visit" className="hover:text-ochre transition-colors">Plan your visit</Link>
                                     <Link href="/about" className="hover:text-ochre transition-colors">The Institute</Link>
@@ -181,14 +181,14 @@ export function MegaMenu({ isOpen, activeCategory, columns, onClose, featuredIma
                                 <div className="flex items-center gap-6">
                                     <Link 
                                         href="/get-involved#membership" 
-                                        className="text-xs uppercase tracking-widest font-bold text-charcoal bg-ochre/20 border border-ochre/30 px-4 py-2 hover:bg-ochre hover:text-black transition-all"
+                                        className="text-xs tracking-normal font-bold text-charcoal bg-ochre/20 border border-ochre/30 px-4 py-2 hover:bg-ochre hover:text-black transition-all"
                                         onClick={onClose}
                                     >
                                         Become a Member
                                     </Link>
                                     <Link 
                                         href="/visit" 
-                                        className="text-xs uppercase tracking-widest font-bold text-white bg-charcoal px-4 py-2 hover:bg-charcoal/80 transition-all"
+                                        className="text-xs tracking-normal font-bold text-white bg-charcoal px-4 py-2 hover:bg-charcoal/80 transition-all"
                                         onClick={onClose}
                                     >
                                         Book Tickets

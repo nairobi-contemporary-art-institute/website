@@ -312,7 +312,7 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
                                     <Link
                                         key={`${link.href}-${idx}`}
                                         href={link.href}
-                                        className="text-sm font-bold transition-all duration-200 uppercase tracking-widest text-deep-umber hover:text-ochre relative py-4 group"
+                                        className="text-sm font-bold transition-all duration-200 tracking-normal text-deep-umber hover:text-ochre relative py-4 group"
                                         onMouseEnter={() => handleMouseEnter(idx)}
                                     >
                                         {link.label}
@@ -391,7 +391,7 @@ export function HeaderClient({ locale, openingStatus, navLinks = [] }: HeaderCli
                                     <Link
                                         href={link.href}
                                         className={cn(
-                                            "text-4xl font-bold uppercase tracking-tighter text-deep-umber transition-all duration-500",
+                                            "text-4xl font-bold tracking-tighter text-deep-umber transition-all duration-500",
                                             isMobileMenuOpen ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"
                                         )}
                                         style={{ transitionDelay: `${i * 50}ms` }}

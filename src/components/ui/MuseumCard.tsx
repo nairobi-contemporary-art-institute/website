@@ -12,63 +12,76 @@ interface MuseumCardProps {
     priority?: boolean;
 }
 
+/**
+ * No text over artwork. With an image, the image stays clean; on hover a milky
+ * panel fades in and reveals the text. On touch devices (no hover) the caption
+ * sits below the image instead. Without an image the card is a solid colour
+ * block and text sits on it.
+ */
 export function MuseumCard({ data, className, aspectRatio = "aspect-square", priority = false }: MuseumCardProps) {
     const { href, label, title, subtitle, date, image, backgroundColor } = data;
-    
+    const hasImage = !!image?.asset;
+
     // Default fallback color if no image and no bg color is specified
     const bgColor = backgroundColor || 'var(--color-background-dark)';
 
-    return (
-        <Link 
-            href={href} 
-            className={cn(
-                "group relative block overflow-hidden w-full text-white transition-opacity hover:opacity-100",
-                aspectRatio,
-                className
-            )}
-            style={{ backgroundColor: bgColor }}
-        >
-            {/* Background Image */}
-            {image?.asset && (
-                <div className="absolute inset-0 z-0">
-                    <Image
-                        src={urlFor(image).url()}
-                        alt={title}
-                        fill
-                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        priority={priority}
-                    />
-                    {/* Gradient Overlay for text readable contrast */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 opacity-70" />
-                </div>
-            )}
-
-            {/* Content Container - Overlay style */}
-            <div className="relative z-10 flex flex-col justify-between h-full p-6 md:p-8">
-                {/* Top Section: Label & Date */}
-                <div className="flex justify-between items-start gap-4">
-                    <span className="inline-block text-xs md:text-xs font-bold uppercase tracking-widest text-white/90">
-                        {label}
-                    </span>
-                    
-                    {date && (
-                        <span className="text-xs md:text-xs font-bold uppercase tracking-widest text-white/100">
-                            {date}
-                        </span>
-                    )}
-                </div>
-
-                {/* Bottom Section: Title & Subtitle */}
-                <div className="mt-auto">
-                    <h3 className="uppercase tracking-tighter">
-                        <span className="block text-2xl lg:text-3xl xl:text-4xl leading-none font-black">{title}</span>
-                        {subtitle && (
-                            <span className="block text-lg lg:text-xl leading-tight font-normal mt-2 opacity-90">{subtitle}</span>
-                        )}
-                    </h3>
-                </div>
+    const text = (
+        <>
+            <div className="flex justify-between items-start gap-4 text-xs font-bold">
+                <span>{label}</span>
+                {date && <span>{date}</span>}
             </div>
+            <div className="mt-auto">
+                <h3 className="tracking-tight">
+                    <span className="block text-2xl lg:text-3xl font-bold leading-tight">{title}</span>
+                    {subtitle && (
+                        <span className="block text-lg leading-tight font-normal mt-2">{subtitle}</span>
+                    )}
+                </h3>
+            </div>
+        </>
+    );
+
+    return (
+        <Link
+            href={href}
+            className={cn("group block w-full", className)}
+        >
+            <div
+                className={cn("relative overflow-hidden w-full", aspectRatio, hasImage ? "text-charcoal" : "text-white")}
+                style={{ backgroundColor: hasImage ? undefined : bgColor }}
+            >
+                {hasImage && (
+                    <>
+                        <Image
+                            src={urlFor(image!).url()}
+                            alt={title}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            priority={priority}
+                        />
+                        {/* Hover reveal: milky panel + text (hover-capable devices only) */}
+                        <div
+                            aria-hidden="true"
+                            className="absolute inset-0 flex flex-col justify-between p-6 md:p-8 bg-white/90 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 group-focus-visible:opacity-100 [@media(hover:none)]:hidden"
+                        >
+                            {text}
+                        </div>
+                    </>
+                )}
+                {!hasImage && (
+                    <div className="flex flex-col justify-between h-full p-6 md:p-8">{text}</div>
+                )}
+            </div>
+            {/* Touch fallback: caption below the image */}
+            {hasImage && (
+                <div className="hidden [@media(hover:none)]:block pt-3 text-charcoal">
+                    <p className="text-xs font-bold">{label}{date ? ` · ${date}` : ''}</p>
+                    <p className="text-lg font-bold leading-tight mt-1">{title}</p>
+                    {subtitle && <p className="text-sm font-normal mt-1">{subtitle}</p>}
+                </div>
+            )}
         </Link>
     )
 }
