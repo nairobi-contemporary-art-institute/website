@@ -6,7 +6,7 @@ import { SITEMAP_QUERY, TEXT_BY_SLUG_QUERY } from '@/sanity/lib/queries'
 import { getLocalizedEntry, getLocalizedValue } from '@/sanity/lib/utils'
 import { urlFor } from '@/sanity/lib/image'
 import { Link, locales } from '@/i18n'
-import { isTextType, labelSpeakerTurns, pickRelatedTexts, readingTime, resolveSpeakers } from '@/lib/texts'
+import { isTextType, labelSpeakerTurns, pickRelatedTexts, resolveSpeakers } from '@/lib/texts'
 import { jsonLdString, textArticleJsonLd } from '@/lib/jsonld'
 import { PortableText } from '@/components/ui/PortableText'
 import { ExhibitionCard } from '@/components/exhibitions/ExhibitionCard'
@@ -95,7 +95,6 @@ export default async function TextPage({ params }: { params: Params }) {
     const speakers = resolveSpeakers(text.participants, locale)
     const body = labelSpeakerTurns(bodyEntry?.value, speakers)
     const notes = getLocalizedValue<any[]>(text.notes, locale)
-    const minutes = readingTime(bodyEntry?.value)
     const typeLabel = isTextType(text.textType) ? t(`types.${text.textType}.singular`) : null
     const authors: any[] = (text.authors || []).filter(Boolean)
     const showLead = text.leadLayout !== 'none' && text.leadImage?.asset
@@ -110,14 +109,53 @@ export default async function TextPage({ params }: { params: Params }) {
         speakers,
     })
 
+    const meta = (
+        <div className="space-y-1 text-sm text-umber">
+            {authors.length > 0 && (
+                <p>
+                    {t('by')}{' '}
+                    {authors.map((author, i) => (
+                        <span key={author._id || i}>
+                            {i > 0 && (i === authors.length - 1 ? ' & ' : ', ')}
+                            <AuthorLink author={author} locale={locale} />
+                        </span>
+                    ))}
+                </p>
+            )}
+            {byline && <p>{byline}</p>}
+            {text.publishedAt && (
+                <p>
+                    <time dateTime={text.publishedAt}>{formatTextDate(text.publishedAt, locale)}</time>
+                </p>
+            )}
+        </div>
+    )
+
     return (
         <article className="pt-36 md:pt-48 pb-24">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
+            <div className="relative">
+            {/* Desktop: metadata scrolls alongside the article (e-flux style) */}
+            <div className="hidden xl:block absolute inset-y-0 start-0 w-full pointer-events-none" aria-hidden="false">
+                <div className="page-container h-full">
+                    <aside className="sticky top-32 w-56 pointer-events-auto space-y-4">
+                        {typeLabel && (
+                            <Link
+                                href={{ pathname: '/texts', query: { type: text.textType } }}
+                                className="block text-xs font-bold text-ochre-dark hover:text-charcoal transition-colors"
+                            >
+                                {typeLabel}
+                            </Link>
+                        )}
+                        {meta}
+                    </aside>
+                </div>
+            </div>
             <header className="measure" {...langProps(titleEntry?.locale, locale)}>
                 {typeLabel && (
                     <Link
                         href={{ pathname: '/texts', query: { type: text.textType } }}
-                        className="text-xs font-bold uppercase tracking-widest text-ochre-dark hover:text-charcoal transition-colors"
+                        className="xl:hidden text-xs font-bold text-ochre-dark hover:text-charcoal transition-colors"
                     >
                         {typeLabel}
                     </Link>
@@ -128,24 +166,7 @@ export default async function TextPage({ params }: { params: Params }) {
                 {standfirst && (
                     <p className="mt-6 text-xl md:text-2xl font-light leading-snug text-umber">{standfirst}</p>
                 )}
-                <div className="mt-8 pt-6 border-t border-charcoal/15 space-y-1 text-sm text-umber">
-                    {authors.length > 0 && (
-                        <p>
-                            {t('by')}{' '}
-                            {authors.map((author, i) => (
-                                <span key={author._id || i}>
-                                    {i > 0 && (i === authors.length - 1 ? ' & ' : ', ')}
-                                    <AuthorLink author={author} locale={locale} />
-                                </span>
-                            ))}
-                        </p>
-                    )}
-                    {byline && <p>{byline}</p>}
-                    <p>
-                        {text.publishedAt && <time dateTime={text.publishedAt}>{formatTextDate(text.publishedAt, locale)}</time>}
-                        {bodyEntry && <> · {t('minRead', { minutes })}</>}
-                    </p>
-                </div>
+                <div className="xl:hidden mt-8 pt-6 border-t border-charcoal/15">{meta}</div>
             </header>
 
             {showLead && (
@@ -160,6 +181,7 @@ export default async function TextPage({ params }: { params: Params }) {
 
             <div className="mt-12 md:mt-16" {...langProps(bodyEntry?.locale, locale)}>
                 <TextBody value={body} />
+            </div>
             </div>
 
             {notes?.length ? (
