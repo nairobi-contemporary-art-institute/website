@@ -150,7 +150,7 @@ function SlideContent({ slide, locale, textOnRight = true }: { slide: HeroSlide;
                     )}
                     {title && (
                         <h1 
-                            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-display mb-4 md:mb-6 capitalize transition-all duration-700"
+                            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-display mb-4 md:mb-6 transition-all duration-700"
                             style={textStyle}
                         >
                             {title.split('\n').map((line, i) => (
