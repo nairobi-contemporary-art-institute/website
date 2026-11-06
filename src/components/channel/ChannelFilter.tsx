@@ -43,8 +43,9 @@ export function ChannelFilter({ posts, locale }: ChannelFilterProps) {
 
     const MEDIA_FILTERS = [
         { label: t('filterAll'), value: 'all' },
-        { label: t('filterFilm'), value: 'film' },
+        { label: t('filterText'), value: 'text' },
         { label: t('filterAudio'), value: 'audio' },
+        { label: t('filterFilm'), value: 'film' },
     ]
 
     // Extract unique series from posts that have tags of type 'series'
