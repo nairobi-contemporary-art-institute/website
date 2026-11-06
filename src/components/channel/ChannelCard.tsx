@@ -35,7 +35,7 @@ export function ChannelCard({ post, locale, variant = 'light' }: ChannelCardProp
 
     return (
         <Link
-            href={`/${locale}/channel/${post.slug}`}
+            href={post.href ?? `/${locale}/channel/${post.slug}`}
             className="group block h-full flex flex-col"
         >
             <div className="relative aspect-[16/10] bg-charcoal/5 overflow-hidden mb-6 group">
