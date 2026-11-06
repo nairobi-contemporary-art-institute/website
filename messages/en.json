@@ -183,9 +183,9 @@
             "description": "News, interviews, and insights from NCAI.",
             "noContent": "No content found",
             "filterAll": "All",
-            "filterFilm": "Film",
-            "filterAudio": "Audio",
-            "filterText": "Text"
+            "filterFilm": "Watch",
+            "filterAudio": "Listen",
+            "filterText": "Read"
         },
         "texts": {
             "title": "Texts",

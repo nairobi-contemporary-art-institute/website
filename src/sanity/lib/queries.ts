@@ -1487,6 +1487,16 @@ export const TEXTS_QUERY = groq`
 `
 
 /**
+ * Texts for the Channel's Read filter. Same card fields as the /texts index,
+ * no pagination: the Channel filters client-side like it does for posts.
+ */
+export const CHANNEL_TEXTS_QUERY = groq`
+  *[_type == "textPiece" && defined(slug.current)] | order(publishedAt desc) [0...60] {
+    ${TEXT_CARD_PROJECTION}
+  }
+`
+
+/**
  * A single Text with body, notes, links and neighbours.
  * Related texts: manual picks win; otherwise the page merges the
  * linked → same type → recent candidates (deduped, top 3).
