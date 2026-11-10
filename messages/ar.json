@@ -162,9 +162,9 @@
             "description": "أخبار ومقابلات ورؤى من المعهد.",
             "noContent": "لم يتم العثور على محتوى",
             "filterAll": "الكل",
-            "filterFilm": "أفلام",
-            "filterAudio": "صوتيات",
-            "filterText": "نصوص"
+            "filterFilm": "شاهد",
+            "filterAudio": "استمع",
+            "filterText": "اقرأ"
         },
         "texts": {
             "title": "نصوص",

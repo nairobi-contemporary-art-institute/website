@@ -162,9 +162,9 @@
             "description": "Warar, wareysiyo iyo aragtiyo ka yimid NCAI.",
             "noContent": "Wax nuxur ah lama helin",
             "filterAll": "Dhammaan",
-            "filterFilm": "Filim",
-            "filterAudio": "Cod",
-            "filterText": "Qoraal"
+            "filterFilm": "Daawo",
+            "filterAudio": "Dhageyso",
+            "filterText": "Akhri"
         },
         "texts": {
             "title": "Qoraallo",

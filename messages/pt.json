@@ -162,9 +162,9 @@
             "description": "Notícias, entrevistas e reflexões do NCAI.",
             "noContent": "Nenhum conteúdo encontrado",
             "filterAll": "Todos",
-            "filterFilm": "Filme",
-            "filterAudio": "Áudio",
-            "filterText": "Texto"
+            "filterFilm": "Assistir",
+            "filterAudio": "Ouvir",
+            "filterText": "Ler"
         },
         "texts": {
             "title": "Textos",

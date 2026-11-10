@@ -162,9 +162,9 @@
             "description": "Habari, mahojiano, na maarifa kutoka NCAI.",
             "noContent": "Hakuna maudhui yaliyopatikana",
             "filterAll": "Zote",
-            "filterFilm": "Filamu",
-            "filterAudio": "Sauti",
-            "filterText": "Maandishi"
+            "filterFilm": "Tazama",
+            "filterAudio": "Sikiliza",
+            "filterText": "Soma"
         },
         "texts": {
             "title": "Maandishi",

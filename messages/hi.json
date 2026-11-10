@@ -162,9 +162,9 @@
             "description": "NCAI से समाचार, साक्षात्कार और विचार।",
             "noContent": "कोई सामग्री नहीं मिली",
             "filterAll": "सभी",
-            "filterFilm": "फ़िल्म",
-            "filterAudio": "ऑडियो",
-            "filterText": "लेख"
+            "filterFilm": "देखें",
+            "filterAudio": "सुनें",
+            "filterText": "पढ़ें"
         },
         "texts": {
             "title": "लेख",

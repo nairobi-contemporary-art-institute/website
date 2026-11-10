@@ -7,6 +7,7 @@ import Link from "next/link"
 import { PlayCircle, Headphones, BookOpen } from "lucide-react"
 import { PortableText } from "@/components/ui/PortableText"
 import { cn } from "@/lib/utils"
+import { useTranslations } from "next-intl"
 
 interface ChannelCardProps {
     post: any
@@ -15,6 +16,7 @@ interface ChannelCardProps {
 }
 
 export function ChannelCard({ post, locale, variant = 'light' }: ChannelCardProps) {
+    const t = useTranslations('Pages.channel')
     const isDark = variant === 'dark'
     const title = getLocalizedValue(post.title, locale)
 
@@ -28,10 +30,10 @@ export function ChannelCard({ post, locale, variant = 'light' }: ChannelCardProp
     }[type as 'film' | 'audio' | 'text'] || BookOpen
 
     const typeLabel = {
-        film: 'Watch',
-        audio: 'Listen',
-        text: 'Read'
-    }[type as 'film' | 'audio' | 'text'] || 'Read'
+        film: t('filterFilm'),
+        audio: t('filterAudio'),
+        text: t('filterText')
+    }[type as 'film' | 'audio' | 'text'] || t('filterText')
 
     return (
         <Link

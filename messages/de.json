@@ -162,9 +162,9 @@
             "description": "Neuigkeiten, Interviews und Einblicke aus dem NCAI.",
             "noContent": "Keine Inhalte gefunden",
             "filterAll": "Alle",
-            "filterFilm": "Film",
-            "filterAudio": "Audio",
-            "filterText": "Text"
+            "filterFilm": "Sehen",
+            "filterAudio": "Hören",
+            "filterText": "Lesen"
         },
         "texts": {
             "title": "Texte",
