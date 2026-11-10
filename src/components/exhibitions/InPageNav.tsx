@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import { ScrollFade } from '@/components/ui/ScrollFade'
 import { cn } from '@/lib/utils'
 
 interface NavItem {
@@ -60,7 +61,7 @@ export function InPageNav({ items, className }: InPageNavProps) {
             )}
             style={{ top: 'var(--header-offset, 96px)' }}
         >
-            <div className="flex items-center gap-8 h-16 overflow-x-auto no-scrollbar">
+            <ScrollFade className="flex items-center gap-8 h-16" fadeFrom="from-white">
                 {items.map((item) => (
                     <button
                         key={item.id}
@@ -75,7 +76,7 @@ export function InPageNav({ items, className }: InPageNavProps) {
                         {item.label}
                     </button>
                 ))}
-            </div>
+            </ScrollFade>
         </nav>
     )
 }

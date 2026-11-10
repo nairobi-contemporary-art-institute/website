@@ -5,6 +5,7 @@ import { Link } from '@/i18n'
 import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
 import { useState, useEffect } from 'react'
+import { ScrollFade } from "@/components/ui/ScrollFade"
 import { GridRoot as Grid, GridSystem, Cell as GridCell } from "@/components/ui/Grid/Grid"
 
 interface AboutSubNavProps {
@@ -41,7 +42,7 @@ export function AboutSubNav({ locale }: AboutSubNavProps) {
             style={{ top: 'var(--header-offset, 96px)' }}
         >
             <GridSystem unstable_useContainer className="py-4 md:py-6">
-                <nav aria-label="About sections" className="flex items-center gap-6 md:gap-12 overflow-x-auto no-scrollbar scroll-smooth">
+                <ScrollFade as="nav" aria-label="About sections" className="flex items-center gap-6 md:gap-12">
                     {navItems.map((item) => {
                         const isActive = pathname === item.href
                         
@@ -63,7 +64,7 @@ export function AboutSubNav({ locale }: AboutSubNavProps) {
                             </Link>
                         )
                     })}
-                </nav>
+                </ScrollFade>
             </GridSystem>
         </div>
     )

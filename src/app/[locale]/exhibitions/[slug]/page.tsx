@@ -230,7 +230,12 @@ export default async function ExhibitionPage({ params }: Props) {
                                             ))}
                                         </div>
                                     ) : (
-                                        <div className={wide ? cn("grid items-start gap-x-12 gap-y-16 md:grid-cols-2 lg:grid-cols-3", artists.length >= 8 && "xl:grid-cols-4") : "flex flex-col gap-16"}>
+                                        <div className={wide ? cn(
+                                            "grid items-start gap-x-12 gap-y-16 md:grid-cols-2",
+                                            // columns that fill whole rows: 3 -> 3, 4 -> 4 (not 3 + 1), 8+ -> 4
+                                            artists.length === 4 ? "xl:grid-cols-4" : "lg:grid-cols-3",
+                                            artists.length >= 8 && "xl:grid-cols-4"
+                                        ) : "flex flex-col gap-16"}>
                                             {artists.map((artist: any) => {
                                                 const artistBio = getLocalizedValue(artist.bio, locale)
                                                 const portraitCaption = getLocalizedValue(artist.image?.caption, locale)
@@ -240,6 +245,9 @@ export default async function ExhibitionPage({ params }: Props) {
 
                                                 return (
                                                     <div key={artist._id} className="space-y-6">
+                                                        {wide && !artist.image?.asset && (
+                                                            <div aria-hidden className="aspect-[4/5] bg-stone-100" />
+                                                        )}
                                                         {artist.image?.asset && (
                                                             <div className="space-y-4">
                                                                 <div className="aspect-[4/5] relative overflow-hidden bg-stone-100">
