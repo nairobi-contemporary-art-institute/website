@@ -246,7 +246,7 @@ export default async function ExhibitionPage({ params }: Props) {
                                                 return (
                                                     <div key={artist._id} className="space-y-6">
                                                         {wide && !artist.image?.asset && (
-                                                            <div aria-hidden className="aspect-[4/5] bg-stone-100" />
+                                                            <div aria-hidden className="hidden aspect-[4/5] bg-stone-100 md:block" />
                                                         )}
                                                         {artist.image?.asset && (
                                                             <div className="space-y-4">
