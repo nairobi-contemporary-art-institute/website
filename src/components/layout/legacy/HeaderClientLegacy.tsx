@@ -53,13 +53,15 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
     const initialLogoRef = useRef<HTMLDivElement>(null)
     const fullLogoRef = useRef<HTMLDivElement>(null)
     const runwayRef = useRef<HTMLDivElement>(null)
+    const runwaySmRef = useRef<HTMLDivElement>(null)
     const headerInnerRef = useRef<HTMLDivElement>(null)
     const navSectionRef = useRef<HTMLDivElement>(null)
     const bannerRef = useRef<HTMLDivElement>(null)
     const isFirstMount = useRef(true)
     const lastAtTop = useRef(isAtTop)
-    // Full title only replaces the compact mark when it fits beside the nav (locale + nav dependent)
-    const titleFits = useTitleFits(headerInnerRef, navSectionRef, runwayRef, [locale])
+    // Full title replaces the compact mark when it fits beside the nav: large if room, else small (locale + nav dependent)
+    const titleSize = useTitleFits(headerInnerRef, navSectionRef, runwayRef, runwaySmRef, [locale])
+    const titleFits = titleSize !== false
 
     // ... (useGSAP and useEffect for scroll stay same)
     useGSAP(() => {
@@ -70,7 +72,7 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
         const mm = gsap.matchMedia()
         mm.add("(min-width: 1280px)", () => {
             const initialContentWidth = initialLogoRef.current?.offsetWidth || 120
-            const targetContentWidth = runwayRef.current?.offsetWidth || 400
+            const targetContentWidth = (titleSize === 'sm' ? runwaySmRef : runwayRef).current?.offsetWidth || 400
 
             // Account for absolute positioning and container padding to prevent clipping
             const style = window.getComputedStyle(logoContainerRef.current!)
@@ -128,7 +130,7 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
                 )
         })
         return () => mm.revert()
-    }, { scope: headerRef, dependencies: [locale, titleFits], revertOnUpdate: true })
+    }, { scope: headerRef, dependencies: [locale, titleSize], revertOnUpdate: true })
 
     useEffect(() => {
         const banner = bannerRef.current
@@ -324,8 +326,12 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
                                 aria-label="NCAI Home"
                                 onMouseEnter={closeMegaMenu}
                             >
-                                {/* Dynamic Runway - Provides the measurement for the multi-language title */}
-                                <div ref={runwayRef} className="absolute hidden md:flex items-center opacity-0 pointer-events-none whitespace-nowrap text-xl md:text-3xl font-bold tracking-tight">
+                                {/* Dynamic Runways - invisible large + small copies of the title; measured to see what fits beside the nav */}
+                                <div ref={runwayRef} className="absolute hidden md:flex items-center opacity-0 pointer-events-none whitespace-nowrap text-3xl font-bold tracking-tight">
+                                    <Logo className="h-10 md:h-12 w-auto me-4" />
+                                    <span>{t('title')}</span>
+                                </div>
+                                <div ref={runwaySmRef} className="absolute hidden md:flex items-center opacity-0 pointer-events-none whitespace-nowrap text-xl font-bold tracking-tight">
                                     <Logo className="h-10 md:h-12 w-auto me-4" />
                                     <span>{t('title')}</span>
                                 </div>
@@ -340,7 +346,8 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
                                 <div
                                     ref={fullLogoRef}
                                     className={cn(
-                                        "items-center absolute start-0 whitespace-nowrap text-xl md:text-3xl font-bold tracking-tight opacity-0 transition-colors duration-300",
+                                        "items-center absolute start-0 whitespace-nowrap font-bold tracking-tight opacity-0 transition-colors duration-300",
+                                        titleSize === 'sm' ? "text-xl" : "text-3xl",
                                         titleFits ? "flex" : "hidden",
                                         isDark ? "text-white" : "text-umber"
                                     )}
