@@ -4,38 +4,44 @@ import { useEffect, useLayoutEffect, useState, type RefObject } from 'react'
 
 const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
+export type TitleSize = 'lg' | 'sm' | false
+
 /**
- * True when the full institute title (measured from an invisible `runwayRef` copy of
- * the logo + title) fits in the header row beside the navigation, with `gap` px spare.
+ * Picks how the full institute title is shown beside the navigation:
+ *  - 'lg'  the large wordmark fits (`largeRef`, an invisible copy of logo + title)
+ *  - 'sm'  only the smaller wordmark fits (`smallRef`)
+ *  - false neither fits: keep the compact logomark
  *
- * The title length changes per locale ("Instituto de Arte Contemporáneo de Nairobi"
- * is ~30% wider than the English) and the nav width changes with its labels and the
- * entry badge, so a fixed breakpoint cannot be right. Re-measures on resize, font load
- * and when `deps` change (locale). Never true below `minViewport` (the full wording is
- * a desktop-only treatment) or while the nav is hidden (phones).
+ * Title length changes per locale ("Instituto de Arte Contemporáneo de Nairobi" is ~30%
+ * wider than the English) and the nav width changes with its labels and the entry
+ * badge, so a fixed breakpoint cannot be right. Re-measures on resize, font load and
+ * when `deps` change (locale). Never shows the full wording below `minViewport` (a
+ * desktop-only treatment) or while the nav is hidden (phones).
  */
 export function useTitleFits(
     rowRef: RefObject<HTMLElement | null>,
     navRef: RefObject<HTMLElement | null>,
-    runwayRef: RefObject<HTMLElement | null>,
+    largeRef: RefObject<HTMLElement | null>,
+    smallRef: RefObject<HTMLElement | null>,
     deps: unknown[] = [],
     gap = 32,
     minViewport = 1280
-): boolean {
-    const [fits, setFits] = useState(false)
+): TitleSize {
+    const [size, setSize] = useState<TitleSize>(false)
 
     useIsoLayoutEffect(() => {
         const row = rowRef.current
         const nav = navRef.current
-        const runway = runwayRef.current
-        if (!row || !nav || !runway) return
+        const large = largeRef.current
+        const small = smallRef.current
+        if (!row || !nav || !large || !small) return
 
         const measure = () => {
             const navW = nav.offsetWidth
-            if (navW === 0 || window.innerWidth < minViewport) return setFits(false)
+            if (navW === 0 || window.innerWidth < minViewport) return setSize(false)
             const cs = getComputedStyle(row)
-            const rowW = row.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)
-            setFits(runway.offsetWidth + navW + gap <= rowW)
+            const free = row.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) - navW - gap
+            setSize(large.offsetWidth <= free ? 'lg' : small.offsetWidth <= free ? 'sm' : false)
         }
 
         measure()
@@ -51,5 +57,5 @@ export function useTitleFits(
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, deps)
 
-    return fits
+    return size
 }

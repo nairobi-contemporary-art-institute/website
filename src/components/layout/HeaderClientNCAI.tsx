@@ -54,8 +54,10 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
     const rowRef = useRef<HTMLDivElement>(null)
     const navSectionRef = useRef<HTMLDivElement>(null)
     const runwayRef = useRef<HTMLDivElement>(null)
-    // Full title only replaces the compact mark when it fits beside the nav (locale + nav dependent)
-    const titleFits = useTitleFits(rowRef, navSectionRef, runwayRef, [locale])
+    const runwaySmRef = useRef<HTMLDivElement>(null)
+    // Full title replaces the compact mark when it fits beside the nav: large if room, else small (locale + nav dependent)
+    const titleSize = useTitleFits(rowRef, navSectionRef, runwayRef, runwaySmRef, [locale])
+    const titleFits = titleSize !== false
 
     // Animation for logo matching the legacy one exactly
     useGSAP(() => {
@@ -327,11 +329,15 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                                     <span className="text-3xl font-bold tracking-tighter transition-colors pt-2">NCAI</span>
                                 </div>
 
-                                {/* Invisible copy of the full title: measured to decide whether it fits beside the nav */}
+                                {/* Invisible copies of the full title (large + small): measured to decide what fits beside the nav */}
                                 <div aria-hidden="true" className="pointer-events-none invisible absolute left-0 top-0 h-0 w-0 overflow-hidden">
                                     <div ref={runwayRef} className="flex w-max items-center whitespace-nowrap">
-                                        <Logo className="h-8 md:h-10 w-auto me-4" />
-                                        <span className="text-xl md:text-3xl font-bold tracking-tight">{t('title')}</span>
+                                        <Logo className="h-10 w-auto me-4" />
+                                        <span className="text-3xl font-bold tracking-tight">{t('title')}</span>
+                                    </div>
+                                    <div ref={runwaySmRef} className="flex w-max items-center whitespace-nowrap">
+                                        <Logo className="h-8 w-auto me-4" />
+                                        <span className="text-xl font-bold tracking-tight">{t('title')}</span>
                                     </div>
                                 </div>
 
@@ -344,8 +350,8 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                                     )}
                                     aria-hidden="true"
                                 >
-                                    <Logo className="h-8 md:h-10 w-auto me-4" />
-                                    <span className="text-xl md:text-3xl font-bold tracking-tight">
+                                    <Logo className={cn("w-auto me-4", titleSize === 'sm' ? "h-8" : "h-10")} />
+                                    <span className={cn("font-bold tracking-tight", titleSize === 'sm' ? "text-xl" : "text-3xl")}>
                                         {t('title')}
                                     </span>
                                 </div>
