@@ -53,39 +53,42 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
 
     // Animation for logo matching the legacy one exactly
     useGSAP(() => {
-        if (window.innerWidth < 768) return
+        // Full title only fits beside the nav from xl (1280px); below that the compact mark stays.
+        const mm = gsap.matchMedia()
+        mm.add("(min-width: 1280px)", () => {
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: typeof document !== 'undefined' ? document.body : null,
+                    start: "top top",
+                    end: "200px top",
+                    scrub: 0.5,
+                }
+            })
 
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: typeof document !== 'undefined' ? document.body : null,
-                start: "top top",
-                end: "200px top",
-                scrub: 0.5,
-            }
-        })
-
-        tl.to(initialLogoRef.current, {
-            opacity: 0,
-            x: -20,
-            scale: 0.8,
-            duration: 1,
-            ease: "power2.inOut"
-        }, 0)
-        .fromTo(fullLogoRef.current,
-            {
-                clipPath: "inset(0% 100% 0% 0%)",
+            tl.to(initialLogoRef.current, {
                 opacity: 0,
-                x: 20
-            },
-            {
-                clipPath: "inset(0% 0% 0% 0%)",
-                opacity: 1,
-                x: 0,
-                duration: 1.5,
+                x: -20,
+                scale: 0.8,
+                duration: 1,
                 ease: "power2.inOut"
-            },
-            0
-        )
+            }, 0)
+            .fromTo(fullLogoRef.current,
+                {
+                    clipPath: "inset(0% 100% 0% 0%)",
+                    opacity: 0,
+                    x: 20
+                },
+                {
+                    clipPath: "inset(0% 0% 0% 0%)",
+                    opacity: 1,
+                    x: 0,
+                    duration: 1.5,
+                    ease: "power2.inOut"
+                },
+                0
+            )
+        })
+        return () => mm.revert()
     }, { scope: headerRef, dependencies: [locale] })
 
     // Scroll listener for sticky header styling and smart hide/show
@@ -322,7 +325,7 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                                 {/* Target State: Full Title (revealed on scroll) */}
                                 <div
                                     ref={fullLogoRef}
-                                    className="hidden md:flex items-center absolute left-0 whitespace-nowrap opacity-0"
+                                    className="hidden xl:flex items-center absolute left-0 whitespace-nowrap opacity-0"
                                     aria-hidden="true"
                                 >
                                     <Logo className="h-8 md:h-10 w-auto mr-4" />
