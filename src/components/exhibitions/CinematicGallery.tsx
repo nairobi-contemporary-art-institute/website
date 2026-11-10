@@ -202,7 +202,7 @@ export function CinematicGallery({ images, locale, title, className }: Cinematic
                             </div>
 
                             {localizedCaption && (
-                                <figcaption className="mt-4 max-w-md whitespace-normal premium-gallery-text text-xs md:text-sm normal-case text-white/70 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <figcaption className="mt-4 max-w-md whitespace-normal premium-gallery-text text-xs md:text-sm normal-case text-white/80 leading-relaxed">
                                     <MarkdownText text={localizedCaption} />
                                 </figcaption>
                             )}

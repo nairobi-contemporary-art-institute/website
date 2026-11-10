@@ -41,10 +41,10 @@ export function WhatsOnFilter({
                                     key={cat}
                                     onClick={() => onCategoryChange(cat === 'All' ? '' : cat)}
                                     className={cn(
-                                        "px-4 md:px-6 py-4 text-xs md:text-sm font-bold uppercase tracking-widest transition-colors flex-grow md:flex-grow-0 border-r border-b border-[#333]",
+                                        "px-4 md:px-6 py-4 text-sm font-bold uppercase tracking-widest transition-colors flex-grow md:flex-grow-0 border-r border-b border-[#333]",
                                         isActive 
                                             ? "bg-white text-black" 
-                                            : "bg-[#2A2A2A] text-[#aaa] hover:bg-[#333] hover:text-white"
+                                            : "bg-[#2A2A2A] text-[#d4d4d4] hover:bg-[#333] hover:text-white"
                                     )}
                                 >
                                     {translateLabel(t, cat)}
@@ -60,8 +60,8 @@ export function WhatsOnFilter({
                 
                 {/* Left Side: Checkboxes - within container */}
                 <div className="page-container py-6 md:pt-10 md:pb-8 flex-1">
-                    <div className="flex flex-wrap items-center gap-x-6 gap-y-4 text-xs md:text-sm text-[#ccc] font-medium tracking-wide">
-                        <span className="uppercase text-xs md:text-xs font-bold tracking-widest text-white mr-2">
+                    <div className="flex flex-wrap items-center gap-x-6 gap-y-4 text-sm text-[#e0e0e0] font-medium tracking-wide">
+                        <span className="uppercase text-xs font-bold tracking-widest text-white mr-2">
                             {t('suitableFor')}:
                         </span>
                         {tags.map((tag) => {

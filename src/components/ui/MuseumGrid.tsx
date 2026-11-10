@@ -108,7 +108,7 @@ export function MuseumGrid({
             {/* Isotope Masonry Grid */}
             <motion.div 
                 layout
-                className={cn("grid w-full bg-background-dark", gridGap, gridColumns)}
+                className={cn("grid w-full", gridGap, gridColumns)}
             >
                 <AnimatePresence mode="popLayout">
                     {filteredItems.map((item, index) => (

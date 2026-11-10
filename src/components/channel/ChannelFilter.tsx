@@ -74,10 +74,10 @@ export function ChannelFilter({ posts, locale }: ChannelFilterProps) {
                             key={f.value}
                             onClick={() => handleFilterChange(f.value, seriesFilter)}
                             className={cn(
-                                "px-4 py-2 text-sm font-mono capitalize tracking-widest transition-all",
+                                "px-4 py-2 text-sm font-mono font-normal capitalize tracking-widest transition-all",
                                 filter === f.value
                                     ? "bg-umber/10 text-umber font-bold border-b-2 border-umber"
-                                    : "text-charcoal/70 hover:text-charcoal hover:bg-stone-50"
+                                    : "text-charcoal/80 hover:text-charcoal hover:bg-stone-50"
                             )}
                         >
                             {f.label}

@@ -73,15 +73,14 @@ export function ExhibitHeroSplit({
             className="relative min-h-[60vh] md:min-h-[80vh] flex items-center overflow-hidden pt-32"
             style={{ backgroundColor: bgColor, '--bg-color': bgColor } as React.CSSProperties}
         >
+            {/* Decorative title watermark: kept behind the artwork side and faded out before the text column, so it never sits behind body copy */}
             {(!textArt?.placement || textArt.placement === 'full' || textArt.placement === 'artwork') && (
                 <AnimatedTextArt
                     text={displayArtText}
                     style={textArt?.animationStyle || 'static'}
                     opacity={textArt?.textOpacity ?? 0.15}
                     color={textColor}
-                    className={cn(
-                        textArt?.placement === 'artwork' && "[mask-image:linear-gradient(to_right,black_60%,transparent_95%)]"
-                    )}
+                    className="[mask-image:linear-gradient(to_right,black_0%,black_30%,transparent_52%)]"
                 />
             )}
 
