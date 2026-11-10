@@ -59,67 +59,69 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
 
     // ... (useGSAP and useEffect for scroll stay same)
     useGSAP(() => {
-        // Disable expansion on mobile ( < 768px )
-        if (window.innerWidth < 768) return
+        // The full title only fits beside the nav from xl (1280px). Below that the compact
+        // logomark + NCAI stays and nothing expands (matchMedia reverts on resize).
+        const mm = gsap.matchMedia()
+        mm.add("(min-width: 1280px)", () => {
+            const initialContentWidth = initialLogoRef.current?.offsetWidth || 120
+            const targetContentWidth = runwayRef.current?.offsetWidth || 400
 
-        const initialContentWidth = initialLogoRef.current?.offsetWidth || 120
-        const targetContentWidth = runwayRef.current?.offsetWidth || 400
+            // Account for absolute positioning and container padding to prevent clipping
+            const style = window.getComputedStyle(logoContainerRef.current!)
+            const horizontalPadding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight)
 
-        // Account for absolute positioning and container padding to prevent clipping
-        const style = window.getComputedStyle(logoContainerRef.current!)
-        const horizontalPadding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight)
+            const initialWidth = initialContentWidth + horizontalPadding
+            const targetWidth = targetContentWidth + horizontalPadding
 
-        const initialWidth = initialContentWidth + horizontalPadding
-        const targetWidth = targetContentWidth + horizontalPadding
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: document.body,
+                    start: "top top",
+                    end: "200px top",
+                    scrub: 0.5,
+                }
+            })
 
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: document.body,
-                start: "top top",
-                end: "200px top",
-                scrub: 0.5,
-            }
-        })
-
-        // Animate the container width to push the navigation
-        tl.fromTo(logoContainerRef.current,
-            { width: initialWidth },
-            { width: targetWidth, duration: 1, ease: "none" },
-            0
-        )
-
-        // Sync header height contraction via padding
-        tl.to(headerInnerRef.current, {
-            paddingTop: "0.75rem", // py-3
-            paddingBottom: "0.75rem", // py-3
-            duration: 1,
-            ease: "none"
-        }, 0)
-
-
-        tl.to(initialLogoRef.current, {
-            opacity: 0,
-            x: -20,
-            scale: 0.8,
-            duration: 1,
-            ease: "power2.inOut"
-        }, 0)
-            .fromTo(fullLogoRef.current,
-                {
-                    clipPath: "inset(0% 100% 0% 0%)",
-                    opacity: 0,
-                    x: 20
-                },
-                {
-                    clipPath: "inset(0% 0% 0% 0%)",
-                    opacity: 1,
-                    x: 0,
-                    duration: 1.5,
-                    ease: "power2.inOut"
-                },
+            // Animate the container width to push the navigation
+            tl.fromTo(logoContainerRef.current,
+                { width: initialWidth },
+                { width: targetWidth, duration: 1, ease: "none" },
                 0
             )
 
+            // Sync header height contraction via padding
+            tl.to(headerInnerRef.current, {
+                paddingTop: "0.75rem", // py-3
+                paddingBottom: "0.75rem", // py-3
+                duration: 1,
+                ease: "none"
+            }, 0)
+
+
+            tl.to(initialLogoRef.current, {
+                opacity: 0,
+                x: -20,
+                scale: 0.8,
+                duration: 1,
+                ease: "power2.inOut"
+            }, 0)
+                .fromTo(fullLogoRef.current,
+                    {
+                        clipPath: "inset(0% 100% 0% 0%)",
+                        opacity: 0,
+                        x: 20
+                    },
+                    {
+                        clipPath: "inset(0% 0% 0% 0%)",
+                        opacity: 1,
+                        x: 0,
+                        duration: 1.5,
+                        ease: "power2.inOut"
+                    },
+                    0
+                )
+        })
+        return () => mm.revert()
     }, { scope: headerRef, dependencies: [locale] })
 
     useEffect(() => {
@@ -317,13 +319,13 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
                                 onMouseEnter={closeMegaMenu}
                             >
                                 {/* Dynamic Runway - Provides the measurement for the multi-language title */}
-                                <div ref={runwayRef} className="absolute flex items-center opacity-0 pointer-events-none whitespace-nowrap text-xl md:text-3xl font-bold tracking-tight">
+                                <div ref={runwayRef} className="absolute hidden xl:flex items-center opacity-0 pointer-events-none whitespace-nowrap text-xl md:text-3xl font-bold tracking-tight">
                                     <Logo className="h-10 md:h-12 w-auto mr-4" />
                                     <span>{t('title')}</span>
                                 </div>
 
                                 {/* Initial State: Logomark + NCAI */}
-                                <div ref={initialLogoRef} className="flex items-center md:absolute md:left-0 whitespace-nowrap">
+                                <div ref={initialLogoRef} className="flex items-center xl:absolute xl:left-0 whitespace-nowrap">
                                     <Logo className="h-10 md:h-12 w-auto mr-4 transition-colors" />
                                     <span className="text-3xl font-bold tracking-tighter transition-colors pt-2">NCAI</span>
                                 </div>
@@ -332,7 +334,7 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
                                 <div
                                     ref={fullLogoRef}
                                     className={cn(
-                                        "hidden md:flex items-center absolute left-0 whitespace-nowrap text-xl md:text-3xl font-bold tracking-tight opacity-0 transition-colors duration-300",
+                                        "hidden xl:flex items-center absolute left-0 whitespace-nowrap text-xl md:text-3xl font-bold tracking-tight opacity-0 transition-colors duration-300",
                                         isDark ? "text-white" : "text-umber"
                                     )}
                                     aria-hidden="true"
