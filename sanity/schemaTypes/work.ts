@@ -94,6 +94,20 @@ export const work = defineType({
             of: [{ type: 'reference', to: [{ type: 'category' }] }],
         }),
         defineField({
+            name: 'inNcaiCollection',
+            title: 'In the NCAI collection',
+            type: 'boolean',
+            initialValue: false,
+            description: 'The work belongs to the NCAI collection. Drives the "In the collection" filter on the Artists page. Can be on together with "Exhibited at NCAI".',
+        }),
+        defineField({
+            name: 'exhibitedAtNcai',
+            title: 'Exhibited at NCAI',
+            type: 'boolean',
+            initialValue: false,
+            description: 'The work has been shown at NCAI. Drives the "Exhibited with NCAI" filter on the Artists page. Works linked to an NCAI exhibition below count automatically.',
+        }),
+        defineField({
             name: 'showInCollection',
             title: 'Show in Collection',
             type: 'boolean',
