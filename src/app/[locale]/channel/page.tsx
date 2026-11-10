@@ -36,7 +36,7 @@ export default async function ChannelPage({ params }: { params: Promise<{ locale
     return (
         <div className="page-container pt-52 pb-20 min-h-screen">
             <header className="mb-20">
-                <h1 className="text-6xl md:text-8xl font-light tracking-tighter text-charcoal mb-4">
+                <h1 className="page-title text-charcoal mb-4">
                     {t('title')}
                 </h1>
                 <p className="text-xl md:text-2xl text-umber/80 font-light max-w-2xl leading-relaxed">

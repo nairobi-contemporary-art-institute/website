@@ -170,7 +170,7 @@ export default async function ExhibitionPage({ params }: Props) {
                                     {artistNames}
                                 </h3>
                             )}
-                            <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-display text-charcoal">
+                            <h1 className="detail-title text-charcoal">
                                 {title || 'Untitled'}
                             </h1>
                             <p className="text-sm md:text-base font-bold tracking-tight text-charcoal/80">
@@ -219,7 +219,7 @@ export default async function ExhibitionPage({ params }: Props) {
                         </span>
 
                         <h1 className={cn(
-                            "text-4xl md:text-5xl font-black tracking-tighter uppercase leading-display transition-colors",
+                            "detail-title transition-colors",
                             isDark ? "text-white" : "text-charcoal"
                         )}>
                             {title || 'Untitled'}

@@ -159,6 +159,36 @@
   }
 }
 
+/* Page titles: one h1 voice for the whole site (size, weight, case).
+   `page-title`   = section / index pages (Exhibitions, Channel, About ...)
+   `detail-title` = a single item (exhibition, text, event, artwork ...)
+   Colour, margins and layout stay on the element. Never uppercase or Light. */
+@utility page-title {
+  font-size: var(--text-6xl);
+  line-height: var(--leading-display);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tighter);
+  text-wrap: balance;
+  overflow-wrap: break-word;
+
+  @media (width >= 48rem) {
+    font-size: var(--text-8xl);
+  }
+}
+
+@utility detail-title {
+  font-size: var(--text-4xl);
+  line-height: var(--leading-display);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tighter);
+  text-wrap: balance;
+  overflow-wrap: break-word;
+
+  @media (width >= 48rem) {
+    font-size: var(--text-6xl);
+  }
+}
+
 @layer components {
   .container {
     /* To ensure your margin reads exactly 24px on both left and right, 

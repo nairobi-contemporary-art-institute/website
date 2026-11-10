@@ -96,7 +96,7 @@ export default async function CollectionItemPage({ params }: { params: Promise<{
                     {/* Right: Info */}
                     <div className="space-y-12">
                         <header className="space-y-4">
-                            <h1 className="text-4xl md:text-6xl font-bold tracking-tighter text-charcoal italic leading-none">
+                            <h1 className="detail-title text-charcoal italic">
                                 {title}
                             </h1>
                             <Link

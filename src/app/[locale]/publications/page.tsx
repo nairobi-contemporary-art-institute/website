@@ -23,7 +23,7 @@ export default async function PublicationsPage({ params }: PublicationsPageProps
         // Fallback to empty state if no data is found
         return (
             <div className="bg-sun-bleached-paper min-h-screen py-24 px-section-clamp md:px-20 text-center">
-                <h1 className="text-heading-72 text-charcoal mb-8">NCAI Press</h1>
+                <h1 className="page-title text-charcoal mb-8">NCAI Press</h1>
                 <p className="text-copy-20 text-deep-umber/80 italic">Publications coming soon.</p>
             </div>
         );
@@ -41,7 +41,7 @@ export default async function PublicationsPage({ params }: PublicationsPageProps
                 <p className="text-xs font-bold text-deep-umber/80 capitalize tracking-widest mb-4">
                     {pageLabel}
                 </p>
-                <h1 className="text-heading-72 text-charcoal mb-8">
+                <h1 className="page-title text-charcoal mb-8">
                     {pageTitle}
                 </h1>
                 {header?.description && (

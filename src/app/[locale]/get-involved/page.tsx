@@ -62,7 +62,7 @@ export default async function GetInvolvedPage({ params }: { params: Promise<{ lo
                         <Grid columns={{ sm: 1, md: 12 }} gap={24}>
                             <GridCell column={{ sm: 1, md: 8 }} className="items-start justify-start p-0">
                                 <div className="max-w-4xl space-y-8">
-                                    <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-charcoal capitalize leading-display">
+                                    <h1 className="page-title text-charcoal">
                                         {title}
                                     </h1>
                                     {heroHeadline && (
