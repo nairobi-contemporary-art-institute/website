@@ -93,7 +93,7 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
             },
             0
         )
-    }, { scope: headerRef, dependencies: [locale, titleFits] })
+    }, { scope: headerRef, dependencies: [locale, titleFits], revertOnUpdate: true })
 
     // Scroll listener for sticky header styling and smart hide/show
     useEffect(() => {

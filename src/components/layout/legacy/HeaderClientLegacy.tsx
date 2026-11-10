@@ -68,7 +68,7 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
         if (!titleFits) return
         const rtl = document.documentElement.dir === 'rtl'
         const mm = gsap.matchMedia()
-        mm.add("(min-width: 768px)", () => {
+        mm.add("(min-width: 1280px)", () => {
             const initialContentWidth = initialLogoRef.current?.offsetWidth || 120
             const targetContentWidth = runwayRef.current?.offsetWidth || 400
 
@@ -128,7 +128,7 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
                 )
         })
         return () => mm.revert()
-    }, { scope: headerRef, dependencies: [locale, titleFits] })
+    }, { scope: headerRef, dependencies: [locale, titleFits], revertOnUpdate: true })
 
     useEffect(() => {
         const banner = bannerRef.current
