@@ -4,7 +4,7 @@ import { sanityFetch } from '@/sanity/lib/client'
 import { TEXTS_QUERY } from '@/sanity/lib/queries'
 import { Link } from '@/i18n'
 import { isTextType, TEXTS_PAGE_SIZE, type TextType } from '@/lib/texts'
-import { TextCard } from '@/components/texts/TextCard'
+import { TextCard, TextRow } from '@/components/texts/TextCard'
 import { TextTypeFilter } from '@/components/texts/TextTypeFilter'
 
 type SearchParams = Promise<{ type?: string | string[]; page?: string | string[] }>
@@ -42,6 +42,8 @@ export default async function TextsPage({ params, searchParams }: { params: Prom
 
     const totalPages = Math.max(1, Math.ceil(total / TEXTS_PAGE_SIZE))
     const [feature, ...rest] = page === 1 ? items : [null, ...items]
+    const pair = rest.slice(0, 2)
+    const list = rest.slice(2)
     const pageHref = (p: number) => ({
         pathname: '/texts' as const,
         query: { ...(type ? { type } : {}), ...(p > 1 ? { page: String(p) } : {}) },
@@ -65,11 +67,20 @@ export default async function TextsPage({ params, searchParams }: { params: Prom
                             <TextCard text={feature} locale={locale} variant="feature" />
                         </div>
                     )}
-                    {rest.length > 0 && (
-                        <ul className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
-                            {rest.map((text: any) => (
-                                <li key={text._id}>
+                    {pair.length > 0 && (
+                        <ul className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-14">
+                            {pair.map((text: any, i: number) => (
+                                <li key={text._id} className={i === 1 ? 'md:mt-24' : undefined}>
                                     <TextCard text={text} locale={locale} />
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                    {list.length > 0 && (
+                        <ul className="mt-16 md:mt-24 border-t border-charcoal/15">
+                            {list.map((text: any) => (
+                                <li key={text._id}>
+                                    <TextRow text={text} locale={locale} />
                                 </li>
                             ))}
                         </ul>

@@ -1,4 +1,4 @@
-import { getLocalizedValue, portableTextToPlainText } from '../sanity/lib/utils'
+import { getLocalizedValue } from '../sanity/lib/utils'
 
 /**
  * Canonical vocabulary for Texts (see CONTEXT.md → Text).
@@ -20,12 +20,6 @@ export function isTextType(value: unknown): value is TextType {
 }
 
 export const TEXTS_PAGE_SIZE = 12
-
-/** Estimated reading time in whole minutes (~200 wpm), minimum 1. */
-export function readingTime(blocks: any[] | undefined): number {
-    const words = portableTextToPlainText(blocks || []).split(/\s+/).filter(Boolean).length
-    return Math.max(1, Math.round(words / 200))
-}
 
 const TEXT_PATHS: Record<string, string> = {
     textPiece: '/texts/',
