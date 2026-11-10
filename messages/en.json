@@ -215,6 +215,8 @@
             "nextText": "Next text",
             "textNavigation": "More texts",
             "pagination": "Pagination",
+            "pdf": "PDF",
+            "event": "Event page",
             "newer": "Newer",
             "older": "Older",
             "pageOf": "Page {page} of {total}",
