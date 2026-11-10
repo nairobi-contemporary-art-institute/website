@@ -162,9 +162,9 @@
             "description": "Actualités, entretiens et regards du NCAI.",
             "noContent": "Aucun contenu trouvé",
             "filterAll": "Tous",
-            "filterFilm": "Film",
-            "filterAudio": "Audio",
-            "filterText": "Texte"
+            "filterFilm": "Regarder",
+            "filterAudio": "Écouter",
+            "filterText": "Lire"
         },
         "texts": {
             "title": "Textes",

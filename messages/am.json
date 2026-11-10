@@ -162,9 +162,9 @@
             "description": "ከNCAI የተገኙ ዜናዎች፣ ቃለ መጠይቆችና ግንዛቤዎች።",
             "noContent": "ምንም ይዘት አልተገኘም",
             "filterAll": "ሁሉም",
-            "filterFilm": "ፊልም",
-            "filterAudio": "ድምፅ",
-            "filterText": "ጽሑፍ"
+            "filterFilm": "ተመልከት",
+            "filterAudio": "ስማ",
+            "filterText": "አንብብ"
         },
         "texts": {
             "title": "ጽሑፎች",
