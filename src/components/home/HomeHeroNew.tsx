@@ -150,7 +150,7 @@ function SlideContent({ slide, locale, textOnRight = true }: { slide: HeroSlide;
                     )}
                     {title && (
                         <h1 
-                            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-display mb-4 md:mb-6 capitalize transition-all duration-700"
+                            className="text-[clamp(2rem,6vw,4.5rem)] font-black tracking-tighter leading-display break-words mb-4 md:mb-6 capitalize transition-all duration-700"
                             style={textStyle}
                         >
                             {title.split('\n').map((line, i) => (
@@ -271,7 +271,7 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
 
     return (
         <section
-            className="relative w-full overflow-hidden flex-1 min-h-[600px] max-md:min-h-dvh"
+            className="relative flex w-full flex-col overflow-hidden flex-1 min-h-[600px] max-md:min-h-dvh"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
         >
@@ -349,8 +349,8 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                     // Split (image left / text right): artwork fills its half edge to edge, text sits
                     // in the container's right column. `start`/`ps` flip automatically in RTL.
                     const splitContent = layout === 'split-right' && (
-                        <div className="relative w-full h-full flex flex-col md:block">
-                            <div className="relative overflow-hidden max-md:mt-36 max-md:h-[28%] md:absolute md:inset-y-0 md:start-0 md:w-1/2">
+                        <div className="relative flex w-full flex-1 flex-col">
+                            <div className="relative overflow-hidden max-md:mt-36 max-md:h-[28dvh] md:absolute md:inset-y-0 md:start-0 md:w-1/2">
                                 {slide.image?.asset && (
                                     <Image
                                         src={urlFor(slide.image).width(1920).quality(85).url()}
@@ -366,10 +366,10 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                                 )}
                                 {captionTooltip}
                             </div>
-                            <div className="flex-1 min-h-0 md:absolute md:inset-0 md:z-20">
+                            <div className="relative z-20 flex flex-1 flex-col">
                                 {/* md: clear the fixed header (~132px incl. status bar) so text centres in the visible hero */}
-                                <div className="page-container h-full md:grid md:grid-cols-2 md:pt-[132px]">
-                                    <div className="max-md:pt-5 max-md:pb-24 md:h-full md:flex md:items-center md:col-start-2 md:ps-12">
+                                <div className="page-container flex-1 md:grid md:grid-cols-2 md:pt-[132px]">
+                                    <div className="max-md:pt-5 max-md:pb-24 md:flex md:items-center md:col-start-2 md:ps-12">
                                         <SlideContent slide={slide} locale={locale} textOnRight />
                                     </div>
                                 </div>
@@ -378,7 +378,7 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                     )
 
                     const content = splitContent || (
-                        <div className="relative w-full h-full">
+                        <div className="relative flex w-full flex-1 flex-col">
                             {/* Image layer (z-0) */}
                             <div className="absolute inset-0 z-0">
                                 {imageElement}
@@ -386,11 +386,11 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                             </div>
 
                             {/* Text content layer (z-20) */}
-                            <div className="absolute inset-0 z-20">
-                                <div className={`page-container h-full flex ${justifyClass}`}>
+                            <div className="relative z-20 flex flex-1 flex-col">
+                                <div className={`page-container flex flex-1 ${justifyClass}`}>
                                     {/* Phones: image fills the top, text sits below it at full width */}
                                     <div
-                                        className="h-full flex items-center max-md:!w-full max-md:items-end max-md:pb-12"
+                                        className="flex items-center max-md:!w-full max-md:items-end max-md:pb-12"
                                         style={{ width: `${contentWidth}%` }}
                                     >
                                         <SlideContent slide={slide} locale={locale} textOnRight={textOnRight} />
@@ -407,11 +407,11 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.8, ease: 'easeInOut' }}
-                            className="absolute inset-0"
+                            className="relative flex flex-1 flex-col"
                             style={{ backgroundColor: bgColor }}
                         >
                             {href !== '#' ? (
-                                <Link href={href} className="block w-full h-full">
+                                <Link href={href} className="flex w-full flex-1 flex-col">
                                     {content}
                                 </Link>
                             ) : content}
