@@ -68,10 +68,27 @@ const imageVariants: Variants = {
     center: { x: 0, opacity: 1, transition: { duration: 0.7, ease: SWIPE_EASE_OUT } },
     exit: { x: '-100%', opacity: 0, transition: { duration: 0.5, ease: SWIPE_EASE_IN } },
 }
+// Text container: only the exit lives here (groups below own their entrance), so the whole
+// block still leaves together in 0.48s. Entrance is staggered, all ending by 0.82s, the same
+// instant the old single 0.12s + 0.7s entrance ended, so the slide change is no longer.
 const textVariants: Variants = {
-    enter: { x: 64, opacity: 0 },
-    center: { x: 0, opacity: 1, transition: { duration: 0.7, delay: 0.12, ease: SWIPE_EASE_OUT } },
+    enter: {},
+    center: {},
     exit: { x: -96, opacity: 0, transition: { duration: 0.4, delay: 0.08, ease: SWIPE_EASE_IN } },
+}
+const ENTRANCE = { a: 0.1, b: 0.22, c: 0.32 } // eyebrow+title, then date+location, then central info
+const groupVariants = (delay: number): Variants => ({
+    enter: { x: 48, opacity: 0 },
+    center: { x: 0, opacity: 1, transition: { duration: 0.5, delay, ease: SWIPE_EASE_OUT } },
+})
+const groupFadeVariants = (delay: number): Variants => ({
+    enter: { opacity: 0 },
+    center: { opacity: 1, transition: { duration: 0.3, delay } },
+})
+const textFadeVariants: Variants = {
+    enter: {},
+    center: {},
+    exit: { opacity: 0, transition: { duration: 0.3 } },
 }
 const fadeVariants: Variants = {
     enter: { opacity: 0 },
@@ -141,6 +158,8 @@ function SlideContent({ slide, locale, textOnRight = true }: { slide: HeroSlide;
     const baseColor = slide.forceBlackText || isLight(bgColor) ? '#000000' : '#FFFFFF'
 
     const textStyle = { color: baseColor }
+    const reduce = useReducedMotion()
+    const gv = (delay: number) => (reduce ? groupFadeVariants(delay) : groupVariants(delay))
     const mutedTextStyle = { color: baseColor, opacity: 0.85 }
     const isCentered = slide.layout === 'centered' || slide.contentPosition === 'center'
     const textAlignClass = isCentered ? 'text-center' : 'text-start'
@@ -152,7 +171,7 @@ function SlideContent({ slide, locale, textOnRight = true }: { slide: HeroSlide;
                 textAlignClass
             )}>
                 {/* Heading and content share one left edge (docs/DESIGN_PRINCIPLES.md) */}
-                <div className="mb-4 md:mb-6 transition-all duration-700">
+                <motion.div variants={gv(ENTRANCE.a)} className="mb-4 md:mb-6">
                     {preHeading && (
                         <p 
                             className="text-sm font-bold mb-4"
@@ -174,23 +193,27 @@ function SlideContent({ slide, locale, textOnRight = true }: { slide: HeroSlide;
                             ))}
                         </h1>
                     )}
-                </div>
+                </motion.div>
 
                 <div className="flex flex-col gap-y-4 transition-all duration-700">
-                    {subtitle && (
-                        <p 
-                            className="text-base md:text-lg max-w-xl font-medium tracking-tight leading-relaxed"
-                            style={mutedTextStyle}
-                        >
-                            {subtitle}
-                        </p>
+                    {(subtitle || slide.description) && (
+                        <motion.div variants={gv(ENTRANCE.c)} className="flex flex-col gap-y-4">
+                            {subtitle && (
+                                <p 
+                                    className="text-base md:text-lg max-w-xl font-medium tracking-tight leading-relaxed"
+                                    style={mutedTextStyle}
+                                >
+                                    {subtitle}
+                                </p>
+                            )}
+                            {slide.description && (
+                                <div className="text-sm md:text-base max-w-xl leading-relaxed" style={{ color: baseColor, opacity: 0.9 }}>
+                                    <PortableText value={getLocalizedValue(slide.description, locale)} locale={locale} noProse={true} />
+                                </div>
+                            )}
+                        </motion.div>
                     )}
-                    {slide.description && (
-                        <div className="text-sm md:text-base max-w-xl leading-relaxed" style={{ color: baseColor, opacity: 0.9 }}>
-                            <PortableText value={getLocalizedValue(slide.description, locale)} locale={locale} noProse={true} />
-                        </div>
-                    )}
-                    <div className="flex flex-col gap-y-2 mt-2">
+                    <motion.div variants={gv(ENTRANCE.b)} className="flex flex-col gap-y-2 mt-2">
                         {dateLabel && (
                             <span 
                                 className="text-sm md:text-base font-bold"
@@ -207,7 +230,7 @@ function SlideContent({ slide, locale, textOnRight = true }: { slide: HeroSlide;
                                 {location}
                             </span>
                         )}
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </div>
@@ -223,7 +246,7 @@ export function HomeHeroNew({ heroData, locale }: HomeHeroNewProps) {
     const isRtl = locale === 'ar'
     const reduceMotion = useReducedMotion()
     const imgV = reduceMotion ? fadeVariants : imageVariants
-    const txtV = reduceMotion ? fadeVariants : textVariants
+    const txtV = reduceMotion ? textFadeVariants : textVariants
     const [sampledLight, setSampledLight] = useState<boolean | null>(null)
 
     // Brightness of the image strip behind the arrow, sampled from the tiny blur placeholder.
