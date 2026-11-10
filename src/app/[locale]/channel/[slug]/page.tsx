@@ -85,7 +85,7 @@ export default async function ChannelPostPage({ params }: { params: Promise<{ lo
                     </div>
                 )}
 
-                <h1 className="text-4xl md:text-6xl font-bold tracking-tighter text-charcoal leading-tight">
+                <h1 className="detail-title text-charcoal">
                     {title || 'Untitled'}
                 </h1>
 

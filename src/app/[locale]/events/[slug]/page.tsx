@@ -96,7 +96,7 @@ export default async function EventPage({ params }: Props) {
                         {isPast && <span className="px-2 py-1 bg-stone-200 text-stone-500">Archived</span>}
                     </div>
 
-                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tighter text-charcoal mb-8 leading-display">
+                    <h1 className="detail-title text-charcoal mb-8">
                         {title}
                     </h1>
 

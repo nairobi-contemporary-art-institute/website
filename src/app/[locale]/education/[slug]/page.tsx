@@ -109,7 +109,7 @@ export default async function ProgramPage({ params }: Props) {
                         <span className="px-2 py-1 bg-stone-200 text-stone-600">{audienceLabel}</span>
                     </div>
 
-                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tighter text-charcoal mb-8 leading-display">
+                    <h1 className="detail-title text-charcoal mb-8">
                         {title}
                     </h1>
 

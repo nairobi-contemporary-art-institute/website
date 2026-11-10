@@ -160,7 +160,7 @@ export default async function TextPage({ params }: { params: Params }) {
                         {typeLabel}
                     </Link>
                 )}
-                <h1 className="mt-6 text-4xl md:text-6xl font-light leading-none tracking-tight text-charcoal text-balance">
+                <h1 className="detail-title mt-6 text-charcoal">
                     {titleEntry?.value}
                 </h1>
                 {standfirst && (

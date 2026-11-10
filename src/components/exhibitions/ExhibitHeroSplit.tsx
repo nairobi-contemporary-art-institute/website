@@ -109,7 +109,7 @@ export function ExhibitHeroSplit({
                                         {artistName}
                                     </h3>
                                 )}
-                                <h1 className={cn("text-5xl font-black uppercase tracking-tighter leading-display", textColor === 'white' ? 'text-white' : 'text-charcoal')}>
+                                <h1 className={cn("detail-title", textColor === 'white' ? 'text-white' : 'text-charcoal')}>
                                     {localizedTitle}
                                 </h1>
                             </div>

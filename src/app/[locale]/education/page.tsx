@@ -76,7 +76,7 @@ export default async function EducationPage({ params }: Props) {
                 <div className="relative z-10 page-container h-full flex flex-col justify-end pb-24">
                     <div className="w-full lg:w-1/2 text-start">
                         <div className="mb-6">
-                            <h1 className="text-4xl md:text-5xl font-medium tracking-tighter text-white leading-none">
+                            <h1 className="page-title text-white">
                                 {title}
                             </h1>
                         </div>

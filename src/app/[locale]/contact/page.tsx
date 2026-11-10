@@ -16,7 +16,7 @@ export default function ContactPage() {
     return (
         <div className="page-container page-header-padding pb-20">
             <header className="max-w-3xl mb-16">
-                <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-charcoal mb-4">
+                <h1 className="page-title text-charcoal mb-4">
                     {t('title')}
                 </h1>
                 <ResponsiveDivider variant="curved" weight="medium" className="text-umber/80" />

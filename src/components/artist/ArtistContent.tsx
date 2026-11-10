@@ -46,7 +46,7 @@ export function ArtistContent({ artist, locale }: ArtistContentProps) {
         <div className="space-y-24">
             {/* Top Section: Split Layout */}
             <header className="border-b border-charcoal/5 pb-8 mb-16">
-                <h1 className="text-4xl leading-[46px] font-bold text-charcoal tracking-tight">
+                <h1 className="detail-title text-charcoal">
                     {name}
                 </h1>
             </header>

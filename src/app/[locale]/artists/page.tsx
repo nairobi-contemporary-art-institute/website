@@ -51,7 +51,7 @@ export default async function ArtistsPage({ params }: Props) {
             <GridSystem unstable_useContainer>
                 <div className="page-header-padding pb-24">
                     <header className="mb-24">
-                        <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-white leading-none uppercase">
+                        <h1 className="page-title text-white">
                             {title}
                         </h1>
                         {description && (

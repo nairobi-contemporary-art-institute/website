@@ -53,7 +53,7 @@ export default async function AccessibilityPage({ params }: Props) {
         <div className="min-h-screen bg-stone-50/20 pb-32">
             <header className="page-container page-header-padding pb-20 border-b border-charcoal/5">
                 <div className="max-w-4xl">
-                    <h1 className="text-6xl md:text-8xl font-light tracking-tighter text-charcoal mb-8">
+                    <h1 className="page-title text-charcoal mb-8">
                         {title}
                     </h1>
                     {description ? (
