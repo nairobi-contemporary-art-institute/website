@@ -202,10 +202,9 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                 }
             ]
         },
-        { href: '/channel', label: 'Channel' },
         {
-            href: '/texts',
-            label: 'Texts',
+            href: '/channel',
+            label: 'Channel',
             columns: [
                 {
                     title: 'Read', links: [
@@ -214,7 +213,9 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                         { label: 'Conversations', href: '/texts?type=conversation' },
                         { label: "Artists' Writings", href: '/texts?type=artistWriting' }
                     ]
-                }
+                },
+                { title: 'Listen', links: [{ label: 'Podcasts', href: '/channel?type=audio' }] },
+                { title: 'Watch', links: [{ label: 'Videos', href: '/channel?type=film' }] }
             ]
         },
         {

@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import { getTranslations, getMessages } from 'next-intl/server'
 import { client, sanityFetch } from '@/sanity/lib/client'
-import { POSTS_QUERY } from '@/sanity/lib/queries'
+import { POSTS_QUERY, CHANNEL_TEXTS_QUERY } from '@/sanity/lib/queries'
 import { ChannelFilter } from '@/components/channel/ChannelFilter'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -16,10 +16,22 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function ChannelPage({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params
     const t = await getTranslations({ locale, namespace: 'Pages.channel' })
-    const posts = await sanityFetch<any[]>({
-        query: POSTS_QUERY,
-        tags: ['post']
-    })
+    const [postList, textList] = await Promise.all([
+        sanityFetch<any[]>({ query: POSTS_QUERY, tags: ['post'] }),
+        sanityFetch<any[]>({ query: CHANNEL_TEXTS_QUERY, tags: ['textPiece'] }),
+    ])
+
+    // Texts join the Channel as "Read" items; they keep their own /texts/[slug] page.
+    const texts = (textList || []).map((text) => ({
+        ...text,
+        href: `/${locale}/texts/${text.slug}`,
+        mediaType: 'text',
+        excerpt: text.standfirst,
+        mainImage: text.leadImage,
+    }))
+    const posts = [...(postList || []), ...texts].sort(
+        (a, b) => new Date(b.publishedAt || 0).getTime() - new Date(a.publishedAt || 0).getTime()
+    )
 
     return (
         <div className="page-container pt-52 pb-20 min-h-screen">
