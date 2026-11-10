@@ -360,7 +360,7 @@ html {
 
   /* Page Layout Utilities */
   .page-header-padding {
-    padding-top: 112px; /* 88px header + 24px buffer */
+    padding-top: 164px; /* phones: fixed header + wrapped notice bar (~140px) + 24px buffer */
   }
 
   @media (min-width: 768px) {

@@ -231,7 +231,7 @@ export default async function GetInvolvedPage({ params }: { params: Promise<{ lo
 
                     {/* Contact Section */}
                     {data.contactSection && (
-                        <section className="px-section-clamp bg-umber/5 -mx-section-clamp px-section-clamp py-32 border-y border-umber/10">
+                        <section className="px-section-clamp bg-umber/5 -mx-section-clamp px-section-clamp py-32 border-y border-umber/10 overflow-x-clip">
                             <Grid columns={{ sm: 1, md: 12 }}>
                                 <GridCell column={{ sm: 1, md: 8 }} className="mx-auto text-center space-y-12">
                                     <h2 className="text-4xl md:text-6xl font-light tracking-tighter text-charcoal italic leading-tight">
