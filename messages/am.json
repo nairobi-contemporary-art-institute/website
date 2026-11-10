@@ -299,5 +299,31 @@
         "description": "ያልተጠበቀ ስህተት ተከስቷል። ማሳወቂያ ደርሶናል፤ እየተመለከትነው ነው።",
         "tryAgain": "እንደገና ይሞክሩ",
         "goHome": "ወደ መነሻ ገጽ ተመለስ"
+    },
+    "WhatsOn": {
+        "title": "ወቅታዊ ዝግጅቶች",
+        "all": "ሁሉም",
+        "exhibitions": "ኤግዚቢሽኖች",
+        "performances": "ትርኢቶች",
+        "screenings": "የፊልም ዕይታዎች",
+        "events": "ዝግጅቶች",
+        "talks": "ውይይቶች",
+        "tours": "ጉብኝቶች",
+        "workshops": "አውደ ጥናቶች",
+        "members": "አባላት",
+        "families": "ቤተሰቦች",
+        "children": "ሕፃናት",
+        "teens": "ወጣቶች",
+        "groups": "ቡድኖች",
+        "individuals": "ግለሰቦች",
+        "students": "ተማሪዎች",
+        "supportedAccess": "የድጋፍ አገልግሎት",
+        "suitableFor": "ተስማሚ ለ",
+        "calendar": "የቀን መቁጠሪያ",
+        "current": "አሁን ያሉ",
+        "upcoming": "የሚመጡ",
+        "archive": "ማህደር",
+        "result": "ውጤት",
+        "results": "ውጤቶች"
     }
 }

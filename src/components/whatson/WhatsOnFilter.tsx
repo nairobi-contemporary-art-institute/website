@@ -3,6 +3,8 @@
 import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { X, ChevronDown } from "lucide-react"
+import { useTranslations } from "next-intl"
+import { translateLabel } from "@/lib/labels"
 
 export interface WhatsOnFilterProps {
     categories: string[]
@@ -25,6 +27,7 @@ export function WhatsOnFilter({
     isCalendarOpen,
     onCalendarToggle
 }: WhatsOnFilterProps) {
+    const t = useTranslations('WhatsOn')
     return (
         <div className="bg-[#2A2A2A] text-white w-full">
             {/* Top Row: Event Type Selector */}
@@ -44,7 +47,7 @@ export function WhatsOnFilter({
                                             : "bg-[#2A2A2A] text-[#aaa] hover:bg-[#333] hover:text-white"
                                     )}
                                 >
-                                    {cat}
+                                    {translateLabel(t, cat)}
                                 </button>
                             )
                         })}
@@ -59,7 +62,7 @@ export function WhatsOnFilter({
                 <div className="page-container py-6 md:pt-10 md:pb-8 flex-1">
                     <div className="flex flex-wrap items-center gap-x-6 gap-y-4 text-xs md:text-sm text-[#ccc] font-medium tracking-wide">
                         <span className="uppercase text-xs md:text-xs font-bold tracking-widest text-white mr-2">
-                            Event suitable for:
+                            {t('suitableFor')}:
                         </span>
                         {tags.map((tag) => {
                             const isChecked = activeTags.includes(tag);
@@ -80,7 +83,7 @@ export function WhatsOnFilter({
                                     <span className={cn(
                                         "transition-colors",
                                         isChecked ? "text-white" : "group-hover:text-white"
-                                    )}>{tag}</span>
+                                    )}>{translateLabel(t, tag)}</span>
                                 </label>
                             )
                         })}
@@ -92,7 +95,7 @@ export function WhatsOnFilter({
                         onClick={onCalendarToggle}
                         className="bg-black hover:bg-[#111] text-white border-l border-t border-[#333] px-8 h-[60px] md:h-[72px] flex items-center gap-8 font-bold text-xs uppercase tracking-widest transition-colors min-w-[200px] w-full md:w-auto justify-between"
                     >
-                        <span>Calendar</span>
+                        <span>{t('calendar')}</span>
                         <div className="w-6 h-6 flex items-center justify-center relative">
                             {isCalendarOpen ? (
                                 <X className="w-5 h-5 font-light" />

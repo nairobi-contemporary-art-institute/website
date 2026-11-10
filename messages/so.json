@@ -299,5 +299,31 @@
         "description": "Khalad lama filaan ah ayaa dhacay. Waa nala ogeysiiyay, waanu eegaynaa.",
         "tryAgain": "Isku Day Mar Kale",
         "goHome": "Ku Noqo Bogga Hore"
+    },
+    "WhatsOn": {
+        "title": "Maxaa socda",
+        "all": "Dhammaan",
+        "exhibitions": "Bandhigyo",
+        "performances": "Riwaayado",
+        "screenings": "Muujinta filimada",
+        "events": "Dhacdooyin",
+        "talks": "Wada hadallo",
+        "tours": "Booqasho hoggaaminaya",
+        "workshops": "Tababaro",
+        "members": "Xubnaha",
+        "families": "Qoysaska",
+        "children": "Carruurta",
+        "teens": "Dhallinyarada",
+        "groups": "Kooxaha",
+        "individuals": "Shaqsiyaadka",
+        "students": "Ardayda",
+        "supportedAccess": "Gelitaan la taageeray",
+        "suitableFor": "Ku habboon",
+        "calendar": "Jadwalka",
+        "current": "Hadda socda",
+        "upcoming": "Soo socda",
+        "archive": "Kaydka",
+        "result": "natiijo",
+        "results": "natiijooyin"
     }
 }

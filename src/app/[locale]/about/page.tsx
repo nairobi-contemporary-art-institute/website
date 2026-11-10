@@ -1,6 +1,6 @@
 import { sanityFetch } from "@/sanity/lib/client"
 import { ABOUT_PAGE_QUERY, SITE_SETTINGS_QUERY } from "@/sanity/lib/queries"
-import { getLocalizedValue } from "@/sanity/lib/utils"
+import { getLocalizedValue, getLocalizedOrMessage } from "@/sanity/lib/utils"
 import { PortableText } from "@/components/ui/PortableText"
 import { ResponsiveDivider } from '@/components/ui/ResponsiveDivider'
 import Image from "next/image"
@@ -44,8 +44,8 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
     const t = await getTranslations({ locale, namespace: 'Pages.about' })
     const tNav = await getTranslations({ locale, namespace: 'Navigation' })
 
-    const title = getLocalizedValue(aboutPageData?.title, locale) || t('title')
-    const heroHeadline = getLocalizedValue(aboutPageData?.hero?.headline, locale) || t('description')
+    const title = getLocalizedOrMessage(aboutPageData?.title, locale, t('title'))
+    const heroHeadline = getLocalizedOrMessage(aboutPageData?.hero?.headline, locale, t('description'))
     const heroIntro = getLocalizedValue(aboutPageData?.hero?.intro, locale)
     
     // Check global style preference

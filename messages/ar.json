@@ -299,5 +299,31 @@
         "description": "حدث خطأ غير متوقع. تم إبلاغنا ونعمل على معالجته.",
         "tryAgain": "حاول مرة أخرى",
         "goHome": "العودة إلى الرئيسية"
+    },
+    "WhatsOn": {
+        "title": "ما يُعرض الآن",
+        "all": "الكل",
+        "exhibitions": "المعارض",
+        "performances": "العروض الأدائية",
+        "screenings": "العروض السينمائية",
+        "events": "الفعاليات",
+        "talks": "الحوارات",
+        "tours": "الجولات",
+        "workshops": "ورش العمل",
+        "members": "الأعضاء",
+        "families": "العائلات",
+        "children": "الأطفال",
+        "teens": "المراهقون",
+        "groups": "المجموعات",
+        "individuals": "الأفراد",
+        "students": "الطلاب",
+        "supportedAccess": "الوصول المدعوم",
+        "suitableFor": "مناسب لـ",
+        "calendar": "التقويم",
+        "current": "الحالية",
+        "upcoming": "القادمة",
+        "archive": "الأرشيف",
+        "result": "نتيجة",
+        "results": "نتائج"
     }
 }

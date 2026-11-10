@@ -299,5 +299,31 @@
         "description": "Une erreur inattendue est survenue. Nous en avons été informés et nous y travaillons.",
         "tryAgain": "Réessayer",
         "goHome": "Retour à l'accueil"
+    },
+    "WhatsOn": {
+        "title": "Programme",
+        "all": "Tous",
+        "exhibitions": "Expositions",
+        "performances": "Performances",
+        "screenings": "Projections",
+        "events": "Événements",
+        "talks": "Conférences",
+        "tours": "Visites guidées",
+        "workshops": "Ateliers",
+        "members": "Membres",
+        "families": "Familles",
+        "children": "Enfants",
+        "teens": "Adolescents",
+        "groups": "Groupes",
+        "individuals": "Particuliers",
+        "students": "Étudiants",
+        "supportedAccess": "Accès accompagné",
+        "suitableFor": "Convient à",
+        "calendar": "Calendrier",
+        "current": "En cours",
+        "upcoming": "À venir",
+        "archive": "Archives",
+        "result": "résultat",
+        "results": "résultats"
     }
 }
