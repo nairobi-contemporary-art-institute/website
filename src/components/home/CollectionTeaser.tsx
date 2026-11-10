@@ -188,15 +188,14 @@ export function CollectionTeaser({ data, locale }: CollectionTeaserProps) {
                             />
                           </div>
                         ) : (
-                          <div className="aspect-[4/5] w-full h-full flex items-center justify-center text-white/10 text-xs uppercase tracking-widest bg-charcoal">
+                          <div className="aspect-[4/5] w-full h-full flex items-center justify-center text-white/10 text-xs bg-charcoal">
                             {tCol('noImageAvailable')}
                           </div>
                         )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       </div>
                       
                       <div className="flex flex-col gap-2">
-                        <h3 className="text-sm font-bold text-white group-hover:text-white/70 transition-colors uppercase tracking-widest">
+                        <h3 className="text-sm font-bold text-white group-hover:text-white/70 transition-colors tracking-tight">
                           {itemTitle}
                         </h3>
                         <p className="text-xs text-white/70 italic tracking-wider uppercase font-medium">
