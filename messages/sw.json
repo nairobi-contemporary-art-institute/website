@@ -299,5 +299,31 @@
         "description": "Hitilafu isiyotarajiwa imetokea. Tumearifiwa na tunaishughulikia.",
         "tryAgain": "Jaribu Tena",
         "goHome": "Rudi Mwanzo"
+    },
+    "WhatsOn": {
+        "title": "Kinachoendelea",
+        "all": "Yote",
+        "exhibitions": "Maonyesho",
+        "performances": "Maonyesho ya jukwaani",
+        "screenings": "Maonyesho ya filamu",
+        "events": "Matukio",
+        "talks": "Mazungumzo",
+        "tours": "Ziara",
+        "workshops": "Warsha",
+        "members": "Wanachama",
+        "families": "Familia",
+        "children": "Watoto",
+        "teens": "Vijana",
+        "groups": "Vikundi",
+        "individuals": "Watu binafsi",
+        "students": "Wanafunzi",
+        "supportedAccess": "Msaada wa ufikiaji",
+        "suitableFor": "Inafaa kwa",
+        "calendar": "Kalenda",
+        "current": "Yanayoendelea",
+        "upcoming": "Yanayokuja",
+        "archive": "Kumbukumbu",
+        "result": "matokeo",
+        "results": "matokeo"
     }
 }

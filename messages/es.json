@@ -299,5 +299,31 @@
         "description": "Se produjo un error inesperado. Hemos sido notificados y lo estamos revisando.",
         "tryAgain": "Intentar de nuevo",
         "goHome": "Volver al inicio"
+    },
+    "WhatsOn": {
+        "title": "Programación",
+        "all": "Todos",
+        "exhibitions": "Exposiciones",
+        "performances": "Performances",
+        "screenings": "Proyecciones",
+        "events": "Eventos",
+        "talks": "Charlas",
+        "tours": "Visitas guiadas",
+        "workshops": "Talleres",
+        "members": "Socios",
+        "families": "Familias",
+        "children": "Niños",
+        "teens": "Adolescentes",
+        "groups": "Grupos",
+        "individuals": "Personas",
+        "students": "Estudiantes",
+        "supportedAccess": "Acceso asistido",
+        "suitableFor": "Apto para",
+        "calendar": "Calendario",
+        "current": "En curso",
+        "upcoming": "Próximamente",
+        "archive": "Archivo",
+        "result": "resultado",
+        "results": "resultados"
     }
 }

@@ -50,8 +50,8 @@ export default async function ExhibitionsPage({ params }: Props) {
     const items: MuseumCardData[] = (exhibitions || []).map((exh: any): MuseumCardData => ({
         id: exh._id || exh.slug,
         href: `/exhibitions/${exh.slug}`,
-        label: 'Exhibitions',
-        title: getLocalizedValue(exh.title, locale) || 'Untitled',
+        label: te('title'),
+        title: getLocalizedValue(exh.title, locale) || te('untitled'),
         date: exh.startDate ? new Date(exh.startDate).getFullYear().toString() : '',
         image: exh.listImage || exh.homepageImage || exh.mainImage,
         tags: ['Exhibitions'],

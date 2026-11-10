@@ -299,5 +299,31 @@
         "description": "एक अप्रत्याशित त्रुटि हुई। हमें सूचित कर दिया गया है और हम इसकी जाँच कर रहे हैं।",
         "tryAgain": "फिर से प्रयास करें",
         "goHome": "मुखपृष्ठ पर वापस जाएँ"
+    },
+    "WhatsOn": {
+        "title": "क्या हो रहा है",
+        "all": "सभी",
+        "exhibitions": "प्रदर्शनियाँ",
+        "performances": "प्रस्तुतियाँ",
+        "screenings": "फ़िल्म प्रदर्शन",
+        "events": "कार्यक्रम",
+        "talks": "वार्ताएँ",
+        "tours": "भ्रमण",
+        "workshops": "कार्यशालाएँ",
+        "members": "सदस्य",
+        "families": "परिवार",
+        "children": "बच्चे",
+        "teens": "किशोर",
+        "groups": "समूह",
+        "individuals": "व्यक्ति",
+        "students": "विद्यार्थी",
+        "supportedAccess": "सहायक पहुँच",
+        "suitableFor": "इनके लिए उपयुक्त",
+        "calendar": "कैलेंडर",
+        "current": "वर्तमान",
+        "upcoming": "आगामी",
+        "archive": "संग्रह",
+        "result": "परिणाम",
+        "results": "परिणाम"
     }
 }

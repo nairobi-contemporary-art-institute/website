@@ -322,5 +322,31 @@
         "description": "An unexpected error occurred. We have been notified and are looking into it.",
         "tryAgain": "Try Again",
         "goHome": "Back to Home"
+    },
+    "WhatsOn": {
+        "title": "What's On",
+        "all": "All",
+        "exhibitions": "Exhibitions",
+        "performances": "Performances",
+        "screenings": "Screenings",
+        "events": "Events",
+        "talks": "Talks",
+        "tours": "Tours",
+        "workshops": "Workshops",
+        "members": "Members",
+        "families": "Families",
+        "children": "Children",
+        "teens": "Teens",
+        "groups": "Groups",
+        "individuals": "Individuals",
+        "students": "Students",
+        "supportedAccess": "Supported Access",
+        "suitableFor": "Event suitable for",
+        "calendar": "Calendar",
+        "current": "Current",
+        "upcoming": "Upcoming",
+        "archive": "Archive",
+        "result": "result",
+        "results": "results"
     }
 }

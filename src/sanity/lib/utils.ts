@@ -80,3 +80,18 @@ export function getLocalizedValueAsString(
     if (typeof val === 'object' && val._type === 'block') return portableTextToPlainText([val]);
     return String(val);
 }
+
+/**
+ * Page titles: use the CMS value when it exists for this locale, otherwise the
+ * translated UI message, so a CMS field that only has English does not leave an
+ * English title on an Amharic or Arabic page. English keeps the CMS wording.
+ */
+export function getLocalizedOrMessage(array: any, locale: string, message: string): string {
+    if (locale === 'en') return getLocalizedValueAsString(array, 'en') || message
+    if (Array.isArray(array)) {
+        const exact = array.find((item: any) => item._key === locale)
+        const v = exact?.value ?? exact?.text
+        if (typeof v === 'string' && v) return v
+    }
+    return message
+}

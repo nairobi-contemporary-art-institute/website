@@ -299,5 +299,31 @@
         "description": "Ein unerwarteter Fehler ist aufgetreten. Wir wurden benachrichtigt und kümmern uns darum.",
         "tryAgain": "Erneut versuchen",
         "goHome": "Zur Startseite"
+    },
+    "WhatsOn": {
+        "title": "Programm",
+        "all": "Alle",
+        "exhibitions": "Ausstellungen",
+        "performances": "Performances",
+        "screenings": "Filmvorführungen",
+        "events": "Veranstaltungen",
+        "talks": "Gespräche",
+        "tours": "Führungen",
+        "workshops": "Workshops",
+        "members": "Mitglieder",
+        "families": "Familien",
+        "children": "Kinder",
+        "teens": "Jugendliche",
+        "groups": "Gruppen",
+        "individuals": "Einzelpersonen",
+        "students": "Studierende",
+        "supportedAccess": "Unterstützter Zugang",
+        "suitableFor": "Geeignet für",
+        "calendar": "Kalender",
+        "current": "Aktuell",
+        "upcoming": "Demnächst",
+        "archive": "Archiv",
+        "result": "Ergebnis",
+        "results": "Ergebnisse"
     }
 }

@@ -1,7 +1,7 @@
 import { getTranslations, getMessages } from 'next-intl/server'
 import { sanityFetch } from '@/sanity/lib/client'
 import { VISIT_PAGE_QUERY, SITE_SETTINGS_QUERY } from '@/sanity/lib/queries'
-import { getLocalizedValue, getLocalizedValueAsString } from '@/sanity/lib/utils'
+import { getLocalizedValue, getLocalizedValueAsString, getLocalizedOrMessage } from '@/sanity/lib/utils'
 import { urlFor } from '@/sanity/lib/image'
 import Image from 'next/image'
 import { HeroIMMA } from '@/components/ui/HeroIMMA'
@@ -41,7 +41,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
         <>
             {/* Hero Header Section */}
             <HeroIMMA 
-                title={getLocalizedValueAsString(visitData?.title, locale) || t('title')}
+                title={getLocalizedOrMessage(visitData?.title, locale, t('title'))}
                 headline={getLocalizedValueAsString(visitData?.label, locale)}
                 intro={getLocalizedValueAsString(visitData?.introText, locale)}
                 caption={finalHeroCaption}

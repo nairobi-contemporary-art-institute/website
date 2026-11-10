@@ -10,6 +10,7 @@ import { MuseumGrid } from "@/components/ui/MuseumGrid"
 import { MuseumResultRow } from "@/components/ui/MuseumResultRow"
 import { MuseumCardData } from "@/lib/types/museum-card"
 import { getLocalizedValue } from "@/sanity/lib/utils"
+import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
 import { ARCHIVE_CAROUSEL } from '@/lib/flags'
 
@@ -32,6 +33,7 @@ interface WhatsOnClientProps {
 }
 
 export function WhatsOnClient({ items, locale, noticeBarSettings, showYearNav = false, categories = ["All", "Exhibitions", "Performances", "Screenings", "Events", "Talks", "Tours", "Workshops", "Members"] }: WhatsOnClientProps) {
+    const t = useTranslations('WhatsOn')
     const [activeCategory, setActiveCategory] = useState<string>("")
     const [activeTags, setActiveTags] = useState<string[]>([])
     const [isCalendarOpen, setIsCalendarOpen] = useState(false)
@@ -355,7 +357,7 @@ export function WhatsOnClient({ items, locale, noticeBarSettings, showYearNav = 
                 {currentItems.length > 0 && (
                     <div id="current">
                         <MuseumResultRow 
-                            title="Current" 
+                            title={t('current')} 
                             items={currentItems} 
                             className="py-8 border-b-0" 
                         />
@@ -365,7 +367,7 @@ export function WhatsOnClient({ items, locale, noticeBarSettings, showYearNav = 
                 {upcomingItems.length > 0 && (
                     <div id="upcoming">
                         <MuseumResultRow 
-                            title="Upcoming" 
+                            title={t('upcoming')} 
                             items={upcomingItems} 
                             className="py-8 border-b-0 border-[#1a1a1a]/10" 
                         />
@@ -400,10 +402,10 @@ export function WhatsOnClient({ items, locale, noticeBarSettings, showYearNav = 
                         <div className="page-container mb-8">
                             <div className="flex flex-col md:flex-row md:items-baseline justify-between border-b border-[#1a1a1a]/10 pb-4 gap-4">
                                 <h2 className="text-lg md:text-xl font-bold text-[#1a1a1a]">
-                                    Archive
+                                    {t('archive')}
                                 </h2>
                                 <span className="text-sm md:text-base text-[#1a1a1a]/70 font-medium shrink-0">
-                                    {archiveItems.length} {archiveItems.length === 1 ? 'result' : 'results'}
+                                    {archiveItems.length} {archiveItems.length === 1 ? t('result') : t('results')}
                                 </span>
                             </div>
                         </div>

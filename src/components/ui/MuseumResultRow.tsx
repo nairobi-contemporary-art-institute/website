@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslations } from 'next-intl'
 import { MuseumCardData } from '@/lib/types/museum-card'
 import { MuseumGrid } from './MuseumGrid'
 import { cn } from '@/lib/utils'
@@ -10,6 +11,7 @@ interface MuseumResultRowProps {
 }
 
 export function MuseumResultRow({ title, items, className }: MuseumResultRowProps) {
+    const t = useTranslations('WhatsOn')
     if (!items || items.length === 0) return null;
 
     return (
@@ -20,7 +22,7 @@ export function MuseumResultRow({ title, items, className }: MuseumResultRowProp
                         {title}
                     </h2>
                     <span className="text-sm md:text-base text-[#1a1a1a]/70 font-medium shrink-0">
-                        {items.length} {items.length === 1 ? 'result' : 'results'}
+                        {items.length} {items.length === 1 ? t('result') : t('results')}
                     </span>
                 </div>
             </div>

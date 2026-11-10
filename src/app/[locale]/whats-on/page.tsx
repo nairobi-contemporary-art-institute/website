@@ -5,10 +5,11 @@ import { EXHIBITIONS_QUERY, EVENTS_QUERY, PROGRAMS_QUERY, EVENTS_PAGE_QUERY } fr
 import { getLocalizedValue } from '@/sanity/lib/utils'
 import { MuseumCardData } from '@/lib/types/museum-card'
 import { WhatsOnClient } from '@/components/whatson/WhatsOnClient'
+import { translateLabel } from '@/lib/labels'
 
 export default async function WhatsOnPage({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params
-    const t = await getTranslations({ locale, namespace: 'WhatsOn' }) // Will need to define/fallback this
+    const t = await getTranslations({ locale, namespace: 'WhatsOn' })
 
     const [exhibitions, events, programs, pageData] = await Promise.all([
         sanityFetch<any[]>({ query: EXHIBITIONS_QUERY, tags: ['exhibition'] }),
@@ -22,7 +23,7 @@ export default async function WhatsOnPage({ params }: { params: Promise<{ locale
         ...(exhibitions || []).map((exh: any): MuseumCardData => ({
             id: exh._id || exh.slug,
             href: `/exhibitions/${exh.slug}`,
-            label: 'Exhibitions',
+            label: t('exhibitions'),
             title: getLocalizedValue(exh.title, locale) || 'Untitled',
             date: exh.startDate ? new Date(exh.startDate).getFullYear().toString() : '',
             image: exh.listImage || exh.homepageImage || exh.mainImage,
@@ -37,7 +38,7 @@ export default async function WhatsOnPage({ params }: { params: Promise<{ locale
             return {
                 id: event._id || event.slug,
                 href: `/events/${event.slug}`,
-                label: event.eventType || 'Events',
+                label: translateLabel(t, event.eventType || 'Events'),
                 title: getLocalizedValue(event.title, locale) || 'Untitled',
                 date: event.startDate ? new Date(event.startDate).toLocaleDateString(locale, { month: 'short', day: 'numeric', year: 'numeric' }) : '',
                 image: event.mainImage,
@@ -52,7 +53,7 @@ export default async function WhatsOnPage({ params }: { params: Promise<{ locale
             return {
                 id: prog._id || prog.slug,
                 href: `/education/${prog.slug}`,
-                label: prog.programType || 'Workshops',
+                label: translateLabel(t, prog.programType || 'Workshops'),
                 title: getLocalizedValue(prog.title, locale) || 'Untitled',
                 date: prog.startDate ? new Date(prog.startDate).toLocaleDateString(locale, { month: 'short', year: 'numeric' }) : '',
                 image: prog.mainImage,
@@ -69,7 +70,7 @@ export default async function WhatsOnPage({ params }: { params: Promise<{ locale
             {/* Minimal Header could go here, but Filter starts sticky typically */}
             <div className="bg-black w-full border-b border-[#333]">
                 <div className="page-container text-ivory page-header-padding pb-16">
-                    <h1 className="page-title">What's On</h1>
+                    <h1 className="page-title">{t('title')}</h1>
                 </div>
             </div>
 
