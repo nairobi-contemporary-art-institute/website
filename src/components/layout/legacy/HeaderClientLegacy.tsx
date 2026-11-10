@@ -10,6 +10,7 @@ import { Logo } from '@/components/ui/Logo'
 import { cn } from '@/lib/utils'
 import { gsap, ScrollTrigger } from '@/lib/gsap'
 import { useGSAP } from '@gsap/react'
+import { useTitleFits } from '@/lib/useTitleFits'
 
 interface HeaderClientProps {
     locale: string;
@@ -53,16 +54,21 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
     const fullLogoRef = useRef<HTMLDivElement>(null)
     const runwayRef = useRef<HTMLDivElement>(null)
     const headerInnerRef = useRef<HTMLDivElement>(null)
+    const navSectionRef = useRef<HTMLDivElement>(null)
     const bannerRef = useRef<HTMLDivElement>(null)
     const isFirstMount = useRef(true)
     const lastAtTop = useRef(isAtTop)
+    // Full title only replaces the compact mark when it fits beside the nav (locale + nav dependent)
+    const titleFits = useTitleFits(headerInnerRef, navSectionRef, runwayRef, [locale])
 
     // ... (useGSAP and useEffect for scroll stay same)
     useGSAP(() => {
-        // The full title only fits beside the nav from xl (1280px). Below that the compact
-        // logomark + NCAI stays and nothing expands (matchMedia reverts on resize).
+        // The full title only replaces the compact mark when it fits beside the nav
+        // (useTitleFits); otherwise nothing expands and the compact logomark + NCAI stays.
+        if (!titleFits) return
+        const rtl = document.documentElement.dir === 'rtl'
         const mm = gsap.matchMedia()
-        mm.add("(min-width: 1280px)", () => {
+        mm.add("(min-width: 768px)", () => {
             const initialContentWidth = initialLogoRef.current?.offsetWidth || 120
             const targetContentWidth = runwayRef.current?.offsetWidth || 400
 
@@ -100,16 +106,16 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
 
             tl.to(initialLogoRef.current, {
                 opacity: 0,
-                x: -20,
+                x: rtl ? 20 : -20,
                 scale: 0.8,
                 duration: 1,
                 ease: "power2.inOut"
             }, 0)
                 .fromTo(fullLogoRef.current,
                     {
-                        clipPath: "inset(0% 100% 0% 0%)",
+                        clipPath: rtl ? "inset(0% 0% 0% 100%)" : "inset(0% 100% 0% 0%)",
                         opacity: 0,
-                        x: 20
+                        x: rtl ? -20 : 20
                     },
                     {
                         clipPath: "inset(0% 0% 0% 0%)",
@@ -122,7 +128,7 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
                 )
         })
         return () => mm.revert()
-    }, { scope: headerRef, dependencies: [locale] })
+    }, { scope: headerRef, dependencies: [locale, titleFits] })
 
     useEffect(() => {
         const banner = bannerRef.current
@@ -319,14 +325,14 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
                                 onMouseEnter={closeMegaMenu}
                             >
                                 {/* Dynamic Runway - Provides the measurement for the multi-language title */}
-                                <div ref={runwayRef} className="absolute hidden xl:flex items-center opacity-0 pointer-events-none whitespace-nowrap text-xl md:text-3xl font-bold tracking-tight">
-                                    <Logo className="h-10 md:h-12 w-auto mr-4" />
+                                <div ref={runwayRef} className="absolute hidden md:flex items-center opacity-0 pointer-events-none whitespace-nowrap text-xl md:text-3xl font-bold tracking-tight">
+                                    <Logo className="h-10 md:h-12 w-auto me-4" />
                                     <span>{t('title')}</span>
                                 </div>
 
                                 {/* Initial State: Logomark + NCAI */}
-                                <div ref={initialLogoRef} className="flex items-center xl:absolute xl:left-0 whitespace-nowrap">
-                                    <Logo className="h-10 md:h-12 w-auto mr-4 transition-colors" />
+                                <div ref={initialLogoRef} className={cn("flex items-center whitespace-nowrap", titleFits && "absolute start-0")}>
+                                    <Logo className="h-10 md:h-12 w-auto me-4 transition-colors" />
                                     <span className="text-3xl font-bold tracking-tighter transition-colors pt-2">NCAI</span>
                                 </div>
 
@@ -334,19 +340,20 @@ export function HeaderClientLegacy({ locale, openingStatus, navLinks = [], utili
                                 <div
                                     ref={fullLogoRef}
                                     className={cn(
-                                        "hidden xl:flex items-center absolute left-0 whitespace-nowrap text-xl md:text-3xl font-bold tracking-tight opacity-0 transition-colors duration-300",
+                                        "items-center absolute start-0 whitespace-nowrap text-xl md:text-3xl font-bold tracking-tight opacity-0 transition-colors duration-300",
+                                        titleFits ? "flex" : "hidden",
                                         isDark ? "text-white" : "text-umber"
                                     )}
                                     aria-hidden="true"
                                 >
-                                    <Logo className={cn("h-10 md:h-12 w-auto mr-4 transition-colors", isDark ? "text-white" : "text-umber")} />
+                                    <Logo className={cn("h-10 md:h-12 w-auto me-4 transition-colors", isDark ? "text-white" : "text-umber")} />
                                     <span>{t('title')}</span>
                                 </div>
                             </Link>
                         </div>
 
                         {/* Navigation Section - Desktop Only (Tiered structure matching NCAI header) */}
-                        <div className="hidden md:flex flex-col justify-center gap-2 py-4">
+                        <div ref={navSectionRef} className="hidden md:flex flex-col justify-center gap-2 py-4">
                             {/* Top Tier Links */}
                             <div className="flex justify-end items-center gap-6">
                                 {utilityLinks.length > 0 ? (

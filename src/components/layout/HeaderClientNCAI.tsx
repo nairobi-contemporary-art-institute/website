@@ -10,6 +10,7 @@ import { Logo } from '@/components/ui/Logo'
 import { cn } from '@/lib/utils'
 import { gsap } from '@/lib/gsap'
 import { useGSAP } from '@gsap/react'
+import { useTitleFits } from '@/lib/useTitleFits'
 import { MegaMenu } from './MegaMenu'
 import { FreeEntryBadge, type FreeEntryBadgeProps } from './FreeEntryBadge'
 
@@ -50,46 +51,49 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
     const initialLogoRef = useRef<HTMLDivElement>(null)
     const fullLogoRef = useRef<HTMLDivElement>(null)
     const bannerRef = useRef<HTMLDivElement>(null)
+    const rowRef = useRef<HTMLDivElement>(null)
+    const navSectionRef = useRef<HTMLDivElement>(null)
+    const runwayRef = useRef<HTMLDivElement>(null)
+    // Full title only replaces the compact mark when it fits beside the nav (locale + nav dependent)
+    const titleFits = useTitleFits(rowRef, navSectionRef, runwayRef, [locale])
 
     // Animation for logo matching the legacy one exactly
     useGSAP(() => {
-        // Full title only fits beside the nav from xl (1280px); below that the compact mark stays.
-        const mm = gsap.matchMedia()
-        mm.add("(min-width: 1280px)", () => {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: typeof document !== 'undefined' ? document.body : null,
-                    start: "top top",
-                    end: "200px top",
-                    scrub: 0.5,
-                }
-            })
+        if (!titleFits) return
+        const rtl = document.documentElement.dir === 'rtl'
 
-            tl.to(initialLogoRef.current, {
-                opacity: 0,
-                x: -20,
-                scale: 0.8,
-                duration: 1,
-                ease: "power2.inOut"
-            }, 0)
-            .fromTo(fullLogoRef.current,
-                {
-                    clipPath: "inset(0% 100% 0% 0%)",
-                    opacity: 0,
-                    x: 20
-                },
-                {
-                    clipPath: "inset(0% 0% 0% 0%)",
-                    opacity: 1,
-                    x: 0,
-                    duration: 1.5,
-                    ease: "power2.inOut"
-                },
-                0
-            )
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: typeof document !== 'undefined' ? document.body : null,
+                start: "top top",
+                end: "200px top",
+                scrub: 0.5,
+            }
         })
-        return () => mm.revert()
-    }, { scope: headerRef, dependencies: [locale] })
+
+        tl.to(initialLogoRef.current, {
+            opacity: 0,
+            x: rtl ? 20 : -20,
+            scale: 0.8,
+            duration: 1,
+            ease: "power2.inOut"
+        }, 0)
+        .fromTo(fullLogoRef.current,
+            {
+                clipPath: rtl ? "inset(0% 0% 0% 100%)" : "inset(0% 100% 0% 0%)",
+                opacity: 0,
+                x: rtl ? -20 : 20
+            },
+            {
+                clipPath: "inset(0% 0% 0% 0%)",
+                opacity: 1,
+                x: 0,
+                duration: 1.5,
+                ease: "power2.inOut"
+            },
+            0
+        )
+    }, { scope: headerRef, dependencies: [locale, titleFits] })
 
     // Scroll listener for sticky header styling and smart hide/show
     useEffect(() => {
@@ -305,7 +309,7 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                     onMouseEnter={() => setIsHoveringHeader(true)}
                     onMouseLeave={() => setIsHoveringHeader(false)}
                 >
-                    <div className="page-container flex justify-between items-stretch transition-all duration-300 relative z-50">
+                    <div ref={rowRef} className="page-container flex justify-between items-stretch transition-all duration-300 relative z-50">
                         {/* Logo Section */}
                         <div className="flex items-center py-6">
                             <Link
@@ -318,18 +322,29 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                                 onMouseEnter={closeMegaMenu}
                             >
                                 {/* Initial State: Logomark + NCAI */}
-                                <div ref={initialLogoRef} className="flex items-center gap-2 md:absolute md:left-0 whitespace-nowrap">
+                                <div ref={initialLogoRef} className="flex items-center gap-2 md:absolute md:start-0 whitespace-nowrap">
                                     <Logo className="h-10 md:h-12 w-auto transition-colors" />
                                     <span className="text-3xl font-bold tracking-tighter transition-colors pt-2">NCAI</span>
                                 </div>
 
-                                {/* Target State: Full Title (revealed on scroll) */}
+                                {/* Invisible copy of the full title: measured to decide whether it fits beside the nav */}
+                                <div aria-hidden="true" className="pointer-events-none invisible absolute left-0 top-0 h-0 w-0 overflow-hidden">
+                                    <div ref={runwayRef} className="flex w-max items-center whitespace-nowrap">
+                                        <Logo className="h-8 md:h-10 w-auto me-4" />
+                                        <span className="text-xl md:text-3xl font-bold tracking-tight">{t('title')}</span>
+                                    </div>
+                                </div>
+
+                                {/* Target State: Full Title (revealed on scroll, only when it fits) */}
                                 <div
                                     ref={fullLogoRef}
-                                    className="hidden xl:flex items-center absolute left-0 whitespace-nowrap opacity-0"
+                                    className={cn(
+                                        "pointer-events-none items-center absolute start-0 whitespace-nowrap opacity-0",
+                                        titleFits ? "flex" : "hidden"
+                                    )}
                                     aria-hidden="true"
                                 >
-                                    <Logo className="h-8 md:h-10 w-auto mr-4" />
+                                    <Logo className="h-8 md:h-10 w-auto me-4" />
                                     <span className="text-xl md:text-3xl font-bold tracking-tight">
                                         {t('title')}
                                     </span>
@@ -338,7 +353,7 @@ export function HeaderClientNCAI({ locale, openingStatus, navLinks = [], utility
                         </div>
 
                         {/* Navigation Section - Desktop Only */}
-                        <div className="hidden md:flex flex-col justify-center gap-2 py-4">
+                        <div ref={navSectionRef} className="hidden md:flex flex-col justify-center gap-2 py-4">
                             {/* Top Tier Links (Small) */}
                             <div className="flex justify-end items-center gap-6">
                                 {utilityLinks.length > 0 ? (
