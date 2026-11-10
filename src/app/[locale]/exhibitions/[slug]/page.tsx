@@ -148,7 +148,65 @@ export default async function ExhibitionPage({ params }: Props) {
     ].filter(Boolean) as { id: string, label: string }[]
 
     const artistsWide = artists.length > 1 && exhibition.artistListLayout !== 'sentence'
-    const sidebarEmpty = artistsWide && !(exhibition.curators?.length > 0) && !exhibition.enquiryModule?.enabled
+    const sidebarEmpty = artistsWide && !exhibition.enquiryModule?.enabled
+    // Curators: in the sidebar normally; beside the accordions when the sidebar has nothing else
+    const renderCurators = () => (
+                                <div className="space-y-6 border-t border-stone-200/50 pt-8">
+                                    <h4 className="text-xs font-black uppercase tracking-widest text-charcoal/70">Curated By</h4>
+                                    <div className="flex flex-col gap-4">
+                                        {exhibition.curators.map((curator: any) => {
+                                            const name = getLocalizedValue(curator.name, locale)
+                                            const isArtist = curator._type === 'artist'
+                                            const hasProfile = isArtist || curator.hasProfile !== false
+                                            
+                                            // Handle roles (e.g., Assistant Curator)
+                                            const roles = curator.roles || [];
+                                            const translatedRoles = roles.map((role: string) => {
+                                                if (role === 'curator') return locale === 'en' ? 'Curator' : 'Curateur';
+                                                if (role === 'assistant-curator') return locale === 'en' ? 'Assistant Curator' : 'Assistant Curateur';
+                                                return role;
+                                            });
+                                            const roleDisplay = translatedRoles.join(', ');
+                                            
+                                            if (hasProfile && curator.slug) {
+                                                const profileUrl = isArtist 
+                                                    ? `/${locale}/artists/${curator.slug}`
+                                                    : `/${locale}/about/team#${curator.slug}`
+ 
+                                                return (
+                                                <div key={curator._id} className="space-y-1">
+                                                    <Link 
+                                                        href={profileUrl}
+                                                        className="text-lg font-medium tracking-tight text-charcoal hover:text-ochre transition-colors underline decoration-charcoal/10 underline-offset-8 uppercase block"
+                                                    >
+                                                        {name}
+                                                    </Link>
+                                                    {roleDisplay && (
+                                                        <span className="text-xs uppercase tracking-widest text-charcoal/70 block">
+                                                            {roleDisplay}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                                )
+                                            }
+
+                                            return (
+                                                <div key={curator._id} className="space-y-1">
+                                                    <span className="text-lg font-medium tracking-tight text-charcoal/80 uppercase block">
+                                                        {name}
+                                                    </span>
+                                                    {roleDisplay && (
+                                                        <span className="text-xs uppercase tracking-widest text-charcoal/70 block">
+                                                            {roleDisplay}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
+    )
+
     // Artist profiles: a stacked column in the sidebar for one artist, or a full-width grid
     // below the overview when there are several (a tall sticky sidebar left the right column empty)
     const renderArtists = (wide: boolean) => (
@@ -172,7 +230,7 @@ export default async function ExhibitionPage({ params }: Props) {
                                             ))}
                                         </div>
                                     ) : (
-                                        <div className={wide ? "grid items-start gap-x-12 gap-y-16 md:grid-cols-2 lg:grid-cols-3" : "flex flex-col gap-16"}>
+                                        <div className={wide ? cn("grid items-start gap-x-12 gap-y-16 md:grid-cols-2 lg:grid-cols-3", artists.length >= 8 && "xl:grid-cols-4") : "flex flex-col gap-16"}>
                                             {artists.map((artist: any) => {
                                                 const artistBio = getLocalizedValue(artist.bio, locale)
                                                 const portraitCaption = getLocalizedValue(artist.image?.caption, locale)
@@ -364,62 +422,7 @@ export default async function ExhibitionPage({ params }: Props) {
                              {artists.length > 0 && !artistsWide && renderArtists(false)}
 
                              {/* Curators */}
-                             {exhibition.curators?.length > 0 && (
-                                <div className="space-y-6 border-t border-stone-200/50 pt-8">
-                                    <h4 className="text-xs font-black uppercase tracking-widest text-charcoal/70">Curated By</h4>
-                                    <div className="flex flex-col gap-4">
-                                        {exhibition.curators.map((curator: any) => {
-                                            const name = getLocalizedValue(curator.name, locale)
-                                            const isArtist = curator._type === 'artist'
-                                            const hasProfile = isArtist || curator.hasProfile !== false
-                                            
-                                            // Handle roles (e.g., Assistant Curator)
-                                            const roles = curator.roles || [];
-                                            const translatedRoles = roles.map((role: string) => {
-                                                if (role === 'curator') return locale === 'en' ? 'Curator' : 'Curateur';
-                                                if (role === 'assistant-curator') return locale === 'en' ? 'Assistant Curator' : 'Assistant Curateur';
-                                                return role;
-                                            });
-                                            const roleDisplay = translatedRoles.join(', ');
-                                            
-                                            if (hasProfile && curator.slug) {
-                                                const profileUrl = isArtist 
-                                                    ? `/${locale}/artists/${curator.slug}`
-                                                    : `/${locale}/about/team#${curator.slug}`
- 
-                                                return (
-                                                <div key={curator._id} className="space-y-1">
-                                                    <Link 
-                                                        href={profileUrl}
-                                                        className="text-lg font-medium tracking-tight text-charcoal hover:text-ochre transition-colors underline decoration-charcoal/10 underline-offset-8 uppercase block"
-                                                    >
-                                                        {name}
-                                                    </Link>
-                                                    {roleDisplay && (
-                                                        <span className="text-xs uppercase tracking-widest text-charcoal/70 block">
-                                                            {roleDisplay}
-                                                        </span>
-                                                    )}
-                                                </div>
-                                                )
-                                            }
-
-                                            return (
-                                                <div key={curator._id} className="space-y-1">
-                                                    <span className="text-lg font-medium tracking-tight text-charcoal/80 uppercase block">
-                                                        {name}
-                                                    </span>
-                                                    {roleDisplay && (
-                                                        <span className="text-xs uppercase tracking-widest text-charcoal/70 block">
-                                                            {roleDisplay}
-                                                        </span>
-                                                    )}
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
-                                </div>
-                            )}
+                             {exhibition.curators?.length > 0 && renderCurators()}
 
                              {/* Enquiry Button (Admin controlled) */}
                              {exhibition.enquiryModule?.enabled && (
@@ -451,6 +454,7 @@ export default async function ExhibitionPage({ params }: Props) {
                             </div>
 
                             <div className={cn("pt-8 space-y-4", sidebarEmpty && "md:col-span-4 md:col-start-9 md:pt-0")}>
+                                {sidebarEmpty && exhibition.curators?.length > 0 && <div className="pb-4">{renderCurators()}</div>}
                                 <AccordionSection id="visitor-info" title="Visitor Information">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-sm text-charcoal/70 leading-relaxed">
                                         <div className="space-y-4">
