@@ -69,8 +69,8 @@ export function ArtistIndex({ artists, locale }: ArtistIndexProps) {
                 <button
                     onClick={() => setActiveLetter(null)}
                     className={cn(
-                        "text-xs font-black uppercase tracking-widest transition-all",
-                        !activeLetter ? "text-white" : "text-white/20 hover:text-white"
+                        "text-sm font-black uppercase tracking-widest transition-all",
+                        !activeLetter ? "text-white" : "text-white/60 hover:text-white"
                     )}
                 >
                     {locale === 'en' ? 'ALL' : 'ZOTE'}
@@ -83,9 +83,9 @@ export function ArtistIndex({ artists, locale }: ArtistIndexProps) {
                             disabled={!hasArtists}
                             onClick={() => setActiveLetter(letter)}
                             className={cn(
-                                "text-xs font-black uppercase tracking-widest transition-all",
+                                "text-sm font-black uppercase tracking-widest transition-all",
                                 activeLetter === letter ? "text-white" : 
-                                hasArtists ? "text-white/20 hover:text-white" : "text-white/5 cursor-not-allowed"
+                                hasArtists ? "text-white/60 hover:text-white" : "text-white/15 cursor-not-allowed"
                             )}
                         >
                             {letter}
