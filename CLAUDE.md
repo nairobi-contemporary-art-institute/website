@@ -45,9 +45,15 @@ Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Tailwind CSS v4 
 
 **Redirects.** `/support` and `/membership` permanently redirect to `/get-involved` (in `next.config.ts`).
 
+## Dev server
+
+Node is pinned to 24 LTS (`.nvmrc`, `engines` in `package.json`; `fnm use` picks it up). Node 25 "current" was in use when the server kept dying mid-session (#13, cause unproven).
+
+After changing Sanity content or switching branches, `rm -rf .next` before `npm run dev` — fetched data is cached there and a plain restart is not enough. The same reset is the first fix when the server dies or serves stale pages. If it dies again, capture the terminal output and paste it on #13 (out-of-memory vs watcher exhaustion look different).
+
 ## Git workflow
 
-`main` is protected (PR required, no force push or deletion; admins can bypass) and auto-deploys to Vercel. Work on a branch, run `npm run build`, open a PR, then merge. After changing Sanity content locally, restart `next dev` — fetched data is cached in memory.
+`main` is protected (PR required, no force push or deletion; admins can bypass) and auto-deploys to Vercel. Work on a branch, run `npm run build`, open a PR, then merge. After changing Sanity content locally, see Dev server above.
 
 ## Agent skills
 
