@@ -46,7 +46,7 @@ export default async function GetInvolvedPage({ params }: { params: Promise<{ lo
     const headerStyle = settings?.headerStyle || 'ncai'
 
     return (
-        <GridSystem unstable_useContainer>
+        <GridSystem>
             <div className="bg-ivory min-h-screen">
                 {/* Hero Section */}
                 {headerStyle === 'ncai' ? (
@@ -58,7 +58,7 @@ export default async function GetInvolvedPage({ params }: { params: Promise<{ lo
                         caption={data.hero?.image?.caption ? getLocalizedValue(data.hero.image.caption, locale) : undefined}
                     />
                 ) : (
-                    <header className="relative page-header-padding pb-20 overflow-hidden border-b border-charcoal/5">
+                    <header className="page-container relative page-header-padding pb-20 overflow-hidden border-b border-charcoal/5">
                         <Grid columns={{ sm: 1, md: 12 }} gap={24}>
                             <GridCell column={{ sm: 1, md: 8 }} className="items-start justify-start p-0">
                                 <div className="max-w-4xl space-y-8">
@@ -100,10 +100,10 @@ export default async function GetInvolvedPage({ params }: { params: Promise<{ lo
                     </header>
                 )}
 
-                <div className="py-20 space-y-40">
+                <div className="page-container py-20 space-y-40">
                     {/* Membership Tiers Section */}
                     {data.membershipTiers && data.membershipTiers.length > 0 && (
-                        <section className="px-section-clamp px-section-clamp">
+                        <section>
                             <div className="mb-16">
                                 <h2 className="text-xs font-bold capitalize tracking-widest text-umber/80 mb-4">Membership</h2>
                                 <h3 className="text-4xl md:text-5xl font-light tracking-tighter text-charcoal italic">

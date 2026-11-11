@@ -146,7 +146,7 @@
 
 /* Page container: one outer column for header, page sections and footer.
    Max 1440px, centred, 24px side padding on phones and 48px from md up.
-   Replaces the legacy `.container` below; never put both on one element.
+   Replaced the legacy `.container` (deleted, #26): do not reintroduce a second outer column.
    Rules: docs/DESIGN_PRINCIPLES.md */
 @utility page-container {
   width: 100%;
@@ -186,18 +186,6 @@
 
   @media (width >= 48rem) {
     font-size: var(--text-6xl);
-  }
-}
-
-@layer components {
-  .container {
-    /* To ensure your margin reads exactly 24px on both left and right, 
-       we set the width to 100% minus 48px (24px + 24px).
-       This ensures the visual space on the outside of the box is exactly 24px. */
-    max-width: calc(100% - 48px) !important;
-    width: 100% !important;
-    margin-left: 24px !important;
-    margin-right: 24px !important;
   }
 }
 

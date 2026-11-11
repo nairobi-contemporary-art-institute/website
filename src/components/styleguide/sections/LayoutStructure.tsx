@@ -18,12 +18,12 @@ export function LayoutStructure() {
             <section className="space-y-8">
                 <h3 className="text-xs font-bold text-charcoal capitalize tracking-widest border-b border-umber/10 pb-4">Global Container</h3>
                 <div className="bg-umber/5 p-4 md:p-12 relative border border-dashed border-umber/20">
-                    <div className="absolute top-0 left-0 text-[8px] bg-charcoal text-ivory px-2 py-1 capitalize tracking-widest font-bold">.container --max-w-5xl</div>
+                    <div className="absolute top-0 left-0 text-[8px] bg-charcoal text-ivory px-2 py-1 capitalize tracking-widest font-bold">.page-container --max-w-1440</div>
                     <div className="h-40 bg-ivory shadow-sm flex items-center justify-center">
                         <span className="text-[10px] font-bold text-umber/80 capitalize tracking-widest italic">Main Content Area</span>
                     </div>
                     <div className="absolute top-4 left-4 h-[calc(100%-32px)] w-4 bg-ochre/20 flex flex-col items-center justify-center">
-                        <span className="text-[8px] -rotate-90 origin-center whitespace-nowrap text-ochre font-bold">PADDING: px-6</span>
+                        <span className="text-[8px] -rotate-90 origin-center whitespace-nowrap text-ochre font-bold">PADDING: px-6 md:px-12</span>
                     </div>
                 </div>
             </section>
