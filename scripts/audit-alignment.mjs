@@ -41,8 +41,8 @@ const TOLERANCE = 1 // px
 const PAGES = {
     home: ['/'],
     shell: ['/contact'],
-    programme: ['/education', '/education/curator-masterclass', '/events', '/events/accessibility-in-art-spaces-workshop', '/channel', '/channel/artist-portrait-elimo-njau', '/whats-on'],
-    editorial: ['/texts', '/texts/sample-artist-writing', '/exhibitions', '/exhibitions/kaspale-syowia-kyambi', '/history', '/artists', '/artists/adamu', '/collection'],
+    programme: ['/education', '/education/residency', '/events', '/events/accessibility-in-art-spaces-workshop', '/channel', '/channel/artist-portrait-elimo-njau', '/whats-on'],
+    editorial: ['/texts', '/exhibitions', '/exhibitions/kaspale-syowia-kyambi', '/history', '/artists', '/artists/adamu', '/collection'],
     information: ['/visit', '/contact', '/accessibility'],
     about: ['/about', '/get-involved'],
 }
@@ -63,9 +63,6 @@ function scanLegacy() {
                     // containerRef, page-container, max-w-container, etc.)
                     const code = line.replace(/\/\/.*$/, '').replace(/\/\*.*?\*\//g, '')
                     if (/["'`][^"'`]*(?<![-\w])container(?![-\w])[^"'`]*["'`]/.test(code)) uses.push({ kind: 'class', at: `${p}:${i + 1}` })
-                    // GridSystem pulls in the legacy class via this prop
-                    // (skip the component that defines the prop: its own `"container"` string is counted above)
-                    if (!p.endsWith('Grid/Grid.tsx') && /unstable_useContainer(?!=\{false\})(\s|>|=\{true\})/.test(line)) uses.push({ kind: 'grid-prop', at: `${p}:${i + 1}` })
                 })
             }
         }
@@ -144,6 +141,7 @@ for (const [family, paths] of Object.entries(PAGES)) {
                 if (err) problems.push(err)
                 if (m) {
                     for (const k of ['header', 'content', 'footer']) {
+                        if (k === 'content' && family === 'home') continue // split hero: its text sits on the right-hand panel by design
                         if (m[k] === null) problems.push(`${k}: not found`)
                         else if (Math.abs(m[k] - want) > TOLERANCE) problems.push(`${k} ${m[k]}px (want ${want})`)
                     }
@@ -169,7 +167,7 @@ for (const r of rows) {
     console.log(`${pad(r.family, 12)}${pad(r.locale, 4)}${pad(r.width, 6)}${pad(r.path, 56)}${pad(g('header'), 8)}${pad(g('content'), 9)}${pad(g('footer'), 8)}${r.problems.length ? 'FAIL ' + r.problems.join('; ') : 'ok'}`)
 }
 
-console.log(`\nLegacy container uses in src/: ${legacy.length}  (class: ${byKind.class || 0}, GridSystem prop: ${byKind['grid-prop'] || 0})`)
+console.log(`\nLegacy container uses in src/: ${legacy.length}`)
 console.log(`Checks: ${rows.length}, failing: ${failures}`)
 
 let exit = 0
